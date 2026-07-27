@@ -1,7 +1,4 @@
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 4.3.1
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 4.3.1
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 4.3.1
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 4.3.1
 
 // TOSCA 1.3/2.0 compatible $concat function
 // TOSCA 1.3: Allows implicit conversion of compatible types to strings

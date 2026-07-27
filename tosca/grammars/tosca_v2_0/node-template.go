@@ -12,9 +12,6 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.8.3
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.8.3
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.7.3
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.7.3
 //
 
 type NodeTemplate struct {
@@ -24,7 +21,7 @@ type NodeTemplate struct {
 	Directives                   *[]string              `read:"directives"`
 	CopyNodeTemplateName         *string                `read:"copy"`
 	NodeTypeName                 *string                `read:"type" mandatory:""`
-	Metadata                     Metadata               `read:"metadata,Metadata"` // introduced in TOSCA 1.1
+	Metadata                     Metadata               `read:"metadata,Metadata"`
 	Description                  *string                `read:"description"`
 	Properties                   Values                 `read:"properties,Value"`
 	Attributes                   Values                 `read:"attributes,AttributeValue"`

@@ -27,9 +27,7 @@ var CsarVersions = []Version{{1, 1}}
 
 // See:
 //   https://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.3/TOSCA-Simple-Profile-YAML-v1.3.html#_Toc302251718
-//   https://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.2/TOSCA-Simple-Profile-YAML-v1.2.html#_Toc528072959
-//   https://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.1/TOSCA-Simple-Profile-YAML-v1.1.html#_Toc489606742
-//   https://docs.oasis-open.org/tosca/TOSCA/v1.0/TOSCA-v1.0.html#_Toc356403711
+//   [TOSCA-v2.0] @ 17
 
 type Meta struct {
 	Version          *Version `yaml:"version" json:"version"`

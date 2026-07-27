@@ -4,8 +4,17 @@ import (
 	"github.com/tliron/go-puccini/tosca/parsing"
 )
 
-// Map of keyword -> version -> grammar
-var Grammars = make(map[string]map[string]*parsing.Grammar)
+const (
+	definitionsVersionKey = "tosca_definitions_version"
+	toscaSimpleYAML13     = "tosca_simple_yaml_1_3"
+	tosca20               = "tosca_2_0"
+)
 
-// Map of keyword -> version -> internal URL path
-var ImplicitProfilePaths = make(map[string]map[string]string)
+var grammars map[string]*parsing.Grammar
+var implicitProfilePaths map[string]string
+
+// SupportedDefinitionsVersions returns the complete set of accepted values
+// for the mandatory tosca_definitions_version keyname.
+func SupportedDefinitionsVersions() []string {
+	return []string{toscaSimpleYAML13, tosca20}
+}

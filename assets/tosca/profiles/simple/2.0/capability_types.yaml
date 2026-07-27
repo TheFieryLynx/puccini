@@ -52,7 +52,7 @@ capability_types:
           Specifies the operating frequency of CPU's core.  This
           property expresses the expected frequency of one (1) CPU as
           provided by the property "num_cpus".
-        type: scalar-unit.frequency
+        type: Frequency
         required: false
         validation:
           $greater_or_equal: 
@@ -62,7 +62,7 @@ capability_types:
         description: >-
           Size of the local disk available to applications running on
           the Compute node.
-        type: scalar-unit.size
+        type: Size
         required: false
         validation:
           $greater_or_equal: 
@@ -72,7 +72,7 @@ capability_types:
         description: >-
           Size of memory available to applications running on the
           Compute node.
-        type: scalar-unit.size
+        type: Size
         required: false
         validation:
           $greater_or_equal: 

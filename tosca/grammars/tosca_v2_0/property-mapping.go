@@ -15,7 +15,6 @@ import (
 //
 // [TOSCA-v2.0] @ 15.2
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.8.8
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.8.8
 //
 
 type PropertyMapping struct {

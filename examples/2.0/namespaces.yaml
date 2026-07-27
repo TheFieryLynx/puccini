@@ -13,7 +13,7 @@ imports:
     namespace: mongodb
 
   # Explicit import of the TOSCA Simple Profile types into the "tosca" namespace
-  - url: https://raw.githubusercontent.com/xDaryamo/tosca-community-contributions/refs/heads/master/profiles/org/oasis-open/simple/2.0/profile.yaml
+  - profile: org.oasis-open.simple:2.0
     namespace: tosca
 
 # The "profile" keyword declares this file as a reusable library.

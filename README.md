@@ -28,7 +28,6 @@ Note that Puccini is intentionally *not* an orchestrator. This is a "BYOO" kind 
   as a Kubernetes operator and includes TOSCA types generated directly from the Kubernetes API
 * [Ansible](https://www.ansible.com/): Puccini is [packaged for Ansible Galaxy](wrappers/ansible/)
 * [OpenStack](https://www.openstack.org/): see [these examples using Ansible](examples/openstack/)
-  (Puccini also natively supports OpenStack's Heat Orchestration Template language)
 * Process automation: see [these examples for BPMN integration](examples/bpmn/)
 
 Puccini is also available as a [GitHub action](https://github.com/marketplace/actions/setup-puccini-tosca),
@@ -62,26 +61,23 @@ but can be used in many other programming languages via self-contained shared C 
 included wrappers and examples for [Java](wrappers/java/), [Python](wrappers/python/), and
 [Ruby](wrappers/ruby/).
 
-### Dialects
+### Supported TOSCA Versions
 
-Puccini can parse all versions of TOSCA:
+Puccini accepts exactly these `tosca_definitions_version` values:
 
-* [TOSCA 2.0](http://docs.oasis-open.org/tosca/TOSCA/v2.0/TOSCA-v2.0.html)
-* [TOSCA 1.3](https://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.3/TOSCA-Simple-Profile-YAML-v1.3.html)
-* [TOSCA 1.2](https://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.2/TOSCA-Simple-Profile-YAML-v1.2.html)
-* [TOSCA 1.1](https://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.1/TOSCA-Simple-Profile-YAML-v1.1.html)
-* [TOSCA 1.0](https://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/TOSCA-Simple-Profile-YAML-v1.0.html)
+* `tosca_simple_yaml_1_3` — TOSCA Simple Profile in YAML 1.3
+* `tosca_2_0` — TOSCA 2.0
 
-Additionally, Puccini can parse the following TOSCA-like dialects:
-
-* [Cloudify DSL 1.3](https://docs.cloudify.co/6.3.0/developer/blueprints/)
-* [OpenStack Heat Orchestration Template language (HOT) 2021-04-16](https://docs.openstack.org/heat/wallaby/template_guide/hot_guide.html)
+Other values, aliases, version URIs, and non-TOSCA language selectors are rejected without fallback.
+The two grammars remain version-specific; shared parser infrastructure does not make their keynames
+or semantic rules interchangeable. See the [conformance matrix](docs/conformance-matrix.md) for
+implemented and partial areas. This support statement does not claim complete standards conformance.
 
 TOSCA is a complex object-oriented language. We put considerable effort into adhering to every
 aspect of the grammar, especially in regards to data type checking and type inheritance contracts,
 which are key to delivering the object-oriented promise of extensibility while maintaining reliable
-base-type compatibility. Unfortunately, in earlier versions of TOSCA some grammatical features and
-even some syntax have been specified in ways that are open to interpretation. Puccini picks one
+base-type compatibility. Some grammatical features and syntax have been specified in ways that are
+open to interpretation. Puccini picks one
 interpretation by default, but also supports [quirk modes](tosca/parsing/QUIRKS.md) that enable
 alternative behaviors.
 

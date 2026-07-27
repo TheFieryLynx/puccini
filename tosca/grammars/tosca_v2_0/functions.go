@@ -15,22 +15,16 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 4
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 4
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 4
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 4
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.6.3
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.6.3
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.5.2
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.5.2
 //
 
 const functionPathPrefix = "implicit/2.0/js/functions/"
 
 var FunctionScriptlets = map[string]string{
 	parsing.MetadataFunctionPrefix + "concat":               profiles.GetString(functionPathPrefix + "concat.js"),
-	parsing.MetadataFunctionPrefix + "join":                 profiles.GetString(functionPathPrefix + "join.js"), // introduced in TOSCA 1.2
+	parsing.MetadataFunctionPrefix + "join":                 profiles.GetString(functionPathPrefix + "join.js"),
 	parsing.MetadataFunctionPrefix + "token":                profiles.GetString(functionPathPrefix + "token.js"),
 	parsing.MetadataFunctionPrefix + "get_input":            profiles.GetString(functionPathPrefix + "get_input.js"),
 	parsing.MetadataFunctionPrefix + "get_property":         profiles.GetString(functionPathPrefix + "get_property.js"),

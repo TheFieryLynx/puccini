@@ -12,9 +12,6 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.3.3
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.3.3
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.2.3
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.2.3
 //
 
 type Range struct {

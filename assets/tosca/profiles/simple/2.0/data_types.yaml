@@ -13,7 +13,62 @@ metadata:
 description: >
   TOSCA Simple Profile data type definitions
 
+dsl_definitions:
+  iso-prefixes: &ISO80000
+    "": 1
+    k: 1000
+    Ki: 1024
+    M: 1000000
+    Mi: 1048576
+    G: 1000000000
+    Gi: 1073741824
+    T: 1000000000000
+    Ti: 1099511627776
+
 data_types:
+
+  Bitrate:
+    description: Bitrate scalar used by the Simple Profile.
+    derived_from: scalar
+    data_type: float
+    units:
+      bps: 1
+      Bps: 8
+    prefixes: *ISO80000
+    validation: { $greater_or_equal: [ $value, 0.0 ] }
+
+  Frequency:
+    description: Frequency scalar used by the Simple Profile.
+    derived_from: scalar
+    data_type: float
+    units:
+      Hz: 1
+    prefixes: *ISO80000
+    validation: { $greater_or_equal: [ $value, 0.0 ] }
+
+  Size:
+    description: Data size scalar used by the Simple Profile.
+    derived_from: scalar
+    data_type: integer
+    units:
+      B: 1
+    prefixes: *ISO80000
+    validation: { $greater_or_equal: [ $value, 0 ] }
+
+  Time:
+    description: Time scalar used by the Simple Profile.
+    derived_from: scalar
+    data_type: float
+    units:
+      ns: 0.000000001
+      us: 0.000001
+      μs: 0.000001
+      ms: 0.001
+      s: 1
+      m: 60
+      h: 3600
+      d: 86400
+    validation: { $greater_or_equal: [ $value, 0.0 ] }
 
   json:
     description: >-

@@ -53,8 +53,3 @@ Composition
 
 * [Substitution Mapping](substitution-mapping.yaml)
 * [Substitution Mapping Client](substitution-mapping-client.yaml)
-
-NFV
----
-
-* [Simple for NFV](simple-for-nfv.yaml)

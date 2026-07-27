@@ -9,8 +9,6 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.6.21
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.6.17
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.5.15
 //
 
 type EventFilter struct {

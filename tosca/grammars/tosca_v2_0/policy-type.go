@@ -9,9 +9,6 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.7.12
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.7.12
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.6.12
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.6.11
 //
 
 type PolicyType struct {
@@ -19,7 +16,7 @@ type PolicyType struct {
 
 	PropertyDefinitions            PropertyDefinitions `read:"properties,PropertyDefinition" inherit:"properties,Parent"`
 	TargetNodeTypeOrGroupTypeNames *[]string           `read:"targets" inherit:"targets,Parent"`
-	TriggerDefinitions             TriggerDefinitions  `read:"triggers,TriggerDefinition" inherit:"triggers,Parent"` // introduced in TOSCA 1.1
+	TriggerDefinitions             TriggerDefinitions  `read:"triggers,TriggerDefinition" inherit:"triggers,Parent"`
 
 	Parent           *PolicyType `lookup:"derived_from,ParentName" traverse:"ignore" json:"-" yaml:"-"`
 	TargetNodeTypes  NodeTypes   `lookup:"targets,TargetNodeTypeOrGroupTypeNames" inherit:"targets,Parent" traverse:"ignore" json:"-" yaml:"-"`

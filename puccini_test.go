@@ -165,10 +165,6 @@ func NewContext(tb testing.TB) *Context {
 }
 
 func (self *Context) compileAll() {
-	self.compile("legacy/tosca_1_0.yaml", nil)
-	self.compile("legacy/tosca_1_1.yaml", nil)
-	self.compile("legacy/tosca_1_2.yaml", nil)
-
 	self.compile("1.3/artifacts.yaml", nil)
 	self.compile("1.3/attributes.yaml", nil)
 	self.compile("1.3/copy.yaml", nil)
@@ -182,7 +178,6 @@ func (self *Context) compileAll() {
 	self.compile("1.3/namespaces.yaml", nil)
 	self.compile("1.3/policies-and-groups.yaml", nil)
 	self.compile("1.3/requirements-and-capabilities.yaml", nil)
-	self.compile("1.3/simple-for-nfv.yaml", nil)
 	self.compile("1.3/source-and-target.yaml", nil)
 	self.compile("1.3/substitution-mapping-client.yaml", nil)
 	self.compile("1.3/substitution-mapping.yaml", nil)
@@ -218,17 +213,6 @@ func (self *Context) compileAll() {
 	self.compile("openstack/hello-world.yaml", nil)
 
 	self.compile("bpmn/open-loop.yaml", nil)
-
-	self.compile("cloudify/advanced-blueprint-example.yaml", map[string]any{
-		"host_ip":                "1.2.3.4",
-		"agent_user":             "my_user",
-		"agent_private_key_path": "my_key",
-	})
-	self.compile("cloudify/example.yaml", nil)
-
-	self.compile("hot/hello-world.yaml", map[string]any{
-		"username": "test",
-	})
 }
 
 func (self *Context) compile(url string, inputs map[string]any) {

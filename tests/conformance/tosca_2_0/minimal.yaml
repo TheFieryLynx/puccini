@@ -1,0 +1,8 @@
+# specification: TOSCA 2.0
+# section: 6.9, Service Template Definition
+# expected: accepted
+# category: positive, minimal, normalization
+tosca_definitions_version: tosca_2_0
+
+service_template:
+  node_templates: {}

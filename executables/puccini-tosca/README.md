@@ -1,6 +1,11 @@
 puccini-tosca
 =============
 
+The executable accepts only TOSCA Simple Profile in YAML 1.3
+(`tosca_simple_yaml_1_3`) and TOSCA 2.0 (`tosca_2_0`). The version is selected
+by the mandatory `tosca_definitions_version` keyname in the input document.
+Unknown, removed, and alias values fail in the read phase without fallback.
+
 ### Format
 
 The default format for output is YAML, but you can select JSON, XML, CBOR, or MessagePack instead with

@@ -11,9 +11,6 @@ import (
 //
 // [TOSCA-v2.0] @ 11.4
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.6.17
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.6.15
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.5.13
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.5.13
 //
 
 type OperationDefinition struct {

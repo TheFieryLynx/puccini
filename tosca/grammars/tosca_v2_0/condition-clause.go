@@ -11,8 +11,6 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.6.25
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.6.21
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.5.19
 //
 
 type ConditionClause struct {

@@ -11,9 +11,6 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.6.6
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.6.6
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.5.5
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.5.5
 //
 
 type Repository struct {

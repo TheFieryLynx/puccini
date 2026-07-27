@@ -8,7 +8,7 @@ import (
 	"github.com/tliron/go-kutil/util"
 )
 
-//go:embed cloudify/* common/* hot/* implicit/* simple/* simple-for-nfv/*
+//go:embed common/* implicit/1.3/* implicit/2.0/* simple/1.3/* simple/2.0/*
 var profiles embed.FS
 
 func init() {

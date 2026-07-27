@@ -40,7 +40,7 @@ relationship_types:
       The HostedOn type represents a hosting relationship between two
       nodes.
     derived_from: Root
-    valid_target_types: [ Container ]
+    valid_capability_types: [ Container ]
     metadata:
       role: host
 
@@ -49,7 +49,7 @@ relationship_types:
       The ConnectsTo type represents a network connection relationship
       between two nodes.
     derived_from: Root
-    valid_target_types: [ Endpoint ]
+    valid_capability_types: [ Endpoint ]
     properties:
       credential:
         description: >-
@@ -64,7 +64,7 @@ relationship_types:
       between two nodes (e.g. for attaching a storage node to a
       Compute node).
     derived_from: Root
-    valid_target_types: [ Attachment ]
+    valid_capability_types: [ Attachment ]
     properties:
       location:
         description: >-
@@ -86,18 +86,18 @@ relationship_types:
       The LinksTo type represents an association relationship between
       Port and Network node types.
     derived_from: DependsOn
-    valid_target_types: [ Linkable ]
+    valid_capability_types: [ Linkable ]
 
   BindsTo:
     description: >-
       The BindsTo type represents an association relationship between
       Port and Compute node types.
     derived_from: DependsOn
-    valid_target_types: [ Bindable ]
+    valid_capability_types: [ Bindable ]
 
   RoutesTo:
     description: >-
       The RoutesTo type represents an intentional network routing
       between two Endpoints in different networks.
     derived_from: ConnectsTo
-    valid_target_types: [ Endpoint ]
+    valid_capability_types: [ Endpoint ]

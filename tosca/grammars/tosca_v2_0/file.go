@@ -12,16 +12,13 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.10
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.10
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.9
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.9
 //
 
 type File struct {
 	*Entity `name:"file"`
 
 	ToscaDefinitionsVersion *string           `read:"tosca_definitions_version" mandatory:""`
-	Profile                 *string           `read:"profile"` // introduced in TOSCA 1.2 as "namespace", renamed in TOSCA 2.0
+	Profile                 *string           `read:"profile"` // Read as "namespace" by the TOSCA 1.3 grammar
 	Metadata                Metadata          `read:"metadata,!Metadata"`
 	Description             *string           `read:"description"`
 	Repositories            Repositories      `read:"repositories,Repository"`

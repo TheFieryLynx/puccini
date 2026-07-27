@@ -11,7 +11,7 @@ import (
 type Quirk string
 
 const (
-	// In TOSCA 1.0-1.3 the Simple Profile is implicitly imported by default. This quirk will disable
+	// In TOSCA 1.3 the Simple Profile is implicitly imported by default. This quirk will disable
 	// implicit imports.
 	QuirkImportsImplicitDisable Quirk = "imports.implicit.disable"
 
@@ -48,13 +48,13 @@ const (
 	// This will ignore any type that is has the `tosca.normative: 'true'` metadata.
 	QuirkNamespaceNormativeIgnore Quirk = "namespace.normative.ignore"
 
-	// In TOSCA 1.0-1.3 all the normative types have long
+	// In TOSCA 1.3 all the normative types have long
 	// names, such as "tosca.nodes.Compute", prefixed names ("tosca:Compute"), and also short names
 	// ("Compute"). Those short names might be annoying because it means you can't use those names for
 	// your own types. This quirk disables the short names (the prefixed names remain).
 	QuirkNamespaceNormativeShortcutsDisable Quirk = "namespace.normative.shortcuts.disable"
 
-	// According to the examples in the TOSCA 1.0-1.3 specs,
+	// According to examples in the TOSCA 1.3 specification,
 	// the `requirements` key under `substitution_mappings` is syntactically a map. However, this syntax
 	// is inconsistent because it doesn't match the syntax in node templates, which is a sequenced list.
 	// (In node types, too, it is a sequenced list, although grammatically it works like a map.) This
@@ -69,35 +69,7 @@ const (
 	// Ignores the "annotation_types" keyword in service templates and the
 	// "annotations" keyword in parameter definitions.
 	QuirkAnnotationsIgnore Quirk = "annotations.ignore"
-
-	// Allows interface types, definitions, and assignments to
-	// refer to operations directly in addition to using the "operations" keyname. This allows TOSCA 1.3
-	// and 2.0 to support the TOSCA 1.2 grammar.
-	QuirkInterfacesOperationsPermissive Quirk = "interfaces.operations.permissive"
-
-	// Combines "imports.topology_template.ignore", "data_types.string.permissive",
-	// "capabilities.occurrences.permissive", "substitution_mappings.requirements.permissive",
-	// "substitution_mappings.requirements.list"
-	QuirkETSINFV Quirk = "etsinfv"
-
-	// Combines "annotations.ignore", "imports.sequencedlist", "imports.version.permissive"
-	QuirkONAP Quirk = "onap"
 )
-
-var combinationQuirks = map[Quirk][]Quirk{
-	QuirkETSINFV: {
-		QuirkImportsTopologyTemplateIgnore,
-		QuirkDataTypesStringPermissive,
-		QuirkCapabilitiesOccurrencesPermissive,
-		QuirkSubstitutionMappingsRequirementsPermissive,
-		QuirkSubstitutionMappingsRequirementsList,
-	},
-	QuirkONAP: {
-		QuirkAnnotationsIgnore,
-		QuirkImportsSequencedList,
-		QuirkImportsVersionPermissive,
-	},
-}
 
 //
 // Quirks
@@ -108,12 +80,7 @@ type Quirks []Quirk
 func NewQuirks(quirks ...string) Quirks {
 	var self Quirks
 	for _, quirk := range quirks {
-		quirk_ := Quirk(quirk)
-		if quirks_, ok := combinationQuirks[quirk_]; ok {
-			self = append(self, quirks_...)
-		} else {
-			self = append(self, quirk_)
-		}
+		self = append(self, Quirk(quirk))
 	}
 	return self
 }

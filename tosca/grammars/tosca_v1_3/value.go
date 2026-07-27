@@ -12,9 +12,6 @@ func ReadAttributeValue(context *parsing.Context) parsing.EntityPtr {
 
 	// Unpack long notation (only for attributes)
 	// [TOSCA-Simple-Profile-YAML-v1.3] @ 3.6.13.2.2
-	// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.6.12.2.2
-	// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.5.11.2.2
-	// [TOSCA-Simple-Profile-YAML-v1.0] @3.5.11.2.2
 	if context.Is(ard.TypeMap) {
 		map_ := context.Data.(ard.Map)
 		if len(map_) == 2 {

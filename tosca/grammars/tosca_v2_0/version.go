@@ -19,9 +19,6 @@ var VersionRE = regexp.MustCompile(
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.3.2
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.3.2
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.2.2
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.2.2
 //
 
 type Version struct {

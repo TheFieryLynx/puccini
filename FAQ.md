@@ -18,10 +18,7 @@ Please join [OASIS's TOSCA community](https://www.oasis-open.org/committees/tc_h
 to help improve the language!
 
 Meanwhile, Puccini includes [examples](examples/) of TOSCA's grammatical features with some
-running commentary. Treat them as your playground. Also, if you have 4 hours to spare, grab some
-snacks, get comfortable, and watch the author's free online course for TOSCA 1.0:
-[part 1](https://www.youtube.com/watch?v=aMkqLI6o-58),
-[part 2](https://www.youtube.com/watch?v=6xGmpi--7-A).
+running commentary. Treat them as your playground.
 
 (Author's note: This is my second take at writing a TOSCA parser. The first was
 [AriaTosca](https://github.com/apache/incubator-ariatosca), an

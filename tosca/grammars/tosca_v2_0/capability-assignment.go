@@ -12,9 +12,6 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.8.1
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.8.1
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.7.1
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.7.1
 //
 
 type CapabilityAssignment struct {

@@ -122,6 +122,15 @@ func (self *Context) ReportKeynameUnsupportedValue() bool {
 	return self.ReportPathf(1, "unsupported value for keyname: %s", self.FormatBadData())
 }
 
+func (self *Context) ReportToscaDefinitionsVersionUnsupported(supported []string) bool {
+	return self.ReportPathf(
+		1,
+		"unsupported TOSCA definitions version %s; supported versions: %s",
+		self.FormatBadData(),
+		strings.Join(supported, ", "),
+	)
+}
+
 func (self *Context) ReportKeynameMalformedSequencedList() bool {
 	return self.ReportPathf(1, "unsupported value for keyname, must be a %s of single-key %s elements", self.Problems.Stylist.TypeName(quote("sequenced list")), self.Problems.Stylist.TypeName(quote("map")))
 }

@@ -9,46 +9,31 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.7.5
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.7.5
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.6.5
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.6.4
 //
 
 type InterfaceType struct {
 	*Type `name:"interface type"`
 
-	InputDefinitions          ParameterDefinitions    `read:"inputs,ParameterDefinition" inherit:"inputs,Parent"`
-	OperationDefinitions      OperationDefinitions    `read:"operations,OperationDefinition" inherit:"operations,Parent"`
-	NotificationDefinitions   NotificationDefinitions `read:"notifications,NotificationDefinition" inherit:"notifications,Parent"` // introduced in TOSCA 1.3
-	ExtraOperationDefinitions OperationDefinitions    `json:"-" yaml:"-"`
+	InputDefinitions        ParameterDefinitions    `read:"inputs,ParameterDefinition" inherit:"inputs,Parent"`
+	OperationDefinitions    OperationDefinitions    `read:"operations,OperationDefinition" inherit:"operations,Parent"`
+	NotificationDefinitions NotificationDefinitions `read:"notifications,NotificationDefinition" inherit:"notifications,Parent"` // introduced in TOSCA 1.3
 
 	Parent *InterfaceType `lookup:"derived_from,ParentName" traverse:"ignore" json:"-" yaml:"-"`
 }
 
 func NewInterfaceType(context *parsing.Context) *InterfaceType {
 	return &InterfaceType{
-		Type:                      NewType(context),
-		InputDefinitions:          make(ParameterDefinitions),
-		OperationDefinitions:      make(OperationDefinitions),
-		NotificationDefinitions:   make(NotificationDefinitions),
-		ExtraOperationDefinitions: make(OperationDefinitions),
+		Type:                    NewType(context),
+		InputDefinitions:        make(ParameterDefinitions),
+		OperationDefinitions:    make(OperationDefinitions),
+		NotificationDefinitions: make(NotificationDefinitions),
 	}
 }
 
 // ([parsing.Reader] signature)
 func ReadInterfaceType(context *parsing.Context) parsing.EntityPtr {
 	self := NewInterfaceType(context)
-
-	if context.HasQuirk(parsing.QuirkInterfacesOperationsPermissive) {
-		context.SetReadTag("ExtraOperationDefinitions", "?,OperationDefinition")
-		context.ReadFields(self)
-		for name, definition := range self.ExtraOperationDefinitions {
-			self.OperationDefinitions[name] = definition
-		}
-	} else {
-		context.ValidateUnsupportedFields(context.ReadFields(self))
-	}
-
+	context.ValidateUnsupportedFields(context.ReadFields(self))
 	return self
 }
 

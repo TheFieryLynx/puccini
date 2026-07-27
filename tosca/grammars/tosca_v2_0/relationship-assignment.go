@@ -11,9 +11,6 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.8.2.2.3
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.8.2.2.3
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.7.2.2.3
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.7.2.2.3
 //
 
 type RelationshipAssignment struct {

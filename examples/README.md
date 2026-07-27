@@ -1,17 +1,15 @@
 Examples
 ========
 
-Grammars
---------
+TOSCA Versions
+--------------
 
-* [TOSCA](tosca/)
-* [HOT](hot/)
-* [Cloudify DSL](cloudify/)
+* [TOSCA Simple Profile in YAML 1.3](1.3/)
+* [TOSCA 2.0](2.0/)
 
 Profiles
 --------
 
-* [Kubernetes Profile](kubernetes/)
 * [OpenStack Profile](openstack/)
 * [BPMN Profile](bpmn/)
 

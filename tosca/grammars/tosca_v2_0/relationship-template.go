@@ -10,9 +10,6 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.8.4
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.8.4
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.7.4
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.7.4
 //
 
 type RelationshipTemplate struct {
@@ -21,7 +18,7 @@ type RelationshipTemplate struct {
 
 	CopyRelationshipTemplateName *string              `read:"copy"`
 	RelationshipTypeName         *string              `read:"type" mandatory:""`
-	Metadata                     Metadata             `read:"metadata,Metadata"` // introduced in TOSCA 1.1
+	Metadata                     Metadata             `read:"metadata,Metadata"`
 	Description                  *string              `read:"description"`
 	Properties                   Values               `read:"properties,Value"`
 	Attributes                   Values               `read:"attributes,AttributeValue"`

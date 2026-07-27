@@ -11,16 +11,13 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.6.12
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.6.11
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.5.10
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.5.10
 //
 
 type AttributeDefinition struct {
 	*Entity `name:"attribute definition"`
 	Name    string
 
-	Metadata         Metadata          `read:"metadata,Metadata"` // introduced in TOSCA 1.2, but only for properties
+	Metadata         Metadata          `read:"metadata,Metadata"`
 	Description      *string           `read:"description"`
 	DataTypeName     *string           `read:"type"` // mandatory only if cannot be inherited or discovered
 	ValidationClause *ValidationClause `read:"validation,ValidationClause" traverse:"ignore"`

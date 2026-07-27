@@ -4,7 +4,7 @@ Puccini TOSCA Quirks
 These are activated via the `--quirk/-x` switch for
 [**puccini-tosca**](../../executables/puccini-tosca/):
 
-* **imports.implicit.disable**: In TOSCA 1.0-1.3 the Simple Profile is implicitly imported by
+* **imports.implicit.disable**: In TOSCA 1.3 the Simple Profile is implicitly imported by
   default. This quirk will disable implicit imports.
 
 * **imports.version.permissive**: By default Puccini will report an error if a file imports
@@ -34,12 +34,12 @@ These are activated via the `--quirk/-x` switch for
 * **namespace.normative.ignore**: This will ignore any type that is has the
   "tosca.normative: true" metadata.
 
-* **namespace.normative.shortcuts.disable**: In TOSCA 1.0-1.3 all the normative types have long
+* **namespace.normative.shortcuts.disable**: In TOSCA 1.3 all the normative types have long
   names, such as "tosca.nodes.Compute", prefixed names ("tosca:Compute"), and also short names
   ("Compute"). Those short names might be annoying because it means you can't use those names for
   your own types. This quirk disables the short names (the prefixed names remain).
 
-* **substitution_mappings.requirements.list**: According to the examples in the TOSCA 1.0-2.0 specs,
+* **substitution_mappings.requirements.list**: According to examples in the TOSCA 1.3 and 2.0 specs,
   the `requirements` key under `substitution_mappings` is syntactically a map. However, this syntax
   is inconsistent because it doesn't match the syntax in node templates, which is a sequenced list.
   (In node types, too, it is a sequenced list, although grammatically it works like a map.) This
@@ -51,15 +51,3 @@ These are activated via the `--quirk/-x` switch for
 
 * **annotations.ignore**: Ignores the "annotation_types" keyword in service templates and the
   "annotations" keyword in parameter definitions.
-
-* **interfaces.operations.permissive**: Allows interface types, definitions, and assignments to
-  refer to operations directly in addition to using the "operations" keyname. This allows TOSCA 1.3
-  and 2.0 to support the TOSCA 1.2 grammar.
-
-Combination Quirks
-------------------
-
-* **etsinfv**: Combines "imports.topology_template.ignore", "data_types.string.permissive",
-  "capabilities.occurrences.permissive", "substitution_mappings.requirements.permissive",
-  "substitution_mappings.requirements.list"
-* **onap**: Combines "annotations.ignore", "imports.sequencedlist", "imports.version.permissive"

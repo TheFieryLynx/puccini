@@ -9,9 +9,6 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.6.10
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.6.9
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.5.8
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.5.8
 //
 
 type PropertyDefinition struct {

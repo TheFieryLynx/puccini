@@ -10,9 +10,6 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.6.5.2
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.6.5.2
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.5.4.2
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.5.4.2
 //
 
 type CapabilityFilter struct {

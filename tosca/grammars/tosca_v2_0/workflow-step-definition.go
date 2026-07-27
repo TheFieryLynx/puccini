@@ -10,8 +10,6 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.6.27
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.6.23
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.5.21
 //
 
 type WorkflowStepDefinition struct {

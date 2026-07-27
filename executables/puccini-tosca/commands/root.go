@@ -36,6 +36,8 @@ func init() {
 var rootCommand = &cobra.Command{
 	Use:   toolName,
 	Short: "TOSCA parser and compiler",
+	Long: "TOSCA parser and compiler.\n\n" +
+		"Supported definitions versions: tosca_simple_yaml_1_3, tosca_2_0.",
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		util.InitializeCPUProfiling(cpuProfilePath)
 		util.InitializeColorization(colorize)

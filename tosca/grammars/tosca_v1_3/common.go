@@ -15,8 +15,6 @@ var Grammar = parsing.NewGrammar()
 var DefaultScriptletNamespace = parsing.NewScriptletNamespace()
 
 func init() {
-	Grammar.RegisterVersion("tosca_definitions_version", "tosca_simple_yaml_1_3", "/profiles/simple/1.3/profile.yaml")
-
 	Grammar.RegisterReader("$Root", ReadServiceFile) // override
 	Grammar.RegisterReader("$File", ReadFile)        // override
 
@@ -59,7 +57,7 @@ func init() {
 	Grammar.RegisterReader("PolicyType", tosca_v2_0.ReadPolicyType)
 	Grammar.RegisterReader("PropertyDefinition", ReadPropertyDefinition)
 	Grammar.RegisterReader("PropertyFilter", tosca_v2_0.ReadPropertyFilter)
-	Grammar.RegisterReader("PropertyMapping", tosca_v2_0.ReadPropertyMapping) // introduced in TOSCA 1.2
+	Grammar.RegisterReader("PropertyMapping", tosca_v2_0.ReadPropertyMapping)
 	Grammar.RegisterReader("range", tosca_v2_0.ReadRange)
 	Grammar.RegisterReader("RangeEntity", tosca_v2_0.ReadRangeEntity)
 	Grammar.RegisterReader("RelationshipAssignment", tosca_v2_0.ReadRelationshipAssignment)
@@ -79,14 +77,14 @@ func init() {
 	Grammar.RegisterReader("SubstitutionMappings", ReadSubstitutionMappings) // override
 	Grammar.RegisterReader("timestamp", tosca_v2_0.ReadTimestamp)
 	Grammar.RegisterReader("TriggerDefinition", ReadTriggerDefinition) // override
-	Grammar.RegisterReader("TriggerDefinitionCondition", tosca_v2_0.ReadTriggerDefinitionCondition)
+	Grammar.RegisterReader("TriggerDefinitionCondition", ReadTriggerDefinitionCondition)
 	Grammar.RegisterReader("Value", tosca_v2_0.ReadValue)
 	Grammar.RegisterReader("version", tosca_v2_0.ReadVersion)
-	Grammar.RegisterReader("WorkflowActivityCallOperation", tosca_v2_0.ReadWorkflowActivityCallOperation)   // introduced in TOSCA 1.1
-	Grammar.RegisterReader("WorkflowActivityDefinition", tosca_v2_0.ReadWorkflowActivityDefinition)         // introduced in TOSCA 1.1
-	Grammar.RegisterReader("WorkflowDefinition", tosca_v2_0.ReadWorkflowDefinition)                         // introduced in TOSCA 1.1
-	Grammar.RegisterReader("WorkflowPreconditionDefinition", tosca_v2_0.ReadWorkflowPreconditionDefinition) // introduced in TOSCA 1.1
-	Grammar.RegisterReader("WorkflowStepDefinition", tosca_v2_0.ReadWorkflowStepDefinition)                 // introduced in TOSCA 1.1
+	Grammar.RegisterReader("WorkflowActivityCallOperation", tosca_v2_0.ReadWorkflowActivityCallOperation)
+	Grammar.RegisterReader("WorkflowActivityDefinition", tosca_v2_0.ReadWorkflowActivityDefinition)
+	Grammar.RegisterReader("WorkflowDefinition", tosca_v2_0.ReadWorkflowDefinition)
+	Grammar.RegisterReader("WorkflowPreconditionDefinition", tosca_v2_0.ReadWorkflowPreconditionDefinition)
+	Grammar.RegisterReader("WorkflowStepDefinition", tosca_v2_0.ReadWorkflowStepDefinition)
 
 	DefaultScriptletNamespace.RegisterScriptlets(tosca_v2_0.FunctionScriptlets, nil)
 	DefaultScriptletNamespace.RegisterScriptlets(ConstraintClauseScriptlets, ConstraintClauseNativeArgumentIndexes)

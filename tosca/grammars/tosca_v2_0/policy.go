@@ -10,9 +10,6 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.8.6
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.8.6
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.7.6
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.7.6
 //
 
 type Policy struct {
@@ -20,11 +17,11 @@ type Policy struct {
 	Name    string `namespace:""`
 
 	PolicyTypeName                 *string            `read:"type" mandatory:""`
-	Metadata                       Metadata           `read:"metadata,Metadata"` // introduced in TOSCA 1.1
+	Metadata                       Metadata           `read:"metadata,Metadata"`
 	Description                    *string            `read:"description"`
 	Properties                     Values             `read:"properties,Value"`
 	TargetNodeTemplateOrGroupNames *[]string          `read:"targets"`
-	TriggerDefinitions             TriggerDefinitions `read:"triggers,TriggerDefinition" inherit:"triggers,PolicyType"` // introduced in TOSCA 1.1
+	TriggerDefinitions             TriggerDefinitions `read:"triggers,TriggerDefinition" inherit:"triggers,PolicyType"`
 
 	PolicyType          *PolicyType   `lookup:"type,PolicyTypeName" traverse:"ignore" json:"-" yaml:"-"`
 	TargetNodeTemplates NodeTemplates `lookup:"targets,TargetNodeTemplateOrGroupNames" traverse:"ignore" json:"-" yaml:"-"`

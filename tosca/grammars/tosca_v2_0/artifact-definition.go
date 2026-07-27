@@ -19,9 +19,6 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.6.7
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.6.7
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.5.6
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.5.6
 //
 
 type ArtifactDefinition struct {
@@ -32,7 +29,7 @@ type ArtifactDefinition struct {
 	Description       *string  `read:"description"`
 	Metadata          Metadata `read:"metadata,Metadata"`
 	ArtifactVersion   *string  `read:"artifact_version"`
-	Properties        Values   `read:"properties,Value"` // ERRATUM: ommited in TOSCA 1.0-1.2 (appears in artifact type)
+	Properties        Values   `read:"properties,Value"`
 	RepositoryName    *string  `read:"repository"`
 	File              *string  `read:"file"` // mandatory only if cannot be inherited
 	DeployPath        *string  `read:"deploy_path"`

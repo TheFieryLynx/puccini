@@ -229,7 +229,7 @@ node_types:
     derived_from: Root
     properties:
       size:
-        type: scalar-unit.size
+        type: Size
         validation:
           $greater_or_equal:
             - $value
@@ -249,7 +249,7 @@ node_types:
       maxsize:
         description: >
           The requested maximum storage size.
-        type: scalar-unit.size
+        type: Size
         validation:
           $greater_or_equal:
             - $value

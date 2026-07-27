@@ -19,9 +19,6 @@ import (
 // SubstitutionMappings represents the TOSCA substitution mappings grammar
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.8.13, 2.10, 2.11, 2.12
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.8.12, 2.10, 2.11
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 2.10, 2.11
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 2.10, 2.11
 //
 
 type SubstitutionMappings struct {
@@ -30,9 +27,9 @@ type SubstitutionMappings struct {
 	NodeTypeName        *string             `read:"node_type" mandatory:""`
 	CapabilityMappings  CapabilityMappings  `read:"capabilities,CapabilityMapping"`
 	RequirementMappings RequirementMappings `read:"requirements,RequirementMapping"`
-	PropertyMappings    PropertyMappings    `read:"properties,PropertyMapping"`     // introduced in TOSCA 1.2
-	AttributeMappings   AttributeMappings   `read:"attributes,AttributeMapping"`    // introduced in TOSCA 1.3
-	InterfaceMappings   InterfaceMappings   `read:"interfaces,InterfaceMapping"`    // introduced in TOSCA 1.2
+	PropertyMappings    PropertyMappings    `read:"properties,PropertyMapping"`
+	AttributeMappings   AttributeMappings   `read:"attributes,AttributeMapping"` // introduced in TOSCA 1.3
+	InterfaceMappings   InterfaceMappings   `read:"interfaces,InterfaceMapping"`
 	SubstitutionFilter  *NodeFilter         `read:"substitution_filter,NodeFilter"` // introduced in TOSCA 1.3
 
 	NodeType *NodeType `lookup:"node_type,NodeTypeName" traverse:"ignore" json:"-" yaml:"-"`

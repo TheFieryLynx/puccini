@@ -10,9 +10,6 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.7.3
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.7.3
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.6.3
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.6.2
 //
 
 type RequirementDefinition struct {

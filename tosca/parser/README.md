@@ -14,8 +14,9 @@ Coding Principles
 -----------------
 
 There are over 60 different entity types in TOSCA 1.3. Writing custom code for each, even with
-reusable utility functions, would quickly become a maintenance nightmare, not only for fixing bugs
-but also for supporting future versions of TOSCA.
+reusable utility functions, would quickly become a maintenance nightmare. Puccini keeps separate
+TOSCA 1.3 and TOSCA 2.0 grammar packages while sharing phase infrastructure only where both
+specifications require equivalent processing.
 
 We have opted to combine utility functions with plenty of reflection. Reflection is used to
 solve generic, repeatable actions, such as reading data of various types, looking up names in

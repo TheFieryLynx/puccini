@@ -159,9 +159,6 @@ func (self ScalarUnitMeasures) Get(unit string, caseSensitive bool) (string, flo
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.3.6.4
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.3.6.4
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.2.6.4
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.2.6.4
 //
 
 var ScalarUnitSizeRE = regexp.MustCompile(
@@ -190,9 +187,6 @@ func ReadScalarUnitSize(context *parsing.Context) parsing.EntityPtr {
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.3.6.5
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.3.6.5
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.2.6.5
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.2.6.5
 //
 
 var ScalarUnitTimeRE = regexp.MustCompile(
@@ -219,9 +213,6 @@ func ReadScalarUnitTime(context *parsing.Context) parsing.EntityPtr {
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.3.6.6
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.3.6.6
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.2.6.6
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.2.6.6
 //
 
 var ScalarUnitFrequencyRE = regexp.MustCompile(

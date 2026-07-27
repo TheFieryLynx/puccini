@@ -12,9 +12,6 @@ However, Ansible is a general-purpose orchestrator that can do a lot more than H
 playbooks comprise roles that can be imported and used in other playbooks, allowing for custom
 orchestration integrations.
 
-Note that though Puccini can compile HOT directly, we recommend TOSCA because of its much
-richer grammar and features. See the [HOT examples](../hot/).
-
 * [Hello World](hello-world.yaml)
 
 If you have [Ansible](https://www.ansible.com/) installed and configured then you can run something

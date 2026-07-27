@@ -10,7 +10,7 @@ processes.
 Features
 --------
 
-Two features (introduced in TOSCA 1.1) are supported:
+Two TOSCA workflow and policy features are demonstrated:
 
 ### Workflows
 

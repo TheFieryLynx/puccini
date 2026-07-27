@@ -10,46 +10,31 @@ import (
 //
 // [TOSCA-v2.0] @ ?
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.6.20
-// [TOSCA-Simple-Profile-YAML-v1.2] @ 3.6.16
-// [TOSCA-Simple-Profile-YAML-v1.1] @ 3.5.14
-// [TOSCA-Simple-Profile-YAML-v1.0] @ 3.5.14
 //
 
 type InterfaceAssignment struct {
 	*Entity `name:"interface" json:"-" yaml:"-"`
 	Name    string
 
-	Inputs          Values                  `read:"inputs,Value"`
-	Operations      OperationAssignments    `read:"operations,OperationAssignment"`       // keyword since TOSCA 1.3
-	Notifications   NotificationAssignments `read:"notifications,NotificationAssignment"` // introduced in TOSCA 1.3
-	ExtraOperations OperationAssignments    `json:"-" yaml:"-"`
+	Inputs        Values                  `read:"inputs,Value"`
+	Operations    OperationAssignments    `read:"operations,OperationAssignment"`       // keyword since TOSCA 1.3
+	Notifications NotificationAssignments `read:"notifications,NotificationAssignment"` // introduced in TOSCA 1.3
 }
 
 func NewInterfaceAssignment(context *parsing.Context) *InterfaceAssignment {
 	return &InterfaceAssignment{
-		Entity:          NewEntity(context),
-		Name:            context.Name,
-		Inputs:          make(Values),
-		Operations:      make(OperationAssignments),
-		Notifications:   make(NotificationAssignments),
-		ExtraOperations: make(OperationAssignments),
+		Entity:        NewEntity(context),
+		Name:          context.Name,
+		Inputs:        make(Values),
+		Operations:    make(OperationAssignments),
+		Notifications: make(NotificationAssignments),
 	}
 }
 
 // ([parsing.Reader] signature)
 func ReadInterfaceAssignment(context *parsing.Context) parsing.EntityPtr {
 	self := NewInterfaceAssignment(context)
-
-	if context.HasQuirk(parsing.QuirkInterfacesOperationsPermissive) {
-		context.SetReadTag("ExtraOperations", "?,OperationAssignments")
-		context.ReadFields(self)
-		for name, operation := range self.ExtraOperations {
-			self.Operations[name] = operation
-		}
-	} else {
-		context.ValidateUnsupportedFields(context.ReadFields(self))
-	}
-
+	context.ValidateUnsupportedFields(context.ReadFields(self))
 	return self
 }
 
