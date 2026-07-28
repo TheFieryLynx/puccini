@@ -1,0 +1,69 @@
+remediation_group: normative-name-case-sensitivity
+remediation_order: 4
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+parser_phase: namespaces
+execution_path:
+  - parser.Context.AddNamespaces
+  - parsing.Namespace.Merge
+  - parsing.Namespace.Lookup
+  - parsing.Namespace.LookupForType
+
+requirements:
+  - requirement_id: TOSCA13-5.2.1-001
+    section: "5.2.1"
+    section_title: "Additional requirements"
+    normative_rule: "TOSCA Type URI, Shorthand, and Type Qualified names are treated as case-sensitive."
+    baseline:
+      implementation_status: partial
+      verification_status: untested
+      behavior:
+        - "Namespace storage and lookup use exact Go string keys and no case-folding path was found."
+        - "The audit lacked direct tests for all three normative name forms and imported qualified names."
+      baseline_test_result: "New direct tests passed before production changes; the gap was evidence, not behavior."
+    implementation:
+      files:
+        - tosca/parsing/namespaces.go
+        - tosca/grammars/tosca_v2_0/import.go
+      symbols:
+        - parsing.Namespace.Lookup
+        - parsing.Namespace.LookupForType
+        - tosca_v2_0.getNormativeNames
+      production_change_required: false
+      version_isolation: "No shared or version-specific production behavior changed."
+    tests:
+      positive:
+        - TestNormativeTypeNamesExactCaseAccepted
+        - TestImportedQualifiedTypeNameExactCaseAccepted
+      negative:
+        - TestNormativeTypeNameCaseMismatchRejected
+        - TestImportedQualifiedTypeNameCaseMismatchRejected
+      boundary:
+        - TestNormativeTypeNamesExactCaseAccepted
+      resolution:
+        - TestImportedQualifiedTypeNameCaseMismatchRejected
+      regression:
+        - TestTosca20TypeNameCaseSensitivityUnchanged
+    mutation_check:
+      performed: true
+      mutation: "Temporarily added strings.EqualFold fallback to parsing.Namespace.LookupForType."
+      affected_tests:
+        - TestNormativeTypeNameCaseMismatchRejected
+        - TestImportedQualifiedTypeNameCaseMismatchRejected
+        - TestTosca20TypeNameCaseSensitivityUnchanged
+      expected_tests_failed: true
+      production_diff_restored: true
+    result:
+      implementation_status: implemented
+      verification_status: verified
+      direct_evidence_added: true
+      production_behavior_changed: false
+    verification:
+      focused_name_resolution: passed
+      focused_imports_namespaces: passed
+      tosca_2_0_regression: passed
+      go_test_all: passed
+      go_test_race_all: passed
+      go_vet_all: passed
+      audit_generation_twice: passed
+      audit_sha256_identical: true
+      denominator: 223

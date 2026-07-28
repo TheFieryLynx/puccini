@@ -13,17 +13,17 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Implementation Status | Records |
 |---|---:|
-| implemented | 742 |
-| partial | 48 |
+| implemented | 743 |
+| partial | 47 |
 | missing | 2 |
 | non-compliant | 27 |
 | unknown | 2282 |
 
 | Verification Status | Records |
 |---|---:|
-| verified | 175 |
+| verified | 176 |
 | indirectly-tested | 562 |
-| untested | 2310 |
+| untested | 2309 |
 | unverifiable | 54 |
 
 | Applicability | Records |
@@ -36,7 +36,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Strength | Applicable atomic denominator | Implemented | Implementation coverage | Implemented + verified | Verified conformance coverage | Broad test evidence | Broad evidence coverage |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| MUST/SHALL/REQUIRED | 223 | 196 | 87.89% | 146 | 65.47% | 172 | 77.13% |
+| MUST/SHALL/REQUIRED | 223 | 197 | 88.34% | 147 | 65.92% | 173 | 77.58% |
 | SHOULD/RECOMMENDED | 23 | 0 | 0.00% | 0 | 0.00% | 0 | 0.00% |
 | MAY/OPTIONAL | 693 | 99 | 14.29% | 0 | 0.00% | 95 | 13.71% |
 
@@ -49,7 +49,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | 14 | 43 | 0 | 0 | 0 | 0 | 43 | 0 | 0 | 6 | 37 |
 | 3 | 1670 | 244 | 41 | 2 | 14 | 1369 | 130 | 102 | 1431 | 7 |
 | 4 | 144 | 24 | 0 | 0 | 5 | 115 | 29 | 0 | 115 | 0 |
-| 5 | 978 | 395 | 6 | 0 | 5 | 572 | 6 | 393 | 573 | 6 |
+| 5 | 978 | 396 | 5 | 0 | 5 | 572 | 7 | 393 | 572 | 6 |
 | 6 | 44 | 11 | 0 | 0 | 3 | 30 | 9 | 0 | 31 | 4 |
 | 7 | 25 | 0 | 0 | 0 | 0 | 25 | 0 | 0 | 25 | 0 |
 | 8 | 188 | 68 | 1 | 0 | 0 | 119 | 1 | 67 | 120 | 0 |
@@ -67,6 +67,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | inheritance/rendering | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 |
 | inheritance/rendering/normalization | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | namespaces | 16 | 0 | 0 | 1 | 0 | 15 | 0 | 0 | 16 | 0 |
+| namespaces and lookup | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | normalization | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 1 |
 | read | 1395 | 191 | 20 | 0 | 3 | 1181 | 81 | 101 | 1206 | 7 |
 | read and rendering/function-evaluation | 24 | 24 | 0 | 0 | 0 | 0 | 24 | 0 | 0 | 0 |
@@ -76,7 +77,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | rendering | 254 | 15 | 17 | 0 | 1 | 221 | 3 | 1 | 246 | 4 |
 | rendering/function-evaluation | 75 | 1 | 1 | 0 | 4 | 69 | 4 | 0 | 71 | 0 |
 | rendering/normalization/function-evaluation | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
-| semantic | 576 | 0 | 5 | 1 | 11 | 559 | 11 | 0 | 530 | 35 |
+| semantic | 575 | 0 | 4 | 1 | 11 | 559 | 11 | 0 | 529 | 35 |
 
 ## grammar entities
 

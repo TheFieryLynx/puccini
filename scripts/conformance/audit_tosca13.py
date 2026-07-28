@@ -214,6 +214,24 @@ DIRECT_TESTS["TOSCA13-4.7.1.2-003"] = {
     ],
 }
 
+NORMATIVE_NAME_CASE_SENSITIVITY_ID = "TOSCA13-5.2.1-001"
+DIRECT_TESTS[NORMATIVE_NAME_CASE_SENSITIVITY_ID] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_name_case_sensitivity_test.go#TestNormativeTypeNamesExactCaseAccepted",
+        "tests/conformance/tosca_1_3/partial_name_case_sensitivity_test.go#TestImportedQualifiedTypeNameExactCaseAccepted",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_name_case_sensitivity_test.go#TestNormativeTypeNameCaseMismatchRejected",
+        "tests/conformance/tosca_1_3/partial_name_case_sensitivity_test.go#TestImportedQualifiedTypeNameCaseMismatchRejected",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_name_case_sensitivity_test.go#TestNormativeTypeNamesExactCaseAccepted",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_name_case_sensitivity_test.go#TestTosca20TypeNameCaseSensitivityUnchanged",
+    ],
+}
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -597,6 +615,21 @@ MUTATION_CHECKS["TOSCA13-3.1.3.1-004"] = {
         "and version."
     ),
     "expected_test_failed": True,
+}
+MUTATION_CHECKS[NORMATIVE_NAME_CASE_SENSITIVITY_ID] = {
+    "performed": True,
+    "mutation": (
+        "Temporarily added a strings.EqualFold fallback to "
+        "parsing.Namespace.LookupForType; all case-mismatch negative tests "
+        "failed by accepting incorrectly cased type names."
+    ),
+    "affected_tests": [
+        "TestNormativeTypeNameCaseMismatchRejected",
+        "TestImportedQualifiedTypeNameCaseMismatchRejected",
+        "TestTosca20TypeNameCaseSensitivityUnchanged",
+    ],
+    "expected_tests_failed": True,
+    "production_diff_restored": True,
 }
 for requirement_id in LOCAL_COLLISION_IDS:
     MUTATION_CHECKS[requirement_id] = {
@@ -1778,6 +1811,37 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
     }
     if app == "not-applicable":
         return "unknown", empty, "Outside processor conformance or invalid catalog record."
+    if requirement_id == NORMATIVE_NAME_CASE_SENSITIVITY_ID:
+        return "implemented", {
+            "entry_point": "parser.Context.AddNamespaces",
+            "packages": [
+                "tosca/grammars/tosca_v2_0",
+                "tosca/parsing",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v2_0/import.go",
+                "tosca/parsing/namespaces.go",
+                "tests/conformance/tosca_1_3/partial_name_case_sensitivity_test.go",
+            ],
+            "symbols": [
+                "tosca_v2_0.getNormativeNames",
+                "parsing.Namespace.Merge",
+                "parsing.Namespace.Lookup",
+                "parsing.Namespace.LookupForType",
+            ],
+            "parser_phase": "namespaces and lookup",
+            "execution_path": [
+                "parser.Context.AddNamespaces",
+                "tosca_v2_0.getNormativeNames",
+                "parsing.Namespace.Merge",
+                "parsing.Namespace.LookupForType",
+            ],
+            "trace_summary": (
+                "implicit TOSCA 1.3 profile names are registered in Type URI, "
+                "shorthand, and qualified forms using exact strings; namespace "
+                "storage and lookup use exact Go map keys without case folding"
+            ),
+        }, None
     if requirement_id in IMPORT_NAMESPACE_IDS:
         return "implemented", {
             "entry_point": "parser.Context.ReadRoot",
