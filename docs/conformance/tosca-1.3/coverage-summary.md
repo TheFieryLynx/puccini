@@ -13,17 +13,17 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Implementation Status | Records |
 |---|---:|
-| implemented | 739 |
-| partial | 51 |
+| implemented | 740 |
+| partial | 50 |
 | missing | 2 |
 | non-compliant | 27 |
 | unknown | 2282 |
 
 | Verification Status | Records |
 |---|---:|
-| verified | 172 |
+| verified | 173 |
 | indirectly-tested | 562 |
-| untested | 2313 |
+| untested | 2312 |
 | unverifiable | 54 |
 
 | Applicability | Records |
@@ -36,7 +36,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Strength | Applicable atomic denominator | Implemented | Implementation coverage | Implemented + verified | Verified conformance coverage | Broad test evidence | Broad evidence coverage |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| MUST/SHALL/REQUIRED | 223 | 193 | 86.55% | 143 | 64.13% | 169 | 75.78% |
+| MUST/SHALL/REQUIRED | 223 | 194 | 87.00% | 144 | 64.57% | 170 | 76.23% |
 | SHOULD/RECOMMENDED | 23 | 0 | 0.00% | 0 | 0.00% | 0 | 0.00% |
 | MAY/OPTIONAL | 693 | 99 | 14.29% | 0 | 0.00% | 95 | 13.71% |
 
@@ -47,7 +47,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 13 | 8 | 0 | 0 | 0 | 0 | 8 | 0 | 0 | 8 | 0 |
 | 14 | 43 | 0 | 0 | 0 | 0 | 43 | 0 | 0 | 6 | 37 |
-| 3 | 1670 | 243 | 42 | 2 | 14 | 1369 | 129 | 102 | 1432 | 7 |
+| 3 | 1670 | 244 | 41 | 2 | 14 | 1369 | 130 | 102 | 1431 | 7 |
 | 4 | 144 | 22 | 2 | 0 | 5 | 115 | 27 | 0 | 117 | 0 |
 | 5 | 978 | 395 | 6 | 0 | 5 | 572 | 6 | 393 | 573 | 6 |
 | 6 | 44 | 11 | 0 | 0 | 3 | 30 | 9 | 0 | 31 | 4 |
@@ -68,7 +68,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | inheritance/rendering/normalization | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | namespaces | 16 | 0 | 0 | 1 | 0 | 15 | 0 | 0 | 16 | 0 |
 | normalization | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 1 |
-| read | 1395 | 190 | 21 | 0 | 3 | 1181 | 80 | 101 | 1207 | 7 |
+| read | 1395 | 191 | 20 | 0 | 3 | 1181 | 81 | 101 | 1206 | 7 |
 | read and rendering/function-evaluation | 22 | 22 | 0 | 0 | 0 | 0 | 22 | 0 | 0 | 0 |
 | read, imports, namespaces, and lookup | 34 | 34 | 0 | 0 | 0 | 0 | 34 | 0 | 0 | 0 |
 | read/imports | 14 | 0 | 0 | 0 | 0 | 14 | 0 | 0 | 14 | 0 |

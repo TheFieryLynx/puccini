@@ -56,6 +56,7 @@ func ReadInterfaceDefinition(context *parsing.Context) parsing.EntityPtr {
 //
 // TOSCA Simple Profile in YAML 1.3, sections 3.7.5.2 and 3.7.5.4.
 func ReadInterfaceType(context *parsing.Context) parsing.EntityPtr {
+	validateInterfaceTypeOperationNames(context)
 	validateInterfaceTypeImplementations(context, "operations")
 	validateInterfaceTypeImplementations(context, "notifications")
 	self := tosca_v2_0.ReadInterfaceType(context).(*tosca_v2_0.InterfaceType)
@@ -142,6 +143,24 @@ func validateNonEmptyMapField(context *parsing.Context, key string) {
 	if data, present := mapField(context, key); present {
 		if map_, ok := data.(ard.Map); ok && len(map_) == 0 {
 			context.FieldChild(key, data).ReportValueMalformed(key, "must contain one or more entries")
+		}
+	}
+}
+
+func validateInterfaceTypeOperationNames(context *parsing.Context) {
+	data, present := mapField(context, "operations")
+	if !present {
+		return
+	}
+	operations, ok := data.(ard.Map)
+	if !ok {
+		return
+	}
+	for name, definition := range operations {
+		if yamlkeys.KeyString(name) == "inputs" {
+			context.FieldChild("operations", data).
+				MapChild(name, definition).
+				ReportValueMalformed("operation name", "inputs is reserved")
 		}
 	}
 }

@@ -47863,8 +47863,8 @@ requirements:
   strength: SHALL_NOT
   category: semantic
   subject: additional-requirements
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -47878,45 +47878,40 @@ requirements:
     packages:
     - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
-    - tosca/parser
-    - tosca/parsing
     files:
     - tosca/grammars/tosca_v2_0/interface-type.go
-    - tosca/grammars/tosca_v1_3/common.go
-    - tosca/parsing/reading.go
-    - tosca/parsing/validation.go
-    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
     symbols:
     - tosca_v2_0.ReadInterfaceType
-    - tosca_v1_3.Grammar
-    - parsing.Context.ReadFields
-    - parsing.ValidateRequiredFields
-    - parsing.Context.ValidateUnsupportedFields
+    - tosca_v1_3.ReadInterfaceType
+    - tosca_v1_3.validateInterfaceTypeOperationNames
     parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - parser.Context.read
+    - tosca_v1_3.ReadInterfaceType
+    - tosca_v1_3.validateInterfaceTypeOperationNames
     - tosca_v2_0.ReadInterfaceType
-    - parsing.Context.ReadFields
-    - parsing.ValidateRequiredFields
-    trace_summary: Operation names are collection keys; no reserved-name check for this prohibited name was found.
+    trace_summary: The TOSCA 1.3 InterfaceType reader rejects the exact reserved key inputs in its operations map before shared structural decoding.
   tests:
-    positive: []
-    negative: []
-    boundary: []
-    regression: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_interface_reserved_name_test.go#TestInterfaceTypeOperationNameAccepted
+    - tests/conformance/tosca_1_3/partial_interface_reserved_name_test.go#TestInterfaceTypeReservedOperationNameIsCaseSensitive
+    negative:
+    - tests/conformance/tosca_1_3/partial_interface_reserved_name_test.go#TestInterfaceTypeRejectsReservedInputsOperationName
+    boundary:
+    - tests/conformance/tosca_1_3/partial_interface_reserved_name_test.go#TestInterfaceTypeReservedOperationDiagnosticDeterministic
+    regression:
+    - tests/conformance/tosca_1_3/partial_interface_reserved_name_test.go#TestTosca20InterfaceOperationNamedInputsUnchanged
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Reserved operation-name rejection is absent.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Reserved operation-name rejection is absent.
+  gaps: []
+  notes: The reserved operation name is rejected and directly verified in the TOSCA 1.3 read path.
 - requirement_id: TOSCA13-3.7.5.4-003
   section: 3.7.5.4
   section_title: Additional Requirements

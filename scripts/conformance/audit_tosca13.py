@@ -162,6 +162,23 @@ for requirement_id in VERSION_ZERO_IDS:
         ],
     }
 
+INTERFACE_RESERVED_OPERATION_NAME_ID = "TOSCA13-3.7.5.4-002"
+DIRECT_TESTS[INTERFACE_RESERVED_OPERATION_NAME_ID] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_interface_reserved_name_test.go#TestInterfaceTypeOperationNameAccepted",
+        "tests/conformance/tosca_1_3/partial_interface_reserved_name_test.go#TestInterfaceTypeReservedOperationNameIsCaseSensitive",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_interface_reserved_name_test.go#TestInterfaceTypeRejectsReservedInputsOperationName",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_interface_reserved_name_test.go#TestInterfaceTypeReservedOperationDiagnosticDeterministic",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_interface_reserved_name_test.go#TestTosca20InterfaceOperationNamedInputsUnchanged",
+    ],
+}
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -1652,8 +1669,25 @@ def manual_must_trace(requirement: dict[str, Any]) -> tuple[str, dict[str, Any],
         return "partial", traced_impl("grammar-field", "read", "Operation/notification maps are recognized, but an empty map is accepted; one-or-more cardinality is not enforced."), "Required non-empty collection cardinality is absent."
     if requirement_id == "TOSCA13-3.7.5.4-001":
         return "partial", traced_impl("grammar-field", "read", "Interface type operation definitions use the shared OperationDefinition reader, which accepts `implementation`; the context prohibition is not isolated for v1.3."), "Operation/notification implementation is accepted in an interface type context."
-    if requirement_id == "TOSCA13-3.7.5.4-002":
-        return "partial", traced_impl("grammar-field", "read", "Operation names are collection keys; no reserved-name check for this prohibited name was found."), "Reserved operation-name rejection is absent."
+    if requirement_id == INTERFACE_RESERVED_OPERATION_NAME_ID:
+        impl = traced_impl(
+            "grammar-field",
+            "read",
+            "The TOSCA 1.3 InterfaceType reader rejects the exact reserved key inputs in its operations map before shared structural decoding.",
+        )
+        impl["files"] = ["tosca/grammars/tosca_v1_3/structural-readers.go"]
+        impl["packages"] = ["tosca/grammars/tosca_v1_3"]
+        impl["symbols"] = [
+            "tosca_v1_3.ReadInterfaceType",
+            "tosca_v1_3.validateInterfaceTypeOperationNames",
+        ]
+        impl["execution_path"] = [
+            "parser.Context.ReadRoot",
+            "tosca_v1_3.ReadInterfaceType",
+            "tosca_v1_3.validateInterfaceTypeOperationNames",
+            "tosca_v2_0.ReadInterfaceType",
+        ]
+        return "implemented", impl, "The reserved operation name is rejected and directly verified in the TOSCA 1.3 read path."
     if requirement_id == "TOSCA13-3.7.11.4-002":
         return "partial", traced_impl("hierarchy", "rendering", "GroupType.Render checks a child members list against the parent list, but it does not prove that all types within a newly declared members list share one hierarchy."), "Parent refinement is checked; intra-list homogeneity is not fully validated."
 
@@ -1950,7 +1984,10 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
                 "post-lookup/inheritance reference and context validation → deterministic normalization/evaluation"
             ),
         }, None
-    if requirement_id in {PROPERTY_ATTRIBUTE_REFLECTION_ID, EXTERNAL_SCHEMA_VALIDATION_ID} or requirement_id in VERSION_ZERO_IDS:
+    if (
+        requirement_id in {PROPERTY_ATTRIBUTE_REFLECTION_ID, EXTERNAL_SCHEMA_VALIDATION_ID, INTERFACE_RESERVED_OPERATION_NAME_ID}
+        or requirement_id in VERSION_ZERO_IDS
+    ):
         return manual_must_trace(requirement)
     if requirement_id in CSAR_REMEDIATED_IDS:
         return "implemented", {
