@@ -376,3 +376,172 @@ List unresolved or interpreted specification language.
 State whether the relevant conformance matrix entries are implemented, partial,
 blocked, ambiguous, or not applicable.
 
+## Mandatory Git commits
+
+Every task that produces persistent repository changes must end with a Git
+commit.
+
+Persistent changes include:
+
+* production code;
+* tests and fixtures;
+* documentation;
+* conformance artifacts;
+* decision records;
+* scripts;
+* configuration;
+* generated files intentionally tracked by the repository.
+
+Do not create an empty commit when the task produces no repository changes.
+
+### Before making changes
+
+At the beginning of every task:
+
+1. Run `git status --short`.
+2. Record which modified, staged, and untracked files already existed.
+3. Treat all pre-existing changes as user-owned.
+4. Do not modify, discard, stage, or commit pre-existing user changes unless
+   they are explicitly included in the current task.
+
+### Commit isolation
+
+Each completed task must produce one focused, atomic commit.
+
+The commit must contain only changes created for the current task.
+
+Do not use broad staging commands such as:
+
+```bash
+git add .
+git add -A
+git commit -a
+```
+
+Stage files explicitly by path:
+
+```bash
+git add path/to/file1 path/to/file2
+```
+
+Before committing, run:
+
+```bash
+git diff --cached --stat
+git diff --cached
+```
+
+Verify that:
+
+* every staged change belongs to the current task;
+* no pre-existing user changes are staged;
+* no temporary probes, debug files, mutations, generated scratch files, or
+  unrelated formatting changes are staged;
+* required tests and verification commands have completed successfully.
+
+If a file contains both task changes and pre-existing user changes, stage only
+the task-related hunks. Do not include the entire file merely because partial
+staging is inconvenient.
+
+### Commit timing
+
+Create the commit only after:
+
+1. implementation is complete;
+2. permanent tests are complete;
+3. required tests, linting, validation, and audit generation succeed;
+4. temporary probes and mutations are removed;
+5. generated artifacts are deterministic where required;
+6. `git diff --check` succeeds;
+7. the final staged diff has been reviewed.
+
+Do not claim a task is complete before the commit has been created.
+
+If required verification fails because of the current changes, do not commit
+the changes as completed work. Fix the failure first.
+
+If verification cannot run because of a confirmed unrelated environment or
+pre-existing repository problem, commit only when the task changes are
+otherwise complete and clearly report the unverified checks in both the commit
+context and final response.
+
+### Commit messages
+
+Use Conventional Commit-style messages:
+
+```text
+<type>(<scope>): <concise imperative summary>
+```
+
+Allowed common types:
+
+* `feat`
+* `fix`
+* `test`
+* `refactor`
+* `docs`
+* `build`
+* `ci`
+* `chore`
+
+Examples:
+
+```text
+fix(tosca-1.3): enforce intrinsic function validation
+fix(tosca-1.3): validate imports and namespace collisions
+test(tosca-1.3): verify structural grammar requirements
+docs(conformance): record TOSCA 1.3 interpretation
+```
+
+For a task containing implementation and its tests, prefer the type describing
+the user-visible or standards-compliance change rather than creating a
+separate test-only commit.
+
+The commit body should include, when applicable:
+
+* affected TOSCA version;
+* processed conformance requirement IDs or requirement group;
+* important normative sections;
+* tests executed;
+* cross-version impact.
+
+Do not include generated attribution trailers unless explicitly requested.
+
+### Prohibited Git operations
+
+Do not:
+
+* push commits;
+* amend an existing commit;
+* rebase;
+* reset;
+* force checkout files;
+* discard working-tree changes;
+* modify Git history;
+* create or delete branches or tags;
+
+unless the user explicitly requests that operation.
+
+Creating the required local commit does not imply permission to push it.
+
+### Final verification
+
+After committing, run:
+
+```bash
+git status --short
+git show --stat --oneline --summary HEAD
+```
+
+The final response must include:
+
+* the commit hash;
+* the commit subject;
+* the files or subsystems committed;
+* the verification commands executed;
+* any remaining uncommitted files, explicitly distinguishing pre-existing
+  user changes from task changes.
+
+A task that created persistent repository changes is not complete if those
+changes remain uncommitted.
+
