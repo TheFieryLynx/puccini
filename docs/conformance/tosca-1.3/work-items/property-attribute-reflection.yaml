@@ -1,0 +1,164 @@
+requirements:
+  - requirement_id: TOSCA13-3.6.10.5-001
+    section: "3.6.10.5"
+    section_title: "Additional Requirements"
+    normative_rule: "Implementations of the TOSCA Simple Profile SHALL automatically reflect (i.e., make available) any property defined on an entity as an attribute of the entity with the same name as the property."
+    current_implementation_status: missing
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    implementation_symbols:
+      - tosca_v1_3.File.Render
+      - tosca_v1_3.ServiceFile.Render
+      - tosca_v1_3.reflectFilePropertyDefinitions
+      - tosca_v1_3.reflectPropertyDefinitions
+      - tosca_v2_0.AttributeDefinition.ReflectedProperty
+      - tosca_v2_0.Values.RenderReflectedAttributes
+      - tosca_v1_3.modelableEntity.hasAttribute
+    affected_entities:
+      - node type and node template
+      - relationship type, template, and assignment
+      - capability type, node capability definition, and capability assignment
+    applicable_specification:
+      version: "TOSCA Simple Profile in YAML 1.3"
+      source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+      sections:
+        - number: "3.5.1"
+          title: "Required Keynames"
+        - number: "3.6.10.1"
+          title: "Attribute and Property reflection"
+        - number: "3.6.10.5"
+          title: "Additional Requirements"
+        - number: "3.6.10.6"
+          title: "Refining Property Definitions"
+        - number: "3.6.11"
+          title: "Property assignment"
+        - number: "3.6.12.1"
+          title: "Attribute and Property reflection"
+        - number: "3.6.12.4"
+          title: "Additional Requirements"
+        - number: "3.6.13"
+          title: "Attribute assignment"
+        - number: "4.5.1"
+          title: "get_attribute"
+    interpretation:
+      scope: "Node, node capability, and relationship entities that normatively define both properties and attributes."
+      effective_definition: true
+      type: "The reflected attribute uses the final effective property data type and independently cloned key/entry schemas."
+      description: "Copied as an implementation interpretation."
+      default: "Not copied into the attribute definition; section 3.6.12.4 prohibits deriving an attribute default from property inputs."
+      constraints: "Not copied; the specification does not say that desired-state property constraints constrain actual state."
+      explicit_same_name: "The explicit definition is retained when its effective type is identical; a different type is a deterministic rendering error."
+      inheritance: "Reflection runs after inheritance and uses each type's final effective property map."
+      refinement: "The reflected attribute uses the refined property's final effective type."
+      normalization: "The reflected attribute and its current value source are preserved independently in normalized output."
+      current_value: "Absent an explicit attribute assignment/default, Puccini uses the rendered property value as the initial current value; this is an implementation interpretation."
+      get_attribute: "Resolution uses the effective attribute map; SOURCE/TARGET endpoint selection remains runtime behavior."
+      assignment_notation: "Section 3.6.11 defines no keynames and only short notation, so a short/long equivalence case is not applicable."
+      multiple_inheritance: "TOSCA 1.3 derived_from identifies one parent type, so duplicate reflection across multiple type-inheritance paths is not applicable."
+      parser_phase: "Effective definitions in post-inheritance rendering; assignments/defaults/functions in rendering; serialization in normalization."
+      decision_record: docs/decisions/0006-tosca-1.3-property-attribute-reflection.md
+    architecture:
+      execution_path:
+        - type definition
+        - property definitions
+        - hierarchy and inheritance
+        - TOSCA 1.3 effective-definition reflection
+        - rendering of property assignments/defaults
+        - rendering of reflected attribute values
+        - effective entity
+        - normalization
+        - intrinsic get_attribute resolution/evaluation
+      source_yaml_mutated: false
+      definition_aliasing: false
+      version_isolation: "The policy hook exists only in tosca_v1_3; shared rendering acts only on an explicitly marked definition."
+      gaps: []
+    planned_tests:
+      implicit_attribute:
+        - TestPropertyAttributeReflectionEffectiveDefinitions
+      explicit_attribute:
+        - TestPropertyAttributeReflectionExplicitAttributeConflict
+      inheritance:
+        - TestPropertyAttributeReflectionInheritanceAndRefinement
+      refinement:
+        - TestPropertyAttributeReflectionInheritanceAndRefinement
+      assignment:
+        - TestPropertyAttributeReflectionValues
+      default_value:
+        - TestPropertyAttributeReflectionValues
+      function_value:
+        - TestPropertyAttributeReflectionValues
+      normalization:
+        - TestPropertyAttributeReflectionNormalization
+      conflict:
+        - TestPropertyAttributeReflectionExplicitAttributeConflict
+      regression:
+        - TestPropertyAttributeReflectionGetAttributeResolution
+        - TestPropertyAttributeReflectionDoesNotChangeTosca20
+        - TestIntrinsicFunctionResolution
+    test_first_evidence:
+      baseline:
+        expected_failures:
+          - TestPropertyAttributeReflectionEffectiveDefinitions
+          - TestPropertyAttributeReflectionValues
+          - TestPropertyAttributeReflectionInheritanceAndRefinement
+          - TestPropertyAttributeReflectionNormalization
+        already_correct:
+          - TestPropertyAttributeReflectionGetAttributeResolution
+        failure_reason: "Property definitions did not create effective attribute definitions or normalized attribute values; get_attribute passed only through a separate property-map fallback."
+      focused_tests_passed: true
+    mutation_check:
+      performed: true
+      mutations:
+        - description: "Disabled the TOSCA 1.3 effective-type property-to-attribute reflection hook."
+          affected_tests:
+            - TestPropertyAttributeReflectionEffectiveDefinitions
+            - TestPropertyAttributeReflectionGetAttributeResolution
+          expected_tests_failed: true
+        - description: "Skipped reflection of the inherited property path."
+          affected_tests:
+            - TestPropertyAttributeReflectionInheritanceAndRefinement
+          expected_tests_failed: true
+        - description: "Forced an attributes collection onto an unrelated group entity."
+          affected_tests:
+            - TestPropertyAttributeReflectionEffectiveDefinitions
+          expected_tests_failed: true
+        - description: "Bypassed incompatible same-name explicit attribute conflict handling."
+          affected_tests:
+            - TestPropertyAttributeReflectionExplicitAttributeConflict
+          expected_tests_failed: true
+        - description: "Removed function-valued property propagation to the reflected attribute."
+          affected_tests:
+            - TestPropertyAttributeReflectionValues
+          expected_tests_failed: true
+      production_diff_restored: true
+    verification:
+      focused:
+        - "go test -count=1 ./tests/conformance/tosca_1_3 -run '^TestPropertyAttributeReflection'"
+        - "go test -count=1 ./tests/conformance/tosca_1_3 -run '^TestIntrinsicFunction'"
+        - "go test -count=1 ./tests/conformance/tosca_1_3 -run '^(TestPropertyAttributeReflectionInheritanceAndRefinement|TestPropertyAttributeReflectionValues|TestGrammarStructural|TestOperatingSystemCapability)'"
+        - "go test -count=1 ./tests/conformance/tosca_2_0"
+      full:
+        - "go test -count=1 ./..."
+        - "go test -race -count=1 ./..."
+        - "go vet ./..."
+        - "git diff --check"
+      audit:
+        command: python scripts/conformance/audit_tosca13.py
+        generated_twice: true
+        sha256_match: true
+        denominator: 223
+        implementation:
+          implemented: 184
+          partial: 32
+          missing: 1
+          non_compliant: 6
+        verification:
+          verified: 140
+          indirectly_tested: 26
+          untested: 57
+      protected_blocks:
+        intrinsic_functions: "22/22 implemented/verified"
+        imports_namespaces: "34/34 implemented/verified"
+        grammar_structural: "75/75 implemented/verified"
+        operating_system_capability_normalization: "1/1 implemented/verified"

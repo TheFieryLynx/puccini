@@ -78,7 +78,7 @@ func (self *NodeTemplate) render() {
 	}
 
 	self.Properties.RenderProperties(self.NodeType.PropertyDefinitions, self.Context.FieldChild("properties", nil))
-	self.Attributes.RenderAttributes(self.NodeType.AttributeDefinitions, self.Context.FieldChild("attributes", nil))
+	self.Attributes.RenderReflectedAttributes(self.Properties, self.NodeType.AttributeDefinitions, self.Context.FieldChild("attributes", nil))
 	self.Capabilities.Render(self.NodeType.CapabilityDefinitions, self.Context.FieldChild("capabilities", nil))
 	self.Requirements.Render(self, self.Context.FieldChild("requirements", nil))
 	self.Interfaces.RenderForNodeType(self.NodeType, self.Context.FieldChild("interfaces", nil))

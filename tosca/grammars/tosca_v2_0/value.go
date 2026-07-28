@@ -27,6 +27,11 @@ type Value struct {
 
 	DataType *DataType         `traverse:"ignore" json:"-" yaml:"-"`
 	Meta     *normal.ValueMeta `traverse:"ignore" json:"-" yaml:"-"`
+
+	// Set only on a value wrapper created for a reflected TOSCA 1.3
+	// attribute. The property has already rendered the shared context data;
+	// the separate wrapper preserves attribute ownership and metadata.
+	reflected bool
 }
 
 func NewValue(context *parsing.Context) *Value {
@@ -296,6 +301,14 @@ func (self Values) RenderAttributes(definitions AttributeDefinitions, context *p
 		if _, ok := self[key]; !ok {
 			if definition.Default != nil {
 				self[definition.Name] = definition.Default
+			} else if definition.ReflectedProperty != nil {
+				// An absent optional property has no current attribute value.
+				// Keep a distinct nil value without attaching validators that
+				// would incorrectly evaluate constraints against nil.
+				value := NewValue(context.MapChild(definition.Name, nil))
+				value.DataType = definition.DataType
+				value.reflected = true
+				self[definition.Name] = value
 			} else {
 				// Attributes should always appear, at least as nil, even if they have no default value
 				self[definition.Name] = NewValue(context.MapChild(definition.Name, nil))
@@ -305,6 +318,9 @@ func (self Values) RenderAttributes(definitions AttributeDefinitions, context *p
 
 	for key, value := range self {
 		if definition, ok := definitions[key]; ok {
+			if value.reflected {
+				continue
+			}
 			// Avoid re-rendering default
 			if value != definition.Default {
 				if definition.DataType != nil {
@@ -316,6 +332,36 @@ func (self Values) RenderAttributes(definitions AttributeDefinitions, context *p
 			delete(self, key)
 		}
 	}
+}
+
+// RenderReflectedAttributes preserves the ordinary attribute precedence while
+// allowing a version-specific effective-type policy to mark attributes whose
+// initial current value comes from a rendered property value.
+func (self Values) RenderReflectedAttributes(properties Values, definitions AttributeDefinitions, context *parsing.Context) {
+	for name, definition := range definitions {
+		if definition.ReflectedProperty == nil {
+			continue
+		}
+		if _, assigned := self[name]; assigned {
+			continue
+		}
+		if definition.Default != nil {
+			continue
+		}
+		if property, present := properties[name]; present {
+			// The property context contains the already rendered data, but the
+			// attribute needs independent identity and metadata. In particular,
+			// property-specific constraints must not become attribute
+			// constraints merely because the current value is reflected.
+			value := NewValue(property.Context)
+			value.DataType = definition.DataType
+			value.Meta = NewValueMeta(property.Context, definition.DataType, definition, nil)
+			value.reflected = true
+			self[name] = value
+		}
+	}
+
+	self.RenderAttributes(definitions, context)
 }
 
 func (self Values) RenderProperties(definitions PropertyDefinitions, context *parsing.Context) {

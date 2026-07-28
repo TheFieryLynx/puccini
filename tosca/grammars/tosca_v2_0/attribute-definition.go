@@ -28,6 +28,11 @@ type AttributeDefinition struct {
 
 	DataType *DataType `lookup:"type,DataTypeName" traverse:"ignore" json:"-" yaml:"-"`
 
+	// Set only by a version-specific grammar policy after inheritance. Shared
+	// rendering uses it to source the initial value of an implicitly reflected
+	// attribute without applying that policy to other language versions.
+	ReflectedProperty *PropertyDefinition `traverse:"ignore" json:"-" yaml:"-"`
+
 	looseType bool
 }
 

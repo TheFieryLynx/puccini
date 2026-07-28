@@ -64,7 +64,7 @@ func (self *RelationshipTemplate) render() {
 	}
 
 	self.Properties.RenderProperties(self.RelationshipType.PropertyDefinitions, self.Context.FieldChild("properties", nil))
-	self.Attributes.RenderAttributes(self.RelationshipType.AttributeDefinitions, self.Context.FieldChild("attributes", nil))
+	self.Attributes.RenderReflectedAttributes(self.Properties, self.RelationshipType.AttributeDefinitions, self.Context.FieldChild("attributes", nil))
 }
 
 func (self *RelationshipTemplate) Normalize(normalRelationship *normal.Relationship) {

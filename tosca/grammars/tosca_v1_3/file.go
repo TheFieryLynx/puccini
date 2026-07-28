@@ -11,11 +11,19 @@ import (
 // [TOSCA-Simple-Profile-YAML-v1.3] @ 3.10
 //
 
+type File struct {
+	*tosca_v2_0.File `name:"file"`
+}
+
+func NewFile(context *parsing.Context) *File {
+	return &File{File: tosca_v2_0.NewFile(context)}
+}
+
 // ([parsing.Reader] signature)
 func ReadFile(context *parsing.Context) parsing.EntityPtr {
 	context.SetReadTag("Profile", "namespace")
 
-	self := tosca_v2_0.NewFile(context)
+	self := NewFile(context)
 	context.ScriptletNamespace.Merge(DefaultScriptletNamespace)
 	ignore := []string{"dsl_definitions"}
 	if context.HasQuirk(parsing.QuirkImportsTopologyTemplateIgnore) {
@@ -30,4 +38,9 @@ func ReadFile(context *parsing.Context) parsing.EntityPtr {
 		context.CanonicalNamespace = self.Profile
 	}
 	return self
+}
+
+// ([parsing.Renderable] interface)
+func (self *File) Render() {
+	reflectFilePropertyDefinitions(self.File)
 }

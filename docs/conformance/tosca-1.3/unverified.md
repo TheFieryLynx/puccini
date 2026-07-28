@@ -1,6 +1,6 @@
 # Unverified TOSCA 1.3 requirements
 
-Untested or currently unverifiable records: **2371**.
+Untested or currently unverifiable records: **2370**.
 
 | Requirement | Implementation | Verification | Applicability | Reason |
 |---|---|---|---|---|
@@ -388,7 +388,6 @@ Untested or currently unverifiable records: **2371**.
 | `TOSCA13-3.6.10.4-011` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.10.4-012` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.10.4-013` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.6.10.5-001` | missing | untested | applicable | Properties are not automatically exposed as same-named attributes.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.10.5-002` | partial | untested | applicable | Construct is represented, but the complete requirement-specific validation is absent.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: duplicate. |
 | `TOSCA13-3.6.10.5-003` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.10.5-004` | partial | untested | applicable | Constraint/type compatibility is incomplete.; Verification status is untested; no requirement-isolating direct test proves conformance. |

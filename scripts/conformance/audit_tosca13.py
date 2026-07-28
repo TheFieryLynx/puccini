@@ -370,6 +370,29 @@ DIRECT_TESTS[OS_CAPABILITY_NORMALIZATION_ID] = {
     ],
 }
 
+PROPERTY_ATTRIBUTE_REFLECTION_ID = "TOSCA13-3.6.10.5-001"
+DIRECT_TESTS[PROPERTY_ATTRIBUTE_REFLECTION_ID] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/property_attribute_reflection_test.go#TestPropertyAttributeReflectionEffectiveDefinitions",
+        "tests/conformance/tosca_1_3/property_attribute_reflection_test.go#TestPropertyAttributeReflectionValues",
+        "tests/conformance/tosca_1_3/property_attribute_reflection_test.go#TestPropertyAttributeReflectionInheritanceAndRefinement",
+        "tests/conformance/tosca_1_3/property_attribute_reflection_test.go#TestPropertyAttributeReflectionGetAttributeResolution",
+        "tests/conformance/tosca_1_3/property_attribute_reflection_test.go#TestPropertyAttributeReflectionNormalization",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/property_attribute_reflection_test.go#TestPropertyAttributeReflectionExplicitAttributeConflict",
+        "tests/conformance/tosca_1_3/property_attribute_reflection_test.go#TestPropertyAttributeReflectionGetAttributeResolution",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/property_attribute_reflection_test.go#TestPropertyAttributeReflectionValues",
+        "tests/conformance/tosca_1_3/property_attribute_reflection_test.go#TestPropertyAttributeReflectionNormalization",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/property_attribute_reflection_test.go#TestPropertyAttributeReflectionDoesNotChangeTosca20",
+        "tests/conformance/tosca_1_3/intrinsic_functions_test.go#TestIntrinsicFunctionResolution",
+    ],
+}
+
 MUTATION_CHECKS = {
     requirement_id: {
         "performed": True,
@@ -487,6 +510,48 @@ MUTATION_CHECKS[OS_CAPABILITY_NORMALIZATION_ID] = {
             "description": "Applied normalization to unrelated property",
             "affected_tests": [
                 "TestOperatingSystemCapabilityNormalizationScope",
+            ],
+            "expected_tests_failed": True,
+        },
+    ],
+    "production_diff_restored": True,
+}
+MUTATION_CHECKS[PROPERTY_ATTRIBUTE_REFLECTION_ID] = {
+    "performed": True,
+    "mutations": [
+        {
+            "description": "Disabled the TOSCA 1.3 effective-type property-to-attribute reflection hook",
+            "affected_tests": [
+                "TestPropertyAttributeReflectionEffectiveDefinitions",
+                "TestPropertyAttributeReflectionGetAttributeResolution",
+            ],
+            "expected_tests_failed": True,
+        },
+        {
+            "description": "Skipped reflection of the inherited property path",
+            "affected_tests": [
+                "TestPropertyAttributeReflectionInheritanceAndRefinement",
+            ],
+            "expected_tests_failed": True,
+        },
+        {
+            "description": "Forced an attributes collection onto an unrelated group entity",
+            "affected_tests": [
+                "TestPropertyAttributeReflectionEffectiveDefinitions",
+            ],
+            "expected_tests_failed": True,
+        },
+        {
+            "description": "Bypassed incompatible same-name explicit attribute conflict handling",
+            "affected_tests": [
+                "TestPropertyAttributeReflectionExplicitAttributeConflict",
+            ],
+            "expected_tests_failed": True,
+        },
+        {
+            "description": "Removed function-valued property propagation to the reflected attribute",
+            "affected_tests": [
+                "TestPropertyAttributeReflectionValues",
             ],
             "expected_tests_failed": True,
         },
@@ -1281,7 +1346,50 @@ def manual_must_trace(requirement: dict[str, Any]) -> tuple[str, dict[str, Any],
     if requirement_id == "TOSCA13-3.6.10.4-008":
         return "implemented", traced_impl("rendering", "rendering", "PropertyDefinition.IsRequired returns true when `required` is absent; Values.RenderProperties enforces the resulting assignment obligation."), "The required=true default is implemented."
     if requirement_id == "TOSCA13-3.6.10.5-001":
-        return "missing", traced_impl("rendering", "rendering/normalization", "Property definitions and attribute definitions remain separate through rendering and normalization; exhaustive property/attribute/function searches found no automatic reflection path."), "Properties are not automatically exposed as same-named attributes."
+        impl = traced_impl(
+            "rendering",
+            "inheritance/rendering/normalization",
+            "The TOSCA 1.3 file rendering hook reflects final effective node, relationship, capability, and capability-definition properties into independent same-named attribute definitions; marked shared rendering propagates the rendered current value, normalization preserves it, and get_attribute resolves the effective attribute map.",
+        )
+        impl["files"] = [
+            "tosca/grammars/tosca_v1_3/property-attribute-reflection.go",
+            "tosca/grammars/tosca_v1_3/file.go",
+            "tosca/grammars/tosca_v1_3/service-file.go",
+            "tosca/grammars/tosca_v1_3/functions.go",
+            "tosca/grammars/tosca_v2_0/attribute-definition.go",
+            "tosca/grammars/tosca_v2_0/value.go",
+            "tosca/grammars/tosca_v2_0/node-template.go",
+            "tosca/grammars/tosca_v2_0/capability-assignment.go",
+            "tosca/grammars/tosca_v2_0/relationship-template.go",
+            "tosca/grammars/tosca_v2_0/relationship-assignment.go",
+        ]
+        impl["packages"] = [
+            "tosca/grammars/tosca_v1_3",
+            "tosca/grammars/tosca_v2_0",
+        ]
+        impl["symbols"] = [
+            "tosca_v1_3.File.Render",
+            "tosca_v1_3.ServiceFile.Render",
+            "tosca_v1_3.reflectFilePropertyDefinitions",
+            "tosca_v1_3.reflectPropertyDefinitions",
+            "tosca_v2_0.AttributeDefinition.ReflectedProperty",
+            "tosca_v2_0.Values.RenderReflectedAttributes",
+            "tosca_v1_3.modelableEntity.hasAttribute",
+        ]
+        impl["execution_path"] = [
+            "parser.Context.Parse",
+            "parser.Context.LookupNames",
+            "parser.Context.Inherit",
+            "parser.Context.Render",
+            "tosca_v1_3.ServiceFile.Render/tosca_v1_3.File.Render",
+            "tosca_v1_3.reflectFilePropertyDefinitions",
+            "tosca_v1_3.reflectPropertyDefinitions",
+            "tosca_v2_0.Values.RenderProperties",
+            "tosca_v2_0.Values.RenderReflectedAttributes",
+            "tosca_v2_0.Value.Normalize",
+            "tosca_v1_3.modelableEntity.hasAttribute",
+        ]
+        return "implemented", impl, "Effective properties are exposed as same-named attributes and directly verified."
     if requirement_id in {"TOSCA13-3.6.10.5-003", "TOSCA13-3.6.12.2-010", "TOSCA13-3.6.14.3-002"}:
         return "implemented", traced_impl("rendering", "rendering", "Definition.Render resolves the declared data type and renders the default through Value.Render/RenderProperty, producing type-specific diagnostics."), "Default value type compatibility is implemented."
     if requirement_id in {"TOSCA13-3.6.10.5-004", "TOSCA13-3.6.14.3-003"}:
@@ -1615,6 +1723,8 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
                 "post-lookup/inheritance reference and context validation → deterministic normalization/evaluation"
             ),
         }, None
+    if requirement_id == PROPERTY_ATTRIBUTE_REFLECTION_ID:
+        return manual_must_trace(requirement)
     if requirement_id in VERIFIED_IMPLEMENTED:
         files = ["tosca/grammars/parse.go", "tosca/parser/phase1-read.go", "tosca/grammars/tosca_v1_3/service-file.go"]
         return "implemented", {

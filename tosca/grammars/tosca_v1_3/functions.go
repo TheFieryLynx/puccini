@@ -457,17 +457,11 @@ func (entity modelableEntity) hasProperty(name string) bool {
 
 func (entity modelableEntity) hasAttribute(name string) bool {
 	if entity.node != nil && entity.node.NodeType != nil {
-		if _, ok := entity.node.NodeType.AttributeDefinitions[name]; ok {
-			return true
-		}
-		_, ok := entity.node.NodeType.PropertyDefinitions[name]
+		_, ok := entity.node.NodeType.AttributeDefinitions[name]
 		return ok
 	}
 	if entity.relationship != nil && entity.relationship.RelationshipType != nil {
-		if _, ok := entity.relationship.RelationshipType.AttributeDefinitions[name]; ok {
-			return true
-		}
-		_, ok := entity.relationship.RelationshipType.PropertyDefinitions[name]
+		_, ok := entity.relationship.RelationshipType.AttributeDefinitions[name]
 		return ok
 	}
 	return false

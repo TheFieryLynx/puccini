@@ -45,6 +45,11 @@ func (self *ServiceFile) ValidateNamespace() {
 	validateImportedDefinitionIdentities(self.Context)
 }
 
+// ([parsing.Renderable] interface)
+func (self *ServiceFile) Render() {
+	reflectFilePropertyDefinitions(self.File)
+}
+
 // normal.Normalizable interface
 func (self *ServiceFile) NormalizeServiceTemplate() *normal.ServiceTemplate {
 	normalServiceTemplate := normal.NewServiceTemplate()
