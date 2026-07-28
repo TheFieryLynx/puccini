@@ -14,17 +14,17 @@ This report covers the continuation trace of every formerly-unknown record that 
 
 ## Stable denominator result
 
-- implemented: **194**.
-- partial: **29**.
+- implemented: **196**.
+- partial: **27**.
 - missing: **0**.
 - non-compliant: **0**.
-- verified: **144**.
+- verified: **146**.
 - indirectly-tested: **26**.
-- untested: **53**.
+- untested: **51**.
 - unverifiable: **0**.
-- implementation coverage: **194/223 (87.00%)**.
-- verified conformance coverage: **144/223 (64.57%)**.
-- broad test evidence coverage: **170/223 (76.23%)**.
+- implementation coverage: **196/223 (87.89%)**.
+- verified conformance coverage: **146/223 (65.47%)**.
+- broad test evidence coverage: **172/223 (77.13%)**.
 
 ## Continuation trace by subsystem
 
@@ -37,7 +37,7 @@ This report covers the continuation trace of every formerly-unknown record that 
 | Inheritance and refinement | 3 | 2 | 1 | 0 | 0 | 0 | 0 | 3 | 0 |
 | Properties, attributes and assignments | 20 | 14 | 6 | 0 | 0 | 9 | 1 | 10 | 0 |
 | Constraints | 8 | 3 | 5 | 0 | 0 | 3 | 0 | 5 | 0 |
-| Intrinsic functions | 22 | 20 | 2 | 0 | 0 | 20 | 0 | 2 | 0 |
+| Intrinsic functions | 22 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | 0 |
 | Requirements and capabilities | 6 | 5 | 1 | 0 | 0 | 4 | 0 | 2 | 0 |
 | Interfaces, operations and artifacts | 11 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | 0 |
 | Groups and policies | 5 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | 0 |

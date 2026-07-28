@@ -1,6 +1,6 @@
 # Unverified TOSCA 1.3 requirements
 
-Untested or currently unverifiable records: **2366**.
+Untested or currently unverifiable records: **2364**.
 
 | Requirement | Implementation | Verification | Applicability | Reason |
 |---|---|---|---|---|
@@ -1471,7 +1471,6 @@ Untested or currently unverifiable records: **2366**.
 | `TOSCA13-4.3.2.1-001` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: dependent-grammar-umbrella. |
 | `TOSCA13-4.3.2.2-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-4.3.2.2-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-4.3.2.2-003` | partial | untested | applicable | Function syntax is recognized; required arguments/resolution are incompletely validated.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-4.3.2.2-004` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-4.3.2.2-005` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-4.3.2.2-006` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
@@ -1538,7 +1537,6 @@ Untested or currently unverifiable records: **2366**.
 | `TOSCA13-4.7.1.1-001` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: dependent-grammar-umbrella. |
 | `TOSCA13-4.7.1.2-001` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-4.7.1.2-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-4.7.1.2-003` | partial | untested | applicable | Function syntax is recognized; required arguments/resolution are incompletely validated.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-4.7.1.3-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-4.7.1.3-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-4.8.1-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |

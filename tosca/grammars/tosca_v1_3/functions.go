@@ -18,11 +18,13 @@ import (
 // TOSCA 1.3 grammar from changing the independently selected TOSCA 2.0 path.
 var intrinsicFunctionNames = map[string]struct{}{
 	"concat":               {},
+	"join":                 {},
 	"token":                {},
 	"get_input":            {},
 	"get_property":         {},
 	"get_attribute":        {},
 	"get_operation_output": {},
+	"get_nodes_of_type":    {},
 	"get_artifact":         {},
 }
 
@@ -94,6 +96,37 @@ func validateIntrinsicFunctionCall(context *parsing.Context, functionCall *parsi
 			}
 		}
 
+	case "join":
+		if _, ok := rawArgument.(ard.List); rawArgument != nil && !ok {
+			malformed("arguments must be a YAML sequence")
+		} else if len(arguments) < 1 {
+			malformed("requires list of string value expressions")
+		} else if len(arguments) > 2 {
+			malformed("accepts at most 2 arguments")
+		} else {
+			switch list := arguments[0].(type) {
+			case *parsing.FunctionCall:
+				// A string value expression may itself produce the required
+				// list at evaluation time.
+			case ard.List:
+				if len(list) == 0 {
+					malformed("first argument list requires one or more string value expressions")
+				} else {
+					for index, item := range list {
+						if !isStringExpression(item) {
+							malformed(fmt.Sprintf("list element %d must be a string or string value expression", index+1))
+							break
+						}
+					}
+				}
+			default:
+				malformed("first argument must be a list or a string value expression that produces a list")
+			}
+			if len(arguments) == 2 && !isString(arguments[1]) {
+				malformed("delimiter must be a string")
+			}
+		}
+
 	case "token":
 		if _, ok := rawArgument.(ard.List); rawArgument != nil && !ok {
 			malformed("arguments must be a YAML sequence")
@@ -128,6 +161,15 @@ func validateIntrinsicFunctionCall(context *parsing.Context, functionCall *parsi
 					break
 				}
 			}
+		}
+
+	case "get_nodes_of_type":
+		if len(arguments) < 1 {
+			malformed("requires node_type_name")
+		} else if len(arguments) > 1 {
+			malformed("requires exactly 1 argument")
+		} else if !isString(arguments[0]) {
+			malformed("node_type_name must be a string")
 		}
 
 	case "get_property", "get_attribute":
@@ -316,6 +358,18 @@ func validateFunctionResolution(serviceTemplate *ServiceTemplate, context *parsi
 		if inputName, ok := arguments[0].(string); ok {
 			if _, found := serviceTemplate.InputDefinitions[inputName]; !found {
 				malformed(fmt.Sprintf("input_property_name %q not found", inputName))
+			}
+		}
+
+	case "get_nodes_of_type":
+		if len(arguments) == 1 {
+			if nodeTypeName, ok := arguments[0].(string); ok {
+				entity, found := context.Namespace.Lookup(nodeTypeName)
+				if !found {
+					malformed(fmt.Sprintf("node_type_name %q not found", nodeTypeName))
+				} else if _, ok := entity.(*tosca_v2_0.NodeType); !ok {
+					malformed(fmt.Sprintf("node_type_name %q is not a Node Type", nodeTypeName))
+				}
 			}
 		}
 

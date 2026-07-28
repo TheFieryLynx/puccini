@@ -179,6 +179,41 @@ DIRECT_TESTS[INTERFACE_RESERVED_OPERATION_NAME_ID] = {
     ],
 }
 
+INTRINSIC_REQUIRED_ARGUMENT_IDS = {
+    "TOSCA13-4.3.2.2-003",
+    "TOSCA13-4.7.1.2-003",
+}
+DIRECT_TESTS["TOSCA13-4.3.2.2-003"] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_intrinsic_required_arguments_test.go#TestJoinRequiredListAccepted",
+        "tests/conformance/tosca_1_3/partial_intrinsic_required_arguments_test.go#TestJoinStringExpressionListAccepted",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_intrinsic_required_arguments_test.go#TestJoinRequiredListRejected",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_intrinsic_required_arguments_test.go#TestJoinSingleElementAndOptionalDelimiter",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_intrinsic_required_arguments_test.go#TestTosca20JoinAndGetNodesOfTypeBehaviorUnchanged",
+    ],
+}
+DIRECT_TESTS["TOSCA13-4.7.1.2-003"] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_intrinsic_required_arguments_test.go#TestGetNodesOfTypeRequiredNameAccepted",
+        "tests/conformance/tosca_1_3/partial_intrinsic_required_arguments_test.go#TestGetNodesOfDerivedTypeAccepted",
+        "tests/conformance/tosca_1_3/partial_intrinsic_required_arguments_test.go#TestGetNodesOfTypeResolvesImportedType",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_intrinsic_required_arguments_test.go#TestGetNodesOfTypeRequiredNameRejected",
+        "tests/conformance/tosca_1_3/partial_intrinsic_required_arguments_test.go#TestGetNodesOfTypeUnknownOrWrongKindRejected",
+    ],
+    "boundary": [],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_intrinsic_required_arguments_test.go#TestTosca20JoinAndGetNodesOfTypeBehaviorUnchanged",
+    ],
+}
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -1942,7 +1977,10 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
             "parser_phase": parser_phase,
             "trace": "service reader → namespace construction; exhaustive symbol and diagnostic search found no reserved-OASIS namespace policy",
         }, MISSING[requirement_id]
-    if requirement_id in INTRINSIC_FUNCTION_IDS:
+    if requirement_id in INTRINSIC_FUNCTION_IDS or requirement_id in INTRINSIC_REQUIRED_ARGUMENT_IDS:
+        test_file = "tests/conformance/tosca_1_3/intrinsic_functions_test.go"
+        if requirement_id in INTRINSIC_REQUIRED_ARGUMENT_IDS:
+            test_file = "tests/conformance/tosca_1_3/partial_intrinsic_required_arguments_test.go"
         return "implemented", {
             "entry_point": "tosca_v1_3.ReadValue",
             "packages": [
@@ -1957,7 +1995,7 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
                 "tosca/grammars/tosca_v1_3/value.go",
                 "tosca/grammars/tosca_v1_3/common.go",
                 "tosca/grammars/tosca_v1_3/service-template.go",
-                "tests/conformance/tosca_1_3/intrinsic_functions_test.go",
+                test_file,
             ],
             "symbols": [
                 "tosca_v1_3.ReadValue",

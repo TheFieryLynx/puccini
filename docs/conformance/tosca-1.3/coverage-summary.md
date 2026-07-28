@@ -13,17 +13,17 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Implementation Status | Records |
 |---|---:|
-| implemented | 740 |
-| partial | 50 |
+| implemented | 742 |
+| partial | 48 |
 | missing | 2 |
 | non-compliant | 27 |
 | unknown | 2282 |
 
 | Verification Status | Records |
 |---|---:|
-| verified | 173 |
+| verified | 175 |
 | indirectly-tested | 562 |
-| untested | 2312 |
+| untested | 2310 |
 | unverifiable | 54 |
 
 | Applicability | Records |
@@ -36,7 +36,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Strength | Applicable atomic denominator | Implemented | Implementation coverage | Implemented + verified | Verified conformance coverage | Broad test evidence | Broad evidence coverage |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| MUST/SHALL/REQUIRED | 223 | 194 | 87.00% | 144 | 64.57% | 170 | 76.23% |
+| MUST/SHALL/REQUIRED | 223 | 196 | 87.89% | 146 | 65.47% | 172 | 77.13% |
 | SHOULD/RECOMMENDED | 23 | 0 | 0.00% | 0 | 0.00% | 0 | 0.00% |
 | MAY/OPTIONAL | 693 | 99 | 14.29% | 0 | 0.00% | 95 | 13.71% |
 
@@ -48,7 +48,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | 13 | 8 | 0 | 0 | 0 | 0 | 8 | 0 | 0 | 8 | 0 |
 | 14 | 43 | 0 | 0 | 0 | 0 | 43 | 0 | 0 | 6 | 37 |
 | 3 | 1670 | 244 | 41 | 2 | 14 | 1369 | 130 | 102 | 1431 | 7 |
-| 4 | 144 | 22 | 2 | 0 | 5 | 115 | 27 | 0 | 117 | 0 |
+| 4 | 144 | 24 | 0 | 0 | 5 | 115 | 29 | 0 | 115 | 0 |
 | 5 | 978 | 395 | 6 | 0 | 5 | 572 | 6 | 393 | 573 | 6 |
 | 6 | 44 | 11 | 0 | 0 | 3 | 30 | 9 | 0 | 31 | 4 |
 | 7 | 25 | 0 | 0 | 0 | 0 | 25 | 0 | 0 | 25 | 0 |
@@ -69,12 +69,12 @@ This matrix separates implementation, verification, and applicability. It is an 
 | namespaces | 16 | 0 | 0 | 1 | 0 | 15 | 0 | 0 | 16 | 0 |
 | normalization | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 1 |
 | read | 1395 | 191 | 20 | 0 | 3 | 1181 | 81 | 101 | 1206 | 7 |
-| read and rendering/function-evaluation | 22 | 22 | 0 | 0 | 0 | 0 | 22 | 0 | 0 | 0 |
+| read and rendering/function-evaluation | 24 | 24 | 0 | 0 | 0 | 0 | 24 | 0 | 0 | 0 |
 | read, imports, namespaces, and lookup | 34 | 34 | 0 | 0 | 0 | 0 | 34 | 0 | 0 | 0 |
 | read/imports | 14 | 0 | 0 | 0 | 0 | 14 | 0 | 0 | 14 | 0 |
 | read/inheritance/rendering | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | rendering | 254 | 15 | 17 | 0 | 1 | 221 | 3 | 1 | 246 | 4 |
-| rendering/function-evaluation | 77 | 1 | 3 | 0 | 4 | 69 | 4 | 0 | 73 | 0 |
+| rendering/function-evaluation | 75 | 1 | 1 | 0 | 4 | 69 | 4 | 0 | 71 | 0 |
 | rendering/normalization/function-evaluation | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | semantic | 576 | 0 | 5 | 1 | 11 | 559 | 11 | 0 | 530 | 35 |
 
@@ -304,7 +304,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | 4.3.1.1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 4.3.1.2 | 2 | 1 | 0 | 0 | 0 | 1 | 1 | 0 | 1 | 0 |
 | 4.3.2.1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
-| 4.3.2.2 | 4 | 0 | 1 | 0 | 0 | 3 | 0 | 0 | 4 | 0 |
+| 4.3.2.2 | 4 | 1 | 0 | 0 | 0 | 3 | 1 | 0 | 3 | 0 |
 | 4.3.3.1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 4.3.3.2 | 6 | 3 | 0 | 0 | 0 | 3 | 3 | 0 | 3 | 0 |
 | 4.4.1.1 | 2 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 2 | 0 |
@@ -316,7 +316,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | 4.6.1.1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 4.6.1.2 | 8 | 4 | 0 | 0 | 0 | 4 | 4 | 0 | 4 | 0 |
 | 4.7.1.1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
-| 4.7.1.2 | 2 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 2 | 0 |
+| 4.7.1.2 | 2 | 1 | 0 | 0 | 0 | 1 | 1 | 0 | 1 | 0 |
 | 4.7.1.3 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 4.8.1.1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 4.8.1.2 | 8 | 2 | 0 | 0 | 0 | 6 | 2 | 0 | 6 | 0 |

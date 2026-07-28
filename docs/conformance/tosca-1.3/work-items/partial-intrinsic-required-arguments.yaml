@@ -1,0 +1,129 @@
+remediation_group: intrinsic-required-arguments
+remediation_order: 3
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+parser_phases:
+  - read
+  - rendering
+execution_path:
+  - tosca_v1_3.ReadValue
+  - tosca_v1_3.ParseFunctionCall
+  - tosca_v1_3.validateIntrinsicFunctionCall
+  - tosca_v1_3.validateFunctionResolution
+baseline_reproduction:
+  performed: true
+  command: "go test -count=1 ./tests/conformance/tosca_1_3 -run 'Test(Join|GetNodesOf|Tosca20Join)' -v"
+  observed_failures:
+    - "Every invalid join argument shape was accepted."
+    - "Missing and non-string get_nodes_of_type names were accepted."
+    - "Unknown and wrong-kind get_nodes_of_type names were accepted."
+  unaffected_regressions:
+    - TestJoinRequiredListAccepted
+    - TestJoinStringExpressionListAccepted
+    - TestGetNodesOfTypeRequiredNameAccepted
+    - TestGetNodesOfDerivedTypeAccepted
+    - TestTosca20JoinAndGetNodesOfTypeBehaviorUnchanged
+
+requirements:
+  - requirement_id: TOSCA13-4.3.2.2-003
+    section: "4.3.2.2"
+    section_title: "Parameters"
+    normative_rule: "join requires a non-empty list of string value expressions; its delimiter is optional and string-valued."
+    baseline:
+      implementation_status: partial
+      verification_status: untested
+      behavior:
+        - "join is parsed by the shared function engine but omitted from the TOSCA 1.3 validation allowlist."
+        - "Missing, scalar, empty, non-string, bad-delimiter, and excess arguments are accepted during processing."
+    implementation:
+      files:
+        - tosca/grammars/tosca_v1_3/functions.go
+      symbols:
+        - tosca_v1_3.intrinsicFunctionNames
+        - tosca_v1_3.validateIntrinsicFunctionCall
+    tests:
+      positive:
+        - TestJoinRequiredListAccepted
+        - TestJoinStringExpressionListAccepted
+      negative:
+        - TestJoinRequiredListRejected
+      boundary:
+        - TestJoinSingleElementAndOptionalDelimiter
+      normalization:
+        - TestJoinRequiredListAccepted
+      regression:
+        - TestTosca20JoinAndGetNodesOfTypeBehaviorUnchanged
+    mutation_check:
+      performed: true
+      mutation: "Temporarily remove join from the TOSCA 1.3 intrinsic validation allowlist."
+      affected_tests:
+        - TestJoinRequiredListRejected
+      expected_tests_failed: true
+      production_diff_restored: true
+    final_status:
+      implementation_status: implemented
+      verification_status: verified
+
+  - requirement_id: TOSCA13-4.7.1.2-003
+    section: "4.7.1.2"
+    section_title: "Parameters"
+    normative_rule: "get_nodes_of_type requires one string naming a Node Type."
+    baseline:
+      implementation_status: partial
+      verification_status: untested
+      behavior:
+        - "get_nodes_of_type is parsed by the shared function engine but omitted from TOSCA 1.3 argument validation."
+        - "Missing, non-string, unknown, and wrong-kind type names are accepted."
+    implementation:
+      files:
+        - tosca/grammars/tosca_v1_3/functions.go
+      symbols:
+        - tosca_v1_3.intrinsicFunctionNames
+        - tosca_v1_3.validateIntrinsicFunctionCall
+        - tosca_v1_3.validateFunctionResolution
+    tests:
+      positive:
+        - TestGetNodesOfTypeRequiredNameAccepted
+      negative:
+        - TestGetNodesOfTypeRequiredNameRejected
+        - TestGetNodesOfTypeUnknownOrWrongKindRejected
+      boundary:
+        - TestGetNodesOfDerivedTypeAccepted
+      resolution:
+        - TestGetNodesOfTypeRequiredNameAccepted
+        - TestGetNodesOfTypeResolvesImportedType
+      normalization:
+        - TestGetNodesOfTypeRequiredNameAccepted
+      regression:
+        - TestTosca20JoinAndGetNodesOfTypeBehaviorUnchanged
+    mutation_check:
+      performed: true
+      mutation: "Temporarily bypass get_nodes_of_type argument validation and Node Type resolution independently."
+      affected_tests:
+        - TestGetNodesOfTypeRequiredNameRejected
+        - TestGetNodesOfTypeUnknownOrWrongKindRejected
+      expected_tests_failed: true
+      production_diff_restored: true
+    final_status:
+      implementation_status: implemented
+      verification_status: verified
+
+verification:
+  focused_tests: passed
+  focused_import_resolution: passed
+  tosca_1_3_conformance: passed
+  tosca_2_0_conformance: passed
+  go_test: passed
+  go_test_race: passed
+  go_vet: passed
+  git_diff_check: passed
+  audit_generation_runs: 2
+  audit_sha256_match: true
+  denominator: 223
+  resulting_metrics:
+    implemented: 196
+    partial: 27
+    missing: 0
+    non_compliant: 0
+    verified: 146
+    indirectly_tested: 26
+    untested: 51
