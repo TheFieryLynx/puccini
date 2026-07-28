@@ -1,6 +1,6 @@
 # Confirmed TOSCA 1.3 non-compliance
 
-Confirmed non-compliant catalog records: **33**. Duplicate records are shown individually but excluded from atomic coverage denominators.
+Confirmed non-compliant catalog records: **28**. Duplicate records are shown individually but excluded from atomic coverage denominators.
 Every behavioral claim below was reproduced on 2026-07-27 or directly compared against the bundled profile. Temporary probes were removed.
 
 ## TOSCA13-3.10.2.1-003
@@ -242,56 +242,6 @@ Every behavioral claim below was reproduced on 2026-07-27 or directly compared a
 - Responsible path: `implicit/simple profile load → namespaces → hierarchy → inheritance`
 - Fix phase: **implicit-profile/read or hierarchy**
 - Required regression test: Direct normative-profile assertion for `tosca.nodes.abstract.storage.properties.size.default`.
-
-## TOSCA13-6.1-004
-
-- Normative basis: §6.1 **Overall Structure of a CSAR** — The root YAML file MUST define a metadata section.
-- Minimal reproducer: CSAR without TOSCA-Metadata containing one root service.yaml with no metadata
-- Actual Puccini result: Archive parsing succeeded with no diagnostics.
-- Expected result: Reject the root template for missing metadata/template_name/template_version.
-- Responsible path: `GetServiceTemplateURL → ReadMetaFromURL or GetRootPath fallback → service-template parse`
-- Fix phase: **csar/read**
-- Required regression test: Direct in-memory CSAR negative test asserting the missing/invalid metadata diagnostic.
-
-## TOSCA13-6.1-006
-
-- Normative basis: §6.1 **Overall Structure of a CSAR** — The root YAML file metadata section requires `template_name`.
-- Minimal reproducer: CSAR without TOSCA-Metadata containing one root service.yaml with no metadata
-- Actual Puccini result: Archive parsing succeeded with no diagnostics.
-- Expected result: Reject the root template for missing metadata/template_name/template_version.
-- Responsible path: `GetServiceTemplateURL → ReadMetaFromURL or GetRootPath fallback → service-template parse`
-- Fix phase: **csar/read**
-- Required regression test: Direct in-memory CSAR negative test asserting the missing/invalid metadata diagnostic.
-
-## TOSCA13-6.1-007
-
-- Normative basis: §6.1 **Overall Structure of a CSAR** — The root YAML file metadata section requires `template_version`.
-- Minimal reproducer: CSAR without TOSCA-Metadata containing one root service.yaml with no metadata
-- Actual Puccini result: Archive parsing succeeded with no diagnostics.
-- Expected result: Reject the root template for missing metadata/template_name/template_version.
-- Responsible path: `GetServiceTemplateURL → ReadMetaFromURL or GetRootPath fallback → service-template parse`
-- Fix phase: **csar/read**
-- Required regression test: Direct in-memory CSAR negative test asserting the missing/invalid metadata diagnostic.
-
-## TOSCA13-6.2-005
-
-- Normative basis: §6.2 **TOSCA Meta File** — `block_0` requires the `Entry-Definitions` key.
-- Minimal reproducer: TOSCA.meta 1.1 with CSAR-Version and Created-By but no Entry-Definitions
-- Actual Puccini result: csar.ReadMeta returned success.
-- Expected result: Reject missing Entry-Definitions.
-- Responsible path: `GetServiceTemplateURL → ReadMetaFromURL or GetRootPath fallback → service-template parse`
-- Fix phase: **csar/read**
-- Required regression test: Direct in-memory CSAR negative test asserting the missing/invalid metadata diagnostic.
-
-## TOSCA13-6.2-018
-
-- Normative basis: §6.2 **TOSCA Meta File** — Due to the changes to the TOSCA.meta file compared to TOSCA 1.2 the TOSCA-Meta-File-Version keyword listed in block_0 of the the meta-file is required to denote version 1.1.
-- Minimal reproducer: TOSCA.meta with TOSCA-Meta-File-Version: 1.0 and otherwise valid block_0
-- Actual Puccini result: csar.ReadMeta returned success.
-- Expected result: Reject; TOSCA 1.3 requires meta-file version 1.1.
-- Responsible path: `GetServiceTemplateURL → ReadMetaFromURL or GetRootPath fallback → service-template parse`
-- Fix phase: **csar/read**
-- Required regression test: Direct in-memory CSAR negative test asserting the missing/invalid metadata diagnostic.
 
 ## TOSCA13-6.3-003
 

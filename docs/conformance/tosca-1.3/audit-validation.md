@@ -3,10 +3,10 @@
 ## Statistical result
 
 - Deterministic stratified sample seed: **20260727**.
-- Sample size: **152** records.
+- Sample size: **147** records.
 - Strata: 50 legacy `partial`; all 36 `non-compliant`; all 3 `unimplemented`; all 25 `unverified`; 20 `not-applicable`; 20 `ambiguous`.
-- Misclassified sampled records: **96** (63.16%).
-- False-positive rate: **45/87 (51.72%)**.
+- Misclassified sampled records: **96** (65.31%).
+- False-positive rate: **45/82 (54.88%)**.
 - False-negative rate: **22/65 (33.85%)**.
 - Duplicate clusters found: **96**.
 - Catalog records classified as informative/non-normative: **35**.
@@ -94,11 +94,6 @@ False positive means the old audit asserted a concrete implementation state from
 | non-compliant | `TOSCA13-5.9.12.1-004` | no | yes | no | no | yes | yes | no | yes | unknown / untested / not-applicable |
 | non-compliant | `TOSCA13-5.10.1.1-003` | yes | yes | yes | yes | yes | yes | yes | yes | non-compliant / verified / applicable |
 | non-compliant | `TOSCA13-5.10.1.1-004` | yes | yes | yes | yes | yes | yes | yes | yes | non-compliant / verified / applicable |
-| non-compliant | `TOSCA13-6.1-004` | yes | yes | yes | yes | yes | yes | yes | yes | non-compliant / verified / applicable |
-| non-compliant | `TOSCA13-6.1-006` | yes | yes | yes | yes | yes | yes | yes | yes | non-compliant / verified / applicable |
-| non-compliant | `TOSCA13-6.1-007` | yes | yes | yes | yes | yes | yes | yes | yes | non-compliant / verified / applicable |
-| non-compliant | `TOSCA13-6.2-005` | yes | yes | yes | yes | yes | yes | yes | yes | non-compliant / verified / applicable |
-| non-compliant | `TOSCA13-6.2-018` | yes | yes | yes | yes | yes | yes | yes | yes | non-compliant / verified / applicable |
 | non-compliant | `TOSCA13-6.3-003` | yes | yes | no | yes | yes | yes | yes | no | non-compliant / verified / applicable |
 | non-compliant | `TOSCA13-6.3-004` | yes | yes | no | yes | yes | yes | yes | no | non-compliant / verified / applicable |
 | non-compliant | `TOSCA13-6.3-006` | yes | yes | no | yes | yes | yes | yes | no | non-compliant / verified / applicable |

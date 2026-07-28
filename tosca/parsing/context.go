@@ -71,6 +71,14 @@ type Context struct {
 	Grammar            *Grammar
 	FunctionPrefix     string
 	ReadTagOverrides   map[string]string
+	CSAR               *CSARContext
+}
+
+type CSARContext struct {
+	MetaPresent      bool
+	RootFallback     bool
+	MetaFileVersion  string
+	EntryDefinitions string
 }
 
 func NewContext(stylist *terminal.Stylist, quirks Quirks) *Context {

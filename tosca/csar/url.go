@@ -8,6 +8,14 @@ import (
 	"github.com/tliron/exturl"
 )
 
+type ServiceTemplateSelection struct {
+	URL           exturl.URL
+	RepositoryURL exturl.URL
+	Meta          *Meta
+	MetaPresent   bool
+	RootFallback  bool
+}
+
 func NewURL(csarUrl exturl.URL, format string, path string) (exturl.URL, exturl.URL, error) {
 	if format == "" {
 		format = csarUrl.Format()
@@ -30,18 +38,28 @@ func GetDefaultServiceTemplateURL(context contextpkg.Context, csarUrl exturl.URL
 }
 
 func GetServiceTemplateURL(context contextpkg.Context, csarUrl exturl.URL, format string, serviceTemplateName string) (exturl.URL, exturl.URL, error) {
+	selection, err := ResolveServiceTemplateURL(context, csarUrl, format, serviceTemplateName)
+	if err != nil {
+		return nil, nil, err
+	}
+	return selection.URL, selection.RepositoryURL, nil
+}
+
+func ResolveServiceTemplateURL(context contextpkg.Context, csarUrl exturl.URL, format string, serviceTemplateName string) (*ServiceTemplateSelection, error) {
 	if format == "" {
 		format = csarUrl.Format()
 	}
 
+	metaPresent := true
 	meta, err := ReadMetaFromURL(context, csarUrl, format)
 	if err != nil {
 		if exturl.IsNotFound(err) {
+			metaPresent = false
 			if meta, err = NewMetaFor(context, csarUrl, format); err != nil {
-				return nil, nil, err
+				return nil, err
 			}
 		} else {
-			return nil, nil, err
+			return nil, err
 		}
 	}
 
@@ -50,14 +68,34 @@ func GetServiceTemplateURL(context contextpkg.Context, csarUrl exturl.URL, forma
 
 		// Attempt to use Entry-Definitions in TOSCA.meta
 		if meta.EntryDefinitions != "" {
-			return NewURL(csarUrl, format, meta.EntryDefinitions)
+			url, repositoryURL, err := NewURL(csarUrl, format, meta.EntryDefinitions)
+			if err != nil {
+				return nil, err
+			}
+			return &ServiceTemplateSelection{
+				URL:           url,
+				RepositoryURL: repositoryURL,
+				Meta:          meta,
+				MetaPresent:   metaPresent,
+				RootFallback:  !metaPresent,
+			}, nil
 		}
 
 		// Attempt to find it in root of archive
 		if path, err := GetRootPath(context, csarUrl, format); err == nil {
-			return NewURL(csarUrl, format, path)
+			url, repositoryURL, err := NewURL(csarUrl, format, path)
+			if err != nil {
+				return nil, err
+			}
+			return &ServiceTemplateSelection{
+				URL:           url,
+				RepositoryURL: repositoryURL,
+				Meta:          meta,
+				MetaPresent:   metaPresent,
+				RootFallback:  true,
+			}, nil
 		} else {
-			return nil, nil, err
+			return nil, err
 		}
 	} else {
 		// Alternative entry points
@@ -65,17 +103,35 @@ func GetServiceTemplateURL(context contextpkg.Context, csarUrl exturl.URL, forma
 		// Try as integer
 		if serviceTemplateNumber, err := strconv.ParseUint(serviceTemplateName, 10, 64); err == nil {
 			if otherDefinitionIndex := int(serviceTemplateNumber) - 1; (otherDefinitionIndex >= 0) && (otherDefinitionIndex < len(meta.OtherDefinitions)) {
-				return NewURL(csarUrl, format, meta.OtherDefinitions[otherDefinitionIndex])
+				url, repositoryURL, err := NewURL(csarUrl, format, meta.OtherDefinitions[otherDefinitionIndex])
+				if err != nil {
+					return nil, err
+				}
+				return &ServiceTemplateSelection{
+					URL:           url,
+					RepositoryURL: repositoryURL,
+					Meta:          meta,
+					MetaPresent:   metaPresent,
+				}, nil
 			}
 		}
 
 		// Try as string
 		for _, otherDefinition := range meta.OtherDefinitions {
 			if otherDefinition == serviceTemplateName {
-				return NewURL(csarUrl, format, serviceTemplateName)
+				url, repositoryURL, err := NewURL(csarUrl, format, serviceTemplateName)
+				if err != nil {
+					return nil, err
+				}
+				return &ServiceTemplateSelection{
+					URL:           url,
+					RepositoryURL: repositoryURL,
+					Meta:          meta,
+					MetaPresent:   metaPresent,
+				}, nil
 			}
 		}
 	}
 
-	return nil, nil, fmt.Errorf("CSAR does not have service template %q: %s", serviceTemplateName, csarUrl.String())
+	return nil, fmt.Errorf("CSAR does not have service template %q: %s", serviceTemplateName, csarUrl.String())
 }

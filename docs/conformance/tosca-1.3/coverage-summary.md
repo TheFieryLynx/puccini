@@ -8,15 +8,15 @@ This matrix separates implementation, verification, and applicability. It is an 
 - Counted atomic/non-duplicate records: **2773**.
 - Applicable counted records: **2632**.
 - Stable applicable atomic MUST denominator: **223**; remaining MUST implementation unknown: **0**.
-- Confirmed non-compliant catalog records: **33**; atomic/non-duplicate violations: **29**.
+- Confirmed non-compliant catalog records: **28**; atomic/non-duplicate violations: **24**.
 - Proven missing catalog records: **2**; unique capabilities: **2**.
 
 | Implementation Status | Records |
 |---|---:|
-| implemented | 731 |
+| implemented | 736 |
 | partial | 53 |
 | missing | 2 |
-| non-compliant | 33 |
+| non-compliant | 28 |
 | unknown | 2282 |
 
 | Verification Status | Records |
@@ -36,7 +36,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Strength | Applicable atomic denominator | Implemented | Implementation coverage | Implemented + verified | Verified conformance coverage | Broad test evidence | Broad evidence coverage |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| MUST/SHALL/REQUIRED | 223 | 185 | 82.96% | 135 | 60.54% | 167 | 74.89% |
+| MUST/SHALL/REQUIRED | 223 | 190 | 85.20% | 140 | 62.78% | 167 | 74.89% |
 | SHOULD/RECOMMENDED | 23 | 0 | 0.00% | 0 | 0.00% | 0 | 0.00% |
 | MAY/OPTIONAL | 693 | 99 | 14.29% | 0 | 0.00% | 95 | 13.71% |
 
@@ -50,7 +50,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | 3 | 1670 | 241 | 44 | 2 | 14 | 1369 | 127 | 102 | 1434 | 7 |
 | 4 | 144 | 22 | 2 | 0 | 5 | 115 | 27 | 0 | 117 | 0 |
 | 5 | 978 | 395 | 6 | 0 | 5 | 572 | 6 | 393 | 573 | 6 |
-| 6 | 44 | 6 | 0 | 0 | 8 | 30 | 9 | 0 | 31 | 4 |
+| 6 | 44 | 11 | 0 | 0 | 3 | 30 | 9 | 0 | 31 | 4 |
 | 7 | 25 | 0 | 0 | 0 | 0 | 25 | 0 | 0 | 25 | 0 |
 | 8 | 188 | 67 | 1 | 0 | 1 | 119 | 1 | 67 | 120 | 0 |
 
@@ -58,7 +58,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Phase | Total | implemented | partial | missing | non-compliant | unknown | verified | indirect | untested | unverifiable |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| csar/read | 46 | 6 | 0 | 0 | 8 | 32 | 9 | 0 | 31 | 6 |
+| csar/read | 46 | 11 | 0 | 0 | 3 | 32 | 9 | 0 | 31 | 6 |
 | hierarchy | 62 | 0 | 0 | 0 | 2 | 60 | 2 | 0 | 59 | 1 |
 | hierarchy/rendering | 3 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 3 | 0 |
 | implicit-profile/read | 576 | 460 | 0 | 0 | 4 | 112 | 4 | 460 | 112 | 0 |
@@ -704,8 +704,8 @@ This matrix separates implementation, verification, and applicability. It is an 
 | Section | Total | implemented | partial | missing | non-compliant | unknown | verified | indirect | untested | unverifiable |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | 6 | 2 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 2 | 0 |
-| 6.1 | 9 | 2 | 0 | 0 | 3 | 4 | 3 | 0 | 5 | 1 |
-| 6.2 | 18 | 2 | 0 | 0 | 2 | 14 | 3 | 0 | 14 | 1 |
+| 6.1 | 9 | 5 | 0 | 0 | 0 | 4 | 3 | 0 | 5 | 1 |
+| 6.2 | 18 | 4 | 0 | 0 | 0 | 14 | 3 | 0 | 14 | 1 |
 | 6.2.1 | 5 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 4 | 1 |
 | 6.3 | 10 | 2 | 0 | 0 | 3 | 5 | 3 | 0 | 6 | 1 |
 

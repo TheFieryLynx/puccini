@@ -14,16 +14,16 @@ This report covers the continuation trace of every formerly-unknown record that 
 
 ## Stable denominator result
 
-- implemented: **185**.
+- implemented: **190**.
 - partial: **32**.
 - missing: **0**.
-- non-compliant: **6**.
+- non-compliant: **1**.
 - verified: **141**.
 - indirectly-tested: **26**.
 - untested: **56**.
 - unverifiable: **0**.
-- implementation coverage: **185/223 (82.96%)**.
-- verified conformance coverage: **135/223 (60.54%)**.
+- implementation coverage: **190/223 (85.20%)**.
+- verified conformance coverage: **140/223 (62.78%)**.
 - broad test evidence coverage: **167/223 (74.89%)**.
 
 ## Continuation trace by subsystem

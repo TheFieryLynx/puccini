@@ -10,7 +10,7 @@ audit:
   production_code_changed: true
   requirement_count: 3101
   sample_seed: 20260727
-  sample_size: 152
+  sample_size: 147
   implementation_status_vocabulary:
   - implemented
   - partial
@@ -130267,7 +130267,7 @@ requirements:
   strength: MUST
   category: csar
   subject: overall-structure-of-a-csar
-  implementation_status: non-compliant
+  implementation_status: implemented
   verification_status: verified
   applicability: applicable
   catalog_quality: atomic
@@ -130278,40 +130278,74 @@ requirements:
     issue: null
     counted: true
   implementation:
+    entry_point: parser.Context.ReadRoot
     packages:
     - tosca/csar
+    - tosca/parser
+    - tosca/parsing
+    - tosca/grammars/tosca_v1_3
     files:
     - tosca/csar/meta.go
     - tosca/csar/paths.go
     - tosca/csar/url.go
+    - tosca/parser/phase1-read.go
+    - tosca/parsing/context.go
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - tests/conformance/tosca_1_3/csar_test.go
     symbols:
-    - csar.ReadMeta
-    - csar.GetRootPath
-    - csar.GetServiceTemplateURL
+    - csar.ResolveServiceTemplateURL
+    - csar.ValidateTOSCA13Meta
+    - parsing.CSARContext
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v1_3.validateCSAR
     parser_phase: csar/read
-    entry_point: parser.Context.ReadRoot
     execution_path:
-    - csar.ReadMeta
-    - csar.GetRootPath
-    - csar.GetServiceTemplateURL
-    trace_summary: archive URL → TOSCA.meta reader or root-path fallback → service-template reader
+    - parser.Context.ReadRoot
+    - csar.ResolveServiceTemplateURL
+    - parser.Context.read
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v1_3.validateCSAR
+    - csar.ValidateTOSCA13Meta
+    trace_summary: archive entry selection records TOSCA.meta/root-fallback provenance; after exact v1.3 grammar selection the service reader
+      validates the applicable root metadata or TOSCA 1.3 meta-file contract
   tests:
-    positive: []
+    positive:
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataAcceptsRequiredRootMetadata
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithMetadataAcceptsVersion11AndEntryDefinitions
     negative:
-    - temporary audit probe executed 2026-07-27 (removed after execution)
-    boundary: []
-    regression: []
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataRequiresRootMetadata
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRequiresEntryDefinitions
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRequiresVersion11
+    boundary:
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataReportsMissingNamesDeterministically
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataRejectsMultipleRootDefinitions
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRejectsUnsafeEntryDefinitions
+    regression:
+    - tests/conformance/tosca_1_3/csar_test.go#TestOrdinaryServiceTemplateMetadataRemainsOptional
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARValidationDoesNotChangeTosca20
   evidence:
     specification_verified: true
     code_path_traced: true
-    runtime_probe_executed: true
-    existing_test_executed: false
+    runtime_probe_executed: false
+    existing_test_executed: true
     tests_executed: true
     correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Implementation status is non-compliant.
+  gaps: []
   notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled only the tosca_v1_3.validateCSAR dispatch; the root metadata, Entry-Definitions, meta-file version, and archive-relative
+      path negative tests failed by accepting invalid CSARs.
+    affected_tests:
+    - TestCSARWithoutMetadataRequiresRootMetadata
+    - TestCSARMetaRequiresEntryDefinitions
+    - TestCSARMetaRequiresVersion11
+    - TestCSARMetaRejectsUnsafeEntryDefinitions
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-6.1-005
   section: '6.1'
   section_title: Overall Structure of a CSAR
@@ -130377,7 +130411,7 @@ requirements:
   strength: REQUIRED
   category: csar
   subject: overall-structure-of-a-csar
-  implementation_status: non-compliant
+  implementation_status: implemented
   verification_status: verified
   applicability: applicable
   catalog_quality: atomic
@@ -130388,47 +130422,81 @@ requirements:
     issue: null
     counted: true
   implementation:
+    entry_point: parser.Context.ReadRoot
     packages:
     - tosca/csar
+    - tosca/parser
+    - tosca/parsing
+    - tosca/grammars/tosca_v1_3
     files:
     - tosca/csar/meta.go
     - tosca/csar/paths.go
     - tosca/csar/url.go
+    - tosca/parser/phase1-read.go
+    - tosca/parsing/context.go
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - tests/conformance/tosca_1_3/csar_test.go
     symbols:
-    - csar.ReadMeta
-    - csar.GetRootPath
-    - csar.GetServiceTemplateURL
+    - csar.ResolveServiceTemplateURL
+    - csar.ValidateTOSCA13Meta
+    - parsing.CSARContext
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v1_3.validateCSAR
     parser_phase: csar/read
-    entry_point: parser.Context.ReadRoot
     execution_path:
-    - csar.ReadMeta
-    - csar.GetRootPath
-    - csar.GetServiceTemplateURL
-    trace_summary: archive URL → TOSCA.meta reader or root-path fallback → service-template reader
+    - parser.Context.ReadRoot
+    - csar.ResolveServiceTemplateURL
+    - parser.Context.read
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v1_3.validateCSAR
+    - csar.ValidateTOSCA13Meta
+    trace_summary: archive entry selection records TOSCA.meta/root-fallback provenance; after exact v1.3 grammar selection the service reader
+      validates the applicable root metadata or TOSCA 1.3 meta-file contract
   tests:
-    positive: []
+    positive:
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataAcceptsRequiredRootMetadata
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithMetadataAcceptsVersion11AndEntryDefinitions
     negative:
-    - temporary audit probe executed 2026-07-27 (removed after execution)
-    boundary: []
-    regression: []
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataRequiresRootMetadata
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRequiresEntryDefinitions
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRequiresVersion11
+    boundary:
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataReportsMissingNamesDeterministically
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataRejectsMultipleRootDefinitions
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRejectsUnsafeEntryDefinitions
+    regression:
+    - tests/conformance/tosca_1_3/csar_test.go#TestOrdinaryServiceTemplateMetadataRemainsOptional
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARValidationDoesNotChangeTosca20
   evidence:
     specification_verified: true
     code_path_traced: true
-    runtime_probe_executed: true
-    existing_test_executed: false
+    runtime_probe_executed: false
+    existing_test_executed: true
     tests_executed: true
     correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Implementation status is non-compliant.
+  gaps: []
   notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled only the tosca_v1_3.validateCSAR dispatch; the root metadata, Entry-Definitions, meta-file version, and archive-relative
+      path negative tests failed by accepting invalid CSARs.
+    affected_tests:
+    - TestCSARWithoutMetadataRequiresRootMetadata
+    - TestCSARMetaRequiresEntryDefinitions
+    - TestCSARMetaRequiresVersion11
+    - TestCSARMetaRejectsUnsafeEntryDefinitions
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-6.1-007
   section: '6.1'
   section_title: Overall Structure of a CSAR
   strength: REQUIRED
   category: csar
   subject: overall-structure-of-a-csar
-  implementation_status: non-compliant
+  implementation_status: implemented
   verification_status: verified
   applicability: applicable
   catalog_quality: atomic
@@ -130439,40 +130507,74 @@ requirements:
     issue: null
     counted: true
   implementation:
+    entry_point: parser.Context.ReadRoot
     packages:
     - tosca/csar
+    - tosca/parser
+    - tosca/parsing
+    - tosca/grammars/tosca_v1_3
     files:
     - tosca/csar/meta.go
     - tosca/csar/paths.go
     - tosca/csar/url.go
+    - tosca/parser/phase1-read.go
+    - tosca/parsing/context.go
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - tests/conformance/tosca_1_3/csar_test.go
     symbols:
-    - csar.ReadMeta
-    - csar.GetRootPath
-    - csar.GetServiceTemplateURL
+    - csar.ResolveServiceTemplateURL
+    - csar.ValidateTOSCA13Meta
+    - parsing.CSARContext
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v1_3.validateCSAR
     parser_phase: csar/read
-    entry_point: parser.Context.ReadRoot
     execution_path:
-    - csar.ReadMeta
-    - csar.GetRootPath
-    - csar.GetServiceTemplateURL
-    trace_summary: archive URL → TOSCA.meta reader or root-path fallback → service-template reader
+    - parser.Context.ReadRoot
+    - csar.ResolveServiceTemplateURL
+    - parser.Context.read
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v1_3.validateCSAR
+    - csar.ValidateTOSCA13Meta
+    trace_summary: archive entry selection records TOSCA.meta/root-fallback provenance; after exact v1.3 grammar selection the service reader
+      validates the applicable root metadata or TOSCA 1.3 meta-file contract
   tests:
-    positive: []
+    positive:
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataAcceptsRequiredRootMetadata
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithMetadataAcceptsVersion11AndEntryDefinitions
     negative:
-    - temporary audit probe executed 2026-07-27 (removed after execution)
-    boundary: []
-    regression: []
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataRequiresRootMetadata
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRequiresEntryDefinitions
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRequiresVersion11
+    boundary:
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataReportsMissingNamesDeterministically
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataRejectsMultipleRootDefinitions
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRejectsUnsafeEntryDefinitions
+    regression:
+    - tests/conformance/tosca_1_3/csar_test.go#TestOrdinaryServiceTemplateMetadataRemainsOptional
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARValidationDoesNotChangeTosca20
   evidence:
     specification_verified: true
     code_path_traced: true
-    runtime_probe_executed: true
-    existing_test_executed: false
+    runtime_probe_executed: false
+    existing_test_executed: true
     tests_executed: true
     correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Implementation status is non-compliant.
+  gaps: []
   notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled only the tosca_v1_3.validateCSAR dispatch; the root metadata, Entry-Definitions, meta-file version, and archive-relative
+      path negative tests failed by accepting invalid CSARs.
+    affected_tests:
+    - TestCSARWithoutMetadataRequiresRootMetadata
+    - TestCSARMetaRequiresEntryDefinitions
+    - TestCSARMetaRequiresVersion11
+    - TestCSARMetaRejectsUnsafeEntryDefinitions
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-6.1-008
   section: '6.1'
   section_title: Overall Structure of a CSAR
@@ -130759,7 +130861,7 @@ requirements:
   strength: REQUIRED
   category: csar
   subject: tosca-meta-file
-  implementation_status: non-compliant
+  implementation_status: implemented
   verification_status: verified
   applicability: applicable
   catalog_quality: atomic
@@ -130770,40 +130872,74 @@ requirements:
     issue: null
     counted: true
   implementation:
+    entry_point: parser.Context.ReadRoot
     packages:
     - tosca/csar
+    - tosca/parser
+    - tosca/parsing
+    - tosca/grammars/tosca_v1_3
     files:
     - tosca/csar/meta.go
     - tosca/csar/paths.go
     - tosca/csar/url.go
+    - tosca/parser/phase1-read.go
+    - tosca/parsing/context.go
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - tests/conformance/tosca_1_3/csar_test.go
     symbols:
-    - csar.ReadMeta
-    - csar.GetRootPath
-    - csar.GetServiceTemplateURL
+    - csar.ResolveServiceTemplateURL
+    - csar.ValidateTOSCA13Meta
+    - parsing.CSARContext
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v1_3.validateCSAR
     parser_phase: csar/read
-    entry_point: parser.Context.ReadRoot
     execution_path:
-    - csar.ReadMeta
-    - csar.GetRootPath
-    - csar.GetServiceTemplateURL
-    trace_summary: archive URL → TOSCA.meta reader or root-path fallback → service-template reader
+    - parser.Context.ReadRoot
+    - csar.ResolveServiceTemplateURL
+    - parser.Context.read
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v1_3.validateCSAR
+    - csar.ValidateTOSCA13Meta
+    trace_summary: archive entry selection records TOSCA.meta/root-fallback provenance; after exact v1.3 grammar selection the service reader
+      validates the applicable root metadata or TOSCA 1.3 meta-file contract
   tests:
-    positive: []
+    positive:
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataAcceptsRequiredRootMetadata
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithMetadataAcceptsVersion11AndEntryDefinitions
     negative:
-    - temporary audit probe executed 2026-07-27 (removed after execution)
-    boundary: []
-    regression: []
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataRequiresRootMetadata
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRequiresEntryDefinitions
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRequiresVersion11
+    boundary:
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataReportsMissingNamesDeterministically
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataRejectsMultipleRootDefinitions
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRejectsUnsafeEntryDefinitions
+    regression:
+    - tests/conformance/tosca_1_3/csar_test.go#TestOrdinaryServiceTemplateMetadataRemainsOptional
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARValidationDoesNotChangeTosca20
   evidence:
     specification_verified: true
     code_path_traced: true
-    runtime_probe_executed: true
-    existing_test_executed: false
+    runtime_probe_executed: false
+    existing_test_executed: true
     tests_executed: true
     correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Implementation status is non-compliant.
+  gaps: []
   notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled only the tosca_v1_3.validateCSAR dispatch; the root metadata, Entry-Definitions, meta-file version, and archive-relative
+      path negative tests failed by accepting invalid CSARs.
+    affected_tests:
+    - TestCSARWithoutMetadataRequiresRootMetadata
+    - TestCSARMetaRequiresEntryDefinitions
+    - TestCSARMetaRequiresVersion11
+    - TestCSARMetaRejectsUnsafeEntryDefinitions
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-6.2-006
   section: '6.2'
   section_title: TOSCA Meta File
@@ -131319,7 +131455,7 @@ requirements:
   strength: REQUIRED
   category: csar
   subject: tosca-meta-file
-  implementation_status: non-compliant
+  implementation_status: implemented
   verification_status: verified
   applicability: applicable
   catalog_quality: atomic
@@ -131330,40 +131466,74 @@ requirements:
     issue: null
     counted: true
   implementation:
+    entry_point: parser.Context.ReadRoot
     packages:
     - tosca/csar
+    - tosca/parser
+    - tosca/parsing
+    - tosca/grammars/tosca_v1_3
     files:
     - tosca/csar/meta.go
     - tosca/csar/paths.go
     - tosca/csar/url.go
+    - tosca/parser/phase1-read.go
+    - tosca/parsing/context.go
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - tests/conformance/tosca_1_3/csar_test.go
     symbols:
-    - csar.ReadMeta
-    - csar.GetRootPath
-    - csar.GetServiceTemplateURL
+    - csar.ResolveServiceTemplateURL
+    - csar.ValidateTOSCA13Meta
+    - parsing.CSARContext
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v1_3.validateCSAR
     parser_phase: csar/read
-    entry_point: parser.Context.ReadRoot
     execution_path:
-    - csar.ReadMeta
-    - csar.GetRootPath
-    - csar.GetServiceTemplateURL
-    trace_summary: archive URL → TOSCA.meta reader or root-path fallback → service-template reader
+    - parser.Context.ReadRoot
+    - csar.ResolveServiceTemplateURL
+    - parser.Context.read
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v1_3.validateCSAR
+    - csar.ValidateTOSCA13Meta
+    trace_summary: archive entry selection records TOSCA.meta/root-fallback provenance; after exact v1.3 grammar selection the service reader
+      validates the applicable root metadata or TOSCA 1.3 meta-file contract
   tests:
-    positive: []
+    positive:
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataAcceptsRequiredRootMetadata
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithMetadataAcceptsVersion11AndEntryDefinitions
     negative:
-    - temporary audit probe executed 2026-07-27 (removed after execution)
-    boundary: []
-    regression: []
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataRequiresRootMetadata
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRequiresEntryDefinitions
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRequiresVersion11
+    boundary:
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataReportsMissingNamesDeterministically
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataRejectsMultipleRootDefinitions
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRejectsUnsafeEntryDefinitions
+    regression:
+    - tests/conformance/tosca_1_3/csar_test.go#TestOrdinaryServiceTemplateMetadataRemainsOptional
+    - tests/conformance/tosca_1_3/csar_test.go#TestCSARValidationDoesNotChangeTosca20
   evidence:
     specification_verified: true
     code_path_traced: true
-    runtime_probe_executed: true
-    existing_test_executed: false
+    runtime_probe_executed: false
+    existing_test_executed: true
     tests_executed: true
     correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Implementation status is non-compliant.
+  gaps: []
   notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled only the tosca_v1_3.validateCSAR dispatch; the root metadata, Entry-Definitions, meta-file version, and archive-relative
+      path negative tests failed by accepting invalid CSARs.
+    affected_tests:
+    - TestCSARWithoutMetadataRequiresRootMetadata
+    - TestCSARMetaRequiresEntryDefinitions
+    - TestCSARMetaRequiresVersion11
+    - TestCSARMetaRejectsUnsafeEntryDefinitions
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-6.2.1-001
   section: 6.2.1
   section_title: Custom keynames in the TOSCA.meta file

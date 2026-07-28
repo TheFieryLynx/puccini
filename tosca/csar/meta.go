@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	pathpkg "path"
 	"strings"
 
 	"github.com/tliron/commonlog"
@@ -105,6 +106,31 @@ func ReadMeta(reader io.Reader) (*Meta, error) {
 	}
 
 	return &self, nil
+}
+
+// ValidateTOSCA13Meta applies the TOSCA Simple Profile in YAML 1.3 additions
+// to the otherwise version-neutral TOSCA.meta reader.
+func ValidateTOSCA13Meta(metaFileVersion string, entryDefinitions string) error {
+	if metaFileVersion != "1.1" {
+		return fmt.Errorf(
+			"invalid TOSCA 1.3 CSAR metadata: \"TOSCA-Meta-File-Version\" must be 1.1, not %q",
+			metaFileVersion,
+		)
+	}
+	if entryDefinitions == "" {
+		return fmt.Errorf("invalid TOSCA 1.3 CSAR metadata: missing required \"Entry-Definitions\"")
+	}
+	if pathpkg.IsAbs(entryDefinitions) ||
+		(entryDefinitions == "..") ||
+		strings.HasPrefix(entryDefinitions, "../") ||
+		strings.Contains(entryDefinitions, "\\") ||
+		(pathpkg.Clean(entryDefinitions) != entryDefinitions) {
+		return fmt.Errorf(
+			"invalid TOSCA 1.3 CSAR metadata: \"Entry-Definitions\" must identify a normalized path relative to the CSAR root: %q",
+			entryDefinitions,
+		)
+	}
+	return nil
 }
 
 func ReadMetaFromPath(path string) (*Meta, error) {

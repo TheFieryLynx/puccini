@@ -1,0 +1,342 @@
+requirements:
+  - requirement_id: TOSCA13-6.1-004
+    section: "6.1"
+    section_title: "Overall Structure of a CSAR"
+    normative_rule: "A root YAML entry used when TOSCA-Metadata is absent MUST define a metadata section."
+    current_behavior: "A metadata-less CSAR with one root TOSCA 1.3 YAML file is accepted when that file has no metadata section."
+    expected_behavior: "Reject the archive during the read phase and identify the missing root metadata section."
+    minimal_reproducer: "A .csar ZIP containing only service.yaml with tosca_definitions_version: tosca_simple_yaml_1_3."
+    current_verification_status: verified
+    implementation_status: implemented
+    verification_status: verified
+
+    implementation:
+      packages:
+        - tosca/csar
+        - tosca/parser
+        - tosca/parsing
+        - tosca/grammars/tosca_v1_3
+      files:
+        - tosca/csar/url.go
+        - tosca/parser/phase1-read.go
+        - tosca/parsing/context.go
+        - tosca/grammars/tosca_v1_3/service-file.go
+      symbols:
+        - csar.ResolveServiceTemplateURL
+        - parser.Context.read
+        - parsing.CSARContext
+        - tosca_v1_3.validateCSAR
+      parser_phase: csar/read
+      execution_path:
+        - parser.Context.ReadRoot
+        - csar.ResolveServiceTemplateURL
+        - grammars.DetectGrammar
+        - tosca_v1_3.ReadServiceFile
+        - tosca_v1_3.validateCSAR
+
+    remediation_group: csar-read-validation
+    remediation_order: 1
+    planned_tests:
+      positive:
+        - TestCSARWithoutMetadataAcceptsRequiredRootMetadata
+      negative:
+        - TestCSARWithoutMetadataRequiresRootMetadata
+      boundary:
+        - TestCSARWithoutMetadataRejectsMultipleRootDefinitions
+      regression:
+        - TestCSARValidationDoesNotChangeTosca20
+
+  - requirement_id: TOSCA13-6.1-006
+    section: "6.1"
+    section_title: "Overall Structure of a CSAR"
+    normative_rule: "The required root metadata section in an archive without TOSCA-Metadata requires template_name."
+    current_behavior: "The root TOSCA 1.3 YAML file is accepted when metadata omits template_name."
+    expected_behavior: "Reject the archive during the read phase and identify metadata.template_name."
+    minimal_reproducer: "A metadata-less .csar whose sole root service.yaml contains metadata.template_version but no template_name."
+    current_verification_status: verified
+    implementation_status: implemented
+    verification_status: verified
+
+    implementation:
+      packages:
+        - tosca/csar
+        - tosca/parser
+        - tosca/parsing
+        - tosca/grammars/tosca_v1_3
+      files:
+        - tosca/csar/url.go
+        - tosca/parser/phase1-read.go
+        - tosca/parsing/context.go
+        - tosca/grammars/tosca_v1_3/service-file.go
+      symbols:
+        - csar.ResolveServiceTemplateURL
+        - parser.Context.read
+        - parsing.CSARContext
+        - tosca_v1_3.validateCSAR
+      parser_phase: csar/read
+      execution_path:
+        - parser.Context.ReadRoot
+        - csar.ResolveServiceTemplateURL
+        - grammars.DetectGrammar
+        - tosca_v1_3.ReadServiceFile
+        - tosca_v1_3.validateCSAR
+
+    remediation_group: csar-read-validation
+    remediation_order: 1
+    planned_tests:
+      positive:
+        - TestCSARWithoutMetadataAcceptsRequiredRootMetadata
+      negative:
+        - TestCSARWithoutMetadataRequiresRootMetadata
+      boundary:
+        - TestCSARWithoutMetadataReportsMissingNamesDeterministically
+      regression:
+        - TestOrdinaryServiceTemplateMetadataRemainsOptional
+
+  - requirement_id: TOSCA13-6.1-007
+    section: "6.1"
+    section_title: "Overall Structure of a CSAR"
+    normative_rule: "The required root metadata section in an archive without TOSCA-Metadata requires template_version."
+    current_behavior: "The root TOSCA 1.3 YAML file is accepted when metadata omits template_version."
+    expected_behavior: "Reject the archive during the read phase and identify metadata.template_version."
+    minimal_reproducer: "A metadata-less .csar whose sole root service.yaml contains metadata.template_name but no template_version."
+    current_verification_status: verified
+    implementation_status: implemented
+    verification_status: verified
+
+    implementation:
+      packages:
+        - tosca/csar
+        - tosca/parser
+        - tosca/parsing
+        - tosca/grammars/tosca_v1_3
+      files:
+        - tosca/csar/url.go
+        - tosca/parser/phase1-read.go
+        - tosca/parsing/context.go
+        - tosca/grammars/tosca_v1_3/service-file.go
+      symbols:
+        - csar.ResolveServiceTemplateURL
+        - parser.Context.read
+        - parsing.CSARContext
+        - tosca_v1_3.validateCSAR
+      parser_phase: csar/read
+      execution_path:
+        - parser.Context.ReadRoot
+        - csar.ResolveServiceTemplateURL
+        - grammars.DetectGrammar
+        - tosca_v1_3.ReadServiceFile
+        - tosca_v1_3.validateCSAR
+
+    remediation_group: csar-read-validation
+    remediation_order: 1
+    planned_tests:
+      positive:
+        - TestCSARWithoutMetadataAcceptsRequiredRootMetadata
+      negative:
+        - TestCSARWithoutMetadataRequiresRootMetadata
+      boundary:
+        - TestCSARWithoutMetadataReportsMissingNamesDeterministically
+      regression:
+        - TestOrdinaryServiceTemplateMetadataRemainsOptional
+
+  - requirement_id: TOSCA13-6.2-005
+    section: "6.2"
+    section_title: "TOSCA Meta File"
+    normative_rule: "The required block_0 of TOSCA.meta includes Entry-Definitions pointing to the entry TOSCA definitions YAML file."
+    current_behavior: "TOSCA.meta without Entry-Definitions is parsed successfully and the processor falls back to a root YAML file."
+    expected_behavior: "After selecting the TOSCA 1.3 grammar, reject the archive as invalid TOSCA 1.3 CSAR metadata."
+    minimal_reproducer: "TOSCA.meta 1.1 with CSAR-Version and Created-By but no Entry-Definitions, plus a root service.yaml."
+    current_verification_status: verified
+    implementation_status: implemented
+    verification_status: verified
+
+    implementation:
+      packages:
+        - tosca/csar
+        - tosca/parser
+        - tosca/parsing
+        - tosca/grammars/tosca_v1_3
+      files:
+        - tosca/csar/meta.go
+        - tosca/csar/url.go
+        - tosca/parser/phase1-read.go
+        - tosca/parsing/context.go
+        - tosca/grammars/tosca_v1_3/service-file.go
+      symbols:
+        - csar.ValidateTOSCA13Meta
+        - csar.ResolveServiceTemplateURL
+        - parser.Context.read
+        - parsing.CSARContext
+        - tosca_v1_3.validateCSAR
+      parser_phase: csar/read
+      execution_path:
+        - parser.Context.ReadRoot
+        - csar.ResolveServiceTemplateURL
+        - grammars.DetectGrammar
+        - tosca_v1_3.ReadServiceFile
+        - csar.ValidateTOSCA13Meta
+
+    remediation_group: csar-read-validation
+    remediation_order: 1
+    planned_tests:
+      positive:
+        - TestCSARWithMetadataAcceptsVersion11AndEntryDefinitions
+      negative:
+        - TestCSARMetaRequiresEntryDefinitions
+      boundary:
+        - TestCSARMetaRejectsUnsafeEntryDefinitions
+      regression:
+        - TestCSARValidationDoesNotChangeTosca20
+
+  - requirement_id: TOSCA13-6.2-018
+    section: "6.2"
+    section_title: "TOSCA Meta File"
+    normative_rule: "For TOSCA 1.3, TOSCA-Meta-File-Version in block_0 is required to denote version 1.1."
+    current_behavior: "A TOSCA 1.3 archive whose TOSCA.meta declares TOSCA-Meta-File-Version: 1.0 is accepted."
+    expected_behavior: "Reject the archive during the TOSCA 1.3 read phase and identify the unsupported 1.0 meta-file version."
+    minimal_reproducer: "TOSCA.meta version 1.0 with an otherwise valid block_0 and a TOSCA 1.3 entry file."
+    current_verification_status: verified
+    implementation_status: implemented
+    verification_status: verified
+
+    implementation:
+      packages:
+        - tosca/csar
+        - tosca/parser
+        - tosca/parsing
+        - tosca/grammars/tosca_v1_3
+      files:
+        - tosca/csar/meta.go
+        - tosca/csar/url.go
+        - tosca/parser/phase1-read.go
+        - tosca/parsing/context.go
+        - tosca/grammars/tosca_v1_3/service-file.go
+      symbols:
+        - csar.ValidateTOSCA13Meta
+        - csar.ResolveServiceTemplateURL
+        - parser.Context.read
+        - parsing.CSARContext
+        - tosca_v1_3.validateCSAR
+      parser_phase: csar/read
+      execution_path:
+        - parser.Context.ReadRoot
+        - csar.ResolveServiceTemplateURL
+        - grammars.DetectGrammar
+        - tosca_v1_3.ReadServiceFile
+        - csar.ValidateTOSCA13Meta
+
+    remediation_group: csar-read-validation
+    remediation_order: 1
+    planned_tests:
+      positive:
+        - TestCSARWithMetadataAcceptsVersion11AndEntryDefinitions
+      negative:
+        - TestCSARMetaRequiresVersion11
+      boundary:
+        - TestCSARMetaDiagnosticsAreDeterministic
+      regression:
+        - TestCSARValidationDoesNotChangeTosca20
+
+  - requirement_id: TOSCA13-8.5.2.3-008
+    section: "8.5.2.3"
+    section_title: "Definition"
+    normative_rule: "The normative tosca.nodes.network.Port property order has required: true."
+    current_behavior: "The bundled TOSCA 1.3 profile declares order.required: false, allowing an assignment that omits order."
+    expected_behavior: "The ordinary TOSCA 1.3 processor path loads order as required and rejects a Port node template that omits it."
+    minimal_reproducer: "A TOSCA 1.3 topology containing a tosca.nodes.network.Port node template with no order property assignment."
+    current_verification_status: verified
+
+    implementation:
+      packages:
+        - assets/tosca/profiles/simple/1.3
+        - tosca/grammars/tosca_v1_3
+        - tosca/parser
+      files:
+        - assets/tosca/profiles/simple/1.3/nodes.yaml
+      symbols:
+        - tosca.nodes.network.Port.properties.order.required
+        - parser.Context.goReadImports
+        - parser.Context.Inherit
+        - tosca_v1_3.PropertyDefinition.Render
+      parser_phase: implicit-profile/read and rendering
+      execution_path:
+        - parser.Context.ReadRoot
+        - grammars.GetImplicitImportSpec
+        - parser.Context.goReadImports
+        - tosca_v1_3.ReadServiceFile
+        - parser.Context.AddHierarchies
+        - parser.Context.Inherit
+        - parser.Context.Render
+
+    remediation_group: normative-network-port-profile
+    remediation_order: 2
+    planned_tests:
+      positive:
+        - TestNormativeNetworkPortAcceptsOrderAssignment
+      negative:
+        - TestNormativeNetworkPortRequiresOrder
+      boundary:
+        - TestNormativeNetworkPortAcceptsZeroOrder
+      regression:
+        - TestNormativeNetworkPortEffectiveDefinition
+        - TestNormativeProfileTosca20Isolation
+
+remediation_groups:
+  - name: csar-read-validation
+    remediation_order: 1
+    requirement_ids:
+      - TOSCA13-6.1-004
+      - TOSCA13-6.1-006
+      - TOSCA13-6.1-007
+      - TOSCA13-6.2-005
+      - TOSCA13-6.2-018
+    test_first_evidence:
+      baseline_failed: true
+      affected_tests:
+        - TestCSARWithoutMetadataRequiresRootMetadata
+        - TestCSARWithoutMetadataReportsMissingNamesDeterministically
+        - TestCSARMetaRequiresEntryDefinitions
+        - TestCSARMetaRequiresVersion11
+        - TestCSARMetaRejectsUnsafeEntryDefinitions
+      failure_reason: "The processor accepted every invalid archive because entry selection discarded root-fallback provenance and no TOSCA 1.3 post-selection CSAR policy ran."
+    mutation_check:
+      performed: true
+      mutation: "Disabled only the tosca_v1_3.validateCSAR dispatch."
+      affected_tests:
+        - TestCSARWithoutMetadataRequiresRootMetadata
+        - TestCSARMetaRequiresEntryDefinitions
+        - TestCSARMetaRequiresVersion11
+        - TestCSARMetaRejectsUnsafeEntryDefinitions
+      expected_tests_failed: true
+      production_diff_restored: true
+    verification:
+      focused:
+        - "go test -count=1 ./tosca/csar ./tests/conformance/tosca_1_3 -run '^(TestCSAR|TestOrdinaryServiceTemplateMetadata)'"
+        - "go test -count=1 ./tests/conformance/tosca_2_0"
+      full:
+        - "go test -count=1 ./..."
+        - "go test -race -count=1 ./..."
+        - "go vet ./..."
+        - "git diff --check"
+      audit:
+        command: python scripts/conformance/audit_tosca13.py
+        generated_twice: true
+        sha256_match: true
+        denominator: 223
+        implementation:
+          implemented: 190
+          partial: 32
+          missing: 0
+          non_compliant: 1
+        verification:
+          verified: 141
+          indirectly_tested: 26
+          untested: 56
+      protected_blocks:
+        intrinsic_functions: "22/22 implemented/verified"
+        imports_namespaces: "34/34 implemented/verified"
+        grammar_structural: "75/75 implemented/verified"
+        operating_system_capability_normalization: "1/1 implemented/verified"
+        property_attribute_reflection: "1/1 implemented/verified"
+        external_schema_validation: "1/1 implemented/verified"

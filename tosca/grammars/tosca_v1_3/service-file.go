@@ -2,6 +2,7 @@ package tosca_v1_3
 
 import (
 	"github.com/tliron/go-puccini/normal"
+	"github.com/tliron/go-puccini/tosca/csar"
 	"github.com/tliron/go-puccini/tosca/grammars/tosca_v2_0"
 	"github.com/tliron/go-puccini/tosca/parsing"
 )
@@ -33,11 +34,40 @@ func ReadServiceFile(context *parsing.Context) parsing.EntityPtr {
 		ignore = append(ignore, "annotation_types")
 	}
 	context.ValidateUnsupportedFields(append(context.ReadFields(self), ignore...))
+	validateCSAR(context, self)
 	validateNamespaceDeclarations(context, self.Profile, self.Imports)
 	if self.Profile != nil {
 		context.CanonicalNamespace = self.Profile
 	}
 	return self
+}
+
+func validateCSAR(context *parsing.Context, serviceFile *ServiceFile) {
+	csarContext := context.CSAR
+	if csarContext == nil {
+		return
+	}
+
+	if csarContext.MetaPresent {
+		if err := csar.ValidateTOSCA13Meta(csarContext.MetaFileVersion, csarContext.EntryDefinitions); err != nil {
+			context.ReportError(err)
+		}
+		return
+	}
+
+	if !csarContext.RootFallback {
+		return
+	}
+	if serviceFile.Metadata == nil {
+		context.FieldChild("metadata", nil).ReportKeynameMissing()
+		return
+	}
+	if _, ok := serviceFile.Metadata["template_name"]; !ok {
+		context.FieldChild("metadata", nil).FieldChild("template_name", nil).ReportKeynameMissing()
+	}
+	if _, ok := serviceFile.Metadata["template_version"]; !ok {
+		context.FieldChild("metadata", nil).FieldChild("template_version", nil).ReportKeynameMissing()
+	}
 }
 
 // ([parsing.NamespaceValidator] interface)

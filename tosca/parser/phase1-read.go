@@ -44,9 +44,19 @@ func (self *Context) read(context contextpkg.Context, promise util.Promise, pars
 
 	// TODO: allow override of CSAR format
 	if format := parsingContext.URL.Format(); csar.IsValidFormat(format) {
-		if url, repositoryUrl, err := csar.GetServiceTemplateURL(context, parsingContext.URL, format, serviceTemplateName); err == nil {
-			parsingContext.URL = url
-			parsingContext.RepositoryURL = repositoryUrl
+		if selection, err := csar.ResolveServiceTemplateURL(context, parsingContext.URL, format, serviceTemplateName); err == nil {
+			parsingContext.URL = selection.URL
+			parsingContext.RepositoryURL = selection.RepositoryURL
+			metaFileVersion := ""
+			if selection.Meta.Version != nil {
+				metaFileVersion = selection.Meta.Version.String()
+			}
+			parsingContext.CSAR = &parsing.CSARContext{
+				MetaPresent:      selection.MetaPresent,
+				RootFallback:     selection.RootFallback,
+				MetaFileVersion:  metaFileVersion,
+				EntryDefinitions: selection.Meta.EntryDefinitions,
+			}
 		} else {
 			parsingContext.ReportError(err)
 			file := NewEmptyFile(parsingContext, container, nameTransformer)

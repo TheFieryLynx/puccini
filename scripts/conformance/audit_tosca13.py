@@ -140,6 +140,35 @@ DIRECT_TESTS: dict[str, dict[str, list[str]]] = {
     },
 }
 
+CSAR_REMEDIATED_IDS = {
+    "TOSCA13-6.1-004",
+    "TOSCA13-6.1-006",
+    "TOSCA13-6.1-007",
+    "TOSCA13-6.2-005",
+    "TOSCA13-6.2-018",
+}
+for requirement_id in CSAR_REMEDIATED_IDS:
+    DIRECT_TESTS[requirement_id] = {
+        "positive": [
+            "tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataAcceptsRequiredRootMetadata",
+            "tests/conformance/tosca_1_3/csar_test.go#TestCSARWithMetadataAcceptsVersion11AndEntryDefinitions",
+        ],
+        "negative": [
+            "tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataRequiresRootMetadata",
+            "tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRequiresEntryDefinitions",
+            "tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRequiresVersion11",
+        ],
+        "boundary": [
+            "tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataReportsMissingNamesDeterministically",
+            "tests/conformance/tosca_1_3/csar_test.go#TestCSARWithoutMetadataRejectsMultipleRootDefinitions",
+            "tests/conformance/tosca_1_3/csar_test.go#TestCSARMetaRejectsUnsafeEntryDefinitions",
+        ],
+        "regression": [
+            "tests/conformance/tosca_1_3/csar_test.go#TestOrdinaryServiceTemplateMetadataRemainsOptional",
+            "tests/conformance/tosca_1_3/csar_test.go#TestCSARValidationDoesNotChangeTosca20",
+        ],
+    }
+
 INTRINSIC_FUNCTION_IDS = {
     "TOSCA13-4.3.1.2-003",
     "TOSCA13-4.3.3.2-003", "TOSCA13-4.3.3.2-006", "TOSCA13-4.3.3.2-010",
@@ -631,6 +660,23 @@ MUTATION_CHECKS[EXTERNAL_SCHEMA_VALIDATION_ID] = {
     ],
     "production_diff_restored": True,
 }
+for requirement_id in CSAR_REMEDIATED_IDS:
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutation": (
+            "Temporarily disabled only the tosca_v1_3.validateCSAR dispatch; "
+            "the root metadata, Entry-Definitions, meta-file version, and "
+            "archive-relative path negative tests failed by accepting invalid CSARs."
+        ),
+        "affected_tests": [
+            "TestCSARWithoutMetadataRequiresRootMetadata",
+            "TestCSARMetaRequiresEntryDefinitions",
+            "TestCSARMetaRequiresVersion11",
+            "TestCSARMetaRejectsUnsafeEntryDefinitions",
+        ],
+        "expected_tests_failed": True,
+        "production_diff_restored": True,
+    }
 
 VERIFIED_IMPLEMENTED = set(DIRECT_TESTS)
 
@@ -665,7 +711,7 @@ CONFIRMED_NON_COMPLIANT = OLD_NON_COMPLIANT - {
     "TOSCA13-4.3.3.2-010",
     "TOSCA13-4.4.1.2-003",
     "TOSCA13-5.9.12.1-004",
-}
+} - CSAR_REMEDIATED_IDS
 
 CONSTRAINT_NON_COMPLIANT = {
     "TOSCA13-3.6.3.1-004": ("equal", "8", "7"),
@@ -1835,6 +1881,48 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
         }, None
     if requirement_id in {PROPERTY_ATTRIBUTE_REFLECTION_ID, EXTERNAL_SCHEMA_VALIDATION_ID}:
         return manual_must_trace(requirement)
+    if requirement_id in CSAR_REMEDIATED_IDS:
+        return "implemented", {
+            "entry_point": "parser.Context.ReadRoot",
+            "packages": [
+                "tosca/csar",
+                "tosca/parser",
+                "tosca/parsing",
+                "tosca/grammars/tosca_v1_3",
+            ],
+            "files": [
+                "tosca/csar/meta.go",
+                "tosca/csar/paths.go",
+                "tosca/csar/url.go",
+                "tosca/parser/phase1-read.go",
+                "tosca/parsing/context.go",
+                "tosca/grammars/tosca_v1_3/service-file.go",
+                "tests/conformance/tosca_1_3/csar_test.go",
+            ],
+            "symbols": [
+                "csar.ResolveServiceTemplateURL",
+                "csar.ValidateTOSCA13Meta",
+                "parsing.CSARContext",
+                "parser.Context.read",
+                "tosca_v1_3.ReadServiceFile",
+                "tosca_v1_3.validateCSAR",
+            ],
+            "parser_phase": "csar/read",
+            "execution_path": [
+                "parser.Context.ReadRoot",
+                "csar.ResolveServiceTemplateURL",
+                "parser.Context.read",
+                "grammars.DetectGrammar",
+                "tosca_v1_3.ReadServiceFile",
+                "tosca_v1_3.validateCSAR",
+                "csar.ValidateTOSCA13Meta",
+            ],
+            "trace_summary": (
+                "archive entry selection records TOSCA.meta/root-fallback provenance; "
+                "after exact v1.3 grammar selection the service reader validates the "
+                "applicable root metadata or TOSCA 1.3 meta-file contract"
+            ),
+        }, None
     if requirement_id in VERIFIED_IMPLEMENTED:
         files = ["tosca/grammars/parse.go", "tosca/parser/phase1-read.go", "tosca/grammars/tosca_v1_3/service-file.go"]
         return "implemented", {
