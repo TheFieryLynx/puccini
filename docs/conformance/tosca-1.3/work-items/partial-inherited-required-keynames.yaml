@@ -1,0 +1,80 @@
+remediation_group: inherited-required-keynames
+remediation_order: 5
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+parser_phase: inheritance/rendering
+execution_path:
+  - parser.Context.ReadRoot
+  - parser.Context.LookupNames
+  - parser.Context.Inherit
+  - tosca_v2_0.ArtifactDefinitions.Inherit
+  - parser.Context.Render
+  - tosca_v1_3.validateArtifactDefinitionRequiredKeynames
+
+requirements:
+  - requirement_id: TOSCA13-3.5.1-002
+    section: "3.5.1"
+    section_title: "Required Keynames"
+    normative_rule: "A derived type may omit a required keyname when the keyname is specified by its parent type."
+    baseline:
+      implementation_status: partial
+      verification_status: untested
+      behavior:
+        - "ArtifactDefinition.Inherit copies omitted type and file values from the parent definition."
+        - "The TOSCA 1.3 reader reports missing type and file before inheritance, rejecting a valid derived refinement."
+        - "No post-inheritance validator confirms that every effective long-form artifact definition is complete."
+      reproducer: TestDerivedArtifactInheritsRequiredKeynames
+      expected_pre_fix_result: failed
+    implementation:
+      packages:
+        - tosca/grammars/tosca_v1_3
+        - tosca/grammars/tosca_v2_0
+      files:
+        - tosca/grammars/tosca_v1_3/structural-readers.go
+        - tosca/grammars/tosca_v1_3/artifact-required-keynames.go
+        - tosca/grammars/tosca_v1_3/file.go
+        - tosca/grammars/tosca_v1_3/service-file.go
+        - tosca/grammars/tosca_v2_0/artifact-definition.go
+      symbols:
+        - tosca_v1_3.ReadArtifactDefinition
+        - tosca_v1_3.validateArtifactDefinitionRequiredKeynames
+        - tosca_v2_0.ArtifactDefinition.Inherit
+      ownership: "The effective-definition check is a TOSCA 1.3 file-render policy; shared inheritance remains version-neutral."
+    planned_tests:
+      positive:
+        - TestDerivedArtifactInheritsRequiredKeynames
+        - TestDerivedArtifactMayOverrideOneInheritedKey
+      negative:
+        - TestBaseArtifactStillRequiresTypeAndFile
+        - TestNewDerivedArtifactStillRequiresTypeAndFile
+      boundary:
+        - TestArtifactShortNotationInferenceRemainsValid
+      inheritance:
+        - TestDerivedArtifactInheritsRequiredKeynames
+        - TestDerivedArtifactMayOverrideOneInheritedKey
+      regression:
+        - TestTosca20ArtifactRequirednessUnchanged
+    mutation_check:
+      performed: true
+      mutation: "Temporarily removed the TOSCA 1.3 post-inheritance validator calls, then independently disabled type/file propagation in ArtifactDefinition.Inherit."
+      affected_tests:
+        - TestBaseArtifactStillRequiresTypeAndFile
+        - TestNewDerivedArtifactStillRequiresTypeAndFile
+        - TestDerivedArtifactInheritsRequiredKeynames
+        - TestDerivedArtifactMayOverrideOneInheritedKey
+      expected_tests_failed: true
+      production_diff_restored: true
+    result:
+      implementation_status: implemented
+      verification_status: verified
+      validation_phase: "rendering immediately after effective inheritance"
+    verification:
+      focused_artifact_inheritance: passed
+      focused_grammar_structural: passed
+      focused_rendering: passed
+      tosca_2_0_regression: passed
+      go_test_all: passed
+      go_test_race_all: passed
+      go_vet_all: passed
+      audit_generation_twice: passed
+      audit_sha256_identical: true
+      denominator: 223

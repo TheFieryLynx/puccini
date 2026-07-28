@@ -9630,8 +9630,8 @@ requirements:
   strength: REQUIRED
   category: grammar
   subject: required-keynames
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -9641,47 +9641,72 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: parser.Context.Inherit
     packages:
+    - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
     - tosca/parser
     files:
+    - tosca/grammars/tosca_v1_3/artifact-required-keynames.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/grammars/tosca_v1_3/file.go
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - tosca/grammars/tosca_v2_0/artifact-definition.go
+    - tosca/parser/phase4-inheritance.go
     - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
-    - tosca/grammars/tosca_v2_0/property-definition.go
-    - tosca/grammars/tosca_v2_0/value.go
+    - tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go
     symbols:
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: inheritance
+    - tosca_v1_3.ReadArtifactDefinition
+    - tosca_v1_3.validateArtifactDefinitionRequiredKeynames
+    - tosca_v1_3.File.Render
+    - tosca_v1_3.ServiceFile.Render
+    - tosca_v2_0.ArtifactDefinition.Inherit
+    - tosca_v2_0.ArtifactDefinitions.Inherit
+    parser_phase: inheritance and rendering
     execution_path:
-    - parser.Context.Parse
-    - parser.Context.LookupNames
     - parser.Context.Inherit
+    - tosca_v2_0.ArtifactDefinitions.Inherit
+    - tosca_v2_0.ArtifactDefinition.Inherit
     - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: Generic inheritance can supply conditional fields, but ArtifactDefinition has no final missing type/file validation and coverage
-      is not uniform across constructs.
+    - tosca_v1_3.File.Render
+    - tosca_v1_3.validateArtifactDefinitionRequiredKeynames
+    trace_summary: TOSCA 1.3 artifact grammar read without premature required-key failure → effective node-type artifact inheritance → deterministic
+      TOSCA 1.3-only post-inheritance completeness validation
   tests:
-    positive: []
-    negative: []
-    boundary: []
-    regression: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go#TestDerivedArtifactInheritsRequiredKeynames
+    - tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go#TestDerivedArtifactMayOverrideOneInheritedKey
+    negative:
+    - tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go#TestBaseArtifactStillRequiresTypeAndFile
+    - tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go#TestNewDerivedArtifactStillRequiresTypeAndFile
+    boundary:
+    - tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go#TestArtifactShortNotationInferenceRemainsValid
+    regression:
+    - tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go#TestTosca20ArtifactRequirednessUnchanged
+    inheritance:
+    - tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go#TestDerivedArtifactInheritsRequiredKeynames
+    - tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go#TestDerivedArtifactMayOverrideOneInheritedKey
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
-    generic_logic_applicability_explained: true
-  gaps:
-  - Conditional requiredness after inheritance is incomplete.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Conditional requiredness after inheritance is incomplete.
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
+    generic_logic_applicability_explained: false
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily removed the TOSCA 1.3 post-inheritance validator calls, then independently disabled ArtifactDefinition.Inherit propagation
+      of type and file.
+    affected_tests:
+    - TestBaseArtifactStillRequiresTypeAndFile
+    - TestNewDerivedArtifactStillRequiresTypeAndFile
+    - TestDerivedArtifactInheritsRequiredKeynames
+    - TestDerivedArtifactMayOverrideOneInheritedKey
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.5.1-003
   section: 3.5.1
   section_title: Required Keynames

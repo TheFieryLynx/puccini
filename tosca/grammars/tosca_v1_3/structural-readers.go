@@ -9,21 +9,12 @@ import (
 	"github.com/tliron/yamlkeys"
 )
 
-// ReadArtifactDefinition enforces the required fields of the TOSCA 1.3
-// extended notation. The scalar short notation continues to infer them.
+// ReadArtifactDefinition retains the TOSCA 1.3 grammar shape while deferring
+// effective required-key validation until after inheritance.
 //
-// TOSCA Simple Profile in YAML 1.3, sections 3.6.7.1 and 3.6.7.2.2.
+// TOSCA Simple Profile in YAML 1.3, sections 3.5.1, 3.6.7.1, and 3.6.7.2.2.
 func ReadArtifactDefinition(context *parsing.Context) parsing.EntityPtr {
-	self := tosca_v2_0.ReadArtifactDefinition(context).(*tosca_v2_0.ArtifactDefinition)
-	if context.Is(ard.TypeMap) {
-		if self.ArtifactTypeName == nil {
-			context.FieldChild("type", nil).ReportKeynameMissing()
-		}
-		if self.File == nil {
-			context.FieldChild("file", nil).ReportKeynameMissing()
-		}
-	}
-	return self
+	return tosca_v2_0.ReadArtifactDefinition(context)
 }
 
 // ReadEventFilter supplies the TOSCA 1.3 requiredness that is not shared by

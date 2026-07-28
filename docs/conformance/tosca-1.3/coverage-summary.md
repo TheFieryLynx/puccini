@@ -13,17 +13,17 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Implementation Status | Records |
 |---|---:|
-| implemented | 743 |
-| partial | 47 |
+| implemented | 744 |
+| partial | 46 |
 | missing | 2 |
 | non-compliant | 27 |
 | unknown | 2282 |
 
 | Verification Status | Records |
 |---|---:|
-| verified | 176 |
+| verified | 177 |
 | indirectly-tested | 562 |
-| untested | 2309 |
+| untested | 2308 |
 | unverifiable | 54 |
 
 | Applicability | Records |
@@ -36,7 +36,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Strength | Applicable atomic denominator | Implemented | Implementation coverage | Implemented + verified | Verified conformance coverage | Broad test evidence | Broad evidence coverage |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| MUST/SHALL/REQUIRED | 223 | 197 | 88.34% | 147 | 65.92% | 173 | 77.58% |
+| MUST/SHALL/REQUIRED | 223 | 198 | 88.79% | 148 | 66.37% | 174 | 78.03% |
 | SHOULD/RECOMMENDED | 23 | 0 | 0.00% | 0 | 0.00% | 0 | 0.00% |
 | MAY/OPTIONAL | 693 | 99 | 14.29% | 0 | 0.00% | 95 | 13.71% |
 
@@ -47,7 +47,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 13 | 8 | 0 | 0 | 0 | 0 | 8 | 0 | 0 | 8 | 0 |
 | 14 | 43 | 0 | 0 | 0 | 0 | 43 | 0 | 0 | 6 | 37 |
-| 3 | 1670 | 244 | 41 | 2 | 14 | 1369 | 130 | 102 | 1431 | 7 |
+| 3 | 1670 | 245 | 40 | 2 | 14 | 1369 | 131 | 102 | 1430 | 7 |
 | 4 | 144 | 24 | 0 | 0 | 5 | 115 | 29 | 0 | 115 | 0 |
 | 5 | 978 | 396 | 5 | 0 | 5 | 572 | 7 | 393 | 572 | 6 |
 | 6 | 44 | 11 | 0 | 0 | 3 | 30 | 9 | 0 | 31 | 4 |
@@ -63,7 +63,8 @@ This matrix separates implementation, verification, and applicability. It is an 
 | hierarchy/rendering | 3 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 3 | 0 |
 | implicit-profile/read | 575 | 460 | 0 | 0 | 3 | 112 | 3 | 460 | 112 | 0 |
 | implicit-profile/read and inheritance/rendering | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
-| inheritance | 20 | 0 | 2 | 0 | 0 | 18 | 0 | 0 | 20 | 0 |
+| inheritance | 19 | 0 | 1 | 0 | 0 | 18 | 0 | 0 | 19 | 0 |
+| inheritance and rendering | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | inheritance/rendering | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 |
 | inheritance/rendering/normalization | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | namespaces | 16 | 0 | 0 | 1 | 0 | 15 | 0 | 0 | 16 | 0 |
@@ -156,7 +157,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | 3.3.6.7.1 | 18 | 0 | 0 | 0 | 0 | 18 | 0 | 0 | 18 | 0 |
 | 3.4.1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 3.4.2 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
-| 3.5.1 | 2 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 2 | 0 |
+| 3.5.1 | 2 | 1 | 0 | 0 | 0 | 1 | 1 | 0 | 1 | 0 |
 | 3.6.1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 3.6.1.1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 3.6.1.2 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |

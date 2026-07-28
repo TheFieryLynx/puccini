@@ -77,6 +77,7 @@ func (self *ServiceFile) ValidateNamespace() {
 
 // ([parsing.Renderable] interface)
 func (self *ServiceFile) Render() {
+	validateArtifactDefinitionRequiredKeynames(self.File)
 	validateExternalPropertySchemas(self.File)
 	reflectFilePropertyDefinitions(self.File)
 }

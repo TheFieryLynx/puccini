@@ -232,6 +232,28 @@ DIRECT_TESTS[NORMATIVE_NAME_CASE_SENSITIVITY_ID] = {
     ],
 }
 
+INHERITED_REQUIRED_KEYNAMES_ID = "TOSCA13-3.5.1-002"
+DIRECT_TESTS[INHERITED_REQUIRED_KEYNAMES_ID] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go#TestDerivedArtifactInheritsRequiredKeynames",
+        "tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go#TestDerivedArtifactMayOverrideOneInheritedKey",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go#TestBaseArtifactStillRequiresTypeAndFile",
+        "tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go#TestNewDerivedArtifactStillRequiresTypeAndFile",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go#TestArtifactShortNotationInferenceRemainsValid",
+    ],
+    "inheritance": [
+        "tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go#TestDerivedArtifactInheritsRequiredKeynames",
+        "tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go#TestDerivedArtifactMayOverrideOneInheritedKey",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go#TestTosca20ArtifactRequirednessUnchanged",
+    ],
+}
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -627,6 +649,22 @@ MUTATION_CHECKS[NORMATIVE_NAME_CASE_SENSITIVITY_ID] = {
         "TestNormativeTypeNameCaseMismatchRejected",
         "TestImportedQualifiedTypeNameCaseMismatchRejected",
         "TestTosca20TypeNameCaseSensitivityUnchanged",
+    ],
+    "expected_tests_failed": True,
+    "production_diff_restored": True,
+}
+MUTATION_CHECKS[INHERITED_REQUIRED_KEYNAMES_ID] = {
+    "performed": True,
+    "mutation": (
+        "Temporarily removed the TOSCA 1.3 post-inheritance validator calls, "
+        "then independently disabled ArtifactDefinition.Inherit propagation "
+        "of type and file."
+    ),
+    "affected_tests": [
+        "TestBaseArtifactStillRequiresTypeAndFile",
+        "TestNewDerivedArtifactStillRequiresTypeAndFile",
+        "TestDerivedArtifactInheritsRequiredKeynames",
+        "TestDerivedArtifactMayOverrideOneInheritedKey",
     ],
     "expected_tests_failed": True,
     "production_diff_restored": True,
@@ -1840,6 +1878,47 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
                 "implicit TOSCA 1.3 profile names are registered in Type URI, "
                 "shorthand, and qualified forms using exact strings; namespace "
                 "storage and lookup use exact Go map keys without case folding"
+            ),
+        }, None
+    if requirement_id == INHERITED_REQUIRED_KEYNAMES_ID:
+        return "implemented", {
+            "entry_point": "parser.Context.Inherit",
+            "packages": [
+                "tosca/grammars/tosca_v1_3",
+                "tosca/grammars/tosca_v2_0",
+                "tosca/parser",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v1_3/artifact-required-keynames.go",
+                "tosca/grammars/tosca_v1_3/structural-readers.go",
+                "tosca/grammars/tosca_v1_3/file.go",
+                "tosca/grammars/tosca_v1_3/service-file.go",
+                "tosca/grammars/tosca_v2_0/artifact-definition.go",
+                "tosca/parser/phase4-inheritance.go",
+                "tosca/parser/phase5-rendering.go",
+                "tests/conformance/tosca_1_3/partial_inherited_required_keynames_test.go",
+            ],
+            "symbols": [
+                "tosca_v1_3.ReadArtifactDefinition",
+                "tosca_v1_3.validateArtifactDefinitionRequiredKeynames",
+                "tosca_v1_3.File.Render",
+                "tosca_v1_3.ServiceFile.Render",
+                "tosca_v2_0.ArtifactDefinition.Inherit",
+                "tosca_v2_0.ArtifactDefinitions.Inherit",
+            ],
+            "parser_phase": "inheritance and rendering",
+            "execution_path": [
+                "parser.Context.Inherit",
+                "tosca_v2_0.ArtifactDefinitions.Inherit",
+                "tosca_v2_0.ArtifactDefinition.Inherit",
+                "parser.Context.Render",
+                "tosca_v1_3.File.Render",
+                "tosca_v1_3.validateArtifactDefinitionRequiredKeynames",
+            ],
+            "trace_summary": (
+                "TOSCA 1.3 artifact grammar read without premature required-key "
+                "failure → effective node-type artifact inheritance → deterministic "
+                "TOSCA 1.3-only post-inheritance completeness validation"
             ),
         }, None
     if requirement_id in IMPORT_NAMESPACE_IDS:
