@@ -31,6 +31,7 @@ func ReadTriggerDefinition(context *parsing.Context) parsing.EntityPtr {
 		if tf, ok := data["target_filter"]; ok {
 			targetFilter = tf
 			hasTargetFilter = true
+			ReadEventFilter(context.FieldChild("target_filter", targetFilter))
 			delete(data, "target_filter")
 		}
 		if c, ok := data["condition"]; ok {

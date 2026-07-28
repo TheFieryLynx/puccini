@@ -127,6 +127,46 @@ When useful, also include:
 * normalization equivalence tests;
 * CSAR tests.
 
+## Frozen TOSCA 1.3 conformance baseline
+
+The TOSCA 1.3 atomic MUST denominator is frozen at 223 requirements.
+
+Implementation changes, bug fixes, refactoring, and conformance-test additions
+must not change:
+
+* requirement IDs;
+* applicability;
+* catalog quality;
+* deduplication;
+* denominator membership;
+* the total atomic MUST denominator of 223.
+
+If an error is discovered in the requirements catalog, applicability
+classification, deduplication, or denominator membership:
+
+1. Do not modify it as part of an implementation or conformance-test task.
+2. Record the proposed correction in:
+   `docs/conformance/tosca-1.3/catalog-review-queue.yaml`
+3. Describe:
+
+   * the affected requirement IDs;
+   * the current classification;
+   * the proposed classification;
+   * the normative justification;
+   * the expected denominator change.
+4. Apply the correction only in a separate catalog-review change.
+5. Regenerate and independently validate all conformance artifacts after the
+   catalog-review change.
+
+A coverage improvement must result from implementing or verifying requirements,
+not from removing requirements from the denominator.
+
+Every implementation or conformance-test task must verify that:
+
+* the atomic MUST denominator remains exactly 223;
+* no requirement IDs were added, removed, or reclassified;
+* the sum of all applicable atomic MUST implementation statuses remains 223.
+
 ## Conformance test organization
 
 Version-specific tests must be stored separately:

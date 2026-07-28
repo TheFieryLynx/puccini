@@ -1,17 +1,7 @@
 # Confirmed TOSCA 1.3 non-compliance
 
-Confirmed non-compliant catalog records: **36**. Duplicate records are shown individually but excluded from atomic coverage denominators.
+Confirmed non-compliant catalog records: **33**. Duplicate records are shown individually but excluded from atomic coverage denominators.
 Every behavioral claim below was reproduced on 2026-07-27 or directly compared against the bundled profile. Temporary probes were removed.
-
-## TOSCA13-3.1.2-001
-
-- Normative basis: §3.1.2 **TOSCA Namespacing in TOSCA Service Templates** — In the TOSCA Simple Profile, TOSCA Service Templates MUST always have, as the first line of YAML, the keyword “tosca_definitions_version” with an associated TOSCA Namespace Alias value.
-- Minimal reproducer: Place `description` before `tosca_definitions_version` in a minimal service template.
-- Actual Puccini result: Compilation succeeded without diagnostics.
-- Expected result: Reject because the selector is not the first YAML line.
-- Responsible path: `YAML decode → grammars.DetectGrammar → parser phase 1 read`
-- Fix phase: **read/lexical**
-- Required regression test: Direct negative first-line test asserting a lexical-position diagnostic.
 
 ## TOSCA13-3.10.2.1-003
 
@@ -173,16 +163,6 @@ Every behavioral claim below was reproduced on 2026-07-27 or directly compared a
 - Fix phase: **rendering/function resolution**
 - Required regression test: Direct negative `concat` grammar/resolution test asserting the specific diagnostic.
 
-## TOSCA13-4.3.3.2-010
-
-- Normative basis: §4.3.3.2 **Parameters** — The `substring_index` entry is required.
-- Minimal reproducer: topology output value: { token: [abc, b] }
-- Actual Puccini result: Compilation accepted and normalized the invalid function call without diagnostics.
-- Expected result: Reject invalid argument count/type or unresolved input reference.
-- Responsible path: `ReadValue → ParseFunctionCall → setFunctionCall → rendering/normalization`
-- Fix phase: **rendering/function resolution**
-- Required regression test: Direct negative `token` grammar/resolution test asserting the specific diagnostic.
-
 ## TOSCA13-4.4.1-001
 
 - Normative basis: §4.4.1 **get_input** — The get_input function is used to retrieve the values of properties declared within the inputs section of a TOSCA Service Template.
@@ -206,16 +186,6 @@ Every behavioral claim below was reproduced on 2026-07-27 or directly compared a
 ## TOSCA13-4.4.1.2-002
 
 - Normative basis: §4.4.1.2 **Parameters** — The `<input_property_name>` entry has type/schema `string`.
-- Minimal reproducer: topology output value: { get_input: [] }
-- Actual Puccini result: Compilation accepted and normalized the invalid function call without diagnostics.
-- Expected result: Reject invalid argument count/type or unresolved input reference.
-- Responsible path: `ReadValue → ParseFunctionCall → setFunctionCall → rendering/normalization`
-- Fix phase: **rendering/function resolution**
-- Required regression test: Direct negative `get_input` grammar/resolution test asserting the specific diagnostic.
-
-## TOSCA13-4.4.1.2-003
-
-- Normative basis: §4.4.1.2 **Parameters** — The `<input_property_name>` entry is required.
 - Minimal reproducer: topology output value: { get_input: [] }
 - Actual Puccini result: Compilation accepted and normalized the invalid function call without diagnostics.
 - Expected result: Reject invalid argument count/type or unresolved input reference.

@@ -1,0 +1,494 @@
+specification:
+  version: "TOSCA Simple Profile in YAML 1.3"
+  source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  frozen_atomic_must_denominator: 223
+scope:
+  functions:
+    - concat
+    - token
+    - get_input
+    - get_property
+    - get_attribute
+    - get_operation_output
+    - get_artifact
+  requirement_count: 22
+ambiguities:
+  - sections: ["4.3.1", "4.3.1.2"]
+    subject: concat minimum cardinality
+    decision: docs/decisions/0002-tosca-1.3-concat-minimum-cardinality.md
+requirements:
+  - requirement_id: TOSCA13-4.3.1.2-003
+    section: "4.3.1.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols:
+      - tosca_v1_3.ReadAttributeValue
+      - tosca_v2_0.ParseFunctionCall
+      - tosca_v2_0.setFunctionCall
+      - tosca_v2_0.NormalizeFunctionCallArguments
+    gaps:
+      - concat accepts an empty argument sequence.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests:
+      positive: [TestIntrinsicFunctionValidForms/concat]
+      negative: [TestIntrinsicFunctionRequiredArguments/concat-empty]
+      boundary: [TestIntrinsicFunctionArgumentGrammar/concat-one-and-many]
+      context: [TestIntrinsicFunctionContexts/concat]
+      resolution: [TestIntrinsicFunctionNesting/concat-get_input]
+      normalization: [TestIntrinsicFunctionNormalization/concat]
+
+  - requirement_id: TOSCA13-4.3.3.2-003
+    section: "4.3.3.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: &shared_function_symbols
+      - tosca_v1_3.ReadAttributeValue
+      - tosca_v2_0.ParseFunctionCall
+      - tosca_v2_0.setFunctionCall
+      - tosca_v2_0.NormalizeFunctionCallArguments
+    gaps:
+      - token does not enforce the required string_with_tokens argument in the parser.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests:
+      positive: [TestIntrinsicFunctionValidForms/token]
+      negative: [TestIntrinsicFunctionRequiredArguments/token-missing-string]
+      boundary: [TestIntrinsicFunctionArgumentGrammar/token-arity]
+      context: [TestIntrinsicFunctionContexts/token]
+      resolution: [TestIntrinsicFunctionNesting/token-get_input]
+      normalization: [TestIntrinsicFunctionNormalization/token]
+
+  - requirement_id: TOSCA13-4.3.3.2-006
+    section: "4.3.3.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - token does not enforce the required string_of_token_chars argument in the parser.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests:
+      positive: [TestIntrinsicFunctionValidForms/token]
+      negative: [TestIntrinsicFunctionRequiredArguments/token-missing-separators]
+      boundary: [TestIntrinsicFunctionArgumentGrammar/token-arity]
+      context: [TestIntrinsicFunctionContexts/token]
+      resolution: [TestIntrinsicFunctionNesting/token-get_input]
+      normalization: [TestIntrinsicFunctionNormalization/token]
+
+  - requirement_id: TOSCA13-4.3.3.2-010
+    section: "4.3.3.2"
+    section_title: "Parameters"
+    current_implementation_status: non-compliant
+    current_verification_status: verified
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols:
+      - tosca_v2_0.ParseFunctionCall
+      - tosca_v2_0.setFunctionCall
+      - parser.Context.Render
+    gaps:
+      - token accepts a two-argument call without the required substring_index.
+    planned_tests:
+      positive: [TestIntrinsicFunctionValidForms/token]
+      negative: [TestIntrinsicFunctionRequiredArguments/token-missing-index]
+      boundary: [TestIntrinsicFunctionArgumentGrammar/token-index-type]
+      context: [TestIntrinsicFunctionContexts/token]
+      resolution: [TestIntrinsicFunctionNesting/token-get_input]
+      normalization: [TestIntrinsicFunctionNormalization/token]
+
+  - requirement_id: TOSCA13-4.4.1.2-003
+    section: "4.4.1.2"
+    section_title: "Parameters"
+    current_implementation_status: non-compliant
+    current_verification_status: verified
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols:
+      - tosca_v2_0.ParseFunctionCall
+      - tosca_v2_0.setFunctionCall
+      - parser.Context.Render
+    gaps:
+      - get_input accepts an empty argument sequence.
+    planned_tests:
+      positive: [TestIntrinsicFunctionValidForms/get_input-scalar, TestIntrinsicFunctionValidForms/get_input-list]
+      negative: [TestIntrinsicFunctionRequiredArguments/get_input-empty]
+      boundary: [TestIntrinsicFunctionArgumentGrammar/get_input-nested-path]
+      context: [TestIntrinsicFunctionContexts/get_input]
+      resolution: [TestIntrinsicFunctionResolution/get_input]
+      normalization: [TestIntrinsicFunctionNormalization/get_input]
+
+  - requirement_id: TOSCA13-4.4.2.2-002
+    section: "4.4.2.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_property does not resolve and validate the required modelable entity reference.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests:
+      positive: [TestIntrinsicFunctionValidForms/get_property]
+      negative: [TestIntrinsicFunctionResolution/get_property-unknown-entity]
+      boundary: [TestIntrinsicFunctionArgumentGrammar/get_property-arity]
+      context: [TestIntrinsicFunctionContexts/get_property]
+      resolution: [TestIntrinsicFunctionResolution/get_property]
+      normalization: [TestIntrinsicFunctionNormalization/get_property]
+
+  - requirement_id: TOSCA13-4.4.2.2-004
+    section: "4.4.2.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_property does not reject a missing modelable entity argument.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests:
+      positive: [TestIntrinsicFunctionValidForms/get_property]
+      negative: [TestIntrinsicFunctionRequiredArguments/get_property-missing-entity]
+      boundary: [TestIntrinsicFunctionArgumentGrammar/get_property-arity]
+      context: [TestIntrinsicFunctionContexts/get_property]
+      resolution: [TestIntrinsicFunctionResolution/get_property]
+      normalization: [TestIntrinsicFunctionNormalization/get_property]
+
+  - requirement_id: TOSCA13-4.4.2.2-010
+    section: "4.4.2.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_property does not reject a missing property_name argument.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests:
+      positive: [TestIntrinsicFunctionValidForms/get_property]
+      negative: [TestIntrinsicFunctionRequiredArguments/get_property-missing-property]
+      boundary: [TestIntrinsicFunctionArgumentGrammar/get_property-arity]
+      context: [TestIntrinsicFunctionContexts/get_property]
+      resolution: [TestIntrinsicFunctionResolution/get_property]
+      normalization: [TestIntrinsicFunctionNormalization/get_property]
+
+  - requirement_id: TOSCA13-4.5.1.2-002
+    section: "4.5.1.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_attribute does not resolve and validate the required modelable entity reference.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests:
+      positive: [TestIntrinsicFunctionValidForms/get_attribute]
+      negative: [TestIntrinsicFunctionResolution/get_attribute-unknown-entity]
+      boundary: [TestIntrinsicFunctionArgumentGrammar/get_attribute-arity]
+      context: [TestIntrinsicFunctionContexts/get_attribute]
+      resolution: [TestIntrinsicFunctionResolution/get_attribute]
+      normalization: [TestIntrinsicFunctionNormalization/get_attribute]
+
+  - requirement_id: TOSCA13-4.5.1.2-004
+    section: "4.5.1.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_attribute does not reject a missing modelable entity argument.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests:
+      positive: [TestIntrinsicFunctionValidForms/get_attribute]
+      negative: [TestIntrinsicFunctionRequiredArguments/get_attribute-missing-entity]
+      boundary: [TestIntrinsicFunctionArgumentGrammar/get_attribute-arity]
+      context: [TestIntrinsicFunctionContexts/get_attribute]
+      resolution: [TestIntrinsicFunctionResolution/get_attribute]
+      normalization: [TestIntrinsicFunctionNormalization/get_attribute]
+
+  - requirement_id: TOSCA13-4.5.1.2-010
+    section: "4.5.1.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_attribute does not reject a missing attribute_name argument.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests:
+      positive: [TestIntrinsicFunctionValidForms/get_attribute]
+      negative: [TestIntrinsicFunctionRequiredArguments/get_attribute-missing-attribute]
+      boundary: [TestIntrinsicFunctionArgumentGrammar/get_attribute-arity]
+      context: [TestIntrinsicFunctionContexts/get_attribute]
+      resolution: [TestIntrinsicFunctionResolution/get_attribute]
+      normalization: [TestIntrinsicFunctionNormalization/get_attribute]
+
+  - requirement_id: TOSCA13-4.6.1.2-001
+    section: "4.6.1.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_operation_output does not resolve the required modelable entity implementing the interface and operation.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests: &get_operation_output_tests
+      positive: [TestIntrinsicFunctionValidForms/get_operation_output]
+      negative: [TestIntrinsicFunctionResolution/get_operation_output-unknown-entity]
+      boundary: [TestIntrinsicFunctionArgumentGrammar/get_operation_output-arity]
+      context: [TestIntrinsicFunctionContexts/get_operation_output]
+      resolution: [TestIntrinsicFunctionResolution/get_operation_output]
+      normalization: [TestIntrinsicFunctionNormalization/get_operation_output]
+
+  - requirement_id: TOSCA13-4.6.1.2-003
+    section: "4.6.1.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_operation_output does not reject a missing modelable entity argument.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests: *get_operation_output_tests
+
+  - requirement_id: TOSCA13-4.6.1.2-004
+    section: "4.6.1.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_operation_output does not resolve the required interface_name.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests: *get_operation_output_tests
+
+  - requirement_id: TOSCA13-4.6.1.2-006
+    section: "4.6.1.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_operation_output does not reject a missing interface_name argument.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests: *get_operation_output_tests
+
+  - requirement_id: TOSCA13-4.6.1.2-007
+    section: "4.6.1.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_operation_output does not resolve the required operation_name.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests: *get_operation_output_tests
+
+  - requirement_id: TOSCA13-4.6.1.2-009
+    section: "4.6.1.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_operation_output does not reject a missing operation_name argument.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests: *get_operation_output_tests
+
+  - requirement_id: TOSCA13-4.6.1.2-010
+    section: "4.6.1.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_operation_output does not resolve the required output_variable_name.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests: *get_operation_output_tests
+
+  - requirement_id: TOSCA13-4.6.1.2-012
+    section: "4.6.1.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_operation_output does not reject a missing output_variable_name argument.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests: *get_operation_output_tests
+
+  - requirement_id: TOSCA13-4.8.1.2-002
+    section: "4.8.1.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_artifact does not resolve and validate the required modelable entity reference.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests:
+      positive: [TestIntrinsicFunctionValidForms/get_artifact]
+      negative: [TestIntrinsicFunctionResolution/get_artifact-unknown-entity]
+      boundary: [TestIntrinsicFunctionArgumentGrammar/get_artifact-arity]
+      context: [TestIntrinsicFunctionContexts/get_artifact]
+      resolution: [TestIntrinsicFunctionResolution/get_artifact]
+      normalization: [TestIntrinsicFunctionNormalization/get_artifact]
+
+  - requirement_id: TOSCA13-4.8.1.2-004
+    section: "4.8.1.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_artifact does not reject a missing modelable entity argument.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests:
+      positive: [TestIntrinsicFunctionValidForms/get_artifact]
+      negative: [TestIntrinsicFunctionRequiredArguments/get_artifact-missing-entity]
+      boundary: [TestIntrinsicFunctionArgumentGrammar/get_artifact-arity]
+      context: [TestIntrinsicFunctionContexts/get_artifact]
+      resolution: [TestIntrinsicFunctionResolution/get_artifact]
+      normalization: [TestIntrinsicFunctionNormalization/get_artifact]
+
+  - requirement_id: TOSCA13-4.8.1.2-007
+    section: "4.8.1.2"
+    section_title: "Parameters"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled the requirement-specific grammar or rendering-resolution validation path; the linked negative test failed."
+      expected_test_failed: true
+    implementation_symbols: *shared_function_symbols
+    gaps:
+      - get_artifact does not reject a missing artifact_name argument.
+      - No direct requirement-isolating conformance test exists.
+    planned_tests:
+      positive: [TestIntrinsicFunctionValidForms/get_artifact]
+      negative: [TestIntrinsicFunctionRequiredArguments/get_artifact-missing-artifact]
+      boundary: [TestIntrinsicFunctionArgumentGrammar/get_artifact-arity]
+      context: [TestIntrinsicFunctionContexts/get_artifact]
+      resolution: [TestIntrinsicFunctionResolution/get_artifact]
+      normalization: [TestIntrinsicFunctionNormalization/get_artifact]

@@ -1,6 +1,8 @@
 package tosca_v1_3
 
 import (
+	"strings"
+
 	"github.com/tliron/go-ard"
 	"github.com/tliron/go-puccini/tosca/grammars/tosca_v2_0"
 	"github.com/tliron/go-puccini/tosca/parsing"
@@ -35,9 +37,17 @@ func ReadImport(context *parsing.Context) parsing.EntityPtr {
 
 		// Long notation
 		context.ValidateUnsupportedFields(context.ReadFields(self))
+		if _, ok := context.GetFieldChild("file"); !ok {
+			context.FieldChild("file", nil).ReportKeynameMissing()
+		} else if self.URL != nil && strings.TrimSpace(*self.URL) == "" {
+			context.FieldChild("file", *self.URL).ReportValueInvalid("import file", "must not be empty")
+		}
 	} else if context.ValidateType(ard.TypeMap, ard.TypeString) {
 		// Short notation
 		self.URL = context.FieldChild("file", context.Data).ReadString()
+		if self.URL != nil && strings.TrimSpace(*self.URL) == "" {
+			context.FieldChild("file", *self.URL).ReportValueInvalid("import file", "must not be empty")
+		}
 	}
 
 	return self

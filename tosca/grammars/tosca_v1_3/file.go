@@ -25,6 +25,7 @@ func ReadFile(context *parsing.Context) parsing.EntityPtr {
 		ignore = append(ignore, "annotation_types")
 	}
 	context.ValidateUnsupportedFields(append(context.ReadFields(self), ignore...))
+	validateNamespaceDeclarations(context, self.Profile, self.Imports)
 	if self.Profile != nil {
 		context.CanonicalNamespace = self.Profile
 	}

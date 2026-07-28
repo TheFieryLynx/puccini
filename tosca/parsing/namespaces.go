@@ -12,6 +12,13 @@ import (
 
 type NameTransformer = func(string, EntityPtr) []string
 
+// NamespaceValidator is an optional version-neutral phase hook. Grammar
+// entities implement it only when their specification defines additional
+// rules that require the fully merged namespace.
+type NamespaceValidator interface {
+	ValidateNamespace()
+}
+
 func GetCanonicalName(entityPtr EntityPtr) string {
 	if metadata, ok := GetMetadata(entityPtr); ok {
 		if canonicalName, ok := metadata[MetadataCanonicalName]; ok {
@@ -137,21 +144,30 @@ func (self *Namespace) Merge(namespace *Namespace, nameTransformer NameTransform
 			entries = append(entries, entry{type_, name, entityPtr})
 		}
 	}
+	sort.Slice(entries, func(i int, j int) bool {
+		iType := entries[i].type_.String()
+		jType := entries[j].type_.String()
+		if iType != jType {
+			return iType < jType
+		}
+		if entries[i].name != entries[j].name {
+			return entries[i].name < entries[j].name
+		}
+		return GetContext(entries[i].entityPtr).URL.String() < GetContext(entries[j].entityPtr).URL.String()
+	})
 
-	for type_, forType := range namespace.namespace {
-		for name, entityPtr := range forType {
-			var names []string
+	for _, entry := range entries {
+		var names []string
 
-			if nameTransformer != nil {
-				names = append(names, nameTransformer(name, entityPtr)...)
-			} else {
-				names = []string{name}
-			}
+		if nameTransformer != nil {
+			names = append(names, nameTransformer(entry.name, entry.entityPtr)...)
+		} else {
+			names = []string{entry.name}
+		}
 
-			for _, name := range names {
-				if existing, exists := self.set(name, entityPtr); exists {
-					GetContext(entityPtr).ReportNameAmbiguous(type_.Elem(), name, entityPtr, existing)
-				}
+		for _, name := range names {
+			if existing, exists := self.set(name, entry.entityPtr); exists {
+				GetContext(entry.entityPtr).ReportNameAmbiguous(entry.type_.Elem(), name, entry.entityPtr, existing)
 			}
 		}
 	}

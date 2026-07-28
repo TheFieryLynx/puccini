@@ -1,6 +1,8 @@
 package tosca_2_0_test
 
 import (
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -75,5 +77,99 @@ topology_template:
 	}
 	if !strings.Contains(problems, "topology_template") || !strings.Contains(problems, "unsupported keyname") {
 		t.Fatalf("wrong rejection reason:\n%s", problems)
+	}
+}
+
+// Specification: TOSCA 2.0
+// Section: 10.1, Function definition and invocation
+// Expected: the TOSCA 2.0 $-prefixed function path remains selected and is
+// unaffected by TOSCA 1.3 argument and reference validators
+// Category: positive, function, normalization, cross-version regression
+func TestTosca20FunctionPathRemainsIsolated(t *testing.T) {
+	serviceTemplate, problems, err := testsupport.ParseSource(t, `tosca_definitions_version: tosca_2_0
+service_template:
+  outputs:
+    result:
+      value: { $concat: [TOSCA, " ", "2.0"] }
+`)
+	if err != nil {
+		t.Fatalf("TOSCA 2.0 function path regressed: %v\n%s", err, problems)
+	}
+	if serviceTemplate == nil || serviceTemplate.Outputs["result"] == nil {
+		t.Fatal("TOSCA 2.0 function was not normalized")
+	}
+}
+
+// Specification: TOSCA 2.0
+// Sections: 6.4, Namespace; 6.5, Import
+// Expected: sorting in the version-neutral namespace merge infrastructure
+// does not change TOSCA 2.0 import or qualified-name resolution
+// Category: positive, import, namespace, cross-version regression
+func TestTosca20NamespaceMergeRemainsIsolated(t *testing.T) {
+	directory := t.TempDir()
+	writeFixture := func(name string, source string) {
+		t.Helper()
+		if err := os.WriteFile(filepath.Join(directory, name), []byte(source), 0o600); err != nil {
+			t.Fatalf("write %s: %v", name, err)
+		}
+	}
+
+	writeFixture("one.yaml", `tosca_definitions_version: tosca_2_0
+node_types:
+  One: {}
+`)
+	writeFixture("two.yaml", `tosca_definitions_version: tosca_2_0
+node_types:
+  Two: {}
+`)
+	writeFixture("main.yaml", `tosca_definitions_version: tosca_2_0
+imports:
+  - url: two.yaml
+    namespace: second
+  - url: one.yaml
+    namespace: first
+node_types:
+  FirstChild:
+    derived_from: first:One
+  SecondChild:
+    derived_from: second:Two
+`)
+
+	if _, problems, err := testsupport.ParseFile(t, filepath.Join(directory, "main.yaml")); err != nil {
+		t.Fatalf("TOSCA 2.0 namespace merge regressed: %v\n%s", err, problems)
+	}
+}
+
+// Specification: TOSCA 2.0
+// Section: 16.5, Trigger Definition
+// Expected: the version-neutral required-field reader distinguishes an absent
+// required sequence key from an explicitly present empty sequence.
+// Category: positive, negative, required field, shared-reader regression
+func TestTosca20RequiredSequencePresenceRegression(t *testing.T) {
+	valid := `tosca_definitions_version: tosca_2_0
+policy_types:
+  Monitor:
+    triggers:
+      threshold:
+        event: changed
+        action: []
+`
+	if _, problems, err := testsupport.ParseSource(t, valid); err != nil {
+		t.Fatalf("present empty required sequence regressed: %v\n%s", err, problems)
+	}
+
+	invalid := `tosca_definitions_version: tosca_2_0
+policy_types:
+  Monitor:
+    triggers:
+      threshold:
+        event: changed
+`
+	_, problems, err := testsupport.ParseSource(t, invalid)
+	if err == nil {
+		t.Fatal("absent required sequence key was accepted")
+	}
+	if !strings.Contains(problems, "action") || !strings.Contains(problems, "missing required keyname") {
+		t.Fatalf("wrong required-sequence diagnostic:\n%s", problems)
 	}
 }

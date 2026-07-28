@@ -1,6 +1,8 @@
 package parser
 
 import (
+	"sort"
+
 	"github.com/tliron/go-kutil/terminal"
 	"github.com/tliron/go-puccini/tosca/parsing"
 )
@@ -10,15 +12,20 @@ func (self *Context) AddNamespaces() {
 	defer self.Parser.lock.Unlock()
 
 	self.Root.mergeNamespaces()
+	if validator, ok := self.Root.EntityPtr.(parsing.NamespaceValidator); ok {
+		validator.ValidateNamespace()
+	}
 }
 
 func (self *File) mergeNamespaces() {
 	context := self.GetContext()
 
 	self.importsLock.RLock()
-	defer self.importsLock.RUnlock()
+	imports := append(Files(nil), self.Imports...)
+	self.importsLock.RUnlock()
+	sort.Sort(imports)
 
-	for _, import_ := range self.Imports {
+	for _, import_ := range imports {
 		import_.mergeNamespaces()
 		context.Namespace.Merge(import_.GetContext().Namespace, import_.NameTransformer)
 		context.ScriptletNamespace.Merge(import_.GetContext().ScriptletNamespace)

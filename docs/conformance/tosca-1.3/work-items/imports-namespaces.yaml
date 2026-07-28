@@ -1,0 +1,395 @@
+specification:
+  version: "TOSCA Simple Profile in YAML 1.3"
+  source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  frozen_atomic_must_denominator: 223
+scope:
+  requirement_count: 34
+  sections: ["3.1", "3.1.1", "3.1.2", "3.1.3.1", "3.6.8.1", "3.6.8.2.2", "3.6.8.2.3"]
+
+templates:
+  final_status: &final_status
+    final_implementation_status: implemented
+    final_verification_status: verified
+    final_gaps: []
+    mutation_check:
+      performed: true
+      expected_test_failed: true
+  namespace_symbols: &namespace_symbols
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v1_3.ServiceFile.ValidateNamespace
+    - tosca_v1_3.validateImportedDefinitionIdentities
+    - parser.Context.AddNamespaces
+    - parser.Context.LookupNames
+    - parsing.Namespace.Merge
+    - parsing.Namespace.LookupForType
+  import_symbols: &import_symbols
+    - tosca_v1_3.ReadImport
+    - tosca_v2_0.Import.NewImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddNamespaces
+    - parser.Context.LookupNames
+  collision_symbols: &collision_symbols
+    - parsing.Context.ReadFields
+    - parsing.Context.setMapItem
+    - parsing.Context.appendUnique
+    - parsing.Context.ReportDuplicateMapKey
+  namespace_tests: &namespace_tests
+    positive: [TestNamespaceDeclarations]
+    negative: [TestDefinitionsVersionFirstLine, TestReservedNamespacePolicy]
+    collision: [TestNamespacePrefixCollisions, TestDuplicateNamespaceDeclaration, TestLocalNameCollisions]
+    resolution: [TestQualifiedImportedTypeResolution]
+    import_graph: [TestImportGraphResolution]
+  import_tests: &import_tests
+    positive: [TestImportNotationAndResolution]
+    negative: [TestImportGrammarErrors, TestImportResolutionErrors]
+    collision: [TestDuplicateImportIsIdempotent, TestConflictingImportedDefinitionIdentity, TestImportCollisionDeterminism]
+    resolution: [TestQualifiedImportedTypeResolution, TestImportDifferentDefinitionsVersionIsRejected]
+    import_graph: [TestImportGraphResolution]
+  collision_tests: &collision_tests
+    positive: []
+    negative: [TestLocalNameCollisions]
+    collision: [TestLocalNameCollisions]
+    resolution: [TestImportCollisionDeterminism]
+    import_graph: []
+
+requirements:
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1-001
+    section: "3.1"
+    section_title: "TOSCA Namespace URI and alias"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_symbols: *namespace_symbols
+    gaps: ["Reserved URI/alias association is not represented and directly verified end-to-end."]
+    planned_tests: *namespace_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.1-001
+    section: "3.1.1"
+    section_title: "TOSCA Namespace prefix"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_symbols: *namespace_symbols
+    gaps: ["Default and reserved prefix association is not directly verified."]
+    planned_tests: *namespace_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.2-001
+    section: "3.1.2"
+    section_title: "TOSCA Namespacing in TOSCA Service Templates"
+    current_implementation_status: non-compliant
+    current_verification_status: verified
+    implementation_symbols: [grammars.DetectGrammar, parser.Context.Read]
+    gaps: ["The parser requires the key but does not enforce its physical first-line position."]
+    planned_tests: *namespace_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.2-002
+    section: "3.1.2"
+    section_title: "TOSCA Namespacing in TOSCA Service Templates"
+    current_implementation_status: implemented
+    current_verification_status: verified
+    implementation_symbols: [grammars.DetectGrammar, grammars.DetectGrammarVersion]
+    gaps: []
+    planned_tests: *namespace_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.2-003
+    section: "3.1.2"
+    section_title: "TOSCA Namespacing in TOSCA Service Templates"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_symbols: *namespace_symbols
+    gaps: ["Default namespace URI and prefix behavior lacks a direct end-to-end test."]
+    planned_tests: *namespace_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.2-004
+    section: "3.1.2"
+    section_title: "TOSCA Namespacing in TOSCA Service Templates"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: [grammars.GetImplicitImportSpec, parser.Context.goReadImports]
+    gaps: ["Implicit normative-profile import lacks a direct requirement-isolating test."]
+    planned_tests: *namespace_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.2-005
+    section: "3.1.2"
+    section_title: "TOSCA Namespacing in TOSCA Service Templates"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_symbols: *namespace_symbols
+    gaps: ["Association of normative types with the reserved URI/prefix is incomplete."]
+    planned_tests: *namespace_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-001
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: missing
+    current_verification_status: untested
+    implementation_symbols: [tosca_v1_3.ReadServiceFile, parser.Context.AddNamespaces]
+    gaps: ["No strict rejection of a reserved OASIS namespace declared by a user service template."]
+    planned_tests: *namespace_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-002
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: missing
+    current_verification_status: untested
+    implementation_symbols: [tosca_v1_3.ReadServiceFile, parser.Context.AddNamespaces]
+    gaps: ["No strict rejection of URI path extensions in the reserved TOSCA URI hierarchy."]
+    planned_tests: *namespace_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-004
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_symbols: *namespace_symbols
+    gaps: ["Equivalent imported definitions are not directly checked across repeated namespace imports."]
+    planned_tests: *namespace_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-005
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_symbols: *namespace_symbols
+    gaps: ["Different definition versions are not required to use distinct prefixes."]
+    planned_tests: *namespace_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-007
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate repositories test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-008
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate data_types test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-009
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: verified
+    implementation_symbols: *collision_symbols
+    gaps: []
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-010
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate relationship_types test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-011
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate capability_types test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-012
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate artifact_types test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-013
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate interface_types test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-015
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate node_templates test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-016
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate relationship_templates test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-017
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate topology inputs test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-018
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate topology outputs test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-020
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate properties test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-021
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate attributes test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-022
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate artifacts test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-023
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate requirements test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-024
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate capabilities test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-025
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate interfaces test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-026
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate policies test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.1.3.1-027
+    section: "3.1.3.1"
+    section_title: "Additional Requirements"
+    current_implementation_status: implemented
+    current_verification_status: untested
+    implementation_symbols: *collision_symbols
+    gaps: ["No direct duplicate groups test."]
+    planned_tests: *collision_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.6.8.1-002
+    section: "3.6.8.1"
+    section_title: "Keynames"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_symbols: *import_symbols
+    gaps: ["Long notation does not enforce a present, non-empty file value on every branch."]
+    planned_tests: *import_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.6.8.1-003
+    section: "3.6.8.1"
+    section_title: "Keynames"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_symbols: *import_symbols
+    gaps: ["The imported file symbolic name is not fully validated."]
+    planned_tests: *import_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.6.8.2.2-003
+    section: "3.6.8.2.2"
+    section_title: "Multi-line grammar"
+    current_implementation_status: partial
+    current_verification_status: untested
+    implementation_symbols: *import_symbols
+    gaps: ["Multi-line file_uri type and non-empty value lack direct strict validation."]
+    planned_tests: *import_tests
+
+  - <<: *final_status
+    requirement_id: TOSCA13-3.6.8.2.3-002
+    section: "3.6.8.2.3"
+    section_title: "Requirements"
+    current_implementation_status: missing
+    current_verification_status: untested
+    implementation_symbols: *import_symbols
+    gaps: ["Reserved namespace_prefix values are accepted on imports."]
+    planned_tests: *import_tests

@@ -1,0 +1,99 @@
+specification:
+  version: TOSCA Simple Profile in YAML 1.3
+  source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  frozen_atomic_must_denominator: 223
+requirements:
+  - requirement_id: TOSCA13-5.5.12.3-001
+    section: "5.5.12.3"
+    section_title: Additional Requirements
+    normative_rule: >-
+      The string values for the properties architecture, type and distribution
+      SHALL be normalized to lowercase by processors of the service template
+      for matching purposes.
+    current_implementation_status: implemented
+    current_verification_status: verified
+    affected_type: tosca.capabilities.OperatingSystem
+    affected_properties:
+      - architecture
+      - type
+      - distribution
+    implementation_symbols:
+      - tosca_v1_3.ServiceFile.NormalizeServiceTemplate
+      - tosca_v1_3.normalizeOperatingSystemCapabilities
+      - tosca_v1_3.operatingSystemLowercaseConverterScript
+      - tosca_v2_0.CapabilityAssignment.Normalize
+      - tosca_v2_0.Values.Normalize
+      - tosca_v2_0.Value.Normalize
+      - normal.ServiceTemplate.Compile
+      - clout/js.FunctionCall.Coerce
+    implementation:
+      entry_point: tosca_v1_3.ServiceFile.NormalizeServiceTemplate
+      parser_phase: rendering/normalization/function-evaluation
+      execution_path:
+        - YAML capability property assignment
+        - parser.Context.Inherit
+        - tosca_v2_0.CapabilityAssignment.Render
+        - tosca_v2_0.Values.RenderProperties
+        - tosca_v2_0.CapabilityAssignment.Normalize
+        - tosca_v2_0.Value.Normalize
+        - tosca_v1_3.ServiceFile.NormalizeServiceTemplate
+        - tosca_v1_3.normalizeOperatingSystemCapabilities
+        - normal.ServiceTemplate.Compile
+        - clout/js.FunctionCall.Coerce
+      policy_scope:
+        capability_type: tosca.capabilities.OperatingSystem
+        normalized_properties:
+          - architecture
+          - type
+          - distribution
+        static_values: string primitives only
+        function_values: preserved until evaluation, then converted
+        source_yaml_mutated: false
+      gaps: []
+    planned_tests:
+      direct_assignment:
+        - TestOperatingSystemCapabilityLowercaseNormalization/uppercase
+        - TestOperatingSystemCapabilityLowercaseNormalization/mixed-case
+      default_value:
+        - TestOperatingSystemCapabilityDefaultsAndInheritance/default
+      inherited_value:
+        - TestOperatingSystemCapabilityDefaultsAndInheritance/inherited
+      mixed_case:
+        - TestOperatingSystemCapabilityLowercaseNormalization/uppercase
+        - TestOperatingSystemCapabilityLowercaseNormalization/mixed-case
+      lowercase_input:
+        - TestOperatingSystemCapabilityLowercaseNormalization/already-lowercase
+      invalid_type:
+        - TestOperatingSystemCapabilityLowercaseInvalidType
+      function_value:
+        - TestOperatingSystemCapabilityFunctionValue
+      normalization:
+        - TestOperatingSystemCapabilityNormalizationIdempotenceAndDeterminism
+      regression:
+        - TestOperatingSystemCapabilityNormalizationScope
+    test_first_evidence:
+      baseline:
+        expected_failures:
+          - TestOperatingSystemCapabilityLowercaseNormalization/uppercase
+          - TestOperatingSystemCapabilityLowercaseNormalization/mixed-case
+          - TestOperatingSystemCapabilityDefaultsAndInheritance/default
+          - TestOperatingSystemCapabilityDefaultsAndInheritance/inherited
+          - TestOperatingSystemCapabilityFunctionValue
+        already_correct:
+          - TestOperatingSystemCapabilityLowercaseNormalization/already-lowercase
+          - TestOperatingSystemCapabilityLowercaseInvalidType
+          - TestOperatingSystemCapabilityNormalizationIdempotenceAndDeterminism
+        failure_reason: Mixed-case values survived normalization and function evaluation unchanged.
+      focused_tests_passed: true
+    mutation_check:
+      performed: true
+      mutations:
+        - description: Disabled OS capability lowercase normalization
+          affected_tests:
+            - TestOperatingSystemCapabilityLowercaseNormalization/mixed-case
+          expected_tests_failed: true
+        - description: Applied normalization to unrelated property
+          affected_tests:
+            - TestOperatingSystemCapabilityNormalizationScope
+          expected_tests_failed: true
+      production_diff_restored: true

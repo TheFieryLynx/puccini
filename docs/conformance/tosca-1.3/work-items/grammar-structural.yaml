@@ -1,0 +1,3840 @@
+specification:
+  version: TOSCA Simple Profile in YAML 1.3
+  source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  frozen_atomic_must_denominator: 223
+scope:
+  requirement_count: 75
+  selection: Applicable counted atomic MUST records in sections 3.6-3.8 and 3.10.1 whose category is grammar/error and validation kind is structural/lexical,
+    excluding completed imports/namespaces and intrinsic-function work items.
+requirements:
+- requirement_id: TOSCA13-3.6.3.4-004
+  section: 3.6.3.4
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `operator: represents a required operator from the specified list shown above (see section 3.6.3.1 “Operator keynames”).`.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadConstraintClause
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadConstraintClause
+  - parser.Context.Render
+  - tosca_v2_0.AttributeDefinition.Render
+  - tosca_v2_0.PropertyDefinition.Render
+  - tosca_v2_0.Values.RenderProperties
+  gaps:
+  - Constraint grammar is read but the complete TOSCA 1.3 semantics are not enforced.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: &id001
+    positive:
+    - TestGrammarStructuralShortLongNotation
+    - TestGrammarStructuralSymbolicNames
+    negative:
+    - TestGrammarStructuralRequiredKeys
+    - TestInterfaceTypeRejectsImplementations
+    yaml_type:
+    - TestGrammarStructuralYAMLTypes
+    unknown_key:
+    - TestGrammarStructuralUnknownKeys
+    required_key:
+    - TestGrammarStructuralRequiredKeys
+    short_notation:
+    - TestGrammarStructuralShortLongNotation
+    long_notation:
+    - TestGrammarStructuralShortLongNotation
+    duplicate:
+    - TestGrammarStructuralDuplicates
+    boundary:
+    - TestGrammarStructuralBoundaries
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: &id002
+    - TestGrammarStructuralRequiredKeys
+    - TestGrammarStructuralYAMLTypes
+    - TestGrammarStructuralUnknownKeys
+    - TestGrammarStructuralShortLongNotation
+    - TestGrammarStructuralDuplicates
+    - TestGrammarStructuralBoundaries
+    - TestInterfaceTypeRejectsImplementations
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.3.4-005
+  section: 3.6.3.4
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `scalar_value, scalar_value_*: represents a required scalar (or atomic quantity) that can hold only one value at a time.`.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadConstraintClause
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadConstraintClause
+  - parser.Context.Render
+  - tosca_v2_0.AttributeDefinition.Render
+  - tosca_v2_0.PropertyDefinition.Render
+  - tosca_v2_0.Values.RenderProperties
+  gaps:
+  - Constraint grammar is read but the complete TOSCA 1.3 semantics are not enforced.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.3.4-007
+  section: 3.6.3.4
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `value_*: represents a required value of the operator that is not limited to scalars.`.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadConstraintClause
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadConstraintClause
+  - parser.Context.Render
+  - tosca_v2_0.AttributeDefinition.Render
+  - tosca_v2_0.PropertyDefinition.Render
+  - tosca_v2_0.Values.RenderProperties
+  gaps:
+  - Constraint grammar is read but the complete TOSCA 1.3 semantics are not enforced.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.6.1-004
+  section: 3.6.6.1
+  section_title: Keynames
+  requirement_summary: 'For `url`: The required URL or network address used to access the repository.'
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v2_0.ReadRepository
+  reader_field: url
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadRepository
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.6.1-006
+  section: 3.6.6.1
+  section_title: Keynames
+  requirement_summary: The `url` entry is required.
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadRepository
+  reader_field: url
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadRepository
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Construct is represented, but the complete requirement-specific validation is absent.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.6.2.2-003
+  section: 3.6.6.2.2
+  section_title: Multi-line grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `repository_name: represents the required symbolic name of the repository as a string.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadRepository
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadRepository
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.6.2.2-005
+  section: 3.6.6.2.2
+  section_title: Multi-line grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `repository_address: represents the required URL of the repository as a string.`.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadRepository
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadRepository
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Construct is represented, but the complete requirement-specific validation is absent.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.7.1-001
+  section: 3.6.7.1
+  section_title: Keynames
+  requirement_summary: 'For `type`: The required artifact type for the artifact definition.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadArtifactDefinition
+  reader_field: type
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadArtifactDefinition
+  - parser.Context.Render
+  - tosca_v2_0.AttributeDefinition.Render
+  - tosca_v2_0.PropertyDefinition.Render
+  - tosca_v2_0.Values.RenderProperties
+  gaps:
+  - Conditional requiredness after inheritance is incomplete.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.7.1-003
+  section: 3.6.7.1
+  section_title: Keynames
+  requirement_summary: The `type` entry is required.
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadArtifactDefinition
+  reader_field: type
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadArtifactDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Construct is represented, but the complete requirement-specific validation is absent.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.7.1-004
+  section: 3.6.7.1
+  section_title: Keynames
+  requirement_summary: 'For `file`: The required URI string (relative or absolute) which can be used to locate the artifact’s file.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadArtifactDefinition
+  reader_field: file
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadArtifactDefinition
+  - parser.Context.Render
+  - tosca_v2_0.AttributeDefinition.Render
+  - tosca_v2_0.PropertyDefinition.Render
+  - tosca_v2_0.Values.RenderProperties
+  gaps:
+  - Conditional requiredness after inheritance is incomplete.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.7.1-006
+  section: 3.6.7.1
+  section_title: Keynames
+  requirement_summary: The `file` entry is required.
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadArtifactDefinition
+  reader_field: file
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadArtifactDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Construct is represented, but the complete requirement-specific validation is absent.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.7.2.2-003
+  section: 3.6.7.2.2
+  section_title: 'Extended notation:'
+  requirement_summary: 'The preceding rule `The following multi-line grammar may be used when the artifact’s definition’s type and mime type need
+    to be explicitly declared` includes `artifact_name: represents the required symbolic name of the artifact as a string.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadArtifactDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadArtifactDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.7.2.2-005
+  section: 3.6.7.2.2
+  section_title: 'Extended notation:'
+  requirement_summary: 'The preceding rule `The following multi-line grammar may be used when the artifact’s definition’s type and mime type need
+    to be explicitly declared` includes `artifact_type_name: represents the required artifact type the artifact definition is based upon.`.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadArtifactDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadArtifactDefinition
+  - parser.Context.Render
+  - tosca_v2_0.AttributeDefinition.Render
+  - tosca_v2_0.PropertyDefinition.Render
+  - tosca_v2_0.Values.RenderProperties
+  gaps:
+  - Conditional requiredness after inheritance is incomplete.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.7.2.2-006
+  section: 3.6.7.2.2
+  section_title: 'Extended notation:'
+  requirement_summary: 'The preceding rule `The following multi-line grammar may be used when the artifact’s definition’s type and mime type need
+    to be explicitly declared` includes `artifact_file_URI: represents the required URI string (relative or absolute) which can be used to locate
+    the artifact’s file.`.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadArtifactDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadArtifactDefinition
+  - parser.Context.Render
+  - tosca_v2_0.AttributeDefinition.Render
+  - tosca_v2_0.PropertyDefinition.Render
+  - tosca_v2_0.Values.RenderProperties
+  gaps:
+  - Conditional requiredness after inheritance is incomplete.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.9.1-001
+  section: 3.6.9.1
+  section_title: Keynames
+  requirement_summary: 'For `type`: The required data type for the key or entry.'
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v1_3.ReadSchema
+  reader_field: type
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadSchema
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.10.2-001
+  section: 3.6.10.2
+  section_title: Keynames
+  requirement_summary: 'For `type`: The required data type for the property.'
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v1_3.ReadPropertyDefinition
+  reader_field: type
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadPropertyDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.10.4-004
+  section: 3.6.10.4
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `property_name: represents the required symbolic name of the property as a string.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadPropertyDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadPropertyDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.10.4-007
+  section: 3.6.10.4
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `property_required: represents an optional boolean value (true or false) indicating whether or not the property is required.`.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadPropertyDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadPropertyDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Construct is represented, but the complete requirement-specific validation is absent.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.12.2-001
+  section: 3.6.12.2
+  section_title: Keynames
+  requirement_summary: 'For `type`: The required data type for the attribute.'
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v1_3.ReadAttributeDefinition
+  reader_field: type
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadAttributeDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.12.3-004
+  section: 3.6.12.3
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `attribute_name: represents the required symbolic name of the attribute as a string.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadAttributeDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadAttributeDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.14.2-008
+  section: 3.6.14.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `parameter_name: represents the required symbolic name of the parameter as a string.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadParameterDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadParameterDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.14.2-014
+  section: 3.6.14.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `parameter_required: represents an optional boolean value (true or false) indicating whether or not the parameter is required.`.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadParameterDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadParameterDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Construct is represented, but the complete requirement-specific validation is absent.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.15.1-005
+  section: 3.6.15.1
+  section_title: Grammar
+  requirement_summary: The `SELF | SOURCE | TARGET` entry is required.
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadAttributeMapping
+  reader_field: self-source-target
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadAttributeMapping
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.15.1-012
+  section: 3.6.15.1
+  section_title: Grammar
+  requirement_summary: The `<attribute_name>` entry is required.
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadAttributeMapping
+  reader_field: attribute_name
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadAttributeMapping
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.17.2.3-003
+  section: 3.6.17.2.3
+  section_title: Extended notation for use in Template definitions
+  requirement_summary: 'The preceding rule `The following multi-line grammar may be used in Node or Relationship Template definitions when additional
+    information about the operation is needed` includes `operation_name: represents the required symbolic name of the operation as a string.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadOperationDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadOperationDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.19.2-004
+  section: 3.6.19.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `notification_name: represents the required symbolic name of the notification as a string.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadNotificationDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadNotificationDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.20.2.2-003
+  section: 3.6.20.2.2
+  section_title: Extended notation for use in Template definitions
+  requirement_summary: 'The preceding rule `The following multi-line grammar may be used in Node or Relationship Template definitions` includes
+    `interface_definition_name: represents the required symbolic name of the interface as a string.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadInterfaceDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadInterfaceDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.20.2.2-004
+  section: 3.6.20.2.2
+  section_title: Extended notation for use in Template definitions
+  requirement_summary: 'The preceding rule `The following multi-line grammar may be used in Node or Relationship Template definitions` includes
+    `interface_type_name: represents the required name of the Interface Type for the interface definition.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadInterfaceDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadInterfaceDefinition
+  - tosca_v2_0.ReadWorkflowActivityDefinition
+  - tosca_v2_0.ReadWorkflowStepDefinition
+  - tosca_v2_0.ReadWorkflowPreconditionDefinition
+  - tosca_v2_0.WorkflowStepDefinition.Render
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.20.2.2-007
+  section: 3.6.20.2.2
+  section_title: Extended notation for use in Template definitions
+  requirement_summary: 'The preceding rule `The following multi-line grammar may be used in Node or Relationship Template definitions` includes
+    `operation_definitions: represents the required name of one or more operation definitions.`.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadInterfaceDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadInterfaceDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Construct is recognized; requiredness/cardinality validation is incomplete.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.20.2.2-008
+  section: 3.6.20.2.2
+  section_title: Extended notation for use in Template definitions
+  requirement_summary: 'The preceding rule `The following multi-line grammar may be used in Node or Relationship Template definitions` includes
+    `notification_definitions: represents the required name of one or more notification definitions.`.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadInterfaceDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadInterfaceDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Construct is recognized; requiredness/cardinality validation is incomplete.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.21.1-001
+  section: 3.6.21.1
+  section_title: Keynames
+  requirement_summary: 'For `node`: The required name of the node type or template that contains either the attribute to be monitored or contains
+    the requirement that references the node that contains the attribute to be monitored.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadEventFilter
+  reader_field: node
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadEventFilter
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Construct is recognized; requiredness/cardinality validation is incomplete.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.21.1-003
+  section: 3.6.21.1
+  section_title: Keynames
+  requirement_summary: The `node` entry is required.
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadEventFilter
+  reader_field: node
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadEventFilter
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Construct is recognized; requiredness/cardinality validation is incomplete.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.22.1-004
+  section: 3.6.22.1
+  section_title: Keynames
+  requirement_summary: 'For `event`: The required name of the event that activates the trigger’s action.'
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v1_3.ReadTriggerDefinition
+  reader_field: event
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadTriggerDefinition
+  - tosca_v2_0.ReadWorkflowActivityDefinition
+  - tosca_v2_0.ReadWorkflowStepDefinition
+  - tosca_v2_0.ReadWorkflowPreconditionDefinition
+  - tosca_v2_0.WorkflowStepDefinition.Render
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.22.1-020
+  section: 3.6.22.1
+  section_title: Keynames
+  requirement_summary: The `action` entry is required.
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v1_3.ReadTriggerDefinition
+  reader_field: action
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadTriggerDefinition
+  - tosca_v2_0.ReadWorkflowActivityDefinition
+  - tosca_v2_0.ReadWorkflowStepDefinition
+  - tosca_v2_0.ReadWorkflowPreconditionDefinition
+  - tosca_v2_0.WorkflowStepDefinition.Render
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.22.3.2-002
+  section: 3.6.22.3.2
+  section_title: 'Extended notation:'
+  requirement_summary: 'trigger_name: represents the required symbolic name of the trigger as a string.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadTriggerDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadTriggerDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.22.3.2-004
+  section: 3.6.22.3.2
+  section_title: 'Extended notation:'
+  requirement_summary: 'event_name: represents the required name of an event associated with an interface notification on the identified resource
+    (node).'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadTriggerDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadTriggerDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Construct is represented, but the complete requirement-specific validation is absent.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.23.1.1-003
+  section: 3.6.23.1.1
+  section_title: Keynames
+  requirement_summary: The `delegate` entry is required.
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadWorkflowActivityDefinition
+  reader_field: delegate
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadWorkflowActivityDefinition
+  - tosca_v2_0.ReadWorkflowStepDefinition
+  - tosca_v2_0.ReadWorkflowPreconditionDefinition
+  - tosca_v2_0.WorkflowStepDefinition.Render
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.23.2.1-002
+  section: 3.6.23.2.1
+  section_title: Keynames
+  requirement_summary: The `set_state` entry is required.
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v2_0.ReadWorkflowActivityDefinition
+  reader_field: set_state
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadWorkflowActivityDefinition
+  - tosca_v2_0.ReadWorkflowStepDefinition
+  - tosca_v2_0.ReadWorkflowPreconditionDefinition
+  - tosca_v2_0.WorkflowStepDefinition.Render
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.23.3.1-004
+  section: 3.6.23.3.1
+  section_title: Keynames
+  requirement_summary: The `call_operation` entry is required.
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v2_0.ReadWorkflowActivityDefinition
+  reader_field: call_operation
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadWorkflowActivityDefinition
+  - tosca_v2_0.ReadWorkflowStepDefinition
+  - tosca_v2_0.ReadWorkflowPreconditionDefinition
+  - tosca_v2_0.WorkflowStepDefinition.Render
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.23.3.1-007
+  section: 3.6.23.3.1
+  section_title: Keynames
+  requirement_summary: 'For `operation`: Required in the extended notation.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadWorkflowActivityDefinition
+  reader_field: operation
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadWorkflowActivityDefinition
+  - tosca_v2_0.ReadWorkflowStepDefinition
+  - tosca_v2_0.ReadWorkflowPreconditionDefinition
+  - tosca_v2_0.WorkflowStepDefinition.Render
+  gaps:
+  - Construct is recognized; requiredness/cardinality validation is incomplete.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.23.4.1-003
+  section: 3.6.23.4.1
+  section_title: Keynames
+  requirement_summary: The `inline` entry is required.
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadWorkflowActivityDefinition
+  reader_field: inline
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadWorkflowActivityDefinition
+  - tosca_v2_0.ReadWorkflowStepDefinition
+  - tosca_v2_0.ReadWorkflowPreconditionDefinition
+  - tosca_v2_0.WorkflowStepDefinition.Render
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.23.4.1-004
+  section: 3.6.23.4.1
+  section_title: Keynames
+  requirement_summary: 'For `workflow`: Required in the extended notation.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadWorkflowActivityDefinition
+  reader_field: workflow
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadWorkflowActivityDefinition
+  - tosca_v2_0.ReadWorkflowStepDefinition
+  - tosca_v2_0.ReadWorkflowPreconditionDefinition
+  - tosca_v2_0.WorkflowStepDefinition.Render
+  gaps:
+  - Construct is recognized; requiredness/cardinality validation is incomplete.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.26.1-002
+  section: 3.6.26.1
+  section_title: Keynames
+  requirement_summary: The `target` entry is required.
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v2_0.ReadWorkflowActivityDefinition
+  reader_field: target
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadWorkflowActivityDefinition
+  - tosca_v2_0.ReadWorkflowStepDefinition
+  - tosca_v2_0.ReadWorkflowPreconditionDefinition
+  - tosca_v2_0.WorkflowStepDefinition.Render
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.27.1-002
+  section: 3.6.27.1
+  section_title: Keynames
+  requirement_summary: The `target` entry is required.
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v2_0.ReadWorkflowActivityDefinition
+  reader_field: target
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadWorkflowActivityDefinition
+  - tosca_v2_0.ReadWorkflowStepDefinition
+  - tosca_v2_0.ReadWorkflowPreconditionDefinition
+  - tosca_v2_0.WorkflowStepDefinition.Render
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.6.27.1-020
+  section: 3.6.27.1
+  section_title: Keynames
+  requirement_summary: The `activities` entry is required.
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v2_0.ReadWorkflowActivityDefinition
+  reader_field: activities
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadWorkflowActivityDefinition
+  - tosca_v2_0.ReadWorkflowStepDefinition
+  - tosca_v2_0.ReadWorkflowPreconditionDefinition
+  - tosca_v2_0.WorkflowStepDefinition.Render
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.7.2.1-001
+  section: 3.7.2.1
+  section_title: Keynames
+  requirement_summary: 'For `type`: The required name of the Capability Type the capability definition is based upon.'
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v1_3.ReadCapabilityDefinition
+  reader_field: type
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadCapabilityDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.7.2.4-002
+  section: 3.7.2.4
+  section_title: Additional requirements
+  requirement_summary: Capability symbolic names SHALL be unique; it is an error if a capability name is found to occur more than once.
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadCapabilityDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadCapabilityDefinition
+  - parsing.Context.ReadFields
+  - parsing.Context.setMapItem
+  - parsing.Context.appendUnique
+  - parsing.Context.ReportDuplicateMapKey
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.7.3.1-001
+  section: 3.7.3.1
+  section_title: Keynames
+  requirement_summary: 'For `capability`: The required reserved keyname used that can be used to provide the name of a valid Capability Type that
+    can fulfill the requirement.'
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v1_3.ReadRequirementDefinition
+  reader_field: capability
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadRequirementDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.7.3.2.3-003
+  section: 3.7.3.2.3
+  section_title: Extended grammar for declaring Property Definitions on the relationship’s Interfaces
+  requirement_summary: 'requirement_definition_name: represents the required symbolic name of the requirement definition as a string.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadRequirementDefinition
+  reader_field: extended-grammar-for-declaring-property-definitions-on-the-relationship-s-interfaces
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadRequirementDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.7.3.2.3-004
+  section: 3.7.3.2.3
+  section_title: Extended grammar for declaring Property Definitions on the relationship’s Interfaces
+  requirement_summary: 'capability_type_name: represents the required name of a Capability type that can be used to fulfill the requirement.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadRequirementDefinition
+  reader_field: extended-grammar-for-declaring-property-definitions-on-the-relationship-s-interfaces
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadRequirementDefinition
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Construct is represented, but the complete requirement-specific validation is absent.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.7.3.3-001
+  section: 3.7.3.3
+  section_title: Additional Requirements
+  requirement_summary: Requirement symbolic names SHALL be unique; it is an error if a requirement name is found to occur more than once.
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadRequirementDefinition
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadRequirementDefinition
+  - parsing.Context.ReadFields
+  - parsing.Context.setMapItem
+  - parsing.Context.appendUnique
+  - parsing.Context.ReportDuplicateMapKey
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.7.5.2-004
+  section: 3.7.5.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `interface_type_name: represents the required name of the interface as a string.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadInterfaceType
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadInterfaceType
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.7.5.2-008
+  section: 3.7.5.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `operation_definitions: represents the required map of one or more operation definitions.`.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadInterfaceType
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadInterfaceType
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Required non-empty collection cardinality is absent.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.7.5.2-009
+  section: 3.7.5.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `notification_definitions: represents the required name of one or more notification definitions.`.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadInterfaceType
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadInterfaceType
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Required non-empty collection cardinality is absent.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.7.5.4-001
+  section: 3.7.5.4
+  section_title: Additional Requirements
+  requirement_summary: Interface Types MUST NOT include any implementations for defined operations or notifications; that is, the implementation
+    keyname is invalid in this context.
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadInterfaceType
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadInterfaceType
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Operation/notification implementation is accepted in an interface type context.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.7.6.2-004
+  section: 3.7.6.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `data_type_name: represents the required symbolic name of the Data Type as a string.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadDataType
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadDataType
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.7.7.2-004
+  section: 3.7.7.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `capability_type_name: represents the required name of the Capability Type being declared as a string.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadCapabilityType
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadCapabilityType
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.7.9.2-004
+  section: 3.7.9.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `node_type_name: represents the required symbolic name of the Node Type being declared.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadNodeType
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadNodeType
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.7.10.2-004
+  section: 3.7.10.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `relationship_type_name: represents the required symbolic name of the Relationship Type being declared as a string.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadRelationshipType
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadRelationshipType
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.7.11.2-003
+  section: 3.7.11.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `group_type_name: represents the required symbolic name of the Group Type being declared as a string.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadGroupType
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadGroupType
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.7.12.2-004
+  section: 3.7.12.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `policy_type_name: represents the required symbolic name of the Policy Type being declared as a string.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadPolicyType
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadPolicyType
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.8.3.1-001
+  section: 3.8.3.1
+  section_title: Keynames
+  requirement_summary: 'For `type`: The required name of the Node Type the Node Template is based upon.'
+  current_implementation_status: implemented
+  current_verification_status: verified
+  reader_entity: tosca_v1_3.ReadNodeTemplate
+  reader_field: type
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadNodeTemplate
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps: []
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.8.3.2-003
+  section: 3.8.3.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `node_template_name: represents the required symbolic name of the Node Template being declared.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadNodeTemplate
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadNodeTemplate
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.8.4.1-001
+  section: 3.8.4.1
+  section_title: Keynames
+  requirement_summary: 'For `type`: The required name of the Relationship Type the Relationship Template is based upon.'
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v2_0.ReadRelationshipTemplate
+  reader_field: type
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadRelationshipTemplate
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.8.4.2-003
+  section: 3.8.4.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `relationship_template_name: represents the required symbolic name of the Relationship Template being declared.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadRelationshipTemplate
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadRelationshipTemplate
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.8.5.1-001
+  section: 3.8.5.1
+  section_title: Keynames
+  requirement_summary: 'For `type`: The required name of the group type the group definition is based upon.'
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v2_0.ReadGroup
+  reader_field: type
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadGroup
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.8.5.2-003
+  section: 3.8.5.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `group_name: represents the required symbolic name of the group as a string.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadGroup
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadGroup
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.8.5.2-007
+  section: 3.8.5.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `list_of_node_templates: contains the required list of one or more node template names (within the same topology template) that are
+    members of this logical group.`.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadGroup
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadGroup
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Construct is recognized; requiredness/cardinality validation is incomplete.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.8.6.1-001
+  section: 3.8.6.1
+  section_title: Keynames
+  requirement_summary: 'For `type`: The required name of the policy type the policy definition is based upon.'
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v2_0.ReadPolicy
+  reader_field: type
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadPolicy
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.8.6.1-003
+  section: 3.8.6.1
+  section_title: Keynames
+  requirement_summary: The `type` entry is required.
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadPolicy
+  reader_field: type
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadPolicy
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Construct is represented, but the complete requirement-specific validation is absent.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.8.6.2-003
+  section: 3.8.6.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `policy_name: represents the required symbolic name of the policy as a string.`.'
+  current_implementation_status: implemented
+  current_verification_status: untested
+  reader_entity: tosca_v2_0.ReadPolicy
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v2_0.ReadPolicy
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.8.13.1-001
+  section: 3.8.13.1
+  section_title: Keynames
+  requirement_summary: 'For `node_type`: The required name of the Node Type the Topology Template is providing an implementation for.'
+  current_implementation_status: implemented
+  current_verification_status: indirectly-tested
+  reader_entity: tosca_v1_3.ReadSubstitutionMappings
+  reader_field: node_type
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadSubstitutionMappings
+  - tosca_v2_0.SubstitutionMappings.Render
+  - tosca_v2_0.SubstitutionMappings.renderCapabilityMappings
+  - tosca_v2_0.SubstitutionMappings.renderRequirementMappings
+  gaps:
+  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.8.13.1-003
+  section: 3.8.13.1
+  section_title: Keynames
+  requirement_summary: The `node_type` entry is required.
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadSubstitutionMappings
+  reader_field: node_type
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadSubstitutionMappings
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Construct is represented, but the complete requirement-specific validation is absent.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.8.13.2-004
+  section: 3.8.13.2
+  section_title: Grammar
+  requirement_summary: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have the following meaning`
+    includes `node_type_name: represents the required Node Type name that the Service Template’s topology is offering an implementation for.`.'
+  current_implementation_status: partial
+  current_verification_status: untested
+  reader_entity: tosca_v1_3.ReadSubstitutionMappings
+  reader_field: null
+  parser_phase: read
+  implementation_symbols:
+  - tosca_v1_3.ReadSubstitutionMappings
+  - tosca_v1_3.Grammar
+  - parsing.Context.ReadFields
+  - parsing.ValidateRequiredFields
+  - parsing.Context.ValidateUnsupportedFields
+  gaps:
+  - Construct is represented, but the complete requirement-specific validation is absent.
+  - Verification status is untested; no requirement-isolating direct test proves conformance.
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true
+- requirement_id: TOSCA13-3.10.1-002
+  section: 3.10.1
+  section_title: Keynames
+  requirement_summary: The `tosca_definitions_version` entry is required.
+  current_implementation_status: implemented
+  current_verification_status: verified
+  reader_entity: parsing.Context.Read
+  reader_field: tosca_definitions_version
+  parser_phase: read
+  implementation_symbols:
+  - grammars.DetectGrammar
+  - parsing.Context.Read
+  - tosca_v1_3.ReadServiceFile
+  gaps: []
+  planned_tests: *id001
+  implementation:
+    entry_point: parser.Context.ReadRoot
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    symbols:
+    - concrete TOSCA 1.3 entity reader
+    - parsing.Context.ReadFields
+    - parsing.Context.ValidateType
+    - parsing.Context.ValidateUnsupportedFields
+    - parsing.ValidateRequiredFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.ReadServiceFile
+    - ConcreteEntity.Read
+    - ConcreteField.Read
+    - parsing.Context.ReadFields
+    - StructuralValidation
+  implementation_status: implemented
+  verification_status: verified
+  final_gaps: []
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the traced generic and TOSCA 1.3-specific structural validation paths; linked focused tests failed as expected.
+    affected_tests: *id002
+    expected_tests_failed: true
+    production_diff_restored: true

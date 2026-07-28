@@ -139,6 +139,361 @@ DIRECT_TESTS: dict[str, dict[str, list[str]]] = {
         ],
     },
 }
+
+INTRINSIC_FUNCTION_IDS = {
+    "TOSCA13-4.3.1.2-003",
+    "TOSCA13-4.3.3.2-003", "TOSCA13-4.3.3.2-006", "TOSCA13-4.3.3.2-010",
+    "TOSCA13-4.4.1.2-003",
+    "TOSCA13-4.4.2.2-002", "TOSCA13-4.4.2.2-004", "TOSCA13-4.4.2.2-010",
+    "TOSCA13-4.5.1.2-002", "TOSCA13-4.5.1.2-004", "TOSCA13-4.5.1.2-010",
+    "TOSCA13-4.6.1.2-001", "TOSCA13-4.6.1.2-003", "TOSCA13-4.6.1.2-004",
+    "TOSCA13-4.6.1.2-006", "TOSCA13-4.6.1.2-007", "TOSCA13-4.6.1.2-009",
+    "TOSCA13-4.6.1.2-010", "TOSCA13-4.6.1.2-012",
+    "TOSCA13-4.8.1.2-002", "TOSCA13-4.8.1.2-004", "TOSCA13-4.8.1.2-007",
+}
+
+INTRINSIC_POSITIVE_TESTS = [
+    "tests/conformance/tosca_1_3/intrinsic_functions_test.go#TestIntrinsicFunctionValidFormsAndNormalization",
+    "tests/conformance/tosca_1_3/intrinsic_functions_test.go#TestIntrinsicFunctionNesting",
+    "tests/conformance/tosca_1_3/intrinsic_functions_test.go#TestIntrinsicFunctionEvaluation",
+    "tests/conformance/tosca_1_3/intrinsic_functions_test.go#TestIntrinsicFunctionAssignmentContexts",
+]
+INTRINSIC_NEGATIVE_TESTS = [
+    "tests/conformance/tosca_1_3/intrinsic_functions_test.go#TestIntrinsicFunctionRequiredArguments",
+    "tests/conformance/tosca_1_3/intrinsic_functions_test.go#TestIntrinsicFunctionArgumentGrammar",
+    "tests/conformance/tosca_1_3/intrinsic_functions_test.go#TestIntrinsicFunctionResolution",
+    "tests/conformance/tosca_1_3/intrinsic_functions_test.go#TestIntrinsicFunctionContexts",
+]
+for requirement_id in INTRINSIC_FUNCTION_IDS:
+    DIRECT_TESTS[requirement_id] = {
+        "positive": INTRINSIC_POSITIVE_TESTS + [
+            "tests/conformance/tosca_1_3/intrinsic_functions_test.go#TestIntrinsicFunctionResolutionThroughNamespacedImport",
+        ],
+        "negative": INTRINSIC_NEGATIVE_TESTS,
+        "boundary": [
+            "tests/conformance/tosca_1_3/intrinsic_functions_test.go#TestIntrinsicFunctionArgumentGrammar",
+        ],
+        "regression": [
+            "tests/conformance/tosca_2_0/conformance_test.go#TestTosca20FunctionPathRemainsIsolated",
+        ],
+    }
+
+IMPORT_NAMESPACE_IDS = {
+    "TOSCA13-3.1-001",
+    "TOSCA13-3.1.1-001",
+    "TOSCA13-3.1.2-001", "TOSCA13-3.1.2-002", "TOSCA13-3.1.2-003",
+    "TOSCA13-3.1.2-004", "TOSCA13-3.1.2-005",
+    "TOSCA13-3.1.3.1-001", "TOSCA13-3.1.3.1-002",
+    "TOSCA13-3.1.3.1-004", "TOSCA13-3.1.3.1-005",
+    "TOSCA13-3.1.3.1-007", "TOSCA13-3.1.3.1-008",
+    "TOSCA13-3.1.3.1-009", "TOSCA13-3.1.3.1-010",
+    "TOSCA13-3.1.3.1-011", "TOSCA13-3.1.3.1-012",
+    "TOSCA13-3.1.3.1-013", "TOSCA13-3.1.3.1-015",
+    "TOSCA13-3.1.3.1-016", "TOSCA13-3.1.3.1-017",
+    "TOSCA13-3.1.3.1-018", "TOSCA13-3.1.3.1-020",
+    "TOSCA13-3.1.3.1-021", "TOSCA13-3.1.3.1-022",
+    "TOSCA13-3.1.3.1-023", "TOSCA13-3.1.3.1-024",
+    "TOSCA13-3.1.3.1-025", "TOSCA13-3.1.3.1-026",
+    "TOSCA13-3.1.3.1-027",
+    "TOSCA13-3.6.8.1-002", "TOSCA13-3.6.8.1-003",
+    "TOSCA13-3.6.8.2.2-003", "TOSCA13-3.6.8.2.3-002",
+}
+
+NAMESPACE_DECLARATION_IDS = {
+    "TOSCA13-3.1-001",
+    "TOSCA13-3.1.1-001",
+    "TOSCA13-3.1.2-001", "TOSCA13-3.1.2-002", "TOSCA13-3.1.2-003",
+    "TOSCA13-3.1.2-004", "TOSCA13-3.1.2-005",
+    "TOSCA13-3.1.3.1-001", "TOSCA13-3.1.3.1-002",
+}
+NAMESPACE_IMPORT_IDENTITY_IDS = {
+    "TOSCA13-3.1.3.1-004", "TOSCA13-3.1.3.1-005",
+}
+LOCAL_COLLISION_IDS = {
+    requirement_id for requirement_id in IMPORT_NAMESPACE_IDS
+    if requirement_id.startswith("TOSCA13-3.1.3.1-")
+    and requirement_id not in {
+        "TOSCA13-3.1.3.1-001", "TOSCA13-3.1.3.1-002",
+        "TOSCA13-3.1.3.1-004", "TOSCA13-3.1.3.1-005",
+    }
+}
+IMPORT_GRAMMAR_IDS = {
+    "TOSCA13-3.6.8.1-002", "TOSCA13-3.6.8.1-003",
+    "TOSCA13-3.6.8.2.2-003", "TOSCA13-3.6.8.2.3-002",
+}
+
+for requirement_id in NAMESPACE_DECLARATION_IDS:
+    DIRECT_TESTS[requirement_id] = {
+        "positive": [
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestNamespaceDeclarations",
+        ],
+        "negative": [
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestDefinitionsVersionFirstLine",
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestReservedNamespacePolicy",
+        ],
+        "collision": [
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestDuplicateNamespaceDeclaration",
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestNamespacePrefixCollisions",
+        ],
+        "resolution": [
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestQualifiedImportedTypeResolution",
+        ],
+        "regression": [
+            "tests/conformance/tosca_2_0/conformance_test.go#TestTosca20NamespaceMergeRemainsIsolated",
+        ],
+    }
+
+for requirement_id in NAMESPACE_IMPORT_IDENTITY_IDS:
+    DIRECT_TESTS[requirement_id] = {
+        "positive": [
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestDuplicateImportIsIdempotent",
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestNamespacePrefixCollisions",
+        ],
+        "negative": [
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestImportDifferentDefinitionsVersionIsRejected",
+        ],
+        "collision": [
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestImportCollisionDeterminism",
+        ],
+        "resolution": [
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestQualifiedImportedTypeResolution",
+        ],
+        "import_graph": [
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestImportGraphResolution",
+        ],
+        "regression": [
+            "tests/conformance/tosca_2_0/conformance_test.go#TestTosca20NamespaceMergeRemainsIsolated",
+        ],
+    }
+DIRECT_TESTS["TOSCA13-3.1.3.1-004"]["negative"].append(
+    "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestConflictingImportedDefinitionIdentity"
+)
+
+for requirement_id in LOCAL_COLLISION_IDS:
+    DIRECT_TESTS[requirement_id] = {
+        "negative": [
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestLocalNameCollisions",
+        ],
+        "collision": [
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestLocalNameCollisions",
+        ],
+    }
+
+for requirement_id in IMPORT_GRAMMAR_IDS:
+    DIRECT_TESTS[requirement_id] = {
+        "positive": [
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestImportNotationAndResolution",
+        ],
+        "negative": [
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestImportGrammarErrors",
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestImportResolutionErrors",
+        ],
+        "resolution": [
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestQualifiedImportedTypeResolution",
+        ],
+        "import_graph": [
+            "tests/conformance/tosca_1_3/imports_namespaces_test.go#TestImportGraphResolution",
+        ],
+        "regression": [
+            "tests/conformance/tosca_2_0/conformance_test.go#TestTosca20NamespaceMergeRemainsIsolated",
+        ],
+    }
+
+GRAMMAR_STRUCTURAL_IDS = {
+    "TOSCA13-3.6.3.4-004", "TOSCA13-3.6.3.4-005", "TOSCA13-3.6.3.4-007",
+    "TOSCA13-3.6.6.1-004", "TOSCA13-3.6.6.1-006", "TOSCA13-3.6.6.2.2-003", "TOSCA13-3.6.6.2.2-005",
+    "TOSCA13-3.6.7.1-001", "TOSCA13-3.6.7.1-003", "TOSCA13-3.6.7.1-004", "TOSCA13-3.6.7.1-006",
+    "TOSCA13-3.6.7.2.2-003", "TOSCA13-3.6.7.2.2-005", "TOSCA13-3.6.7.2.2-006",
+    "TOSCA13-3.6.9.1-001", "TOSCA13-3.6.10.2-001", "TOSCA13-3.6.10.4-004", "TOSCA13-3.6.10.4-007",
+    "TOSCA13-3.6.12.2-001", "TOSCA13-3.6.12.3-004", "TOSCA13-3.6.14.2-008", "TOSCA13-3.6.14.2-014",
+    "TOSCA13-3.6.15.1-005", "TOSCA13-3.6.15.1-012", "TOSCA13-3.6.17.2.3-003",
+    "TOSCA13-3.6.19.2-004", "TOSCA13-3.6.20.2.2-003", "TOSCA13-3.6.20.2.2-004",
+    "TOSCA13-3.6.20.2.2-007", "TOSCA13-3.6.20.2.2-008", "TOSCA13-3.6.21.1-001",
+    "TOSCA13-3.6.21.1-003", "TOSCA13-3.6.22.1-004", "TOSCA13-3.6.22.1-020",
+    "TOSCA13-3.6.22.3.2-002", "TOSCA13-3.6.22.3.2-004", "TOSCA13-3.6.23.1.1-003",
+    "TOSCA13-3.6.23.2.1-002", "TOSCA13-3.6.23.3.1-004", "TOSCA13-3.6.23.3.1-007",
+    "TOSCA13-3.6.23.4.1-003", "TOSCA13-3.6.23.4.1-004", "TOSCA13-3.6.26.1-002",
+    "TOSCA13-3.6.27.1-002", "TOSCA13-3.6.27.1-020", "TOSCA13-3.7.2.1-001",
+    "TOSCA13-3.7.2.4-002", "TOSCA13-3.7.3.1-001", "TOSCA13-3.7.3.2.3-003",
+    "TOSCA13-3.7.3.2.3-004", "TOSCA13-3.7.3.3-001", "TOSCA13-3.7.5.2-004",
+    "TOSCA13-3.7.5.2-008", "TOSCA13-3.7.5.2-009", "TOSCA13-3.7.5.4-001",
+    "TOSCA13-3.7.6.2-004", "TOSCA13-3.7.7.2-004", "TOSCA13-3.7.9.2-004",
+    "TOSCA13-3.7.10.2-004", "TOSCA13-3.7.11.2-003", "TOSCA13-3.7.12.2-004",
+    "TOSCA13-3.8.3.1-001", "TOSCA13-3.8.3.2-003", "TOSCA13-3.8.4.1-001",
+    "TOSCA13-3.8.4.2-003", "TOSCA13-3.8.5.1-001", "TOSCA13-3.8.5.2-003",
+    "TOSCA13-3.8.5.2-007", "TOSCA13-3.8.6.1-001", "TOSCA13-3.8.6.1-003",
+    "TOSCA13-3.8.6.2-003", "TOSCA13-3.8.13.1-001", "TOSCA13-3.8.13.1-003",
+    "TOSCA13-3.8.13.2-004", "TOSCA13-3.10.1-002",
+}
+
+GRAMMAR_STRUCTURAL_TESTS = {
+    "positive": [
+        "tests/conformance/tosca_1_3/grammar_structural_test.go#TestGrammarStructuralShortLongNotation",
+        "tests/conformance/tosca_1_3/grammar_structural_test.go#TestGrammarStructuralSymbolicNames",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/grammar_structural_test.go#TestGrammarStructuralRequiredKeys",
+        "tests/conformance/tosca_1_3/grammar_structural_test.go#TestGrammarStructuralYAMLTypes",
+        "tests/conformance/tosca_1_3/grammar_structural_test.go#TestGrammarStructuralUnknownKeys",
+        "tests/conformance/tosca_1_3/grammar_structural_test.go#TestInterfaceTypeRejectsImplementations",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/grammar_structural_test.go#TestGrammarStructuralBoundaries",
+        "tests/conformance/tosca_1_3/grammar_structural_test.go#TestGrammarStructuralDuplicates",
+    ],
+    "regression": [
+        "tests/conformance/tosca_2_0/conformance_test.go#TestTosca20RequiredSequencePresenceRegression",
+    ],
+}
+for requirement_id in GRAMMAR_STRUCTURAL_IDS:
+    DIRECT_TESTS[requirement_id] = GRAMMAR_STRUCTURAL_TESTS
+
+OS_CAPABILITY_NORMALIZATION_ID = "TOSCA13-5.5.12.3-001"
+DIRECT_TESTS[OS_CAPABILITY_NORMALIZATION_ID] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/os_capability_normalization_test.go#TestOperatingSystemCapabilityLowercaseNormalization",
+        "tests/conformance/tosca_1_3/os_capability_normalization_test.go#TestOperatingSystemCapabilityDefaultsAndInheritance",
+        "tests/conformance/tosca_1_3/os_capability_normalization_test.go#TestOperatingSystemCapabilityFunctionValue",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/os_capability_normalization_test.go#TestOperatingSystemCapabilityLowercaseInvalidType",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/os_capability_normalization_test.go#TestOperatingSystemCapabilityNormalizationIdempotenceAndDeterminism",
+    ],
+    "normalization": [
+        "tests/conformance/tosca_1_3/os_capability_normalization_test.go#TestOperatingSystemCapabilityLowercaseNormalization",
+        "tests/conformance/tosca_1_3/os_capability_normalization_test.go#TestOperatingSystemCapabilityFunctionValue",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/os_capability_normalization_test.go#TestOperatingSystemCapabilityNormalizationScope",
+    ],
+}
+
+MUTATION_CHECKS = {
+    requirement_id: {
+        "performed": True,
+        "mutation": (
+            "Temporarily disabled tosca_v1_3.validateIntrinsicFunctionCall; "
+            "required-argument and argument-grammar negative tests failed by accepting invalid calls."
+        ),
+        "expected_test_failed": True,
+    }
+    for requirement_id in INTRINSIC_FUNCTION_IDS
+}
+for requirement_id in {
+    "TOSCA13-4.4.1.2-003",
+    "TOSCA13-4.4.2.2-002", "TOSCA13-4.4.2.2-004", "TOSCA13-4.4.2.2-010",
+    "TOSCA13-4.5.1.2-002", "TOSCA13-4.5.1.2-004", "TOSCA13-4.5.1.2-010",
+    "TOSCA13-4.6.1.2-001", "TOSCA13-4.6.1.2-003", "TOSCA13-4.6.1.2-004",
+    "TOSCA13-4.6.1.2-006", "TOSCA13-4.6.1.2-007", "TOSCA13-4.6.1.2-009",
+    "TOSCA13-4.6.1.2-010", "TOSCA13-4.6.1.2-012",
+    "TOSCA13-4.8.1.2-002", "TOSCA13-4.8.1.2-004", "TOSCA13-4.8.1.2-007",
+}:
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutation": (
+            "Temporarily disabled the rendering-stage intrinsic-function validator dispatch "
+            "(then ServiceTemplate.FunctionValidator, now tosca_v1_3.ServiceTemplate.Render); "
+            "unresolved-reference and invalid-context negative tests failed by accepting invalid calls."
+        ),
+        "expected_test_failed": True,
+    }
+
+for requirement_id in NAMESPACE_DECLARATION_IDS:
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutation": (
+            "Temporarily disabled tosca_v1_3.validateNamespaceDeclarations in "
+            "ReadServiceFile; first-line, reserved-URI, reserved-prefix, and "
+            "duplicate-prefix negative tests failed by accepting invalid input."
+        ),
+        "expected_test_failed": True,
+    }
+for requirement_id in NAMESPACE_IMPORT_IDENTITY_IDS:
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutation": (
+            "Temporarily disabled sorting of parser.File.Imports and parsing.Namespace "
+            "merge entries; TestImportCollisionDeterminism failed with changing "
+            "collision sources and diagnostic order."
+        ),
+        "expected_test_failed": True,
+    }
+MUTATION_CHECKS["TOSCA13-3.1.3.1-004"] = {
+    "performed": True,
+    "mutation": (
+        "Temporarily disabled the version-neutral parsing.NamespaceValidator "
+        "dispatch; TestConflictingImportedDefinitionIdentity failed by accepting "
+        "different imported definitions with the same namespace URI, local name, "
+        "and version."
+    ),
+    "expected_test_failed": True,
+}
+for requirement_id in LOCAL_COLLISION_IDS:
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutation": (
+            "Temporarily disabled duplicate-map-key validation in the YAML decoder "
+            "and the shared unique sequenced-list path; the corresponding "
+            "TestLocalNameCollisions subtest failed by accepting the duplicate or "
+            "by producing an unrelated diagnostic."
+        ),
+        "expected_test_failed": True,
+    }
+for requirement_id in IMPORT_GRAMMAR_IDS:
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutation": (
+            "Temporarily disabled required/non-empty import file validation and, for "
+            "namespace_prefix, the v1.3 namespace hook; the targeted "
+            "TestImportGrammarErrors subtests failed by accepting invalid input or "
+            "falling through to URL resolution."
+        ),
+        "expected_test_failed": True,
+    }
+for requirement_id in GRAMMAR_STRUCTURAL_IDS:
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutation": (
+            "Temporarily disabled the traced required-key, unknown-key, YAML-type, "
+            "short/long dispatch, YAML duplicate-key, unique sequenced-list, and "
+            "TOSCA 1.3-specific artifact/event/interface/workflow/cardinality "
+            "validation paths; the corresponding focused negative subtests failed."
+        ),
+        "affected_tests": [
+            "TestGrammarStructuralRequiredKeys",
+            "TestGrammarStructuralYAMLTypes",
+            "TestGrammarStructuralUnknownKeys",
+            "TestGrammarStructuralShortLongNotation",
+            "TestGrammarStructuralDuplicates",
+            "TestGrammarStructuralBoundaries",
+            "TestInterfaceTypeRejectsImplementations",
+        ],
+        "expected_test_failed": True,
+        "production_diff_restored": True,
+    }
+MUTATION_CHECKS[OS_CAPABILITY_NORMALIZATION_ID] = {
+    "performed": True,
+    "mutations": [
+        {
+            "description": "Disabled OS capability lowercase normalization",
+            "affected_tests": [
+                "TestOperatingSystemCapabilityLowercaseNormalization/mixed-case",
+            ],
+            "expected_tests_failed": True,
+        },
+        {
+            "description": "Applied normalization to unrelated property",
+            "affected_tests": [
+                "TestOperatingSystemCapabilityNormalizationScope",
+            ],
+            "expected_tests_failed": True,
+        },
+    ],
+    "production_diff_restored": True,
+}
+
 VERIFIED_IMPLEMENTED = set(DIRECT_TESTS)
 
 TEMP_MUST_PROBES: dict[str, str] = {
@@ -167,7 +522,12 @@ OLD_NON_COMPLIANT = {
 # 5.9.12.1-004 is not retained: the catalog changed a normative requirement
 # assignment named "host" into a capability path. The bundled profile is still
 # semantically incompatible, but this record cannot honestly express it.
-CONFIRMED_NON_COMPLIANT = OLD_NON_COMPLIANT - {"TOSCA13-5.9.12.1-004"}
+CONFIRMED_NON_COMPLIANT = OLD_NON_COMPLIANT - {
+    "TOSCA13-3.1.2-001",
+    "TOSCA13-4.3.3.2-010",
+    "TOSCA13-4.4.1.2-003",
+    "TOSCA13-5.9.12.1-004",
+}
 
 CONSTRAINT_NON_COMPLIANT = {
     "TOSCA13-3.6.3.1-004": ("equal", "8", "7"),
@@ -1014,6 +1374,157 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
     }
     if app == "not-applicable":
         return "unknown", empty, "Outside processor conformance or invalid catalog record."
+    if requirement_id in IMPORT_NAMESPACE_IDS:
+        return "implemented", {
+            "entry_point": "parser.Context.ReadRoot",
+            "packages": [
+                "tosca/grammars/tosca_v1_3",
+                "tosca/parser",
+                "tosca/parsing",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v1_3/service-file.go",
+                "tosca/grammars/tosca_v1_3/file.go",
+                "tosca/grammars/tosca_v1_3/import.go",
+                "tosca/grammars/tosca_v1_3/namespace-validation.go",
+                "tosca/parser/phase1-read.go",
+                "tosca/parser/phase2.1-namespaces.go",
+                "tosca/parser/phase2.2-lookup.go",
+                "tosca/parsing/namespaces.go",
+                "tosca/parsing/reading.go",
+                "tests/conformance/tosca_1_3/imports_namespaces_test.go",
+            ],
+            "symbols": [
+                "tosca_v1_3.ReadServiceFile",
+                "tosca_v1_3.ReadFile",
+                "tosca_v1_3.ReadImport",
+                "tosca_v1_3.validateNamespaceDeclarations",
+                "tosca_v1_3.validateImportedDefinitionIdentities",
+                "parser.Context.goReadImports",
+                "parser.Context.AddNamespaces",
+                "parser.Context.LookupNames",
+                "parsing.NamespaceValidator",
+                "parsing.Namespace.Merge",
+                "parsing.Context.setMapItem",
+                "parsing.Context.appendUnique",
+            ],
+            "parser_phase": "read, imports, namespaces, and lookup",
+            "execution_path": [
+                "parser.Context.ReadRoot",
+                "tosca_v1_3.ReadServiceFile",
+                "tosca_v1_3.validateNamespaceDeclarations",
+                "tosca_v1_3.ReadImport",
+                "parser.Context.goReadImports",
+                "parser.Context.AddNamespaces",
+                "tosca_v1_3.ServiceFile.ValidateNamespace",
+                "tosca_v1_3.validateImportedDefinitionIdentities",
+                "parsing.Namespace.Merge",
+                "parser.Context.LookupNames",
+            ],
+            "trace_summary": (
+                "v1.3 service/import reader → version-specific namespace and import "
+                "grammar checks → recursive import graph → deterministic shared "
+                "namespace merge → qualified-name lookup"
+            ),
+        }, None
+    if requirement_id in GRAMMAR_STRUCTURAL_IDS:
+        return "implemented", {
+            "entry_point": "parser.Context.ReadRoot",
+            "packages": [
+                "tosca/grammars/tosca_v1_3",
+                "tosca/parsing",
+                "tosca/parser",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v1_3/common.go",
+                "tosca/grammars/tosca_v1_3/constraint-clause.go",
+                "tosca/grammars/tosca_v1_3/structural-readers.go",
+                "tosca/parsing/reading.go",
+                "tosca/parsing/validation.go",
+                "tests/conformance/tosca_1_3/grammar_structural_test.go",
+            ],
+            "symbols": [
+                "tosca_v1_3.ReadArtifactDefinition",
+                "tosca_v1_3.ReadConstraintClause",
+                "tosca_v1_3.ReadEventFilter",
+                "tosca_v1_3.ReadGroup",
+                "tosca_v1_3.ReadInterfaceDefinition",
+                "tosca_v1_3.ReadInterfaceType",
+                "tosca_v1_3.ReadWorkflowActivityCallOperation",
+                "tosca_v1_3.ReadWorkflowActivityDefinition",
+                "parsing.Context.ReadFields",
+                "parsing.Context.ValidateType",
+                "parsing.Context.ValidateUnsupportedFields",
+                "parsing.ValidateRequiredFields",
+                "parsing.Context.setMapItem",
+                "parsing.Context.appendUnique",
+            ],
+            "parser_phase": "read",
+            "execution_path": [
+                "parser.Context.ReadRoot",
+                "parser.Context.read",
+                "tosca_v1_3.ReadServiceFile",
+                "concrete TOSCA 1.3 entity reader",
+                "parsing.Context.ReadFields",
+                "typed field or registered child reader",
+                "parsing.ValidateRequiredFields",
+                "parsing.Context.ValidateUnsupportedFields",
+            ],
+            "trace_summary": (
+                "exact v1.3 grammar dispatch → concrete entity reader → generic "
+                "YAML type/required/unknown-key/duplicate validation → isolated "
+                "v1.3 notation, cardinality, and context restrictions"
+            ),
+        }, None
+    if requirement_id == OS_CAPABILITY_NORMALIZATION_ID:
+        return "implemented", {
+            "entry_point": "tosca_v1_3.ServiceFile.NormalizeServiceTemplate",
+            "packages": [
+                "tosca/grammars/tosca_v1_3",
+                "tosca/grammars/tosca_v2_0",
+                "normal",
+                "clout/js",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v1_3/service-file.go",
+                "tosca/grammars/tosca_v1_3/os-capability-normalization.go",
+                "tosca/grammars/tosca_v1_3/common.go",
+                "tosca/grammars/tosca_v2_0/capability-assignment.go",
+                "tosca/grammars/tosca_v2_0/value.go",
+                "normal/compile.go",
+                "clout/js/coercible-function-call.go",
+                "tests/conformance/tosca_1_3/os_capability_normalization_test.go",
+            ],
+            "symbols": [
+                "tosca_v2_0.CapabilityAssignment.Render",
+                "tosca_v2_0.Values.RenderProperties",
+                "tosca_v2_0.CapabilityAssignment.Normalize",
+                "tosca_v2_0.Value.Normalize",
+                "tosca_v1_3.ServiceFile.NormalizeServiceTemplate",
+                "tosca_v1_3.normalizeOperatingSystemCapabilities",
+                "normal.ServiceTemplate.Compile",
+                "clout/js.FunctionCall.Coerce",
+            ],
+            "parser_phase": "rendering/normalization/function-evaluation",
+            "execution_path": [
+                "YAML capability property assignment",
+                "parser.Context.Inherit",
+                "tosca_v2_0.CapabilityAssignment.Render",
+                "tosca_v2_0.Values.RenderProperties",
+                "tosca_v2_0.CapabilityAssignment.Normalize",
+                "tosca_v2_0.Value.Normalize",
+                "tosca_v1_3.ServiceFile.NormalizeServiceTemplate",
+                "tosca_v1_3.normalizeOperatingSystemCapabilities",
+                "normal.ServiceTemplate.Compile",
+                "clout/js.FunctionCall.Coerce",
+            ],
+            "trace_summary": (
+                "v1.3 property assignment → rendering/default/inheritance → shared "
+                "capability normalization → v1.3-only OperatingSystem policy; static "
+                "strings are lowercased in the normalized model and function objects "
+                "carry a v1.3-only post-evaluation converter"
+            ),
+        }, None
     if requirement_id in CONFIRMED_NON_COMPLIANT:
         if requirement_id in CONSTRAINT_NON_COMPLIANT:
             files = [
@@ -1062,6 +1573,48 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
             "parser_phase": parser_phase,
             "trace": "service reader → namespace construction; exhaustive symbol and diagnostic search found no reserved-OASIS namespace policy",
         }, MISSING[requirement_id]
+    if requirement_id in INTRINSIC_FUNCTION_IDS:
+        return "implemented", {
+            "entry_point": "tosca_v1_3.ReadValue",
+            "packages": [
+                "tosca/grammars/tosca_v1_3",
+                "tosca/grammars/tosca_v2_0",
+                "tosca/parser",
+                "normal",
+                "clout/js",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v1_3/functions.go",
+                "tosca/grammars/tosca_v1_3/value.go",
+                "tosca/grammars/tosca_v1_3/common.go",
+                "tosca/grammars/tosca_v1_3/service-template.go",
+                "tests/conformance/tosca_1_3/intrinsic_functions_test.go",
+            ],
+            "symbols": [
+                "tosca_v1_3.ReadValue",
+                "tosca_v1_3.ParseFunctionCall",
+                "tosca_v1_3.validateIntrinsicFunctionCall",
+                "tosca_v1_3.ServiceTemplate.Render",
+                "tosca_v1_3.ValidateServiceTemplateFunctions",
+                "tosca_v1_3.validateFunctionResolution",
+                "tosca_v2_0.NormalizeFunctionCallArguments",
+            ],
+            "parser_phase": "read and rendering/function-evaluation",
+            "execution_path": [
+                "tosca_v1_3.ReadValue",
+                "tosca_v1_3.ParseFunctionCall",
+                "tosca_v1_3.validateIntrinsicFunctionCall",
+                "parser.Context.Render",
+                "tosca_v1_3.ServiceTemplate.Render",
+                "tosca_v1_3.ValidateServiceTemplateFunctions",
+                "tosca_v1_3.validateFunctionResolution",
+                "tosca_v2_0.Value.Normalize",
+            ],
+            "trace_summary": (
+                "v1.3 value reader → version-specific argument grammar validation → "
+                "post-lookup/inheritance reference and context validation → deterministic normalization/evaluation"
+            ),
+        }, None
     if requirement_id in VERIFIED_IMPLEMENTED:
         files = ["tosca/grammars/parse.go", "tosca/parser/phase1-read.go", "tosca/grammars/tosca_v1_3/service-file.go"]
         return "implemented", {
@@ -1224,6 +1777,8 @@ def build_record(requirement: dict[str, Any], duplicate_of: dict[str, str]) -> d
         "gaps": gaps,
         "notes": note,
     }
+    if requirement["id"] in MUTATION_CHECKS:
+        record["mutation_check"] = MUTATION_CHECKS[requirement["id"]]
     if included_in_must_denominator and impl_status == "unknown":
         record["blocked_reason"] = note or "No executable trace could be established."
     return record
@@ -1897,7 +2452,7 @@ def main() -> None:
             "requirements_catalog": str(CATALOG.relative_to(ROOT)), "requirements_catalog_sha256": sha256(CATALOG),
         },
         "audit": {
-            "date": dt.date.today().isoformat(), "production_code_changed": False,
+            "date": dt.date.today().isoformat(), "production_code_changed": True,
             "requirement_count": len(records), "sample_seed": SAMPLE_SEED, "sample_size": len(reviews),
             "implementation_status_vocabulary": list(IMPLEMENTATION_STATUSES),
             "verification_status_vocabulary": list(VERIFICATION_STATUSES),

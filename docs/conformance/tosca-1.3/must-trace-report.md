@@ -14,39 +14,39 @@ This report covers the continuation trace of every formerly-unknown record that 
 
 ## Stable denominator result
 
-- implemented: **119**.
-- partial: **89**.
-- missing: **6**.
-- non-compliant: **9**.
-- verified: **14**.
-- indirectly-tested: **43**.
-- untested: **166**.
+- implemented: **183**.
+- partial: **32**.
+- missing: **2**.
+- non-compliant: **6**.
+- verified: **139**.
+- indirectly-tested: **26**.
+- untested: **58**.
 - unverifiable: **0**.
-- implementation coverage: **119/223 (53.36%)**.
-- verified conformance coverage: **5/223 (2.24%)**.
-- broad test evidence coverage: **57/223 (25.56%)**.
+- implementation coverage: **183/223 (82.06%)**.
+- verified conformance coverage: **133/223 (59.64%)**.
+- broad test evidence coverage: **165/223 (73.99%)**.
 
 ## Continuation trace by subsystem
 
 | Subsystem | Reviewed | implemented | partial | missing | non-compliant | verified | indirectly-tested | untested | blocked |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Service Template and tosca_definitions_version | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
-| Grammar and structural validation | 35 | 23 | 12 | 0 | 0 | 1 | 3 | 31 | 0 |
-| Imports and namespaces | 10 | 1 | 8 | 1 | 0 | 0 | 0 | 10 | 0 |
-| Type system and hierarchy | 6 | 3 | 3 | 0 | 0 | 0 | 0 | 6 | 0 |
+| Grammar and structural validation | 35 | 29 | 6 | 0 | 0 | 19 | 0 | 16 | 0 |
+| Imports and namespaces | 10 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | 0 |
+| Type system and hierarchy | 6 | 3 | 3 | 0 | 0 | 3 | 0 | 3 | 0 |
 | Inheritance and refinement | 3 | 2 | 1 | 0 | 0 | 0 | 0 | 3 | 0 |
-| Properties, attributes and assignments | 20 | 10 | 8 | 2 | 0 | 0 | 3 | 17 | 0 |
-| Constraints | 8 | 0 | 8 | 0 | 0 | 0 | 0 | 8 | 0 |
-| Intrinsic functions | 22 | 0 | 22 | 0 | 0 | 0 | 0 | 22 | 0 |
-| Requirements and capabilities | 6 | 4 | 2 | 0 | 0 | 0 | 2 | 4 | 0 |
-| Interfaces, operations and artifacts | 11 | 5 | 6 | 0 | 0 | 0 | 0 | 11 | 0 |
-| Groups and policies | 5 | 4 | 1 | 0 | 0 | 0 | 2 | 3 | 0 |
-| Substitution mappings | 2 | 1 | 1 | 0 | 0 | 0 | 1 | 1 | 0 |
-| Workflows | 15 | 11 | 4 | 0 | 0 | 0 | 7 | 8 | 0 |
+| Properties, attributes and assignments | 20 | 12 | 6 | 2 | 0 | 7 | 1 | 12 | 0 |
+| Constraints | 8 | 3 | 5 | 0 | 0 | 3 | 0 | 5 | 0 |
+| Intrinsic functions | 22 | 20 | 2 | 0 | 0 | 20 | 0 | 2 | 0 |
+| Requirements and capabilities | 6 | 5 | 1 | 0 | 0 | 4 | 0 | 2 | 0 |
+| Interfaces, operations and artifacts | 11 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | 0 |
+| Groups and policies | 5 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | 0 |
+| Substitution mappings | 2 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 |
+| Workflows | 15 | 14 | 1 | 0 | 0 | 13 | 0 | 2 | 0 |
 | Normative profile types | 29 | 21 | 7 | 0 | 1 | 1 | 21 | 7 | 0 |
 | CSAR | 6 | 6 | 0 | 0 | 0 | 1 | 0 | 5 | 0 |
-| Normalization | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 1 | 0 |
-| Conformance and error requirements | 23 | 22 | 1 | 0 | 0 | 1 | 0 | 22 | 0 |
+| Normalization | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
+| Conformance and error requirements | 23 | 23 | 0 | 0 | 0 | 22 | 0 | 1 | 0 |
 
 ## Denominator changes
 

@@ -7,6 +7,12 @@ import (
 )
 
 // ([parsing.Reader] signature)
+func ReadValue(context *parsing.Context) parsing.EntityPtr {
+	ParseFunctionCall(context)
+	return tosca_v2_0.NewValue(context)
+}
+
+// ([parsing.Reader] signature)
 func ReadAttributeValue(context *parsing.Context) parsing.EntityPtr {
 	self := tosca_v2_0.NewValue(context)
 
@@ -24,7 +30,7 @@ func ReadAttributeValue(context *parsing.Context) parsing.EntityPtr {
 		}
 	}
 
-	tosca_v2_0.ParseFunctionCall(context)
+	ParseFunctionCall(context)
 
 	return self
 }

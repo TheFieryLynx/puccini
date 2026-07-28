@@ -41,12 +41,14 @@ func ValidateRequiredFields(entityPtr EntityPtr) bool {
 	entity := reflect.ValueOf(entityPtr).Elem()
 	for fieldName, tag := range reflection.GetFieldTagsForValue(entity, "mandatory") {
 		field := entity.FieldByName(fieldName)
-		if reflection.IsNil(field) {
-			// Try to use the "read" tag for the problem report
-			if readTag, ok := context.getReadTagKey(entity, fieldName); ok {
-				tag = readTag
-			}
+		// Try to use the "read" tag for both presence checking and reporting.
+		if readTag, ok := context.getReadTagKey(entity, fieldName); ok {
+			tag = readTag
+		}
 
+		map_, isMap := context.Data.(ard.Map)
+		_, keyPresent := map_[tag]
+		if reflection.IsNil(field) || (isMap && !keyPresent) {
 			context.FieldChild(tag, nil).ReportKeynameMissing()
 		}
 	}
