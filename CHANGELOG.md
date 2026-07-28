@@ -11,6 +11,9 @@
   successful-selection behavior.
 * Remove the runtime grammar-registration API, non-standard dialect
   combination aliases, and legacy interface-operation permissive quirk.
+* Raise the minimum Go toolchain from 1.26.0 to 1.26.1 because the
+  `github.com/lestrrat-go/helium` v0.7.0 XML Schema compiler requires Go
+  1.26.1.
 
 ### Validation
 

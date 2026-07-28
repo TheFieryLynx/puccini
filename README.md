@@ -45,6 +45,13 @@ Get It
 
 To build Puccini yourself see the [build guide](scripts/).
 
+### Build requirements
+
+Building the current source requires Go 1.26.1 or newer. The direct
+`github.com/lestrrat-go/helium` v0.7.0 dependency used for bounded XML Schema
+1.0 compilation declares Go 1.26.1 as its minimum. The JSON Schema engine
+requires only Go 1.21; it is not the reason for the higher project minimum.
+
 
 Overview
 --------
