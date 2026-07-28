@@ -5523,8 +5523,8 @@ requirements:
   strength: SHALL
   category: constraint
   subject: additional-requirements
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -5534,50 +5534,91 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: tosca_v1_3.ReadConstraintClause
     packages:
     - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
-    - tosca/parser
+    - tosca/parsing
     files:
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/constraint-validation.go
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/property-definition.go
+    - tosca/grammars/tosca_v1_3/parameter-definition.go
+    - tosca/grammars/tosca_v1_3/data-type.go
     - tosca/grammars/tosca_v1_3/scalar-unit.go
-    - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
     - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/data-type.go
     - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/tosca_v2_0/validation-clause.go
+    - tosca/parsing/grammars.go
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go
     symbols:
     - tosca_v1_3.ReadScalarUnit
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: rendering
+    - tosca_v1_3.ReadConstraintClause
+    - tosca_v1_3.normalizeConstraintList
+    - tosca_v1_3.validateConstraintDefinition
+    - tosca_v1_3.validateConstraintValue
+    - tosca_v1_3.validateConstraintCompatibility
+    - tosca_v1_3.evaluateConstraint
+    - tosca_v1_3.collectionLength
+    - tosca_v1_3.ScalarUnit.Compare
+    - parsing.Grammar.DataDefinitionValidator
+    - parsing.Grammar.DataValueValidator
+    - tosca_v2_0.Value.RenderProperty
+    parser_phase: read, hierarchy/inheritance, and rendering
     execution_path:
-    - parser.Context.Parse
+    - tosca_v1_3.ReadConstraintClause
     - parser.Context.LookupNames
     - parser.Context.Inherit
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: ScalarUnit.Compare canonicalizes scalar and unit together, but the traced constraint path does not enforce all constraint clauses
-      on assignments.
+    - tosca_v2_0.PropertyDefinition.Render
+    - tosca_v2_0.DataType.Render
+    - tosca_v1_3.validateConstraintDefinition
+    - tosca_v2_0.Value.RenderProperty
+    - tosca_v1_3.validateConstraintValue
+    - tosca_v1_3.evaluateConstraint
+    trace_summary: TOSCA 1.3 constraint grammar and bare-equal normalization → effective datatype lookup/inheritance → version-policy definition
+      compatibility → rendered default/assignment evaluation → stable normalized validators; TOSCA 2.0 leaves both policy hooks unset
   tests:
-    positive: []
-    negative: []
-    boundary: []
-    regression: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestScalarUnitConstraintConvertsUnits
+    negative:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestScalarUnitConstraintRejectsOutOfRangeValue
+    boundary:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestScalarUnitConstraintInclusiveBoundary
+    regression:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestTosca20ConstraintBehaviorUnchanged
+    inheritance:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestInheritedScalarUnitConstraint
+    normalization:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestScalarUnitConstraintMetadataDeterministic
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Combined scalar-unit comparison exists, but constraint enforcement is incomplete.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Combined scalar-unit comparison exists, but constraint enforcement is incomplete.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the TOSCA 1.3 definition/value validator callbacks, bare-scalar conversion, exact collection-size evaluation,
+      and corrected greater-than comparison branches in separate narrow mutations.
+    affected_tests:
+    - TestBareConstraintMeansEqual
+    - TestBareConstraintRejectsDifferentValue
+    - TestLengthConstraintRejectsWrongCollectionSize
+    - TestConstraintRejectsIncompatibleOperand
+    - TestPropertyConstraintRejectsIncompatibleType
+    - TestPropertyDefaultConstraintEvaluated
+    - TestParameterConstraintRejectsIncompatibleType
+    - TestDatatypeConstraintRejectsIncompatibleParent
+    - TestInheritedDatatypeConstraint
+    - TestScalarUnitConstraintRejectsOutOfRangeValue
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.3.6.2-004
   section: 3.3.6.2
   section_title: Additional requirements
@@ -12117,8 +12158,8 @@ requirements:
   strength: SHALL
   category: constraint
   subject: additional-requirements
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -12128,58 +12169,98 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: tosca_v1_3.ReadConstraintClause
     packages:
     - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
-    - tosca/parser
+    - tosca/parsing
     files:
     - tosca/grammars/tosca_v1_3/constraint-clause.go
-    - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
+    - tosca/grammars/tosca_v1_3/constraint-validation.go
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/property-definition.go
+    - tosca/grammars/tosca_v1_3/parameter-definition.go
+    - tosca/grammars/tosca_v1_3/data-type.go
+    - tosca/grammars/tosca_v1_3/scalar-unit.go
     - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/data-type.go
     - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/tosca_v2_0/validation-clause.go
+    - tosca/parsing/grammars.go
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go
     symbols:
     - tosca_v1_3.ReadConstraintClause
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: rendering
+    - tosca_v1_3.normalizeConstraintList
+    - tosca_v1_3.validateConstraintDefinition
+    - tosca_v1_3.validateConstraintValue
+    - tosca_v1_3.validateConstraintCompatibility
+    - tosca_v1_3.evaluateConstraint
+    - tosca_v1_3.collectionLength
+    - tosca_v1_3.ScalarUnit.Compare
+    - parsing.Grammar.DataDefinitionValidator
+    - parsing.Grammar.DataValueValidator
+    - tosca_v2_0.Value.RenderProperty
+    parser_phase: read, hierarchy/inheritance, and rendering
     execution_path:
-    - parser.Context.Parse
+    - tosca_v1_3.ReadConstraintClause
     - parser.Context.LookupNames
     - parser.Context.Inherit
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: Constraint clauses are converted to generic validation calls and preserved in metadata; default-equal, set length semantics,
-      operand typing, and runtime enforcement are not all validated.
+    - tosca_v2_0.PropertyDefinition.Render
+    - tosca_v2_0.DataType.Render
+    - tosca_v1_3.validateConstraintDefinition
+    - tosca_v2_0.Value.RenderProperty
+    - tosca_v1_3.validateConstraintValue
+    - tosca_v1_3.evaluateConstraint
+    trace_summary: TOSCA 1.3 constraint grammar and bare-equal normalization → effective datatype lookup/inheritance → version-policy definition
+      compatibility → rendered default/assignment evaluation → stable normalized validators; TOSCA 2.0 leaves both policy hooks unset
   tests:
-    positive: []
-    negative: []
-    boundary: []
-    regression: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestBareConstraintMeansEqual
+    negative:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestBareConstraintRejectsDifferentValue
+    boundary:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestBareAndExplicitEqualAreEquivalent
+    regression:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestTosca20ValidationGrammarUnchanged
+    inheritance:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestInheritedBareEqualConstraint
+    normalization:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestBareEqualConstraintNormalizesDeterministically
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
-    generic_logic_applicability_explained: true
-  gaps:
-  - Constraint grammar is read but the complete TOSCA 1.3 semantics are not enforced.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Constraint grammar is read but the complete TOSCA 1.3 semantics are not enforced.
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
+    generic_logic_applicability_explained: false
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the TOSCA 1.3 definition/value validator callbacks, bare-scalar conversion, exact collection-size evaluation,
+      and corrected greater-than comparison branches in separate narrow mutations.
+    affected_tests:
+    - TestBareConstraintMeansEqual
+    - TestBareConstraintRejectsDifferentValue
+    - TestLengthConstraintRejectsWrongCollectionSize
+    - TestConstraintRejectsIncompatibleOperand
+    - TestPropertyConstraintRejectsIncompatibleType
+    - TestPropertyDefaultConstraintEvaluated
+    - TestParameterConstraintRejectsIncompatibleType
+    - TestDatatypeConstraintRejectsIncompatibleParent
+    - TestInheritedDatatypeConstraint
+    - TestScalarUnitConstraintRejectsOutOfRangeValue
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.6.3.3-002
   section: 3.6.3.3
   section_title: Additional Requirements
   strength: SHALL
   category: semantic
   subject: additional-requirements
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -12189,58 +12270,96 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: tosca_v1_3.ReadConstraintClause
     packages:
     - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
-    - tosca/parser
+    - tosca/parsing
     files:
     - tosca/grammars/tosca_v1_3/constraint-clause.go
-    - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
+    - tosca/grammars/tosca_v1_3/constraint-validation.go
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/property-definition.go
+    - tosca/grammars/tosca_v1_3/parameter-definition.go
+    - tosca/grammars/tosca_v1_3/data-type.go
+    - tosca/grammars/tosca_v1_3/scalar-unit.go
     - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/data-type.go
     - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/tosca_v2_0/validation-clause.go
+    - tosca/parsing/grammars.go
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go
     symbols:
     - tosca_v1_3.ReadConstraintClause
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: rendering
+    - tosca_v1_3.normalizeConstraintList
+    - tosca_v1_3.validateConstraintDefinition
+    - tosca_v1_3.validateConstraintValue
+    - tosca_v1_3.validateConstraintCompatibility
+    - tosca_v1_3.evaluateConstraint
+    - tosca_v1_3.collectionLength
+    - tosca_v1_3.ScalarUnit.Compare
+    - parsing.Grammar.DataDefinitionValidator
+    - parsing.Grammar.DataValueValidator
+    - tosca_v2_0.Value.RenderProperty
+    parser_phase: read, hierarchy/inheritance, and rendering
     execution_path:
-    - parser.Context.Parse
+    - tosca_v1_3.ReadConstraintClause
     - parser.Context.LookupNames
     - parser.Context.Inherit
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: Constraint clauses are converted to generic validation calls and preserved in metadata; default-equal, set length semantics,
-      operand typing, and runtime enforcement are not all validated.
+    - tosca_v2_0.PropertyDefinition.Render
+    - tosca_v2_0.DataType.Render
+    - tosca_v1_3.validateConstraintDefinition
+    - tosca_v2_0.Value.RenderProperty
+    - tosca_v1_3.validateConstraintValue
+    - tosca_v1_3.evaluateConstraint
+    trace_summary: TOSCA 1.3 constraint grammar and bare-equal normalization → effective datatype lookup/inheritance → version-policy definition
+      compatibility → rendered default/assignment evaluation → stable normalized validators; TOSCA 2.0 leaves both policy hooks unset
   tests:
-    positive: []
-    negative: []
-    boundary: []
-    regression: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestLengthConstraintUsesListAndMapSize
+    negative:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestLengthConstraintRejectsWrongCollectionSize
+    boundary:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestLengthConstraintEmptyCollection
+    regression:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestTosca20ValidationGrammarUnchanged
+    normalization:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestLengthConstraintNormalizesOnCollection
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
-    generic_logic_applicability_explained: true
-  gaps:
-  - Constraint grammar is read but the complete TOSCA 1.3 semantics are not enforced.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Constraint grammar is read but the complete TOSCA 1.3 semantics are not enforced.
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
+    generic_logic_applicability_explained: false
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the TOSCA 1.3 definition/value validator callbacks, bare-scalar conversion, exact collection-size evaluation,
+      and corrected greater-than comparison branches in separate narrow mutations.
+    affected_tests:
+    - TestBareConstraintMeansEqual
+    - TestBareConstraintRejectsDifferentValue
+    - TestLengthConstraintRejectsWrongCollectionSize
+    - TestConstraintRejectsIncompatibleOperand
+    - TestPropertyConstraintRejectsIncompatibleType
+    - TestPropertyDefaultConstraintEvaluated
+    - TestParameterConstraintRejectsIncompatibleType
+    - TestDatatypeConstraintRejectsIncompatibleParent
+    - TestInheritedDatatypeConstraint
+    - TestScalarUnitConstraintRejectsOutOfRangeValue
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.6.3.3-003
   section: 3.6.3.3
   section_title: Additional Requirements
   strength: SHALL
   category: semantic
   subject: additional-requirements
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -12250,50 +12369,86 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: tosca_v1_3.ReadConstraintClause
     packages:
     - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
-    - tosca/parser
+    - tosca/parsing
     files:
     - tosca/grammars/tosca_v1_3/constraint-clause.go
-    - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
+    - tosca/grammars/tosca_v1_3/constraint-validation.go
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/property-definition.go
+    - tosca/grammars/tosca_v1_3/parameter-definition.go
+    - tosca/grammars/tosca_v1_3/data-type.go
+    - tosca/grammars/tosca_v1_3/scalar-unit.go
     - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/data-type.go
     - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/tosca_v2_0/validation-clause.go
+    - tosca/parsing/grammars.go
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go
     symbols:
     - tosca_v1_3.ReadConstraintClause
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: rendering
+    - tosca_v1_3.normalizeConstraintList
+    - tosca_v1_3.validateConstraintDefinition
+    - tosca_v1_3.validateConstraintValue
+    - tosca_v1_3.validateConstraintCompatibility
+    - tosca_v1_3.evaluateConstraint
+    - tosca_v1_3.collectionLength
+    - tosca_v1_3.ScalarUnit.Compare
+    - parsing.Grammar.DataDefinitionValidator
+    - parsing.Grammar.DataValueValidator
+    - tosca_v2_0.Value.RenderProperty
+    parser_phase: read, hierarchy/inheritance, and rendering
     execution_path:
-    - parser.Context.Parse
+    - tosca_v1_3.ReadConstraintClause
     - parser.Context.LookupNames
     - parser.Context.Inherit
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: Constraint clauses are converted to generic validation calls and preserved in metadata; default-equal, set length semantics,
-      operand typing, and runtime enforcement are not all validated.
+    - tosca_v2_0.PropertyDefinition.Render
+    - tosca_v2_0.DataType.Render
+    - tosca_v1_3.validateConstraintDefinition
+    - tosca_v2_0.Value.RenderProperty
+    - tosca_v1_3.validateConstraintValue
+    - tosca_v1_3.evaluateConstraint
+    trace_summary: TOSCA 1.3 constraint grammar and bare-equal normalization → effective datatype lookup/inheritance → version-policy definition
+      compatibility → rendered default/assignment evaluation → stable normalized validators; TOSCA 2.0 leaves both policy hooks unset
   tests:
-    positive: []
-    negative: []
-    boundary: []
-    regression: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestConstraintOperandTypeCompatibility
+    negative:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestConstraintRejectsIncompatibleOperand
+    boundary:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestLengthConstraintRejectsNonCollectionType
+    regression:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestTosca20ValidationGrammarUnchanged
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
-    generic_logic_applicability_explained: true
-  gaps:
-  - Constraint grammar is read but the complete TOSCA 1.3 semantics are not enforced.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Constraint grammar is read but the complete TOSCA 1.3 semantics are not enforced.
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
+    generic_logic_applicability_explained: false
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the TOSCA 1.3 definition/value validator callbacks, bare-scalar conversion, exact collection-size evaluation,
+      and corrected greater-than comparison branches in separate narrow mutations.
+    affected_tests:
+    - TestBareConstraintMeansEqual
+    - TestBareConstraintRejectsDifferentValue
+    - TestLengthConstraintRejectsWrongCollectionSize
+    - TestConstraintRejectsIncompatibleOperand
+    - TestPropertyConstraintRejectsIncompatibleType
+    - TestPropertyDefaultConstraintEvaluated
+    - TestParameterConstraintRejectsIncompatibleType
+    - TestDatatypeConstraintRejectsIncompatibleParent
+    - TestInheritedDatatypeConstraint
+    - TestScalarUnitConstraintRejectsOutOfRangeValue
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.6.3.3-004
   section: 3.6.3.3
   section_title: Additional Requirements
@@ -22182,8 +22337,8 @@ requirements:
   strength: SHALL
   category: constraint
   subject: additional-requirements
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -22193,50 +22348,89 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: tosca_v1_3.ReadConstraintClause
     packages:
     - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
-    - tosca/parser
+    - tosca/parsing
     files:
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/constraint-validation.go
+    - tosca/grammars/tosca_v1_3/common.go
     - tosca/grammars/tosca_v1_3/property-definition.go
-    - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
+    - tosca/grammars/tosca_v1_3/parameter-definition.go
+    - tosca/grammars/tosca_v1_3/data-type.go
+    - tosca/grammars/tosca_v1_3/scalar-unit.go
     - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/data-type.go
     - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/tosca_v2_0/validation-clause.go
+    - tosca/parsing/grammars.go
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go
     symbols:
     - tosca_v1_3.ReadPropertyDefinition
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: rendering
+    - tosca_v1_3.ReadConstraintClause
+    - tosca_v1_3.normalizeConstraintList
+    - tosca_v1_3.validateConstraintDefinition
+    - tosca_v1_3.validateConstraintValue
+    - tosca_v1_3.validateConstraintCompatibility
+    - tosca_v1_3.evaluateConstraint
+    - tosca_v1_3.collectionLength
+    - tosca_v1_3.ScalarUnit.Compare
+    - parsing.Grammar.DataDefinitionValidator
+    - parsing.Grammar.DataValueValidator
+    - tosca_v2_0.Value.RenderProperty
+    parser_phase: read, hierarchy/inheritance, and rendering
     execution_path:
-    - parser.Context.Parse
+    - tosca_v1_3.ReadConstraintClause
     - parser.Context.LookupNames
     - parser.Context.Inherit
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: Constraints are parsed and attached to ValueMeta, but type compatibility and enforcement are not complete for all TOSCA 1.3
-      operators.
+    - tosca_v2_0.PropertyDefinition.Render
+    - tosca_v2_0.DataType.Render
+    - tosca_v1_3.validateConstraintDefinition
+    - tosca_v2_0.Value.RenderProperty
+    - tosca_v1_3.validateConstraintValue
+    - tosca_v1_3.evaluateConstraint
+    trace_summary: TOSCA 1.3 constraint grammar and bare-equal normalization → effective datatype lookup/inheritance → version-policy definition
+      compatibility → rendered default/assignment evaluation → stable normalized validators; TOSCA 2.0 leaves both policy hooks unset
   tests:
-    positive: []
-    negative: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestPropertyConstraintCompatibleWithType
+    negative:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestPropertyConstraintRejectsIncompatibleType
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestPropertyDefaultConstraintEvaluated
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestPropertiesWithoutConstraintsUnchanged
+    inheritance:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestRefinedPropertyConstraintUsesEffectiveType
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Constraint/type compatibility is incomplete.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Constraint/type compatibility is incomplete.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the TOSCA 1.3 definition/value validator callbacks, bare-scalar conversion, exact collection-size evaluation,
+      and corrected greater-than comparison branches in separate narrow mutations.
+    affected_tests:
+    - TestBareConstraintMeansEqual
+    - TestBareConstraintRejectsDifferentValue
+    - TestLengthConstraintRejectsWrongCollectionSize
+    - TestConstraintRejectsIncompatibleOperand
+    - TestPropertyConstraintRejectsIncompatibleType
+    - TestPropertyDefaultConstraintEvaluated
+    - TestParameterConstraintRejectsIncompatibleType
+    - TestDatatypeConstraintRejectsIncompatibleParent
+    - TestInheritedDatatypeConstraint
+    - TestScalarUnitConstraintRejectsOutOfRangeValue
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.6.10.5-005
   section: 3.6.10.5
   section_title: Additional Requirements
@@ -26553,8 +26747,8 @@ requirements:
   strength: SHALL
   category: constraint
   subject: additional-requirements
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -26564,50 +26758,88 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: tosca_v1_3.ReadConstraintClause
     packages:
     - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
-    - tosca/parser
+    - tosca/parsing
     files:
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/constraint-validation.go
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/property-definition.go
     - tosca/grammars/tosca_v1_3/parameter-definition.go
-    - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
+    - tosca/grammars/tosca_v1_3/data-type.go
+    - tosca/grammars/tosca_v1_3/scalar-unit.go
     - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/data-type.go
     - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/tosca_v2_0/validation-clause.go
+    - tosca/parsing/grammars.go
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go
     symbols:
     - tosca_v1_3.ReadParameterDefinition
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: rendering
+    - tosca_v1_3.ReadConstraintClause
+    - tosca_v1_3.normalizeConstraintList
+    - tosca_v1_3.validateConstraintDefinition
+    - tosca_v1_3.validateConstraintValue
+    - tosca_v1_3.validateConstraintCompatibility
+    - tosca_v1_3.evaluateConstraint
+    - tosca_v1_3.collectionLength
+    - tosca_v1_3.ScalarUnit.Compare
+    - parsing.Grammar.DataDefinitionValidator
+    - parsing.Grammar.DataValueValidator
+    - tosca_v2_0.Value.RenderProperty
+    parser_phase: read, hierarchy/inheritance, and rendering
     execution_path:
-    - parser.Context.Parse
+    - tosca_v1_3.ReadConstraintClause
     - parser.Context.LookupNames
     - parser.Context.Inherit
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: Constraints are parsed and attached to ValueMeta, but type compatibility and enforcement are not complete for all TOSCA 1.3
-      operators.
+    - tosca_v2_0.PropertyDefinition.Render
+    - tosca_v2_0.DataType.Render
+    - tosca_v1_3.validateConstraintDefinition
+    - tosca_v2_0.Value.RenderProperty
+    - tosca_v1_3.validateConstraintValue
+    - tosca_v1_3.evaluateConstraint
+    trace_summary: TOSCA 1.3 constraint grammar and bare-equal normalization → effective datatype lookup/inheritance → version-policy definition
+      compatibility → rendered default/assignment evaluation → stable normalized validators; TOSCA 2.0 leaves both policy hooks unset
   tests:
-    positive: []
-    negative: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestParameterConstraintCompatibleWithType
+    negative:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestParameterConstraintRejectsIncompatibleType
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestUnconstrainedParametersUnchanged
+    normalization:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestParameterConstraintMetadataPreserved
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Constraint/type compatibility is incomplete.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Constraint/type compatibility is incomplete.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the TOSCA 1.3 definition/value validator callbacks, bare-scalar conversion, exact collection-size evaluation,
+      and corrected greater-than comparison branches in separate narrow mutations.
+    affected_tests:
+    - TestBareConstraintMeansEqual
+    - TestBareConstraintRejectsDifferentValue
+    - TestLengthConstraintRejectsWrongCollectionSize
+    - TestConstraintRejectsIncompatibleOperand
+    - TestPropertyConstraintRejectsIncompatibleType
+    - TestPropertyDefaultConstraintEvaluated
+    - TestParameterConstraintRejectsIncompatibleType
+    - TestDatatypeConstraintRejectsIncompatibleParent
+    - TestInheritedDatatypeConstraint
+    - TestScalarUnitConstraintRejectsOutOfRangeValue
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.6.15-001
   section: 3.6.15
   section_title: Attribute Mapping definition
@@ -49158,8 +49390,8 @@ requirements:
   strength: SHALL
   category: hierarchy
   subject: additional-requirements
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -49169,49 +49401,88 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: tosca_v1_3.ReadConstraintClause
     packages:
     - tosca/grammars/tosca_v1_3
-    - tosca/parser
+    - tosca/grammars/tosca_v2_0
     - tosca/parsing
     files:
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/constraint-validation.go
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/property-definition.go
+    - tosca/grammars/tosca_v1_3/parameter-definition.go
     - tosca/grammars/tosca_v1_3/data-type.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parsing/inheritance.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/scalar-unit.go
+    - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/data-type.go
+    - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/tosca_v2_0/validation-clause.go
+    - tosca/parsing/grammars.go
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go
     symbols:
     - tosca_v1_3.ReadDataType
-    - parser.Context.AddHierarchies
-    - parsing.NewHierarchyFor
-    - parsing.Hierarchy.IsCompatible
-    - parser.Context.Inherit
-    parser_phase: hierarchy/rendering
+    - tosca_v1_3.ReadConstraintClause
+    - tosca_v1_3.normalizeConstraintList
+    - tosca_v1_3.validateConstraintDefinition
+    - tosca_v1_3.validateConstraintValue
+    - tosca_v1_3.validateConstraintCompatibility
+    - tosca_v1_3.evaluateConstraint
+    - tosca_v1_3.collectionLength
+    - tosca_v1_3.ScalarUnit.Compare
+    - parsing.Grammar.DataDefinitionValidator
+    - parsing.Grammar.DataValueValidator
+    - tosca_v2_0.Value.RenderProperty
+    parser_phase: read, hierarchy/inheritance, and rendering
     execution_path:
-    - parser.Context.Parse
+    - tosca_v1_3.ReadConstraintClause
     - parser.Context.LookupNames
-    - parser.Context.AddHierarchies
-    - parsing.NewHierarchyFor
     - parser.Context.Inherit
-    - parsing.Hierarchy.IsCompatible
-    trace_summary: Parent lookup, loops, and incomplete chains are validated; the additional base-type, datatype-shape, non-empty-properties,
-      and constraint-compatibility conditions are not all enforced.
+    - tosca_v2_0.PropertyDefinition.Render
+    - tosca_v2_0.DataType.Render
+    - tosca_v1_3.validateConstraintDefinition
+    - tosca_v2_0.Value.RenderProperty
+    - tosca_v1_3.validateConstraintValue
+    - tosca_v1_3.evaluateConstraint
+    trace_summary: TOSCA 1.3 constraint grammar and bare-equal normalization → effective datatype lookup/inheritance → version-policy definition
+      compatibility → rendered default/assignment evaluation → stable normalized validators; TOSCA 2.0 leaves both policy hooks unset
   tests:
-    positive: []
-    negative: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestDatatypeConstraintCompatibleWithParent
+    negative:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestDatatypeConstraintRejectsIncompatibleParent
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestTosca20DatatypeConstraintBehaviorUnchanged
+    inheritance:
+    - tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestInheritedDatatypeConstraint
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Hierarchy construction exists, but this additional semantic condition is incomplete.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Hierarchy construction exists, but this additional semantic condition is incomplete.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the TOSCA 1.3 definition/value validator callbacks, bare-scalar conversion, exact collection-size evaluation,
+      and corrected greater-than comparison branches in separate narrow mutations.
+    affected_tests:
+    - TestBareConstraintMeansEqual
+    - TestBareConstraintRejectsDifferentValue
+    - TestLengthConstraintRejectsWrongCollectionSize
+    - TestConstraintRejectsIncompatibleOperand
+    - TestPropertyConstraintRejectsIncompatibleType
+    - TestPropertyDefaultConstraintEvaluated
+    - TestParameterConstraintRejectsIncompatibleType
+    - TestDatatypeConstraintRejectsIncompatibleParent
+    - TestInheritedDatatypeConstraint
+    - TestScalarUnitConstraintRejectsOutOfRangeValue
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.7.6.3-003
   section: 3.7.6.3
   section_title: Additional Requirements

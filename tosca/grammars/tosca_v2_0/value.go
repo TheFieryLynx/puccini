@@ -238,6 +238,9 @@ func (self *Value) render(dataType *DataType, dataDefinition DataDefinition, bar
 
 func (self *Value) RenderProperty(dataType *DataType, dataDefinition *PropertyDefinition) {
 	self.Render(dataType, dataDefinition, false, false)
+	if validator := self.Context.Grammar.DataValueValidator; validator != nil {
+		validator(self.Context, dataType, dataDefinition)
+	}
 }
 
 func (self *Value) Normalize() normal.Value {
@@ -471,7 +474,11 @@ func NewValueMeta(context *parsing.Context, dataType *DataType, dataDefinition D
 
 		// Add validation function to meta using the same logic as ValidationClauses.AddToMeta
 		// Check if this is a map and should apply validation to values instead
-		if meta.Type == "map" && meta.Value != nil {
+		if clause.ValidateCollection {
+			functionCall := clause.ToFunctionCall(context, true)
+			NormalizeFunctionCallArguments(functionCall, context)
+			meta.AddValidator(functionCall)
+		} else if meta.Type == "map" && meta.Value != nil {
 			// Set the DataType to the element type for proper $value handling
 			originalDataType := clause.DataType
 			originalDefinition := clause.Definition

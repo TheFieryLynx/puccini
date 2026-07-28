@@ -19,6 +19,7 @@ func ReadDataType(ctx *parsing.Context) parsing.EntityPtr {
 	// Transform YAML 1.x: constraints → validation
 	if m, ok := ctx.Data.(ard.Map); ok {
 		if c, ok := m["constraints"].(ard.List); ok && len(c) > 0 {
+			c = normalizeConstraintList(c)
 			if len(c) == 1 {
 				m["validation"] = c[0]
 			} else {

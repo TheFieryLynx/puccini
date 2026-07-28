@@ -1,0 +1,218 @@
+remediation_group: constraint-semantics
+remediation_order: 6
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+parser_phases:
+  - read
+  - hierarchy
+  - inheritance
+  - rendering
+execution_path:
+  - tosca_v1_3.ReadConstraintClause
+  - parser.Context.LookupNames
+  - parser.Context.Inherit
+  - tosca_v2_0.PropertyDefinition.Render
+  - tosca_v2_0.ParameterDefinition.Render
+  - tosca_v2_0.DataType.Render
+  - tosca_v2_0.Value.RenderProperty
+  - tosca_v1_3.validateConstraintDefinition
+  - tosca_v1_3.validateConstraintValue
+
+requirements:
+  - requirement_id: TOSCA13-3.3.6.2-003
+    section: "3.3.6.2"
+    section_title: "Additional requirements"
+    normative_rule: "Scalar-unit constraint evaluation compares the scalar and unit portions as one value."
+    baseline:
+      implementation_status: partial
+      verification_status: untested
+      implemented:
+        - "ScalarUnit parsing stores a canonical number and canonical unit."
+        - "ScalarUnit.Compare compares canonical values."
+      missing:
+        - "Property defaults and assignments are not constraint-checked during processing."
+        - "No direct cross-unit inclusive-boundary or rejection evidence exists."
+    planned_tests:
+      positive: [TestScalarUnitConstraintConvertsUnits]
+      negative: [TestScalarUnitConstraintRejectsOutOfRangeValue]
+      boundary: [TestScalarUnitConstraintInclusiveBoundary]
+      inheritance: [TestInheritedScalarUnitConstraint]
+      normalization: [TestScalarUnitConstraintMetadataDeterministic]
+      regression: [TestTosca20ConstraintBehaviorUnchanged]
+
+  - requirement_id: TOSCA13-3.6.3.3-001
+    section: "3.6.3.3"
+    section_title: "Additional Requirements"
+    normative_rule: "A simple scalar constraint without an operator is interpreted as equal."
+    baseline:
+      implementation_status: partial
+      verification_status: untested
+      implemented:
+        - "The explicit equal operator is recognized."
+      missing:
+        - "The constraint reader rejects a bare scalar before it can mean equal."
+        - "Bare and explicit equal do not have proven equivalent value behavior."
+    planned_tests:
+      positive: [TestBareConstraintMeansEqual]
+      negative: [TestBareConstraintRejectsDifferentValue]
+      boundary: [TestBareAndExplicitEqualAreEquivalent]
+      inheritance: [TestInheritedBareEqualConstraint]
+      normalization: [TestBareEqualConstraintNormalizesDeterministically]
+      regression: [TestTosca20ValidationGrammarUnchanged]
+
+  - requirement_id: TOSCA13-3.6.3.3-002
+    section: "3.6.3.3"
+    section_title: "Additional Requirements"
+    normative_rule: "The length operator means size for list and map values."
+    baseline:
+      implementation_status: partial
+      verification_status: untested
+      implemented:
+        - "min_length and max_length scriptlets exist."
+      missing:
+        - "The TOSCA 1.3 length operator is not registered."
+        - "Exact list and map sizes are not validated as collection values."
+    planned_tests:
+      positive: [TestLengthConstraintUsesListAndMapSize]
+      negative: [TestLengthConstraintRejectsWrongCollectionSize]
+      boundary: [TestLengthConstraintEmptyCollection]
+      regression: [TestTosca20ValidationGrammarUnchanged]
+
+  - requirement_id: TOSCA13-3.6.3.3-003
+    section: "3.6.3.3"
+    section_title: "Additional Requirements"
+    normative_rule: "Constraint operands are type-compatible with their operators."
+    baseline:
+      implementation_status: partial
+      verification_status: untested
+      implemented:
+        - "Several operand YAML shapes and in_range cardinality are checked."
+      missing:
+        - "Operator applicability is not checked against the effective datatype."
+        - "Definition-only constraints can retain incompatible operands until runtime."
+    planned_tests:
+      positive: [TestConstraintOperandTypeCompatibility]
+      negative: [TestConstraintRejectsIncompatibleOperand]
+      boundary: [TestLengthConstraintRejectsNonCollectionType]
+      regression: [TestTosca20ValidationGrammarUnchanged]
+
+  - requirement_id: TOSCA13-3.6.10.5-004
+    section: "3.6.10.5"
+    section_title: "Additional Requirements"
+    normative_rule: "Property constraints are compatible with the effective property type."
+    baseline:
+      implementation_status: partial
+      verification_status: untested
+      implemented:
+        - "Property constraints are parsed and normalized as validators."
+      missing:
+        - "Every operator is not checked against the effective property datatype."
+        - "Inherited/refined property compatibility has no direct evidence."
+    planned_tests:
+      positive: [TestPropertyConstraintCompatibleWithType]
+      negative: [TestPropertyConstraintRejectsIncompatibleType]
+      inheritance: [TestRefinedPropertyConstraintUsesEffectiveType]
+      regression: [TestPropertiesWithoutConstraintsUnchanged]
+
+  - requirement_id: TOSCA13-3.6.14.3-003
+    section: "3.6.14.3"
+    section_title: "Additional Requirements"
+    normative_rule: "Parameter constraints are compatible with the parameter type."
+    baseline:
+      implementation_status: partial
+      verification_status: untested
+      implemented:
+        - "Input and output constraints are converted to shared validation clauses."
+      missing:
+        - "Operator/datatype compatibility is not checked without a value."
+        - "Input and output parameter paths lack direct evidence."
+    planned_tests:
+      positive: [TestParameterConstraintCompatibleWithType]
+      negative: [TestParameterConstraintRejectsIncompatibleType]
+      normalization: [TestParameterConstraintMetadataPreserved]
+      regression: [TestUnconstrainedParametersUnchanged]
+
+  - requirement_id: TOSCA13-3.7.6.3-002
+    section: "3.7.6.3"
+    section_title: "Additional Requirements"
+    normative_rule: "Datatype constraints are compatible with the type named by derived_from."
+    baseline:
+      implementation_status: partial
+      verification_status: untested
+      implemented:
+        - "Datatype constraints are parsed, resolved, and inherited."
+      missing:
+        - "Operators are not validated against the effective parent datatype."
+    planned_tests:
+      positive: [TestDatatypeConstraintCompatibleWithParent]
+      negative: [TestDatatypeConstraintRejectsIncompatibleParent]
+      inheritance: [TestInheritedDatatypeConstraint]
+      regression: [TestTosca20DatatypeConstraintBehaviorUnchanged]
+
+implementation:
+  packages:
+    - tosca/parsing
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+  policy: "Shared rendering exposes neutral callbacks; only the TOSCA 1.3 grammar installs constraint semantics."
+  files:
+    - tosca/parsing/grammars.go
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/constraint-validation.go
+    - tosca/grammars/tosca_v1_3/property-definition.go
+    - tosca/grammars/tosca_v1_3/parameter-definition.go
+    - tosca/grammars/tosca_v1_3/data-type.go
+    - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/data-type.go
+    - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/tosca_v2_0/validation-clause.go
+  symbols:
+    - parsing.Grammar.DataDefinitionValidator
+    - parsing.Grammar.DataValueValidator
+    - tosca_v1_3.ReadConstraintClause
+    - tosca_v1_3.normalizeConstraintList
+    - tosca_v1_3.validateConstraintDefinition
+    - tosca_v1_3.validateConstraintValue
+    - tosca_v1_3.validateConstraintCompatibility
+    - tosca_v1_3.evaluateConstraint
+    - tosca_v1_3.collectionLength
+    - tosca_v2_0.Value.RenderProperty
+mutation_check:
+  performed: true
+  mutation: "Separately disabled the definition/value callbacks, bare-scalar conversion, exact length evaluation, and corrected greater-than branches."
+  affected_tests:
+    - TestBareConstraintMeansEqual
+    - TestBareConstraintRejectsDifferentValue
+    - TestLengthConstraintRejectsWrongCollectionSize
+    - TestConstraintRejectsIncompatibleOperand
+    - TestLengthConstraintRejectsNonCollectionType
+    - TestPropertyConstraintRejectsIncompatibleType
+    - TestRefinedPropertyConstraintUsesEffectiveType
+    - TestPropertyDefaultConstraintEvaluated
+    - TestDatatypeConstraintRejectsIncompatibleParent
+    - TestInheritedDatatypeConstraint
+    - TestScalarUnitConstraintRejectsOutOfRangeValue
+  expected_tests_failed: true
+  production_diff_restored: true
+result:
+  requirements:
+    TOSCA13-3.3.6.2-003: {implementation_status: implemented, verification_status: verified}
+    TOSCA13-3.6.3.3-001: {implementation_status: implemented, verification_status: verified}
+    TOSCA13-3.6.3.3-002: {implementation_status: implemented, verification_status: verified}
+    TOSCA13-3.6.3.3-003: {implementation_status: implemented, verification_status: verified}
+    TOSCA13-3.6.10.5-004: {implementation_status: implemented, verification_status: verified}
+    TOSCA13-3.6.14.3-003: {implementation_status: implemented, verification_status: verified}
+    TOSCA13-3.7.6.3-002: {implementation_status: implemented, verification_status: verified}
+verification:
+  focused_constraint_semantics: passed
+  focused_grammar_structural: passed
+  focused_external_schema: passed
+  focused_property_reflection: passed
+  focused_os_normalization: passed
+  tosca_2_0_grammar_conformance: passed
+  go_test_all: passed
+  go_test_race_all: passed
+  go_vet_all: passed
+  audit_generation_twice: passed
+  audit_sha256_identical: true
+  denominator: 223

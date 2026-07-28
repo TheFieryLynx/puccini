@@ -1,6 +1,6 @@
 # Unverified TOSCA 1.3 requirements
 
-Untested or currently unverifiable records: **2362**.
+Untested or currently unverifiable records: **2355**.
 
 | Requirement | Implementation | Verification | Applicability | Reason |
 |---|---|---|---|---|
@@ -68,7 +68,6 @@ Untested or currently unverifiable records: **2362**.
 | `TOSCA13-3.3.6.1-006` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.6.2-001` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.6.2-002` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.3.6.2-003` | partial | untested | applicable | Combined scalar-unit comparison exists, but constraint enforcement is incomplete.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.6.2-004` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: example. |
 | `TOSCA13-3.3.6.2-005` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.6.3-001` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: misclassified. |
@@ -208,9 +207,6 @@ Untested or currently unverifiable records: **2362**.
 | `TOSCA13-3.6.3.1.1-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.3.2-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.3.2-002` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.6.3.3-001` | partial | untested | applicable | Constraint grammar is read but the complete TOSCA 1.3 semantics are not enforced.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.6.3.3-002` | partial | untested | applicable | Constraint grammar is read but the complete TOSCA 1.3 semantics are not enforced.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.6.3.3-003` | partial | untested | applicable | Constraint grammar is read but the complete TOSCA 1.3 semantics are not enforced.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.3.3-004` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.3.3-005` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.3.3-006` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance. |
@@ -387,7 +383,6 @@ Untested or currently unverifiable records: **2362**.
 | `TOSCA13-3.6.10.4-013` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.10.5-002` | partial | untested | applicable | Construct is represented, but the complete requirement-specific validation is absent.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: duplicate. |
 | `TOSCA13-3.6.10.5-003` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.6.10.5-004` | partial | untested | applicable | Constraint/type compatibility is incomplete.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.10.5-006` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.10.6-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.10.6-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
@@ -474,7 +469,6 @@ Untested or currently unverifiable records: **2362**.
 | `TOSCA13-3.6.14.2-019` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.14.3-001` | partial | untested | applicable | Construct is represented, but the complete requirement-specific validation is absent.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: duplicate. |
 | `TOSCA13-3.6.14.3-002` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.6.14.3-003` | partial | untested | applicable | Constraint/type compatibility is incomplete.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.15-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.15.1-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.15.1-002` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: dependent-grammar-umbrella. |
@@ -894,7 +888,6 @@ Untested or currently unverifiable records: **2362**.
 | `TOSCA13-3.7.6.2-010` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.7.6.2-011` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.7.6.3-001` | partial | untested | applicable | Hierarchy construction exists, but this additional semantic condition is incomplete.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.7.6.3-002` | partial | untested | applicable | Hierarchy construction exists, but this additional semantic condition is incomplete.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.7.6.3-003` | partial | untested | applicable | Hierarchy construction exists, but this additional semantic condition is incomplete.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.7.7.1-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.7.7.1-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |

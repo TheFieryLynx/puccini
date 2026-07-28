@@ -254,6 +254,133 @@ DIRECT_TESTS[INHERITED_REQUIRED_KEYNAMES_ID] = {
     ],
 }
 
+CONSTRAINT_SEMANTICS_IDS = {
+    "TOSCA13-3.3.6.2-003",
+    "TOSCA13-3.6.3.3-001",
+    "TOSCA13-3.6.3.3-002",
+    "TOSCA13-3.6.3.3-003",
+    "TOSCA13-3.6.10.5-004",
+    "TOSCA13-3.6.14.3-003",
+    "TOSCA13-3.7.6.3-002",
+}
+DIRECT_TESTS["TOSCA13-3.3.6.2-003"] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestScalarUnitConstraintConvertsUnits",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestScalarUnitConstraintRejectsOutOfRangeValue",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestScalarUnitConstraintInclusiveBoundary",
+    ],
+    "inheritance": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestInheritedScalarUnitConstraint",
+    ],
+    "normalization": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestScalarUnitConstraintMetadataDeterministic",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestTosca20ConstraintBehaviorUnchanged",
+    ],
+}
+DIRECT_TESTS["TOSCA13-3.6.3.3-001"] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestBareConstraintMeansEqual",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestBareConstraintRejectsDifferentValue",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestBareAndExplicitEqualAreEquivalent",
+    ],
+    "inheritance": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestInheritedBareEqualConstraint",
+    ],
+    "normalization": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestBareEqualConstraintNormalizesDeterministically",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestTosca20ValidationGrammarUnchanged",
+    ],
+}
+DIRECT_TESTS["TOSCA13-3.6.3.3-002"] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestLengthConstraintUsesListAndMapSize",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestLengthConstraintRejectsWrongCollectionSize",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestLengthConstraintEmptyCollection",
+    ],
+    "normalization": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestLengthConstraintNormalizesOnCollection",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestTosca20ValidationGrammarUnchanged",
+    ],
+}
+DIRECT_TESTS["TOSCA13-3.6.3.3-003"] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestConstraintOperandTypeCompatibility",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestConstraintRejectsIncompatibleOperand",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestLengthConstraintRejectsNonCollectionType",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestTosca20ValidationGrammarUnchanged",
+    ],
+}
+DIRECT_TESTS["TOSCA13-3.6.10.5-004"] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestPropertyConstraintCompatibleWithType",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestPropertyConstraintRejectsIncompatibleType",
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestPropertyDefaultConstraintEvaluated",
+    ],
+    "boundary": [],
+    "inheritance": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestRefinedPropertyConstraintUsesEffectiveType",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestPropertiesWithoutConstraintsUnchanged",
+    ],
+}
+DIRECT_TESTS["TOSCA13-3.6.14.3-003"] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestParameterConstraintCompatibleWithType",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestParameterConstraintRejectsIncompatibleType",
+    ],
+    "boundary": [],
+    "normalization": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestParameterConstraintMetadataPreserved",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestUnconstrainedParametersUnchanged",
+    ],
+}
+DIRECT_TESTS["TOSCA13-3.7.6.3-002"] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestDatatypeConstraintCompatibleWithParent",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestDatatypeConstraintRejectsIncompatibleParent",
+    ],
+    "boundary": [],
+    "inheritance": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestInheritedDatatypeConstraint",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go#TestTosca20DatatypeConstraintBehaviorUnchanged",
+    ],
+}
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -669,6 +796,30 @@ MUTATION_CHECKS[INHERITED_REQUIRED_KEYNAMES_ID] = {
     "expected_tests_failed": True,
     "production_diff_restored": True,
 }
+for requirement_id in CONSTRAINT_SEMANTICS_IDS:
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutation": (
+            "Temporarily disabled the TOSCA 1.3 definition/value validator "
+            "callbacks, bare-scalar conversion, exact collection-size "
+            "evaluation, and corrected greater-than comparison branches in "
+            "separate narrow mutations."
+        ),
+        "affected_tests": [
+            "TestBareConstraintMeansEqual",
+            "TestBareConstraintRejectsDifferentValue",
+            "TestLengthConstraintRejectsWrongCollectionSize",
+            "TestConstraintRejectsIncompatibleOperand",
+            "TestPropertyConstraintRejectsIncompatibleType",
+            "TestPropertyDefaultConstraintEvaluated",
+            "TestParameterConstraintRejectsIncompatibleType",
+            "TestDatatypeConstraintRejectsIncompatibleParent",
+            "TestInheritedDatatypeConstraint",
+            "TestScalarUnitConstraintRejectsOutOfRangeValue",
+        ],
+        "expected_tests_failed": True,
+        "production_diff_restored": True,
+    }
 for requirement_id in LOCAL_COLLISION_IDS:
     MUTATION_CHECKS[requirement_id] = {
         "performed": True,
@@ -1919,6 +2070,61 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
                 "TOSCA 1.3 artifact grammar read without premature required-key "
                 "failure → effective node-type artifact inheritance → deterministic "
                 "TOSCA 1.3-only post-inheritance completeness validation"
+            ),
+        }, None
+    if requirement_id in CONSTRAINT_SEMANTICS_IDS:
+        return "implemented", {
+            "entry_point": "tosca_v1_3.ReadConstraintClause",
+            "packages": [
+                "tosca/grammars/tosca_v1_3",
+                "tosca/grammars/tosca_v2_0",
+                "tosca/parsing",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v1_3/constraint-clause.go",
+                "tosca/grammars/tosca_v1_3/constraint-validation.go",
+                "tosca/grammars/tosca_v1_3/common.go",
+                "tosca/grammars/tosca_v1_3/property-definition.go",
+                "tosca/grammars/tosca_v1_3/parameter-definition.go",
+                "tosca/grammars/tosca_v1_3/data-type.go",
+                "tosca/grammars/tosca_v1_3/scalar-unit.go",
+                "tosca/grammars/tosca_v2_0/property-definition.go",
+                "tosca/grammars/tosca_v2_0/data-type.go",
+                "tosca/grammars/tosca_v2_0/value.go",
+                "tosca/grammars/tosca_v2_0/validation-clause.go",
+                "tosca/parsing/grammars.go",
+                "tests/conformance/tosca_1_3/partial_constraint_semantics_test.go",
+            ],
+            "symbols": [
+                "tosca_v1_3.ReadConstraintClause",
+                "tosca_v1_3.normalizeConstraintList",
+                "tosca_v1_3.validateConstraintDefinition",
+                "tosca_v1_3.validateConstraintValue",
+                "tosca_v1_3.validateConstraintCompatibility",
+                "tosca_v1_3.evaluateConstraint",
+                "tosca_v1_3.collectionLength",
+                "tosca_v1_3.ScalarUnit.Compare",
+                "parsing.Grammar.DataDefinitionValidator",
+                "parsing.Grammar.DataValueValidator",
+                "tosca_v2_0.Value.RenderProperty",
+            ],
+            "parser_phase": "read, hierarchy/inheritance, and rendering",
+            "execution_path": [
+                "tosca_v1_3.ReadConstraintClause",
+                "parser.Context.LookupNames",
+                "parser.Context.Inherit",
+                "tosca_v2_0.PropertyDefinition.Render",
+                "tosca_v2_0.DataType.Render",
+                "tosca_v1_3.validateConstraintDefinition",
+                "tosca_v2_0.Value.RenderProperty",
+                "tosca_v1_3.validateConstraintValue",
+                "tosca_v1_3.evaluateConstraint",
+            ],
+            "trace_summary": (
+                "TOSCA 1.3 constraint grammar and bare-equal normalization → "
+                "effective datatype lookup/inheritance → version-policy definition "
+                "compatibility → rendered default/assignment evaluation → stable "
+                "normalized validators; TOSCA 2.0 leaves both policy hooks unset"
             ),
         }, None
     if requirement_id in IMPORT_NAMESPACE_IDS:

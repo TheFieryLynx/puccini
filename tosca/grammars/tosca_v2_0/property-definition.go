@@ -59,6 +59,10 @@ func (self *PropertyDefinition) render() {
 
 	self.doRender()
 
+	if validator := self.Context.Grammar.DataDefinitionValidator; validator != nil {
+		validator(self)
+	}
+
 	if (self.Default != nil) && (self.DataType != nil) {
 		// The "default" value must be a valid value of the type
 		self.Default.RenderProperty(self.DataType, self)

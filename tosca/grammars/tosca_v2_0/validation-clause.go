@@ -73,6 +73,7 @@ type ValidationClause struct {
 	NativeArgumentIndexes []int
 	DataType              *DataType      `traverse:"ignore" json:"-" yaml:"-"`
 	Definition            DataDefinition `traverse:"ignore" json:"-" yaml:"-"`
+	ValidateCollection    bool           `traverse:"ignore" json:"-" yaml:"-"`
 }
 
 func NewValidationClause(context *parsing.Context) *ValidationClause {

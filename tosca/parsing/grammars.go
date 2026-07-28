@@ -1,5 +1,8 @@
 package parsing
 
+type DataDefinitionValidator func(EntityPtr)
+type DataValueValidator func(*Context, EntityPtr, EntityPtr)
+
 //
 // Grammar
 //
@@ -7,6 +10,8 @@ package parsing
 type Grammar struct {
 	Readers                    Readers
 	InvalidNamespaceCharacters string
+	DataDefinitionValidator    DataDefinitionValidator
+	DataValueValidator         DataValueValidator
 }
 
 func NewGrammar() Grammar {

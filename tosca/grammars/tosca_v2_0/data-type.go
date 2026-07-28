@@ -164,6 +164,10 @@ func (self *DataType) render() {
 			}
 		}
 	}
+
+	if validator := self.Context.Grammar.DataDefinitionValidator; validator != nil {
+		validator(self)
+	}
 }
 
 func (self *DataType) GetInternalTypeName() (ard.TypeName, bool) {

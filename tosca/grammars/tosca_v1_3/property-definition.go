@@ -32,6 +32,7 @@ func ReadPropertyDefinition(ctx *parsing.Context) parsing.EntityPtr {
 			delete(m, "validation")
 		}
 		if c, ok := m["constraints"].(ard.List); ok && len(c) > 0 {
+			c = normalizeConstraintList(c)
 			if len(c) == 1 {
 				m["validation"] = c[0]
 			} else {

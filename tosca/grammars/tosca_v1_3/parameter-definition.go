@@ -23,6 +23,7 @@ func ReadParameterDefinition(context *parsing.Context) parsing.EntityPtr {
 	if context.Is(ard.TypeMap) {
 		if m, ok := context.Data.(ard.Map); ok {
 			if c, ok := m["constraints"].(ard.List); ok && len(c) > 0 {
+				c = normalizeConstraintList(c)
 				// Convert constraints array to validation clause
 				processedConstraints := make(ard.List, len(c))
 				for i, constraint := range c {

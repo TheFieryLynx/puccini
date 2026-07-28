@@ -14,17 +14,17 @@ This report covers the continuation trace of every formerly-unknown record that 
 
 ## Stable denominator result
 
-- implemented: **198**.
-- partial: **25**.
+- implemented: **205**.
+- partial: **18**.
 - missing: **0**.
 - non-compliant: **0**.
-- verified: **148**.
+- verified: **155**.
 - indirectly-tested: **26**.
-- untested: **49**.
+- untested: **42**.
 - unverifiable: **0**.
-- implementation coverage: **198/223 (88.79%)**.
-- verified conformance coverage: **148/223 (66.37%)**.
-- broad test evidence coverage: **174/223 (78.03%)**.
+- implementation coverage: **205/223 (91.93%)**.
+- verified conformance coverage: **155/223 (69.51%)**.
+- broad test evidence coverage: **181/223 (81.17%)**.
 
 ## Continuation trace by subsystem
 
@@ -33,10 +33,10 @@ This report covers the continuation trace of every formerly-unknown record that 
 | Service Template and tosca_definitions_version | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | Grammar and structural validation | 35 | 32 | 3 | 0 | 0 | 22 | 0 | 13 | 0 |
 | Imports and namespaces | 10 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | 0 |
-| Type system and hierarchy | 6 | 3 | 3 | 0 | 0 | 3 | 0 | 3 | 0 |
+| Type system and hierarchy | 6 | 4 | 2 | 0 | 0 | 4 | 0 | 2 | 0 |
 | Inheritance and refinement | 3 | 3 | 0 | 0 | 0 | 1 | 0 | 2 | 0 |
-| Properties, attributes and assignments | 20 | 14 | 6 | 0 | 0 | 9 | 1 | 10 | 0 |
-| Constraints | 8 | 3 | 5 | 0 | 0 | 3 | 0 | 5 | 0 |
+| Properties, attributes and assignments | 20 | 16 | 4 | 0 | 0 | 11 | 1 | 8 | 0 |
+| Constraints | 8 | 7 | 1 | 0 | 0 | 7 | 0 | 1 | 0 |
 | Intrinsic functions | 22 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | 0 |
 | Requirements and capabilities | 6 | 5 | 1 | 0 | 0 | 4 | 0 | 2 | 0 |
 | Interfaces, operations and artifacts | 11 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | 0 |
