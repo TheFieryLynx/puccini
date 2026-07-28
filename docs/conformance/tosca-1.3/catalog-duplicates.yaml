@@ -1,0 +1,487 @@
+duplicate_clusters:
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.4.3.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.4.3.1.1-001
+  reason: Both records assert only that tosca.artifacts.deployment exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.4.3.3-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.4.3.3.1-001
+  reason: Both records assert only that tosca.artifacts.deployment.image exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.4.3.4-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.4.3.4.1-001
+  reason: Both records assert only that tosca.artifacts.deployment.image.vm exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.4.2-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.4.2.1-001
+  reason: Both records assert only that tosca.artifacts.file exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.4.4.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.4.4.1.1-001
+  reason: Both records assert only that tosca.artifacts.implementation exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.4.4.3-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.4.4.3.1-001
+  reason: Both records assert only that tosca.artifacts.implementation.bash exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.4.4.4-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.4.4.4.1-001
+  reason: Both records assert only that tosca.artifacts.implementation.python exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.4.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.4.1.1-001
+  reason: Both records assert only that tosca.artifacts.root exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.4.5.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.4.5.1.1-001
+  reason: Both records assert only that tosca.artifacts.template exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.5.11-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.5.11.2-001
+  reason: Both records assert only that tosca.capabilities.attachment exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.5.3-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.5.3.2-001
+  reason: Both records assert only that tosca.capabilities.compute exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.5.6-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.5.6.2-001
+  reason: Both records assert only that tosca.capabilities.container exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.5.7-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.5.7.3-001
+  reason: Both records assert only that tosca.capabilities.endpoint exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.5.9-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.5.9.2-001
+  reason: Both records assert only that tosca.capabilities.endpoint.admin exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.5.10-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.5.10.2-001
+  reason: Both records assert only that tosca.capabilities.endpoint.database exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.5.8-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.5.8.1-001
+  reason: Both records assert only that tosca.capabilities.endpoint.public exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.5.4-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.5.4.2-001
+  reason: Both records assert only that tosca.capabilities.network exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.5.14-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.5.14.2-001
+  reason: Both records assert only that tosca.capabilities.network.bindable exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-8.5.3-001
+  duplicate_requirement_ids:
+  - TOSCA13-8.5.3.2-001
+  reason: Both records assert only that tosca.capabilities.network.linkable exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.5.2-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.5.2.1-001
+  reason: Both records assert only that tosca.capabilities.node exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.5.12-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.5.12.2-001
+  reason: Both records assert only that tosca.capabilities.operatingsystem exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.5.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.5.1.1-001
+  reason: Both records assert only that tosca.capabilities.root exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.5.13-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.5.13.2-001
+  reason: Both records assert only that tosca.capabilities.scalable exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.5.5-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.5.5.2-001
+  reason: Both records assert only that tosca.capabilities.storage exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.3.6-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.3.6.2-001
+  reason: Both records assert only that tosca.datatypes.credential exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.3.8-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.3.8.2-001
+  reason: Both records assert only that tosca.datatypes.network.networkinfo exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.3.9-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.3.9.2-001
+  reason: Both records assert only that tosca.datatypes.network.portinfo exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.3.11-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.3.11.2-001
+  reason: Both records assert only that tosca.datatypes.network.portspec exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.3.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.3.1.1-001
+  reason: Both records assert only that tosca.datatypes.root exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.3.7-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.3.7.2-001
+  reason: Both records assert only that tosca.datatypes.timeinterval exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.10.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.10.1.1-001
+  reason: Both records assert only that tosca.groups.root exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.8.4-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.8.4.1-001
+  reason: Both records assert only that tosca.interfaces.node.lifecycle.standard exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.8.5-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.8.5.1-001
+  reason: Both records assert only that tosca.interfaces.relationship.configure exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.8.3-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.8.3.1-001
+  reason: Both records assert only that tosca.interfaces.root exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.9.2-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.9.2.3-001
+  reason: Both records assert only that tosca.nodes.abstract.compute exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.9.9-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.9.9.2-001
+  reason: Both records assert only that tosca.nodes.abstract.storage exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.9.3-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.9.3.3-001
+  reason: Both records assert only that tosca.nodes.compute exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.9.13-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.9.13.1-001
+  reason: Both records assert only that tosca.nodes.container.application exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.9.12-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.9.12.1-001
+  reason: Both records assert only that tosca.nodes.container.runtime exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.9.8-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.9.8.2-001
+  reason: Both records assert only that tosca.nodes.database exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.9.7-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.9.7.2-001
+  reason: Both records assert only that tosca.nodes.dbms exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.9.14-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.9.14.1-001
+  reason: Both records assert only that tosca.nodes.loadbalancer exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-8.5.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-8.5.1.3-001
+  reason: Both records assert only that tosca.nodes.network.network exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-8.5.2-001
+  duplicate_requirement_ids:
+  - TOSCA13-8.5.2.3-001
+  reason: Both records assert only that tosca.nodes.network.port exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.9.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.9.1.3-001
+  reason: Both records assert only that tosca.nodes.root exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.9.4-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.9.4.3-001
+  reason: Both records assert only that tosca.nodes.softwarecomponent exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.9.11-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.9.11.3-001
+  reason: Both records assert only that tosca.nodes.storage.blockstorage exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.9.10-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.9.10.2-001
+  reason: Both records assert only that tosca.nodes.storage.objectstorage exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.9.6-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.9.6.2-001
+  reason: Both records assert only that tosca.nodes.webapplication exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.9.5-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.9.5.2-001
+  reason: Both records assert only that tosca.nodes.webserver exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.11.5-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.11.5.1-001
+  reason: Both records assert only that tosca.policies.performance exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.11.2-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.11.2.1-001
+  reason: Both records assert only that tosca.policies.placement exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.11.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.11.1.1-001
+  reason: Both records assert only that tosca.policies.root exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.11.3-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.11.3.1-001
+  reason: Both records assert only that tosca.policies.scaling exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.11.4-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.11.4.1-001
+  reason: Both records assert only that tosca.policies.update exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.7.5-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.7.5.3-001
+  reason: Both records assert only that tosca.relationships.attachesto exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.7.4-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.7.4.1-001
+  reason: Both records assert only that tosca.relationships.connectsto exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.7.2-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.7.2.1-001
+  reason: Both records assert only that tosca.relationships.dependson exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.7.3-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.7.3.1-001
+  reason: Both records assert only that tosca.relationships.hostedon exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-8.5.5-001
+  duplicate_requirement_ids:
+  - TOSCA13-8.5.5.1-001
+  reason: Both records assert only that tosca.relationships.network.bindsto exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-8.5.4-001
+  duplicate_requirement_ids:
+  - TOSCA13-8.5.4.1-001
+  reason: Both records assert only that tosca.relationships.network.linksto exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.7.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.7.1.2-001
+  reason: Both records assert only that tosca.relationships.root exists and cannot produce different conformance results.
+- kind: normative-type-declaration-restatement
+  canonical_requirement_id: TOSCA13-5.7.6-001
+  duplicate_requirement_ids:
+  - TOSCA13-5.7.6.1-001
+  reason: Both records assert only that tosca.relationships.routesto exists and cannot produce different conformance results.
+- kind: reserved-namespace-restatement
+  canonical_requirement_id: TOSCA13-3.1.3.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-3.10.2.1-001
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: reserved-uri-restatement
+  canonical_requirement_id: TOSCA13-3.1.3.1-002
+  duplicate_requirement_ids:
+  - TOSCA13-3.10.2.1-002
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: first-line-restatement
+  canonical_requirement_id: TOSCA13-3.1.2-001
+  duplicate_requirement_ids:
+  - TOSCA13-3.10.2.1-003
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: definitions-version-presence-restatement
+  canonical_requirement_id: TOSCA13-3.10.1-002
+  duplicate_requirement_ids:
+  - TOSCA13-3.10.3.1-001
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: schema-type-required-restatement
+  canonical_requirement_id: TOSCA13-3.6.9.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-3.6.9.1-003
+  - TOSCA13-3.6.9.2-005
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: property-type-required-restatement
+  canonical_requirement_id: TOSCA13-3.6.10.2-001
+  duplicate_requirement_ids:
+  - TOSCA13-3.6.10.2-003
+  - TOSCA13-3.6.10.4-006
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: property-required-default-restatement
+  canonical_requirement_id: TOSCA13-3.6.10.4-008
+  duplicate_requirement_ids:
+  - TOSCA13-3.6.10.5-002
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: property-reflected-attribute-restatement
+  canonical_requirement_id: TOSCA13-3.6.10.5-001
+  duplicate_requirement_ids:
+  - TOSCA13-3.6.12.4-001
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: attribute-type-required-restatement
+  canonical_requirement_id: TOSCA13-3.6.12.2-001
+  duplicate_requirement_ids:
+  - TOSCA13-3.6.12.2-003
+  - TOSCA13-3.6.12.3-005
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: parameter-required-default-restatement
+  canonical_requirement_id: TOSCA13-3.6.14.2-015
+  duplicate_requirement_ids:
+  - TOSCA13-3.6.14.3-001
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: trigger-event-required-restatement
+  canonical_requirement_id: TOSCA13-3.6.22.1-004
+  duplicate_requirement_ids:
+  - TOSCA13-3.6.22.1-006
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: workflow-delegate-required-restatement
+  canonical_requirement_id: TOSCA13-3.6.23.1.1-003
+  duplicate_requirement_ids:
+  - TOSCA13-3.6.23.1.1-005
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: capability-type-required-restatement
+  canonical_requirement_id: TOSCA13-3.7.2.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-3.7.2.1-003
+  - TOSCA13-3.7.2.2.2-003
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: requirement-capability-required-restatement
+  canonical_requirement_id: TOSCA13-3.7.3.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-3.7.3.1-003
+  - TOSCA13-3.7.3.5-001
+  - TOSCA13-3.7.3.5-004
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: requirement-occurrences-default-restatement
+  canonical_requirement_id: TOSCA13-3.7.3.3-002
+  duplicate_requirement_ids:
+  - TOSCA13-3.7.3.3-003
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: node-template-type-required-restatement
+  canonical_requirement_id: TOSCA13-3.8.3.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-3.8.3.1-003
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: relationship-template-type-required-restatement
+  canonical_requirement_id: TOSCA13-3.8.4.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-3.8.4.1-003
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: group-type-required-restatement
+  canonical_requirement_id: TOSCA13-3.8.5.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-3.8.5.1-003
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: credential-token-type-required-restatement
+  canonical_requirement_id: TOSCA13-5.3.6.1-005
+  duplicate_requirement_ids:
+  - TOSCA13-5.3.6.1-007
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: credential-token-required-restatement
+  canonical_requirement_id: TOSCA13-5.3.6.1-008
+  duplicate_requirement_ids:
+  - TOSCA13-5.3.6.1-010
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: portspec-protocol-required-restatement
+  canonical_requirement_id: TOSCA13-5.3.11.1-002
+  duplicate_requirement_ids:
+  - TOSCA13-5.3.11.1-004
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: csar-root-metadata-restatement
+  canonical_requirement_id: TOSCA13-6.1-004
+  duplicate_requirement_ids:
+  - TOSCA13-6.3-006
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: csar-template-name-restatement
+  canonical_requirement_id: TOSCA13-6.1-006
+  duplicate_requirement_ids:
+  - TOSCA13-6.3-003
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: csar-template-version-restatement
+  canonical_requirement_id: TOSCA13-6.1-007
+  duplicate_requirement_ids:
+  - TOSCA13-6.3-004
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: duplicated-bitrate-table-row
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-001
+  duplicate_requirement_ids:
+  - TOSCA13-3.3.6.7.1-019
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: duplicated-bitrate-table-row
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-003
+  duplicate_requirement_ids:
+  - TOSCA13-3.3.6.7.1-021
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: duplicated-bitrate-table-row
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-005
+  duplicate_requirement_ids:
+  - TOSCA13-3.3.6.7.1-023
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: duplicated-bitrate-table-row
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-007
+  duplicate_requirement_ids:
+  - TOSCA13-3.3.6.7.1-025
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: duplicated-bitrate-table-row
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-009
+  duplicate_requirement_ids:
+  - TOSCA13-3.3.6.7.1-027
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: duplicated-bitrate-table-row
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-011
+  duplicate_requirement_ids:
+  - TOSCA13-3.3.6.7.1-029
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: duplicated-bitrate-table-row
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-013
+  duplicate_requirement_ids:
+  - TOSCA13-3.3.6.7.1-031
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: duplicated-bitrate-table-row
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-015
+  duplicate_requirement_ids:
+  - TOSCA13-3.3.6.7.1-033
+  reason: The records express the same scoped obligation and cannot be verified independently.
+- kind: duplicated-bitrate-table-row
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-017
+  duplicate_requirement_ids:
+  - TOSCA13-3.3.6.7.1-035
+  reason: The records express the same scoped obligation and cannot be verified independently.

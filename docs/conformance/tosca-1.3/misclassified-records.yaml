@@ -1,0 +1,1970 @@
+records:
+- requirement_id: TOSCA13-1.6-001
+  section: '1.6'
+  classification: informative
+  canonical_requirement_id: null
+  reason: RFC 2119 interpretation convention is not an independently testable processor requirement.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.1-003
+  section: '3.1'
+  classification: informative
+  canonical_requirement_id: null
+  reason: The table's prose description is documentation, not processor behavior.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.1.3.1-006
+  section: 3.1.3.1
+  classification: dependent-summary
+  canonical_requirement_id: null
+  reason: Heading for the independently testable duplicate-name scopes in records 007–013.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.1.3.1-014
+  section: 3.1.3.1
+  classification: dependent-summary
+  canonical_requirement_id: null
+  reason: Heading for the independently testable duplicate-template scopes in records 015–018.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.1.3.1-019
+  section: 3.1.3.1
+  classification: dependent-summary
+  canonical_requirement_id: null
+  reason: Heading for the independently testable nested-name scopes in records 020–027.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.1-001
+  section: 3.3.1
+  classification: author-only
+  canonical_requirement_id: null
+  reason: The SHALL governs names chosen by service-template/type authors; it does not impose an independent processor algorithm.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.2.1-002
+  section: 3.3.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.3.1-002
+  section: 3.3.3.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.4.1.1-001
+  section: 3.3.4.1.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.4.1.2-001
+  section: 3.3.4.1.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.5.1.1-001
+  section: 3.3.5.1.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.5.1.2-001
+  section: 3.3.5.1.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.6.1-002
+  section: 3.3.6.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.6.2-004
+  section: 3.3.6.2
+  classification: example
+  canonical_requirement_id: null
+  reason: The generated record is the example that follows the scalar-unit comparison rule, not an additional normative obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.6.3-001
+  section: 3.3.6.3
+  classification: misclassified
+  canonical_requirement_id: null
+  reason: Multiple type-qualified-name rows were collapsed into a malformed value pair.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.6.7.1-019
+  section: 3.3.6.7.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.6.7.1-021
+  section: 3.3.6.7.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-003
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.6.7.1-023
+  section: 3.3.6.7.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-005
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.6.7.1-025
+  section: 3.3.6.7.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-007
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.6.7.1-027
+  section: 3.3.6.7.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-009
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.6.7.1-029
+  section: 3.3.6.7.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-011
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.6.7.1-031
+  section: 3.3.6.7.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-013
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.6.7.1-033
+  section: 3.3.6.7.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-015
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.3.6.7.1-035
+  section: 3.3.6.7.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.3.6.7.1-017
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.4.1-002
+  section: 3.4.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.4.2-001
+  section: 3.4.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.5.1-001
+  section: 3.5.1
+  classification: dependent-summary
+  canonical_requirement_id: null
+  reason: General introduction to required keynames; concrete required-key rules are recorded separately.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.1.1-001
+  section: 3.6.1.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.1.2-002
+  section: 3.6.1.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.2.1-001
+  section: 3.6.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.2.2-002
+  section: 3.6.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.3.4-002
+  section: 3.6.3.4
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.4.1.1-002
+  section: 3.6.4.1.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.4.1.2-002
+  section: 3.6.4.1.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.5.3-002
+  section: 3.6.5.3
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.6.2.1-001
+  section: 3.6.6.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.6.2.2-001
+  section: 3.6.6.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.7.1-019
+  section: 3.6.7.1
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.7.2.1-002
+  section: 3.6.7.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.7.2.2-002
+  section: 3.6.7.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.8.2.1-001
+  section: 3.6.8.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.8.2.2-001
+  section: 3.6.8.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.9.1-003
+  section: 3.6.9.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.6.9.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.9.2-002
+  section: 3.6.9.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.9.2-005
+  section: 3.6.9.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.6.9.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.10.2-003
+  section: 3.6.10.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.6.10.2-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.10.2-008
+  section: 3.6.10.2
+  classification: informative
+  canonical_requirement_id: null
+  reason: Field description says the key is optional; REQUIRED was extracted from the property name, not normative language.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.10.4-002
+  section: 3.6.10.4
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.10.4-006
+  section: 3.6.10.4
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.6.10.2-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.10.5-002
+  section: 3.6.10.5
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.6.10.4-008
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.11.2.1-002
+  section: 3.6.11.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.12.2-003
+  section: 3.6.12.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.6.12.2-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.12.3-002
+  section: 3.6.12.3
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.12.3-005
+  section: 3.6.12.3
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.6.12.2-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.12.4-001
+  section: 3.6.12.4
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.6.10.5-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.13.2.1-002
+  section: 3.6.13.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.13.2.2-002
+  section: 3.6.13.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.14.1-001
+  section: 3.6.14.1
+  classification: informative
+  canonical_requirement_id: null
+  reason: Cross-reference contrasting property and parameter definitions; it is not a parameter requirement.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.14.1-002
+  section: 3.6.14.1
+  classification: misclassified
+  canonical_requirement_id: null
+  reason: The prose calls the represented data type 'required' while the adjacent normative note explicitly makes parameter type optional.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.14.2-002
+  section: 3.6.14.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.14.2-004
+  section: 3.6.14.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.14.2-006
+  section: 3.6.14.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.14.2-010
+  section: 3.6.14.2
+  classification: informative
+  canonical_requirement_id: null
+  reason: The note explicitly states that parameter type is not required; keyword extraction produced the opposite strength.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.14.3-001
+  section: 3.6.14.3
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.6.14.2-015
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.15.1-002
+  section: 3.6.15.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.16.2.1-002
+  section: 3.6.16.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.16.2.2-002
+  section: 3.6.16.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.16.2.3-002
+  section: 3.6.16.2.3
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.16.2.4-001
+  section: 3.6.16.2.4
+  classification: informative
+  canonical_requirement_id: null
+  reason: A permission to use an extended notation, not an independently testable MUST-level condition.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.16.2.4-002
+  section: 3.6.16.2.4
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.17.2.1-002
+  section: 3.6.17.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.17.2.2-002
+  section: 3.6.17.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.17.2.3-002
+  section: 3.6.17.2.3
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.18.2.1-002
+  section: 3.6.18.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.18.2.2-002
+  section: 3.6.18.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.19.2-002
+  section: 3.6.19.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.20.2.1-002
+  section: 3.6.20.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.20.2.2-002
+  section: 3.6.20.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.21.2-002
+  section: 3.6.21.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.21.2-004
+  section: 3.6.21.2
+  classification: dependent-grammar-fragment
+  canonical_requirement_id: null
+  reason: One alternative value of the required node selector; it cannot be tested independently from the node key and the template alternative.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.21.2-005
+  section: 3.6.21.2
+  classification: dependent-grammar-fragment
+  canonical_requirement_id: null
+  reason: One alternative value of the required node selector; it cannot be tested independently from the node key and the type alternative.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.22.1-006
+  section: 3.6.22.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.6.22.1-004
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.22.3.1-001
+  section: 3.6.22.3.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.22.3.2-001
+  section: 3.6.22.3.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.23.1.1-005
+  section: 3.6.23.1.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.6.23.1.1-003
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.23.1.2.1-001
+  section: 3.6.23.1.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.23.1.2.2-001
+  section: 3.6.23.1.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.23.2.2-002
+  section: 3.6.23.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.23.3.2.1-001
+  section: 3.6.23.3.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.23.3.2.2-001
+  section: 3.6.23.3.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.23.4.2.1-001
+  section: 3.6.23.4.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.23.4.2.2-001
+  section: 3.6.23.4.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.24.2-002
+  section: 3.6.24.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.25.2.1-001
+  section: 3.6.25.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.25.2.2-001
+  section: 3.6.25.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.25.2.3-001
+  section: 3.6.25.2.3
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.25.3-001
+  section: 3.6.25.3
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.26.2-001
+  section: 3.6.26.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.6.27.2-001
+  section: 3.6.27.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.1.2-002
+  section: 3.7.1.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.1.3-001
+  section: 3.7.1.3
+  classification: metamodel-declaration
+  canonical_requirement_id: null
+  reason: Declares the abstract TOSCA Entity Type in the metamodel; it is not an independently addressable YAML processor algorithm.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.1.3-002
+  section: 3.7.1.3
+  classification: author-only
+  canonical_requirement_id: null
+  reason: Prohibits profiles from creating new top-level base type families; ordinary service templates cannot derive directly from the abstract
+    metamodel Entity Type.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.2.1-003
+  section: 3.7.2.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.7.2.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.2.2.1-002
+  section: 3.7.2.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.2.2.2-002
+  section: 3.7.2.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.2.2.2-003
+  section: 3.7.2.2.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.7.2.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.3.1-003
+  section: 3.7.3.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.7.3.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.3.2.1-001
+  section: 3.7.3.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.3.2.2-001
+  section: 3.7.3.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.3.2.3-002
+  section: 3.7.3.2.3
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.3.3-003
+  section: 3.7.3.3
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.7.3.3-002
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.3.5-001
+  section: 3.7.3.5
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.7.3.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.3.5-004
+  section: 3.7.3.5
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.7.3.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.4.2-002
+  section: 3.7.4.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.5.2-002
+  section: 3.7.5.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.6.2-002
+  section: 3.7.6.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.7.2-002
+  section: 3.7.7.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.9.2-002
+  section: 3.7.9.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.10.2-002
+  section: 3.7.10.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.11-001
+  section: 3.7.11
+  classification: informative
+  canonical_requirement_id: null
+  reason: Conceptual explanation of group membership, not a processor conformance rule.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.11.1-010
+  section: 3.7.11.1
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.11.2-001
+  section: 3.7.11.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.12.1-007
+  section: 3.7.12.1
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.7.12.2-002
+  section: 3.7.12.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.1.2-001
+  section: 3.8.1.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.2.2.1-002
+  section: 3.8.2.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.2.2.2-002
+  section: 3.8.2.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.2.2.3-002
+  section: 3.8.2.2.3
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.2.2.3-003
+  section: 3.8.2.2.3
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.2.2.3-004
+  section: 3.8.2.2.3
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.2.2.3-005
+  section: 3.8.2.2.3
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.2.2.3-008
+  section: 3.8.2.2.3
+  classification: example
+  canonical_requirement_id: null
+  reason: Generated from an explanatory list of extended-grammar uses, not a separate assignment obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.2.2.3-009
+  section: 3.8.2.2.3
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.3.1-003
+  section: 3.8.3.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.8.3.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.3.2-001
+  section: 3.8.3.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.4.1-003
+  section: 3.8.4.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.8.4.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.4.2-001
+  section: 3.8.4.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.5.1-003
+  section: 3.8.5.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.8.5.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.5.2-001
+  section: 3.8.5.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.6.2-001
+  section: 3.8.6.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.7.2-002
+  section: 3.8.7.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.8.2-002
+  section: 3.8.8.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.8.2-004
+  section: 3.8.8.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.9.2-002
+  section: 3.8.9.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.10.2-002
+  section: 3.8.10.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.10.2-004
+  section: 3.8.10.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.11.2-002
+  section: 3.8.11.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.11.2-004
+  section: 3.8.11.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.12.1-002
+  section: 3.8.12.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.8.13.2-002
+  section: 3.8.13.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.9.2-002
+  section: 3.9.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.9.2.1.1-002
+  section: 3.9.2.1.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.9.2.2.1-002
+  section: 3.9.2.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.9.2.3-002
+  section: 3.9.2.3
+  classification: informative
+  canonical_requirement_id: null
+  reason: Historical note that relationship_templates is optional; REQUIRED refers to TOSCA 1.0.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.9.2.3.1-002
+  section: 3.9.2.3.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.9.2.4.1-002
+  section: 3.9.2.4.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.9.2.5.1-002
+  section: 3.9.2.5.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.9.2.6.1-002
+  section: 3.9.2.6.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.9.2.7.1-002
+  section: 3.9.2.7.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.9.2.7.1-004
+  section: 3.9.2.7.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.1-016
+  section: 3.10.1
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.1-023
+  section: 3.10.1
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.2-001
+  section: 3.10.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.2.1-001
+  section: 3.10.2.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.1.3.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.2.1-002
+  section: 3.10.2.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.1.3.1-002
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.2.1-003
+  section: 3.10.2.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.1.2-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.1-001
+  section: 3.10.3.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-3.10.1-002
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.1.1-001
+  section: 3.10.3.1.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.1.2-001
+  section: 3.10.3.1.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.2.1-001
+  section: 3.10.3.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.2.2-001
+  section: 3.10.3.2.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.3.1-001
+  section: 3.10.3.3.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.3.2-001
+  section: 3.10.3.3.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.4.1-001
+  section: 3.10.3.4.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.4.2-001
+  section: 3.10.3.4.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.5.1-001
+  section: 3.10.3.5.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.5.2-001
+  section: 3.10.3.5.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.6.1-001
+  section: 3.10.3.6.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.7.1-001
+  section: 3.10.3.7.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.7.2-001
+  section: 3.10.3.7.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.8.1-001
+  section: 3.10.3.8.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.8.2-001
+  section: 3.10.3.8.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.9.1-001
+  section: 3.10.3.9.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.9.2-001
+  section: 3.10.3.9.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.10.1-001
+  section: 3.10.3.10.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.10.2-001
+  section: 3.10.3.10.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.11.1-001
+  section: 3.10.3.11.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.11.2-001
+  section: 3.10.3.11.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.12.1-001
+  section: 3.10.3.12.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.12.2-001
+  section: 3.10.3.12.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.13.1-001
+  section: 3.10.3.13.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.13.2-001
+  section: 3.10.3.13.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.14.1-001
+  section: 3.10.3.14.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.14.2-001
+  section: 3.10.3.14.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.15.1-001
+  section: 3.10.3.15.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.15.2-001
+  section: 3.10.3.15.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.16.1-001
+  section: 3.10.3.16.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.16.2-001
+  section: 3.10.3.16.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.17.1-001
+  section: 3.10.3.17.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-3.10.3.17.2-001
+  section: 3.10.3.17.2
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-4.3.1.1-001
+  section: 4.3.1.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-4.3.2.1-001
+  section: 4.3.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-4.3.3.1-001
+  section: 4.3.3.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-4.4.1.1-001
+  section: 4.4.1.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-4.4.1.1-002
+  section: 4.4.1.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-4.4.2.1-001
+  section: 4.4.2.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-4.5.1.1-001
+  section: 4.5.1.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-4.6.1.1-001
+  section: 4.6.1.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-4.7.1.1-001
+  section: 4.7.1.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-4.8.1.1-001
+  section: 4.8.1.1
+  classification: dependent-grammar-umbrella
+  canonical_requirement_id: null
+  reason: The generated umbrella cannot differ from the atomic key/type/required/default rows of the same table.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5-001
+  section: '5'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: Section-wide summary; every normative profile declaration must be compared atomically instead.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.3.1.1-001
+  section: 5.3.1.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.3.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.3.6.1-007
+  section: 5.3.6.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.3.6.1-005
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.3.6.1-010
+  section: 5.3.6.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.3.6.1-008
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.3.6.2-001
+  section: 5.3.6.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.3.6-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.3.7.2-001
+  section: 5.3.7.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.3.7-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.3.8.2-001
+  section: 5.3.8.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.3.8-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.3.8.4-002
+  section: 5.3.8.4
+  classification: informative
+  canonical_requirement_id: null
+  reason: States that requiredness depends on usage context and defines no independently testable condition.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.3.9.2-001
+  section: 5.3.9.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.3.9-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.3.9.4-002
+  section: 5.3.9.4
+  classification: informative
+  canonical_requirement_id: null
+  reason: States that requiredness depends on usage context and defines no independently testable condition.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.3.11.1-004
+  section: 5.3.11.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.3.11.1-002
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.3.11.2-001
+  section: 5.3.11.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.3.11-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.4.1.1-001
+  section: 5.4.1.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.4.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.4.2.1-001
+  section: 5.4.2.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.4.2-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.4.3.1.1-001
+  section: 5.4.3.1.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.4.3.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.4.3.3.1-001
+  section: 5.4.3.3.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.4.3.3-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.4.3.4.1-001
+  section: 5.4.3.4.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.4.3.4-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.4.4.1.1-001
+  section: 5.4.4.1.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.4.4.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.4.4.3.1-001
+  section: 5.4.4.3.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.4.4.3-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.4.4.4.1-001
+  section: 5.4.4.4.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.4.4.4-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.4.5.1.1-001
+  section: 5.4.5.1.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.4.5.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.1.1-001
+  section: 5.5.1.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.5.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.2.1-001
+  section: 5.5.2.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.5.2-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.3.2-001
+  section: 5.5.3.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.5.3-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.4.2-001
+  section: 5.5.4.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.5.4-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.5.2-001
+  section: 5.5.5.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.5.5-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.6.2-001
+  section: 5.5.6.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.5.6-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.7.1-004
+  section: 5.5.7.1
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.7.3-001
+  section: 5.5.7.3
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.5.7-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.8.1-001
+  section: 5.5.8.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.5.8-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.9.2-001
+  section: 5.5.9.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.5.9-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.10.2-001
+  section: 5.5.10.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.5.10-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.11.2-001
+  section: 5.5.11.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.5.11-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.12.1-003
+  section: 5.5.12.1
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.12.1-007
+  section: 5.5.12.1
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.12.1-011
+  section: 5.5.12.1
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.12.2-001
+  section: 5.5.12.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.5.12-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.13.2-001
+  section: 5.5.13.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.5.13-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.5.14.2-001
+  section: 5.5.14.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.5.14-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.7.1.2-001
+  section: 5.7.1.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.7.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.7.2.1-001
+  section: 5.7.2.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.7.2-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.7.3.1-001
+  section: 5.7.3.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.7.3-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.7.4.1-001
+  section: 5.7.4.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.7.4-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.7.5.3-001
+  section: 5.7.5.3
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.7.5-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.7.6.1-001
+  section: 5.7.6.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.7.6-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.8.1-001
+  section: 5.8.1
+  classification: author-only
+  canonical_requirement_id: null
+  reason: Permission for type designers to omit implementation artifacts, not a processor algorithm.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.8.3.1-001
+  section: 5.8.3.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.8.3-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.8.4.1-001
+  section: 5.8.4.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.8.4-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.8.5.1-001
+  section: 5.8.5.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.8.5-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.9.1.3-001
+  section: 5.9.1.3
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.9.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.9.2.3-001
+  section: 5.9.2.3
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.9.2-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.9.3.3-001
+  section: 5.9.3.3
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.9.3-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.9.4.3-001
+  section: 5.9.4.3
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.9.4-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.9.5.2-001
+  section: 5.9.5.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.9.5-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.9.6.2-001
+  section: 5.9.6.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.9.6-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.9.7.2-001
+  section: 5.9.7.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.9.7-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.9.8.2-001
+  section: 5.9.8.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.9.8-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.9.9.2-001
+  section: 5.9.9.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.9.9-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.9.10.2-001
+  section: 5.9.10.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.9.10-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.9.11.3-001
+  section: 5.9.11.3
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.9.11-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.9.12.1-001
+  section: 5.9.12.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.9.12-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.9.12.1-004
+  section: 5.9.12.1
+  classification: misclassified
+  canonical_requirement_id: null
+  reason: Extractor changed the normative host requirement assignment into capabilities.host.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.9.13.1-001
+  section: 5.9.13.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.9.13-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.9.14.1-001
+  section: 5.9.14.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.9.14-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.10.1.1-001
+  section: 5.10.1.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.10.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.11.1.1-001
+  section: 5.11.1.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.11.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.11.2.1-001
+  section: 5.11.2.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.11.2-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.11.3.1-001
+  section: 5.11.3.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.11.3-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.11.4.1-001
+  section: 5.11.4.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.11.4-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-5.11.5.1-001
+  section: 5.11.5.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-5.11.5-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-6.3-003
+  section: '6.3'
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-6.1-006
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-6.3-004
+  section: '6.3'
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-6.1-007
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-6.3-006
+  section: '6.3'
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-6.1-004
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-7.2-001
+  section: '7.2'
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-8.3.1.2-001
+  section: 8.3.1.2
+  classification: informative
+  canonical_requirement_id: null
+  reason: Use-case rationale ('typically required'), not normative processor behavior.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-8.4.1-001
+  section: 8.4.1
+  classification: informative
+  canonical_requirement_id: null
+  reason: Use-case design guidance without an atomic validation condition.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-8.4.2-002
+  section: 8.4.2
+  classification: author-only
+  canonical_requirement_id: null
+  reason: Permission for service-template designers, not processor behavior.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-8.5.1.1-033
+  section: 8.5.1.1
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-8.5.1.3-001
+  section: 8.5.1.3
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-8.5.1-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-8.5.2.1-007
+  section: 8.5.2.1
+  classification: malformed
+  canonical_requirement_id: null
+  reason: The source sentence is truncated ('and.') and cannot define an independently testable rule.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-8.5.2.3-001
+  section: 8.5.2.3
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-8.5.2-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-8.5.3.2-001
+  section: 8.5.3.2
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-8.5.3-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-8.5.4.1-001
+  section: 8.5.4.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-8.5.4-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-8.5.5.1-001
+  section: 8.5.5.1
+  classification: duplicate
+  canonical_requirement_id: TOSCA13-8.5.5-001
+  reason: Duplicate of the canonical record.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-8.6.2-002
+  section: 8.6.2
+  classification: informative
+  canonical_requirement_id: null
+  reason: Introduction to an example use case, not a normative processor obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.1-001
+  section: '14.1'
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.1-002
+  section: '14.1'
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.1-003
+  section: '14.1'
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.1-004
+  section: '14.1'
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.1-005
+  section: '14.1'
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.1-006
+  section: '14.1'
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.1-007
+  section: '14.1'
+  classification: informative
+  canonical_requirement_id: null
+  reason: Informative/example text is not an atomic conformance obligation.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.2-001
+  section: '14.2'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.2-002
+  section: '14.2'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.2-003
+  section: '14.2'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.2-004
+  section: '14.2'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.2-005
+  section: '14.2'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.2-006
+  section: '14.2'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.2-007
+  section: '14.2'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.2-008
+  section: '14.2'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.2-009
+  section: '14.2'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.2-010
+  section: '14.2'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.2-011
+  section: '14.2'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.3-001
+  section: '14.3'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.3-002
+  section: '14.3'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: Restates all lower-level parsing obligations.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.3-003
+  section: '14.3'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: Restates all lower-level recognition obligations.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.3-004
+  section: '14.3'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: Restates all lower-level rejection obligations.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.3-005
+  section: '14.3'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.3-006
+  section: '14.3'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.3-007
+  section: '14.3'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.3-008
+  section: '14.3'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: Restates all atomic import-resolution obligations.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.3-009
+  section: '14.3'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: Restates the atomic errors in §3.1.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.3-010
+  section: '14.3'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: Restates the atomic errors in §3.2.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.3-011
+  section: '14.3'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: Restates the atomic errors in §3.6.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.4-001
+  section: '14.4'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.5-001
+  section: '14.5'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.6-001
+  section: '14.6'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
+- requirement_id: TOSCA13-14.6-002
+  section: '14.6'
+  classification: conformance-umbrella
+  canonical_requirement_id: null
+  reason: This restates a set of lower-level obligations and is not independently testable.
+  recommended_action: exclude from aggregate denominator; repair the catalog extractor before assigning a replacement ID
