@@ -501,7 +501,7 @@ node_types:
         constraints:
         - greater_or_equal: 0
         default: 0
-        required: false
+        required: true
       is_default:
         description: >-
           Set is_default=true to apply a default gateway route on the running compute instance to

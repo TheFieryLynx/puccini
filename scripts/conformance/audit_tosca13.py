@@ -169,6 +169,23 @@ for requirement_id in CSAR_REMEDIATED_IDS:
         ],
     }
 
+NETWORK_PORT_ORDER_REQUIRED_ID = "TOSCA13-8.5.2.3-008"
+DIRECT_TESTS[NETWORK_PORT_ORDER_REQUIRED_ID] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeNetworkPortEffectiveDefinition",
+        "tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeNetworkPortAssignments",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeNetworkPortRequirednessRefinement",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeNetworkPortAssignments",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation",
+    ],
+}
+
 INTRINSIC_FUNCTION_IDS = {
     "TOSCA13-4.3.1.2-003",
     "TOSCA13-4.3.3.2-003", "TOSCA13-4.3.3.2-006", "TOSCA13-4.3.3.2-010",
@@ -677,6 +694,20 @@ for requirement_id in CSAR_REMEDIATED_IDS:
         "expected_tests_failed": True,
         "production_diff_restored": True,
     }
+MUTATION_CHECKS[NETWORK_PORT_ORDER_REQUIRED_ID] = {
+    "performed": True,
+    "mutation": (
+        "Temporarily restored the bundled Port.order declaration to "
+        "required: false; the effective-definition and required-refinement "
+        "tests failed on the target semantics."
+    ),
+    "affected_tests": [
+        "TestNormativeNetworkPortEffectiveDefinition",
+        "TestNormativeNetworkPortRequirednessRefinement",
+    ],
+    "expected_tests_failed": True,
+    "production_diff_restored": True,
+}
 
 VERIFIED_IMPLEMENTED = set(DIRECT_TESTS)
 
@@ -711,6 +742,7 @@ CONFIRMED_NON_COMPLIANT = OLD_NON_COMPLIANT - {
     "TOSCA13-4.3.3.2-010",
     "TOSCA13-4.4.1.2-003",
     "TOSCA13-5.9.12.1-004",
+    NETWORK_PORT_ORDER_REQUIRED_ID,
 } - CSAR_REMEDIATED_IDS
 
 CONSTRAINT_NON_COMPLIANT = {
@@ -1921,6 +1953,48 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
                 "archive entry selection records TOSCA.meta/root-fallback provenance; "
                 "after exact v1.3 grammar selection the service reader validates the "
                 "applicable root metadata or TOSCA 1.3 meta-file contract"
+            ),
+        }, None
+    if requirement_id == NETWORK_PORT_ORDER_REQUIRED_ID:
+        return "implemented", {
+            "entry_point": "parser.Context.ReadRoot",
+            "packages": [
+                "assets/tosca/profiles/simple/1.3",
+                "tosca/parser",
+                "tosca/grammars/tosca_v1_3",
+            ],
+            "files": [
+                "assets/tosca/profiles/simple/1.3/nodes.yaml",
+                "tosca/parser/phase1-read.go",
+                "tosca/parser/phase3-hierarchies.go",
+                "tosca/parser/phase4-inheritance.go",
+                "tosca/parser/phase5-rendering.go",
+                "tests/conformance/tosca_1_3/normative_profile_test.go",
+            ],
+            "symbols": [
+                "tosca.nodes.network.Port.properties.order.required",
+                "grammars.GetImplicitImportSpec",
+                "parser.Context.goReadImports",
+                "parser.Context.AddHierarchies",
+                "parser.Context.Inherit",
+                "tosca_v2_0.PropertyDefinition.IsRequired",
+                "tosca_v2_0.PropertyDefinition.Inherit",
+            ],
+            "parser_phase": "implicit-profile/read and inheritance/rendering",
+            "execution_path": [
+                "parser.Context.ReadRoot",
+                "grammars.GetImplicitImportSpec",
+                "parser.Context.goReadImports",
+                "tosca_v1_3.ReadFile",
+                "parser.Context.AddHierarchies",
+                "parser.Context.Inherit",
+                "tosca_v2_0.PropertyDefinition.Inherit",
+                "parser.Context.Render",
+            ],
+            "trace_summary": (
+                "ordinary v1.3 parse loads the corrected bundled Port definition "
+                "through the implicit import, then hierarchy/inheritance expose "
+                "required=true to effective definitions, defaults, and refinement checks"
             ),
         }, None
     if requirement_id in VERIFIED_IMPLEMENTED:

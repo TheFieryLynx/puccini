@@ -8,15 +8,15 @@ This matrix separates implementation, verification, and applicability. It is an 
 - Counted atomic/non-duplicate records: **2773**.
 - Applicable counted records: **2632**.
 - Stable applicable atomic MUST denominator: **223**; remaining MUST implementation unknown: **0**.
-- Confirmed non-compliant catalog records: **28**; atomic/non-duplicate violations: **24**.
+- Confirmed non-compliant catalog records: **27**; atomic/non-duplicate violations: **23**.
 - Proven missing catalog records: **2**; unique capabilities: **2**.
 
 | Implementation Status | Records |
 |---|---:|
-| implemented | 736 |
+| implemented | 737 |
 | partial | 53 |
 | missing | 2 |
-| non-compliant | 28 |
+| non-compliant | 27 |
 | unknown | 2282 |
 
 | Verification Status | Records |
@@ -36,7 +36,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Strength | Applicable atomic denominator | Implemented | Implementation coverage | Implemented + verified | Verified conformance coverage | Broad test evidence | Broad evidence coverage |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| MUST/SHALL/REQUIRED | 223 | 190 | 85.20% | 140 | 62.78% | 167 | 74.89% |
+| MUST/SHALL/REQUIRED | 223 | 191 | 85.65% | 141 | 63.23% | 167 | 74.89% |
 | SHOULD/RECOMMENDED | 23 | 0 | 0.00% | 0 | 0.00% | 0 | 0.00% |
 | MAY/OPTIONAL | 693 | 99 | 14.29% | 0 | 0.00% | 95 | 13.71% |
 
@@ -52,7 +52,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | 5 | 978 | 395 | 6 | 0 | 5 | 572 | 6 | 393 | 573 | 6 |
 | 6 | 44 | 11 | 0 | 0 | 3 | 30 | 9 | 0 | 31 | 4 |
 | 7 | 25 | 0 | 0 | 0 | 0 | 25 | 0 | 0 | 25 | 0 |
-| 8 | 188 | 67 | 1 | 0 | 1 | 119 | 1 | 67 | 120 | 0 |
+| 8 | 188 | 68 | 1 | 0 | 0 | 119 | 1 | 67 | 120 | 0 |
 
 ## Coverage by parser phase
 
@@ -61,7 +61,8 @@ This matrix separates implementation, verification, and applicability. It is an 
 | csar/read | 46 | 11 | 0 | 0 | 3 | 32 | 9 | 0 | 31 | 6 |
 | hierarchy | 62 | 0 | 0 | 0 | 2 | 60 | 2 | 0 | 59 | 1 |
 | hierarchy/rendering | 3 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 3 | 0 |
-| implicit-profile/read | 576 | 460 | 0 | 0 | 4 | 112 | 4 | 460 | 112 | 0 |
+| implicit-profile/read | 575 | 460 | 0 | 0 | 3 | 112 | 3 | 460 | 112 | 0 |
+| implicit-profile/read and inheritance/rendering | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | inheritance | 20 | 0 | 2 | 0 | 0 | 18 | 0 | 0 | 20 | 0 |
 | inheritance/rendering | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 |
 | inheritance/rendering/normalization | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
@@ -594,7 +595,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | 8.5.1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
 | 8.5.1.3 | 34 | 34 | 0 | 0 | 0 | 0 | 0 | 34 | 0 | 0 |
 | 8.5.2 | 2 | 1 | 0 | 0 | 0 | 1 | 0 | 1 | 1 | 0 |
-| 8.5.2.3 | 24 | 23 | 0 | 0 | 1 | 0 | 1 | 23 | 0 | 0 |
+| 8.5.2.3 | 24 | 24 | 0 | 0 | 0 | 0 | 1 | 23 | 0 | 0 |
 | 8.5.3 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
 | 8.5.3.2 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
 | 8.5.4 | 2 | 1 | 0 | 0 | 0 | 1 | 0 | 1 | 1 | 0 |

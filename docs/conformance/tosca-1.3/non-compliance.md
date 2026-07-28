@@ -1,6 +1,6 @@
 # Confirmed TOSCA 1.3 non-compliance
 
-Confirmed non-compliant catalog records: **28**. Duplicate records are shown individually but excluded from atomic coverage denominators.
+Confirmed non-compliant catalog records: **27**. Duplicate records are shown individually but excluded from atomic coverage denominators.
 Every behavioral claim below was reproduced on 2026-07-27 or directly compared against the bundled profile. Temporary probes were removed.
 
 ## TOSCA13-3.10.2.1-003
@@ -272,16 +272,6 @@ Every behavioral claim below was reproduced on 2026-07-27 or directly compared a
 - Responsible path: `GetServiceTemplateURL → ReadMetaFromURL or GetRootPath fallback → service-template parse`
 - Fix phase: **csar/read**
 - Required regression test: Direct in-memory CSAR negative test asserting the missing/invalid metadata diagnostic.
-
-## TOSCA13-8.5.2.3-008
-
-- Normative basis: §8.5.2.3 **Definition** — `tosca.nodes.network.Port.properties.order` is required.
-- Minimal reproducer: Load bundled profile `assets/tosca/profiles/simple/1.3/nodes.yaml` and inspect `tosca.nodes.network.port.properties.order.required`.
-- Actual Puccini result: tosca.nodes.network.Port.properties.order.required: false
-- Expected result: tosca.nodes.network.Port.properties.order.required: true
-- Responsible path: `implicit/simple profile load → namespaces → hierarchy → inheritance`
-- Fix phase: **implicit-profile/read or hierarchy**
-- Required regression test: Direct normative-profile assertion for `tosca.nodes.network.port.properties.order.required`.
 
 ## Rejected former non-compliant claim
 

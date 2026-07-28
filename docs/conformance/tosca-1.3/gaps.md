@@ -7,7 +7,7 @@ Implementation gaps and verification gaps are counted independently.
 | Rank | Area | Records | Implementation unknown/missing/partial | Non-compliant | Not directly verified |
 |---:|---|---:|---:|---:|---:|
 | 1 | grammar | 1107 | 972 | 3 | 1104 |
-| 2 | normative-type | 490 | 111 | 4 | 486 |
+| 2 | normative-type | 489 | 111 | 3 | 486 |
 | 3 | semantic | 409 | 386 | 10 | 399 |
 | 4 | assignment | 120 | 120 | 0 | 120 |
 | 5 | constraint | 98 | 97 | 1 | 97 |
@@ -223,7 +223,7 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-5.5.3.2-008` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.5.3.2-010` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.5.3.2-011` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-- … 390 additional records are available in `coverage.yaml`.
+- … 389 additional records are available in `coverage.yaml`.
 
 ## semantic
 
