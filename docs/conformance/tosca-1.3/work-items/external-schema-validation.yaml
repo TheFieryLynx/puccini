@@ -1,0 +1,176 @@
+requirements:
+  - requirement_id: TOSCA13-3.6.10.5-005
+    section: "3.6.10.5"
+    section_title: "Additional Requirements"
+    normative_rule: "If a schema keyname is provided, its string value MUST represent a valid schema definition that matches the recognized external type named by the type keyname, as described by the corresponding schema specification."
+    current_implementation_status: missing
+    current_verification_status: untested
+    implementation_status: implemented
+    verification_status: verified
+
+    interpretation:
+      schema_forms:
+        - "inline string operand of a schema constraint"
+      schema_languages:
+        - "JSON Schema Draft 4 for json/tosca.datatypes.json"
+        - "XML Schema 1.0 for xml/tosca.datatypes.xml"
+      validation_targets:
+        - "the external schema declaration itself"
+      validation_phase: "TOSCA 1.3 post-inheritance render hook, after effective property type resolution"
+      inheritance_behavior: "Inherited and retained schema constraints are compiled as part of each effective definition; newly added refinement constraints are compiled independently."
+      resolution_base: "No external-resource base is normative; an operation-local synthetic URN is used and every external reference is denied."
+      network_required: false
+      unspecified_aspects:
+        - "schema versions beyond the JSON Schema Draft 4 and XML Schema examples"
+        - "base URI and retrieval of nested external schema references"
+        - "resource limits, timeouts, cache identity, and diagnostic categories"
+        - "validation of defaults, assignments, function results, and normalized values; section 3.6.10.5 makes value validation MAY"
+        - "the section 3.6.10.2 external-schema table spelling conflicts with the section 3.6.10.4 grammar and section 3.6.10.5 schema wording"
+
+    implementation_symbols:
+      - tosca_v1_3.ReadPropertyDefinition
+      - tosca_v1_3.ReadConstraintClause
+      - tosca_v1_3.validateExternalPropertySchemas
+      - tosca_v1_3.collectExternalSchemaDeclarations
+      - tosca_v1_3.externalSchemaValidator.compileCached
+      - tosca_v1_3.compileJSONSchema
+      - tosca_v1_3.compileXMLSchema
+
+    planned_tests:
+      valid_schema:
+        - TestExternalSchemaValidDeclarations
+      invalid_schema:
+        - TestExternalSchemaInvalidDeclarations
+      valid_value:
+        - TestExternalSchemaValueValidationIsOptional
+      invalid_value:
+        - TestExternalSchemaValueValidationIsOptional
+      defaults:
+        - TestExternalSchemaValueValidationIsOptional
+      assignments:
+        - TestExternalSchemaValueValidationIsOptional
+      inheritance:
+        - TestExternalSchemaInheritance
+      refinement:
+        - TestExternalSchemaInheritance
+      functions:
+        - TestExternalSchemaValueValidationIsOptional
+      uri_resolution:
+        - TestExternalSchemaExternalReferencesAreDenied
+        - TestExternalSchemaImportedDefinition
+      offline_behavior:
+        - TestExternalSchemaExternalReferencesAreDenied
+      security:
+        - TestExternalSchemaSecurityLimits
+      determinism:
+        - TestExternalSchemaDeterminismAndCache
+      regression:
+        - TestExternalSchemaTosca20Isolation
+        - TestExternalSchemaImportedDefinition
+        - TestPropertyAttributeReflectionEffectiveDefinitions
+        - TestOperatingSystemCapabilityNormalization
+        - TestIntrinsicFunctionResolution
+
+    decision_record: docs/decisions/0007-tosca-1.3-external-schema-validation.md
+
+    architecture:
+      declaration: "The v1.3 constraint reader validates a non-null string operand and rejects the TOSCA 2.0 validation keyname."
+      resolution: "The effective property DataType ancestry selects json or xml; the top-level schema is inline and no external resource is resolved."
+      compilation: "The v1.3 file render hook compiles each unique bounded schema after lookup/inheritance and caches result categories per processing operation."
+      value_validation: "Not enabled: the next sentence in section 3.6.10.5 makes schema-based property-value validation MAY."
+      version_isolation: "Only tosca_v1_3 File.Render and ServiceFile.Render activate the policy."
+
+    security:
+      supported_schemes: []
+      network_policy: "deny all external retrieval; no redirects or destination connections occur"
+      filesystem_policy: "deny all host filesystem and device/socket access"
+      inline_schema_limit_bytes: 1048576
+      maximum_structure_depth: 64
+      maximum_json_references: 128
+      xml_compile_timeout: "1s per unique schema"
+      external_references: "denied before retrieval"
+      internal_references: "allowed within bounds; valid recursive JSON Schema references compile"
+      cache_identity: "external type plus SHA-256 of exact inline bytes"
+      cache_scope: "one File.Render or ServiceFile.Render operation"
+      diagnostic_identifier: "non-sensitive SHA-256 prefix"
+
+    dependencies:
+      - module: github.com/santhosh-tekuri/jsonschema/v6
+        version: v6.0.2
+        license: Apache-2.0
+        purpose: "JSON Schema Draft 4 compilation with an injected deny-all URL loader"
+      - module: github.com/lestrrat-go/helium
+        version: v0.7.0
+        license: MIT
+        purpose: "pure-Go XML Schema 1.0 compilation with deny-all filesystem and secure XML parser policy"
+
+    test_first_evidence:
+      baseline_command: "go test -count=1 ./tests/conformance/tosca_1_3 -run '^TestExternalSchemaInvalidDeclarations$'"
+      baseline_failed: true
+      failure_reason: "Malformed, empty, wrong-language, and path-like schema strings were accepted because no external schema compiler ran."
+      focused_tests_passed: true
+
+    mutation_check:
+      performed: true
+      mutations:
+        - description: "Disabled the TOSCA 1.3 external-schema render hooks."
+          affected_tests:
+            - TestExternalSchemaInvalidDeclarations
+          expected_tests_failed: true
+        - description: "Allowed a traversal/file JSON reference through a safe in-memory fake loader."
+          affected_tests:
+            - TestExternalSchemaExternalReferencesAreDenied/JSON_file_traversal
+          expected_tests_failed: true
+        - description: "Disabled HTTP destination policy and simulated a safe in-memory loopback response."
+          affected_tests:
+            - TestExternalSchemaExternalReferencesAreDenied/JSON_loopback
+          expected_tests_failed: true
+        - description: "Bypassed the operation-local compilation cache."
+          affected_tests:
+            - TestExternalSchemaCompileCacheIsOperationLocal
+          expected_tests_failed: true
+        - description: "Raised the inline schema size limit above the tested 1 MiB boundary."
+          affected_tests:
+            - TestExternalSchemaSecurityLimits
+          expected_tests_failed: true
+      not_applicable:
+        - "Default-value and function-result mutations target the optional value-validation MAY, not this frozen MUST."
+        - "An inherited declaration is already validated at its defining effective property; there is no mandatory value application to disable."
+        - "External-reference cycles cannot be fetched because all external references are denied; bounded valid in-document recursion remains supported."
+        - "Applying a schema to an unrelated property's value would mutate optional value validation, which is not implemented."
+      production_diff_restored: true
+
+    verification:
+      focused:
+        - "go test -count=1 ./tosca/grammars/tosca_v1_3 ./tests/conformance/tosca_1_3 -run '^TestExternalSchema'"
+        - "go test -count=1 ./tests/conformance/tosca_1_3 -run '^(TestPropertyAttributeReflection|TestOperatingSystemCapability)'"
+        - "go test -count=1 ./tests/conformance/tosca_1_3 -run '^TestIntrinsicFunction'"
+        - "go test -count=1 ./tests/conformance/tosca_1_3 -run '^(TestImport|TestQualifiedImported|TestDuplicateImport|TestConflictingImported)'"
+        - "go test -count=1 ./tosca/csar"
+        - "go test -count=1 ./tests/conformance/tosca_2_0"
+      full:
+        - "go test -count=1 ./..."
+        - "go test -race -count=1 ./..."
+        - "go vet ./..."
+        - "git diff --check"
+      dependency_license_verified: true
+      audit:
+        command: python scripts/conformance/audit_tosca13.py
+        generated_twice: true
+        sha256_match: true
+        denominator: 223
+        implementation:
+          implemented: 185
+          partial: 32
+          missing: 0
+          non_compliant: 6
+        verification:
+          verified: 141
+          indirectly_tested: 26
+          untested: 56
+      protected_blocks:
+        intrinsic_functions: "22/22 implemented/verified"
+        imports_namespaces: "34/34 implemented/verified"
+        grammar_structural: "75/75 implemented/verified"
+        operating_system_capability_normalization: "1/1 implemented/verified"
+        property_attribute_reflection: "1/1 implemented/verified"

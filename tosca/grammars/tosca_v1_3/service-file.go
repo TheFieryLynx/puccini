@@ -47,6 +47,7 @@ func (self *ServiceFile) ValidateNamespace() {
 
 // ([parsing.Renderable] interface)
 func (self *ServiceFile) Render() {
+	validateExternalPropertySchemas(self.File)
 	reflectFilePropertyDefinitions(self.File)
 }
 

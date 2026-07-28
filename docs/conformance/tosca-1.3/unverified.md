@@ -1,6 +1,6 @@
 # Unverified TOSCA 1.3 requirements
 
-Untested or currently unverifiable records: **2370**.
+Untested or currently unverifiable records: **2369**.
 
 | Requirement | Implementation | Verification | Applicability | Reason |
 |---|---|---|---|---|
@@ -391,7 +391,6 @@ Untested or currently unverifiable records: **2370**.
 | `TOSCA13-3.6.10.5-002` | partial | untested | applicable | Construct is represented, but the complete requirement-specific validation is absent.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: duplicate. |
 | `TOSCA13-3.6.10.5-003` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.10.5-004` | partial | untested | applicable | Constraint/type compatibility is incomplete.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.6.10.5-005` | missing | untested | applicable | External schema definition validation is absent.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.10.5-006` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.10.6-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.10.6-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |

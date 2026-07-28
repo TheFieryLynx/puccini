@@ -393,6 +393,31 @@ DIRECT_TESTS[PROPERTY_ATTRIBUTE_REFLECTION_ID] = {
     ],
 }
 
+EXTERNAL_SCHEMA_VALIDATION_ID = "TOSCA13-3.6.10.5-005"
+DIRECT_TESTS[EXTERNAL_SCHEMA_VALIDATION_ID] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaValidDeclarations",
+        "tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaInheritance",
+        "tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaImportedDefinition",
+        "tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaValueValidationIsOptional",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaInvalidDeclarations",
+        "tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaExternalReferencesAreDenied",
+        "tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaSecurityLimits",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaSecurityLimits",
+        "tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaDeterminismAndCache",
+        "tosca/grammars/tosca_v1_3/external-schema-validation_test.go#TestExternalSchemaCompileCacheIsOperationLocal",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaTosca20Isolation",
+        "tests/conformance/tosca_1_3/property_attribute_reflection_test.go#TestPropertyAttributeReflectionEffectiveDefinitions",
+        "tests/conformance/tosca_1_3/intrinsic_functions_test.go#TestIntrinsicFunctionResolution",
+    ],
+}
+
 MUTATION_CHECKS = {
     requirement_id: {
         "performed": True,
@@ -555,6 +580,54 @@ MUTATION_CHECKS[PROPERTY_ATTRIBUTE_REFLECTION_ID] = {
             ],
             "expected_tests_failed": True,
         },
+    ],
+    "production_diff_restored": True,
+}
+MUTATION_CHECKS[EXTERNAL_SCHEMA_VALIDATION_ID] = {
+    "performed": True,
+    "mutations": [
+        {
+            "description": "Disabled the TOSCA 1.3 external-schema render hooks",
+            "affected_tests": [
+                "TestExternalSchemaInvalidDeclarations",
+            ],
+            "expected_tests_failed": True,
+        },
+        {
+            "description": "Allowed a traversal/file JSON reference to resolve through a safe in-memory fake loader",
+            "affected_tests": [
+                "TestExternalSchemaExternalReferencesAreDenied/JSON_file_traversal",
+            ],
+            "expected_tests_failed": True,
+        },
+        {
+            "description": "Disabled the HTTP destination policy and simulated a safe in-memory loopback response",
+            "affected_tests": [
+                "TestExternalSchemaExternalReferencesAreDenied/JSON_loopback",
+            ],
+            "expected_tests_failed": True,
+        },
+        {
+            "description": "Bypassed the operation-local compilation cache",
+            "affected_tests": [
+                "TestExternalSchemaCompileCacheIsOperationLocal",
+            ],
+            "expected_tests_failed": True,
+        },
+        {
+            "description": "Raised the inline schema size limit above the tested 1 MiB boundary",
+            "affected_tests": [
+                "TestExternalSchemaSecurityLimits",
+            ],
+            "expected_tests_failed": True,
+        },
+    ],
+    "not_applicable_mutations": [
+        "Skipping default-value validation: section 3.6.10.5 makes value-schema validation MAY; the frozen MUST validates the schema declaration.",
+        "Skipping function-result validation: intrinsic-function result validation is the same optional value-validation behavior.",
+        "Disabling inherited-schema propagation: an inherited declaration is validated at its defining property; no mandatory value application exists to mutate.",
+        "Disabling external-reference cycle detection: all external references are denied before retrieval; valid in-document recursive schemas remain supported.",
+        "Applying a schema to an unrelated property's value: value-schema validation is not part of this MUST and is deliberately not implemented.",
     ],
     "production_diff_restored": True,
 }
@@ -1395,7 +1468,44 @@ def manual_must_trace(requirement: dict[str, Any]) -> tuple[str, dict[str, Any],
     if requirement_id in {"TOSCA13-3.6.10.5-004", "TOSCA13-3.6.14.3-003"}:
         return "partial", traced_impl("rendering", "rendering", "Constraints are parsed and attached to ValueMeta, but type compatibility and enforcement are not complete for all TOSCA 1.3 operators."), "Constraint/type compatibility is incomplete."
     if requirement_id == "TOSCA13-3.6.10.5-005":
-        return "missing", traced_impl("rendering", "rendering", "Schema is read as an internal TOSCA schema object; no external-schema parser or validator is invoked."), "External schema definition validation is absent."
+        impl = traced_impl(
+            "rendering",
+            "read/inheritance/rendering",
+            "The TOSCA 1.3 property reader validates the schema operand shape, then the file render hook collects effective property definitions after inheritance, selects JSON Schema Draft 4 or XML Schema 1.0 from the resolved external data type, and compiles each bounded inline schema through deny-all resource loaders with an operation-local result cache.",
+        )
+        impl["files"] = [
+            "tosca/grammars/tosca_v1_3/property-definition.go",
+            "tosca/grammars/tosca_v1_3/constraint-clause.go",
+            "tosca/grammars/tosca_v1_3/structural-readers.go",
+            "tosca/grammars/tosca_v1_3/external-schema-validation.go",
+            "tosca/grammars/tosca_v1_3/file.go",
+            "tosca/grammars/tosca_v1_3/service-file.go",
+        ]
+        impl["packages"] = [
+            "tosca/grammars/tosca_v1_3",
+        ]
+        impl["symbols"] = [
+            "tosca_v1_3.ReadPropertyDefinition",
+            "tosca_v1_3.ReadConstraintClause",
+            "tosca_v1_3.validateExternalPropertySchemas",
+            "tosca_v1_3.collectExternalSchemaDeclarations",
+            "tosca_v1_3.externalSchemaValidator.compileCached",
+            "tosca_v1_3.compileJSONSchema",
+            "tosca_v1_3.compileXMLSchema",
+        ]
+        impl["execution_path"] = [
+            "parser.Context.Parse",
+            "tosca_v1_3.ReadPropertyDefinition",
+            "tosca_v1_3.ReadConstraintClause",
+            "parser.Context.LookupNames",
+            "parser.Context.Inherit",
+            "parser.Context.Render",
+            "tosca_v1_3.ServiceFile.Render/tosca_v1_3.File.Render",
+            "tosca_v1_3.validateExternalPropertySchemas",
+            "tosca_v1_3.externalSchemaValidator.compileCached",
+            "tosca_v1_3.compileJSONSchema/tosca_v1_3.compileXMLSchema",
+        ]
+        return "implemented", impl, "Inline external schema declarations are compiled against the resolved json/xml language and directly verified."
     if requirement_id == "TOSCA13-3.6.12.4-002":
         return "partial", traced_impl("rendering", "rendering/function-evaluation", "Attribute defaults are rendered as Values, but literals are accepted and provenance is not restricted to attributes or operation outputs."), "Default provenance restriction is not enforced."
     if requirement_id in {"TOSCA13-3.6.14.2-015"}:
@@ -1723,7 +1833,7 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
                 "post-lookup/inheritance reference and context validation → deterministic normalization/evaluation"
             ),
         }, None
-    if requirement_id == PROPERTY_ATTRIBUTE_REFLECTION_ID:
+    if requirement_id in {PROPERTY_ATTRIBUTE_REFLECTION_ID, EXTERNAL_SCHEMA_VALIDATION_ID}:
         return manual_must_trace(requirement)
     if requirement_id in VERIFIED_IMPLEMENTED:
         files = ["tosca/grammars/parse.go", "tosca/parser/phase1-read.go", "tosca/grammars/tosca_v1_3/service-file.go"]

@@ -25,6 +25,12 @@ func ReadPropertyDefinition(ctx *parsing.Context) parsing.EntityPtr {
 
 	// Convert "constraints" list (1.x) to "validation" (2.0)
 	if m, ok := ctx.Data.(ard.Map); ok {
+		// "validation" is TOSCA 2.0 grammar. Do not let the shared
+		// representation make it an undocumented TOSCA 1.3 spelling.
+		if validation, ok := m["validation"]; ok {
+			ctx.FieldChild("validation", validation).ReportKeynameUnsupported()
+			delete(m, "validation")
+		}
 		if c, ok := m["constraints"].(ard.List); ok && len(c) > 0 {
 			if len(c) == 1 {
 				m["validation"] = c[0]

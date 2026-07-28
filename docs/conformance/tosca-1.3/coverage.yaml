@@ -22220,8 +22220,8 @@ requirements:
   strength: MUST
   category: semantic
   subject: additional-requirements
-  implementation_status: missing
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -22234,46 +22234,96 @@ requirements:
     entry_point: parser.Context.Parse
     packages:
     - tosca/grammars/tosca_v1_3
-    - tosca/grammars/tosca_v2_0
-    - tosca/parser
     files:
     - tosca/grammars/tosca_v1_3/property-definition.go
-    - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
-    - tosca/grammars/tosca_v2_0/property-definition.go
-    - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/tosca_v1_3/constraint-clause.go
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/grammars/tosca_v1_3/external-schema-validation.go
+    - tosca/grammars/tosca_v1_3/file.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
     - tosca_v1_3.ReadPropertyDefinition
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: rendering
+    - tosca_v1_3.ReadConstraintClause
+    - tosca_v1_3.validateExternalPropertySchemas
+    - tosca_v1_3.collectExternalSchemaDeclarations
+    - tosca_v1_3.externalSchemaValidator.compileCached
+    - tosca_v1_3.compileJSONSchema
+    - tosca_v1_3.compileXMLSchema
+    parser_phase: read/inheritance/rendering
     execution_path:
     - parser.Context.Parse
+    - tosca_v1_3.ReadPropertyDefinition
+    - tosca_v1_3.ReadConstraintClause
     - parser.Context.LookupNames
     - parser.Context.Inherit
     - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: Schema is read as an internal TOSCA schema object; no external-schema parser or validator is invoked.
+    - tosca_v1_3.ServiceFile.Render/tosca_v1_3.File.Render
+    - tosca_v1_3.validateExternalPropertySchemas
+    - tosca_v1_3.externalSchemaValidator.compileCached
+    - tosca_v1_3.compileJSONSchema/tosca_v1_3.compileXMLSchema
+    trace_summary: The TOSCA 1.3 property reader validates the schema operand shape, then the file render hook collects effective property definitions
+      after inheritance, selects JSON Schema Draft 4 or XML Schema 1.0 from the resolved external data type, and compiles each bounded inline
+      schema through deny-all resource loaders with an operation-local result cache.
   tests:
-    positive: []
-    negative: []
-    boundary: []
-    regression: []
+    positive:
+    - tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaValidDeclarations
+    - tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaInheritance
+    - tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaImportedDefinition
+    - tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaValueValidationIsOptional
+    negative:
+    - tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaInvalidDeclarations
+    - tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaExternalReferencesAreDenied
+    - tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaSecurityLimits
+    boundary:
+    - tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaSecurityLimits
+    - tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaDeterminismAndCache
+    - tosca/grammars/tosca_v1_3/external-schema-validation_test.go#TestExternalSchemaCompileCacheIsOperationLocal
+    regression:
+    - tests/conformance/tosca_1_3/external_schema_validation_test.go#TestExternalSchemaTosca20Isolation
+    - tests/conformance/tosca_1_3/property_attribute_reflection_test.go#TestPropertyAttributeReflectionEffectiveDefinitions
+    - tests/conformance/tosca_1_3/intrinsic_functions_test.go#TestIntrinsicFunctionResolution
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - External schema definition validation is absent.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: External schema definition validation is absent.
+  gaps: []
+  notes: Inline external schema declarations are compiled against the resolved json/xml language and directly verified.
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Disabled the TOSCA 1.3 external-schema render hooks
+      affected_tests:
+      - TestExternalSchemaInvalidDeclarations
+      expected_tests_failed: true
+    - description: Allowed a traversal/file JSON reference to resolve through a safe in-memory fake loader
+      affected_tests:
+      - TestExternalSchemaExternalReferencesAreDenied/JSON_file_traversal
+      expected_tests_failed: true
+    - description: Disabled the HTTP destination policy and simulated a safe in-memory loopback response
+      affected_tests:
+      - TestExternalSchemaExternalReferencesAreDenied/JSON_loopback
+      expected_tests_failed: true
+    - description: Bypassed the operation-local compilation cache
+      affected_tests:
+      - TestExternalSchemaCompileCacheIsOperationLocal
+      expected_tests_failed: true
+    - description: Raised the inline schema size limit above the tested 1 MiB boundary
+      affected_tests:
+      - TestExternalSchemaSecurityLimits
+      expected_tests_failed: true
+    not_applicable_mutations:
+    - 'Skipping default-value validation: section 3.6.10.5 makes value-schema validation MAY; the frozen MUST validates the schema declaration.'
+    - 'Skipping function-result validation: intrinsic-function result validation is the same optional value-validation behavior.'
+    - 'Disabling inherited-schema propagation: an inherited declaration is validated at its defining property; no mandatory value application
+      exists to mutate.'
+    - 'Disabling external-reference cycle detection: all external references are denied before retrieval; valid in-document recursive schemas
+      remain supported.'
+    - 'Applying a schema to an unrelated property''s value: value-schema validation is not part of this MUST and is deliberately not implemented.'
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.6.10.5-006
   section: 3.6.10.5
   section_title: Additional Requirements

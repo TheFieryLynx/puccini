@@ -42,5 +42,6 @@ func ReadFile(context *parsing.Context) parsing.EntityPtr {
 
 // ([parsing.Renderable] interface)
 func (self *File) Render() {
+	validateExternalPropertySchemas(self.File)
 	reflectFilePropertyDefinitions(self.File)
 }
