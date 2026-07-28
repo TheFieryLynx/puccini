@@ -78,8 +78,8 @@ func init() {
 	Grammar.RegisterReader("timestamp", tosca_v2_0.ReadTimestamp)
 	Grammar.RegisterReader("TriggerDefinition", ReadTriggerDefinition) // override
 	Grammar.RegisterReader("TriggerDefinitionCondition", ReadTriggerDefinitionCondition)
-	Grammar.RegisterReader("Value", ReadValue) // override: TOSCA 1.3 intrinsic-function grammar
-	Grammar.RegisterReader("version", tosca_v2_0.ReadVersion)
+	Grammar.RegisterReader("Value", ReadValue)                                                 // override: TOSCA 1.3 intrinsic-function grammar
+	Grammar.RegisterReader("version", ReadVersion)                                             // override: TOSCA 1.3 zero-version semantics
 	Grammar.RegisterReader("WorkflowActivityCallOperation", ReadWorkflowActivityCallOperation) // override: 1.3 extended notation
 	Grammar.RegisterReader("WorkflowActivityDefinition", ReadWorkflowActivityDefinition)       // override: 1.3 inline notation
 	Grammar.RegisterReader("WorkflowDefinition", tosca_v2_0.ReadWorkflowDefinition)

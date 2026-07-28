@@ -140,6 +140,28 @@ DIRECT_TESTS: dict[str, dict[str, list[str]]] = {
     },
 }
 
+VERSION_ZERO_IDS = {
+    "TOSCA13-3.3.2.5-001",
+    "TOSCA13-3.3.2.5-002",
+}
+for requirement_id in VERSION_ZERO_IDS:
+    DIRECT_TESTS[requirement_id] = {
+        "positive": [
+            "tests/conformance/tosca_1_3/partial_version_zero_test.go#TestVersionZeroMeansUnspecified",
+            "tests/conformance/tosca_1_3/partial_version_zero_test.go#TestNonZeroQualifiedVersionAccepted",
+        ],
+        "negative": [
+            "tests/conformance/tosca_1_3/partial_version_zero_test.go#TestQualifiedZeroVersionRejected",
+        ],
+        "boundary": [
+            "tests/conformance/tosca_1_3/partial_version_zero_test.go#TestVersionZeroSpellingsAreEquivalent",
+            "tests/conformance/tosca_1_3/partial_version_zero_test.go#TestQualifiedZeroVersionDiagnosticDeterministic",
+        ],
+        "regression": [
+            "tests/conformance/tosca_1_3/partial_version_zero_test.go#TestTosca20VersionZeroBehaviorUnchanged",
+        ],
+    }
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -1473,8 +1495,25 @@ def manual_must_trace(requirement: dict[str, Any]) -> tuple[str, dict[str, Any],
 
     if requirement_id in {"TOSCA13-3.3.2.1-004", "TOSCA13-3.3.2.1-005"}:
         return "implemented", traced_impl("scalar-read", "rendering", "VersionRE admits only decimal non-negative major/minor components and ReadVersion reports malformed values."), "Version component grammar is implemented."
-    if requirement_id in {"TOSCA13-3.3.2.5-001", "TOSCA13-3.3.2.5-002"}:
-        return "partial", traced_impl("scalar-read", "rendering", "ReadVersion parses zero versions and qualifiers but contains no special zero-as-unspecified or zero-with-qualifier rejection branch."), "Zero-version semantics and qualifier prohibition are not implemented."
+    if requirement_id in VERSION_ZERO_IDS:
+        impl = traced_impl(
+            "scalar-read",
+            "rendering",
+            "The TOSCA 1.3 version reader canonicalizes the three zero spellings to an unspecified sentinel and rejects a qualifier when all numeric components are zero.",
+        )
+        impl["files"] = [
+            "tosca/grammars/tosca_v1_3/version.go",
+            "tosca/grammars/tosca_v1_3/common.go",
+        ]
+        impl["packages"] = ["tosca/grammars/tosca_v1_3"]
+        impl["symbols"] = ["tosca_v1_3.ReadVersion"]
+        impl["execution_path"] = [
+            "parser.Context.Parse",
+            "tosca_v1_3.ReadValue",
+            "tosca_v1_3.ReadVersion",
+            "tosca_v2_0.ReadVersion",
+        ]
+        return "implemented", impl, "TOSCA 1.3 zero-version semantics and qualifier prohibition are directly verified."
     if requirement_id in {"TOSCA13-3.3.3.1-004", "TOSCA13-3.3.3.1-005", "TOSCA13-3.3.3.1-006"}:
         return "implemented", traced_impl("scalar-read", "read", "ReadRange enforces two integer/string bounds, non-negative values, UNBOUNDED, and upper >= lower."), "Range bound validation is implemented."
     if requirement_id in {"TOSCA13-3.3.6.1-004", "TOSCA13-3.3.6.1-005", "TOSCA13-3.3.6.1-006", "TOSCA13-3.3.6.2-001", "TOSCA13-3.3.6.2-002"}:
@@ -1911,7 +1950,7 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
                 "post-lookup/inheritance reference and context validation → deterministic normalization/evaluation"
             ),
         }, None
-    if requirement_id in {PROPERTY_ATTRIBUTE_REFLECTION_ID, EXTERNAL_SCHEMA_VALIDATION_ID}:
+    if requirement_id in {PROPERTY_ATTRIBUTE_REFLECTION_ID, EXTERNAL_SCHEMA_VALIDATION_ID} or requirement_id in VERSION_ZERO_IDS:
         return manual_must_trace(requirement)
     if requirement_id in CSAR_REMEDIATED_IDS:
         return "implemented", {

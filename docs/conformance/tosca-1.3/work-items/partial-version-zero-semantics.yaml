@@ -1,0 +1,115 @@
+remediation_group: version-zero-semantics
+remediation_order: 1
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+parser_phase: rendering
+execution_path:
+  - parser.Context.Parse
+  - tosca_v1_3.ReadValue
+  - tosca_v1_3.ReadVersion
+baseline_reproduction:
+  performed: true
+  command: "go test -count=1 ./tests/conformance/tosca_1_3 -run 'Test(VersionZero|QualifiedZeroVersion|NonZeroQualifiedVersion|Tosca20VersionZero)' -v"
+  observed_failures:
+    - "TestVersionZeroMeansUnspecified: 0 was malformed and 0.0/0.0.0 retained supplied-version strings."
+    - "TestVersionZeroSpellingsAreEquivalent: 0 was malformed."
+    - "TestQualifiedZeroVersionRejected: qualified zero was accepted."
+  unaffected_regressions:
+    - TestNonZeroQualifiedVersionAccepted
+    - TestTosca20VersionZeroBehaviorUnchanged
+
+requirements:
+  - requirement_id: TOSCA13-3.3.2.5-001
+    section: "3.3.2.5"
+    section_title: "Additional Requirements"
+    normative_rule: "The spellings 0, 0.0, and 0.0.0 denote that no version was provided."
+    baseline:
+      implementation_status: partial
+      verification_status: untested
+      behavior:
+        - "0 is rejected by the shared version lexical reader."
+        - "0.0 and 0.0.0 remain ordinary supplied-version strings."
+    implementation:
+      files:
+        - tosca/grammars/tosca_v1_3/version.go
+        - tosca/grammars/tosca_v1_3/common.go
+      symbols:
+        - tosca_v1_3.ReadVersion
+      version_isolation: "The TOSCA 2.0 reader and grammar registration remain unchanged."
+    tests:
+      positive:
+        - TestVersionZeroMeansUnspecified
+        - TestNonZeroQualifiedVersionAccepted
+      boundary:
+        - TestVersionZeroSpellingsAreEquivalent
+      normalization:
+        - TestVersionZeroMeansUnspecified
+      regression:
+        - TestTosca20VersionZeroBehaviorUnchanged
+    mutation_check:
+      performed: true
+      mutation: "Temporarily register the shared TOSCA 2.0 version reader in the TOSCA 1.3 grammar, bypassing the zero-version policy."
+      affected_tests:
+        - TestVersionZeroMeansUnspecified
+        - TestVersionZeroSpellingsAreEquivalent
+        - TestQualifiedZeroVersionRejected
+      expected_tests_failed: true
+      production_diff_restored: true
+    final_status:
+      implementation_status: implemented
+      verification_status: verified
+
+  - requirement_id: TOSCA13-3.3.2.5-002
+    section: "3.3.2.5"
+    section_title: "Additional Requirements"
+    normative_rule: "A zero version used with any qualifier is invalid."
+    baseline:
+      implementation_status: partial
+      verification_status: untested
+      behavior:
+        - "The shared reader accepts 0.0.0 followed by a qualifier."
+    implementation:
+      files:
+        - tosca/grammars/tosca_v1_3/version.go
+        - tosca/grammars/tosca_v1_3/common.go
+      symbols:
+        - tosca_v1_3.ReadVersion
+      version_isolation: "The TOSCA 2.0 reader and grammar registration remain unchanged."
+    tests:
+      positive:
+        - TestNonZeroQualifiedVersionAccepted
+      negative:
+        - TestQualifiedZeroVersionRejected
+      boundary:
+        - TestQualifiedZeroVersionDiagnosticDeterministic
+      regression:
+        - TestTosca20VersionZeroBehaviorUnchanged
+    mutation_check:
+      performed: true
+      mutation: "Temporarily register the shared TOSCA 2.0 version reader in the TOSCA 1.3 grammar, bypassing the zero-version policy."
+      affected_tests:
+        - TestQualifiedZeroVersionRejected
+      expected_tests_failed: true
+      production_diff_restored: true
+    final_status:
+      implementation_status: implemented
+      verification_status: verified
+
+verification:
+  focused_tests: passed
+  tosca_1_3_conformance: passed
+  tosca_2_0_conformance: passed
+  go_test: passed
+  go_test_race: passed
+  go_vet: passed
+  git_diff_check: passed
+  audit_generation_runs: 2
+  audit_sha256_match: true
+  denominator: 223
+  resulting_metrics:
+    implemented: 193
+    partial: 30
+    missing: 0
+    non_compliant: 0
+    verified: 143
+    indirectly_tested: 26
+    untested: 54

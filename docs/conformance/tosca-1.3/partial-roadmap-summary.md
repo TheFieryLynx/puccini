@@ -53,3 +53,15 @@ risk differs. In particular, grammar-only interface/function rules are not
 mixed with hierarchy checks; substitution mapping coverage is not mixed with
 ordinary assignment validation; and normative profile cross-property rules
 remain isolated from generic constraint processing.
+
+## Current cross-status matrix
+
+After remediation group 1 (`version-zero-semantics`):
+
+| Implementation status | verified | indirectly-tested | untested | Total |
+|---|---:|---:|---:|---:|
+| implemented | 143 | 26 | 24 | 193 |
+| partial | 0 | 0 | 30 | 30 |
+| missing | 0 | 0 | 0 | 0 |
+| non-compliant | 0 | 0 | 0 | 0 |
+| **Total** | **143** | **26** | **54** | **223** |

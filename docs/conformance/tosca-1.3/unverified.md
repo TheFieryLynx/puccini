@@ -1,6 +1,6 @@
 # Unverified TOSCA 1.3 requirements
 
-Untested or currently unverifiable records: **2369**.
+Untested or currently unverifiable records: **2367**.
 
 | Requirement | Implementation | Verification | Applicability | Reason |
 |---|---|---|---|---|
@@ -38,8 +38,6 @@ Untested or currently unverifiable records: **2369**.
 | `TOSCA13-3.3.2.2-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.2.2-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.2.4-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.3.2.5-001` | partial | untested | applicable | Zero-version semantics and qualifier prohibition are not implemented.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.3.2.5-002` | partial | untested | applicable | Zero-version semantics and qualifier prohibition are not implemented.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.3-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.3.1-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.3.1-002` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: dependent-grammar-umbrella. |

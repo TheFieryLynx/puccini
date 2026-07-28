@@ -4031,8 +4031,8 @@ requirements:
   strength: SHALL
   category: semantic
   subject: additional-requirements
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -4046,51 +4046,50 @@ requirements:
     packages:
     - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
-    - tosca/parser
     files:
     - tosca/grammars/tosca_v2_0/version.go
-    - tosca/grammars/tosca_v2_0/range.go
-    - tosca/grammars/tosca_v1_3/scalar-unit.go
-    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/tosca_v1_3/version.go
+    - tosca/grammars/tosca_v1_3/common.go
     symbols:
     - tosca_v2_0.ReadVersion
-    - tosca_v2_0.ReadRange
-    - tosca_v1_3.ReadScalarUnit
-    - parser.Context.Render
+    - tosca_v1_3.ReadVersion
     parser_phase: rendering
     execution_path:
-    - parser.Context.ReadRoot
-    - tosca_v1_3.ReadServiceFile
-    - tosca_v2_0.ReadValue
-    - tosca_v2_0.Value.RenderDataType
-    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
-    trace_summary: ReadVersion parses zero versions and qualifiers but contains no special zero-as-unspecified or zero-with-qualifier rejection
-      branch.
+    - parser.Context.Parse
+    - tosca_v1_3.ReadValue
+    - tosca_v1_3.ReadVersion
+    - tosca_v2_0.ReadVersion
+    trace_summary: The TOSCA 1.3 version reader canonicalizes the three zero spellings to an unspecified sentinel and rejects a qualifier when
+      all numeric components are zero.
   tests:
-    positive: []
-    negative: []
-    boundary: []
-    regression: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_version_zero_test.go#TestVersionZeroMeansUnspecified
+    - tests/conformance/tosca_1_3/partial_version_zero_test.go#TestNonZeroQualifiedVersionAccepted
+    negative:
+    - tests/conformance/tosca_1_3/partial_version_zero_test.go#TestQualifiedZeroVersionRejected
+    boundary:
+    - tests/conformance/tosca_1_3/partial_version_zero_test.go#TestVersionZeroSpellingsAreEquivalent
+    - tests/conformance/tosca_1_3/partial_version_zero_test.go#TestQualifiedZeroVersionDiagnosticDeterministic
+    regression:
+    - tests/conformance/tosca_1_3/partial_version_zero_test.go#TestTosca20VersionZeroBehaviorUnchanged
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Zero-version semantics and qualifier prohibition are not implemented.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Zero-version semantics and qualifier prohibition are not implemented.
+  gaps: []
+  notes: TOSCA 1.3 zero-version semantics and qualifier prohibition are directly verified.
 - requirement_id: TOSCA13-3.3.2.5-002
   section: 3.3.2.5
   section_title: Additional Requirements
   strength: SHALL_NOT
   category: semantic
   subject: additional-requirements
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -4104,43 +4103,42 @@ requirements:
     packages:
     - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
-    - tosca/parser
     files:
     - tosca/grammars/tosca_v2_0/version.go
-    - tosca/grammars/tosca_v2_0/range.go
-    - tosca/grammars/tosca_v1_3/scalar-unit.go
-    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/tosca_v1_3/version.go
+    - tosca/grammars/tosca_v1_3/common.go
     symbols:
     - tosca_v2_0.ReadVersion
-    - tosca_v2_0.ReadRange
-    - tosca_v1_3.ReadScalarUnit
-    - parser.Context.Render
+    - tosca_v1_3.ReadVersion
     parser_phase: rendering
     execution_path:
-    - parser.Context.ReadRoot
-    - tosca_v1_3.ReadServiceFile
-    - tosca_v2_0.ReadValue
-    - tosca_v2_0.Value.RenderDataType
-    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
-    trace_summary: ReadVersion parses zero versions and qualifiers but contains no special zero-as-unspecified or zero-with-qualifier rejection
-      branch.
+    - parser.Context.Parse
+    - tosca_v1_3.ReadValue
+    - tosca_v1_3.ReadVersion
+    - tosca_v2_0.ReadVersion
+    trace_summary: The TOSCA 1.3 version reader canonicalizes the three zero spellings to an unspecified sentinel and rejects a qualifier when
+      all numeric components are zero.
   tests:
-    positive: []
-    negative: []
-    boundary: []
-    regression: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_version_zero_test.go#TestVersionZeroMeansUnspecified
+    - tests/conformance/tosca_1_3/partial_version_zero_test.go#TestNonZeroQualifiedVersionAccepted
+    negative:
+    - tests/conformance/tosca_1_3/partial_version_zero_test.go#TestQualifiedZeroVersionRejected
+    boundary:
+    - tests/conformance/tosca_1_3/partial_version_zero_test.go#TestVersionZeroSpellingsAreEquivalent
+    - tests/conformance/tosca_1_3/partial_version_zero_test.go#TestQualifiedZeroVersionDiagnosticDeterministic
+    regression:
+    - tests/conformance/tosca_1_3/partial_version_zero_test.go#TestTosca20VersionZeroBehaviorUnchanged
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Zero-version semantics and qualifier prohibition are not implemented.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Zero-version semantics and qualifier prohibition are not implemented.
+  gaps: []
+  notes: TOSCA 1.3 zero-version semantics and qualifier prohibition are directly verified.
 - requirement_id: TOSCA13-3.3.3-001
   section: 3.3.3
   section_title: TOSCA range type
