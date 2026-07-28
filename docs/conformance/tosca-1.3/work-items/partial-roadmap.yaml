@@ -1,0 +1,969 @@
+requirements:
+  - requirement_id: TOSCA13-3.3.2.5-001
+    section: "3.3.2.5"
+    section_title: "Additional Requirements"
+    normative_rule: "A zero version value denotes that no version was provided."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Version lexical parsing recognizes major, minor, fix, qualifier and build components."
+      - "The values 0.0 and 0.0.0 are lexically accepted."
+    missing_parts:
+      - "The effective value does not distinguish the normative unspecified-version sentinel from an ordinary supplied version."
+      - "No direct test proves equivalent zero spellings."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3, tosca/grammars/tosca_v2_0]
+      files: [tosca/grammars/tosca_v1_3/version.go, tosca/grammars/tosca_v1_3/common.go, tosca/grammars/tosca_v2_0/version.go]
+      symbols: [tosca_v1_3.ReadVersion, tosca_v2_0.Version]
+      parser_phase: rendering
+      execution_path: [parser.Context.Parse, tosca_v1_3.ReadValue, tosca_v1_3.ReadVersion]
+    remediation_group: version-zero-semantics
+    remediation_order: 1
+    dependencies: []
+    risk: medium
+    planned_tests:
+      positive: [TestVersionZeroMeansUnspecified]
+      negative: []
+      boundary: [TestVersionZeroSpellingsAreEquivalent]
+      inheritance: []
+      resolution: []
+      normalization: [TestVersionZeroNormalizesAsUnspecified]
+      regression: [TestTosca20VersionZeroBehaviorUnchanged]
+
+  - requirement_id: TOSCA13-3.3.2.5-002
+    section: "3.3.2.5"
+    section_title: "Additional Requirements"
+    normative_rule: "A zero version value with any qualifier is invalid."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Qualifiers are parsed for non-zero versions."
+    missing_parts:
+      - "0.0.0.<qualifier> is accepted instead of rejected."
+      - "No deterministic qualifier diagnostic is tested."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3, tosca/grammars/tosca_v2_0]
+      files: [tosca/grammars/tosca_v1_3/version.go, tosca/grammars/tosca_v1_3/common.go, tosca/grammars/tosca_v2_0/version.go]
+      symbols: [tosca_v1_3.ReadVersion, tosca_v2_0.Version]
+      parser_phase: rendering
+      execution_path: [parser.Context.Parse, tosca_v1_3.ReadValue, tosca_v1_3.ReadVersion]
+    remediation_group: version-zero-semantics
+    remediation_order: 1
+    dependencies: [TOSCA13-3.3.2.5-001]
+    risk: medium
+    planned_tests:
+      positive: [TestNonZeroQualifiedVersionAccepted]
+      negative: [TestQualifiedZeroVersionRejected]
+      boundary: [TestQualifiedZeroVersionDiagnosticDeterministic]
+      inheritance: []
+      resolution: []
+      normalization: []
+      regression: [TestTosca20VersionZeroBehaviorUnchanged]
+
+  - requirement_id: TOSCA13-3.3.6.2-003
+    section: "3.3.6.2"
+    section_title: "Additional requirements"
+    normative_rule: "Scalar-unit constraint comparisons compare the scalar and unit as one value."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "ScalarUnit.Compare canonicalizes values across compatible units."
+      - "Scalar-unit definitions attach comparison metadata."
+    missing_parts:
+      - "No direct assignment/default constraint test proves combined scalar-and-unit evaluation."
+      - "No negative boundary test proves unit conversion participates in rejection."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/scalar-unit.go, tosca/grammars/tosca_v1_3/constraint-validation.go]
+      symbols: [tosca_v1_3.ScalarUnit.Compare, tosca_v1_3.validateConstraintValue]
+      parser_phase: rendering
+      execution_path: [parser.Context.Render, Value.RenderProperty, validateConstraintValue, ScalarUnit.Compare]
+    remediation_group: constraint-semantics
+    remediation_order: 6
+    dependencies: [TOSCA13-3.3.2.5-001]
+    risk: high
+    planned_tests:
+      positive: [TestScalarUnitConstraintConvertsUnits]
+      negative: [TestScalarUnitConstraintRejectsOutOfRangeValue]
+      boundary: [TestScalarUnitConstraintInclusiveBoundary]
+      inheritance: [TestInheritedScalarUnitConstraint]
+      resolution: []
+      normalization: [TestScalarUnitConstraintMetadataDeterministic]
+      regression: [TestTosca20ConstraintBehaviorUnchanged]
+
+  - requirement_id: TOSCA13-3.5.1-002
+    section: "3.5.1"
+    section_title: "Required Keynames"
+    normative_rule: "A derived definition may inherit required keynames from its parent."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Generic inheritance copies many omitted definition fields."
+      - "Artifact type and file are required for complete base definitions."
+    missing_parts:
+      - "TOSCA 1.3 artifact requiredness is currently checked before inheritance."
+      - "A child artifact refinement that relies on inherited type and file is rejected."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3, tosca/grammars/tosca_v2_0]
+      files: [tosca/grammars/tosca_v1_3/structural-readers.go, tosca/grammars/tosca_v2_0/artifact-definition.go]
+      symbols: [tosca_v1_3.ReadArtifactDefinition, tosca_v2_0.ArtifactDefinition.Render]
+      parser_phase: inheritance
+      execution_path: [parser.Context.ReadRoot, ArtifactDefinition.Inherit, ArtifactDefinition.Render]
+    remediation_group: inherited-required-keynames
+    remediation_order: 5
+    dependencies: []
+    risk: medium
+    planned_tests:
+      positive: [TestDerivedArtifactInheritsRequiredKeynames]
+      negative: [TestBaseArtifactStillRequiresTypeAndFile]
+      boundary: [TestDerivedArtifactMayOverrideOneInheritedKey]
+      inheritance: [TestDerivedArtifactInheritsRequiredKeynames]
+      resolution: []
+      normalization: []
+      regression: [TestTosca20ArtifactRequirednessUnchanged]
+
+  - requirement_id: TOSCA13-3.6.3.3-001
+    section: "3.6.3.3"
+    section_title: "Additional Requirements"
+    normative_rule: "A scalar constraint without an operator is equivalent to equal."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Explicit equal constraint clauses are recognized."
+    missing_parts:
+      - "A bare scalar constraint clause is not converted to equal."
+      - "Bare-scalar and explicit-equal assignment behavior is not compared."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/constraint-clause.go, tosca/grammars/tosca_v1_3/constraint-validation.go]
+      symbols: [tosca_v1_3.ReadConstraintClause, tosca_v1_3.validateConstraintValue]
+      parser_phase: read/rendering
+      execution_path: [ReadConstraintClause, PropertyDefinition.Render, validateConstraintValue]
+    remediation_group: constraint-semantics
+    remediation_order: 6
+    dependencies: []
+    risk: high
+    planned_tests:
+      positive: [TestBareConstraintMeansEqual]
+      negative: [TestBareConstraintRejectsDifferentValue]
+      boundary: [TestBareAndExplicitEqualAreEquivalent]
+      inheritance: [TestInheritedBareEqualConstraint]
+      resolution: []
+      normalization: [TestBareEqualConstraintNormalizesDeterministically]
+      regression: [TestTosca20ValidationGrammarUnchanged]
+
+  - requirement_id: TOSCA13-3.6.3.3-002
+    section: "3.6.3.3"
+    section_title: "Additional Requirements"
+    normative_rule: "length means collection size for list and map values."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "min_length and max_length validators exist."
+    missing_parts:
+      - "The TOSCA 1.3 length operator is not registered."
+      - "Exact list/map size is not validated."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/constraint-clause.go, tosca/grammars/tosca_v1_3/constraint-validation.go]
+      symbols: [tosca_v1_3.ReadConstraintClause, tosca_v1_3.collectionLength]
+      parser_phase: read/rendering
+      execution_path: [ReadConstraintClause, Value.Render, validateConstraintValue]
+    remediation_group: constraint-semantics
+    remediation_order: 6
+    dependencies: []
+    risk: high
+    planned_tests:
+      positive: [TestLengthConstraintUsesListAndMapSize]
+      negative: [TestLengthConstraintRejectsWrongCollectionSize]
+      boundary: [TestLengthConstraintEmptyCollection]
+      inheritance: []
+      resolution: []
+      normalization: []
+      regression: [TestTosca20ValidationGrammarUnchanged]
+
+  - requirement_id: TOSCA13-3.6.3.3-003
+    section: "3.6.3.3"
+    section_title: "Additional Requirements"
+    normative_rule: "Constraint operands are type-compatible with their operations."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Operand YAML shape is checked for several operators."
+      - "Native operands can be rendered through a resolved datatype."
+    missing_parts:
+      - "Operator applicability to the constrained datatype is not complete."
+      - "Wrongly typed operands can survive until normalized validator execution."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/constraint-validation.go]
+      symbols: [tosca_v1_3.validateConstraintCompatibility, tosca_v1_3.validateConstraintValue]
+      parser_phase: rendering
+      execution_path: [File.Render, validateConstraintDefinitions, validateConstraintCompatibility]
+    remediation_group: constraint-semantics
+    remediation_order: 6
+    dependencies: []
+    risk: high
+    planned_tests:
+      positive: [TestConstraintOperandTypeCompatibility]
+      negative: [TestConstraintRejectsIncompatibleOperand]
+      boundary: [TestLengthConstraintRejectsNonCollectionType]
+      inheritance: []
+      resolution: []
+      normalization: []
+      regression: [TestTosca20ValidationGrammarUnchanged]
+
+  - requirement_id: TOSCA13-3.6.10.5-004
+    section: "3.6.10.5"
+    section_title: "Additional Requirements"
+    normative_rule: "Property constraints are compatible with the property type."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Property constraints are parsed and attached to ValueMeta."
+    missing_parts:
+      - "Every operator is not checked against the effective property datatype."
+      - "Inherited/refined property constraint compatibility is not directly verified."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/constraint-validation.go, tosca/grammars/tosca_v1_3/service-file.go]
+      symbols: [tosca_v1_3.validatePropertyConstraintDefinitions]
+      parser_phase: rendering
+      execution_path: [File.Render, PropertyDefinition.Render, validateConstraintCompatibility]
+    remediation_group: constraint-semantics
+    remediation_order: 6
+    dependencies: [TOSCA13-3.6.3.3-003]
+    risk: high
+    planned_tests:
+      positive: [TestPropertyConstraintCompatibleWithType]
+      negative: [TestPropertyConstraintRejectsIncompatibleType]
+      boundary: []
+      inheritance: [TestRefinedPropertyConstraintUsesEffectiveType]
+      resolution: []
+      normalization: []
+      regression: [TestPropertiesWithoutConstraintsUnchanged]
+
+  - requirement_id: TOSCA13-3.6.12.4-002
+    section: "3.6.12.4"
+    section_title: "Additional Requirements"
+    normative_rule: "Attribute defaults derive from attributes or operation outputs, not literals, properties, or inputs."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Attribute defaults can contain intrinsic functions."
+      - "Function references are resolved after rendering."
+    missing_parts:
+      - "Literal attribute defaults are accepted."
+      - "get_property and get_input defaults are accepted."
+      - "Allowed get_attribute/get_operation_output provenance is not isolated."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/attribute-definition.go, tosca/grammars/tosca_v1_3/service-file.go]
+      symbols: [tosca_v1_3.validateAttributeDefaultProvenance]
+      parser_phase: rendering/function-evaluation
+      execution_path: [File.Render, AttributeDefinition.Render, validateAttributeDefaultProvenance]
+    remediation_group: attribute-default-provenance
+    remediation_order: 11
+    dependencies: [TOSCA13-4.3.2.2-003, TOSCA13-4.7.1.2-003]
+    risk: high
+    planned_tests:
+      positive: [TestAttributeDefaultAllowsActualStateFunctions]
+      negative: [TestAttributeDefaultRejectsLiteralAndDesiredStateFunctions]
+      boundary: [TestAttributeWithoutDefaultUnchanged]
+      inheritance: [TestInheritedAttributeDefaultProvenance]
+      resolution: [TestAttributeDefaultFunctionReferenceResolution]
+      normalization: []
+      regression: [TestTosca20AttributeDefaultsUnchanged]
+
+  - requirement_id: TOSCA13-3.6.14.3-003
+    section: "3.6.14.3"
+    section_title: "Additional Requirements"
+    normative_rule: "Parameter constraints are compatible with the parameter type."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Parameter constraints are converted to the shared validation representation."
+    missing_parts:
+      - "Operator/datatype compatibility is not completely checked."
+      - "Input and output parameter constraint evidence is absent."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/constraint-validation.go, tosca/grammars/tosca_v1_3/parameter-definition.go]
+      symbols: [tosca_v1_3.validateParameterConstraintDefinitions]
+      parser_phase: rendering
+      execution_path: [ServiceTemplate.Render, ParameterDefinition.Render, validateConstraintCompatibility]
+    remediation_group: constraint-semantics
+    remediation_order: 6
+    dependencies: [TOSCA13-3.6.3.3-003]
+    risk: high
+    planned_tests:
+      positive: [TestParameterConstraintCompatibleWithType]
+      negative: [TestParameterConstraintRejectsIncompatibleType]
+      boundary: []
+      inheritance: []
+      resolution: []
+      normalization: [TestParameterConstraintMetadataPreserved]
+      regression: [TestUnconstrainedParametersUnchanged]
+
+  - requirement_id: TOSCA13-3.6.27.1-008
+    section: "3.6.27.1"
+    section_title: "Keynames"
+    normative_rule: "A relationship-target workflow step requires operation_host SOURCE or TARGET."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "operation_host is read and normalized."
+      - "target and target_relationship references are resolved."
+    missing_parts:
+      - "Relationship target does not require operation_host."
+      - "Values other than SOURCE or TARGET are accepted."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/workflow-validation.go, tosca/grammars/tosca_v1_3/service-template.go]
+      symbols: [tosca_v1_3.validateWorkflowOperationHosts]
+      parser_phase: rendering
+      execution_path: [WorkflowStepDefinition.Render, ServiceTemplate.Render, validateWorkflowOperationHosts]
+    remediation_group: workflow-operation-host
+    remediation_order: 12
+    dependencies: [TOSCA13-3.6.27.1-010]
+    risk: high
+    planned_tests:
+      positive: [TestRelationshipWorkflowOperationHostSourceTarget]
+      negative: [TestRelationshipWorkflowRequiresOperationHost, TestRelationshipWorkflowRejectsInvalidOperationHost]
+      boundary: []
+      inheritance: []
+      resolution: [TestWorkflowRelationshipTargetResolution]
+      normalization: [TestWorkflowOperationHostNormalization]
+      regression: [TestTosca20WorkflowHostBehaviorUnchanged]
+
+  - requirement_id: TOSCA13-3.6.27.1-010
+    section: "3.6.27.1"
+    section_title: "Keynames"
+    normative_rule: "operation_host is conditionally applicable to relationship and group targets."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Node and group workflow targets are resolved."
+    missing_parts:
+      - "operation_host on a plain node target is not rejected."
+      - "Group host values are not checked against member node types or node templates."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/workflow-validation.go, tosca/grammars/tosca_v1_3/service-template.go]
+      symbols: [tosca_v1_3.validateWorkflowOperationHosts]
+      parser_phase: rendering
+      execution_path: [WorkflowStepDefinition.Render, ServiceTemplate.Render, validateWorkflowOperationHosts]
+    remediation_group: workflow-operation-host
+    remediation_order: 12
+    dependencies: []
+    risk: high
+    planned_tests:
+      positive: [TestGroupWorkflowOperationHostOptionalAndResolvable]
+      negative: [TestNodeWorkflowRejectsOperationHost, TestGroupWorkflowRejectsUnknownHost]
+      boundary: [TestGroupWorkflowWithoutHostTargetsEveryMember]
+      inheritance: []
+      resolution: [TestGroupWorkflowHostNodeTypeResolution]
+      normalization: []
+      regression: [TestTosca20WorkflowHostBehaviorUnchanged]
+
+  - requirement_id: TOSCA13-3.7.2.4-001
+    section: "3.7.2.4"
+    section_title: "Additional requirements"
+    normative_rule: "Refined valid_source_types remain type-compatible with the parent capability definition."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "valid_source_types names are resolved to node types."
+      - "Omitted lists can be inherited."
+    missing_parts:
+      - "An explicitly refined incompatible list is accepted."
+      - "The TOSCA 1.3 capability-type spelling is not consistently adapted."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3, tosca/grammars/tosca_v2_0]
+      files: [tosca/grammars/tosca_v1_3/capability-definition.go, tosca/grammars/tosca_v1_3/capability-type.go, tosca/grammars/tosca_v2_0/capability-definition.go]
+      symbols: [tosca_v1_3.ReadCapabilityType, tosca_v2_0.CapabilityDefinition.Inherit]
+      parser_phase: inheritance
+      execution_path: [LookupNames, AddHierarchies, CapabilityDefinition.Inherit]
+    remediation_group: capability-source-refinement
+    remediation_order: 8
+    dependencies: [TOSCA13-3.7.6.3-001]
+    risk: high
+    planned_tests:
+      positive: [TestCapabilityValidSourceTypeCompatibleRefinement]
+      negative: [TestCapabilityValidSourceTypeRejectsUnrelatedRefinement]
+      boundary: [TestCapabilityValidSourceTypeMultipleCompatibleChildren]
+      inheritance: [TestCapabilityValidSourceTypesInherited]
+      resolution: [TestCapabilityValidSourceTypesResolveImportedNodeTypes]
+      normalization: []
+      regression: [TestTosca20CapabilitySourceBehaviorUnchanged]
+
+  - requirement_id: TOSCA13-3.7.5.4-002
+    section: "3.7.5.4"
+    section_title: "Additional Requirements"
+    normative_rule: "The reserved keyname inputs cannot be an operation name."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Interface type operations are read from a keyed map."
+    missing_parts:
+      - "An operation named inputs is accepted."
+      - "The restriction is not applied to deprecated shorthand operation names."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/structural-readers.go]
+      symbols: [tosca_v1_3.ReadInterfaceType, tosca_v1_3.validateReservedOperationNames]
+      parser_phase: read
+      execution_path: [ReadInterfaceType, validateReservedOperationNames]
+    remediation_group: interface-reserved-operation-name
+    remediation_order: 2
+    dependencies: []
+    risk: low
+    planned_tests:
+      positive: [TestInterfaceOperationNonReservedNameAccepted]
+      negative: [TestInterfaceOperationInputsNameRejected]
+      boundary: [TestDeprecatedInterfaceOperationInputsNameRejected]
+      inheritance: []
+      resolution: []
+      normalization: []
+      regression: [TestTosca20InterfaceOperationNameUnchanged]
+
+  - requirement_id: TOSCA13-3.7.6.3-001
+    section: "3.7.6.3"
+    section_title: "Additional Requirements"
+    normative_rule: "A datatype has derived_from or at least one property definition."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Datatype parents are resolved and hierarchy cycles rejected."
+      - "Primitive-derived and complex datatypes are represented."
+    missing_parts:
+      - "A datatype with neither derived_from nor properties is accepted."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/data-type-validation.go, tosca/grammars/tosca_v1_3/service-file.go]
+      symbols: [tosca_v1_3.validateDataTypeShape]
+      parser_phase: hierarchy/rendering
+      execution_path: [AddHierarchies, Inherit, File.Render, validateDataTypeShape]
+    remediation_group: datatype-shape
+    remediation_order: 7
+    dependencies: [TOSCA13-3.7.6.3-002]
+    risk: medium
+    planned_tests:
+      positive: [TestDatatypeWithParentOrPropertiesAccepted]
+      negative: [TestDatatypeWithoutParentAndPropertiesRejected]
+      boundary: []
+      inheritance: [TestDatatypeParentSatisfiesShape]
+      resolution: []
+      normalization: []
+      regression: [TestTosca20DatatypeShapeUnchanged]
+
+  - requirement_id: TOSCA13-3.7.6.3-002
+    section: "3.7.6.3"
+    section_title: "Additional Requirements"
+    normative_rule: "Datatype constraints are compatible with derived_from."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Datatype constraints are parsed and inherited."
+    missing_parts:
+      - "Operators are not validated against the effective parent datatype."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/constraint-validation.go, tosca/grammars/tosca_v1_3/service-file.go]
+      symbols: [tosca_v1_3.validateDataTypeConstraintDefinitions]
+      parser_phase: hierarchy/rendering
+      execution_path: [AddHierarchies, Inherit, File.Render, validateConstraintCompatibility]
+    remediation_group: constraint-semantics
+    remediation_order: 6
+    dependencies: [TOSCA13-3.6.3.3-003]
+    risk: high
+    planned_tests:
+      positive: [TestDatatypeConstraintCompatibleWithParent]
+      negative: [TestDatatypeConstraintRejectsIncompatibleParent]
+      boundary: []
+      inheritance: [TestInheritedDatatypeConstraint]
+      resolution: []
+      normalization: []
+      regression: [TestTosca20DatatypeConstraintBehaviorUnchanged]
+
+  - requirement_id: TOSCA13-3.7.6.3-003
+    section: "3.7.6.3"
+    section_title: "Additional Requirements"
+    normative_rule: "An explicitly provided properties map contains at least one valid definition."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Non-empty property maps are parsed and property definitions validated."
+    missing_parts:
+      - "An explicitly empty properties map is accepted."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/data-type.go]
+      symbols: [tosca_v1_3.ReadDataType]
+      parser_phase: read
+      execution_path: [ReadDataType, validateNonEmptyMapField]
+    remediation_group: datatype-shape
+    remediation_order: 7
+    dependencies: []
+    risk: low
+    planned_tests:
+      positive: [TestDatatypeNonEmptyPropertiesAccepted]
+      negative: [TestDatatypeEmptyPropertiesRejected]
+      boundary: []
+      inheritance: [TestDerivedDatatypeMayOmitProperties]
+      resolution: []
+      normalization: []
+      regression: [TestTosca20EmptyPropertiesBehaviorUnchanged]
+
+  - requirement_id: TOSCA13-3.7.11.4-002
+    section: "3.7.11.4"
+    section_title: "Additional Requirements"
+    normative_rule: "All group member types belong to one type hierarchy."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Member type names resolve to node types."
+      - "Child member lists are compared with parent lists."
+    missing_parts:
+      - "A newly declared list containing unrelated node hierarchies is accepted."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3, tosca/grammars/tosca_v2_0]
+      files: [tosca/grammars/tosca_v1_3/group-type.go, tosca/grammars/tosca_v2_0/group-type.go]
+      symbols: [tosca_v1_3.ReadGroupType, tosca_v2_0.GroupType.Render]
+      parser_phase: rendering
+      execution_path: [LookupNames, AddHierarchies, GroupType.Render]
+    remediation_group: group-member-homogeneity
+    remediation_order: 9
+    dependencies: [TOSCA13-3.7.6.3-001]
+    risk: medium
+    planned_tests:
+      positive: [TestGroupMemberTypesFromSameHierarchyAccepted]
+      negative: [TestGroupMemberTypesFromDifferentHierarchiesRejected]
+      boundary: [TestSingleGroupMemberTypeAccepted]
+      inheritance: [TestInheritedGroupMemberHomogeneity]
+      resolution: []
+      normalization: []
+      regression: [TestTosca20GroupMemberBehaviorUnchanged]
+
+  - requirement_id: TOSCA13-3.8.2.2.3-015
+    section: "3.8.2.2.3"
+    section_title: "Extended grammar with Property Assignments for the relationship’s Interfaces"
+    normative_rule: "node_filter is valid only when node denotes a Node Type, not a Node Template."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "node can resolve to either a template or a type."
+      - "node_filter grammar is parsed."
+    missing_parts:
+      - "node_filter combined with a concrete Node Template is accepted."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3, tosca/grammars/tosca_v2_0]
+      files: [tosca/grammars/tosca_v1_3/requirement-assignment.go, tosca/grammars/tosca_v2_0/requirement-assignment.go]
+      symbols: [tosca_v1_3.validateRequirementNodeFilter]
+      parser_phase: rendering
+      execution_path: [RequirementAssignments.Render, validateRequirementNodeFilter]
+    remediation_group: requirement-node-filter
+    remediation_order: 10
+    dependencies: [TOSCA13-3.7.2.4-001]
+    risk: medium
+    planned_tests:
+      positive: [TestRequirementNodeFilterWithNodeTypeAccepted]
+      negative: [TestRequirementNodeFilterWithNodeTemplateRejected]
+      boundary: [TestRequirementWithoutNodeFilterUnchanged]
+      inheritance: []
+      resolution: [TestRequirementNodeTypeAndTemplateResolution]
+      normalization: [TestRequirementNodeFilterNormalization]
+      regression: [TestTosca20RequirementNodeFilterBehaviorUnchanged]
+
+  - requirement_id: TOSCA13-3.8.3.3-001
+    section: "3.8.3.3"
+    section_title: "Additional requirements"
+    normative_rule: "A copied node template source is complete and does not itself use copy."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Direct node template copy and merge are implemented."
+      - "Copy cycles are detected."
+    missing_parts:
+      - "Multi-level acyclic copy chains are accepted."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3, tosca/grammars/tosca_v2_0]
+      files: [tosca/grammars/tosca_v1_3/copy.go, tosca/grammars/tosca_v1_3/node-template.go, tosca/grammars/tosca_v2_0/copy.go]
+      symbols: [tosca_v1_3.CopyTemplate, tosca_v2_0.CopyAndMerge]
+      parser_phase: read
+      execution_path: [NodeTemplate.PreRead, CopyTemplate]
+    remediation_group: template-copy-depth
+    remediation_order: 13
+    dependencies: []
+    risk: medium
+    planned_tests:
+      positive: [TestNodeTemplateSingleLevelCopyAccepted]
+      negative: [TestNodeTemplateCopySourceUsingCopyRejected]
+      boundary: [TestNodeTemplateCopyDiagnosticDeterministic]
+      inheritance: []
+      resolution: [TestNodeTemplateCopySourceResolution]
+      normalization: [TestNodeTemplateCopyNormalization]
+      regression: [TestTosca20MultiLevelCopyUnchanged]
+
+  - requirement_id: TOSCA13-3.8.4.3-001
+    section: "3.8.4.3"
+    section_title: "Additional requirements"
+    normative_rule: "A copied relationship template source is complete and does not itself use copy."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Direct relationship template copy and merge are implemented."
+      - "Copy cycles are detected."
+    missing_parts:
+      - "Multi-level acyclic relationship copy chains are accepted."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3, tosca/grammars/tosca_v2_0]
+      files: [tosca/grammars/tosca_v1_3/copy.go, tosca/grammars/tosca_v1_3/relationship-template.go, tosca/grammars/tosca_v2_0/copy.go]
+      symbols: [tosca_v1_3.CopyTemplate, tosca_v2_0.CopyAndMerge]
+      parser_phase: read
+      execution_path: [RelationshipTemplate.PreRead, CopyTemplate]
+    remediation_group: template-copy-depth
+    remediation_order: 13
+    dependencies: []
+    risk: medium
+    planned_tests:
+      positive: [TestRelationshipTemplateSingleLevelCopyAccepted]
+      negative: [TestRelationshipTemplateCopySourceUsingCopyRejected]
+      boundary: [TestRelationshipTemplateCopyDiagnosticDeterministic]
+      inheritance: []
+      resolution: [TestRelationshipTemplateCopySourceResolution]
+      normalization: [TestRelationshipTemplateCopyNormalization]
+      regression: [TestTosca20MultiLevelCopyUnchanged]
+
+  - requirement_id: TOSCA13-3.8.8.3-005
+    section: "3.8.8.3"
+    section_title: "Notes"
+    normative_rule: "Every required property of every node template in a substituting template has a valid assignment."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Ordinary node template rendering checks required properties."
+      - "Defaults satisfy required properties."
+    missing_parts:
+      - "No substitution-specific traversal proves all internal node templates were rendered."
+      - "Function-valued and mapped assignments are not directly covered."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/substitution-validation.go, tosca/grammars/tosca_v1_3/service-template.go]
+      symbols: [tosca_v1_3.validateSubstitutingNodeProperties]
+      parser_phase: rendering
+      execution_path: [NodeTemplate.Render, ServiceTemplate.Render, validateSubstitutingNodeProperties]
+    remediation_group: substitution-coverage
+    remediation_order: 14
+    dependencies: [TOSCA13-3.8.13.4-001]
+    risk: high
+    planned_tests:
+      positive: [TestSubstitutingTemplateRequiredPropertiesAssigned]
+      negative: [TestSubstitutingTemplateRejectsMissingRequiredProperty]
+      boundary: [TestSubstitutingTemplateDefaultSatisfiesRequiredProperty]
+      inheritance: [TestSubstitutingTemplateInheritedRequiredProperty]
+      resolution: [TestSubstitutingTemplateMappedInputAssignment]
+      normalization: [TestSubstitutingTemplateNormalizationDeterministic]
+      regression: [TestOrdinaryNodeTemplateRequiredPropertiesUnchanged]
+
+  - requirement_id: TOSCA13-3.8.13.4-001
+    section: "3.8.13.4"
+    section_title: "Additional requirements"
+    normative_rule: "Substitution mappings cover every property, capability, and requirement of the substituted node type."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Provided mappings are resolved and type-checked."
+      - "Unknown mapping names are rejected."
+    missing_parts:
+      - "Missing property mappings are not reported."
+      - "Missing capability mappings are not reported."
+      - "Missing requirement mappings are not reported."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/substitution-validation.go, tosca/grammars/tosca_v1_3/service-template.go]
+      symbols: [tosca_v1_3.validateSubstitutionMappingCoverage]
+      parser_phase: rendering
+      execution_path: [SubstitutionMappings.Render, ServiceTemplate.Render, validateSubstitutionMappingCoverage]
+    remediation_group: substitution-coverage
+    remediation_order: 14
+    dependencies: []
+    risk: high
+    planned_tests:
+      positive: [TestSubstitutionMappingCoversEffectiveNodeType]
+      negative: [TestSubstitutionMappingRejectsMissingPropertyCapabilityRequirement]
+      boundary: [TestSubstitutionMappingInheritedDefinitionsRequireMappings]
+      inheritance: [TestSubstitutionMappingCoversInheritedDefinitions]
+      resolution: [TestSubstitutionMappingReferencesResolve]
+      normalization: [TestSubstitutionMappingNormalizationDeterministic]
+      regression: [TestTosca20SubstitutionCoverageBehaviorUnchanged]
+
+  - requirement_id: TOSCA13-4.3.2.2-003
+    section: "4.3.2.2"
+    section_title: "Parameters"
+    normative_rule: "join requires its list of string value expressions."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "The shared function namespace contains join."
+      - "A recognized join call can normalize to a function call."
+    missing_parts:
+      - "The TOSCA 1.3 function allowlist omits join."
+      - "Empty, scalar, and wrongly typed first arguments are not validated."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/functions.go]
+      symbols: [tosca_v1_3.intrinsicFunctionNames, tosca_v1_3.validateIntrinsicFunctionCall]
+      parser_phase: read/function-evaluation
+      execution_path: [ReadValue, ParseFunctionCall, validateIntrinsicFunctionCall]
+    remediation_group: intrinsic-required-arguments
+    remediation_order: 3
+    dependencies: []
+    risk: medium
+    planned_tests:
+      positive: [TestJoinRequiredListAccepted]
+      negative: [TestJoinMissingOrWrongListRejected]
+      boundary: [TestJoinSingleElementList]
+      inheritance: []
+      resolution: []
+      normalization: [TestJoinNormalizesDeterministically]
+      regression: [TestTosca20JoinBehaviorUnchanged]
+
+  - requirement_id: TOSCA13-4.7.1.2-003
+    section: "4.7.1.2"
+    section_title: "Parameters"
+    normative_rule: "get_nodes_of_type requires a Node Type name."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "The shared function namespace contains get_nodes_of_type."
+    missing_parts:
+      - "The TOSCA 1.3 function allowlist omits get_nodes_of_type."
+      - "Missing, non-string, and unknown node type names are not completely validated."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/functions.go]
+      symbols: [tosca_v1_3.intrinsicFunctionNames, tosca_v1_3.validateIntrinsicFunctionCall, tosca_v1_3.validateFunctionResolution]
+      parser_phase: read/rendering/function-evaluation
+      execution_path: [ReadValue, ParseFunctionCall, ServiceTemplate.Render, validateFunctionResolution]
+    remediation_group: intrinsic-required-arguments
+    remediation_order: 3
+    dependencies: []
+    risk: medium
+    planned_tests:
+      positive: [TestGetNodesOfTypeRequiredNameAccepted]
+      negative: [TestGetNodesOfTypeMissingWrongOrUnknownNameRejected]
+      boundary: [TestGetNodesOfDerivedType]
+      inheritance: [TestGetNodesOfTypeUsesHierarchy]
+      resolution: [TestGetNodesOfTypeResolvesImportedType]
+      normalization: [TestGetNodesOfTypeNormalizesDeterministically]
+      regression: [TestTosca20GetNodesOfTypeBehaviorUnchanged]
+
+  - requirement_id: TOSCA13-5.2.1-001
+    section: "5.2.1"
+    section_title: "Additional requirements"
+    normative_rule: "Normative Type URI, shorthand, and qualified names are case-sensitive."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Namespace maps use exact Go string keys."
+      - "No case-folding lookup was found."
+    missing_parts:
+      - "No direct tests cover URI, shorthand, and qualified-name case mismatches."
+      - "No imported-name regression proves case-sensitive namespace resolution."
+    implementation:
+      packages: [tosca/parsing, tosca/grammars/tosca_v1_3]
+      files: [tosca/parsing/namespaces.go, tosca/grammars/tosca_v1_3/namespace-validation.go]
+      symbols: [parsing.Namespace.Lookup, parsing.Namespace.LookupForType]
+      parser_phase: namespaces
+      execution_path: [AddNamespaces, LookupNames, Namespace.LookupForType]
+    remediation_group: normative-name-case-sensitivity
+    remediation_order: 4
+    dependencies: []
+    risk: low
+    planned_tests:
+      positive: [TestNormativeTypeNamesExactCaseAccepted]
+      negative: [TestNormativeTypeURIShorthandAndQualifiedNameCaseMismatchRejected]
+      boundary: []
+      inheritance: []
+      resolution: [TestImportedTypeNamesRemainCaseSensitive]
+      normalization: []
+      regression: [TestTosca20NamespaceBehaviorUnchanged]
+
+  - requirement_id: TOSCA13-5.3.11.3-001
+    section: "5.3.11.3"
+    section_title: "Additional requirements"
+    normative_rule: "PortSpec contains at least one of target, target_range, source, or source_range."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "PortSpec fields and individual PortDef/range constraints are defined."
+    missing_parts:
+      - "A PortSpec containing only protocol is accepted."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/profile-value-validation.go, tosca/grammars/tosca_v1_3/service-template.go]
+      symbols: [tosca_v1_3.validatePortSpec]
+      parser_phase: rendering
+      execution_path: [Value.Render, ServiceTemplate.Render, validateProfileValues, validatePortSpec]
+    remediation_group: profile-cross-property
+    remediation_order: 15
+    dependencies: [TOSCA13-3.6.3.3-003]
+    risk: high
+    planned_tests:
+      positive: [TestPortSpecAtLeastOnePortField]
+      negative: [TestPortSpecRejectsNoPortFields]
+      boundary: [TestPortSpecSingleSourceOrTargetField]
+      inheritance: []
+      resolution: []
+      normalization: [TestPortSpecNormalizationDeterministic]
+      regression: [TestUnrelatedComplexDatatypeUnchanged]
+
+  - requirement_id: TOSCA13-5.3.11.3-002
+    section: "5.3.11.3"
+    section_title: "Additional requirements"
+    normative_rule: "source is present and inside source_range when source_range is specified."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "source and source_range values are independently type-checked."
+    missing_parts:
+      - "source_range without source is accepted."
+      - "A source outside its declared range is accepted."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/profile-value-validation.go]
+      symbols: [tosca_v1_3.validatePortSpec]
+      parser_phase: rendering
+      execution_path: [Value.Render, validateProfileValues, validatePortSpec]
+    remediation_group: profile-cross-property
+    remediation_order: 15
+    dependencies: [TOSCA13-5.3.11.3-001]
+    risk: high
+    planned_tests:
+      positive: [TestPortSpecSourceInsideRange]
+      negative: [TestPortSpecSourceMissingOrOutsideRange]
+      boundary: [TestPortSpecSourceInclusiveBounds]
+      inheritance: []
+      resolution: []
+      normalization: []
+      regression: [TestPortDefConstraintStillApplies]
+
+  - requirement_id: TOSCA13-5.3.11.3-003
+    section: "5.3.11.3"
+    section_title: "Additional requirements"
+    normative_rule: "target is present and inside target_range when target_range is specified."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "target and target_range values are independently type-checked."
+    missing_parts:
+      - "target_range without target is accepted."
+      - "A target outside its declared range is accepted."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/profile-value-validation.go]
+      symbols: [tosca_v1_3.validatePortSpec]
+      parser_phase: rendering
+      execution_path: [Value.Render, validateProfileValues, validatePortSpec]
+    remediation_group: profile-cross-property
+    remediation_order: 15
+    dependencies: [TOSCA13-5.3.11.3-001]
+    risk: high
+    planned_tests:
+      positive: [TestPortSpecTargetInsideRange]
+      negative: [TestPortSpecTargetMissingOrOutsideRange]
+      boundary: [TestPortSpecTargetInclusiveBounds]
+      inheritance: []
+      resolution: []
+      normalization: []
+      regression: [TestPortDefConstraintStillApplies]
+
+  - requirement_id: TOSCA13-5.5.7.4-001
+    section: "5.5.7.4"
+    section_title: "Additional requirements"
+    normative_rule: "A valid Endpoint supplies port or ports."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "port and ports are individually typed; ports has min_length 1."
+    missing_parts:
+      - "An Endpoint with neither property is accepted."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/profile-value-validation.go]
+      symbols: [tosca_v1_3.validateEndpoint]
+      parser_phase: rendering
+      execution_path: [CapabilityAssignment.Render, validateProfileValues, validateEndpoint]
+    remediation_group: profile-cross-property
+    remediation_order: 15
+    dependencies: [TOSCA13-5.3.11.3-001]
+    risk: high
+    planned_tests:
+      positive: [TestEndpointPortOrPortsAccepted]
+      negative: [TestEndpointWithoutPortOrPortsRejected]
+      boundary: [TestEndpointEmptyPortsRejected]
+      inheritance: [TestDerivedEndpointRetainsConditionalRule]
+      resolution: []
+      normalization: [TestEndpointNormalizationDeterministic]
+      regression: [TestUnrelatedCapabilityUnchanged]
+
+  - requirement_id: TOSCA13-5.5.13.1-012
+    section: "5.5.13.1"
+    section_title: "Properties"
+    normative_rule: "default_instances is between min_instances and max_instances."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "All three Scalable properties are integer typed and defaults are applied."
+    missing_parts:
+      - "Cross-property ordering is not validated."
+      - "Inclusive boundaries and inherited defaults are not tested."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/profile-value-validation.go]
+      symbols: [tosca_v1_3.validateScalable]
+      parser_phase: rendering
+      execution_path: [CapabilityAssignment.Render, validateProfileValues, validateScalable]
+    remediation_group: profile-cross-property
+    remediation_order: 15
+    dependencies: []
+    risk: high
+    planned_tests:
+      positive: [TestScalableDefaultInstancesInsideRange]
+      negative: [TestScalableDefaultInstancesOutsideRangeRejected]
+      boundary: [TestScalableDefaultInstancesInclusiveBounds]
+      inheritance: [TestDerivedScalableRetainsRangeRule]
+      resolution: []
+      normalization: [TestScalableDefaultsNormalizeDeterministically]
+      regression: [TestUnrelatedCapabilityUnchanged]
+
+  - requirement_id: TOSCA13-8.5.1.1-036
+    section: "8.5.1.1"
+    section_title: "Properties"
+    normative_rule: "physical_network is required when network_type is flat or vlan."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Both network_type and physical_network are defined and typed."
+    missing_parts:
+      - "flat or vlan without physical_network is accepted."
+      - "Other network types are not directly verified as exempt."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/profile-value-validation.go]
+      symbols: [tosca_v1_3.validateNetwork]
+      parser_phase: rendering
+      execution_path: [NodeTemplate.Render, validateProfileValues, validateNetwork]
+    remediation_group: profile-cross-property
+    remediation_order: 15
+    dependencies: []
+    risk: medium
+    planned_tests:
+      positive: [TestNetworkPhysicalNetworkConditionalRequirement]
+      negative: [TestFlatAndVlanNetworkRequirePhysicalNetwork]
+      boundary: [TestOtherNetworkTypesDoNotRequirePhysicalNetwork]
+      inheritance: [TestDerivedNetworkRetainsConditionalRule]
+      resolution: []
+      normalization: [TestNetworkNormalizationDeterministic]
+      regression: [TestTosca20NetworkBehaviorUnchanged]
