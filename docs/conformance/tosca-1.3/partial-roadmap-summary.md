@@ -56,12 +56,12 @@ remain isolated from generic constraint processing.
 
 ## Current cross-status matrix
 
-After remediation group 11 (`attribute-default-provenance`):
+After remediation group 12 (`workflow-operation-host`):
 
 | Implementation status | verified | indirectly-tested | untested | Total |
 |---|---:|---:|---:|---:|
-| implemented | 161 | 26 | 24 | 211 |
-| partial | 0 | 0 | 12 | 12 |
+| implemented | 163 | 26 | 24 | 213 |
+| partial | 0 | 0 | 10 | 10 |
 | missing | 0 | 0 | 0 | 0 |
 | non-compliant | 0 | 0 | 0 | 0 |
-| **Total** | **161** | **26** | **36** | **223** |
+| **Total** | **163** | **26** | **34** | **223** |

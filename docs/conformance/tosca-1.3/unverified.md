@@ -1,6 +1,6 @@
 # Unverified TOSCA 1.3 requirements
 
-Untested or currently unverifiable records: **2349**.
+Untested or currently unverifiable records: **2347**.
 
 | Requirement | Implementation | Verification | Applicability | Reason |
 |---|---|---|---|---|
@@ -720,9 +720,7 @@ Untested or currently unverifiable records: **2349**.
 | `TOSCA13-3.6.27.1-005` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.27.1-006` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.27.1-007` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.6.27.1-008` | partial | untested | applicable | operation_host conditional validation is incomplete.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.27.1-009` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.6.27.1-010` | partial | untested | applicable | Construct is recognized; requiredness/cardinality validation is incomplete.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.27.1-011` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.27.1-012` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.6.27.1-013` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |

@@ -52,6 +52,10 @@ func (self *WorkflowStepDefinition) GetKey() string {
 func (self *WorkflowStepDefinition) Render(definitions WorkflowStepDefinitions) {
 	logInherit.Debugf("workflow step definition: %s", self.Name)
 
+	if validator := self.Context.Grammar.WorkflowStepDefinitionValidator; validator != nil {
+		validator(self)
+	}
+
 	if self.OnSuccessStepNames != nil {
 		for index, name := range *self.OnSuccessStepNames {
 			if definition, ok := definitions[name]; ok {
@@ -76,7 +80,6 @@ func (self *WorkflowStepDefinition) Render(definitions WorkflowStepDefinitions) 
 		activity.Render(self)
 	}
 
-	// TODO: validate OperationHost
 }
 
 func (self *WorkflowStepDefinition) Normalize(normalWorkflow *normal.Workflow) *normal.WorkflowStep {

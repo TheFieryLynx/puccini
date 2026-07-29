@@ -14,17 +14,17 @@ This report covers the continuation trace of every formerly-unknown record that 
 
 ## Stable denominator result
 
-- implemented: **211**.
-- partial: **12**.
+- implemented: **213**.
+- partial: **10**.
 - missing: **0**.
 - non-compliant: **0**.
-- verified: **161**.
+- verified: **163**.
 - indirectly-tested: **26**.
-- untested: **36**.
+- untested: **34**.
 - unverifiable: **0**.
-- implementation coverage: **211/223 (94.62%)**.
-- verified conformance coverage: **161/223 (72.20%)**.
-- broad test evidence coverage: **187/223 (83.86%)**.
+- implementation coverage: **213/223 (95.52%)**.
+- verified conformance coverage: **163/223 (73.09%)**.
+- broad test evidence coverage: **189/223 (84.75%)**.
 
 ## Continuation trace by subsystem
 
@@ -36,13 +36,13 @@ This report covers the continuation trace of every formerly-unknown record that 
 | Type system and hierarchy | 6 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | 0 |
 | Inheritance and refinement | 3 | 3 | 0 | 0 | 0 | 1 | 0 | 2 | 0 |
 | Properties, attributes and assignments | 20 | 18 | 2 | 0 | 0 | 13 | 1 | 6 | 0 |
-| Constraints | 8 | 7 | 1 | 0 | 0 | 7 | 0 | 1 | 0 |
+| Constraints | 8 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | 0 |
 | Intrinsic functions | 22 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | 0 |
 | Requirements and capabilities | 6 | 6 | 0 | 0 | 0 | 5 | 0 | 1 | 0 |
 | Interfaces, operations and artifacts | 11 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | 0 |
 | Groups and policies | 5 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | 0 |
 | Substitution mappings | 2 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 |
-| Workflows | 15 | 14 | 1 | 0 | 0 | 13 | 0 | 2 | 0 |
+| Workflows | 15 | 15 | 0 | 0 | 0 | 14 | 0 | 1 | 0 |
 | Normative profile types | 29 | 23 | 6 | 0 | 0 | 2 | 21 | 6 | 0 |
 | CSAR | 6 | 6 | 0 | 0 | 0 | 1 | 0 | 5 | 0 |
 | Normalization | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |

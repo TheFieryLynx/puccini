@@ -497,6 +497,34 @@ DIRECT_TESTS[ATTRIBUTE_DEFAULT_PROVENANCE_ID] = {
     ],
 }
 
+WORKFLOW_OPERATION_HOST_IDS = {
+    "TOSCA13-3.6.27.1-008",
+    "TOSCA13-3.6.27.1-010",
+}
+for requirement_id in WORKFLOW_OPERATION_HOST_IDS:
+    DIRECT_TESTS[requirement_id] = {
+        "positive": [
+            "tests/conformance/tosca_1_3/partial_workflow_operation_host_test.go#TestPartialWorkflowOperationHostAcceptsRelationshipEndpoints",
+            "tests/conformance/tosca_1_3/partial_workflow_operation_host_test.go#TestPartialWorkflowOperationHostGroupTargetIsOptional",
+        ],
+        "negative": [
+            "tests/conformance/tosca_1_3/partial_workflow_operation_host_test.go#TestPartialWorkflowOperationHostRejectsMissingRelationshipHost",
+            "tests/conformance/tosca_1_3/partial_workflow_operation_host_test.go#TestPartialWorkflowOperationHostRejectsInvalidRelationshipHosts",
+            "tests/conformance/tosca_1_3/partial_workflow_operation_host_test.go#TestPartialWorkflowOperationHostNodeTargetApplicability",
+            "tests/conformance/tosca_1_3/partial_workflow_operation_host_test.go#TestPartialWorkflowOperationHostUnknownTargetStillFailsLookup",
+        ],
+        "boundary": [
+            "tests/conformance/tosca_1_3/partial_workflow_operation_host_test.go#TestPartialWorkflowOperationHostDiagnosticIsDeterministic",
+        ],
+        "normalization": [
+            "tests/conformance/tosca_1_3/partial_workflow_operation_host_test.go#TestPartialWorkflowOperationHostAcceptsRelationshipEndpoints",
+        ],
+        "regression": [
+            "tests/conformance/tosca_1_3/partial_workflow_operation_host_test.go#TestPartialWorkflowOperationHostDoesNotChangeTOSCA20",
+            "puccini_test.go#TestParse/1.3/workflows.yaml",
+        ],
+    }
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -997,6 +1025,19 @@ MUTATION_CHECKS[ATTRIBUTE_DEFAULT_PROVENANCE_ID] = {
     "expected_tests_failed": True,
     "production_diff_restored": True,
 }
+for requirement_id in WORKFLOW_OPERATION_HOST_IDS:
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutation": "Temporarily removed only the TOSCA 1.3 workflow-step validator registration.",
+        "affected_tests": [
+            "TestPartialWorkflowOperationHostRejectsMissingRelationshipHost",
+            "TestPartialWorkflowOperationHostRejectsInvalidRelationshipHosts",
+            "TestPartialWorkflowOperationHostNodeTargetApplicability",
+            "TestPartialWorkflowOperationHostDiagnosticIsDeterministic",
+        ],
+        "expected_tests_failed": True,
+        "production_diff_restored": True,
+    }
 for requirement_id in LOCAL_COLLISION_IDS:
     MUTATION_CHECKS[requirement_id] = {
         "performed": True,
@@ -2442,6 +2483,45 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
                 "provenance analysis; pinned normative Root state defaults are the "
                 "documented specification-conflict exception and TOSCA 2.0 leaves "
                 "the policy hook unset"
+            ),
+        }, None
+    if requirement_id in WORKFLOW_OPERATION_HOST_IDS:
+        return "implemented", {
+            "entry_point": "parser.Context.Render",
+            "packages": [
+                "tosca/grammars/tosca_v1_3",
+                "tosca/grammars/tosca_v2_0",
+                "tosca/parsing",
+                "tosca/parser",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v1_3/workflow-step-definition.go",
+                "tosca/grammars/tosca_v1_3/common.go",
+                "tosca/grammars/tosca_v2_0/workflow-step-definition.go",
+                "tosca/parsing/grammars.go",
+                "tosca/parser/phase2.2-lookup.go",
+                "tosca/parser/phase5-rendering.go",
+                "tests/conformance/tosca_1_3/partial_workflow_operation_host_test.go",
+            ],
+            "symbols": [
+                "parsing.Grammar.WorkflowStepDefinitionValidator",
+                "tosca_v2_0.WorkflowStepDefinition.Render",
+                "tosca_v1_3.validateWorkflowStepOperationHost",
+            ],
+            "parser_phase": "rendering after target lookup and before activity resolution",
+            "execution_path": [
+                "parser.Context.LookupNames",
+                "WorkflowStepDefinition.TargetNodeTemplate/TargetGroup",
+                "parser.Context.Render",
+                "tosca_v2_0.WorkflowStepDefinition.Render",
+                "tosca_v1_3.validateWorkflowStepOperationHost",
+                "WorkflowActivityDefinition.Render",
+            ],
+            "trace_summary": (
+                "TOSCA 1.3 step target lookup → relationship/group/node "
+                "classification → conditional operation_host requiredness and "
+                "SOURCE/TARGET validation → activity rendering and normalized "
+                "host; TOSCA 2.0 leaves the policy hook unset"
             ),
         }, None
     if requirement_id in DATATYPE_SHAPE_IDS:

@@ -1,0 +1,204 @@
+remediation_group: workflow-operation-host
+remediation_order: 12
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+parser_phase: rendering after target lookup and before activity resolution
+execution_path:
+  - parser.Context.ReadRoot
+  - tosca_v2_0.ReadWorkflowStepDefinition
+  - parser.Context.LookupNames
+  - WorkflowStepDefinition.TargetNodeTemplate/TargetGroup
+  - parser.Context.Render
+  - tosca_v2_0.WorkflowStepDefinition.Render
+  - tosca_v1_3.validateWorkflowStepOperationHost
+  - WorkflowActivityDefinition.Render
+  - WorkflowStepDefinition.NormalizeNext
+
+requirements:
+  - requirement_id: TOSCA13-3.6.27.1-008
+    section: "3.6.27.1"
+    section_title: "Keynames"
+    normative_rule: >-
+      If the workflow target is a relationship, operation_host is required and
+      its valid values are SOURCE or TARGET, referring to the relationship
+      source or target node.
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "operation_host is read as a string."
+      - "A supplied host is preserved on the normalized workflow step."
+      - "target resolves independently as a node template or group."
+      - "target_relationship is represented on the workflow step."
+    missing_parts:
+      - "A relationship step without operation_host was accepted."
+      - "Relationship hosts other than exact SOURCE or TARGET were accepted."
+      - "Lowercase source/target values were accepted."
+      - "No direct test verified normalized endpoint selection."
+    implementation:
+      packages:
+        - tosca/grammars/tosca_v1_3
+        - tosca/grammars/tosca_v2_0
+        - tosca/parsing
+        - tosca/parser
+      files:
+        - tosca/grammars/tosca_v1_3/workflow-step-definition.go
+        - tosca/grammars/tosca_v1_3/common.go
+        - tosca/grammars/tosca_v2_0/workflow-step-definition.go
+        - tosca/parsing/grammars.go
+        - tosca/parser/phase2.2-lookup.go
+        - tosca/parser/phase5-rendering.go
+      symbols:
+        - parsing.Grammar.WorkflowStepDefinitionValidator
+        - tosca_v2_0.WorkflowStepDefinition.Render
+        - tosca_v1_3.validateWorkflowStepOperationHost
+      parser_phase: rendering
+      execution_path:
+        - parser.Context.LookupNames
+        - tosca_v2_0.WorkflowStepDefinition.Render
+        - tosca_v1_3.validateWorkflowStepOperationHost
+    remediation_group: workflow-operation-host
+    remediation_order: 12
+    dependencies:
+      - target and relationship resolution
+    risk: medium
+    planned_tests:
+      positive:
+        - TestPartialWorkflowOperationHostAcceptsRelationshipEndpoints
+      negative:
+        - TestPartialWorkflowOperationHostRejectsMissingRelationshipHost
+        - TestPartialWorkflowOperationHostRejectsInvalidRelationshipHosts
+      boundary:
+        - TestPartialWorkflowOperationHostDiagnosticIsDeterministic
+      inheritance: []
+      resolution:
+        - TestPartialWorkflowOperationHostAcceptsRelationshipEndpoints
+        - TestPartialWorkflowOperationHostUnknownTargetStillFailsLookup
+      normalization:
+        - TestPartialWorkflowOperationHostAcceptsRelationshipEndpoints
+      regression:
+        - TestPartialWorkflowOperationHostDoesNotChangeTOSCA20
+        - TestParse/1.3/workflows.yaml
+
+  - requirement_id: TOSCA13-3.6.27.1-010
+    section: "3.6.27.1"
+    section_title: "Keynames"
+    normative_rule: >-
+      operation_host is conditionally applicable only to relationship and
+      group targets; an ordinary node target does not declare it.
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Node and group target names resolve to distinct fields."
+      - "Group steps may omit operation_host."
+      - "Ordinary node steps may omit operation_host."
+    missing_parts:
+      - "An ordinary node step with operation_host was accepted."
+      - "Conditional applicability was not checked after target resolution."
+      - "Unknown targets were not isolated from host applicability diagnostics."
+    implementation:
+      packages:
+        - tosca/grammars/tosca_v1_3
+        - tosca/grammars/tosca_v2_0
+        - tosca/parsing
+        - tosca/parser
+      files:
+        - tosca/grammars/tosca_v1_3/workflow-step-definition.go
+        - tosca/grammars/tosca_v1_3/common.go
+        - tosca/grammars/tosca_v2_0/workflow-step-definition.go
+        - tosca/parsing/grammars.go
+        - tosca/parser/phase2.2-lookup.go
+        - tosca/parser/phase5-rendering.go
+      symbols:
+        - parsing.Grammar.WorkflowStepDefinitionValidator
+        - tosca_v2_0.WorkflowStepDefinition.Render
+        - tosca_v1_3.validateWorkflowStepOperationHost
+      parser_phase: rendering
+      execution_path:
+        - parser.Context.LookupNames
+        - tosca_v2_0.WorkflowStepDefinition.Render
+        - tosca_v1_3.validateWorkflowStepOperationHost
+      remediation_group: workflow-operation-host
+      remediation_order: 12
+      dependencies:
+        - target resolution
+      risk: medium
+      planned_tests:
+        positive:
+          - TestPartialWorkflowOperationHostGroupTargetIsOptional
+          - TestPartialWorkflowOperationHostNodeTargetApplicability
+        negative:
+          - TestPartialWorkflowOperationHostNodeTargetApplicability
+        boundary:
+          - TestPartialWorkflowOperationHostDiagnosticIsDeterministic
+        inheritance: []
+        resolution:
+          - TestPartialWorkflowOperationHostUnknownTargetStillFailsLookup
+        normalization:
+          - TestPartialWorkflowOperationHostAcceptsRelationshipEndpoints
+        regression:
+          - TestPartialWorkflowOperationHostDoesNotChangeTOSCA20
+          - TestParse/1.3/workflows.yaml
+
+group_implementation:
+  version_isolation: >-
+    Shared workflow rendering exposes a neutral optional policy hook. Only
+    TOSCA 1.3 installs the validator; TOSCA 2.0 leaves it unset.
+  interpretation:
+    relationship_step: >-
+      target_relationship on a resolved node-template target selects the
+      relationship branch and requires exact SOURCE or TARGET.
+    group_step: >-
+      A resolved group target may omit operation_host. Validation of a
+      supplied group node type/template name belongs to the separate
+      non-frozen-MUST group-host rule and is not expanded here.
+    ordinary_node_step: >-
+      A resolved node-template target without target_relationship must omit
+      operation_host because the target node itself is the implicit host.
+    unknown_target: >-
+      If target lookup fails, the host policy emits no secondary applicability
+      diagnostic.
+  baseline_reproduction:
+    performed: true
+    observed_failures:
+      - "A relationship step without operation_host was accepted."
+      - "SELF, lowercase source, and a node name were accepted as relationship hosts."
+      - "An ordinary node step accepted operation_host."
+    correct_failure_reason_verified: true
+  mutation_check:
+    performed: true
+    mutation: "Temporarily removed only the TOSCA 1.3 workflow-step validator registration."
+    affected_tests:
+      - TestPartialWorkflowOperationHostRejectsMissingRelationshipHost
+      - TestPartialWorkflowOperationHostRejectsInvalidRelationshipHosts
+      - TestPartialWorkflowOperationHostNodeTargetApplicability
+      - TestPartialWorkflowOperationHostDiagnosticIsDeterministic
+    expected_tests_failed: true
+    production_diff_restored: true
+  results:
+    TOSCA13-3.6.27.1-008:
+      implementation_status: implemented
+      verification_status: verified
+    TOSCA13-3.6.27.1-010:
+      implementation_status: implemented
+      verification_status: verified
+
+verification:
+  focused_workflow_steps: passed
+  focused_target_resolution: passed
+  workflows_example: passed
+  protected_tosca_1_3_blocks: passed
+  tosca_2_0_conformance: passed
+  go_test_all: passed
+  go_test_race_all: passed
+  go_vet_all: passed
+  git_diff_check: passed
+  audit_generation_twice: passed
+  audit_sha256_identical: true
+  denominator: 223
+  resulting_metrics:
+    implemented: 213
+    partial: 10
+    missing: 0
+    non_compliant: 0
+    verified: 163
+    indirectly_tested: 26
+    untested: 34
