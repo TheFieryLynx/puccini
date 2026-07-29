@@ -1,0 +1,49 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+capability_types:
+  Connectable:
+    derived_from: tosca.capabilities.Root
+relationship_types:
+  Connects:
+    derived_from: tosca.relationships.Root
+node_types:
+  Target:
+    derived_from: tosca.nodes.Root
+    capabilities:
+      endpoint:
+        type: Connectable
+  Source:
+    derived_from: tosca.nodes.Root
+    requirements:
+      - target:
+          capability: Connectable
+          relationship: Connects
+          occurrences: [0, 1]
+group_types:
+  Pair:
+    derived_from: tosca.groups.Root
+    members: [Source, Target]
+policy_types:
+  PairPolicy:
+    derived_from: tosca.policies.Root
+    targets: [Source, Target, Pair]
+topology_template:
+  node_templates:
+    target:
+      type: Target
+    source:
+      type: Source
+      requirements:
+        - target:
+            node: target
+            capability: endpoint
+  relationship_templates:
+    connection:
+      type: Connects
+  groups:
+    pair:
+      type: Pair
+      members: [source, target]
+  policies:
+    - policy:
+        type: PairPolicy
+        targets: [source, target, pair]

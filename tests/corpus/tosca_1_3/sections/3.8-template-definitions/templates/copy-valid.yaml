@@ -1,0 +1,18 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+node_types:
+  Component:
+    derived_from: tosca.nodes.Root
+    properties:
+      label:
+        type: string
+        required: false
+topology_template:
+  node_templates:
+    base:
+      type: Component
+      properties:
+        label: base
+    copy:
+      copy: base
+      properties:
+        label: copy

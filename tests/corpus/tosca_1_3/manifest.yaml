@@ -702,3 +702,65 @@ cases:
     coverage:
       variation_axes: [refinement:invalid-widening, inheritance:one-level]
       related_cases: [TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID]
+
+  - id: TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+    file: sections/3.8-template-definitions/templates/complete-valid.yaml
+    specification:
+      sections: ["3.8.3.1", "3.8.3.2", "3.8.3.3", "3.8.4.1", "3.8.4.2", "3.8.4.3", "3.8.5.1", "3.8.5.2", "3.8.6.1", "3.8.6.2", "3.8.8.3", "3.8.13.1", "3.8.13.2", "3.8.13.4"]
+      requirement_ids:
+        - TOSCA13-3.8.2.2.3-015
+        - TOSCA13-3.8.3.1-001
+        - TOSCA13-3.8.3.2-003
+        - TOSCA13-3.8.3.3-001
+        - TOSCA13-3.8.4.1-001
+        - TOSCA13-3.8.4.2-003
+        - TOSCA13-3.8.4.3-001
+        - TOSCA13-3.8.5.1-001
+        - TOSCA13-3.8.5.2-003
+        - TOSCA13-3.8.5.2-007
+        - TOSCA13-3.8.6.1-001
+        - TOSCA13-3.8.6.1-003
+        - TOSCA13-3.8.6.2-003
+        - TOSCA13-3.8.8.3-005
+        - TOSCA13-3.8.13.1-001
+        - TOSCA13-3.8.13.1-003
+        - TOSCA13-3.8.13.2-004
+        - TOSCA13-3.8.13.4-001
+    classification: {kind: valid, category: semantic, features: [templates, requirements, capabilities, groups, policies]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:source, node_exists:target]}
+    coverage:
+      variation_axes: [template-kind:node-relationship-group-policy, reference:existing-target, cardinality:multiple]
+      related_cases: [TOSCA13-CORPUS-NODE-TEMPLATE-MISSING-TYPE-INVALID, TOSCA13-CORPUS-GROUP-MEMBER-INVALID]
+
+  - id: TOSCA13-CORPUS-NODE-TEMPLATE-MISSING-TYPE-INVALID
+    file: sections/3.8-template-definitions/templates/node-type-missing-invalid.yaml
+    specification:
+      sections: ["3.8.3.1"]
+      requirement_ids: [TOSCA13-3.8.3.1-001]
+    classification: {kind: invalid, category: grammar, features: [node-template, required-key]}
+    expected: {accepted: false, phase: read, diagnostic: {category: missing, path: type}, assertions: []}
+    coverage:
+      variation_axes: [keynames:required-type-absent, template-kind:node]
+      related_cases: [TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID]
+
+  - id: TOSCA13-CORPUS-GROUP-MEMBER-INVALID
+    file: sections/3.8-template-definitions/templates/group-member-invalid.yaml
+    specification:
+      sections: ["3.8.6.2"]
+      requirement_ids: [TOSCA13-3.8.6.2-003]
+    classification: {kind: invalid, category: resolution, features: [group, member]}
+    expected: {accepted: false, phase: namespaces, diagnostic: {category: unknown, path: absent}, assertions: []}
+    coverage:
+      variation_axes: [reference:missing-target, template-kind:group]
+      related_cases: [TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID]
+
+  - id: TOSCA13-CORPUS-TEMPLATE-COPY-VALID
+    file: sections/3.8-template-definitions/templates/copy-valid.yaml
+    specification:
+      sections: ["3.8.2.2.3"]
+      requirement_ids: [TOSCA13-3.8.2.2.3-015]
+    classification: {kind: valid, category: semantic, features: [copy, assignment]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:base, node_exists:copy]}
+    coverage:
+      variation_axes: [copy:one-level, assignment:override, normalization:independent-copy]
+      related_cases: [TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID]

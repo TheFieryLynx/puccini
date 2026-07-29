@@ -39,3 +39,11 @@ mutations:
     expected_corpus_failures: true
     observed_result: count-20 execution alternated the loop diagnostic between First and Second
     production_diff_restored: true
+  - category: template-definitions
+    production_validation_path: tosca_v1_3.ReadNodeTemplate -> required type validation
+    mutation: injected tosca.nodes.Root only for node templates missing the required type key
+    affected_cases:
+      - TOSCA13-CORPUS-NODE-TEMPLATE-MISSING-TYPE-INVALID
+    expected_corpus_failures: true
+    observed_result: the missing-type node template was accepted and the corpus runner failed
+    production_diff_restored: true

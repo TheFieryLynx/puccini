@@ -127,3 +127,18 @@ grammar_entities:
       - TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-INVALID
       - TOSCA13-CORPUS-TYPE-REQUIRED-WIDENING-INVALID
     status: complete
+
+  - entity: template-definitions
+    sections: ["3.8.2", "3.8.3", "3.8.4", "3.8.5", "3.8.6", "3.8.8", "3.8.13"]
+    parser_phases: [read, namespaces, rendering, normalization]
+    variation_axes:
+      template_kind: [node, relationship, group, policy]
+      references: [existing, missing, capability, requirement]
+      copy: [source, one-level-override]
+      keynames: [required-present, required-absent, optional-together]
+    fixtures:
+      - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+      - TOSCA13-CORPUS-NODE-TEMPLATE-MISSING-TYPE-INVALID
+      - TOSCA13-CORPUS-GROUP-MEMBER-INVALID
+      - TOSCA13-CORPUS-TEMPLATE-COPY-VALID
+    status: complete
