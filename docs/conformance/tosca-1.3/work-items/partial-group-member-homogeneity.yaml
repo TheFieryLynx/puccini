@@ -1,0 +1,123 @@
+remediation_group: group-member-homogeneity
+remediation_order: 9
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+parser_phase: rendering after lookup, hierarchy, and inheritance
+execution_path:
+  - parser.Context.ReadRoot
+  - tosca_v2_0.ReadGroupType
+  - parser.Context.LookupNames
+  - parser.Context.AddHierarchies
+  - parser.Context.Inherit
+  - parser.Context.Render
+  - tosca_v2_0.GroupType.Render
+  - tosca_v1_3.validateGroupTypeMembers
+  - parsing.Hierarchy.IsInSameHierarchy
+
+requirements:
+  - requirement_id: TOSCA13-3.7.11.4-002
+    section: "3.7.11.4"
+    section_title: "Additional Requirements"
+    normative_rule: >-
+      The values associated with members MUST contain only homogeneous types
+      that derive from the same type hierarchy.
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Member names are structurally read as node type names."
+      - "Member names are resolved before rendering."
+      - "An omitted derived group list inherits the parent list."
+      - "A child list is directionally checked against a parent group list."
+    missing_parts:
+      - "A newly declared list was not checked for intra-list hierarchy homogeneity."
+      - "Types from two independent roots were accepted in one members list."
+      - "No direct test distinguished same-hierarchy siblings from separate roots."
+    implementation:
+      packages:
+        - tosca/grammars/tosca_v1_3
+        - tosca/grammars/tosca_v2_0
+        - tosca/parsing
+        - tosca/parser
+      files:
+        - tosca/grammars/tosca_v1_3/group-type.go
+        - tosca/grammars/tosca_v1_3/common.go
+        - tosca/grammars/tosca_v2_0/group-type.go
+        - tosca/parsing/grammars.go
+        - tosca/parsing/inheritance.go
+        - tosca/parser/phase5-rendering.go
+      symbols:
+        - parsing.Grammar.GroupTypeValidator
+        - tosca_v2_0.GroupType.Render
+        - tosca_v1_3.validateGroupTypeMembers
+        - parsing.Hierarchy.IsInSameHierarchy
+      version_isolation: >-
+        Shared rendering invokes a neutral optional policy hook and shared
+        hierarchy comparison helper. Only TOSCA 1.3 installs the validator;
+        TOSCA 2.0 leaves it unset.
+    interpretation:
+      homogeneous: >-
+        All resolved members have the same top-level node type root. Types may
+        be equal, ancestor/descendant, or siblings below that root.
+      declaration_scope: >-
+        An explicitly declared members list is validated once. A child that
+        omits members inherits the already validated parent list without a
+        duplicate diagnostic.
+      unresolved_names: >-
+        Lookup reports unknown members first; homogeneity validation is skipped
+        when the resolved and declared list lengths differ.
+      diagnostic_phase: rendering
+    planned_tests:
+      positive:
+        - TestPartialGroupMemberHomogeneityAcceptsOneHierarchy
+      negative:
+        - TestPartialGroupMemberHomogeneityRejectsDifferentHierarchies
+        - TestPartialGroupMemberHomogeneityUnknownTypeStillFailsLookup
+      boundary:
+        - TestPartialGroupMemberHomogeneityAcceptsSingleMember
+        - TestPartialGroupMemberHomogeneityDiagnosticIsDeterministic
+      inheritance:
+        - TestPartialGroupMemberHomogeneityInheritsMembers
+      resolution:
+        - TestPartialGroupMemberHomogeneityUnknownTypeStillFailsLookup
+      normalization: []
+      regression:
+        - TestPartialGroupMemberHomogeneityDoesNotChangeTOSCA20
+        - TestParse/1.3/policies-and-groups.yaml
+    baseline_reproduction:
+      performed: true
+      observed_failures:
+        - "A members list spanning two independent node type roots was accepted."
+        - "No hierarchy-homogeneity diagnostic existed."
+      correct_failure_reason_verified: true
+    mutation_check:
+      performed: true
+      mutation: "Temporarily removed only the TOSCA 1.3 group validator registration."
+      affected_tests:
+        - TestPartialGroupMemberHomogeneityRejectsDifferentHierarchies
+        - TestPartialGroupMemberHomogeneityDiagnosticIsDeterministic
+      expected_tests_failed: true
+      production_diff_restored: true
+    result:
+      implementation_status: implemented
+      verification_status: verified
+
+verification:
+  focused_group_homogeneity: passed
+  focused_hierarchy_inheritance: passed
+  policies_and_groups_example: passed
+  protected_tosca_1_3_blocks: passed
+  tosca_2_0_conformance: passed
+  go_test_all: passed
+  go_test_race_all: passed
+  go_vet_all: passed
+  git_diff_check: passed
+  audit_generation_twice: passed
+  audit_sha256_identical: true
+  denominator: 223
+  resulting_metrics:
+    implemented: 209
+    partial: 14
+    missing: 0
+    non_compliant: 0
+    verified: 159
+    indirectly_tested: 26
+    untested: 38

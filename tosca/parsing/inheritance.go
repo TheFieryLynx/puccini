@@ -174,6 +174,23 @@ func (self *Hierarchy) IsCompatible(baseEntityPtr EntityPtr, entityPtr EntityPtr
 	return false
 }
 
+func (self *Hierarchy) IsInSameHierarchy(firstEntityPtr EntityPtr, secondEntityPtr EntityPtr) bool {
+	first, firstFound := self.Find(firstEntityPtr)
+	second, secondFound := self.Find(secondEntityPtr)
+	if !firstFound || !secondFound {
+		return false
+	}
+
+	return first.typeRoot() == second.typeRoot()
+}
+
+func (self *Hierarchy) typeRoot() *Hierarchy {
+	for (self.parent != nil) && (self.parent.entityPtr != nil) {
+		self = self.parent
+	}
+	return self
+}
+
 func (self *Hierarchy) add(entityPtr EntityPtr, parentEntityPtr EntityPtr, hierarchyContext HierarchyContext, descendants EntityPtrs) (*Hierarchy, bool) {
 	// Several imports may try to add the same entity to their hierarchies, so let's avoid multiple problem reports
 	if hierarchyContext.Contains(entityPtr) {

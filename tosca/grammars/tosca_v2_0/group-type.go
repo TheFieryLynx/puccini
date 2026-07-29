@@ -77,6 +77,10 @@ func (self *GroupType) Render() {
 func (self *GroupType) render() {
 	logRender.Debugf("group type: %s", self.Name)
 
+	if validator := self.Context.Grammar.GroupTypeValidator; validator != nil {
+		validator(self)
+	}
+
 	// (Note we are checking for MemberNodeTypeNames and not MemberNodeTypes, because the latter will never be nil)
 	if self.Parent == nil {
 		return

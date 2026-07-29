@@ -12,7 +12,7 @@ Implementation gaps and verification gaps are counted independently.
 | 4 | assignment | 120 | 120 | 0 | 120 |
 | 5 | constraint | 94 | 93 | 1 | 93 |
 | 6 | function | 68 | 64 | 4 | 64 |
-| 7 | hierarchy | 62 | 60 | 2 | 60 |
+| 7 | hierarchy | 61 | 59 | 2 | 59 |
 | 8 | default | 55 | 55 | 0 | 55 |
 | 9 | csar | 31 | 26 | 0 | 31 |
 | 10 | refinement | 17 | 17 | 0 | 17 |
@@ -605,7 +605,6 @@ Implementation gaps and verification gaps are counted independently.
 
 - `TOSCA13-3.7.6.2-010` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.7.6.2-011` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-3.7.11.4-002` — implementation=partial; verification=untested; Parent refinement is checked; intra-list homogeneity is not fully validated.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.6.2-002` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.7.2-002` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.8.2-002` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.

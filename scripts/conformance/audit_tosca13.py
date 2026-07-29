@@ -427,6 +427,28 @@ DIRECT_TESTS[CAPABILITY_SOURCE_REFINEMENT_ID] = {
     ],
 }
 
+GROUP_MEMBER_HOMOGENEITY_ID = "TOSCA13-3.7.11.4-002"
+DIRECT_TESTS[GROUP_MEMBER_HOMOGENEITY_ID] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_group_member_homogeneity_test.go#TestPartialGroupMemberHomogeneityAcceptsOneHierarchy",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_group_member_homogeneity_test.go#TestPartialGroupMemberHomogeneityRejectsDifferentHierarchies",
+        "tests/conformance/tosca_1_3/partial_group_member_homogeneity_test.go#TestPartialGroupMemberHomogeneityUnknownTypeStillFailsLookup",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_group_member_homogeneity_test.go#TestPartialGroupMemberHomogeneityAcceptsSingleMember",
+        "tests/conformance/tosca_1_3/partial_group_member_homogeneity_test.go#TestPartialGroupMemberHomogeneityDiagnosticIsDeterministic",
+    ],
+    "inheritance": [
+        "tests/conformance/tosca_1_3/partial_group_member_homogeneity_test.go#TestPartialGroupMemberHomogeneityInheritsMembers",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_group_member_homogeneity_test.go#TestPartialGroupMemberHomogeneityDoesNotChangeTOSCA20",
+        "puccini_test.go#TestParse/1.3/policies-and-groups.yaml",
+    ],
+}
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -890,6 +912,16 @@ MUTATION_CHECKS[CAPABILITY_SOURCE_REFINEMENT_ID] = {
         "TestPartialCapabilitySourceRefinementRejectsUnrelatedType",
         "TestPartialCapabilitySourceRefinementRejectsMixedList",
         "TestPartialCapabilitySourceRefinementDiagnosticIsDeterministic",
+    ],
+    "expected_tests_failed": True,
+    "production_diff_restored": True,
+}
+MUTATION_CHECKS[GROUP_MEMBER_HOMOGENEITY_ID] = {
+    "performed": True,
+    "mutation": "Temporarily removed only the TOSCA 1.3 group validator registration.",
+    "affected_tests": [
+        "TestPartialGroupMemberHomogeneityRejectsDifferentHierarchies",
+        "TestPartialGroupMemberHomogeneityDiagnosticIsDeterministic",
     ],
     "expected_tests_failed": True,
     "production_diff_restored": True,
@@ -2220,6 +2252,46 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
                 "definition → TOSCA 1.3 refinement policy hook → subset "
                 "validation against node type hierarchies; TOSCA 2.0 leaves "
                 "the hook unset"
+            ),
+        }, None
+    if requirement_id == GROUP_MEMBER_HOMOGENEITY_ID:
+        return "implemented", {
+            "entry_point": "parser.Context.Render",
+            "packages": [
+                "tosca/grammars/tosca_v1_3",
+                "tosca/grammars/tosca_v2_0",
+                "tosca/parsing",
+                "tosca/parser",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v1_3/group-type.go",
+                "tosca/grammars/tosca_v1_3/common.go",
+                "tosca/grammars/tosca_v2_0/group-type.go",
+                "tosca/parsing/grammars.go",
+                "tosca/parsing/inheritance.go",
+                "tosca/parser/phase5-rendering.go",
+                "tests/conformance/tosca_1_3/partial_group_member_homogeneity_test.go",
+            ],
+            "symbols": [
+                "parsing.Grammar.GroupTypeValidator",
+                "tosca_v2_0.GroupType.Render",
+                "tosca_v1_3.validateGroupTypeMembers",
+                "parsing.Hierarchy.IsInSameHierarchy",
+            ],
+            "parser_phase": "rendering after lookup, hierarchy, and inheritance",
+            "execution_path": [
+                "parser.Context.LookupNames",
+                "parser.Context.AddHierarchies",
+                "parser.Context.Inherit",
+                "parser.Context.Render",
+                "tosca_v2_0.GroupType.Render",
+                "tosca_v1_3.validateGroupTypeMembers",
+                "parsing.Hierarchy.IsInSameHierarchy",
+            ],
+            "trace_summary": (
+                "explicit TOSCA 1.3 members list → resolved node types → "
+                "post-inheritance render policy → common top-level hierarchy "
+                "comparison; TOSCA 2.0 leaves the policy hook unset"
             ),
         }, None
     if requirement_id in DATATYPE_SHAPE_IDS:

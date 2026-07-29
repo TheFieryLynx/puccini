@@ -3,6 +3,7 @@ package parsing
 type DataDefinitionValidator func(EntityPtr)
 type DataValueValidator func(*Context, EntityPtr, EntityPtr)
 type CapabilityDefinitionRefinementValidator func(EntityPtr, EntityPtr)
+type GroupTypeValidator func(EntityPtr)
 
 //
 // Grammar
@@ -14,6 +15,7 @@ type Grammar struct {
 	DataDefinitionValidator                 DataDefinitionValidator
 	DataValueValidator                      DataValueValidator
 	CapabilityDefinitionRefinementValidator CapabilityDefinitionRefinementValidator
+	GroupTypeValidator                      GroupTypeValidator
 }
 
 func NewGrammar() Grammar {
