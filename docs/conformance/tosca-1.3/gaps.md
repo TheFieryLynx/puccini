@@ -8,11 +8,11 @@ Implementation gaps and verification gaps are counted independently.
 |---:|---|---:|---:|---:|---:|
 | 1 | grammar | 1104 | 969 | 3 | 1101 |
 | 2 | normative-type | 489 | 111 | 3 | 486 |
-| 3 | semantic | 403 | 380 | 10 | 393 |
+| 3 | semantic | 402 | 379 | 10 | 392 |
 | 4 | assignment | 120 | 120 | 0 | 120 |
 | 5 | constraint | 94 | 93 | 1 | 93 |
 | 6 | function | 68 | 64 | 4 | 64 |
-| 7 | hierarchy | 63 | 61 | 2 | 61 |
+| 7 | hierarchy | 62 | 60 | 2 | 60 |
 | 8 | default | 55 | 55 | 0 | 55 |
 | 9 | csar | 31 | 26 | 0 | 31 |
 | 10 | refinement | 17 | 17 | 0 | 17 |
@@ -327,7 +327,7 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-3.6.7.1-016` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.6.7.1-020` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.6.7.1-021` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- … 303 additional records are available in `coverage.yaml`.
+- … 302 additional records are available in `coverage.yaml`.
 
 ## assignment
 
@@ -605,7 +605,6 @@ Implementation gaps and verification gaps are counted independently.
 
 - `TOSCA13-3.7.6.2-010` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.7.6.2-011` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-3.7.6.3-001` — implementation=partial; verification=untested; Hierarchy construction exists, but this additional semantic condition is incomplete.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.7.11.4-002` — implementation=partial; verification=untested; Parent refinement is checked; intra-list homogeneity is not fully validated.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.6.2-002` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.7.2-002` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.

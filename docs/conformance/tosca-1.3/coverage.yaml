@@ -6,7 +6,7 @@ specification:
   requirements_catalog: docs/conformance/tosca-1.3/requirements.yaml
   requirements_catalog_sha256: 1861a9652dd659636702f29737818ac6f1c69355ee442e1bebe98739b21aabf0
 audit:
-  date: '2026-07-28'
+  date: '2026-07-29'
   production_code_changed: true
   requirement_count: 3101
   sample_seed: 20260727
@@ -49330,8 +49330,8 @@ requirements:
   strength: MUST
   category: hierarchy
   subject: additional-requirements
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -49344,46 +49344,59 @@ requirements:
     entry_point: parser.Context.Parse
     packages:
     - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
     - tosca/parser
-    - tosca/parsing
     files:
     - tosca/grammars/tosca_v1_3/data-type.go
+    - tosca/grammars/tosca_v2_0/data-type.go
+    - tosca/parser/phase2.2-lookup.go
     - tosca/parser/phase3-hierarchies.go
-    - tosca/parsing/inheritance.go
-    - tosca/parser/phase4-inheritance.go
+    - tests/conformance/tosca_1_3/partial_datatype_shape_test.go
+    - docs/decisions/0009-tosca-1.3-data-type-root-shape.md
     symbols:
     - tosca_v1_3.ReadDataType
-    - parser.Context.AddHierarchies
-    - parsing.NewHierarchyFor
-    - parsing.Hierarchy.IsCompatible
-    - parser.Context.Inherit
-    parser_phase: hierarchy/rendering
-    execution_path:
-    - parser.Context.Parse
+    - tosca_v1_3.isBundledDataType
+    - tosca_v2_0.ReadDataType
     - parser.Context.LookupNames
     - parser.Context.AddHierarchies
-    - parsing.NewHierarchyFor
-    - parser.Context.Inherit
-    - parsing.Hierarchy.IsCompatible
-    trace_summary: Parent lookup, loops, and incomplete chains are validated; the additional base-type, datatype-shape, non-empty-properties,
-      and constraint-compatibility conditions are not all enforced.
+    parser_phase: read and hierarchy
+    execution_path:
+    - parser.Context.ReadRoot
+    - tosca_v1_3.ReadDataType
+    - tosca_v2_0.ReadDataType
+    - parser.Context.LookupNames
+    - parser.Context.AddHierarchies
+    trace_summary: The TOSCA 1.3 data type reader enforces the parent-or-property shape and non-empty properties cardinality; structural property
+      validity and parent resolution remain in the shared read and hierarchy phases.
   tests:
-    positive: []
-    negative: []
-    boundary: []
-    regression: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeAcceptsEachRequiredAlternative
+    negative:
+    - tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeRejectsMissingParentAndProperties
+    - tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeRejectsExplicitEmptyProperties
+    - tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeKeepsStructuralAndHierarchyValidation
+    boundary:
+    - tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeDiagnosticIsDeterministic
+    regression:
+    - tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeDoesNotChangeTOSCA20
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Hierarchy construction exists, but this additional semantic condition is incomplete.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Hierarchy construction exists, but this additional semantic condition is incomplete.
+  gaps: []
+  notes: Data type alternatives and explicit properties cardinality are enforced and directly verified.
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the parent-or-properties union check and the explicit empty-properties check in separate narrow mutations.
+    affected_tests:
+    - TestPartialDataTypeShapeRejectsMissingParentAndProperties
+    - TestPartialDataTypeShapeRejectsExplicitEmptyProperties
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.7.6.3-002
   section: 3.7.6.3
   section_title: Additional Requirements
@@ -49489,8 +49502,8 @@ requirements:
   strength: SHALL
   category: semantic
   subject: additional-requirements
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -49503,46 +49516,59 @@ requirements:
     entry_point: parser.Context.Parse
     packages:
     - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
     - tosca/parser
-    - tosca/parsing
     files:
     - tosca/grammars/tosca_v1_3/data-type.go
+    - tosca/grammars/tosca_v2_0/data-type.go
+    - tosca/parser/phase2.2-lookup.go
     - tosca/parser/phase3-hierarchies.go
-    - tosca/parsing/inheritance.go
-    - tosca/parser/phase4-inheritance.go
+    - tests/conformance/tosca_1_3/partial_datatype_shape_test.go
+    - docs/decisions/0009-tosca-1.3-data-type-root-shape.md
     symbols:
     - tosca_v1_3.ReadDataType
-    - parser.Context.AddHierarchies
-    - parsing.NewHierarchyFor
-    - parsing.Hierarchy.IsCompatible
-    - parser.Context.Inherit
-    parser_phase: hierarchy/rendering
-    execution_path:
-    - parser.Context.Parse
+    - tosca_v1_3.isBundledDataType
+    - tosca_v2_0.ReadDataType
     - parser.Context.LookupNames
     - parser.Context.AddHierarchies
-    - parsing.NewHierarchyFor
-    - parser.Context.Inherit
-    - parsing.Hierarchy.IsCompatible
-    trace_summary: Parent lookup, loops, and incomplete chains are validated; the additional base-type, datatype-shape, non-empty-properties,
-      and constraint-compatibility conditions are not all enforced.
+    parser_phase: read and hierarchy
+    execution_path:
+    - parser.Context.ReadRoot
+    - tosca_v1_3.ReadDataType
+    - tosca_v2_0.ReadDataType
+    - parser.Context.LookupNames
+    - parser.Context.AddHierarchies
+    trace_summary: The TOSCA 1.3 data type reader enforces the parent-or-property shape and non-empty properties cardinality; structural property
+      validity and parent resolution remain in the shared read and hierarchy phases.
   tests:
-    positive: []
-    negative: []
-    boundary: []
-    regression: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeAcceptsEachRequiredAlternative
+    negative:
+    - tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeRejectsMissingParentAndProperties
+    - tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeRejectsExplicitEmptyProperties
+    - tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeKeepsStructuralAndHierarchyValidation
+    boundary:
+    - tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeDiagnosticIsDeterministic
+    regression:
+    - tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeDoesNotChangeTOSCA20
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Hierarchy construction exists, but this additional semantic condition is incomplete.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Hierarchy construction exists, but this additional semantic condition is incomplete.
+  gaps: []
+  notes: Data type alternatives and explicit properties cardinality are enforced and directly verified.
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled the parent-or-properties union check and the explicit empty-properties check in separate narrow mutations.
+    affected_tests:
+    - TestPartialDataTypeShapeRejectsMissingParentAndProperties
+    - TestPartialDataTypeShapeRejectsExplicitEmptyProperties
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.7.7.1-001
   section: 3.7.7.1
   section_title: Keynames

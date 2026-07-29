@@ -1,6 +1,6 @@
 # Unverified TOSCA 1.3 requirements
 
-Untested or currently unverifiable records: **2355**.
+Untested or currently unverifiable records: **2353**.
 
 | Requirement | Implementation | Verification | Applicability | Reason |
 |---|---|---|---|---|
@@ -887,8 +887,6 @@ Untested or currently unverifiable records: **2355**.
 | `TOSCA13-3.7.6.2-009` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.7.6.2-010` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.7.6.2-011` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.7.6.3-001` | partial | untested | applicable | Hierarchy construction exists, but this additional semantic condition is incomplete.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.7.6.3-003` | partial | untested | applicable | Hierarchy construction exists, but this additional semantic condition is incomplete.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.7.7.1-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.7.7.1-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.7.7.1-003` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |

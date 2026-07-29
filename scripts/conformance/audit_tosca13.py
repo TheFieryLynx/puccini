@@ -381,6 +381,28 @@ DIRECT_TESTS["TOSCA13-3.7.6.3-002"] = {
     ],
 }
 
+DATATYPE_SHAPE_IDS = {
+    "TOSCA13-3.7.6.3-001",
+    "TOSCA13-3.7.6.3-003",
+}
+for requirement_id in DATATYPE_SHAPE_IDS:
+    DIRECT_TESTS[requirement_id] = {
+        "positive": [
+            "tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeAcceptsEachRequiredAlternative",
+        ],
+        "negative": [
+            "tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeRejectsMissingParentAndProperties",
+            "tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeRejectsExplicitEmptyProperties",
+            "tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeKeepsStructuralAndHierarchyValidation",
+        ],
+        "boundary": [
+            "tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeDiagnosticIsDeterministic",
+        ],
+        "regression": [
+            "tests/conformance/tosca_1_3/partial_datatype_shape_test.go#TestPartialDataTypeShapeDoesNotChangeTOSCA20",
+        ],
+    }
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -816,6 +838,20 @@ for requirement_id in CONSTRAINT_SEMANTICS_IDS:
             "TestDatatypeConstraintRejectsIncompatibleParent",
             "TestInheritedDatatypeConstraint",
             "TestScalarUnitConstraintRejectsOutOfRangeValue",
+        ],
+        "expected_tests_failed": True,
+        "production_diff_restored": True,
+    }
+for requirement_id in DATATYPE_SHAPE_IDS:
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutation": (
+            "Temporarily disabled the parent-or-properties union check and "
+            "the explicit empty-properties check in separate narrow mutations."
+        ),
+        "affected_tests": [
+            "TestPartialDataTypeShapeRejectsMissingParentAndProperties",
+            "TestPartialDataTypeShapeRejectsExplicitEmptyProperties",
         ],
         "expected_tests_failed": True,
         "production_diff_restored": True,
@@ -1914,7 +1950,41 @@ def manual_must_trace(requirement: dict[str, Any]) -> tuple[str, dict[str, Any],
 
     if requirement_id in {"TOSCA13-3.7.1.3-001"}:
         return "implemented", traced_impl("hierarchy", "hierarchy", "All registered type families embed Type and are added to typed hierarchies rooted by their resolved parent chains."), "Common type hierarchy infrastructure is implemented."
-    if requirement_id in {"TOSCA13-3.7.1.3-002", "TOSCA13-3.7.6.3-001", "TOSCA13-3.7.6.3-002", "TOSCA13-3.7.6.3-003"}:
+    if requirement_id in DATATYPE_SHAPE_IDS:
+        impl = traced_impl(
+            "hierarchy",
+            "read and hierarchy",
+            "The TOSCA 1.3 data type reader enforces the parent-or-property shape and non-empty properties cardinality; structural property validity and parent resolution remain in the shared read and hierarchy phases.",
+        )
+        impl["packages"] = [
+            "tosca/grammars/tosca_v1_3",
+            "tosca/grammars/tosca_v2_0",
+            "tosca/parser",
+        ]
+        impl["files"] = [
+            "tosca/grammars/tosca_v1_3/data-type.go",
+            "tosca/grammars/tosca_v2_0/data-type.go",
+            "tosca/parser/phase2.2-lookup.go",
+            "tosca/parser/phase3-hierarchies.go",
+            "tests/conformance/tosca_1_3/partial_datatype_shape_test.go",
+            "docs/decisions/0009-tosca-1.3-data-type-root-shape.md",
+        ]
+        impl["symbols"] = [
+            "tosca_v1_3.ReadDataType",
+            "tosca_v1_3.isBundledDataType",
+            "tosca_v2_0.ReadDataType",
+            "parser.Context.LookupNames",
+            "parser.Context.AddHierarchies",
+        ]
+        impl["execution_path"] = [
+            "parser.Context.ReadRoot",
+            "tosca_v1_3.ReadDataType",
+            "tosca_v2_0.ReadDataType",
+            "parser.Context.LookupNames",
+            "parser.Context.AddHierarchies",
+        ]
+        return "implemented", impl, "Data type alternatives and explicit properties cardinality are enforced and directly verified."
+    if requirement_id in {"TOSCA13-3.7.1.3-002", "TOSCA13-3.7.6.3-002"}:
         return "partial", traced_impl("hierarchy", "hierarchy/rendering", "Parent lookup, loops, and incomplete chains are validated; the additional base-type, datatype-shape, non-empty-properties, and constraint-compatibility conditions are not all enforced."), "Hierarchy construction exists, but this additional semantic condition is incomplete."
     if requirement_id == "TOSCA13-3.7.2.4-001":
         return "partial", traced_impl("hierarchy", "inheritance", "Capability definitions inherit valid_source_types, but no subset/type-compatibility check is performed when a child supplies its own list."), "valid_source_types refinement validation is absent."
@@ -2072,6 +2142,8 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
                 "TOSCA 1.3-only post-inheritance completeness validation"
             ),
         }, None
+    if requirement_id in DATATYPE_SHAPE_IDS:
+        return manual_must_trace(requirement)
     if requirement_id in CONSTRAINT_SEMANTICS_IDS:
         return "implemented", {
             "entry_point": "tosca_v1_3.ReadConstraintClause",

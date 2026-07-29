@@ -1,0 +1,153 @@
+remediation_group: datatype-shape
+remediation_order: 7
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+parser_phase: read and hierarchy
+execution_path:
+  - parser.Context.ReadRoot
+  - tosca_v1_3.ReadDataType
+  - tosca_v2_0.ReadDataType
+  - parser.Context.LookupNames
+  - parser.Context.AddHierarchies
+
+interpretation:
+  normative_sections:
+    - {section: "3.7.6", title: "Data Type"}
+    - {section: "3.7.6.2", title: "Grammar"}
+    - {section: "3.7.6.3", title: "Additional Requirements"}
+    - {section: "5.3.1", title: "tosca.datatypes.Root"}
+  decision_record: docs/decisions/0009-tosca-1.3-data-type-root-shape.md
+  root_exception: >-
+    The parent-or-property condition applies to user and imported declarations.
+    Bundled profile roots are exempt because the normative tosca.datatypes.Root
+    definition itself has neither key; an author cannot select this exemption.
+  validation_ownership:
+    declaration_shape: tosca_v1_3.ReadDataType
+    property_structure: shared typed field reader
+    parent_resolution: parser lookup and hierarchy phases
+  version_isolation: >-
+    Only the TOSCA 1.3 reader invokes the shape checks; the shared TOSCA 2.0
+    data type reader and TOSCA 2.0 observable behavior are unchanged.
+
+baseline_reproduction:
+  performed: true
+  command: >-
+    go test -count=1 ./tests/conformance/tosca_1_3
+    -run 'TestPartialDataTypeShape'
+  observed_failures:
+    - "A data type with description only was accepted."
+    - "An explicitly empty properties map was accepted with and without derived_from."
+  correct_failure_reason_verified: true
+
+requirements:
+  - requirement_id: TOSCA13-3.7.6.3-001
+    section: "3.7.6.3"
+    section_title: "Additional Requirements"
+    normative_rule: >-
+      A valid datatype definition MUST have either a valid derived_from
+      declaration or at least one valid property definition.
+    baseline:
+      implementation_status: partial
+      verification_status: untested
+      implemented:
+        - "derived_from references are structurally decoded."
+        - "Parent names are resolved and unknown parents are rejected."
+        - "Non-empty property definitions are structurally validated."
+      missing:
+        - "A declaration with neither derived_from nor properties was accepted."
+        - "No direct test isolated the alternatives or hierarchy failure."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3, tosca/grammars/tosca_v2_0, tosca/parser]
+      files:
+        - tosca/grammars/tosca_v1_3/data-type.go
+        - tosca/grammars/tosca_v2_0/data-type.go
+        - tosca/parser/phase2.2-lookup.go
+        - tosca/parser/phase3-hierarchies.go
+      symbols:
+        - tosca_v1_3.ReadDataType
+        - tosca_v1_3.isBundledDataType
+        - tosca_v2_0.ReadDataType
+        - parser.Context.LookupNames
+        - parser.Context.AddHierarchies
+    planned_tests:
+      positive: [TestPartialDataTypeShapeAcceptsEachRequiredAlternative]
+      negative:
+        - TestPartialDataTypeShapeRejectsMissingParentAndProperties
+        - TestPartialDataTypeShapeKeepsStructuralAndHierarchyValidation
+      boundary: [TestPartialDataTypeShapeDiagnosticIsDeterministic]
+      inheritance: [TestPartialDataTypeShapeAcceptsEachRequiredAlternative]
+      resolution: [TestPartialDataTypeShapeKeepsStructuralAndHierarchyValidation]
+      normalization: []
+      regression: [TestPartialDataTypeShapeDoesNotChangeTOSCA20]
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled only the parent-or-properties union check."
+      affected_tests: [TestPartialDataTypeShapeRejectsMissingParentAndProperties]
+      expected_tests_failed: true
+      production_diff_restored: true
+    result:
+      implementation_status: implemented
+      verification_status: verified
+
+  - requirement_id: TOSCA13-3.7.6.3-003
+    section: "3.7.6.3"
+    section_title: "Additional Requirements"
+    normative_rule: >-
+      If a properties keyname is provided, it SHALL contain one or more valid
+      property definitions.
+    baseline:
+      implementation_status: partial
+      verification_status: untested
+      implemented:
+        - "A non-empty properties map is decoded into typed property definitions."
+        - "Malformed property definitions and wrong YAML types are rejected."
+      missing:
+        - "An explicitly empty properties map was accepted."
+        - "Empty properties remained accepted even when derived_from was supplied."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3, tosca/grammars/tosca_v2_0]
+      files:
+        - tosca/grammars/tosca_v1_3/data-type.go
+        - tosca/grammars/tosca_v2_0/data-type.go
+      symbols:
+        - tosca_v1_3.ReadDataType
+        - tosca_v2_0.ReadDataType
+    planned_tests:
+      positive: [TestPartialDataTypeShapeAcceptsEachRequiredAlternative]
+      negative:
+        - TestPartialDataTypeShapeRejectsExplicitEmptyProperties
+        - TestPartialDataTypeShapeKeepsStructuralAndHierarchyValidation
+      boundary: [TestPartialDataTypeShapeDiagnosticIsDeterministic]
+      inheritance: []
+      resolution: []
+      normalization: []
+      regression: [TestPartialDataTypeShapeDoesNotChangeTOSCA20]
+    mutation_check:
+      performed: true
+      mutation: "Temporarily disabled only the explicit empty-properties check."
+      affected_tests: [TestPartialDataTypeShapeRejectsExplicitEmptyProperties]
+      expected_tests_failed: true
+      production_diff_restored: true
+    result:
+      implementation_status: implemented
+      verification_status: verified
+
+verification:
+  focused_datatype_shape: passed
+  focused_constraint_regression: passed
+  tosca_1_3_conformance: passed
+  tosca_2_0_conformance: passed
+  go_test_all: passed
+  go_test_race_all: passed
+  go_vet_all: passed
+  git_diff_check: passed
+  audit_generation_twice: passed
+  audit_sha256_identical: true
+  denominator: 223
+  resulting_metrics:
+    implemented: 207
+    partial: 16
+    missing: 0
+    non_compliant: 0
+    verified: 157
+    indirectly_tested: 26
+    untested: 40
