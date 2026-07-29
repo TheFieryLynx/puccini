@@ -1,0 +1,63 @@
+verification_group: normative-connectivity
+verification_order: 6
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+sections:
+  - "8.2 Connectivity semantics"
+  - "8.3.2 Specifying layer 4 ports"
+parser_phase: implicit profile read, hierarchy, requirement rendering, and normalization
+execution_path:
+  - parser.Context.ReadRoot
+  - implicit TOSCA 1.3 profile import
+  - tosca_v1_3.ReadServiceFile
+  - parser.Context.AddHierarchies
+  - parser.Context.Inherit
+  - RequirementAssignments.Render
+  - RequirementAssignment.Normalize
+
+requirements:
+  - requirement_id: TOSCA13-8.2-002
+    normative_rule: tosca.relationships.ConnectsTo relates a source endpoint requirement to the target node endpoint
+    initial_status: implemented/indirectly-tested
+    final_status: implemented/verified
+  - requirement_id: TOSCA13-8.3.2-001
+    normative_rule: layer-4 port specifications are expressed by tosca.capabilities.Endpoint
+    initial_status: implemented/indirectly-tested
+    final_status: implemented/verified
+
+direct_evidence:
+  tests:
+    - tests/conformance/tosca_1_3/verification_normative_connectivity_test.go#TestVerificationConnectsToEndpointSemantics
+    - tests/conformance/tosca_1_3/verification_normative_connectivity_test.go#TestVerificationConnectsToRejectsNonEndpoint
+    - tests/conformance/tosca_1_3/verification_normative_connectivity_test.go#TestVerificationEndpointLayer4PortSpecifications
+  positive:
+    - the effective ConnectsTo definition has exactly Endpoint as its valid target capability type
+    - an explicit ConnectsTo requirement resolves the target Endpoint and preserves ConnectsTo in normalized relationship types
+    - Endpoint exposes PortDef for port and map-of-PortSpec for ports
+    - an assigned PortSpec mapping survives rendering and normalization
+  negative:
+    - ConnectsTo rejects a Container target at requirement-assignment rendering
+  diagnostic:
+    - the failure identifies the requirement capability path, actual capability, relationship, and allowed Endpoint type
+
+baseline_reproduction:
+  performed: true
+  result: all direct positive and negative tests passed; no implementation defect was discovered
+
+mutation_check:
+  performed: true
+  mutations:
+    - description: changed ConnectsTo.valid_target_types from Endpoint to Container
+      affected_tests:
+        - TestVerificationConnectsToEndpointSemantics
+      expected_tests_failed: true
+    - description: changed Endpoint.ports.entry_schema from PortSpec to string
+      affected_tests:
+        - TestVerificationEndpointLayer4PortSpecifications
+      expected_tests_failed: true
+  production_diff_restored: true
+
+results:
+  implementation_status: implemented
+  verification_status: verified
+  requirement_count: 2
+  defects_discovered: 0

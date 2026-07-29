@@ -320,6 +320,34 @@ for requirement_id in NORMATIVE_PROFILE_FIELD_VERIFICATION_IDS:
         ],
     }
 
+DIRECT_TESTS["TOSCA13-8.2-002"] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/verification_normative_connectivity_test.go#TestVerificationConnectsToEndpointSemantics",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/verification_normative_connectivity_test.go#TestVerificationConnectsToRejectsNonEndpoint",
+    ],
+    "boundary": [],
+    "resolution": [
+        "tests/conformance/tosca_1_3/verification_normative_connectivity_test.go#TestVerificationConnectsToEndpointSemantics",
+    ],
+    "normalization": [
+        "tests/conformance/tosca_1_3/verification_normative_connectivity_test.go#TestVerificationConnectsToEndpointSemantics",
+    ],
+    "regression": [],
+}
+DIRECT_TESTS["TOSCA13-8.3.2-001"] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/verification_normative_connectivity_test.go#TestVerificationEndpointLayer4PortSpecifications",
+    ],
+    "negative": [],
+    "boundary": [],
+    "normalization": [
+        "tests/conformance/tosca_1_3/verification_normative_connectivity_test.go#TestVerificationEndpointLayer4PortSpecifications",
+    ],
+    "regression": [],
+}
+
 INTERFACE_RESERVED_OPERATION_NAME_ID = "TOSCA13-3.7.5.4-002"
 DIRECT_TESTS[INTERFACE_RESERVED_OPERATION_NAME_ID] = {
     "positive": [
@@ -1375,6 +1403,30 @@ for requirement_ids, mutation in (
             "expected_tests_failed": True,
             "production_diff_restored": True,
         }
+MUTATION_CHECKS["TOSCA13-8.2-002"] = {
+    "performed": True,
+    "mutation": (
+        "Temporarily changed ConnectsTo.valid_target_types from Endpoint to "
+        "Container; the exact effective-definition test failed."
+    ),
+    "affected_tests": [
+        "TestVerificationConnectsToEndpointSemantics",
+    ],
+    "expected_tests_failed": True,
+    "production_diff_restored": True,
+}
+MUTATION_CHECKS["TOSCA13-8.3.2-001"] = {
+    "performed": True,
+    "mutation": (
+        "Temporarily changed Endpoint.ports.entry_schema from PortSpec to "
+        "string; the exact effective-definition test failed."
+    ),
+    "affected_tests": [
+        "TestVerificationEndpointLayer4PortSpecifications",
+    ],
+    "expected_tests_failed": True,
+    "production_diff_restored": True,
+}
 for requirement_id in {
     "TOSCA13-4.4.1.2-003",
     "TOSCA13-4.4.2.2-002", "TOSCA13-4.4.2.2-004", "TOSCA13-4.4.2.2-010",

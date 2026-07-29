@@ -134183,7 +134183,7 @@ requirements:
   category: normative-type
   subject: connectivity-semantics
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -134195,50 +134195,53 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: The exact normative profile type/capability/relationship path is present and loaded through the v1.3 implicit profile.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
-    negative: []
+    - tests/conformance/tosca_1_3/verification_normative_connectivity_test.go#TestVerificationConnectsToEndpointSemantics
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_connectivity_test.go#TestVerificationConnectsToRejectsNonEndpoint
     boundary: []
     regression: []
+    resolution:
+    - tests/conformance/tosca_1_3/verification_normative_connectivity_test.go#TestVerificationConnectsToEndpointSemantics
+    normalization:
+    - tests/conformance/tosca_1_3/verification_normative_connectivity_test.go#TestVerificationConnectsToEndpointSemantics
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Bundled normative profile contains the required declaration.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily changed ConnectsTo.valid_target_types from Endpoint to Container; the exact effective-definition test failed.
+    affected_tests:
+    - TestVerificationConnectsToEndpointSemantics
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-8.2-003
   section: '8.2'
   section_title: Connectivity semantics
@@ -134740,7 +134743,7 @@ requirements:
   category: normative-type
   subject: specifying-layer-4-ports
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -134752,50 +134755,50 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: The exact normative profile type/capability/relationship path is present and loaded through the v1.3 implicit profile.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    - tests/conformance/tosca_1_3/verification_normative_connectivity_test.go#TestVerificationEndpointLayer4PortSpecifications
     negative: []
     boundary: []
     regression: []
+    normalization:
+    - tests/conformance/tosca_1_3/verification_normative_connectivity_test.go#TestVerificationEndpointLayer4PortSpecifications
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Bundled normative profile contains the required declaration.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily changed Endpoint.ports.entry_schema from PortSpec to string; the exact effective-definition test failed.
+    affected_tests:
+    - TestVerificationEndpointLayer4PortSpecifications
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-8.3.2-002
   section: 8.3.2
   section_title: Specifying layer 4 ports

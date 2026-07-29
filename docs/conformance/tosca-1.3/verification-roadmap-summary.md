@@ -33,15 +33,16 @@ protection only and never TOSCA 1.3 normative evidence.
 
 ## Current matrix
 
-After verification group 5 (`normative-profile-fields`), all 23 targeted
-profile declarations have direct effective-definition evidence, required
-properties have negative refinement evidence, and profile-file mutations prove
-field sensitivity. The denominator and implementation axis remain fixed.
+After verification group 6 (`normative-connectivity`), both connectivity
+requirements have direct effective-definition, resolution, diagnostic, and
+normalization evidence. Profile-file mutations prove sensitivity to the exact
+ConnectsTo target type and Endpoint port entry schema. The denominator and
+implementation axis remain fixed.
 
 | Implementation status | verified | indirectly-tested | untested | Total |
 |---|---:|---:|---:|---:|
-| implemented | 216 | 2 | 5 | 223 |
+| implemented | 218 | 0 | 5 | 223 |
 | partial | 0 | 0 | 0 | 0 |
 | missing | 0 | 0 | 0 | 0 |
 | non-compliant | 0 | 0 | 0 | 0 |
-| **Total** | **216** | **2** | **5** | **223** |
+| **Total** | **218** | **0** | **5** | **223** |
