@@ -18,13 +18,13 @@ This report covers the continuation trace of every formerly-unknown record that 
 - partial: **0**.
 - missing: **0**.
 - non-compliant: **0**.
-- verified: **189**.
+- verified: **193**.
 - indirectly-tested: **25**.
-- untested: **9**.
+- untested: **5**.
 - unverifiable: **0**.
 - implementation coverage: **223/223 (100.00%)**.
-- verified conformance coverage: **189/223 (84.75%)**.
-- broad test evidence coverage: **214/223 (95.96%)**.
+- verified conformance coverage: **193/223 (86.55%)**.
+- broad test evidence coverage: **218/223 (97.76%)**.
 
 ## Continuation trace by subsystem
 
@@ -34,15 +34,15 @@ This report covers the continuation trace of every formerly-unknown record that 
 | Grammar and structural validation | 35 | 35 | 0 | 0 | 0 | 35 | 0 | 0 | 0 |
 | Imports and namespaces | 10 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | 0 |
 | Type system and hierarchy | 6 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | 0 |
-| Inheritance and refinement | 3 | 3 | 0 | 0 | 0 | 1 | 0 | 2 | 0 |
+| Inheritance and refinement | 3 | 3 | 0 | 0 | 0 | 3 | 0 | 0 | 0 |
 | Properties, attributes and assignments | 20 | 20 | 0 | 0 | 0 | 20 | 0 | 0 | 0 |
 | Constraints | 8 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | 0 |
 | Intrinsic functions | 22 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | 0 |
-| Requirements and capabilities | 6 | 6 | 0 | 0 | 0 | 5 | 0 | 1 | 0 |
+| Requirements and capabilities | 6 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | 0 |
 | Interfaces, operations and artifacts | 11 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | 0 |
 | Groups and policies | 5 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | 0 |
 | Substitution mappings | 2 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 |
-| Workflows | 15 | 15 | 0 | 0 | 0 | 14 | 0 | 1 | 0 |
+| Workflows | 15 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | 0 |
 | Normative profile types | 29 | 29 | 0 | 0 | 0 | 8 | 21 | 0 | 0 |
 | CSAR | 6 | 6 | 0 | 0 | 0 | 1 | 0 | 5 | 0 |
 | Normalization | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |

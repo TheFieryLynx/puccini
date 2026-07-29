@@ -30492,7 +30492,7 @@ requirements:
   category: semantic
   subject: additional-requirements
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -30502,34 +30502,33 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: parser.Context.ReadRoot
     packages:
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
     - tosca/parser
     files:
     - tosca/grammars/tosca_v2_0/operation-definition.go
-    - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
-    - tosca/grammars/tosca_v2_0/property-definition.go
-    - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
     - tosca_v2_0.ReadOperationDefinition
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: inheritance/rendering
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
-    - parser.Context.Parse
-    - parser.Context.LookupNames
-    - parser.Context.Inherit
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: Operation collections merge by name; a child operation/assignment keeps its explicitly supplied implementation, giving override
-      semantics.
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_override_workflow_occurrences_test.go#TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.6.17.3-002
     negative: []
     boundary: []
     regression: []
@@ -30537,13 +30536,32 @@ requirements:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Operation implementation override behavior is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Replaced a subtype's explicit operation implementation with its parent's implementation.
+      affected_tests:
+      - TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.6.17.3-002
+      expected_tests_failed: true
+    - description: Replaced a template's explicit operation implementation with its effective type definition.
+      affected_tests:
+      - TestVerificationOverrideWorkflowOccurrences/TOSCA13-5.8.1-004
+      expected_tests_failed: true
+    - description: Read the explicit and condition operator as or while retaining its children.
+      affected_tests:
+      - TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.6.25.2.1-002
+      expected_tests_failed: true
+    - description: Changed only the TOSCA 1.3 omitted-occurrences default to [0,UNBOUNDED].
+      affected_tests:
+      - TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.7.3.3-002
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.6.17.3-003
   section: 3.6.17.3
   section_title: Additional requirements
@@ -39596,7 +39614,7 @@ requirements:
   category: semantic
   subject: and-clause
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -39608,31 +39626,31 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
     - tosca/parser
     files:
     - tosca/grammars/tosca_v2_0/condition-clause.go
-    - tosca/grammars/tosca_v2_0/workflow-activity-definition.go
-    - tosca/grammars/tosca_v2_0/workflow-step-definition.go
-    - tosca/grammars/tosca_v2_0/workflow-precondition-definition.go
-    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
     - tosca_v2_0.ReadConditionClauseAnd
-    - tosca_v2_0.ReadWorkflowActivityDefinition
-    - tosca_v2_0.ReadWorkflowStepDefinition
-    - tosca_v2_0.ReadWorkflowPreconditionDefinition
-    - tosca_v2_0.WorkflowStepDefinition.Render
-    parser_phase: rendering/function-evaluation
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - tosca_v2_0.ReadWorkflowDefinition
-    - tosca_v2_0.ReadWorkflowStepDefinition/ReadWorkflowActivityDefinition
-    - parser.Context.LookupNames
-    - tosca_v2_0.WorkflowStepDefinition.Render
-    trace_summary: ConditionClauseAnd is read as an AND validation clause and preserved/evaluated as a conjunctive expression.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_override_workflow_occurrences_test.go#TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.6.25.2.1-002
     negative: []
     boundary: []
     regression: []
@@ -39640,13 +39658,32 @@ requirements:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: AND condition composition is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Replaced a subtype's explicit operation implementation with its parent's implementation.
+      affected_tests:
+      - TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.6.17.3-002
+      expected_tests_failed: true
+    - description: Replaced a template's explicit operation implementation with its effective type definition.
+      affected_tests:
+      - TestVerificationOverrideWorkflowOccurrences/TOSCA13-5.8.1-004
+      expected_tests_failed: true
+    - description: Read the explicit and condition operator as or while retaining its children.
+      affected_tests:
+      - TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.6.25.2.1-002
+      expected_tests_failed: true
+    - description: Changed only the TOSCA 1.3 omitted-occurrences default to [0,UNBOUNDED].
+      affected_tests:
+      - TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.7.3.3-002
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.6.25.2.2-001
   section: 3.6.25.2.2
   section_title: Or clause
@@ -46066,7 +46103,7 @@ requirements:
   category: semantic
   subject: additional-requirements
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -46076,48 +46113,66 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: parser.Context.ReadRoot
     packages:
-    - tosca/grammars/tosca_v1_3
-    - tosca/grammars/tosca_v2_0
+    - tosca/grammars
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
     - tosca/grammars/tosca_v1_3/requirement-definition.go
-    - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
-    - tosca/grammars/tosca_v2_0/property-definition.go
-    - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
     - tosca_v1_3.ReadRequirementDefinition
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: rendering
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
-    - parser.Context.Parse
-    - parser.Context.LookupNames
-    - parser.Context.Inherit
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: The v1.3 RequirementDefinition reader sets DefaultCountRange to [1,1], materialized during Render after inheritance.
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_override_workflow_occurrences_test.go#TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.7.3.3-002
     negative: []
-    boundary: []
+    boundary:
+    - tests/conformance/tosca_1_3/verification_override_workflow_occurrences_test.go#TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.7.3.3-002
     regression: []
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: The [1,1] occurrences default is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Replaced a subtype's explicit operation implementation with its parent's implementation.
+      affected_tests:
+      - TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.6.17.3-002
+      expected_tests_failed: true
+    - description: Replaced a template's explicit operation implementation with its effective type definition.
+      affected_tests:
+      - TestVerificationOverrideWorkflowOccurrences/TOSCA13-5.8.1-004
+      expected_tests_failed: true
+    - description: Read the explicit and condition operator as or while retaining its children.
+      affected_tests:
+      - TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.6.25.2.1-002
+      expected_tests_failed: true
+    - description: Changed only the TOSCA 1.3 omitted-occurrences default to [0,UNBOUNDED].
+      affected_tests:
+      - TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.7.3.3-002
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.7.3.3-003
   section: 3.7.3.3
   section_title: Additional Requirements
@@ -112300,7 +112355,7 @@ requirements:
   category: semantic
   subject: additional-requirements
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -112310,35 +112365,30 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: parser.Context.ReadRoot
     packages:
-    - tosca/grammars/tosca_v1_3
-    - tosca/grammars/tosca_v2_0
+    - tosca/grammars
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
     - tosca/grammars/tosca_v1_3/service-file.go
-    - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
-    - tosca/grammars/tosca_v2_0/property-definition.go
-    - tosca/grammars/tosca_v2_0/value.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: inheritance/rendering
+    parser_phase: read
     execution_path:
-    - parser.Context.Parse
-    - parser.Context.LookupNames
-    - parser.Context.Inherit
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: Operation collections merge by name; a child operation/assignment keeps its explicitly supplied implementation, giving override
-      semantics.
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_override_workflow_occurrences_test.go#TestVerificationOverrideWorkflowOccurrences/TOSCA13-5.8.1-004
     negative: []
     boundary: []
     regression: []
@@ -112346,13 +112396,32 @@ requirements:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Operation implementation override behavior is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Replaced a subtype's explicit operation implementation with its parent's implementation.
+      affected_tests:
+      - TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.6.17.3-002
+      expected_tests_failed: true
+    - description: Replaced a template's explicit operation implementation with its effective type definition.
+      affected_tests:
+      - TestVerificationOverrideWorkflowOccurrences/TOSCA13-5.8.1-004
+      expected_tests_failed: true
+    - description: Read the explicit and condition operator as or while retaining its children.
+      affected_tests:
+      - TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.6.25.2.1-002
+      expected_tests_failed: true
+    - description: Changed only the TOSCA 1.3 omitted-occurrences default to [0,UNBOUNDED].
+      affected_tests:
+      - TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.7.3.3-002
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.8.2-001
   section: 5.8.2
   section_title: Best Practices

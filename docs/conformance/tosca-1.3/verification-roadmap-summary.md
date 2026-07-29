@@ -33,15 +33,16 @@ protection only and never TOSCA 1.3 normative evidence.
 
 ## Current matrix
 
-After verification group 3 (`definition-defaults`), omitted required flags and
-the type compatibility of property, attribute, and parameter defaults have
-direct rendering and normalization evidence. Verified increases monotonically
-while the denominator and implementation axis remain fixed.
+After verification group 4 (`override-workflow-occurrences`), operation
+override selection, conjunctive condition representation, and the [1,1]
+requirement occurrence default have direct effective-model evidence. Verified
+increases monotonically while the denominator and implementation axis remain
+fixed.
 
 | Implementation status | verified | indirectly-tested | untested | Total |
 |---|---:|---:|---:|---:|
-| implemented | 189 | 25 | 9 | 223 |
+| implemented | 193 | 25 | 5 | 223 |
 | partial | 0 | 0 | 0 | 0 |
 | missing | 0 | 0 | 0 | 0 |
 | non-compliant | 0 | 0 | 0 | 0 |
-| **Total** | **189** | **25** | **9** | **223** |
+| **Total** | **193** | **25** | **5** | **223** |

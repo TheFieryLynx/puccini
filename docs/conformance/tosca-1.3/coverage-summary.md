@@ -21,9 +21,9 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Verification Status | Records |
 |---|---:|
-| verified | 218 |
+| verified | 222 |
 | indirectly-tested | 561 |
-| untested | 2268 |
+| untested | 2264 |
 | unverifiable | 54 |
 
 | Applicability | Records |
@@ -36,7 +36,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Strength | Applicable atomic denominator | Implemented | Implementation coverage | Implemented + verified | Verified conformance coverage | Broad test evidence | Broad evidence coverage |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| MUST/SHALL/REQUIRED | 223 | 223 | 100.00% | 189 | 84.75% | 214 | 95.96% |
+| MUST/SHALL/REQUIRED | 223 | 223 | 100.00% | 193 | 86.55% | 218 | 97.76% |
 | SHOULD/RECOMMENDED | 23 | 0 | 0.00% | 0 | 0.00% | 0 | 0.00% |
 | MAY/OPTIONAL | 693 | 99 | 14.29% | 0 | 0.00% | 95 | 13.71% |
 
@@ -47,9 +47,9 @@ This matrix separates implementation, verification, and applicability. It is an 
 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 13 | 8 | 0 | 0 | 0 | 0 | 8 | 0 | 0 | 8 | 0 |
 | 14 | 43 | 0 | 0 | 0 | 0 | 43 | 0 | 0 | 6 | 37 |
-| 3 | 1670 | 264 | 21 | 2 | 14 | 1369 | 166 | 101 | 1396 | 7 |
+| 3 | 1670 | 264 | 21 | 2 | 14 | 1369 | 169 | 101 | 1393 | 7 |
 | 4 | 144 | 24 | 0 | 0 | 5 | 115 | 29 | 0 | 115 | 0 |
-| 5 | 978 | 401 | 0 | 0 | 5 | 572 | 12 | 393 | 567 | 6 |
+| 5 | 978 | 401 | 0 | 0 | 5 | 572 | 13 | 393 | 566 | 6 |
 | 6 | 44 | 11 | 0 | 0 | 3 | 30 | 9 | 0 | 31 | 4 |
 | 7 | 25 | 0 | 0 | 0 | 0 | 25 | 0 | 0 | 25 | 0 |
 | 8 | 188 | 69 | 0 | 0 | 0 | 119 | 2 | 67 | 119 | 0 |
@@ -64,13 +64,12 @@ This matrix separates implementation, verification, and applicability. It is an 
 | implicit-profile/read and inheritance/rendering | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | inheritance | 18 | 0 | 0 | 0 | 0 | 18 | 0 | 0 | 18 | 0 |
 | inheritance and rendering | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
-| inheritance/rendering | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 |
 | inheritance/rendering/normalization | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | lookup, hierarchy, and inheritance | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | namespaces | 16 | 0 | 0 | 1 | 0 | 15 | 0 | 0 | 16 | 0 |
 | namespaces and lookup | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | normalization | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 1 |
-| read | 1412 | 211 | 17 | 0 | 3 | 1181 | 105 | 101 | 1199 | 7 |
+| read | 1416 | 215 | 17 | 0 | 3 | 1181 | 109 | 101 | 1199 | 7 |
 | read and hierarchy | 2 | 2 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 |
 | read and rendering/function-evaluation | 24 | 24 | 0 | 0 | 0 | 0 | 24 | 0 | 0 | 0 |
 | read before template field decoding | 2 | 2 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 |
@@ -78,12 +77,12 @@ This matrix separates implementation, verification, and applicability. It is an 
 | read, imports, namespaces, and lookup | 34 | 34 | 0 | 0 | 0 | 0 | 34 | 0 | 0 | 0 |
 | read/imports | 14 | 0 | 0 | 0 | 0 | 14 | 0 | 0 | 14 | 0 |
 | read/inheritance/rendering | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
-| rendering | 225 | 3 | 0 | 0 | 1 | 221 | 3 | 0 | 218 | 4 |
+| rendering | 224 | 2 | 0 | 0 | 1 | 221 | 3 | 0 | 217 | 4 |
 | rendering after inheritance and function parsing | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | rendering after lookup, hierarchy, and inheritance | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | rendering after namespace lookup and before inherited assignment defaults | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | rendering after target lookup and before activity resolution | 2 | 2 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 |
-| rendering/function-evaluation | 74 | 1 | 0 | 0 | 4 | 69 | 4 | 0 | 70 | 0 |
+| rendering/function-evaluation | 73 | 0 | 0 | 0 | 4 | 69 | 4 | 0 | 69 | 0 |
 | rendering/normalization/function-evaluation | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | semantic | 575 | 0 | 4 | 1 | 11 | 559 | 11 | 0 | 529 | 35 |
 

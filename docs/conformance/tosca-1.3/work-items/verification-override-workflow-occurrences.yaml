@@ -1,0 +1,81 @@
+verification_group: override-workflow-occurrences
+verification_order: 4
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+sections:
+  - section: "3.6.17.3"
+    section_title: Additional requirements
+  - section: "3.6.25.2.1"
+    section_title: And clause
+  - section: "3.7.3.3"
+    section_title: Additional Requirements
+  - section: "5.8.1"
+    section_title: Additional Requirements
+parser_phase: hierarchy, inheritance, rendering, and normalized effective template
+execution_path:
+  - parser.Context.ReadRoot
+  - tosca_v1_3.ReadServiceFile
+  - tosca_v2_0.OperationDefinitions.Inherit
+  - tosca_v2_0.OperationAssignments.render
+  - tosca_v2_0.ReadConditionClauseAnd
+  - tosca_v1_3.ReadRequirementDefinition
+  - tosca_v2_0.RequirementDefinition.Render
+  - normalized node interface
+
+requirements:
+  - requirement_id: TOSCA13-3.6.17.3-002
+    normative_rule: an operation implementation in a subtype overrides the parent's implementation
+    initial_status: implemented/untested
+    final_status: implemented/verified
+  - requirement_id: TOSCA13-3.6.25.2.1-002
+    normative_rule: an and clause is true only through the conjunction of all its condition clauses
+    initial_status: implemented/untested
+    final_status: implemented/verified
+  - requirement_id: TOSCA13-3.7.3.3-002
+    normative_rule: omitted requirement occurrences default to one and only one
+    initial_status: implemented/untested
+    final_status: implemented/verified
+  - requirement_id: TOSCA13-5.8.1-004
+    normative_rule: operation scripts supplied by a subtype or template override the existing script
+    initial_status: implemented/untested
+    final_status: implemented/verified
+
+direct_evidence:
+  test: tests/conformance/tosca_1_3/verification_override_workflow_occurrences_test.go#TestVerificationOverrideWorkflowOccurrences
+  positive:
+    - the normalized subtype node uses scripts/subtype.sh instead of scripts/parent.sh
+    - the normalized template node uses scripts/template.sh instead of its effective subtype script
+    - the explicit and clause retains both state assertions under the conjunction operator
+  boundary:
+    - a requirement without occurrences renders to the exact closed range [1,1]
+  diagnostic: []
+
+baseline_reproduction:
+  performed: true
+  result: all direct tests passed; no implementation defect was discovered
+
+mutation_check:
+  performed: true
+  mutations:
+    - description: replaced a subtype implementation with its parent's implementation
+      affected_tests:
+        - TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.6.17.3-002
+      expected_tests_failed: true
+    - description: replaced a template implementation with its effective type implementation
+      affected_tests:
+        - TestVerificationOverrideWorkflowOccurrences/TOSCA13-5.8.1-004
+      expected_tests_failed: true
+    - description: read the explicit and operator as or while retaining its children
+      affected_tests:
+        - TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.6.25.2.1-002
+      expected_tests_failed: true
+    - description: changed only the TOSCA 1.3 omitted-occurrences default to [0,UNBOUNDED]
+      affected_tests:
+        - TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.7.3.3-002
+      expected_tests_failed: true
+  production_diff_restored: true
+
+results:
+  implementation_status: implemented
+  verification_status: verified
+  requirement_count: 4
+  defects_discovered: 0

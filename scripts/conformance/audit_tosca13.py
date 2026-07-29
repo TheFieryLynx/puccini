@@ -240,6 +240,30 @@ for requirement_id in DEFINITION_DEFAULT_VERIFICATION_IDS:
         "regression": [],
     }
 
+OVERRIDE_WORKFLOW_OCCURRENCE_VERIFICATION_IDS = {
+    "TOSCA13-3.6.17.3-002",
+    "TOSCA13-3.6.25.2.1-002",
+    "TOSCA13-3.7.3.3-002",
+    "TOSCA13-5.8.1-004",
+}
+for requirement_id in OVERRIDE_WORKFLOW_OCCURRENCE_VERIFICATION_IDS:
+    DIRECT_TESTS[requirement_id] = {
+        "positive": [
+            (
+                "tests/conformance/tosca_1_3/verification_override_workflow_occurrences_test.go"
+                f"#TestVerificationOverrideWorkflowOccurrences/{requirement_id}"
+            ),
+        ],
+        "negative": [],
+        "boundary": [
+            (
+                "tests/conformance/tosca_1_3/verification_override_workflow_occurrences_test.go"
+                f"#TestVerificationOverrideWorkflowOccurrences/{requirement_id}"
+            ),
+        ] if requirement_id == "TOSCA13-3.7.3.3-002" else [],
+        "regression": [],
+    }
+
 INTERFACE_RESERVED_OPERATION_NAME_ID = "TOSCA13-3.7.5.4-002"
 DIRECT_TESTS[INTERFACE_RESERVED_OPERATION_NAME_ID] = {
     "positive": [
@@ -1189,6 +1213,41 @@ for requirement_id in DEFINITION_DEFAULT_VERIFICATION_IDS:
                 "description": "Removed a rendered attribute default before effective-value normalization.",
                 "affected_tests": [
                     "TestVerificationDefinitionDefaults/TOSCA13-3.6.12.2-010",
+                ],
+                "expected_tests_failed": True,
+            },
+        ],
+        "production_diff_restored": True,
+    }
+for requirement_id in OVERRIDE_WORKFLOW_OCCURRENCE_VERIFICATION_IDS:
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutations": [
+            {
+                "description": "Replaced a subtype's explicit operation implementation with its parent's implementation.",
+                "affected_tests": [
+                    "TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.6.17.3-002",
+                ],
+                "expected_tests_failed": True,
+            },
+            {
+                "description": "Replaced a template's explicit operation implementation with its effective type definition.",
+                "affected_tests": [
+                    "TestVerificationOverrideWorkflowOccurrences/TOSCA13-5.8.1-004",
+                ],
+                "expected_tests_failed": True,
+            },
+            {
+                "description": "Read the explicit and condition operator as or while retaining its children.",
+                "affected_tests": [
+                    "TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.6.25.2.1-002",
+                ],
+                "expected_tests_failed": True,
+            },
+            {
+                "description": "Changed only the TOSCA 1.3 omitted-occurrences default to [0,UNBOUNDED].",
+                "affected_tests": [
+                    "TestVerificationOverrideWorkflowOccurrences/TOSCA13-3.7.3.3-002",
                 ],
                 "expected_tests_failed": True,
             },
