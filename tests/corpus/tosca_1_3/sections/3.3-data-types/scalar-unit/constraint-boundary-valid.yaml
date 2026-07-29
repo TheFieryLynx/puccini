@@ -1,0 +1,15 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+node_types:
+  ScalarHolder:
+    derived_from: tosca.nodes.Root
+    properties:
+      value:
+        type: scalar-unit.size
+        constraints:
+          - in_range: [1 MB, 1 GB]
+topology_template:
+  node_templates:
+    node:
+      type: ScalarHolder
+      properties:
+        value: 1000 kB

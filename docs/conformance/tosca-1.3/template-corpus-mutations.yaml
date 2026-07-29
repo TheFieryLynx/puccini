@@ -7,3 +7,11 @@ mutations:
     expected_corpus_failures: true
     observed_result: invalid reserved namespace was accepted and the corpus runner failed
     production_diff_restored: true
+  - category: data-types
+    production_validation_path: tosca_v1_3.ReadScalarUnit
+    mutation: suppressed only the malformed scalar-unit diagnostic for a missing scalar or unit component
+    affected_cases:
+      - TOSCA13-CORPUS-SCALAR-UNIT-MISSING-UNIT-INVALID
+    expected_corpus_failures: true
+    observed_result: incomplete scalar-unit value was accepted and the corpus runner failed
+    production_diff_restored: true
