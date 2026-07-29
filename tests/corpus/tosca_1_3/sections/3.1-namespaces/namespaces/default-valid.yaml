@@ -1,0 +1,9 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+namespace: urn:example:corpus
+node_types:
+  Local:
+    derived_from: tosca.nodes.Root
+topology_template:
+  node_templates:
+    node:
+      type: Local

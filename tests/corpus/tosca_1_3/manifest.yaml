@@ -52,3 +52,326 @@ cases:
         - version-isolation:1.3-rejects-2.0-form
       related_cases:
         - TOSCA13-CORPUS-SERVICE-TEMPLATE-MINIMAL-VALID
+
+  - id: TOSCA13-CORPUS-NAMESPACE-DEFAULT-VALID
+    file: sections/3.1-namespaces/namespaces/default-valid.yaml
+    specification:
+      sections: ["3.1", "3.1.1", "3.1.2"]
+      requirement_ids:
+        - TOSCA13-3.1-001
+        - TOSCA13-3.1.1-001
+        - TOSCA13-3.1.2-001
+        - TOSCA13-3.1.2-002
+        - TOSCA13-3.1.2-003
+        - TOSCA13-3.1.2-004
+        - TOSCA13-3.1.2-005
+    classification:
+      kind: valid
+      category: resolution
+      features: [namespace, default-namespace, normative-type]
+    expected:
+      accepted: true
+      phase: normalization
+      diagnostic: {category: null, path: null}
+      assertions: [node_exists:node]
+    coverage:
+      variation_axes:
+        - namespace:default
+        - reference:normative-type
+        - keynames:required-first
+      related_cases: [TOSCA13-CORPUS-NAMESPACE-RESERVED-INVALID]
+
+  - id: TOSCA13-CORPUS-NAMESPACE-RESERVED-INVALID
+    file: sections/3.1-namespaces/namespaces/reserved-invalid.yaml
+    specification:
+      sections: ["3.1.3.1"]
+      requirement_ids:
+        - TOSCA13-3.1.3.1-001
+        - TOSCA13-3.1.3.1-002
+    classification:
+      kind: invalid
+      category: resolution
+      features: [namespace, reserved-name]
+    expected:
+      accepted: false
+      phase: read
+      diagnostic: {category: reserved, path: namespace}
+      assertions: []
+    coverage:
+      variation_axes:
+        - namespace:reserved-uri-hierarchy
+        - values:forbidden
+      related_cases: [TOSCA13-CORPUS-NAMESPACE-DEFAULT-VALID]
+
+  - id: TOSCA13-CORPUS-IMPORT-SHORT-VALID
+    file: sections/3.1-namespaces/imports/short-valid.yaml
+    specification:
+      sections: ["3.6.8.1", "3.6.8.2.2"]
+      requirement_ids:
+        - TOSCA13-3.6.8.1-002
+        - TOSCA13-3.6.8.1-003
+        - TOSCA13-3.6.8.2.2-003
+    classification:
+      kind: valid
+      category: resolution
+      features: [imports, short-notation, local-reference]
+    expected:
+      accepted: true
+      phase: normalization
+      diagnostic: {category: null, path: null}
+      assertions: [node_exists:node]
+    coverage:
+      variation_axes:
+        - grammar-form:short
+        - imports:relative
+        - reference:imported-unqualified
+      related_cases: [TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID]
+
+  - id: TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
+    file: sections/3.1-namespaces/imports/long-qualified-valid.yaml
+    specification:
+      sections: ["3.1.3.1", "3.6.8.1", "3.6.8.2.2", "3.6.8.2.3"]
+      requirement_ids:
+        - TOSCA13-3.1.3.1-004
+        - TOSCA13-3.1.3.1-005
+        - TOSCA13-3.6.8.1-002
+        - TOSCA13-3.6.8.1-003
+        - TOSCA13-3.6.8.2.2-003
+        - TOSCA13-3.6.8.2.3-002
+    classification:
+      kind: valid
+      category: resolution
+      features: [imports, long-notation, qualified-reference]
+    expected:
+      accepted: true
+      phase: normalization
+      diagnostic: {category: null, path: null}
+      assertions: [node_exists:node]
+    coverage:
+      variation_axes:
+        - grammar-form:long
+        - imports:namespace-qualified
+        - reference:imported-target
+      related_cases:
+        - TOSCA13-CORPUS-IMPORT-SHORT-VALID
+        - TOSCA13-CORPUS-IMPORT-UNKNOWN-QUALIFIED-INVALID
+
+  - id: TOSCA13-CORPUS-IMPORT-WRONG-YAML-TYPE-INVALID
+    file: sections/3.1-namespaces/imports/wrong-yaml-type-invalid.yaml
+    specification:
+      sections: ["3.6.8.1", "3.6.8.2.2"]
+      requirement_ids:
+        - TOSCA13-3.6.8.1-002
+        - TOSCA13-3.6.8.1-003
+        - TOSCA13-3.6.8.2.2-003
+    classification:
+      kind: invalid
+      category: grammar
+      features: [imports, yaml-type]
+    expected:
+      accepted: false
+      phase: read
+      diagnostic: {category: '"map" or "string"', path: imports}
+      assertions: []
+    coverage:
+      variation_axes:
+        - yaml-type:scalar-number-equivalence-class
+        - grammar-form:invalid
+      related_cases: [TOSCA13-CORPUS-IMPORT-SHORT-VALID]
+
+  - id: TOSCA13-CORPUS-IMPORT-MISSING-FILE-INVALID
+    file: sections/3.1-namespaces/imports/missing-file-invalid.yaml
+    specification:
+      sections: ["3.6.8.1", "3.6.8.2.3"]
+      requirement_ids:
+        - TOSCA13-3.6.8.1-002
+        - TOSCA13-3.6.8.1-003
+        - TOSCA13-3.6.8.2.3-002
+    classification:
+      kind: invalid
+      category: resolution
+      features: [imports, missing-resource]
+    expected:
+      accepted: false
+      phase: read
+      diagnostic: {category: invalid URL, path: absent.yaml}
+      assertions: []
+    coverage:
+      variation_axes:
+        - imports:missing-resource
+        - reference:unresolved
+      related_cases: [TOSCA13-CORPUS-IMPORT-SHORT-VALID]
+
+  - id: TOSCA13-CORPUS-IMPORT-UNKNOWN-QUALIFIED-INVALID
+    file: sections/3.1-namespaces/imports/unknown-qualified-invalid.yaml
+    specification:
+      sections: ["3.1.3.1"]
+      requirement_ids:
+        - TOSCA13-3.1.3.1-004
+        - TOSCA13-3.1.3.1-005
+    classification:
+      kind: invalid
+      category: resolution
+      features: [imports, qualified-reference, missing-name]
+    expected:
+      accepted: false
+      phase: namespaces
+      diagnostic: {category: unknown, path: derived_from}
+      assertions: []
+    coverage:
+      variation_axes:
+        - namespace:known-prefix
+        - reference:missing-qualified-name
+      related_cases: [TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID]
+
+  - id: TOSCA13-CORPUS-IMPORT-TRANSITIVE-VALID
+    file: sections/3.1-namespaces/imports/transitive-valid.yaml
+    specification:
+      sections: ["3.1.3.1"]
+      requirement_ids:
+        - TOSCA13-3.1.3.1-004
+        - TOSCA13-3.1.3.1-005
+    classification:
+      kind: valid
+      category: resolution
+      features: [imports, transitive-import, inheritance]
+    expected:
+      accepted: true
+      phase: normalization
+      diagnostic: {category: null, path: null}
+      assertions: [node_exists:node]
+    coverage:
+      variation_axes:
+        - imports:transitive
+        - notation:long
+        - inheritance:imported-parent
+      related_cases: [TOSCA13-CORPUS-IMPORT-CYCLE-INVALID]
+
+  - id: TOSCA13-CORPUS-IMPORT-CYCLE-INVALID
+    file: sections/3.1-namespaces/imports/cycle-invalid.yaml
+    specification:
+      sections: ["3.1.3.1"]
+      requirement_ids:
+        - TOSCA13-3.1.3.1-004
+        - TOSCA13-3.1.3.1-005
+    classification:
+      kind: invalid
+      category: resolution
+      features: [imports, cycle]
+    expected:
+      accepted: false
+      phase: namespaces
+      diagnostic: {category: endless loop, path: cycle-a.yaml}
+      assertions: []
+    coverage:
+      variation_axes:
+        - imports:cycle
+        - graph:bounded-cycle-detection
+      related_cases: [TOSCA13-CORPUS-IMPORT-TRANSITIVE-VALID]
+
+  - id: TOSCA13-CORPUS-IMPORT-DUPLICATE-IDEMPOTENT-VALID
+    file: sections/3.1-namespaces/imports/duplicate-idempotent-valid.yaml
+    specification:
+      sections: ["3.1.3.1"]
+      requirement_ids:
+        - TOSCA13-3.1.3.1-004
+        - TOSCA13-3.1.3.1-005
+    classification:
+      kind: valid
+      category: resolution
+      features: [imports, duplicate-import, determinism]
+    expected:
+      accepted: true
+      phase: normalization
+      diagnostic: {category: null, path: null}
+      assertions: [node_exists:node]
+    coverage:
+      variation_axes:
+        - imports:duplicate-idempotent
+        - determinism:stable-identity
+      related_cases: [TOSCA13-CORPUS-IMPORT-COLLISION-INVALID]
+
+  - id: TOSCA13-CORPUS-IMPORT-COLLISION-INVALID
+    file: sections/3.1-namespaces/imports/collision-invalid.yaml
+    specification:
+      sections: ["3.1.3.1"]
+      requirement_ids:
+        - TOSCA13-3.1.3.1-004
+        - TOSCA13-3.1.3.1-005
+    classification:
+      kind: invalid
+      category: resolution
+      features: [imports, collision, determinism]
+    expected:
+      accepted: false
+      phase: namespaces
+      diagnostic: {category: ambiguous, path: Collision}
+      assertions: []
+    coverage:
+      variation_axes:
+        - imports:name-collision
+        - namespace:unqualified
+        - diagnostic:deterministic
+      related_cases: [TOSCA13-CORPUS-IMPORT-DUPLICATE-IDEMPOTENT-VALID]
+
+  - id: TOSCA13-CORPUS-LOCAL-DUPLICATE-NAME-INVALID
+    file: sections/3.1-namespaces/namespaces/local-duplicate-invalid.yaml
+    specification:
+      sections: ["3.1.3.1"]
+      requirement_ids:
+        - TOSCA13-3.1.3.1-007
+        - TOSCA13-3.1.3.1-008
+        - TOSCA13-3.1.3.1-009
+        - TOSCA13-3.1.3.1-010
+        - TOSCA13-3.1.3.1-011
+        - TOSCA13-3.1.3.1-012
+        - TOSCA13-3.1.3.1-013
+        - TOSCA13-3.1.3.1-015
+        - TOSCA13-3.1.3.1-016
+        - TOSCA13-3.1.3.1-017
+        - TOSCA13-3.1.3.1-018
+        - TOSCA13-3.1.3.1-020
+        - TOSCA13-3.1.3.1-021
+        - TOSCA13-3.1.3.1-022
+        - TOSCA13-3.1.3.1-023
+        - TOSCA13-3.1.3.1-024
+        - TOSCA13-3.1.3.1-025
+        - TOSCA13-3.1.3.1-026
+        - TOSCA13-3.1.3.1-027
+    classification:
+      kind: invalid
+      category: grammar
+      features: [namespace, duplicate-local-name]
+    expected:
+      accepted: false
+      phase: read
+      diagnostic: {category: duplicate map key, path: Duplicate}
+      assertions: []
+    coverage:
+      variation_axes:
+        - keynames:duplicate-map-key-equivalence-class
+        - namespace:local
+        - diagnostic:yaml-decode
+      related_cases: [TOSCA13-CORPUS-NAMESPACE-DEFAULT-VALID]
+
+  - id: TOSCA13-CORPUS-IMPORT-DIFFERENT-VERSION-INVALID
+    file: version-isolation/import-tosca-2.0-invalid.yaml
+    specification:
+      sections: ["3.1.3.1"]
+      requirement_ids:
+        - TOSCA13-3.1.3.1-004
+        - TOSCA13-3.1.3.1-005
+    classification:
+      kind: invalid
+      category: resolution
+      features: [imports, version-isolation]
+    expected:
+      accepted: false
+      phase: namespaces
+      diagnostic: {category: incompatible import, path: different-version.yaml}
+      assertions: []
+    coverage:
+      variation_axes:
+        - imports:cross-version
+        - version-isolation:1.3-imports-2.0
+      related_cases: [TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID]

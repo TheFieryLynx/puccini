@@ -1,0 +1,4 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+imports:
+  - file: ../sections/3.1-namespaces/imports/_support/different-version.yaml
+    namespace_prefix: foreign

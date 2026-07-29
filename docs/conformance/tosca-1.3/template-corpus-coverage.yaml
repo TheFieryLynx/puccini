@@ -1,0 +1,45 @@
+schema_version: 1
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+completeness_model: normative-equivalence-classes
+
+grammar_entities:
+  - entity: namespace-declaration
+    sections: ["3.1", "3.1.1", "3.1.2", "3.1.3.1"]
+    parser_phases: [read, namespaces]
+    variation_axes:
+      grammar_form: [default-namespace]
+      keynames: [present, duplicate, reserved]
+      yaml_type_equivalence_classes: [string, non-string]
+      resolution: [local, normative, imported-qualified, unresolved]
+      collisions: [local-duplicate, imported-ambiguous]
+    fixtures:
+      - TOSCA13-CORPUS-NAMESPACE-DEFAULT-VALID
+      - TOSCA13-CORPUS-NAMESPACE-RESERVED-INVALID
+      - TOSCA13-CORPUS-LOCAL-DUPLICATE-NAME-INVALID
+      - TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
+      - TOSCA13-CORPUS-IMPORT-UNKNOWN-QUALIFIED-INVALID
+      - TOSCA13-CORPUS-IMPORT-COLLISION-INVALID
+    status: complete
+
+  - entity: import-definition
+    sections: ["3.6.8.1", "3.6.8.2.2", "3.6.8.2.3"]
+    parser_phases: [read, namespaces]
+    variation_axes:
+      grammar_form: [short, long]
+      keynames: [file, namespace_prefix]
+      yaml_type_equivalence_classes: [string, mapping, scalar-number-invalid]
+      graph: [direct, transitive, duplicate-idempotent, cycle]
+      resolution: [relative, qualified, missing-resource, missing-name]
+      version_isolation: [tosca-1.3, incompatible-tosca-2.0]
+    fixtures:
+      - TOSCA13-CORPUS-IMPORT-SHORT-VALID
+      - TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
+      - TOSCA13-CORPUS-IMPORT-WRONG-YAML-TYPE-INVALID
+      - TOSCA13-CORPUS-IMPORT-MISSING-FILE-INVALID
+      - TOSCA13-CORPUS-IMPORT-UNKNOWN-QUALIFIED-INVALID
+      - TOSCA13-CORPUS-IMPORT-TRANSITIVE-VALID
+      - TOSCA13-CORPUS-IMPORT-CYCLE-INVALID
+      - TOSCA13-CORPUS-IMPORT-DUPLICATE-IDEMPOTENT-VALID
+      - TOSCA13-CORPUS-IMPORT-COLLISION-INVALID
+      - TOSCA13-CORPUS-IMPORT-DIFFERENT-VERSION-INVALID
+    status: complete

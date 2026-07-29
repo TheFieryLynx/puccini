@@ -1,0 +1,11 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+imports:
+  - _support/imported.yaml
+  - _support/imported.yaml
+node_types:
+  Local:
+    derived_from: Imported
+topology_template:
+  node_templates:
+    node:
+      type: Local

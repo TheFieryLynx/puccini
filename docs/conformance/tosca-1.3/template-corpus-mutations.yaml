@@ -1,0 +1,9 @@
+mutations:
+  - category: namespaces-imports
+    production_validation_path: tosca_v1_3.ReadServiceFile -> validateNamespaceDeclarations
+    mutation: removed only the TOSCA 1.3 namespace-declaration validator call
+    affected_cases:
+      - TOSCA13-CORPUS-NAMESPACE-RESERVED-INVALID
+    expected_corpus_failures: true
+    observed_result: invalid reserved namespace was accepted and the corpus runner failed
+    production_diff_restored: true
