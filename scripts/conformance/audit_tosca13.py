@@ -610,6 +610,36 @@ DIRECT_TESTS[SUBSTITUTION_MAPPING_COVERAGE_ID] = {
     ],
 }
 
+PORTSPEC_SEMANTICS_IDS = {
+    "TOSCA13-5.3.11.3-001",
+    "TOSCA13-5.3.11.3-002",
+    "TOSCA13-5.3.11.3-003",
+}
+for requirement_id in PORTSPEC_SEMANTICS_IDS:
+    DIRECT_TESTS[requirement_id] = {
+        "positive": [
+            "tests/conformance/tosca_1_3/partial_portspec_semantics_test.go#TestPartialPortSpecCrossPropertyRulesAccepted",
+            "tests/conformance/tosca_1_3/partial_portspec_semantics_test.go#TestPartialPortSpecNestedMapEntryValidated",
+        ],
+        "negative": [
+            "tests/conformance/tosca_1_3/partial_portspec_semantics_test.go#TestPartialPortSpecRejectsNoPortFields",
+            "tests/conformance/tosca_1_3/partial_portspec_semantics_test.go#TestPartialPortSpecRejectsInvalidSourceRangePair",
+            "tests/conformance/tosca_1_3/partial_portspec_semantics_test.go#TestPartialPortSpecRejectsInvalidTargetRangePair",
+        ],
+        "boundary": [
+            "tests/conformance/tosca_1_3/partial_portspec_semantics_test.go#TestPartialPortSpecCrossPropertyRulesAccepted",
+        ],
+        "inheritance": [
+            "tests/conformance/tosca_1_3/partial_portspec_semantics_test.go#TestPartialPortSpecRulesFollowTypeIdentity",
+        ],
+        "normalization": [
+            "tests/conformance/tosca_1_3/partial_portspec_semantics_test.go#TestPartialPortSpecCrossPropertyRulesAccepted",
+        ],
+        "regression": [
+            "tests/conformance/tosca_1_3/partial_portspec_semantics_test.go#TestPartialPortSpecRulesDoNotChangeTOSCA20",
+        ],
+    }
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -1159,6 +1189,20 @@ MUTATION_CHECKS[SUBSTITUTION_MAPPING_COVERAGE_ID] = {
     "expected_tests_failed": True,
     "production_diff_restored": True,
 }
+for requirement_id in PORTSPEC_SEMANTICS_IDS:
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutation": "Temporarily disabled only the TOSCA 1.3 validatePortSpec call.",
+        "affected_tests": [
+            "TestPartialPortSpecRejectsNoPortFields",
+            "TestPartialPortSpecRejectsInvalidSourceRangePair",
+            "TestPartialPortSpecRejectsInvalidTargetRangePair",
+            "TestPartialPortSpecRulesFollowTypeIdentity",
+            "TestPartialPortSpecNestedMapEntryValidated",
+        ],
+        "expected_tests_failed": True,
+        "production_diff_restored": True,
+    }
 for requirement_id in LOCAL_COLLISION_IDS:
     MUTATION_CHECKS[requirement_id] = {
         "performed": True,
@@ -2397,6 +2441,41 @@ def manual_must_trace(requirement: dict[str, Any]) -> tuple[str, dict[str, Any],
                 "of every property, capability, and requirement definition; "
                 "the v1.3-only policy excludes attributes/interfaces and leaves "
                 "TOSCA 2.0 unchanged"
+            ),
+        }, None
+    if requirement_id in PORTSPEC_SEMANTICS_IDS:
+        return "implemented", {
+            "entry_point": "tosca_v2_0.Value.RenderProperty",
+            "packages": [
+                "tosca/grammars/tosca_v1_3",
+                "tosca/grammars/tosca_v2_0",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v1_3/constraint-validation.go",
+                "tosca/grammars/tosca_v2_0/value.go",
+                "tests/conformance/tosca_1_3/partial_portspec_semantics_test.go",
+            ],
+            "symbols": [
+                "tosca_v2_0.Value.RenderProperty",
+                "tosca_v2_0.ReadAndRenderBare",
+                "tosca_v1_3.validateConstraintValue",
+                "tosca_v1_3.validatePortSpec",
+                "tosca_v1_3.validatePortRangePair",
+            ],
+            "parser_phase": "rendering after effective data-type inheritance",
+            "execution_path": [
+                "parser.Context.Render",
+                "tosca_v2_0.Value.RenderProperty/ReadAndRenderBare",
+                "tosca_v1_3.validateConstraintValue",
+                "tosca_v1_3.validatePortSpec",
+                "tosca_v1_3.validatePortRangePair",
+            ],
+            "trace_summary": (
+                "effective PortSpec data type (including derived types) → "
+                "complete direct or collection-entry value rendering → v1.3 "
+                "type-identity policy → required port selector and inclusive "
+                "source/target range pairing; unrelated types and TOSCA 2.0 "
+                "remain outside the policy"
             ),
         }, None
     if requirement_id == "TOSCA13-3.8.2.2.3-015":

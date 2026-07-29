@@ -142,6 +142,9 @@ func (self *Value) render(dataType *DataType, dataDefinition DataDefinition, bar
 
 						for index, data := range slice {
 							value := ReadAndRenderBare(self.Context.ListChild(index, data), entrySchema.DataType, entrySchema)
+							if validator := self.Context.Grammar.DataValueValidator; validator != nil {
+								validator(value.Context, entrySchema.DataType, entrySchema)
+							}
 							valueList.Set(index, value)
 						}
 
@@ -156,6 +159,9 @@ func (self *Value) render(dataType *DataType, dataDefinition DataDefinition, bar
 							// Complex keys are stringified for the purpose of the contexts
 							key = ReadAndRenderBare(self.Context.MapChild(key, yamlkeys.KeyData(key)), keySchema.DataType, keySchema)
 							value := ReadAndRenderBare(self.Context.MapChild(key, data), valueSchema.DataType, valueSchema)
+							if validator := self.Context.Grammar.DataValueValidator; validator != nil {
+								validator(value.Context, valueSchema.DataType, valueSchema)
+							}
 							valueMap.Put(key, value)
 						}
 

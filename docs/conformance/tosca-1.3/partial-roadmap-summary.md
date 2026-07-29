@@ -47,22 +47,25 @@ a manually assigned target.
 | 13 | template-copy-depth | `3.8.3.3-001`, `3.8.4.3-001` | none |
 | 14 | substituting-required-properties | `3.8.8.3-005` | effective property definitions and node rendering |
 | 15 | substitution-mapping-coverage | `3.8.13.4-001` | effective substituted node type |
-| 16 | profile-cross-property | `5.3.11.3-001..003`, `5.5.7.4-001`, `5.5.13.1-012`, `8.5.1.1-036` | rendered complex values and defaults |
+| 16 | portspec-semantics | `5.3.11.3-001..003` | rendered complex data values |
+| 17 | capability-profile-semantics | `5.5.7.4-001`, `5.5.13.1-012` | effective capability assignments and defaults |
+| 18 | network-profile-semantics | `8.5.1.1-036` | effective node-template assignments |
 
 The groups are separated where parser phase, changed symbols, or regression
 risk differs. In particular, grammar-only interface/function rules are not
 mixed with hierarchy checks; substitution mapping coverage is not mixed with
-ordinary assignment validation; and normative profile cross-property rules
-remain isolated from generic constraint processing.
+ordinary assignment validation; and the normative profile rules are split
+between complex data values, capability assignments, and node-template
+assignments.
 
 ## Current cross-status matrix
 
-After remediation group 15 (`substitution-mapping-coverage`):
+After remediation group 16 (`portspec-semantics`):
 
 | Implementation status | verified | indirectly-tested | untested | Total |
 |---|---:|---:|---:|---:|
-| implemented | 167 | 26 | 24 | 217 |
-| partial | 0 | 0 | 6 | 6 |
+| implemented | 170 | 26 | 24 | 220 |
+| partial | 0 | 0 | 3 | 3 |
 | missing | 0 | 0 | 0 | 0 |
 | non-compliant | 0 | 0 | 0 | 0 |
-| **Total** | **167** | **26** | **30** | **223** |
+| **Total** | **170** | **26** | **27** | **223** |

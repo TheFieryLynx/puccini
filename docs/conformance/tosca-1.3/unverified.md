@@ -1,6 +1,6 @@
 # Unverified TOSCA 1.3 requirements
 
-Untested or currently unverifiable records: **2343**.
+Untested or currently unverifiable records: **2340**.
 
 | Requirement | Implementation | Verification | Applicability | Reason |
 |---|---|---|---|---|
@@ -1652,9 +1652,6 @@ Untested or currently unverifiable records: **2343**.
 | `TOSCA13-5.3.11.2-014` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-5.3.11.2-016` | unknown | untested | applicable | The generated profile path/value does not match; no non-compliant status is assigned without an individually reviewed finding.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-5.3.11.2-021` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-5.3.11.3-001` | partial | untested | applicable | Cross-property semantic validation is absent.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-5.3.11.3-002` | partial | untested | applicable | Cross-property semantic validation is absent.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-5.3.11.3-003` | partial | untested | applicable | Cross-property semantic validation is absent.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-5.4.1-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-5.4.1.1-002` | unknown | untested | applicable | The owning profile type exists, but this prose/semantic statement cannot be proven by literal schema comparison.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-5.4.2-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |

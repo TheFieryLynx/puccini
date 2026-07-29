@@ -802,12 +802,12 @@ requirements:
       - "A PortSpec containing only protocol is accepted."
     implementation:
       packages: [tosca/grammars/tosca_v1_3]
-      files: [tosca/grammars/tosca_v1_3/profile-value-validation.go, tosca/grammars/tosca_v1_3/service-template.go]
-      symbols: [tosca_v1_3.validatePortSpec]
+      files: [tosca/grammars/tosca_v1_3/constraint-validation.go, tosca/grammars/tosca_v2_0/value.go]
+      symbols: [tosca_v1_3.validateConstraintValue, tosca_v1_3.validatePortSpec]
       parser_phase: rendering
-      execution_path: [Value.Render, ServiceTemplate.Render, validateProfileValues, validatePortSpec]
-    remediation_group: profile-cross-property
-    remediation_order: 15
+      execution_path: [Value.RenderProperty, validateConstraintValue, validatePortSpec]
+    remediation_group: portspec-semantics
+    remediation_order: 16
     dependencies: [TOSCA13-3.6.3.3-003]
     risk: high
     planned_tests:
@@ -832,12 +832,12 @@ requirements:
       - "A source outside its declared range is accepted."
     implementation:
       packages: [tosca/grammars/tosca_v1_3]
-      files: [tosca/grammars/tosca_v1_3/profile-value-validation.go]
-      symbols: [tosca_v1_3.validatePortSpec]
+      files: [tosca/grammars/tosca_v1_3/constraint-validation.go, tosca/grammars/tosca_v2_0/value.go]
+      symbols: [tosca_v1_3.validateConstraintValue, tosca_v1_3.validatePortSpec, tosca_v1_3.validatePortRangePair]
       parser_phase: rendering
-      execution_path: [Value.Render, validateProfileValues, validatePortSpec]
-    remediation_group: profile-cross-property
-    remediation_order: 15
+      execution_path: [Value.RenderProperty, validateConstraintValue, validatePortSpec, validatePortRangePair]
+    remediation_group: portspec-semantics
+    remediation_order: 16
     dependencies: [TOSCA13-5.3.11.3-001]
     risk: high
     planned_tests:
@@ -862,12 +862,12 @@ requirements:
       - "A target outside its declared range is accepted."
     implementation:
       packages: [tosca/grammars/tosca_v1_3]
-      files: [tosca/grammars/tosca_v1_3/profile-value-validation.go]
-      symbols: [tosca_v1_3.validatePortSpec]
+      files: [tosca/grammars/tosca_v1_3/constraint-validation.go, tosca/grammars/tosca_v2_0/value.go]
+      symbols: [tosca_v1_3.validateConstraintValue, tosca_v1_3.validatePortSpec, tosca_v1_3.validatePortRangePair]
       parser_phase: rendering
-      execution_path: [Value.Render, validateProfileValues, validatePortSpec]
-    remediation_group: profile-cross-property
-    remediation_order: 15
+      execution_path: [Value.RenderProperty, validateConstraintValue, validatePortSpec, validatePortRangePair]
+    remediation_group: portspec-semantics
+    remediation_order: 16
     dependencies: [TOSCA13-5.3.11.3-001]
     risk: high
     planned_tests:
@@ -895,8 +895,8 @@ requirements:
       symbols: [tosca_v1_3.validateEndpoint]
       parser_phase: rendering
       execution_path: [CapabilityAssignment.Render, validateProfileValues, validateEndpoint]
-    remediation_group: profile-cross-property
-    remediation_order: 15
+    remediation_group: capability-profile-semantics
+    remediation_order: 17
     dependencies: [TOSCA13-5.3.11.3-001]
     risk: high
     planned_tests:
@@ -925,8 +925,8 @@ requirements:
       symbols: [tosca_v1_3.validateScalable]
       parser_phase: rendering
       execution_path: [CapabilityAssignment.Render, validateProfileValues, validateScalable]
-    remediation_group: profile-cross-property
-    remediation_order: 15
+    remediation_group: capability-profile-semantics
+    remediation_order: 17
     dependencies: []
     risk: high
     planned_tests:
@@ -955,8 +955,8 @@ requirements:
       symbols: [tosca_v1_3.validateNetwork]
       parser_phase: rendering
       execution_path: [NodeTemplate.Render, validateProfileValues, validateNetwork]
-    remediation_group: profile-cross-property
-    remediation_order: 15
+    remediation_group: network-profile-semantics
+    remediation_order: 18
     dependencies: []
     risk: medium
     planned_tests:

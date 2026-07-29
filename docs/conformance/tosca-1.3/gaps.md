@@ -8,7 +8,7 @@ Implementation gaps and verification gaps are counted independently.
 |---:|---|---:|---:|---:|---:|
 | 1 | grammar | 1103 | 968 | 3 | 1100 |
 | 2 | normative-type | 489 | 111 | 3 | 486 |
-| 3 | semantic | 398 | 375 | 10 | 388 |
+| 3 | semantic | 395 | 372 | 10 | 385 |
 | 4 | assignment | 117 | 117 | 0 | 117 |
 | 5 | constraint | 93 | 92 | 1 | 92 |
 | 6 | function | 68 | 64 | 4 | 64 |
@@ -327,7 +327,7 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-3.6.7.1-016` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.6.7.1-020` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.6.7.1-021` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- … 298 additional records are available in `coverage.yaml`.
+- … 295 additional records are available in `coverage.yaml`.
 
 ## assignment
 

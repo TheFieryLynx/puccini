@@ -53,11 +53,17 @@ func validateConstraintValue(context *parsing.Context, dataTypeEntity parsing.En
 	if definition != nil && definition.ValidationClause != nil && definition.ValidationClause != dataType.ValidationClause {
 		validateConstraintClauseValue(context, context.Data, definition.ValidationClause, dataType, definition)
 	}
+	validatePortSpec(context, dataType)
 }
 
 func validateConstraintCompatibility(clause *tosca_v2_0.ValidationClause, dataType *tosca_v2_0.DataType, definition tosca_v2_0.DataDefinition) {
 	if clause == nil || dataType == nil {
 		return
+	}
+	if isRangeDataType(dataType) && clause.Operator == "in_range" {
+		// The two operands constrain the bounds of the range value; neither
+		// operand is itself a range-valued native argument.
+		clause.NativeArgumentIndexes = nil
 	}
 	if isCollectionDataType(dataType) {
 		clause.ValidateCollection = true
@@ -109,6 +115,14 @@ func validateConstraintOperands(constraint constraintSpec, dataType *tosca_v2_0.
 	case "in_range":
 		if len(constraint.operands) != 2 {
 			constraint.context.ReportValueMalformed("constraint", "in_range requires two operands")
+			return
+		}
+		if isRangeDataType(dataType) {
+			lower, lowerOK := integerOperand(constraint.operands[0])
+			upper, upperOK := integerOperand(constraint.operands[1])
+			if !lowerOK || !upperOK || lower < 0 || upper < lower {
+				constraint.context.ReportValueMalformed("constraint", "in_range on range requires two ordered non-negative integer operands")
+			}
 			return
 		}
 		renderConstraintOperand(constraint, 0, dataType, definition)
@@ -183,6 +197,12 @@ func evaluateConstraint(value any, constraint constraintSpec, dataType *tosca_v2
 	case "in_range":
 		if len(constraint.operands) != 2 {
 			return false
+		}
+		if rangeValue, ok := value.(*tosca_v2_0.Range); ok {
+			lower, lowerOK := integerOperand(constraint.operands[0])
+			upper, upperOK := integerOperand(constraint.operands[1])
+			return lowerOK && upperOK && lower >= 0 && upper >= lower &&
+				rangeValue.Lower >= uint64(lower) && rangeValue.Upper <= uint64(upper)
 		}
 		lower, lowerOK := compareConstraintValues(value, renderConstraintOperand(constraint, 0, dataType, definition))
 		upper, upperOK := compareConstraintValues(value, renderConstraintOperand(constraint, 1, dataType, definition))
@@ -286,6 +306,9 @@ func constraintOperatorCompatible(operator string, dataType *tosca_v2_0.DataType
 	case "equal", "valid_values", "schema":
 		return true
 	case "greater_than", "greater_or_equal", "less_than", "less_or_equal", "in_range":
+		if operator == "in_range" && isRangeDataType(dataType) {
+			return true
+		}
 		return isComparableDataType(dataType)
 	case "length", "min_length", "max_length":
 		return isSizedDataType(dataType)
@@ -294,6 +317,89 @@ func constraintOperatorCompatible(operator string, dataType *tosca_v2_0.DataType
 	default:
 		return true
 	}
+}
+
+func isRangeDataType(dataType *tosca_v2_0.DataType) bool {
+	for current := dataType; current != nil; current = current.Parent {
+		if current.Name == "range" || parsing.GetCanonicalName(current) == "range" {
+			return true
+		}
+	}
+	return false
+}
+
+func validatePortSpec(context *parsing.Context, dataType *tosca_v2_0.DataType) {
+	if !isDataTypeOrDerivedFrom(dataType, "tosca.datatypes.network.PortSpec") {
+		return
+	}
+	fields, ok := context.Data.(ard.Map)
+	if !ok {
+		return
+	}
+
+	hasPortField := false
+	for _, name := range []string{"target", "target_range", "source", "source_range"} {
+		if _, present := fields[name]; present {
+			hasPortField = true
+			break
+		}
+	}
+	if !hasPortField {
+		context.ReportValueMalformed(
+			"PortSpec",
+			"at least one of target, target_range, source, or source_range is required",
+		)
+		return
+	}
+
+	validatePortRangePair(context, fields, "source", "source_range")
+	validatePortRangePair(context, fields, "target", "target_range")
+}
+
+func validatePortRangePair(context *parsing.Context, fields ard.Map, portName, rangeName string) {
+	rangeData, rangePresent := fields[rangeName]
+	if !rangePresent {
+		return
+	}
+	rangeValue, ok := renderedValueData(rangeData).(*tosca_v2_0.Range)
+	if !ok {
+		return
+	}
+
+	portData, portPresent := fields[portName]
+	if !portPresent {
+		context.MapChild(portName, nil).ReportValueMalformed(
+			"PortSpec",
+			fmt.Sprintf("%s is required when %s is specified", portName, rangeName),
+		)
+		return
+	}
+	port, ok := integerOperand(renderedValueData(portData))
+	if !ok || port < 0 {
+		return
+	}
+	if !rangeValue.InRange(uint64(port)) {
+		context.MapChild(portName, port).ReportValueMalformed(
+			"PortSpec",
+			fmt.Sprintf("%s must be within %s", portName, rangeName),
+		)
+	}
+}
+
+func renderedValueData(value any) any {
+	if value, ok := value.(*tosca_v2_0.Value); ok {
+		return value.Context.Data
+	}
+	return value
+}
+
+func isDataTypeOrDerivedFrom(dataType *tosca_v2_0.DataType, canonicalName string) bool {
+	for current := dataType; current != nil; current = current.Parent {
+		if current.Name == canonicalName || parsing.GetCanonicalName(current) == canonicalName {
+			return true
+		}
+	}
+	return false
 }
 
 func isComparableDataType(dataType *tosca_v2_0.DataType) bool {

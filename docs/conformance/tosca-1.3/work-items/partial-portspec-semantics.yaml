@@ -1,0 +1,174 @@
+remediation_group: portspec-semantics
+remediation_order: 16
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+parser_phase: rendering of a complete complex data value
+execution_path:
+  - parser.Context.Render
+  - tosca_v2_0.Value.RenderProperty
+  - tosca_v1_3.validateConstraintValue
+  - tosca_v1_3.validatePortSpec
+
+requirements:
+  - requirement_id: TOSCA13-5.3.11.3-001
+    section: "5.3.11.3"
+    section_title: "Additional requirements"
+    normative_rule: "A valid PortSpec MUST have at least one of target, target_range, source, or source_range."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "The normative type declares every field and their individual types."
+      - "PortDef and range bounds are independently constrained to 1..65535."
+    missing_parts:
+      - "A value with none of the four port-selection fields was accepted."
+      - "No derived-type or unrelated-type scope test existed."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/constraint-validation.go]
+      symbols: [tosca_v1_3.validateConstraintValue, tosca_v1_3.validatePortSpec]
+      parser_phase: rendering
+      execution_path: [Value.RenderProperty, validateConstraintValue, validatePortSpec]
+    remediation_group: portspec-semantics
+    remediation_order: 16
+    dependencies: [TOSCA13-3.6.3.3-003]
+    risk: medium
+    planned_tests:
+      positive: [TestPartialPortSpecCrossPropertyRulesAccepted]
+      negative: [TestPartialPortSpecRejectsNoPortFields, TestPartialPortSpecNestedMapEntryValidated]
+      boundary: [TestPartialPortSpecCrossPropertyRulesAccepted]
+      inheritance: [TestPartialPortSpecRulesFollowTypeIdentity]
+      resolution: []
+      normalization: [TestPartialPortSpecCrossPropertyRulesAccepted]
+      regression: [TestPartialPortSpecRulesDoNotChangeTOSCA20]
+
+  - requirement_id: TOSCA13-5.3.11.3-002
+    section: "5.3.11.3"
+    section_title: "Additional requirements"
+    normative_rule: "When source_range is specified, source MUST have a value within that numeric range."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "source and source_range are independently rendered and type checked."
+    missing_parts:
+      - "source_range without source was accepted."
+      - "source below or above source_range was accepted."
+      - "Inclusive source boundaries were not directly verified."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/constraint-validation.go]
+      symbols: [tosca_v1_3.validatePortSpec]
+      parser_phase: rendering
+      execution_path: [Value.RenderProperty, validateConstraintValue, validatePortSpec]
+    remediation_group: portspec-semantics
+    remediation_order: 16
+    dependencies: [TOSCA13-5.3.11.3-001]
+    risk: medium
+    planned_tests:
+      positive: [TestPartialPortSpecCrossPropertyRulesAccepted]
+      negative: [TestPartialPortSpecRejectsInvalidSourceRangePair]
+      boundary: [TestPartialPortSpecCrossPropertyRulesAccepted]
+      inheritance: [TestPartialPortSpecRulesFollowTypeIdentity]
+      resolution: []
+      normalization: []
+      regression: [TestPartialPortSpecRulesDoNotChangeTOSCA20]
+
+  - requirement_id: TOSCA13-5.3.11.3-003
+    section: "5.3.11.3"
+    section_title: "Additional requirements"
+    normative_rule: "When target_range is specified, target MUST have a value within that numeric range."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "target and target_range are independently rendered and type checked."
+    missing_parts:
+      - "target_range without target was accepted."
+      - "target below or above target_range was accepted."
+      - "Inclusive target boundaries were not directly verified."
+    implementation:
+      packages: [tosca/grammars/tosca_v1_3]
+      files: [tosca/grammars/tosca_v1_3/constraint-validation.go]
+      symbols: [tosca_v1_3.validatePortSpec]
+      parser_phase: rendering
+      execution_path: [Value.RenderProperty, validateConstraintValue, validatePortSpec]
+    remediation_group: portspec-semantics
+    remediation_order: 16
+    dependencies: [TOSCA13-5.3.11.3-001]
+    risk: medium
+    planned_tests:
+      positive: [TestPartialPortSpecCrossPropertyRulesAccepted]
+      negative: [TestPartialPortSpecRejectsInvalidTargetRangePair]
+      boundary: [TestPartialPortSpecCrossPropertyRulesAccepted]
+      inheritance: [TestPartialPortSpecRulesFollowTypeIdentity]
+      resolution: []
+      normalization: []
+      regression: [TestPartialPortSpecRulesDoNotChangeTOSCA20]
+
+group_implementation:
+  interpretation:
+    type_scope: >-
+      The rules apply to the normative PortSpec data type and types derived
+      from it, not to unrelated structural lookalikes.
+    range_bounds: >-
+      "Within the numeric range" is inclusive at both bounds, consistently
+      with the normative range data type and in_range constraint.
+    collection_entries: >-
+      Endpoint.ports declares PortSpec through a map entry_schema, so the
+      completed entry value must reach the same validator as a direct property.
+    functions: >-
+      A function call is preserved and deferred by the existing data-value
+      validator until it has a concrete result; it is not mistaken for a
+      malformed final PortSpec.
+  version_isolation: >-
+    Only the TOSCA 1.3 grammar installs DataValueValidator. Shared rendering
+    exposes completed collection entries to that optional hook; TOSCA 2.0
+    leaves it unset.
+  baseline_reproduction:
+    performed: true
+    observed_failures:
+      - "PortSpec values with none of the four required selector properties were accepted."
+      - "source_range and target_range were accepted without their corresponding port."
+      - "Ports below and above their corresponding ranges were accepted."
+      - "A type derived from PortSpec bypassed all three rules."
+      - "PortSpec values reached through map entry_schema bypassed data-value validation."
+      - "The normative in_range constraint on a range-valued property attempted to render integer bounds as range values."
+    correct_failure_reason_verified: true
+  mutation_check:
+    performed: true
+    mutation: "Temporarily disabled only the TOSCA 1.3 validatePortSpec call."
+    affected_tests:
+      - TestPartialPortSpecRejectsNoPortFields
+      - TestPartialPortSpecRejectsInvalidSourceRangePair
+      - TestPartialPortSpecRejectsInvalidTargetRangePair
+      - TestPartialPortSpecRulesFollowTypeIdentity
+      - TestPartialPortSpecNestedMapEntryValidated
+    expected_tests_failed: true
+    production_diff_restored: true
+  results:
+    TOSCA13-5.3.11.3-001:
+      implementation_status: implemented
+      verification_status: verified
+    TOSCA13-5.3.11.3-002:
+      implementation_status: implemented
+      verification_status: verified
+    TOSCA13-5.3.11.3-003:
+      implementation_status: implemented
+      verification_status: verified
+
+verification:
+  focused_portspec: passed
+  protected_tosca_1_3_blocks: passed
+  tosca_2_0_conformance: passed
+  go_test_all: passed
+  go_test_race_all: passed
+  go_vet_all: passed
+  git_diff_check: passed
+  audit_generation_twice: passed
+  audit_sha256_identical: true
+  denominator: 223
+  resulting_metrics:
+    implemented: 220
+    partial: 3
+    missing: 0
+    non_compliant: 0
+    verified: 170
+    indirectly_tested: 26
+    untested: 27
