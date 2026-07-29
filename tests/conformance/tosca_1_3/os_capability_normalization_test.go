@@ -186,6 +186,7 @@ topology_template:
         endpoint:
           properties:
             protocol: HTTPS
+            port: 443
 `
 	serviceTemplate, parseProblems, err := testsupport.ParseSource(t, source)
 	if err != nil {

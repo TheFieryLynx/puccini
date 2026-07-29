@@ -95,6 +95,9 @@ type CapabilityAssignments map[string]*CapabilityAssignment
 func (self *CapabilityAssignment) Render(definition *CapabilityDefinition) {
 	self.Properties.RenderProperties(definition.PropertyDefinitions, self.Context.FieldChild("properties", nil))
 	self.Attributes.RenderReflectedAttributes(self.Properties, definition.AttributeDefinitions, self.Context.FieldChild("attributes", nil))
+	if validator := self.Context.Grammar.CapabilityAssignmentValidator; validator != nil {
+		validator(self, definition)
+	}
 	// if self.Occurrences == nil {
 	// 	self.Occurrences = definition.Occurrences
 	// }

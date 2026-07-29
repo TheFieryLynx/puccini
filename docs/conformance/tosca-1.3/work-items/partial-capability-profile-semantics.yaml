@@ -1,0 +1,158 @@
+remediation_group: capability-profile-semantics
+remediation_order: 17
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+parser_phase: capability assignment rendering after effective definitions and defaults
+execution_path:
+  - parser.Context.Render
+  - tosca_v2_0.CapabilityAssignments.Render
+  - tosca_v2_0.CapabilityAssignment.Render
+  - tosca_v1_3.validateCapabilityAssignmentProfile
+
+requirements:
+  - requirement_id: TOSCA13-5.5.7.4-001
+    section: "5.5.7.4"
+    section_title: "Additional requirements"
+    normative_rule: "Although port and ports are optional, one of port or ports must be provided in a valid Endpoint."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "port and ports are individually typed."
+      - "ports has a minimum collection length and PortSpec entry schema."
+    missing_parts:
+      - "An explicit Endpoint assignment containing neither port nor ports was accepted."
+      - "Derived Endpoint capability types were not covered."
+      - "No distinction existed between an omitted source assignment and an explicit empty assignment."
+    implementation:
+      packages: [tosca/parsing, tosca/grammars/tosca_v1_3, tosca/grammars/tosca_v2_0]
+      files:
+        - tosca/parsing/grammars.go
+        - tosca/grammars/tosca_v2_0/capability-assignment.go
+        - tosca/grammars/tosca_v1_3/capability-assignment-validation.go
+        - tosca/grammars/tosca_v1_3/common.go
+      symbols:
+        - parsing.Grammar.CapabilityAssignmentValidator
+        - tosca_v2_0.CapabilityAssignment.Render
+        - tosca_v1_3.validateCapabilityAssignmentProfile
+        - tosca_v1_3.validateEndpointAssignment
+      parser_phase: rendering
+      execution_path: [CapabilityAssignments.Render, CapabilityAssignment.Render, validateCapabilityAssignmentProfile, validateEndpointAssignment]
+    remediation_group: capability-profile-semantics
+    remediation_order: 17
+    dependencies: [TOSCA13-5.3.11.3-001]
+    risk: medium
+    planned_tests:
+      positive: [TestPartialEndpointPortOrPortsAccepted]
+      negative: [TestPartialEndpointWithoutPortOrPortsRejected]
+      boundary: [TestPartialEndpointOmittedAssignmentIsNotExplicitEmptyValue]
+      inheritance: [TestPartialEndpointRuleFollowsCapabilityTypeIdentity]
+      resolution: []
+      normalization: [TestPartialEndpointPortOrPortsAccepted]
+      regression: [TestPartialCapabilityProfileDefersFunctionValues, TestPartialCapabilityProfileRulesDoNotChangeTOSCA20]
+
+  - requirement_id: TOSCA13-5.5.13.1-012
+    section: "5.5.13.1"
+    section_title: "Properties"
+    normative_rule: "default_instances MUST be in the range between min_instances and max_instances."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "The three properties are independently integer typed."
+      - "The normative defaults for min_instances and max_instances are applied."
+    missing_parts:
+      - "A concrete default_instances below min_instances or above max_instances was accepted."
+      - "Inclusive bounds and refined inherited defaults were not verified."
+      - "Unrelated capability types with the same field names were not isolated."
+    implementation:
+      packages: [tosca/parsing, tosca/grammars/tosca_v1_3, tosca/grammars/tosca_v2_0]
+      files:
+        - tosca/parsing/grammars.go
+        - tosca/grammars/tosca_v2_0/capability-assignment.go
+        - tosca/grammars/tosca_v1_3/capability-assignment-validation.go
+        - tosca/grammars/tosca_v1_3/common.go
+      symbols:
+        - parsing.Grammar.CapabilityAssignmentValidator
+        - tosca_v2_0.CapabilityAssignment.Render
+        - tosca_v1_3.validateCapabilityAssignmentProfile
+        - tosca_v1_3.validateScalableAssignment
+      parser_phase: rendering
+      execution_path: [CapabilityAssignments.Render, CapabilityAssignment.Render, validateCapabilityAssignmentProfile, validateScalableAssignment]
+    remediation_group: capability-profile-semantics
+    remediation_order: 17
+    dependencies: []
+    risk: medium
+    planned_tests:
+      positive: [TestPartialScalableDefaultInstancesInsideRange]
+      negative: [TestPartialScalableDefaultInstancesOutsideRangeRejected]
+      boundary: [TestPartialScalableDefaultInstancesInsideRange]
+      inheritance: [TestPartialScalableUsesInheritedRefinedDefaults]
+      resolution: []
+      normalization: [TestPartialScalableDefaultInstancesInsideRange]
+      regression: [TestPartialCapabilityProfileDefersFunctionValues, TestPartialCapabilityProfileRulesDoNotChangeTOSCA20]
+
+group_implementation:
+  interpretation:
+    explicit_endpoint_assignment: >-
+      "Provided" is evaluated on a source capability assignment. The shared
+      renderer materializes omitted capability definitions for normalization;
+      that internal object is not treated as an explicit empty YAML value.
+      An explicit empty assignment is a value and is rejected.
+    effective_values: >-
+      Capability type inheritance and node-type capability refinement complete
+      definitions before assignments render. Scalable comparison therefore
+      uses explicit values over effective inherited/refined defaults.
+    inclusive_range: >-
+      "Between" is interpreted inclusively, consistent with the specification's
+      range semantics and boundary wording.
+    functions: >-
+      Endpoint validates function-valued port by presence. Scalable comparison
+      is deferred while any compared value remains an intrinsic function.
+  version_isolation: >-
+    Shared capability rendering exposes an optional neutral hook. Only TOSCA
+    1.3 installs the normative profile policy; TOSCA 2.0 leaves it nil.
+  baseline_reproduction:
+    performed: true
+    observed_failures:
+      - "An explicit empty Endpoint assignment was accepted."
+      - "An Endpoint assignment containing protocol but neither port nor ports was accepted."
+      - "A capability type derived from Endpoint bypassed the rule."
+      - "Scalable default_instances below min_instances or above max_instances was accepted."
+      - "Normative min/max defaults were not compared with default_instances."
+      - "Refined inherited Scalable defaults were not compared."
+    correct_failure_reason_verified: true
+  mutation_check:
+    performed: true
+    mutation: "Temporarily removed only the TOSCA 1.3 capability-assignment validator registration."
+    affected_tests:
+      - TestPartialEndpointWithoutPortOrPortsRejected
+      - TestPartialEndpointRuleFollowsCapabilityTypeIdentity
+      - TestPartialScalableDefaultInstancesOutsideRangeRejected
+      - TestPartialScalableUsesInheritedRefinedDefaults
+    expected_tests_failed: true
+    production_diff_restored: true
+  results:
+    TOSCA13-5.5.7.4-001:
+      implementation_status: implemented
+      verification_status: verified
+    TOSCA13-5.5.13.1-012:
+      implementation_status: implemented
+      verification_status: verified
+
+verification:
+  focused_capability_profile: passed
+  protected_tosca_1_3_blocks: passed
+  tosca_2_0_conformance: passed
+  go_test_all: passed
+  go_test_race_all: passed
+  go_vet_all: passed
+  git_diff_check: passed
+  audit_generation_twice: passed
+  audit_sha256_identical: true
+  denominator: 223
+  resulting_metrics:
+    implemented: 222
+    partial: 1
+    missing: 0
+    non_compliant: 0
+    verified: 172
+    indirectly_tested: 26
+    untested: 25

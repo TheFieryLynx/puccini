@@ -1,6 +1,6 @@
 # Unverified TOSCA 1.3 requirements
 
-Untested or currently unverifiable records: **2340**.
+Untested or currently unverifiable records: **2338**.
 
 | Requirement | Implementation | Verification | Applicability | Reason |
 |---|---|---|---|---|
@@ -1775,7 +1775,6 @@ Untested or currently unverifiable records: **2340**.
 | `TOSCA13-5.5.7.3-028` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-5.5.7.3-032` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-5.5.7.3-033` | unknown | untested | applicable | The generated profile path/value does not match; no non-compliant status is assigned without an individually reviewed finding.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-5.5.7.4-001` | partial | untested | applicable | Cross-property semantic validation is absent.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-5.5.8-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-5.5.8-003` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-5.5.8.1-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
@@ -1833,7 +1832,6 @@ Untested or currently unverifiable records: **2340**.
 | `TOSCA13-5.5.13.1-009` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-5.5.13.1-010` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-5.5.13.1-011` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-5.5.13.1-012` | partial | untested | applicable | Cross-property semantic validation is absent.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-5.5.13.2-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-5.5.13.2-006` | unknown | untested | applicable | The generated profile path/value does not match; no non-compliant status is assigned without an individually reviewed finding.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-5.5.13.2-007` | unknown | untested | applicable | The generated profile path/value does not match; no non-compliant status is assigned without an individually reviewed finding.; Verification status is untested; no requirement-isolating direct test proves conformance. |

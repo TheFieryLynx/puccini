@@ -60,12 +60,12 @@ assignments.
 
 ## Current cross-status matrix
 
-After remediation group 16 (`portspec-semantics`):
+After remediation group 17 (`capability-profile-semantics`):
 
 | Implementation status | verified | indirectly-tested | untested | Total |
 |---|---:|---:|---:|---:|
-| implemented | 170 | 26 | 24 | 220 |
-| partial | 0 | 0 | 3 | 3 |
+| implemented | 172 | 26 | 24 | 222 |
+| partial | 0 | 0 | 1 | 1 |
 | missing | 0 | 0 | 0 | 0 |
 | non-compliant | 0 | 0 | 0 | 0 |
-| **Total** | **170** | **26** | **27** | **223** |
+| **Total** | **172** | **26** | **25** | **223** |

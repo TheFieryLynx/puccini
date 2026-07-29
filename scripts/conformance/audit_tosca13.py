@@ -640,6 +640,53 @@ for requirement_id in PORTSPEC_SEMANTICS_IDS:
         ],
     }
 
+CAPABILITY_PROFILE_SEMANTICS_IDS = {
+    "TOSCA13-5.5.7.4-001",
+    "TOSCA13-5.5.13.1-012",
+}
+DIRECT_TESTS["TOSCA13-5.5.7.4-001"] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_capability_profile_semantics_test.go#TestPartialEndpointPortOrPortsAccepted",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_capability_profile_semantics_test.go#TestPartialEndpointWithoutPortOrPortsRejected",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_capability_profile_semantics_test.go#TestPartialEndpointOmittedAssignmentIsNotExplicitEmptyValue",
+    ],
+    "inheritance": [
+        "tests/conformance/tosca_1_3/partial_capability_profile_semantics_test.go#TestPartialEndpointRuleFollowsCapabilityTypeIdentity",
+    ],
+    "normalization": [
+        "tests/conformance/tosca_1_3/partial_capability_profile_semantics_test.go#TestPartialEndpointPortOrPortsAccepted",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_capability_profile_semantics_test.go#TestPartialCapabilityProfileDefersFunctionValues",
+        "tests/conformance/tosca_1_3/partial_capability_profile_semantics_test.go#TestPartialCapabilityProfileRulesDoNotChangeTOSCA20",
+    ],
+}
+DIRECT_TESTS["TOSCA13-5.5.13.1-012"] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_capability_profile_semantics_test.go#TestPartialScalableDefaultInstancesInsideRange",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_capability_profile_semantics_test.go#TestPartialScalableDefaultInstancesOutsideRangeRejected",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_capability_profile_semantics_test.go#TestPartialScalableDefaultInstancesInsideRange",
+    ],
+    "inheritance": [
+        "tests/conformance/tosca_1_3/partial_capability_profile_semantics_test.go#TestPartialScalableUsesInheritedRefinedDefaults",
+    ],
+    "normalization": [
+        "tests/conformance/tosca_1_3/partial_capability_profile_semantics_test.go#TestPartialScalableDefaultInstancesInsideRange",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_capability_profile_semantics_test.go#TestPartialCapabilityProfileDefersFunctionValues",
+        "tests/conformance/tosca_1_3/partial_capability_profile_semantics_test.go#TestPartialCapabilityProfileRulesDoNotChangeTOSCA20",
+    ],
+}
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -1075,6 +1122,19 @@ for requirement_id in CONSTRAINT_SEMANTICS_IDS:
             "TestDatatypeConstraintRejectsIncompatibleParent",
             "TestInheritedDatatypeConstraint",
             "TestScalarUnitConstraintRejectsOutOfRangeValue",
+        ],
+        "expected_tests_failed": True,
+        "production_diff_restored": True,
+    }
+for requirement_id in CAPABILITY_PROFILE_SEMANTICS_IDS:
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutation": "Temporarily removed only the TOSCA 1.3 capability-assignment validator registration.",
+        "affected_tests": [
+            "TestPartialEndpointWithoutPortOrPortsRejected",
+            "TestPartialEndpointRuleFollowsCapabilityTypeIdentity",
+            "TestPartialScalableDefaultInstancesOutsideRangeRejected",
+            "TestPartialScalableUsesInheritedRefinedDefaults",
         ],
         "expected_tests_failed": True,
         "production_diff_restored": True,
@@ -2476,6 +2536,45 @@ def manual_must_trace(requirement: dict[str, Any]) -> tuple[str, dict[str, Any],
                 "type-identity policy → required port selector and inclusive "
                 "source/target range pairing; unrelated types and TOSCA 2.0 "
                 "remain outside the policy"
+            ),
+        }, None
+    if requirement_id in CAPABILITY_PROFILE_SEMANTICS_IDS:
+        return "implemented", {
+            "entry_point": "tosca_v2_0.CapabilityAssignment.Render",
+            "packages": [
+                "tosca/grammars/tosca_v1_3",
+                "tosca/grammars/tosca_v2_0",
+                "tosca/parsing",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v1_3/capability-assignment-validation.go",
+                "tosca/grammars/tosca_v1_3/common.go",
+                "tosca/grammars/tosca_v2_0/capability-assignment.go",
+                "tosca/parsing/grammars.go",
+                "tests/conformance/tosca_1_3/partial_capability_profile_semantics_test.go",
+            ],
+            "symbols": [
+                "parsing.Grammar.CapabilityAssignmentValidator",
+                "tosca_v2_0.CapabilityAssignment.Render",
+                "tosca_v1_3.validateCapabilityAssignmentProfile",
+                "tosca_v1_3.validateEndpointAssignment",
+                "tosca_v1_3.validateScalableAssignment",
+            ],
+            "parser_phase": "capability assignment rendering after effective defaults",
+            "execution_path": [
+                "parser.Context.Render",
+                "tosca_v2_0.CapabilityAssignments.Render",
+                "tosca_v2_0.CapabilityAssignment.Render",
+                "tosca_v1_3.validateCapabilityAssignmentProfile",
+                "tosca_v1_3.validateEndpointAssignment/validateScalableAssignment",
+            ],
+            "trace_summary": (
+                "effective inherited/refined capability definition → explicit "
+                "assignment and property defaults → v1.3 capability-type "
+                "identity policy → Endpoint port/ports presence or inclusive "
+                "Scalable default range; internal omitted assignments, "
+                "unrelated types, unresolved functions, and TOSCA 2.0 remain "
+                "outside premature validation"
             ),
         }, None
     if requirement_id == "TOSCA13-3.8.2.2.3-015":

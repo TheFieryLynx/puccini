@@ -6,9 +6,9 @@ Implementation gaps and verification gaps are counted independently.
 
 | Rank | Area | Records | Implementation unknown/missing/partial | Non-compliant | Not directly verified |
 |---:|---|---:|---:|---:|---:|
-| 1 | grammar | 1103 | 968 | 3 | 1100 |
+| 1 | grammar | 1102 | 967 | 3 | 1099 |
 | 2 | normative-type | 489 | 111 | 3 | 486 |
-| 3 | semantic | 395 | 372 | 10 | 385 |
+| 3 | semantic | 394 | 371 | 10 | 384 |
 | 4 | assignment | 117 | 117 | 0 | 117 |
 | 5 | constraint | 93 | 92 | 1 | 92 |
 | 6 | function | 68 | 64 | 4 | 64 |
@@ -119,7 +119,7 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-3.6.7.1-002` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.6.7.1-005` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.6.7.1-007` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- … 1003 additional records are available in `coverage.yaml`.
+- … 1002 additional records are available in `coverage.yaml`.
 
 ## normative-type
 
@@ -327,7 +327,7 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-3.6.7.1-016` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.6.7.1-020` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.6.7.1-021` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- … 295 additional records are available in `coverage.yaml`.
+- … 294 additional records are available in `coverage.yaml`.
 
 ## assignment
 

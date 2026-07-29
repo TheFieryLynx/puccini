@@ -890,11 +890,11 @@ requirements:
     missing_parts:
       - "An Endpoint with neither property is accepted."
     implementation:
-      packages: [tosca/grammars/tosca_v1_3]
-      files: [tosca/grammars/tosca_v1_3/profile-value-validation.go]
-      symbols: [tosca_v1_3.validateEndpoint]
+      packages: [tosca/parsing, tosca/grammars/tosca_v1_3, tosca/grammars/tosca_v2_0]
+      files: [tosca/parsing/grammars.go, tosca/grammars/tosca_v1_3/capability-assignment-validation.go, tosca/grammars/tosca_v2_0/capability-assignment.go]
+      symbols: [parsing.Grammar.CapabilityAssignmentValidator, tosca_v1_3.validateEndpointAssignment]
       parser_phase: rendering
-      execution_path: [CapabilityAssignment.Render, validateProfileValues, validateEndpoint]
+      execution_path: [CapabilityAssignment.Render, validateCapabilityAssignmentProfile, validateEndpointAssignment]
     remediation_group: capability-profile-semantics
     remediation_order: 17
     dependencies: [TOSCA13-5.3.11.3-001]
@@ -920,11 +920,11 @@ requirements:
       - "Cross-property ordering is not validated."
       - "Inclusive boundaries and inherited defaults are not tested."
     implementation:
-      packages: [tosca/grammars/tosca_v1_3]
-      files: [tosca/grammars/tosca_v1_3/profile-value-validation.go]
-      symbols: [tosca_v1_3.validateScalable]
+      packages: [tosca/parsing, tosca/grammars/tosca_v1_3, tosca/grammars/tosca_v2_0]
+      files: [tosca/parsing/grammars.go, tosca/grammars/tosca_v1_3/capability-assignment-validation.go, tosca/grammars/tosca_v2_0/capability-assignment.go]
+      symbols: [parsing.Grammar.CapabilityAssignmentValidator, tosca_v1_3.validateScalableAssignment]
       parser_phase: rendering
-      execution_path: [CapabilityAssignment.Render, validateProfileValues, validateScalable]
+      execution_path: [CapabilityAssignment.Render, validateCapabilityAssignmentProfile, validateScalableAssignment]
     remediation_group: capability-profile-semantics
     remediation_order: 17
     dependencies: []

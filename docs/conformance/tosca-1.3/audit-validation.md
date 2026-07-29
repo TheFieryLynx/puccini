@@ -6,8 +6,8 @@
 - Sample size: **146** records.
 - Strata: 50 legacy `partial`; all 36 `non-compliant`; all 3 `unimplemented`; all 25 `unverified`; 20 `not-applicable`; 20 `ambiguous`.
 - Misclassified sampled records: **96** (65.75%).
-- False-positive rate: **43/81 (53.09%)**.
-- False-negative rate: **23/65 (35.38%)**.
+- False-positive rate: **44/81 (54.32%)**.
+- False-negative rate: **22/65 (33.85%)**.
 - Duplicate clusters found: **96**.
 - Catalog records classified as informative/non-normative: **35**.
 - Erroneous `not-applicable` records in the sample: **14**.
@@ -23,12 +23,12 @@ False positive means the old audit asserted a concrete implementation state from
 | partial | `TOSCA13-3.6.17.1-001` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.3.6.5.1-011` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-5.3.7.2-007` | yes | yes | yes | yes | yes | no | no | yes | implemented / indirectly-tested / applicable |
-| partial | `TOSCA13-5.9.11.1-006` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
+| partial | `TOSCA13-5.9.11.1-008` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.8.2.1-004` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
-| partial | `TOSCA13-5.8.5.1-005` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
+| partial | `TOSCA13-5.8.5.1-007` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.6.8.2.2-006` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.10.1-012` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
-| partial | `TOSCA13-5.9.3.3-018` | yes | yes | yes | yes | yes | no | no | yes | implemented / indirectly-tested / applicable |
+| partial | `TOSCA13-5.9.3.3-020` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.3.6.2-005` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.6.8.2.2-004` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.8.1.1-010` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
@@ -42,12 +42,12 @@ False positive means the old audit asserted a concrete implementation state from
 | partial | `TOSCA13-5.5.7.1-024` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.8.3.2-001` | yes | yes | no | no | no | yes | no | yes | unknown / untested / not-applicable |
 | partial | `TOSCA13-3.6.21.2-005` | yes | yes | no | no | no | yes | no | yes | unknown / untested / not-applicable |
-| partial | `TOSCA13-5.9.8.2-011` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
+| partial | `TOSCA13-5.9.8.2-013` | yes | yes | yes | yes | yes | no | no | yes | implemented / indirectly-tested / applicable |
 | partial | `TOSCA13-3.6.14.1-003` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.7.3.4-001` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.7.10.1-011` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.6.17.1-005` | yes | yes | yes | yes | yes | no | no | yes | implemented / indirectly-tested / applicable |
-| partial | `TOSCA13-5.9.11.1-001` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
+| partial | `TOSCA13-5.9.11.1-005` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.6.17.1-002` | yes | yes | yes | yes | yes | no | no | yes | implemented / indirectly-tested / applicable |
 | partial | `TOSCA13-3.3.6.6.1-005` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-5.5.5.1-001` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
@@ -55,11 +55,11 @@ False positive means the old audit asserted a concrete implementation state from
 | partial | `TOSCA13-3.10.1-045` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-5.5.7.3-020` | yes | yes | yes | yes | yes | no | no | yes | implemented / indirectly-tested / applicable |
 | partial | `TOSCA13-3.9.1-003` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
-| partial | `TOSCA13-5.9.13.1-008` | yes | yes | yes | yes | yes | no | no | yes | implemented / indirectly-tested / applicable |
+| partial | `TOSCA13-5.9.13.1-010` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.8.3.1-002` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-5.5.7.1-014` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.8.4.1-009` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
-| partial | `TOSCA13-5.7.6-002` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
+| partial | `TOSCA13-5.7.6-004` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.6.11.2.1-001` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.6.16.1-013` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
 | partial | `TOSCA13-3.6.7.2.1-001` | yes | yes | yes | yes | no | yes | no | yes | unknown / untested / applicable |
