@@ -14,17 +14,17 @@ This report covers the continuation trace of every formerly-unknown record that 
 
 ## Stable denominator result
 
-- implemented: **207**.
-- partial: **16**.
+- implemented: **208**.
+- partial: **15**.
 - missing: **0**.
 - non-compliant: **0**.
-- verified: **157**.
+- verified: **158**.
 - indirectly-tested: **26**.
-- untested: **40**.
+- untested: **39**.
 - unverifiable: **0**.
-- implementation coverage: **207/223 (92.83%)**.
-- verified conformance coverage: **157/223 (70.40%)**.
-- broad test evidence coverage: **183/223 (82.06%)**.
+- implementation coverage: **208/223 (93.27%)**.
+- verified conformance coverage: **158/223 (70.85%)**.
+- broad test evidence coverage: **184/223 (82.51%)**.
 
 ## Continuation trace by subsystem
 
@@ -38,7 +38,7 @@ This report covers the continuation trace of every formerly-unknown record that 
 | Properties, attributes and assignments | 20 | 16 | 4 | 0 | 0 | 11 | 1 | 8 | 0 |
 | Constraints | 8 | 7 | 1 | 0 | 0 | 7 | 0 | 1 | 0 |
 | Intrinsic functions | 22 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | 0 |
-| Requirements and capabilities | 6 | 5 | 1 | 0 | 0 | 4 | 0 | 2 | 0 |
+| Requirements and capabilities | 6 | 6 | 0 | 0 | 0 | 5 | 0 | 1 | 0 |
 | Interfaces, operations and artifacts | 11 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | 0 |
 | Groups and policies | 5 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | 0 |
 | Substitution mappings | 2 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 |

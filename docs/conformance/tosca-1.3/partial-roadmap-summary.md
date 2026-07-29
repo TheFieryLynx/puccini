@@ -56,12 +56,12 @@ remain isolated from generic constraint processing.
 
 ## Current cross-status matrix
 
-After remediation group 7 (`datatype-shape`):
+After remediation group 8 (`capability-source-refinement`):
 
 | Implementation status | verified | indirectly-tested | untested | Total |
 |---|---:|---:|---:|---:|
-| implemented | 157 | 26 | 24 | 207 |
-| partial | 0 | 0 | 16 | 16 |
+| implemented | 158 | 26 | 24 | 208 |
+| partial | 0 | 0 | 15 | 15 |
 | missing | 0 | 0 | 0 | 0 |
 | non-compliant | 0 | 0 | 0 | 0 |
-| **Total** | **157** | **26** | **40** | **223** |
+| **Total** | **158** | **26** | **39** | **223** |

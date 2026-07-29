@@ -403,6 +403,30 @@ for requirement_id in DATATYPE_SHAPE_IDS:
         ],
     }
 
+CAPABILITY_SOURCE_REFINEMENT_ID = "TOSCA13-3.7.2.4-001"
+DIRECT_TESTS[CAPABILITY_SOURCE_REFINEMENT_ID] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go#TestPartialCapabilitySourceRefinementAcceptsCompatibleTypes",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go#TestPartialCapabilitySourceRefinementRejectsUnrelatedType",
+        "tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go#TestPartialCapabilitySourceRefinementRejectsMixedList",
+        "tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go#TestPartialCapabilitySourceRefinementUnknownTypeStillFailsLookup",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go#TestPartialCapabilitySourceRefinementDiagnosticIsDeterministic",
+    ],
+    "inheritance": [
+        "tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go#TestPartialCapabilitySourceRefinementInheritsOmittedList",
+    ],
+    "resolution": [
+        "tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go#TestPartialCapabilitySourceRefinementResolvesImportedTypes",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go#TestPartialCapabilitySourceRefinementDoesNotChangeTOSCA20",
+    ],
+}
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -856,6 +880,20 @@ for requirement_id in DATATYPE_SHAPE_IDS:
         "expected_tests_failed": True,
         "production_diff_restored": True,
     }
+MUTATION_CHECKS[CAPABILITY_SOURCE_REFINEMENT_ID] = {
+    "performed": True,
+    "mutation": (
+        "Temporarily removed only the TOSCA 1.3 registration of the "
+        "capability definition refinement validator."
+    ),
+    "affected_tests": [
+        "TestPartialCapabilitySourceRefinementRejectsUnrelatedType",
+        "TestPartialCapabilitySourceRefinementRejectsMixedList",
+        "TestPartialCapabilitySourceRefinementDiagnosticIsDeterministic",
+    ],
+    "expected_tests_failed": True,
+    "production_diff_restored": True,
+}
 for requirement_id in LOCAL_COLLISION_IDS:
     MUTATION_CHECKS[requirement_id] = {
         "performed": True,
@@ -2140,6 +2178,48 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
                 "TOSCA 1.3 artifact grammar read without premature required-key "
                 "failure → effective node-type artifact inheritance → deterministic "
                 "TOSCA 1.3-only post-inheritance completeness validation"
+            ),
+        }, None
+    if requirement_id == CAPABILITY_SOURCE_REFINEMENT_ID:
+        return "implemented", {
+            "entry_point": "parser.Context.Inherit",
+            "packages": [
+                "tosca/grammars/tosca_v1_3",
+                "tosca/grammars/tosca_v2_0",
+                "tosca/parsing",
+                "tosca/parser",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v1_3/capability-definition.go",
+                "tosca/grammars/tosca_v1_3/common.go",
+                "tosca/grammars/tosca_v2_0/capability-definition.go",
+                "tosca/grammars/tosca_v2_0/node-type.go",
+                "tosca/parsing/grammars.go",
+                "tosca/parser/phase4-inheritance.go",
+                "tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go",
+            ],
+            "symbols": [
+                "parsing.Grammar.CapabilityDefinitionRefinementValidator",
+                "tosca_v2_0.CapabilityDefinition.Inherit",
+                "tosca_v1_3.validateCapabilityDefinitionRefinement",
+                "tosca_v2_0.NodeTypes.ValidateSubset",
+                "parsing.Hierarchy.IsCompatible",
+            ],
+            "parser_phase": "lookup, hierarchy, and inheritance",
+            "execution_path": [
+                "parser.Context.LookupNames",
+                "parser.Context.AddHierarchies",
+                "parser.Context.Inherit",
+                "tosca_v2_0.CapabilityDefinition.Inherit",
+                "tosca_v1_3.validateCapabilityDefinitionRefinement",
+                "tosca_v2_0.NodeTypes.ValidateSubset",
+                "parsing.Hierarchy.IsCompatible",
+            ],
+            "trace_summary": (
+                "resolved valid_source_types → effective parent capability "
+                "definition → TOSCA 1.3 refinement policy hook → subset "
+                "validation against node type hierarchies; TOSCA 2.0 leaves "
+                "the hook unset"
             ),
         }, None
     if requirement_id in DATATYPE_SHAPE_IDS:

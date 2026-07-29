@@ -69,6 +69,10 @@ func (self *CapabilityDefinition) Inherit(parentDefinition *CapabilityDefinition
 		return
 	}
 
+	if validator := self.Context.Grammar.CapabilityDefinitionRefinementValidator; validator != nil {
+		validator(self, parentDefinition)
+	}
+
 	if ((self.Description == nil) || ((self.CapabilityType != nil) && (self.Description == self.CapabilityType.Description))) && (parentDefinition.Description != nil) {
 		self.Description = parentDefinition.Description
 	}

@@ -40,3 +40,15 @@ func ReadCapabilityDefinition(context *parsing.Context) parsing.EntityPtr {
 
 	return self
 }
+
+func validateCapabilityDefinitionRefinement(childPtr parsing.EntityPtr, parentPtr parsing.EntityPtr) {
+	child := childPtr.(*tosca_v2_0.CapabilityDefinition)
+	parent := parentPtr.(*tosca_v2_0.CapabilityDefinition)
+
+	if (child.ValidSourceNodeTypeNames == nil) || (parent.ValidSourceNodeTypeNames == nil) {
+		return
+	}
+
+	context := child.Context.FieldChild("valid_source_types", *child.ValidSourceNodeTypeNames)
+	parent.ValidSourceNodeTypes.ValidateSubset(child.ValidSourceNodeTypes, context)
+}

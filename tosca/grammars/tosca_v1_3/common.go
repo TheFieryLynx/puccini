@@ -97,6 +97,7 @@ func init() {
 	Grammar.InvalidNamespaceCharacters = ":"
 	Grammar.DataDefinitionValidator = validateConstraintDefinition
 	Grammar.DataValueValidator = validateConstraintValue
+	Grammar.CapabilityDefinitionRefinementValidator = validateCapabilityDefinitionRefinement
 }
 
 func CompareUint32(v1 uint32, v2 uint32) int {

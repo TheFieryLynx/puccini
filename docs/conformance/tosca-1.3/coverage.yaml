@@ -43902,8 +43902,8 @@ requirements:
   strength: SHALL
   category: semantic
   subject: additional-requirements
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -43913,49 +43913,72 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: parser.Context.Inherit
     packages:
     - tosca/grammars/tosca_v1_3
-    - tosca/parser
+    - tosca/grammars/tosca_v2_0
     - tosca/parsing
+    - tosca/parser
     files:
     - tosca/grammars/tosca_v1_3/capability-definition.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parsing/inheritance.go
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v2_0/capability-definition.go
+    - tosca/grammars/tosca_v2_0/node-type.go
+    - tosca/parsing/grammars.go
     - tosca/parser/phase4-inheritance.go
+    - tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go
     symbols:
     - tosca_v1_3.ReadCapabilityDefinition
-    - parser.Context.AddHierarchies
-    - parsing.NewHierarchyFor
+    - parsing.Grammar.CapabilityDefinitionRefinementValidator
+    - tosca_v2_0.CapabilityDefinition.Inherit
+    - tosca_v1_3.validateCapabilityDefinitionRefinement
+    - tosca_v2_0.NodeTypes.ValidateSubset
     - parsing.Hierarchy.IsCompatible
-    - parser.Context.Inherit
-    parser_phase: inheritance
+    parser_phase: lookup, hierarchy, and inheritance
     execution_path:
-    - parser.Context.Parse
     - parser.Context.LookupNames
     - parser.Context.AddHierarchies
-    - parsing.NewHierarchyFor
     - parser.Context.Inherit
+    - tosca_v2_0.CapabilityDefinition.Inherit
+    - tosca_v1_3.validateCapabilityDefinitionRefinement
+    - tosca_v2_0.NodeTypes.ValidateSubset
     - parsing.Hierarchy.IsCompatible
-    trace_summary: Capability definitions inherit valid_source_types, but no subset/type-compatibility check is performed when a child supplies
-      its own list.
+    trace_summary: resolved valid_source_types → effective parent capability definition → TOSCA 1.3 refinement policy hook → subset validation
+      against node type hierarchies; TOSCA 2.0 leaves the hook unset
   tests:
-    positive: []
-    negative: []
-    boundary: []
-    regression: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go#TestPartialCapabilitySourceRefinementAcceptsCompatibleTypes
+    negative:
+    - tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go#TestPartialCapabilitySourceRefinementRejectsUnrelatedType
+    - tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go#TestPartialCapabilitySourceRefinementRejectsMixedList
+    - tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go#TestPartialCapabilitySourceRefinementUnknownTypeStillFailsLookup
+    boundary:
+    - tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go#TestPartialCapabilitySourceRefinementDiagnosticIsDeterministic
+    regression:
+    - tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go#TestPartialCapabilitySourceRefinementDoesNotChangeTOSCA20
+    inheritance:
+    - tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go#TestPartialCapabilitySourceRefinementInheritsOmittedList
+    resolution:
+    - tests/conformance/tosca_1_3/partial_capability_source_refinement_test.go#TestPartialCapabilitySourceRefinementResolvesImportedTypes
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - valid_source_types refinement validation is absent.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: valid_source_types refinement validation is absent.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily removed only the TOSCA 1.3 registration of the capability definition refinement validator.
+    affected_tests:
+    - TestPartialCapabilitySourceRefinementRejectsUnrelatedType
+    - TestPartialCapabilitySourceRefinementRejectsMixedList
+    - TestPartialCapabilitySourceRefinementDiagnosticIsDeterministic
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.7.2.4-002
   section: 3.7.2.4
   section_title: Additional requirements

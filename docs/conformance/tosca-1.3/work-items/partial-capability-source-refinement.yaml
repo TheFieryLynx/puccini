@@ -1,0 +1,124 @@
+remediation_group: capability-source-refinement
+remediation_order: 8
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+parser_phase: lookup and inheritance
+execution_path:
+  - parser.Context.ReadRoot
+  - tosca_v1_3.ReadCapabilityDefinition
+  - parser.Context.LookupNames
+  - parser.Context.AddHierarchies
+  - parser.Context.Inherit
+  - tosca_v2_0.CapabilityDefinition.Inherit
+  - tosca_v1_3.validateCapabilityDefinitionRefinement
+  - tosca_v2_0.NodeTypes.ValidateSubset
+
+requirements:
+  - requirement_id: TOSCA13-3.7.2.4-001
+    section: "3.7.2.4"
+    section_title: "Additional requirements"
+    normative_rule: >-
+      Node Type names provided by valid_source_types SHALL be type-compatible
+      with Node Types provided using the same keyname in the parent capability
+      definition.
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "valid_source_types is structurally read as a list of node type names."
+      - "Each name is resolved during lookup, including qualified imported names."
+      - "An omitted child list inherits the effective parent list."
+      - "Node hierarchy compatibility and generic subset checking already exist."
+    missing_parts:
+      - "An explicitly supplied child list was not compared to the parent list."
+      - "An unrelated child node type and a mixed compatible/incompatible list were accepted."
+      - "No direct test isolated compatible derivation from unrelated refinement."
+    implementation:
+      packages:
+        - tosca/grammars/tosca_v1_3
+        - tosca/grammars/tosca_v2_0
+        - tosca/parsing
+        - tosca/parser
+      files:
+        - tosca/grammars/tosca_v1_3/capability-definition.go
+        - tosca/grammars/tosca_v1_3/common.go
+        - tosca/grammars/tosca_v2_0/capability-definition.go
+        - tosca/grammars/tosca_v2_0/node-type.go
+        - tosca/parsing/grammars.go
+        - tosca/parser/phase4-inheritance.go
+      symbols:
+        - parsing.Grammar.CapabilityDefinitionRefinementValidator
+        - tosca_v2_0.CapabilityDefinition.Inherit
+        - tosca_v1_3.validateCapabilityDefinitionRefinement
+        - tosca_v2_0.NodeTypes.ValidateSubset
+        - parsing.Hierarchy.IsCompatible
+      parser_phase: inheritance after lookup and hierarchy construction
+      version_isolation: >-
+        The shared inheritance path exposes a neutral optional policy hook.
+        TOSCA 1.3 installs the validator; TOSCA 2.0 leaves the hook nil.
+    interpretation:
+      compatible: >-
+        Each explicitly supplied child source type must equal or derive from at
+        least one effective parent source type. Omission inherits the parent
+        list; an explicit list is a narrowing refinement.
+      parent_set: >-
+        The effective corresponding capability definition in the parent node
+        type, including valid source types inherited from its capability type.
+      diagnostic_phase: inheritance
+    planned_tests:
+      positive:
+        - TestPartialCapabilitySourceRefinementAcceptsCompatibleTypes
+      negative:
+        - TestPartialCapabilitySourceRefinementRejectsUnrelatedType
+        - TestPartialCapabilitySourceRefinementRejectsMixedList
+        - TestPartialCapabilitySourceRefinementUnknownTypeStillFailsLookup
+      boundary:
+        - TestPartialCapabilitySourceRefinementDiagnosticIsDeterministic
+      inheritance:
+        - TestPartialCapabilitySourceRefinementInheritsOmittedList
+      resolution:
+        - TestPartialCapabilitySourceRefinementResolvesImportedTypes
+      normalization: []
+      regression:
+        - TestPartialCapabilitySourceRefinementDoesNotChangeTOSCA20
+    baseline_reproduction:
+      performed: true
+      observed_failures:
+        - "Unrelated source type refinement was accepted."
+        - "Mixed compatible and unrelated source types were accepted."
+        - "No deterministic incompatibility diagnostic existed."
+      correct_failure_reason_verified: true
+    mutation_check:
+      performed: true
+      mutation: >-
+        Temporarily removed only the TOSCA 1.3 registration of the capability
+        definition refinement validator.
+      affected_tests:
+        - TestPartialCapabilitySourceRefinementRejectsUnrelatedType
+        - TestPartialCapabilitySourceRefinementRejectsMixedList
+        - TestPartialCapabilitySourceRefinementDiagnosticIsDeterministic
+      expected_tests_failed: true
+      production_diff_restored: true
+    result:
+      implementation_status: implemented
+      verification_status: verified
+
+verification:
+  focused_capability_source_refinement: passed
+  focused_hierarchy_inheritance: passed
+  imports_namespaces_regression: passed
+  protected_tosca_1_3_blocks: passed
+  tosca_2_0_conformance: passed
+  go_test_all: passed
+  go_test_race_all: passed
+  go_vet_all: passed
+  git_diff_check: passed
+  audit_generation_twice: passed
+  audit_sha256_identical: true
+  denominator: 223
+  resulting_metrics:
+    implemented: 208
+    partial: 15
+    missing: 0
+    non_compliant: 0
+    verified: 158
+    indirectly_tested: 26
+    untested: 39
