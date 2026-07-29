@@ -99,6 +99,7 @@ func init() {
 	Grammar.DataValueValidator = validateConstraintValue
 	Grammar.CapabilityDefinitionRefinementValidator = validateCapabilityDefinitionRefinement
 	Grammar.GroupTypeValidator = validateGroupTypeMembers
+	Grammar.RequirementAssignmentValidator = validateRequirementAssignmentNodeFilter
 }
 
 func CompareUint32(v1 uint32, v2 uint32) int {

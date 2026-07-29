@@ -1,0 +1,127 @@
+remediation_group: requirement-node-filter
+remediation_order: 10
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+parser_phase: rendering after namespace lookup and before inherited assignment defaults
+execution_path:
+  - parser.Context.ReadRoot
+  - tosca_v1_3.ReadRequirementAssignment
+  - parser.Context.LookupNames
+  - RequirementAssignment.TargetNodeType/TargetNodeTemplate
+  - parser.Context.Render
+  - tosca_v2_0.RequirementAssignments.Render
+  - tosca_v1_3.validateRequirementAssignmentNodeFilter
+
+requirements:
+  - requirement_id: TOSCA13-3.8.2.2.3-015
+    section: "3.8.2.2.3"
+    section_title: "Extended grammar with Property Assignments for the relationship's Interfaces"
+    normative_rule: >-
+      A node_filter definition SHALL only be valid if the node keyname's value
+      is a Node Type and is invalid if it is a Node Template.
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "The node keyname is read as a string in long requirement-assignment notation."
+      - "Namespace lookup independently resolves the value as a Node Type or Node Template."
+      - "Valid node filters are rendered and preserved in normalized requirements."
+      - "Unknown node names already produce a lookup diagnostic."
+    missing_parts:
+      - "A node_filter paired with a concrete Node Template was accepted."
+      - "A node_filter without an explicit node keyname was accepted."
+      - "The rendering path did not condition node_filter validity on lookup kind."
+      - "No direct test distinguished Node Type and Node Template lookup results."
+    implementation:
+      packages:
+        - tosca/grammars/tosca_v1_3
+        - tosca/grammars/tosca_v2_0
+        - tosca/parsing
+        - tosca/parser
+      files:
+        - tosca/grammars/tosca_v1_3/requirement-assignment.go
+        - tosca/grammars/tosca_v1_3/common.go
+        - tosca/grammars/tosca_v2_0/requirement-assignment.go
+        - tosca/parsing/grammars.go
+        - tosca/parser/phase2.2-lookup.go
+        - tosca/parser/phase5-rendering.go
+      symbols:
+        - parsing.Grammar.RequirementAssignmentValidator
+        - tosca_v2_0.RequirementAssignments.Render
+        - tosca_v1_3.validateRequirementAssignmentNodeFilter
+      version_isolation: >-
+        Shared rendering exposes a neutral optional policy hook. Only the
+        TOSCA 1.3 grammar installs the validator; TOSCA 2.0 leaves it unset.
+    interpretation:
+      explicit_node_required: >-
+        The normative phrase "the node keyname's value" requires node to be
+        present in the same assignment. A target Node Type inherited later
+        from the requirement definition does not satisfy that condition.
+      validation_phase: >-
+        Rendering is the earliest phase after lookup distinguishes a Node Type
+        from a Node Template. Validation runs before assignment defaults can
+        obscure whether node was explicitly declared.
+      unresolved_node: >-
+        An explicit unresolved name remains solely a lookup error; the
+        conditional validator does not add a misleading missing-node error.
+      node_filter_absent: >-
+        Assignments without node_filter retain all existing Node Template and
+        Node Type target behavior.
+    planned_tests:
+      positive:
+        - TestPartialRequirementNodeFilterAcceptsNodeType
+      negative:
+        - TestPartialRequirementNodeFilterRejectsNodeTemplate
+        - TestPartialRequirementNodeFilterRejectsMissingNode
+        - TestPartialRequirementNodeFilterUnknownNodeStillFailsLookup
+      boundary:
+        - TestPartialRequirementNodeFilterWithoutFilterMayTargetTemplate
+        - TestPartialRequirementNodeFilterDiagnosticIsDeterministic
+      inheritance: []
+      resolution:
+        - TestPartialRequirementNodeFilterAcceptsNodeType
+        - TestPartialRequirementNodeFilterRejectsNodeTemplate
+        - TestPartialRequirementNodeFilterUnknownNodeStillFailsLookup
+      normalization:
+        - TestPartialRequirementNodeFilterAcceptsNodeType
+      regression:
+        - TestPartialRequirementNodeFilterDoesNotChangeTOSCA20
+        - TestParse/1.3/requirements-and-capabilities.yaml
+    baseline_reproduction:
+      performed: true
+      observed_failures:
+        - "An assignment whose node resolved to a Node Template accepted node_filter."
+        - "An assignment with node_filter and no node keyname was accepted."
+      correct_failure_reason_verified: true
+    mutation_check:
+      performed: true
+      mutation: "Temporarily removed only the TOSCA 1.3 requirement-assignment validator registration."
+      affected_tests:
+        - TestPartialRequirementNodeFilterRejectsNodeTemplate
+        - TestPartialRequirementNodeFilterRejectsMissingNode
+        - TestPartialRequirementNodeFilterDiagnosticIsDeterministic
+      expected_tests_failed: true
+      production_diff_restored: true
+    result:
+      implementation_status: implemented
+      verification_status: verified
+
+verification:
+  focused_requirement_assignment: passed
+  focused_lookup_and_rendering: passed
+  requirements_and_capabilities_example: passed
+  protected_tosca_1_3_blocks: passed
+  tosca_2_0_conformance: passed
+  go_test_all: passed
+  go_test_race_all: passed
+  go_vet_all: passed
+  git_diff_check: passed
+  audit_generation_twice: passed
+  audit_sha256_identical: true
+  denominator: 223
+  resulting_metrics:
+    implemented: 210
+    partial: 13
+    missing: 0
+    non_compliant: 0
+    verified: 160
+    indirectly_tested: 26
+    untested: 37

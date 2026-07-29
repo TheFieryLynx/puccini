@@ -449,6 +449,29 @@ DIRECT_TESTS[GROUP_MEMBER_HOMOGENEITY_ID] = {
     ],
 }
 
+REQUIREMENT_NODE_FILTER_ID = "TOSCA13-3.8.2.2.3-015"
+DIRECT_TESTS[REQUIREMENT_NODE_FILTER_ID] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_requirement_node_filter_test.go#TestPartialRequirementNodeFilterAcceptsNodeType",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_requirement_node_filter_test.go#TestPartialRequirementNodeFilterRejectsNodeTemplate",
+        "tests/conformance/tosca_1_3/partial_requirement_node_filter_test.go#TestPartialRequirementNodeFilterRejectsMissingNode",
+        "tests/conformance/tosca_1_3/partial_requirement_node_filter_test.go#TestPartialRequirementNodeFilterUnknownNodeStillFailsLookup",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_requirement_node_filter_test.go#TestPartialRequirementNodeFilterWithoutFilterMayTargetTemplate",
+        "tests/conformance/tosca_1_3/partial_requirement_node_filter_test.go#TestPartialRequirementNodeFilterDiagnosticIsDeterministic",
+    ],
+    "normalization": [
+        "tests/conformance/tosca_1_3/partial_requirement_node_filter_test.go#TestPartialRequirementNodeFilterAcceptsNodeType",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_requirement_node_filter_test.go#TestPartialRequirementNodeFilterDoesNotChangeTOSCA20",
+        "puccini_test.go#TestParse/1.3/requirements-and-capabilities.yaml",
+    ],
+}
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -922,6 +945,17 @@ MUTATION_CHECKS[GROUP_MEMBER_HOMOGENEITY_ID] = {
     "affected_tests": [
         "TestPartialGroupMemberHomogeneityRejectsDifferentHierarchies",
         "TestPartialGroupMemberHomogeneityDiagnosticIsDeterministic",
+    ],
+    "expected_tests_failed": True,
+    "production_diff_restored": True,
+}
+MUTATION_CHECKS[REQUIREMENT_NODE_FILTER_ID] = {
+    "performed": True,
+    "mutation": "Temporarily removed only the TOSCA 1.3 requirement-assignment validator registration.",
+    "affected_tests": [
+        "TestPartialRequirementNodeFilterRejectsNodeTemplate",
+        "TestPartialRequirementNodeFilterRejectsMissingNode",
+        "TestPartialRequirementNodeFilterDiagnosticIsDeterministic",
     ],
     "expected_tests_failed": True,
     "production_diff_restored": True,
@@ -2292,6 +2326,43 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
                 "explicit TOSCA 1.3 members list → resolved node types → "
                 "post-inheritance render policy → common top-level hierarchy "
                 "comparison; TOSCA 2.0 leaves the policy hook unset"
+            ),
+        }, None
+    if requirement_id == REQUIREMENT_NODE_FILTER_ID:
+        return "implemented", {
+            "entry_point": "parser.Context.Render",
+            "packages": [
+                "tosca/grammars/tosca_v1_3",
+                "tosca/grammars/tosca_v2_0",
+                "tosca/parsing",
+                "tosca/parser",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v1_3/requirement-assignment.go",
+                "tosca/grammars/tosca_v1_3/common.go",
+                "tosca/grammars/tosca_v2_0/requirement-assignment.go",
+                "tosca/parsing/grammars.go",
+                "tosca/parser/phase2.2-lookup.go",
+                "tosca/parser/phase5-rendering.go",
+                "tests/conformance/tosca_1_3/partial_requirement_node_filter_test.go",
+            ],
+            "symbols": [
+                "parsing.Grammar.RequirementAssignmentValidator",
+                "tosca_v2_0.RequirementAssignments.Render",
+                "tosca_v1_3.validateRequirementAssignmentNodeFilter",
+            ],
+            "parser_phase": "rendering after namespace lookup and before inherited assignment defaults",
+            "execution_path": [
+                "parser.Context.LookupNames",
+                "RequirementAssignment.TargetNodeType/TargetNodeTemplate",
+                "parser.Context.Render",
+                "tosca_v2_0.RequirementAssignments.Render",
+                "tosca_v1_3.validateRequirementAssignmentNodeFilter",
+            ],
+            "trace_summary": (
+                "explicit TOSCA 1.3 node keyname → namespace lookup as Node Type "
+                "or Node Template → pre-default rendering policy → node_filter "
+                "conditional validity; TOSCA 2.0 leaves the policy hook unset"
             ),
         }, None
     if requirement_id in DATATYPE_SHAPE_IDS:

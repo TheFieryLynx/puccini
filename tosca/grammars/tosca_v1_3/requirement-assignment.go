@@ -38,3 +38,33 @@ func ReadRequirementAssignment(context *parsing.Context) parsing.EntityPtr {
 
 	return self
 }
+
+func validateRequirementAssignmentNodeFilter(entityPtr parsing.EntityPtr) {
+	assignment := entityPtr.(*tosca_v2_0.RequirementAssignment)
+	if assignment.TargetNodeFilter == nil {
+		return
+	}
+
+	data, ok := assignment.Context.Data.(ard.Map)
+	if !ok {
+		return
+	}
+	nodeData, declared := data["node"]
+	if !declared {
+		assignment.Context.FieldChild("node_filter", data["node_filter"]).ReportPathf(
+			0,
+			"node_filter requires an explicit node keyname whose value is a Node Type",
+		)
+		return
+	}
+
+	if assignment.TargetNodeType != nil {
+		return
+	}
+	if assignment.TargetNodeTemplate != nil {
+		assignment.Context.FieldChild("node", nodeData).ReportValueMalformed(
+			"node",
+			"must name a Node Type when node_filter is present; a Node Template is invalid",
+		)
+	}
+}

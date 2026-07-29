@@ -139,6 +139,7 @@ topology_template:
       type: LightBulb
       requirements:
       - socket:
+          node: PowerPanel
           capability: Socket
           node_filter:
             properties:
@@ -163,6 +164,7 @@ topology_template:
       type: LightBulb
       requirements:
       - socket:
+          node: PowerPanel
           capability: Socket
           node_filter:
             capabilities:

@@ -227,6 +227,10 @@ func (self *RequirementAssignments) Render(sourceNodeTemplate *NodeTemplate, con
 	for _, assignment := range *self {
 		assignment.capabilityIsName = (assignment.TargetCapabilityNameOrTypeName != nil) && (assignment.TargetCapabilityType == nil)
 
+		if validator := assignment.Context.Grammar.RequirementAssignmentValidator; validator != nil {
+			validator(assignment)
+		}
+
 		if assignment.Count == nil {
 			assignment.Count = &one
 		}
