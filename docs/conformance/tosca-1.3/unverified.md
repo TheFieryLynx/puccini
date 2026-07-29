@@ -1,6 +1,6 @@
 # Unverified TOSCA 1.3 requirements
 
-Untested or currently unverifiable records: **2337**.
+Untested or currently unverifiable records: **2327**.
 
 | Requirement | Implementation | Verification | Applicability | Reason |
 |---|---|---|---|---|
@@ -30,8 +30,6 @@ Untested or currently unverifiable records: **2337**.
 | `TOSCA13-3.3.2.1-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.2.1-002` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: dependent-grammar-umbrella. |
 | `TOSCA13-3.3.2.1-003` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.3.2.1-004` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.3.2.1-005` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.2.1-006` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.2.1-007` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.2.1-008` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
@@ -42,9 +40,6 @@ Untested or currently unverifiable records: **2337**.
 | `TOSCA13-3.3.3.1-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.3.1-002` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: dependent-grammar-umbrella. |
 | `TOSCA13-3.3.3.1-003` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.3.3.1-004` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.3.3.1-005` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.3.3.1-006` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.3.2-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.3.2-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.3.2-003` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
@@ -63,11 +58,6 @@ Untested or currently unverifiable records: **2337**.
 | `TOSCA13-3.3.6.1-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.6.1-002` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: dependent-grammar-umbrella. |
 | `TOSCA13-3.3.6.1-003` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.3.6.1-004` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.3.6.1-005` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.3.6.1-006` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.3.6.2-001` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.3.6.2-002` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.6.2-004` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: example. |
 | `TOSCA13-3.3.6.2-005` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.6.3-001` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: misclassified. |

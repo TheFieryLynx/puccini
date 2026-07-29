@@ -162,6 +162,41 @@ for requirement_id in VERSION_ZERO_IDS:
         ],
     }
 
+SCALAR_VERIFICATION_IDS = {
+    "TOSCA13-3.3.2.1-004",
+    "TOSCA13-3.3.2.1-005",
+    "TOSCA13-3.3.3.1-004",
+    "TOSCA13-3.3.3.1-005",
+    "TOSCA13-3.3.3.1-006",
+    "TOSCA13-3.3.6.1-004",
+    "TOSCA13-3.3.6.1-005",
+    "TOSCA13-3.3.6.1-006",
+    "TOSCA13-3.3.6.2-001",
+    "TOSCA13-3.3.6.2-002",
+}
+for requirement_id in SCALAR_VERIFICATION_IDS:
+    DIRECT_TESTS[requirement_id] = {
+        "positive": [
+            (
+                "tests/conformance/tosca_1_3/verification_scalar_semantics_test.go"
+                f"#TestVerificationScalarSemantics/{requirement_id}"
+            ),
+        ],
+        "negative": [
+            (
+                "tests/conformance/tosca_1_3/verification_scalar_semantics_test.go"
+                f"#TestVerificationScalarSemantics/{requirement_id}"
+            ),
+        ],
+        "boundary": [
+            (
+                "tests/conformance/tosca_1_3/verification_scalar_semantics_test.go"
+                f"#TestVerificationScalarSemantics/{requirement_id}"
+            ),
+        ],
+        "regression": [],
+    }
+
 INTERFACE_RESERVED_OPERATION_NAME_ID = "TOSCA13-3.7.5.4-002"
 DIRECT_TESTS[INTERFACE_RESERVED_OPERATION_NAME_ID] = {
     "positive": [
@@ -1049,6 +1084,35 @@ MUTATION_CHECKS = {
     }
     for requirement_id in INTRINSIC_FUNCTION_IDS
 }
+for requirement_id in SCALAR_VERIFICATION_IDS:
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutations": [
+            {
+                "description": "Restricted the version reader's major component so valid zero/one boundaries failed.",
+                "affected_tests": [
+                    "TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004",
+                    "TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005",
+                ],
+                "expected_tests_failed": True,
+            },
+            {
+                "description": "Disabled only the range upper-greater-than-or-equal-to-lower comparison.",
+                "affected_tests": [
+                    "TestVerificationScalarSemantics/TOSCA13-3.3.3.1-006",
+                ],
+                "expected_tests_failed": True,
+            },
+            {
+                "description": "Required whitespace in only the scalar-unit.size lexical reader.",
+                "affected_tests": [
+                    "TestVerificationScalarSemantics/TOSCA13-3.3.6.2-001",
+                ],
+                "expected_tests_failed": True,
+            },
+        ],
+        "production_diff_restored": True,
+    }
 for requirement_id in {
     "TOSCA13-4.4.1.2-003",
     "TOSCA13-4.4.2.2-002", "TOSCA13-4.4.2.2-004", "TOSCA13-4.4.2.2-010",

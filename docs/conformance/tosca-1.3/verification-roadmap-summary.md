@@ -33,14 +33,15 @@ protection only and never TOSCA 1.3 normative evidence.
 
 ## Current matrix
 
-At roadmap creation the current matrix equals the baseline. This section is updated
-after every verification group; verified must increase monotonically while the
-denominator and implementation axis remain fixed.
+After verification group 1 (`scalar-semantics`), all ten scalar records have
+direct positive, negative, boundary, diagnostic, and normalization evidence.
+Verified increases monotonically while the denominator and implementation axis
+remain fixed.
 
 | Implementation status | verified | indirectly-tested | untested | Total |
 |---|---:|---:|---:|---:|
-| implemented | 173 | 26 | 24 | 223 |
+| implemented | 183 | 26 | 14 | 223 |
 | partial | 0 | 0 | 0 | 0 |
 | missing | 0 | 0 | 0 | 0 |
 | non-compliant | 0 | 0 | 0 | 0 |
-| **Total** | **173** | **26** | **24** | **223** |
+| **Total** | **183** | **26** | **14** | **223** |

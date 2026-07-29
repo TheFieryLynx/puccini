@@ -3674,7 +3674,7 @@ requirements:
   category: grammar
   subject: grammar
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -3686,43 +3686,63 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
+    - tosca/grammars
     - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
     - tosca/parser
     files:
     - tosca/grammars/tosca_v2_0/version.go
-    - tosca/grammars/tosca_v2_0/range.go
-    - tosca/grammars/tosca_v1_3/scalar-unit.go
-    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
     - tosca_v2_0.ReadVersion
-    - tosca_v2_0.ReadRange
-    - tosca_v1_3.ReadScalarUnit
-    - parser.Context.Render
-    parser_phase: rendering
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - tosca_v2_0.ReadValue
-    - tosca_v2_0.Value.RenderDataType
-    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
-    trace_summary: VersionRE admits only decimal non-negative major/minor components and ReadVersion reports malformed values.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
-    negative: []
-    boundary: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004
+    boundary:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004
     regression: []
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Version component grammar is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Restricted the version reader's major component so valid zero/one boundaries failed.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005
+      expected_tests_failed: true
+    - description: Disabled only the range upper-greater-than-or-equal-to-lower comparison.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.3.1-006
+      expected_tests_failed: true
+    - description: Required whitespace in only the scalar-unit.size lexical reader.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.6.2-001
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.3.2.1-005
   section: 3.3.2.1
   section_title: Grammar
@@ -3730,7 +3750,7 @@ requirements:
   category: grammar
   subject: grammar
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -3742,43 +3762,63 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
+    - tosca/grammars
     - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
     - tosca/parser
     files:
     - tosca/grammars/tosca_v2_0/version.go
-    - tosca/grammars/tosca_v2_0/range.go
-    - tosca/grammars/tosca_v1_3/scalar-unit.go
-    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
     - tosca_v2_0.ReadVersion
-    - tosca_v2_0.ReadRange
-    - tosca_v1_3.ReadScalarUnit
-    - parser.Context.Render
-    parser_phase: rendering
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - tosca_v2_0.ReadValue
-    - tosca_v2_0.Value.RenderDataType
-    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
-    trace_summary: VersionRE admits only decimal non-negative major/minor components and ReadVersion reports malformed values.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
-    negative: []
-    boundary: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005
+    boundary:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005
     regression: []
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Version component grammar is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Restricted the version reader's major component so valid zero/one boundaries failed.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005
+      expected_tests_failed: true
+    - description: Disabled only the range upper-greater-than-or-equal-to-lower comparison.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.3.1-006
+      expected_tests_failed: true
+    - description: Required whitespace in only the scalar-unit.size lexical reader.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.6.2-001
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.3.2.1-006
   section: 3.3.2.1
   section_title: Grammar
@@ -4312,7 +4352,7 @@ requirements:
   category: grammar
   subject: grammar
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -4324,43 +4364,63 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
+    - tosca/grammars
     - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
     - tosca/parser
     files:
-    - tosca/grammars/tosca_v2_0/version.go
     - tosca/grammars/tosca_v2_0/range.go
-    - tosca/grammars/tosca_v1_3/scalar-unit.go
-    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
-    - tosca_v2_0.ReadVersion
     - tosca_v2_0.ReadRange
-    - tosca_v1_3.ReadScalarUnit
-    - parser.Context.Render
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
     parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - tosca_v2_0.ReadValue
-    - tosca_v2_0.Value.RenderDataType
-    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
-    trace_summary: ReadRange enforces two integer/string bounds, non-negative values, UNBOUNDED, and upper >= lower.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
-    negative: []
-    boundary: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.3.1-004
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.3.1-004
+    boundary:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.3.1-004
     regression: []
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Range bound validation is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Restricted the version reader's major component so valid zero/one boundaries failed.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005
+      expected_tests_failed: true
+    - description: Disabled only the range upper-greater-than-or-equal-to-lower comparison.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.3.1-006
+      expected_tests_failed: true
+    - description: Required whitespace in only the scalar-unit.size lexical reader.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.6.2-001
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.3.3.1-005
   section: 3.3.3.1
   section_title: Grammar
@@ -4368,7 +4428,7 @@ requirements:
   category: grammar
   subject: grammar
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -4380,43 +4440,63 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
+    - tosca/grammars
     - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
     - tosca/parser
     files:
-    - tosca/grammars/tosca_v2_0/version.go
     - tosca/grammars/tosca_v2_0/range.go
-    - tosca/grammars/tosca_v1_3/scalar-unit.go
-    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
-    - tosca_v2_0.ReadVersion
     - tosca_v2_0.ReadRange
-    - tosca_v1_3.ReadScalarUnit
-    - parser.Context.Render
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
     parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - tosca_v2_0.ReadValue
-    - tosca_v2_0.Value.RenderDataType
-    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
-    trace_summary: ReadRange enforces two integer/string bounds, non-negative values, UNBOUNDED, and upper >= lower.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
-    negative: []
-    boundary: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.3.1-005
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.3.1-005
+    boundary:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.3.1-005
     regression: []
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Range bound validation is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Restricted the version reader's major component so valid zero/one boundaries failed.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005
+      expected_tests_failed: true
+    - description: Disabled only the range upper-greater-than-or-equal-to-lower comparison.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.3.1-006
+      expected_tests_failed: true
+    - description: Required whitespace in only the scalar-unit.size lexical reader.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.6.2-001
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.3.3.1-006
   section: 3.3.3.1
   section_title: Grammar
@@ -4424,7 +4504,7 @@ requirements:
   category: semantic
   subject: grammar
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -4436,43 +4516,63 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
+    - tosca/grammars
     - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
     - tosca/parser
     files:
-    - tosca/grammars/tosca_v2_0/version.go
     - tosca/grammars/tosca_v2_0/range.go
-    - tosca/grammars/tosca_v1_3/scalar-unit.go
-    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
-    - tosca_v2_0.ReadVersion
     - tosca_v2_0.ReadRange
-    - tosca_v1_3.ReadScalarUnit
-    - parser.Context.Render
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
     parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - tosca_v2_0.ReadValue
-    - tosca_v2_0.Value.RenderDataType
-    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
-    trace_summary: ReadRange enforces two integer/string bounds, non-negative values, UNBOUNDED, and upper >= lower.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
-    negative: []
-    boundary: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.3.1-006
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.3.1-006
+    boundary:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.3.1-006
     regression: []
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Range bound validation is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Restricted the version reader's major component so valid zero/one boundaries failed.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005
+      expected_tests_failed: true
+    - description: Disabled only the range upper-greater-than-or-equal-to-lower comparison.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.3.1-006
+      expected_tests_failed: true
+    - description: Required whitespace in only the scalar-unit.size lexical reader.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.6.2-001
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.3.3.2-001
   section: 3.3.3.2
   section_title: Keywords
@@ -5244,7 +5344,7 @@ requirements:
   category: grammar
   subject: grammar
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -5256,43 +5356,62 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - tosca/grammars/tosca_v1_3
-    - tosca/grammars/tosca_v2_0
+    - tosca/grammars
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v2_0/version.go
-    - tosca/grammars/tosca_v2_0/range.go
     - tosca/grammars/tosca_v1_3/scalar-unit.go
-    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
-    - tosca_v2_0.ReadVersion
-    - tosca_v2_0.ReadRange
     - tosca_v1_3.ReadScalarUnit
-    - parser.Context.Render
-    parser_phase: rendering
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - tosca_v2_0.ReadValue
-    - tosca_v2_0.Value.RenderDataType
-    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
-    trace_summary: The v1.3 scalar-unit readers require one scalar and a unit from the type-specific unit set and permit zero or more whitespace.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
-    negative: []
-    boundary: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.1-004
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.1-004
+    boundary:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.1-004
     regression: []
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Scalar-unit lexical/type coupling is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Restricted the version reader's major component so valid zero/one boundaries failed.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005
+      expected_tests_failed: true
+    - description: Disabled only the range upper-greater-than-or-equal-to-lower comparison.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.3.1-006
+      expected_tests_failed: true
+    - description: Required whitespace in only the scalar-unit.size lexical reader.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.6.2-001
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.3.6.1-005
   section: 3.3.6.1
   section_title: Grammar
@@ -5300,7 +5419,7 @@ requirements:
   category: grammar
   subject: grammar
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -5312,43 +5431,62 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - tosca/grammars/tosca_v1_3
-    - tosca/grammars/tosca_v2_0
+    - tosca/grammars
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v2_0/version.go
-    - tosca/grammars/tosca_v2_0/range.go
     - tosca/grammars/tosca_v1_3/scalar-unit.go
-    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
-    - tosca_v2_0.ReadVersion
-    - tosca_v2_0.ReadRange
     - tosca_v1_3.ReadScalarUnit
-    - parser.Context.Render
-    parser_phase: rendering
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - tosca_v2_0.ReadValue
-    - tosca_v2_0.Value.RenderDataType
-    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
-    trace_summary: The v1.3 scalar-unit readers require one scalar and a unit from the type-specific unit set and permit zero or more whitespace.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
-    negative: []
-    boundary: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.1-005
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.1-005
+    boundary:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.1-005
     regression: []
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Scalar-unit lexical/type coupling is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Restricted the version reader's major component so valid zero/one boundaries failed.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005
+      expected_tests_failed: true
+    - description: Disabled only the range upper-greater-than-or-equal-to-lower comparison.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.3.1-006
+      expected_tests_failed: true
+    - description: Required whitespace in only the scalar-unit.size lexical reader.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.6.2-001
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.3.6.1-006
   section: 3.3.6.1
   section_title: Grammar
@@ -5356,7 +5494,7 @@ requirements:
   category: semantic
   subject: grammar
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -5368,43 +5506,62 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - tosca/grammars/tosca_v1_3
-    - tosca/grammars/tosca_v2_0
+    - tosca/grammars
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v2_0/version.go
-    - tosca/grammars/tosca_v2_0/range.go
     - tosca/grammars/tosca_v1_3/scalar-unit.go
-    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
-    - tosca_v2_0.ReadVersion
-    - tosca_v2_0.ReadRange
     - tosca_v1_3.ReadScalarUnit
-    - parser.Context.Render
-    parser_phase: rendering
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - tosca_v2_0.ReadValue
-    - tosca_v2_0.Value.RenderDataType
-    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
-    trace_summary: The v1.3 scalar-unit readers require one scalar and a unit from the type-specific unit set and permit zero or more whitespace.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
-    negative: []
-    boundary: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.1-006
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.1-006
+    boundary:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.1-006
     regression: []
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Scalar-unit lexical/type coupling is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Restricted the version reader's major component so valid zero/one boundaries failed.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005
+      expected_tests_failed: true
+    - description: Disabled only the range upper-greater-than-or-equal-to-lower comparison.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.3.1-006
+      expected_tests_failed: true
+    - description: Required whitespace in only the scalar-unit.size lexical reader.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.6.2-001
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.3.6.2-001
   section: 3.3.6.2
   section_title: Additional requirements
@@ -5412,7 +5569,7 @@ requirements:
   category: semantic
   subject: additional-requirements
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -5424,43 +5581,62 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - tosca/grammars/tosca_v1_3
-    - tosca/grammars/tosca_v2_0
+    - tosca/grammars
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v2_0/version.go
-    - tosca/grammars/tosca_v2_0/range.go
     - tosca/grammars/tosca_v1_3/scalar-unit.go
-    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
-    - tosca_v2_0.ReadVersion
-    - tosca_v2_0.ReadRange
     - tosca_v1_3.ReadScalarUnit
-    - parser.Context.Render
-    parser_phase: rendering
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - tosca_v2_0.ReadValue
-    - tosca_v2_0.Value.RenderDataType
-    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
-    trace_summary: The v1.3 scalar-unit readers require one scalar and a unit from the type-specific unit set and permit zero or more whitespace.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
-    negative: []
-    boundary: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.2-001
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.2-001
+    boundary:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.2-001
     regression: []
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Scalar-unit lexical/type coupling is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Restricted the version reader's major component so valid zero/one boundaries failed.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005
+      expected_tests_failed: true
+    - description: Disabled only the range upper-greater-than-or-equal-to-lower comparison.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.3.1-006
+      expected_tests_failed: true
+    - description: Required whitespace in only the scalar-unit.size lexical reader.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.6.2-001
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.3.6.2-002
   section: 3.3.6.2
   section_title: Additional requirements
@@ -5468,7 +5644,7 @@ requirements:
   category: error
   subject: additional-requirements
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -5480,43 +5656,62 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - tosca/grammars/tosca_v1_3
-    - tosca/grammars/tosca_v2_0
+    - tosca/grammars
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v2_0/version.go
-    - tosca/grammars/tosca_v2_0/range.go
     - tosca/grammars/tosca_v1_3/scalar-unit.go
-    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
-    - tosca_v2_0.ReadVersion
-    - tosca_v2_0.ReadRange
     - tosca_v1_3.ReadScalarUnit
-    - parser.Context.Render
-    parser_phase: rendering
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - tosca_v2_0.ReadValue
-    - tosca_v2_0.Value.RenderDataType
-    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
-    trace_summary: The v1.3 scalar-unit readers require one scalar and a unit from the type-specific unit set and permit zero or more whitespace.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
-    negative: []
-    boundary: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.2-002
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.2-002
+    boundary:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.2-002
     regression: []
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Scalar-unit lexical/type coupling is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Restricted the version reader's major component so valid zero/one boundaries failed.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004
+      - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005
+      expected_tests_failed: true
+    - description: Disabled only the range upper-greater-than-or-equal-to-lower comparison.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.3.1-006
+      expected_tests_failed: true
+    - description: Required whitespace in only the scalar-unit.size lexical reader.
+      affected_tests:
+      - TestVerificationScalarSemantics/TOSCA13-3.3.6.2-001
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.3.6.2-003
   section: 3.3.6.2
   section_title: Additional requirements

@@ -1,0 +1,84 @@
+verification_group: scalar-semantics
+verification_order: 1
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+sections:
+  - section: "3.3.2.1"
+    title: Grammar
+  - section: "3.3.3.1"
+    title: Grammar
+  - section: "3.3.6.1"
+    title: Grammar
+  - section: "3.3.6.2"
+    title: Additional requirements
+parser_phase: scalar value rendering followed by normalization
+execution_path:
+  - parser.Context.ReadRoot
+  - tosca_v1_3.ReadServiceFile
+  - tosca_v2_0.Value.RenderDataType
+  - tosca_v2_0.ReadVersion or tosca_v2_0.ReadRange or tosca_v1_3.ReadScalarUnit
+  - normal.Primitive
+
+requirements:
+  - requirement_id: TOSCA13-3.3.2.1-004
+    normative_rule: major_version is a required non-negative integer
+  - requirement_id: TOSCA13-3.3.2.1-005
+    normative_rule: minor_version is a required non-negative integer
+  - requirement_id: TOSCA13-3.3.3.1-004
+    normative_rule: lower_bound is a required integer
+  - requirement_id: TOSCA13-3.3.3.1-005
+    normative_rule: upper_bound is required and is an integer or the normative UNBOUNDED keyword
+  - requirement_id: TOSCA13-3.3.3.1-006
+    normative_rule: upper_bound is greater than or equal to lower_bound
+  - requirement_id: TOSCA13-3.3.6.1-004
+    normative_rule: scalar is required in a scalar-unit value
+  - requirement_id: TOSCA13-3.3.6.1-005
+    normative_rule: unit is required in a scalar-unit value
+  - requirement_id: TOSCA13-3.3.6.1-006
+    normative_rule: unit is compatible with the selected scalar-unit type
+  - requirement_id: TOSCA13-3.3.6.2-001
+    normative_rule: zero or more spaces are accepted between scalar and unit
+  - requirement_id: TOSCA13-3.3.6.2-002
+    normative_rule: a missing scalar or unit is an error
+
+direct_evidence:
+  test: tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics
+  positive:
+    - zero and one version-component boundaries normalize to concrete version fields
+    - equal range bounds normalize without loss
+    - scalar-unit values normalize to canonical values
+    - zero, one, and multiple whitespace spellings are equivalent
+  negative:
+    - negative or missing version components are rejected as malformed versions
+    - missing and wrongly typed range bounds are rejected at the property path
+    - descending range bounds are rejected
+    - missing scalar, missing unit, and a foreign unit are rejected as malformed scalar-unit values
+  diagnostic:
+    - every negative assertion checks the rendered property path and the stable type-specific reason
+
+baseline_reproduction:
+  performed: true
+  result: all direct tests passed; no implementation defect was discovered
+
+mutation_check:
+  performed: true
+  mutations:
+    - description: restricted the version reader major component to invalidate valid zero and one boundaries
+      affected_tests:
+        - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004
+        - TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005
+      expected_tests_failed: true
+    - description: disabled only the range upper-greater-than-or-equal-to-lower comparison
+      affected_tests:
+        - TestVerificationScalarSemantics/TOSCA13-3.3.3.1-006
+      expected_tests_failed: true
+    - description: required whitespace in only the scalar-unit.size lexical reader
+      affected_tests:
+        - TestVerificationScalarSemantics/TOSCA13-3.3.6.2-001
+      expected_tests_failed: true
+  production_diff_restored: true
+
+results:
+  implementation_status: implemented
+  verification_status: verified
+  requirement_count: 10
+  defects_discovered: 0

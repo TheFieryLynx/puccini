@@ -21,9 +21,9 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Verification Status | Records |
 |---|---:|
-| verified | 202 |
+| verified | 212 |
 | indirectly-tested | 562 |
-| untested | 2283 |
+| untested | 2273 |
 | unverifiable | 54 |
 
 | Applicability | Records |
@@ -36,7 +36,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Strength | Applicable atomic denominator | Implemented | Implementation coverage | Implemented + verified | Verified conformance coverage | Broad test evidence | Broad evidence coverage |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| MUST/SHALL/REQUIRED | 223 | 223 | 100.00% | 173 | 77.58% | 199 | 89.24% |
+| MUST/SHALL/REQUIRED | 223 | 223 | 100.00% | 183 | 82.06% | 209 | 93.72% |
 | SHOULD/RECOMMENDED | 23 | 0 | 0.00% | 0 | 0.00% | 0 | 0.00% |
 | MAY/OPTIONAL | 693 | 99 | 14.29% | 0 | 0.00% | 95 | 13.71% |
 
@@ -47,7 +47,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 13 | 8 | 0 | 0 | 0 | 0 | 8 | 0 | 0 | 8 | 0 |
 | 14 | 43 | 0 | 0 | 0 | 0 | 43 | 0 | 0 | 6 | 37 |
-| 3 | 1670 | 264 | 21 | 2 | 14 | 1369 | 150 | 102 | 1411 | 7 |
+| 3 | 1670 | 264 | 21 | 2 | 14 | 1369 | 160 | 102 | 1401 | 7 |
 | 4 | 144 | 24 | 0 | 0 | 5 | 115 | 29 | 0 | 115 | 0 |
 | 5 | 978 | 401 | 0 | 0 | 5 | 572 | 12 | 393 | 567 | 6 |
 | 6 | 44 | 11 | 0 | 0 | 3 | 30 | 9 | 0 | 31 | 4 |
@@ -70,7 +70,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | namespaces | 16 | 0 | 0 | 1 | 0 | 15 | 0 | 0 | 16 | 0 |
 | namespaces and lookup | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | normalization | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 1 |
-| read | 1400 | 199 | 17 | 0 | 3 | 1181 | 89 | 101 | 1203 | 7 |
+| read | 1407 | 206 | 17 | 0 | 3 | 1181 | 99 | 101 | 1200 | 7 |
 | read and hierarchy | 2 | 2 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 |
 | read and rendering/function-evaluation | 24 | 24 | 0 | 0 | 0 | 0 | 24 | 0 | 0 | 0 |
 | read before template field decoding | 2 | 2 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 |
@@ -78,7 +78,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | read, imports, namespaces, and lookup | 34 | 34 | 0 | 0 | 0 | 0 | 34 | 0 | 0 | 0 |
 | read/imports | 14 | 0 | 0 | 0 | 0 | 14 | 0 | 0 | 14 | 0 |
 | read/inheritance/rendering | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
-| rendering | 237 | 15 | 0 | 0 | 1 | 221 | 3 | 1 | 229 | 4 |
+| rendering | 230 | 8 | 0 | 0 | 1 | 221 | 3 | 1 | 222 | 4 |
 | rendering after inheritance and function parsing | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | rendering after lookup, hierarchy, and inheritance | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | rendering after namespace lookup and before inherited assignment defaults | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
@@ -145,10 +145,10 @@ This matrix separates implementation, verification, and applicability. It is an 
 | 3.10.3.9.2 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 3.3.1 | 6 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 6 | 0 |
 | 3.3.2 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
-| 3.3.2.1 | 6 | 2 | 0 | 0 | 0 | 4 | 0 | 0 | 6 | 0 |
+| 3.3.2.1 | 6 | 2 | 0 | 0 | 0 | 4 | 2 | 0 | 4 | 0 |
 | 3.3.2.2 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 3.3.3 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
-| 3.3.3.1 | 3 | 2 | 0 | 0 | 0 | 1 | 0 | 0 | 3 | 0 |
+| 3.3.3.1 | 3 | 2 | 0 | 0 | 0 | 1 | 2 | 0 | 1 | 0 |
 | 3.3.3.2 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 3.3.4 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 3.3.4.1.1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
@@ -156,7 +156,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | 3.3.5 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 3.3.5.1.1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 3.3.5.1.2 | 2 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 2 | 0 |
-| 3.3.6.1 | 3 | 2 | 0 | 0 | 0 | 1 | 0 | 0 | 3 | 0 |
+| 3.3.6.1 | 3 | 2 | 0 | 0 | 0 | 1 | 2 | 0 | 1 | 0 |
 | 3.3.6.3 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 3.3.6.4.1 | 9 | 0 | 0 | 0 | 0 | 9 | 0 | 0 | 9 | 0 |
 | 3.3.6.5.1 | 7 | 0 | 0 | 0 | 0 | 7 | 0 | 0 | 7 | 0 |

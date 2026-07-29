@@ -6,9 +6,9 @@ Implementation gaps and verification gaps are counted independently.
 
 | Rank | Area | Records | Implementation unknown/missing/partial | Non-compliant | Not directly verified |
 |---:|---|---:|---:|---:|---:|
-| 1 | grammar | 1101 | 966 | 3 | 1098 |
+| 1 | grammar | 1095 | 966 | 3 | 1092 |
 | 2 | normative-type | 489 | 111 | 3 | 486 |
-| 3 | semantic | 394 | 371 | 10 | 384 |
+| 3 | semantic | 391 | 371 | 10 | 381 |
 | 4 | assignment | 117 | 117 | 0 | 117 |
 | 5 | constraint | 93 | 92 | 1 | 92 |
 | 6 | function | 68 | 64 | 4 | 64 |
@@ -28,21 +28,15 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-3.3.1-006` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.1-007` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.2-001` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-3.3.2.1-004` — implementation=implemented; verification=untested; Verification status is untested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-3.3.2.1-005` — implementation=implemented; verification=untested; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.2.1-006` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.2.1-007` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.2.1-008` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.2.2-001` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.3-001` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-3.3.3.1-004` — implementation=implemented; verification=untested; Verification status is untested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-3.3.3.1-005` — implementation=implemented; verification=untested; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.3.2-002` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.4-002` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.5-004` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.5.1.2-002` — implementation=implemented; verification=untested; Verification status is untested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-3.3.6.1-004` — implementation=implemented; verification=untested; Verification status is untested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-3.3.6.1-005` — implementation=implemented; verification=untested; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.6.4.1-001` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.6.4.1-003` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.6.4.1-005` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
@@ -119,7 +113,13 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-3.6.7.1-002` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.6.7.1-005` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.6.7.1-007` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- … 1001 additional records are available in `coverage.yaml`.
+- `TOSCA13-3.6.7.1-008` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
+- `TOSCA13-3.6.7.1-009` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
+- `TOSCA13-3.6.7.1-011` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
+- `TOSCA13-3.6.7.1-012` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
+- `TOSCA13-3.6.7.1-013` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
+- `TOSCA13-3.6.7.1-014` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
+- … 995 additional records are available in `coverage.yaml`.
 
 ## normative-type
 
@@ -234,7 +234,6 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-3.3.2.4-001` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.3.1-001` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.3.1-003` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-3.3.3.1-006` — implementation=implemented; verification=untested; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.3.2-001` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.3.2-003` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.4-001` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
@@ -244,8 +243,6 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-3.3.5.1-001` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.6.1-001` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.6.1-003` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-3.3.6.1-006` — implementation=implemented; verification=untested; Verification status is untested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-3.3.6.2-001` — implementation=implemented; verification=untested; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.6.2-005` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.6.3-002` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.3.6.3-003` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
@@ -327,7 +324,10 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-3.6.7.1-016` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.6.7.1-020` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.6.7.1-021` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- … 294 additional records are available in `coverage.yaml`.
+- `TOSCA13-3.6.7.1-022` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
+- `TOSCA13-3.6.7.1-025` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
+- `TOSCA13-3.6.7.1-028` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
+- … 291 additional records are available in `coverage.yaml`.
 
 ## assignment
 
@@ -811,7 +811,6 @@ Implementation gaps and verification gaps are counted independently.
 
 ## error
 
-- `TOSCA13-3.3.6.2-002` — implementation=implemented; verification=untested; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.8.2.2.3-017` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.8.5.5-006` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 
