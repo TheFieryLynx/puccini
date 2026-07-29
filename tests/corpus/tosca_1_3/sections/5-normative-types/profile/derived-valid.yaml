@@ -1,0 +1,30 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+node_types:
+  CorpusCompute:
+    derived_from: tosca.nodes.Compute
+  CorpusSoftware:
+    derived_from: tosca.nodes.SoftwareComponent
+  CorpusWeb:
+    derived_from: tosca.nodes.WebServer
+  CorpusDBMS:
+    derived_from: tosca.nodes.DBMS
+  CorpusDatabase:
+    derived_from: tosca.nodes.Database
+  CorpusObjectStorage:
+    derived_from: tosca.nodes.Storage.ObjectStorage
+  CorpusBlockStorage:
+    derived_from: tosca.nodes.Storage.BlockStorage
+  CorpusRuntime:
+    derived_from: tosca.nodes.Container.Runtime
+  CorpusApplication:
+    derived_from: tosca.nodes.Container.Application
+  CorpusLoadBalancer:
+    derived_from: tosca.nodes.LoadBalancer
+  CorpusNetwork:
+    derived_from: tosca.nodes.network.Network
+  CorpusPort:
+    derived_from: tosca.nodes.network.Port
+topology_template:
+  node_templates:
+    port:
+      type: CorpusPort

@@ -826,3 +826,67 @@ cases:
     coverage:
       variation_axes: [reference:missing-property, function:get_property]
       related_cases: [TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID]
+
+  - id: TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+    file: sections/5-normative-types/profile/derived-valid.yaml
+    specification:
+      sections: ["5.2.1", "5.3.6.1", "5.3.7.1", "5.3.7.2", "5.3.11.1", "5.3.11.2", "5.3.11.3", "5.5.7.1", "5.5.7.2", "5.5.7.3", "5.5.7.4", "5.5.12.3", "5.5.13.1", "5.7.1.1", "5.7.5.1", "5.8.1", "5.9.1.2", "5.9.5.3", "5.9.8.1", "5.9.9.1"]
+      requirement_ids:
+        - TOSCA13-5.2.1-001
+        - TOSCA13-5.3.6.1-005
+        - TOSCA13-5.3.6.1-008
+        - TOSCA13-5.3.7.1-002
+        - TOSCA13-5.3.7.1-005
+        - TOSCA13-5.3.7.2-005
+        - TOSCA13-5.3.7.2-008
+        - TOSCA13-5.3.11.1-002
+        - TOSCA13-5.3.11.2-005
+        - TOSCA13-5.3.11.3-001
+        - TOSCA13-5.3.11.3-002
+        - TOSCA13-5.3.11.3-003
+        - TOSCA13-5.5.7.1-003
+        - TOSCA13-5.5.7.2-002
+        - TOSCA13-5.5.7.3-005
+        - TOSCA13-5.5.7.4-001
+        - TOSCA13-5.5.12.3-001
+        - TOSCA13-5.5.13.1-003
+        - TOSCA13-5.5.13.1-007
+        - TOSCA13-5.5.13.1-012
+        - TOSCA13-5.7.1.1-002
+        - TOSCA13-5.7.1.1-005
+        - TOSCA13-5.7.1.1-010
+        - TOSCA13-5.7.5.1-003
+        - TOSCA13-5.8.1-004
+        - TOSCA13-5.9.1.2-002
+        - TOSCA13-5.9.1.2-005
+        - TOSCA13-5.9.1.2-010
+        - TOSCA13-5.9.5.3-001
+        - TOSCA13-5.9.8.1-002
+        - TOSCA13-5.9.9.1-002
+    classification: {kind: valid, category: semantic, features: [normative-profile, derived-types]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:port]}
+    coverage:
+      variation_axes: [normative-profile:effective-types, inheritance:normative-parent, version-isolation:tosca-1.3]
+      related_cases: [TOSCA13-CORPUS-NETWORK-PORT-VALID]
+
+  - id: TOSCA13-CORPUS-NETWORK-PORT-VALID
+    file: sections/8-normative-node-types/network-port-valid.yaml
+    specification:
+      sections: ["8.2", "8.3.2", "8.5.1.1", "8.5.2.3"]
+      requirement_ids: [TOSCA13-8.2-002, TOSCA13-8.3.2-001, TOSCA13-8.5.1.1-036, TOSCA13-8.5.2.3-008]
+    classification: {kind: valid, category: normalization, features: [normative-profile, network-port, boundary]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:port]}
+    coverage:
+      variation_axes: [default:order, boundary:explicit-zero, constraint:greater-or-equal]
+      related_cases: [TOSCA13-CORPUS-NETWORK-PORT-REFINEMENT-INVALID]
+
+  - id: TOSCA13-CORPUS-NETWORK-PORT-REFINEMENT-INVALID
+    file: sections/8-normative-node-types/network-port-refinement-invalid.yaml
+    specification:
+      sections: ["8.5.2.3"]
+      requirement_ids: [TOSCA13-8.5.2.3-008]
+    classification: {kind: invalid, category: semantic, features: [normative-profile, refinement]}
+    expected: {accepted: false, phase: inheritance, diagnostic: {category: refine, path: required}, assertions: []}
+    coverage:
+      variation_axes: [refinement:invalid-required-widening, normative-profile:effective-property]
+      related_cases: [TOSCA13-CORPUS-NETWORK-PORT-VALID]

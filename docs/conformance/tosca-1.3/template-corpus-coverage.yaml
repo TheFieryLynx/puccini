@@ -157,3 +157,17 @@ grammar_entities:
       - TOSCA13-CORPUS-FUNCTION-ARGUMENTS-INVALID
       - TOSCA13-CORPUS-FUNCTION-REFERENCE-INVALID
     status: complete
+
+  - entity: normative-profile
+    sections: ["5.2", "5.3", "5.5", "5.7", "5.8", "5.9", "8.2", "8.3", "8.5"]
+    parser_phases: [namespaces, hierarchy, inheritance, rendering, normalization]
+    variation_axes:
+      profile_loading: [implicit-tosca-1.3]
+      node_families: [compute, software, web, database, storage, container, load-balancer, network]
+      assignments: [default, explicit-boundary]
+      refinement: [valid-derived, invalid-required-widening]
+    fixtures:
+      - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+      - TOSCA13-CORPUS-NETWORK-PORT-VALID
+      - TOSCA13-CORPUS-NETWORK-PORT-REFINEMENT-INVALID
+    status: complete

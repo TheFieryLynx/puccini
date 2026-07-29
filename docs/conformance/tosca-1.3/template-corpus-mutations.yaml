@@ -55,3 +55,11 @@ mutations:
     expected_corpus_failures: true
     observed_result: the incomplete token call was accepted and the corpus runner failed
     production_diff_restored: true
+  - category: normative-profile
+    production_validation_path: TOSCA 1.3 normative profile -> tosca.nodes.network.Port.order
+    mutation: changed only the normative order property from required true to required false
+    affected_cases:
+      - TOSCA13-CORPUS-NETWORK-PORT-REFINEMENT-INVALID
+    expected_corpus_failures: true
+    observed_result: a derived Port made order optional and the corpus runner failed
+    production_diff_restored: true
