@@ -22042,7 +22042,7 @@ requirements:
   category: semantic
   subject: grammar
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -22052,49 +22052,64 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: parser.Context.ReadRoot
     packages:
-    - tosca/grammars/tosca_v1_3
-    - tosca/grammars/tosca_v2_0
+    - tosca/grammars
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
     - tosca/grammars/tosca_v1_3/property-definition.go
-    - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
-    - tosca/grammars/tosca_v2_0/property-definition.go
-    - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
     - tosca_v1_3.ReadPropertyDefinition
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: rendering
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
-    - parser.Context.Parse
-    - parser.Context.LookupNames
-    - parser.Context.Inherit
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: PropertyDefinition.IsRequired returns true when `required` is absent; Values.RenderProperties enforces the resulting assignment
-      obligation.
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
-    negative: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_definition_defaults_test.go#TestVerificationDefinitionDefaults/TOSCA13-3.6.10.4-008
+    negative:
+    - tests/conformance/tosca_1_3/verification_definition_defaults_test.go#TestVerificationDefinitionDefaults/TOSCA13-3.6.10.4-008
     boundary: []
     regression: []
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: The required=true default is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Changed the omitted required flag's default from true to false.
+      affected_tests:
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.10.4-008
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.14.2-015
+      expected_tests_failed: true
+    - description: Skipped rendering property and parameter defaults through their effective data types.
+      affected_tests:
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.10.5-003
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.14.3-002
+      expected_tests_failed: true
+    - description: Removed a rendered attribute default before effective-value normalization.
+      affected_tests:
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.12.2-010
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.6.10.4-009
   section: 3.6.10.4
   section_title: Grammar
@@ -22478,7 +22493,7 @@ requirements:
   category: semantic
   subject: additional-requirements
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -22488,49 +22503,64 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: parser.Context.ReadRoot
     packages:
-    - tosca/grammars/tosca_v1_3
-    - tosca/grammars/tosca_v2_0
+    - tosca/grammars
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
     - tosca/grammars/tosca_v1_3/property-definition.go
-    - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
-    - tosca/grammars/tosca_v2_0/property-definition.go
-    - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
     - tosca_v1_3.ReadPropertyDefinition
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: rendering
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
-    - parser.Context.Parse
-    - parser.Context.LookupNames
-    - parser.Context.Inherit
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: Definition.Render resolves the declared data type and renders the default through Value.Render/RenderProperty, producing type-specific
-      diagnostics.
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
-    negative: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_definition_defaults_test.go#TestVerificationDefinitionDefaults/TOSCA13-3.6.10.5-003
+    negative:
+    - tests/conformance/tosca_1_3/verification_definition_defaults_test.go#TestVerificationDefinitionDefaults/TOSCA13-3.6.10.5-003
     boundary: []
     regression: []
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Default value type compatibility is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Changed the omitted required flag's default from true to false.
+      affected_tests:
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.10.4-008
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.14.2-015
+      expected_tests_failed: true
+    - description: Skipped rendering property and parameter defaults through their effective data types.
+      affected_tests:
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.10.5-003
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.14.3-002
+      expected_tests_failed: true
+    - description: Removed a rendered attribute default before effective-value normalization.
+      affected_tests:
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.12.2-010
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.6.10.5-004
   section: 3.6.10.5
   section_title: Additional Requirements
@@ -24047,7 +24077,7 @@ requirements:
   category: semantic
   subject: default
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -24057,36 +24087,32 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: parser.Context.ReadRoot
     packages:
-    - tosca/grammars/tosca_v1_3
-    - tosca/grammars/tosca_v2_0
+    - tosca/grammars
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
     - tosca/grammars/tosca_v1_3/attribute-definition.go
-    - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
-    - tosca/grammars/tosca_v2_0/property-definition.go
-    - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
     - tosca_v1_3.ReadAttributeDefinition
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: rendering
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
-    - parser.Context.Parse
-    - parser.Context.LookupNames
-    - parser.Context.Inherit
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: Definition.Render resolves the declared data type and renders the default through Value.Render/RenderProperty, producing type-specific
-      diagnostics.
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (subject occurs in positive example corpus)
+    - tests/conformance/tosca_1_3/verification_definition_defaults_test.go#TestVerificationDefinitionDefaults/TOSCA13-3.6.12.2-010
     negative: []
     boundary: []
     regression: []
@@ -24095,12 +24121,29 @@ requirements:
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Default value type compatibility is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Changed the omitted required flag's default from true to false.
+      affected_tests:
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.10.4-008
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.14.2-015
+      expected_tests_failed: true
+    - description: Skipped rendering property and parameter defaults through their effective data types.
+      affected_tests:
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.10.5-003
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.14.3-002
+      expected_tests_failed: true
+    - description: Removed a rendered attribute default before effective-value normalization.
+      affected_tests:
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.12.2-010
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.6.12.2-011
   section: 3.6.12.2
   section_title: Keynames
@@ -26627,7 +26670,7 @@ requirements:
   category: semantic
   subject: grammar
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -26637,48 +26680,64 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: parser.Context.ReadRoot
     packages:
-    - tosca/grammars/tosca_v1_3
-    - tosca/grammars/tosca_v2_0
+    - tosca/grammars
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
     - tosca/grammars/tosca_v1_3/parameter-definition.go
-    - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
-    - tosca/grammars/tosca_v2_0/property-definition.go
-    - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
     - tosca_v1_3.ReadParameterDefinition
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: rendering
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
-    - parser.Context.Parse
-    - parser.Context.LookupNames
-    - parser.Context.Inherit
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: ParameterDefinition embeds PropertyDefinition; IsRequired defaults true and RenderInputs enforces missing required inputs.
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
-    negative: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_definition_defaults_test.go#TestVerificationDefinitionDefaults/TOSCA13-3.6.14.2-015
+    negative:
+    - tests/conformance/tosca_1_3/verification_definition_defaults_test.go#TestVerificationDefinitionDefaults/TOSCA13-3.6.14.2-015
     boundary: []
     regression: []
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Parameter required=true default is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Changed the omitted required flag's default from true to false.
+      affected_tests:
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.10.4-008
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.14.2-015
+      expected_tests_failed: true
+    - description: Skipped rendering property and parameter defaults through their effective data types.
+      affected_tests:
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.10.5-003
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.14.3-002
+      expected_tests_failed: true
+    - description: Removed a rendered attribute default before effective-value normalization.
+      affected_tests:
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.12.2-010
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.6.14.2-016
   section: 3.6.14.2
   section_title: Grammar
@@ -26912,7 +26971,7 @@ requirements:
   category: semantic
   subject: additional-requirements
   implementation_status: implemented
-  verification_status: untested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -26922,49 +26981,64 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: parser.Context.ReadRoot
     packages:
-    - tosca/grammars/tosca_v1_3
-    - tosca/grammars/tosca_v2_0
+    - tosca/grammars
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
     - tosca/grammars/tosca_v1_3/parameter-definition.go
-    - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
-    - tosca/grammars/tosca_v2_0/property-definition.go
-    - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
     - tosca_v1_3.ReadParameterDefinition
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: rendering
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
-    - parser.Context.Parse
-    - parser.Context.LookupNames
-    - parser.Context.Inherit
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: Definition.Render resolves the declared data type and renders the default through Value.Render/RenderProperty, producing type-specific
-      diagnostics.
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
-    negative: []
+    positive:
+    - tests/conformance/tosca_1_3/verification_definition_defaults_test.go#TestVerificationDefinitionDefaults/TOSCA13-3.6.14.3-002
+    negative:
+    - tests/conformance/tosca_1_3/verification_definition_defaults_test.go#TestVerificationDefinitionDefaults/TOSCA13-3.6.14.3-002
     boundary: []
     regression: []
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Default value type compatibility is implemented.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutations:
+    - description: Changed the omitted required flag's default from true to false.
+      affected_tests:
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.10.4-008
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.14.2-015
+      expected_tests_failed: true
+    - description: Skipped rendering property and parameter defaults through their effective data types.
+      affected_tests:
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.10.5-003
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.14.3-002
+      expected_tests_failed: true
+    - description: Removed a rendered attribute default before effective-value normalization.
+      affected_tests:
+      - TestVerificationDefinitionDefaults/TOSCA13-3.6.12.2-010
+      expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.6.14.3-003
   section: 3.6.14.3
   section_title: Additional Requirements

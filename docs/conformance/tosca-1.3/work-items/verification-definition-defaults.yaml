@@ -1,0 +1,86 @@
+verification_group: definition-defaults
+verification_order: 3
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+sections:
+  - section: "3.6.10.4"
+    section_title: Grammar
+  - section: "3.6.10.5"
+    section_title: Additional Requirements
+  - section: "3.6.12.2"
+    section_title: Keynames
+  - section: "3.6.14.2"
+    section_title: Grammar
+  - section: "3.6.14.3"
+    section_title: Additional Requirements
+parser_phase: rendering after type resolution, followed by normalization
+execution_path:
+  - parser.Context.ReadRoot
+  - tosca_v1_3.ReadServiceFile
+  - tosca_v2_0.PropertyDefinition.IsRequired
+  - tosca_v2_0.PropertyDefinition.Render
+  - tosca_v2_0.AttributeDefinition.Render
+  - tosca_v2_0.ParameterDefinition.Render
+  - effective value normalization
+
+requirements:
+  - requirement_id: TOSCA13-3.6.10.4-008
+    normative_rule: a property definition's required key defaults to true
+    initial_status: implemented/untested
+    final_status: implemented/verified
+  - requirement_id: TOSCA13-3.6.10.5-003
+    normative_rule: a property default must be compatible with its property type
+    initial_status: implemented/untested
+    final_status: implemented/verified
+  - requirement_id: TOSCA13-3.6.12.2-010
+    normative_rule: an attribute default must be compatible with its attribute type
+    initial_status: implemented/indirectly-tested
+    final_status: implemented/verified
+  - requirement_id: TOSCA13-3.6.14.2-015
+    normative_rule: a parameter definition's required key defaults to true
+    initial_status: implemented/untested
+    final_status: implemented/verified
+  - requirement_id: TOSCA13-3.6.14.3-002
+    normative_rule: a parameter default must be compatible with its parameter type
+    initial_status: implemented/untested
+    final_status: implemented/verified
+
+direct_evidence:
+  test: tests/conformance/tosca_1_3/verification_definition_defaults_test.go#TestVerificationDefinitionDefaults
+  positive:
+    - compatible property and parameter defaults are applied and asserted as normalized integer values
+    - an attribute default sourced by get_attribute is preserved as a normalized function call
+    - default-required property and input definitions are accepted when a value is supplied or defaulted
+  negative:
+    - omitted property and input required flags reject absent values at their assignment paths
+    - incompatible property and parameter literal defaults are rejected at their definition paths
+  diagnostic:
+    - every rejection names the affected property or input and the required or integer rule
+
+baseline_reproduction:
+  performed: true
+  result: all direct tests passed; no implementation defect was discovered
+
+mutation_check:
+  performed: true
+  mutations:
+    - description: changed the omitted required flag default from true to false
+      affected_tests:
+        - TestVerificationDefinitionDefaults/TOSCA13-3.6.10.4-008
+        - TestVerificationDefinitionDefaults/TOSCA13-3.6.14.2-015
+      expected_tests_failed: true
+    - description: skipped property and parameter default rendering through effective data types
+      affected_tests:
+        - TestVerificationDefinitionDefaults/TOSCA13-3.6.10.5-003
+        - TestVerificationDefinitionDefaults/TOSCA13-3.6.14.3-002
+      expected_tests_failed: true
+    - description: removed a rendered attribute default before effective-value normalization
+      affected_tests:
+        - TestVerificationDefinitionDefaults/TOSCA13-3.6.12.2-010
+      expected_tests_failed: true
+  production_diff_restored: true
+
+results:
+  implementation_status: implemented
+  verification_status: verified
+  requirement_count: 5
+  defects_discovered: 0

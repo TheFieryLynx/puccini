@@ -215,6 +215,31 @@ DIRECT_TESTS[MAP_ENTRY_KEY_VERIFICATION_ID] = {
     "regression": [],
 }
 
+DEFINITION_DEFAULT_VERIFICATION_IDS = {
+    "TOSCA13-3.6.10.4-008",
+    "TOSCA13-3.6.10.5-003",
+    "TOSCA13-3.6.12.2-010",
+    "TOSCA13-3.6.14.2-015",
+    "TOSCA13-3.6.14.3-002",
+}
+for requirement_id in DEFINITION_DEFAULT_VERIFICATION_IDS:
+    DIRECT_TESTS[requirement_id] = {
+        "positive": [
+            (
+                "tests/conformance/tosca_1_3/verification_definition_defaults_test.go"
+                f"#TestVerificationDefinitionDefaults/{requirement_id}"
+            ),
+        ],
+        "negative": [
+            (
+                "tests/conformance/tosca_1_3/verification_definition_defaults_test.go"
+                f"#TestVerificationDefinitionDefaults/{requirement_id}"
+            ),
+        ] if requirement_id != "TOSCA13-3.6.12.2-010" else [],
+        "boundary": [],
+        "regression": [],
+    }
+
 INTERFACE_RESERVED_OPERATION_NAME_ID = "TOSCA13-3.7.5.4-002"
 DIRECT_TESTS[INTERFACE_RESERVED_OPERATION_NAME_ID] = {
     "positive": [
@@ -1140,6 +1165,36 @@ MUTATION_CHECKS[MAP_ENTRY_KEY_VERIFICATION_ID] = {
     "expected_tests_failed": True,
     "production_diff_restored": True,
 }
+for requirement_id in DEFINITION_DEFAULT_VERIFICATION_IDS:
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutations": [
+            {
+                "description": "Changed the omitted required flag's default from true to false.",
+                "affected_tests": [
+                    "TestVerificationDefinitionDefaults/TOSCA13-3.6.10.4-008",
+                    "TestVerificationDefinitionDefaults/TOSCA13-3.6.14.2-015",
+                ],
+                "expected_tests_failed": True,
+            },
+            {
+                "description": "Skipped rendering property and parameter defaults through their effective data types.",
+                "affected_tests": [
+                    "TestVerificationDefinitionDefaults/TOSCA13-3.6.10.5-003",
+                    "TestVerificationDefinitionDefaults/TOSCA13-3.6.14.3-002",
+                ],
+                "expected_tests_failed": True,
+            },
+            {
+                "description": "Removed a rendered attribute default before effective-value normalization.",
+                "affected_tests": [
+                    "TestVerificationDefinitionDefaults/TOSCA13-3.6.12.2-010",
+                ],
+                "expected_tests_failed": True,
+            },
+        ],
+        "production_diff_restored": True,
+    }
 for requirement_id in {
     "TOSCA13-4.4.1.2-003",
     "TOSCA13-4.4.2.2-002", "TOSCA13-4.4.2.2-004", "TOSCA13-4.4.2.2-010",
