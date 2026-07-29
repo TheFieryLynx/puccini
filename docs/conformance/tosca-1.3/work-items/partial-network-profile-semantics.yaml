@@ -1,0 +1,108 @@
+remediation_group: network-profile-semantics
+remediation_order: 18
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+parser_phase: node-template rendering after effective definitions and defaults
+execution_path:
+  - parser.Context.Render
+  - tosca_v2_0.NodeTemplate.Render
+  - tosca_v2_0.Values.RenderProperties
+  - tosca_v1_3.validateNetworkNodeTemplate
+
+requirements:
+  - requirement_id: TOSCA13-8.5.1.1-036
+    section: "8.5.1.1"
+    section_title: "Properties"
+    normative_rule: "physical_network is required if network_type is flat or vlan."
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "network_type and physical_network are independently string typed."
+      - "Both assignments and inherited property defaults render and normalize."
+    missing_parts:
+      - "flat without physical_network was accepted."
+      - "vlan without physical_network was accepted."
+      - "Derived Network types and effective defaults were not covered."
+      - "Other network types and unrelated node types were not isolated."
+    implementation:
+      packages: [tosca/parsing, tosca/grammars/tosca_v1_3, tosca/grammars/tosca_v2_0]
+      files:
+        - tosca/parsing/grammars.go
+        - tosca/grammars/tosca_v2_0/node-template.go
+        - tosca/grammars/tosca_v1_3/node-template-validation.go
+        - tosca/grammars/tosca_v1_3/common.go
+      symbols:
+        - parsing.Grammar.NodeTemplateValidator
+        - tosca_v2_0.NodeTemplate.render
+        - tosca_v1_3.validateNetworkNodeTemplate
+      parser_phase: rendering
+      execution_path: [NodeTemplate.render, Values.RenderProperties, validateNetworkNodeTemplate]
+    remediation_group: network-profile-semantics
+    remediation_order: 18
+    dependencies: []
+    risk: medium
+    planned_tests:
+      positive: [TestPartialNetworkPhysicalNetworkConditionalRequirement, TestPartialOtherNetworkTypesDoNotRequirePhysicalNetwork]
+      negative: [TestPartialFlatAndVlanNetworkRequirePhysicalNetwork]
+      boundary: [TestPartialOtherNetworkTypesDoNotRequirePhysicalNetwork]
+      inheritance: [TestPartialDerivedNetworkRetainsConditionalRule]
+      resolution: [TestPartialNetworkConditionalDefersFunctionValue]
+      normalization: [TestPartialNetworkPhysicalNetworkConditionalRequirement]
+      regression: [TestPartialNetworkRuleDoesNotApplyToUnrelatedNode, TestPartialNetworkRuleDoesNotChangeTOSCA20]
+
+group_implementation:
+  interpretation:
+    conditional_requiredness: >-
+      The physical_network property's "required if" wording is enforced as
+      conditional presence on the effective node-template value whenever the
+      concrete network_type equals flat or vlan.
+    effective_values: >-
+      Explicit assignments override inherited/refined property defaults before
+      the conditional is evaluated.
+    other_values: >-
+      The pinned text names only flat and vlan. Absent, gre, vxlan, and
+      extension string values do not activate this particular condition.
+    functions: >-
+      A function-valued network_type is preserved and deferred until concrete;
+      the parser does not guess that its runtime result is flat or vlan.
+  version_isolation: >-
+    Shared node rendering exposes an optional neutral hook. Only TOSCA 1.3
+    installs this normative Network policy; TOSCA 2.0 leaves it nil.
+  baseline_reproduction:
+    performed: true
+    observed_failures:
+      - "network_type flat without physical_network was accepted."
+      - "network_type vlan without physical_network was accepted."
+      - "A type derived from Network with an effective flat default bypassed the condition."
+    correct_failure_reason_verified: true
+  mutation_check:
+    performed: true
+    mutation: "Temporarily removed only the TOSCA 1.3 node-template validator registration."
+    affected_tests:
+      - TestPartialFlatAndVlanNetworkRequirePhysicalNetwork
+      - TestPartialDerivedNetworkRetainsConditionalRule
+    expected_tests_failed: true
+    production_diff_restored: true
+  results:
+    TOSCA13-8.5.1.1-036:
+      implementation_status: implemented
+      verification_status: verified
+
+verification:
+  focused_network_profile: passed
+  protected_tosca_1_3_blocks: passed
+  tosca_2_0_conformance: passed
+  go_test_all: passed
+  go_test_race_all: passed
+  go_vet_all: passed
+  git_diff_check: passed
+  audit_generation_twice: passed
+  audit_sha256_identical: true
+  denominator: 223
+  resulting_metrics:
+    implemented: 223
+    partial: 0
+    missing: 0
+    non_compliant: 0
+    verified: 173
+    indirectly_tested: 26
+    untested: 24

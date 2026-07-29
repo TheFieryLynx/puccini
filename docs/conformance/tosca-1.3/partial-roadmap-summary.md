@@ -60,12 +60,17 @@ assignments.
 
 ## Current cross-status matrix
 
-After remediation group 17 (`capability-profile-semantics`):
+After remediation group 18 (`network-profile-semantics`):
 
 | Implementation status | verified | indirectly-tested | untested | Total |
 |---|---:|---:|---:|---:|
-| implemented | 172 | 26 | 24 | 222 |
-| partial | 0 | 0 | 1 | 1 |
+| implemented | 173 | 26 | 24 | 223 |
+| partial | 0 | 0 | 0 | 0 |
 | missing | 0 | 0 | 0 | 0 |
 | non-compliant | 0 | 0 | 0 | 0 |
-| **Total** | **172** | **26** | **25** | **223** |
+| **Total** | **173** | **26** | **24** | **223** |
+
+All 32 records that were `partial` at the frozen baseline are now
+`implemented/verified`. The independent verification axis still contains 26
+indirectly-tested and 24 untested atomic MUST records outside this remediation
+scope, so complete processor conformance is not yet directly demonstrated.

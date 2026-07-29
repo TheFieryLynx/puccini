@@ -950,11 +950,11 @@ requirements:
       - "flat or vlan without physical_network is accepted."
       - "Other network types are not directly verified as exempt."
     implementation:
-      packages: [tosca/grammars/tosca_v1_3]
-      files: [tosca/grammars/tosca_v1_3/profile-value-validation.go]
-      symbols: [tosca_v1_3.validateNetwork]
+      packages: [tosca/parsing, tosca/grammars/tosca_v1_3, tosca/grammars/tosca_v2_0]
+      files: [tosca/parsing/grammars.go, tosca/grammars/tosca_v1_3/node-template-validation.go, tosca/grammars/tosca_v2_0/node-template.go]
+      symbols: [parsing.Grammar.NodeTemplateValidator, tosca_v1_3.validateNetworkNodeTemplate]
       parser_phase: rendering
-      execution_path: [NodeTemplate.Render, validateProfileValues, validateNetwork]
+      execution_path: [NodeTemplate.render, Values.RenderProperties, validateNetworkNodeTemplate]
     remediation_group: network-profile-semantics
     remediation_order: 18
     dependencies: []

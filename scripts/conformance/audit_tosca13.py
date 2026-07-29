@@ -687,6 +687,33 @@ DIRECT_TESTS["TOSCA13-5.5.13.1-012"] = {
     ],
 }
 
+NETWORK_PROFILE_SEMANTICS_ID = "TOSCA13-8.5.1.1-036"
+DIRECT_TESTS[NETWORK_PROFILE_SEMANTICS_ID] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_network_profile_semantics_test.go#TestPartialNetworkPhysicalNetworkConditionalRequirement",
+        "tests/conformance/tosca_1_3/partial_network_profile_semantics_test.go#TestPartialOtherNetworkTypesDoNotRequirePhysicalNetwork",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_network_profile_semantics_test.go#TestPartialFlatAndVlanNetworkRequirePhysicalNetwork",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_network_profile_semantics_test.go#TestPartialOtherNetworkTypesDoNotRequirePhysicalNetwork",
+    ],
+    "inheritance": [
+        "tests/conformance/tosca_1_3/partial_network_profile_semantics_test.go#TestPartialDerivedNetworkRetainsConditionalRule",
+    ],
+    "resolution": [
+        "tests/conformance/tosca_1_3/partial_network_profile_semantics_test.go#TestPartialNetworkConditionalDefersFunctionValue",
+    ],
+    "normalization": [
+        "tests/conformance/tosca_1_3/partial_network_profile_semantics_test.go#TestPartialNetworkPhysicalNetworkConditionalRequirement",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_network_profile_semantics_test.go#TestPartialNetworkRuleDoesNotApplyToUnrelatedNode",
+        "tests/conformance/tosca_1_3/partial_network_profile_semantics_test.go#TestPartialNetworkRuleDoesNotChangeTOSCA20",
+    ],
+}
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -1139,6 +1166,16 @@ for requirement_id in CAPABILITY_PROFILE_SEMANTICS_IDS:
         "expected_tests_failed": True,
         "production_diff_restored": True,
     }
+MUTATION_CHECKS[NETWORK_PROFILE_SEMANTICS_ID] = {
+    "performed": True,
+    "mutation": "Temporarily removed only the TOSCA 1.3 node-template validator registration.",
+    "affected_tests": [
+        "TestPartialFlatAndVlanNetworkRequirePhysicalNetwork",
+        "TestPartialDerivedNetworkRetainsConditionalRule",
+    ],
+    "expected_tests_failed": True,
+    "production_diff_restored": True,
+}
 for requirement_id in DATATYPE_SHAPE_IDS:
     MUTATION_CHECKS[requirement_id] = {
         "performed": True,
@@ -2575,6 +2612,40 @@ def manual_must_trace(requirement: dict[str, Any]) -> tuple[str, dict[str, Any],
                 "Scalable default range; internal omitted assignments, "
                 "unrelated types, unresolved functions, and TOSCA 2.0 remain "
                 "outside premature validation"
+            ),
+        }, None
+    if requirement_id == NETWORK_PROFILE_SEMANTICS_ID:
+        return "implemented", {
+            "entry_point": "tosca_v2_0.NodeTemplate.render",
+            "packages": [
+                "tosca/grammars/tosca_v1_3",
+                "tosca/grammars/tosca_v2_0",
+                "tosca/parsing",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v1_3/node-template-validation.go",
+                "tosca/grammars/tosca_v1_3/common.go",
+                "tosca/grammars/tosca_v2_0/node-template.go",
+                "tosca/parsing/grammars.go",
+                "tests/conformance/tosca_1_3/partial_network_profile_semantics_test.go",
+            ],
+            "symbols": [
+                "parsing.Grammar.NodeTemplateValidator",
+                "tosca_v2_0.NodeTemplate.render",
+                "tosca_v1_3.validateNetworkNodeTemplate",
+            ],
+            "parser_phase": "node-template rendering after effective property defaults",
+            "execution_path": [
+                "parser.Context.Render",
+                "tosca_v2_0.NodeTemplate.render",
+                "tosca_v2_0.Values.RenderProperties",
+                "tosca_v1_3.validateNetworkNodeTemplate",
+            ],
+            "trace_summary": (
+                "effective inherited Network node type → explicit assignments "
+                "and property defaults → concrete network_type conditional → "
+                "physical_network presence check for flat/vlan only; unrelated "
+                "types, unresolved functions, and TOSCA 2.0 remain unchanged"
             ),
         }, None
     if requirement_id == "TOSCA13-3.8.2.2.3-015":

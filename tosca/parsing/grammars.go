@@ -6,6 +6,7 @@ type DataDefinitionValidator func(EntityPtr)
 type DataValueValidator func(*Context, EntityPtr, EntityPtr)
 type CapabilityDefinitionRefinementValidator func(EntityPtr, EntityPtr)
 type CapabilityAssignmentValidator func(EntityPtr, EntityPtr)
+type NodeTemplateValidator func(EntityPtr)
 type GroupTypeValidator func(EntityPtr)
 type RequirementAssignmentValidator func(EntityPtr)
 type AttributeDefinitionValidator func(EntityPtr)
@@ -24,6 +25,7 @@ type Grammar struct {
 	DataValueValidator                      DataValueValidator
 	CapabilityDefinitionRefinementValidator CapabilityDefinitionRefinementValidator
 	CapabilityAssignmentValidator           CapabilityAssignmentValidator
+	NodeTemplateValidator                   NodeTemplateValidator
 	GroupTypeValidator                      GroupTypeValidator
 	RequirementAssignmentValidator          RequirementAssignmentValidator
 	AttributeDefinitionValidator            AttributeDefinitionValidator

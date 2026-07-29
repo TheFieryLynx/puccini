@@ -1,6 +1,6 @@
 # Unverified TOSCA 1.3 requirements
 
-Untested or currently unverifiable records: **2338**.
+Untested or currently unverifiable records: **2337**.
 
 | Requirement | Implementation | Verification | Applicability | Reason |
 |---|---|---|---|---|
@@ -2230,7 +2230,6 @@ Untested or currently unverifiable records: **2338**.
 | `TOSCA13-8.5.1.1-033` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: informative. |
 | `TOSCA13-8.5.1.1-034` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-8.5.1.1-035` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-8.5.1.1-036` | partial | untested | applicable | Cross-property semantic validation is absent.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-8.5.1.1-037` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-8.5.1.1-038` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-8.5.1.1-039` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance. |
