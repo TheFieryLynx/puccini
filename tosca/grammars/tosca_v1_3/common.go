@@ -100,6 +100,7 @@ func init() {
 	Grammar.CapabilityDefinitionRefinementValidator = validateCapabilityDefinitionRefinement
 	Grammar.GroupTypeValidator = validateGroupTypeMembers
 	Grammar.RequirementAssignmentValidator = validateRequirementAssignmentNodeFilter
+	Grammar.AttributeDefinitionValidator = validateAttributeDefaultProvenance
 }
 
 func CompareUint32(v1 uint32, v2 uint32) int {

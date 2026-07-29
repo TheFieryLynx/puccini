@@ -142,6 +142,10 @@ func (self *AttributeDefinition) Render() {
 func (self *AttributeDefinition) render() {
 	logRender.Debugf("attribute definition: %s", self.Name)
 
+	if validator := self.Context.Grammar.AttributeDefinitionValidator; validator != nil {
+		validator(self)
+	}
+
 	self.doRender()
 
 	if (self.Default != nil) && (self.DataType != nil) {

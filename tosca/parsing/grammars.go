@@ -5,6 +5,7 @@ type DataValueValidator func(*Context, EntityPtr, EntityPtr)
 type CapabilityDefinitionRefinementValidator func(EntityPtr, EntityPtr)
 type GroupTypeValidator func(EntityPtr)
 type RequirementAssignmentValidator func(EntityPtr)
+type AttributeDefinitionValidator func(EntityPtr)
 
 //
 // Grammar
@@ -18,6 +19,7 @@ type Grammar struct {
 	CapabilityDefinitionRefinementValidator CapabilityDefinitionRefinementValidator
 	GroupTypeValidator                      GroupTypeValidator
 	RequirementAssignmentValidator          RequirementAssignmentValidator
+	AttributeDefinitionValidator            AttributeDefinitionValidator
 }
 
 func NewGrammar() Grammar {

@@ -13,17 +13,17 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Implementation Status | Records |
 |---|---:|
-| implemented | 756 |
-| partial | 34 |
+| implemented | 757 |
+| partial | 33 |
 | missing | 2 |
 | non-compliant | 27 |
 | unknown | 2282 |
 
 | Verification Status | Records |
 |---|---:|
-| verified | 189 |
+| verified | 190 |
 | indirectly-tested | 562 |
-| untested | 2296 |
+| untested | 2295 |
 | unverifiable | 54 |
 
 | Applicability | Records |
@@ -36,7 +36,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 
 | Strength | Applicable atomic denominator | Implemented | Implementation coverage | Implemented + verified | Verified conformance coverage | Broad test evidence | Broad evidence coverage |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| MUST/SHALL/REQUIRED | 223 | 210 | 94.17% | 160 | 71.75% | 186 | 83.41% |
+| MUST/SHALL/REQUIRED | 223 | 211 | 94.62% | 161 | 72.20% | 187 | 83.86% |
 | SHOULD/RECOMMENDED | 23 | 0 | 0.00% | 0 | 0.00% | 0 | 0.00% |
 | MAY/OPTIONAL | 693 | 99 | 14.29% | 0 | 0.00% | 95 | 13.71% |
 
@@ -47,7 +47,7 @@ This matrix separates implementation, verification, and applicability. It is an 
 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | 13 | 8 | 0 | 0 | 0 | 0 | 8 | 0 | 0 | 8 | 0 |
 | 14 | 43 | 0 | 0 | 0 | 0 | 43 | 0 | 0 | 6 | 37 |
-| 3 | 1670 | 257 | 28 | 2 | 14 | 1369 | 143 | 102 | 1418 | 7 |
+| 3 | 1670 | 258 | 27 | 2 | 14 | 1369 | 144 | 102 | 1417 | 7 |
 | 4 | 144 | 24 | 0 | 0 | 5 | 115 | 29 | 0 | 115 | 0 |
 | 5 | 978 | 396 | 5 | 0 | 5 | 572 | 7 | 393 | 572 | 6 |
 | 6 | 44 | 11 | 0 | 0 | 3 | 30 | 9 | 0 | 31 | 4 |
@@ -78,9 +78,10 @@ This matrix separates implementation, verification, and applicability. It is an 
 | read/imports | 14 | 0 | 0 | 0 | 0 | 14 | 0 | 0 | 14 | 0 |
 | read/inheritance/rendering | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | rendering | 246 | 15 | 9 | 0 | 1 | 221 | 3 | 1 | 238 | 4 |
+| rendering after inheritance and function parsing | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | rendering after lookup, hierarchy, and inheritance | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | rendering after namespace lookup and before inherited assignment defaults | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
-| rendering/function-evaluation | 75 | 1 | 1 | 0 | 4 | 69 | 4 | 0 | 71 | 0 |
+| rendering/function-evaluation | 74 | 1 | 0 | 0 | 4 | 69 | 4 | 0 | 70 | 0 |
 | rendering/normalization/function-evaluation | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | semantic | 575 | 0 | 4 | 1 | 11 | 559 | 11 | 0 | 529 | 35 |
 

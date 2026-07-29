@@ -472,6 +472,31 @@ DIRECT_TESTS[REQUIREMENT_NODE_FILTER_ID] = {
     ],
 }
 
+ATTRIBUTE_DEFAULT_PROVENANCE_ID = "TOSCA13-3.6.12.4-002"
+DIRECT_TESTS[ATTRIBUTE_DEFAULT_PROVENANCE_ID] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_attribute_default_provenance_test.go#TestPartialAttributeDefaultProvenanceAcceptsActualStateSources",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_attribute_default_provenance_test.go#TestPartialAttributeDefaultProvenanceRejectsForbiddenSources",
+        "tests/conformance/tosca_1_3/partial_attribute_default_provenance_test.go#TestPartialAttributeDefaultProvenanceRejectsHardCodedStructuredLeaf",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_attribute_default_provenance_test.go#TestPartialAttributeDefaultProvenanceDiagnosticIsDeterministic",
+        "tests/conformance/tosca_1_3/partial_attribute_default_provenance_test.go#TestPartialAttributeDefaultProvenancePreservesPinnedRootStateDefault",
+    ],
+    "inheritance": [
+        "tests/conformance/tosca_1_3/partial_attribute_default_provenance_test.go#TestPartialAttributeDefaultProvenanceInheritance",
+    ],
+    "normalization": [
+        "tests/conformance/tosca_1_3/partial_attribute_default_provenance_test.go#TestPartialAttributeDefaultProvenanceAcceptsActualStateSources",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_attribute_default_provenance_test.go#TestPartialAttributeDefaultProvenanceDoesNotChangeTOSCA20",
+        "tests/conformance/tosca_1_3/property_attribute_reflection_test.go",
+    ],
+}
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -956,6 +981,18 @@ MUTATION_CHECKS[REQUIREMENT_NODE_FILTER_ID] = {
         "TestPartialRequirementNodeFilterRejectsNodeTemplate",
         "TestPartialRequirementNodeFilterRejectsMissingNode",
         "TestPartialRequirementNodeFilterDiagnosticIsDeterministic",
+    ],
+    "expected_tests_failed": True,
+    "production_diff_restored": True,
+}
+MUTATION_CHECKS[ATTRIBUTE_DEFAULT_PROVENANCE_ID] = {
+    "performed": True,
+    "mutation": "Temporarily removed only the TOSCA 1.3 attribute-definition validator registration.",
+    "affected_tests": [
+        "TestPartialAttributeDefaultProvenanceRejectsForbiddenSources",
+        "TestPartialAttributeDefaultProvenanceRejectsHardCodedStructuredLeaf",
+        "TestPartialAttributeDefaultProvenanceInheritance",
+        "TestPartialAttributeDefaultProvenanceDiagnosticIsDeterministic",
     ],
     "expected_tests_failed": True,
     "production_diff_restored": True,
@@ -2363,6 +2400,48 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
                 "explicit TOSCA 1.3 node keyname → namespace lookup as Node Type "
                 "or Node Template → pre-default rendering policy → node_filter "
                 "conditional validity; TOSCA 2.0 leaves the policy hook unset"
+            ),
+        }, None
+    if requirement_id == ATTRIBUTE_DEFAULT_PROVENANCE_ID:
+        return "implemented", {
+            "entry_point": "parser.Context.Render",
+            "packages": [
+                "tosca/grammars/tosca_v1_3",
+                "tosca/grammars/tosca_v2_0",
+                "tosca/parsing",
+                "tosca/parser",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v1_3/attribute-definition.go",
+                "tosca/grammars/tosca_v1_3/common.go",
+                "tosca/grammars/tosca_v2_0/attribute-definition.go",
+                "tosca/grammars/tosca_v2_0/functions.go",
+                "tosca/parsing/grammars.go",
+                "tosca/parser/phase4-inheritance.go",
+                "tosca/parser/phase5-rendering.go",
+                "tests/conformance/tosca_1_3/partial_attribute_default_provenance_test.go",
+            ],
+            "symbols": [
+                "parsing.Grammar.AttributeDefinitionValidator",
+                "tosca_v2_0.AttributeDefinition.Render",
+                "tosca_v1_3.validateAttributeDefaultProvenance",
+                "tosca_v1_3.analyzeAttributeDefaultProvenance",
+            ],
+            "parser_phase": "rendering after inheritance and function parsing",
+            "execution_path": [
+                "parser.Context.Inherit",
+                "parser.Context.Render",
+                "tosca_v2_0.AttributeDefinition.Render",
+                "tosca_v2_0.ParseFunctionCalls",
+                "tosca_v1_3.validateAttributeDefaultProvenance",
+                "tosca_v1_3.analyzeAttributeDefaultProvenance",
+            ],
+            "trace_summary": (
+                "explicit TOSCA 1.3 attribute default → inherited effective "
+                "definition → nested function parsing → deterministic actual-state "
+                "provenance analysis; pinned normative Root state defaults are the "
+                "documented specification-conflict exception and TOSCA 2.0 leaves "
+                "the policy hook unset"
             ),
         }, None
     if requirement_id in DATATYPE_SHAPE_IDS:
