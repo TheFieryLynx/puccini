@@ -646,3 +646,59 @@ cases:
     coverage:
       variation_axes: [constraint:incompatible-operator, yaml-type:string-pattern-on-integer]
       related_cases: [TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID]
+
+  - id: TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+    file: sections/3.7-type-definitions/hierarchy/multilevel-refinement-valid.yaml
+    specification:
+      sections: ["3.7.2.1", "3.7.2.4", "3.7.3.1", "3.7.3.2.3", "3.7.3.3", "3.7.5.2", "3.7.5.4", "3.7.6.2", "3.7.6.3", "3.7.7.2", "3.7.9.2", "3.7.10.2", "3.7.11.2", "3.7.11.4", "3.7.12.2"]
+      requirement_ids:
+        - TOSCA13-3.7.2.1-001
+        - TOSCA13-3.7.2.4-001
+        - TOSCA13-3.7.2.4-002
+        - TOSCA13-3.7.3.1-001
+        - TOSCA13-3.7.3.2.3-003
+        - TOSCA13-3.7.3.2.3-004
+        - TOSCA13-3.7.3.3-001
+        - TOSCA13-3.7.3.3-002
+        - TOSCA13-3.7.5.2-004
+        - TOSCA13-3.7.5.2-008
+        - TOSCA13-3.7.5.2-009
+        - TOSCA13-3.7.5.4-001
+        - TOSCA13-3.7.5.4-002
+        - TOSCA13-3.7.6.2-004
+        - TOSCA13-3.7.6.3-001
+        - TOSCA13-3.7.6.3-002
+        - TOSCA13-3.7.6.3-003
+        - TOSCA13-3.7.7.2-004
+        - TOSCA13-3.7.9.2-004
+        - TOSCA13-3.7.10.2-004
+        - TOSCA13-3.7.11.2-003
+        - TOSCA13-3.7.11.4-002
+        - TOSCA13-3.7.12.2-004
+    classification: {kind: valid, category: semantic, features: [type-hierarchy, inheritance, refinement]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
+    coverage:
+      variation_axes: [inheritance:direct, inheritance:multilevel, refinement:default, refinement:type-compatible, cardinality:narrowing]
+      related_cases: [TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-INVALID, TOSCA13-CORPUS-TYPE-REQUIRED-WIDENING-INVALID]
+
+  - id: TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-INVALID
+    file: sections/3.7-type-definitions/hierarchy/cycle-invalid.yaml
+    specification:
+      sections: ["3.7.1.1"]
+      requirement_ids: [TOSCA13-3.7.1.1-003]
+    classification: {kind: invalid, category: semantic, features: [type-hierarchy, cycle]}
+    expected: {accepted: false, phase: hierarchy, diagnostic: {category: loop, path: First}, assertions: []}
+    coverage:
+      variation_axes: [inheritance:cycle, graph:bounded-cycle-detection]
+      related_cases: [TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID]
+
+  - id: TOSCA13-CORPUS-TYPE-REQUIRED-WIDENING-INVALID
+    file: sections/3.7-type-definitions/refinement/required-widening-invalid.yaml
+    specification:
+      sections: ["3.7.3.3", "3.7.5.4"]
+      requirement_ids: [TOSCA13-3.7.3.3-002, TOSCA13-3.7.5.4-002]
+    classification: {kind: invalid, category: semantic, features: [refinement, required]}
+    expected: {accepted: false, phase: inheritance, diagnostic: {category: refinement, path: required}, assertions: []}
+    coverage:
+      variation_axes: [refinement:invalid-widening, inheritance:one-level]
+      related_cases: [TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID]

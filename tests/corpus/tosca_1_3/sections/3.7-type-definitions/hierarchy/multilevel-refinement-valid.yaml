@@ -1,0 +1,67 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+capability_types:
+  BaseCapability:
+    derived_from: tosca.capabilities.Root
+    properties:
+      port:
+        type: integer
+        required: false
+        default: 80
+        constraints:
+          - in_range: [1, 65535]
+  ChildCapability:
+    derived_from: BaseCapability
+    properties:
+      port:
+        default: 443
+artifact_types:
+  BaseArtifact:
+    derived_from: tosca.artifacts.File
+  ChildArtifact:
+    derived_from: BaseArtifact
+interface_types:
+  BaseInterface:
+    derived_from: tosca.interfaces.Root
+    operations:
+      start: {}
+  ChildInterface:
+    derived_from: BaseInterface
+relationship_types:
+  BaseRelationship:
+    derived_from: tosca.relationships.Root
+  ChildRelationship:
+    derived_from: BaseRelationship
+node_types:
+  BaseNode:
+    derived_from: tosca.nodes.Root
+    capabilities:
+      endpoint:
+        type: BaseCapability
+        occurrences: [0, UNBOUNDED]
+    interfaces:
+      Lifecycle:
+        type: BaseInterface
+  MiddleNode:
+    derived_from: BaseNode
+  ChildNode:
+    derived_from: MiddleNode
+    capabilities:
+      endpoint:
+        type: ChildCapability
+        occurrences: [0, 1]
+group_types:
+  BaseGroup:
+    derived_from: tosca.groups.Root
+    members: [BaseNode]
+  ChildGroup:
+    derived_from: BaseGroup
+policy_types:
+  BasePolicy:
+    derived_from: tosca.policies.Root
+    targets: [BaseNode]
+  ChildPolicy:
+    derived_from: BasePolicy
+topology_template:
+  node_templates:
+    node:
+      type: ChildNode

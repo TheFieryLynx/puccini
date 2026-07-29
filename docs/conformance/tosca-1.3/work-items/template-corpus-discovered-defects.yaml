@@ -1,0 +1,18 @@
+defects:
+  - id: TOSCA13-CORPUS-DEFECT-001
+    discovered_by: TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-INVALID
+    specification:
+      section: "3.7.1.1"
+      requirement_id: TOSCA13-3.7.1.1-003
+      normative_scope: derived_from is a symbolic type-name reference
+    frozen_must_status_changed: false
+    status_reason: deterministic diagnostic ordering is a corpus gate, but is not a distinct frozen atomic MUST in the catalog
+    reproducer: tests/corpus/tosca_1_3/sections/3.7-type-definitions/hierarchy/cycle-invalid.yaml
+    actual_behavior: repeated processing alternates which node receives the inheritance-loop diagnostic
+    expected_behavior: repeated processing produces the same ordered diagnostics
+    execution_path:
+      - parser.Context.Hierarchy
+      - parsing.GetHierarchy
+      - map iteration over entity types
+    proposed_remediation_group: deterministic-type-hierarchy
+    status: discovered

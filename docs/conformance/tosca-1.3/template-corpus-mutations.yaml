@@ -23,3 +23,11 @@ mutations:
     expected_corpus_failures: true
     observed_result: the missing-type definition was accepted and the corpus runner failed
     production_diff_restored: true
+  - category: type-definitions
+    production_validation_path: parsing.GetHierarchy -> ReportInheritanceLoop
+    mutation: suppressed only the structured inheritance-loop diagnostic while retaining bounded cycle termination
+    affected_cases:
+      - TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-INVALID
+    expected_corpus_failures: true
+    observed_result: cycle termination remained bounded but the required loop diagnostic disappeared
+    production_diff_restored: true

@@ -114,3 +114,16 @@ grammar_entities:
       - Non-boolean YAML scalars share the same field reader for boolean keynames; integer is the representative opposing class.
       - Unknown keynames are validated by the common grammar-context map reader and are covered again by the CI integrity seed.
     status: complete
+
+  - entity: type-definitions
+    sections: ["3.7.2", "3.7.3", "3.7.5", "3.7.6", "3.7.7", "3.7.9", "3.7.10", "3.7.11", "3.7.12"]
+    parser_phases: [namespaces, hierarchy, inheritance, normalization]
+    variation_axes:
+      inheritance: [direct, one-level, multiple-level, cycle]
+      refinement: [default, compatible-type, valid-cardinality-narrowing, invalid-required-widening]
+      type_kinds: [artifact, capability, interface, relationship, node, group, policy]
+    fixtures:
+      - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+      - TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-INVALID
+      - TOSCA13-CORPUS-TYPE-REQUIRED-WIDENING-INVALID
+    status: complete
