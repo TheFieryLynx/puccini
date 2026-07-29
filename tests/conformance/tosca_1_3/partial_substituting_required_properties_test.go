@@ -188,8 +188,7 @@ func substitutingRequiredPropertyTemplate(assignment string, withDefault bool, i
 
 	return `tosca_definitions_version: tosca_simple_yaml_1_3
 node_types:
-  AbstractNode:
-    derived_from: tosca.nodes.Root
+  AbstractNode: {}
 ` + baseType + implementationType + `
 topology_template:
   inputs:

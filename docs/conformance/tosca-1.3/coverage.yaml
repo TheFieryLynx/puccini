@@ -69165,8 +69165,8 @@ requirements:
   strength: MUST
   category: assignment
   subject: additional-requirements
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -69178,45 +69178,68 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - tosca/grammars/tosca_v1_3
-    - tosca/grammars/tosca_v2_0
+    - tosca/grammars
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
     - tosca/grammars/tosca_v1_3/substitution-mappings.go
-    - tosca/grammars/tosca_v2_0/substitution-mappings.go
-    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
     - tosca_v1_3.ReadSubstitutionMappings
-    - tosca_v2_0.SubstitutionMappings.Render
-    - tosca_v2_0.SubstitutionMappings.renderCapabilityMappings
-    - tosca_v2_0.SubstitutionMappings.renderRequirementMappings
-    parser_phase: rendering
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - tosca_v1_3.ReadSubstitutionMappings
-    - parser.Context.LookupNames
-    - parser.Context.Render
-    - tosca_v2_0.SubstitutionMappings.Render
-    trace_summary: Assignments and supplied mappings are resolved and type-checked, but the complete conditional/all-definitions coverage rule
-      is not enforced.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
-    negative: []
-    boundary: []
-    regression: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingCoversEffectiveNodeType
+    - tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingCoverageScopeIsExact
+    negative:
+    - tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingRejectsMissingProperties
+    - tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingRejectsMissingCapabilities
+    - tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingRejectsMissingRequirements
+    - tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingUnknownDefinitionStillRejected
+    boundary:
+    - tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingCoverageDiagnosticIsDeterministic
+    regression:
+    - tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingCoverageDoesNotChangeTOSCA20
+    - puccini_test.go#TestParse/1.3/substitution-mapping.yaml
+    inheritance:
+    - tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingCoversEffectiveNodeType
+    - tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingRejectsMissingProperties
+    - tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingRejectsMissingCapabilities
+    - tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingRejectsMissingRequirements
+    normalization:
+    - tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingCoversEffectiveNodeType
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Assignment coverage/conditional validation is incomplete.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Assignment coverage/conditional validation is incomplete.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily removed only the TOSCA 1.3 substitution-mappings validator registration.
+    affected_tests:
+    - TestPartialSubstitutionMappingRejectsMissingProperties
+    - TestPartialSubstitutionMappingRejectsMissingCapabilities
+    - TestPartialSubstitutionMappingRejectsMissingRequirements
+    - TestPartialSubstitutionMappingCoverageDiagnosticIsDeterministic
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.8.13.5-001
   section: 3.8.13.5
   section_title: Notes

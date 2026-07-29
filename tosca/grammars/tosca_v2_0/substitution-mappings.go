@@ -1277,6 +1277,9 @@ func (self *SubstitutionMappings) Render(inputDefinitions ParameterDefinitions) 
 	self.renderCapabilityMappings()
 	self.renderRequirementMappings()
 	self.renderPropertyMappings(inputDefinitions)
+	if validator := self.Context.Grammar.SubstitutionMappingsValidator; validator != nil {
+		validator(self)
+	}
 	self.renderAttributeMappings()
 	self.renderInterfaceMappings()
 

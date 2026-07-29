@@ -57,12 +57,12 @@ remain isolated from generic constraint processing.
 
 ## Current cross-status matrix
 
-After remediation group 14 (`substituting-required-properties`):
+After remediation group 15 (`substitution-mapping-coverage`):
 
 | Implementation status | verified | indirectly-tested | untested | Total |
 |---|---:|---:|---:|---:|
-| implemented | 166 | 26 | 24 | 216 |
-| partial | 0 | 0 | 7 | 7 |
+| implemented | 167 | 26 | 24 | 217 |
+| partial | 0 | 0 | 6 | 6 |
 | missing | 0 | 0 | 0 | 0 |
 | non-compliant | 0 | 0 | 0 | 0 |
-| **Total** | **166** | **26** | **31** | **223** |
+| **Total** | **167** | **26** | **30** | **223** |

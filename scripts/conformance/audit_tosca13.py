@@ -580,6 +580,36 @@ DIRECT_TESTS[SUBSTITUTING_REQUIRED_PROPERTIES_ID] = {
     ],
 }
 
+SUBSTITUTION_MAPPING_COVERAGE_ID = "TOSCA13-3.8.13.4-001"
+DIRECT_TESTS[SUBSTITUTION_MAPPING_COVERAGE_ID] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingCoversEffectiveNodeType",
+        "tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingCoverageScopeIsExact",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingRejectsMissingProperties",
+        "tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingRejectsMissingCapabilities",
+        "tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingRejectsMissingRequirements",
+        "tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingUnknownDefinitionStillRejected",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingCoverageDiagnosticIsDeterministic",
+    ],
+    "inheritance": [
+        "tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingCoversEffectiveNodeType",
+        "tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingRejectsMissingProperties",
+        "tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingRejectsMissingCapabilities",
+        "tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingRejectsMissingRequirements",
+    ],
+    "normalization": [
+        "tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingCoversEffectiveNodeType",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go#TestPartialSubstitutionMappingCoverageDoesNotChangeTOSCA20",
+        "puccini_test.go#TestParse/1.3/substitution-mapping.yaml",
+    ],
+}
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -1113,6 +1143,18 @@ MUTATION_CHECKS[SUBSTITUTING_REQUIRED_PROPERTIES_ID] = {
         "TestPartialSubstitutingTemplateInheritedRequiredProperty",
         "TestPartialSubstitutingTemplateChecksEveryInternalNode",
         "TestPartialSubstitutingRequiredPropertyDiagnosticIsDeterministic",
+    ],
+    "expected_tests_failed": True,
+    "production_diff_restored": True,
+}
+MUTATION_CHECKS[SUBSTITUTION_MAPPING_COVERAGE_ID] = {
+    "performed": True,
+    "mutation": "Temporarily removed only the TOSCA 1.3 substitution-mappings validator registration.",
+    "affected_tests": [
+        "TestPartialSubstitutionMappingRejectsMissingProperties",
+        "TestPartialSubstitutionMappingRejectsMissingCapabilities",
+        "TestPartialSubstitutionMappingRejectsMissingRequirements",
+        "TestPartialSubstitutionMappingCoverageDiagnosticIsDeterministic",
     ],
     "expected_tests_failed": True,
     "production_diff_restored": True,
@@ -2317,7 +2359,47 @@ def manual_must_trace(requirement: dict[str, Any]) -> tuple[str, dict[str, Any],
                 "TOSCA 1.3 substituting-template tests prove generic logic applicability"
             ),
         }, None
-    if requirement_id in {"TOSCA13-3.8.2.2.3-015", "TOSCA13-3.8.13.4-001"}:
+    if requirement_id == SUBSTITUTION_MAPPING_COVERAGE_ID:
+        return "implemented", {
+            "entry_point": "parser.Context.Render",
+            "packages": [
+                "tosca/grammars/tosca_v1_3",
+                "tosca/grammars/tosca_v2_0",
+                "tosca/parsing",
+                "tosca/parser",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v1_3/substitution-validation.go",
+                "tosca/grammars/tosca_v1_3/common.go",
+                "tosca/grammars/tosca_v2_0/substitution-mappings.go",
+                "tosca/parsing/grammars.go",
+                "tosca/parser/phase4-inheritance.go",
+                "tosca/parser/phase5-rendering.go",
+                "tests/conformance/tosca_1_3/partial_substitution_mapping_coverage_test.go",
+                "docs/decisions/0011-tosca-1.3-substitution-mapping-coverage.md",
+            ],
+            "symbols": [
+                "parsing.Grammar.SubstitutionMappingsValidator",
+                "tosca_v2_0.SubstitutionMappings.Render",
+                "tosca_v1_3.validateSubstitutionMappingCoverage",
+            ],
+            "parser_phase": "rendering after inheritance and supplied-mapping resolution",
+            "execution_path": [
+                "parser.Context.Inherit",
+                "parser.Context.Render",
+                "tosca_v2_0.SubstitutionMappings.Render",
+                "renderCapabilityMappings/renderRequirementMappings/renderPropertyMappings",
+                "tosca_v1_3.validateSubstitutionMappingCoverage",
+            ],
+            "trace_summary": (
+                "effective inherited substituted node type → supplied mapping "
+                "resolution/type checks → deterministic completeness traversal "
+                "of every property, capability, and requirement definition; "
+                "the v1.3-only policy excludes attributes/interfaces and leaves "
+                "TOSCA 2.0 unchanged"
+            ),
+        }, None
+    if requirement_id == "TOSCA13-3.8.2.2.3-015":
         group = "substitution" if section.startswith("3.8.13") else "rendering"
         return "partial", traced_impl(group, "rendering", "Assignments and supplied mappings are resolved and type-checked, but the complete conditional/all-definitions coverage rule is not enforced."), "Assignment coverage/conditional validation is incomplete."
     if requirement_id in {"TOSCA13-3.8.3.3-001", "TOSCA13-3.8.4.3-001"}:

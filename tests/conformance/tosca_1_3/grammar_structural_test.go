@@ -241,6 +241,12 @@ topology_template:
         targets: [NodeTemplateName]
   substitution_mappings:
     node_type: NodeTypeName
+    capabilities:
+      CapabilityName: [NodeTemplateName, CapabilityName]
+      feature: [NodeTemplateName, feature]
+    requirements:
+      RequirementName: [NodeTemplateName, RequirementName]
+      dependency: [NodeTemplateName, dependency]
 `
 	if _, problems, err := testsupport.ParseSource(t, source); err != nil {
 		t.Fatalf("valid symbolic grammar names failed: %v\n%s", err, problems)

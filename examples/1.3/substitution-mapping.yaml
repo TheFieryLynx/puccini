@@ -22,6 +22,10 @@ topology_template:
     scale:
       type: integer
 
+    algorithm:
+      type: string
+      default: round_robin
+
   node_templates:
 
     loadbalancer:
@@ -47,15 +51,19 @@ topology_template:
       # Expose the internal loadbalancer node's capability
       # The capability types must be compatible
       client: [ loadbalancer, client ]
+      feature: [ loadbalancer, feature ]
     requirements:
       # Expose the requirements of our software components
       # Any requirement can be mapped
       admin_host: [ admin, host ]
+      application: [ loadbalancer, application ]
       db_host: [ db, host ]
+      dependency: [ loadbalancer, dependency ]
     properties:
       # Properties are mapped to inputs
       # (You can also map properties to node template properties, though this use is deprecated in TOSCA 1.3)
       # The data types must be compatible
+      algorithm: [ algorithm ]
       redundancy: [ scale ]
     attributes:
       # The data types must be compatible
