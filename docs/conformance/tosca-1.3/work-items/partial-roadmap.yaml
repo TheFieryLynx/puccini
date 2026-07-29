@@ -645,25 +645,25 @@ requirements:
       - "Ordinary node template rendering checks required properties."
       - "Defaults satisfy required properties."
     missing_parts:
-      - "No substitution-specific traversal proves all internal node templates were rendered."
-      - "Function-valued and mapped assignments are not directly covered."
+      - "No direct evidence proved that generic all-node rendering covers substituting templates."
+      - "Function-valued assignments, defaults, inherited required properties, and disconnected internal nodes were not directly covered."
     implementation:
-      packages: [tosca/grammars/tosca_v1_3]
-      files: [tosca/grammars/tosca_v1_3/substitution-validation.go, tosca/grammars/tosca_v1_3/service-template.go]
-      symbols: [tosca_v1_3.validateSubstitutingNodeProperties]
+      packages: [tosca/grammars/tosca_v2_0, tosca/parser]
+      files: [tosca/grammars/tosca_v2_0/node-template.go, tosca/grammars/tosca_v2_0/value.go, tosca/grammars/tosca_v2_0/property-definition.go]
+      symbols: [tosca_v2_0.NodeTemplate.Render, tosca_v2_0.Values.RenderProperties, tosca_v2_0.PropertyDefinition.IsRequired]
       parser_phase: rendering
-      execution_path: [NodeTemplate.Render, ServiceTemplate.Render, validateSubstitutingNodeProperties]
-    remediation_group: substitution-coverage
+      execution_path: [parser.Context.Inherit, parser.Context.Render, NodeTemplate.Render, Values.RenderProperties]
+    remediation_group: substituting-required-properties
     remediation_order: 14
-    dependencies: [TOSCA13-3.8.13.4-001]
-    risk: high
+    dependencies: []
+    risk: low
     planned_tests:
-      positive: [TestSubstitutingTemplateRequiredPropertiesAssigned]
-      negative: [TestSubstitutingTemplateRejectsMissingRequiredProperty]
-      boundary: [TestSubstitutingTemplateDefaultSatisfiesRequiredProperty]
-      inheritance: [TestSubstitutingTemplateInheritedRequiredProperty]
-      resolution: [TestSubstitutingTemplateMappedInputAssignment]
-      normalization: [TestSubstitutingTemplateNormalizationDeterministic]
+      positive: [TestPartialSubstitutingTemplateRequiredPropertiesAssigned, TestPartialSubstitutingTemplateDefaultsAndOptionalProperties]
+      negative: [TestPartialSubstitutingTemplateRejectsMissingRequiredProperty, TestPartialSubstitutingTemplateChecksEveryInternalNode]
+      boundary: [TestPartialSubstitutingRequiredPropertyDiagnosticIsDeterministic]
+      inheritance: [TestPartialSubstitutingTemplateInheritedRequiredProperty]
+      resolution: [TestPartialSubstitutingTemplateFunctionAssignmentIsValid]
+      normalization: [TestPartialSubstitutingTemplateRequiredPropertiesAssigned, TestPartialSubstitutingTemplateFunctionAssignmentIsValid]
       regression: [TestOrdinaryNodeTemplateRequiredPropertiesUnchanged]
 
   - requirement_id: TOSCA13-3.8.13.4-001
@@ -685,8 +685,8 @@ requirements:
       symbols: [tosca_v1_3.validateSubstitutionMappingCoverage]
       parser_phase: rendering
       execution_path: [SubstitutionMappings.Render, ServiceTemplate.Render, validateSubstitutionMappingCoverage]
-    remediation_group: substitution-coverage
-    remediation_order: 14
+    remediation_group: substitution-mapping-coverage
+    remediation_order: 15
     dependencies: []
     risk: high
     planned_tests:

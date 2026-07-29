@@ -553,6 +553,33 @@ for requirement_id in TEMPLATE_COPY_DEPTH_IDS:
         ],
     }
 
+SUBSTITUTING_REQUIRED_PROPERTIES_ID = "TOSCA13-3.8.8.3-005"
+DIRECT_TESTS[SUBSTITUTING_REQUIRED_PROPERTIES_ID] = {
+    "positive": [
+        "tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateRequiredPropertiesAssigned",
+        "tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateDefaultsAndOptionalProperties",
+        "tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateFunctionAssignmentIsValid",
+    ],
+    "negative": [
+        "tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateRejectsMissingRequiredProperty",
+        "tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateChecksEveryInternalNode",
+    ],
+    "boundary": [
+        "tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateDefaultsAndOptionalProperties",
+        "tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingRequiredPropertyDiagnosticIsDeterministic",
+    ],
+    "inheritance": [
+        "tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateInheritedRequiredProperty",
+    ],
+    "normalization": [
+        "tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateRequiredPropertiesAssigned",
+        "tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateFunctionAssignmentIsValid",
+    ],
+    "regression": [
+        "tests/conformance/tosca_1_3/property_attribute_reflection_test.go",
+    ],
+}
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -1078,6 +1105,18 @@ for requirement_id in TEMPLATE_COPY_DEPTH_IDS:
         "expected_tests_failed": True,
         "production_diff_restored": True,
     }
+MUTATION_CHECKS[SUBSTITUTING_REQUIRED_PROPERTIES_ID] = {
+    "performed": True,
+    "mutation": "Temporarily disabled only the IsRequired branch in Values.RenderProperties.",
+    "affected_tests": [
+        "TestPartialSubstitutingTemplateRejectsMissingRequiredProperty",
+        "TestPartialSubstitutingTemplateInheritedRequiredProperty",
+        "TestPartialSubstitutingTemplateChecksEveryInternalNode",
+        "TestPartialSubstitutingRequiredPropertyDiagnosticIsDeterministic",
+    ],
+    "expected_tests_failed": True,
+    "production_diff_restored": True,
+}
 for requirement_id in LOCAL_COLLISION_IDS:
     MUTATION_CHECKS[requirement_id] = {
         "performed": True,
@@ -2240,7 +2279,45 @@ def manual_must_trace(requirement: dict[str, Any]) -> tuple[str, dict[str, Any],
     if requirement_id == "TOSCA13-3.7.11.4-002":
         return "partial", traced_impl("hierarchy", "rendering", "GroupType.Render checks a child members list against the parent list, but it does not prove that all types within a newly declared members list share one hierarchy."), "Parent refinement is checked; intra-list homogeneity is not fully validated."
 
-    if requirement_id in {"TOSCA13-3.8.2.2.3-015", "TOSCA13-3.8.8.3-005", "TOSCA13-3.8.13.4-001"}:
+    if requirement_id == SUBSTITUTING_REQUIRED_PROPERTIES_ID:
+        return "implemented", {
+            "entry_point": "parser.Context.Render",
+            "packages": [
+                "tosca/grammars/tosca_v2_0",
+                "tosca/parser",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v2_0/node-template.go",
+                "tosca/grammars/tosca_v2_0/value.go",
+                "tosca/grammars/tosca_v2_0/property-definition.go",
+                "tosca/parser/phase4-inheritance.go",
+                "tosca/parser/phase5-rendering.go",
+                "tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go",
+            ],
+            "symbols": [
+                "tosca_v2_0.NodeTemplate.Render",
+                "tosca_v2_0.Values.RenderProperties",
+                "tosca_v2_0.PropertyDefinition.IsRequired",
+                "tosca_v2_0.Value.RenderProperty",
+            ],
+            "parser_phase": "rendering after inheritance and before normalization",
+            "execution_path": [
+                "parser.Context.Inherit",
+                "parser.Context.Render",
+                "tosca_v2_0.NodeTemplate.Render",
+                "tosca_v2_0.Values.RenderProperties",
+                "tosca_v2_0.PropertyDefinition.Render",
+                "tosca_v2_0.Value.RenderProperty",
+            ],
+            "trace_summary": (
+                "generic all-entity rendering visits every internal node "
+                "template → effective inherited property definitions supply "
+                "requiredness/defaults → RenderProperties rejects every absent "
+                "required assignment and validates every supplied value; direct "
+                "TOSCA 1.3 substituting-template tests prove generic logic applicability"
+            ),
+        }, None
+    if requirement_id in {"TOSCA13-3.8.2.2.3-015", "TOSCA13-3.8.13.4-001"}:
         group = "substitution" if section.startswith("3.8.13") else "rendering"
         return "partial", traced_impl(group, "rendering", "Assignments and supplied mappings are resolved and type-checked, but the complete conditional/all-definitions coverage rule is not enforced."), "Assignment coverage/conditional validation is incomplete."
     if requirement_id in {"TOSCA13-3.8.3.3-001", "TOSCA13-3.8.4.3-001"}:

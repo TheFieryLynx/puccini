@@ -45,8 +45,9 @@ a manually assigned target.
 | 11 | attribute-default-provenance | `3.6.12.4-002` | intrinsic syntax and resolution |
 | 12 | workflow-operation-host | `3.6.27.1-008`, `3.6.27.1-010` | target and relationship resolution |
 | 13 | template-copy-depth | `3.8.3.3-001`, `3.8.4.3-001` | none |
-| 14 | substitution-coverage | `3.8.8.3-005`, `3.8.13.4-001` | rendered assignments and effective node type |
-| 15 | profile-cross-property | `5.3.11.3-001..003`, `5.5.7.4-001`, `5.5.13.1-012`, `8.5.1.1-036` | rendered complex values and defaults |
+| 14 | substituting-required-properties | `3.8.8.3-005` | effective property definitions and node rendering |
+| 15 | substitution-mapping-coverage | `3.8.13.4-001` | effective substituted node type |
+| 16 | profile-cross-property | `5.3.11.3-001..003`, `5.5.7.4-001`, `5.5.13.1-012`, `8.5.1.1-036` | rendered complex values and defaults |
 
 The groups are separated where parser phase, changed symbols, or regression
 risk differs. In particular, grammar-only interface/function rules are not
@@ -56,12 +57,12 @@ remain isolated from generic constraint processing.
 
 ## Current cross-status matrix
 
-After remediation group 13 (`template-copy-depth`):
+After remediation group 14 (`substituting-required-properties`):
 
 | Implementation status | verified | indirectly-tested | untested | Total |
 |---|---:|---:|---:|---:|
-| implemented | 165 | 26 | 24 | 215 |
-| partial | 0 | 0 | 8 | 8 |
+| implemented | 166 | 26 | 24 | 216 |
+| partial | 0 | 0 | 7 | 7 |
 | missing | 0 | 0 | 0 | 0 |
 | non-compliant | 0 | 0 | 0 | 0 |
-| **Total** | **165** | **26** | **32** | **223** |
+| **Total** | **166** | **26** | **31** | **223** |

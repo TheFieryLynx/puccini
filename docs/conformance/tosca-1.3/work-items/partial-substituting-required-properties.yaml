@@ -1,0 +1,130 @@
+remediation_group: substituting-required-properties
+remediation_order: 14
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+parser_phase: rendering after inheritance and before normalization
+execution_path:
+  - parser.Context.Inherit
+  - parser.Context.Render
+  - tosca_v2_0.NodeTemplate.Render
+  - tosca_v2_0.Values.RenderProperties
+  - PropertyDefinition.Render
+  - Value.RenderProperty
+
+requirements:
+  - requirement_id: TOSCA13-3.8.8.3-005
+    section: "3.8.8.3"
+    section_title: "Notes"
+    normative_rule: >-
+      If the substituting template is valid, all required properties of all
+      its node templates have valid property assignments already defined.
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "Every node template participates in parser rendering."
+      - "Effective inherited property definitions are supplied to RenderProperties."
+      - "An explicit value is rendered against its effective data type and constraints."
+      - "A property default supplies an absent assignment."
+      - "An absent property whose effective required value is true is diagnosed."
+    missing_parts:
+      - "No direct conformance test proved that the generic path covers substituting templates."
+      - "No direct test covered every disconnected internal node."
+      - "No direct test covered inherited required properties, defaults, optional properties, or function-valued assignments together with substitution_mappings."
+      - "No mutation evidence proved sensitivity to the required-property branch."
+    implementation:
+      packages:
+        - tosca/grammars/tosca_v2_0
+        - tosca/parser
+      files:
+        - tosca/grammars/tosca_v2_0/node-template.go
+        - tosca/grammars/tosca_v2_0/value.go
+        - tosca/grammars/tosca_v2_0/property-definition.go
+        - tosca/parser/phase4-inheritance.go
+        - tosca/parser/phase5-rendering.go
+      symbols:
+        - tosca_v2_0.NodeTemplate.Render
+        - tosca_v2_0.Values.RenderProperties
+        - tosca_v2_0.PropertyDefinition.IsRequired
+        - tosca_v2_0.Value.RenderProperty
+      parser_phase: rendering
+      execution_path:
+        - parser.Context.Inherit
+        - parser.Context.Render
+        - NodeTemplate.Render
+        - Values.RenderProperties
+    remediation_group: substituting-required-properties
+    remediation_order: 14
+    dependencies: []
+    risk: low
+    planned_tests:
+      positive:
+        - TestPartialSubstitutingTemplateRequiredPropertiesAssigned
+        - TestPartialSubstitutingTemplateDefaultsAndOptionalProperties
+        - TestPartialSubstitutingTemplateFunctionAssignmentIsValid
+      negative:
+        - TestPartialSubstitutingTemplateRejectsMissingRequiredProperty
+        - TestPartialSubstitutingTemplateChecksEveryInternalNode
+      boundary:
+        - TestPartialSubstitutingTemplateDefaultsAndOptionalProperties
+        - TestPartialSubstitutingRequiredPropertyDiagnosticIsDeterministic
+      inheritance:
+        - TestPartialSubstitutingTemplateInheritedRequiredProperty
+      resolution:
+        - TestPartialSubstitutingTemplateFunctionAssignmentIsValid
+      normalization:
+        - TestPartialSubstitutingTemplateRequiredPropertiesAssigned
+        - TestPartialSubstitutingTemplateFunctionAssignmentIsValid
+      regression:
+        - tests/conformance/tosca_1_3/property_attribute_reflection_test.go
+
+group_implementation:
+  finding: >-
+    Runtime tracing and direct tests establish that no substitution-specific
+    traversal is necessary. All topology node templates are rendered through
+    the same effective-definition path whether or not substitution_mappings is
+    present. The partial state was an evidence gap, not a production behavior
+    gap.
+  version_isolation: >-
+    No production semantics change. The direct evidence is TOSCA 1.3-specific;
+    shared required-property rendering remains unchanged for TOSCA 2.0.
+  baseline_reproduction:
+    performed: true
+    observed_behavior:
+      - "Valid explicit, defaulted, optional, and function-valued assignments were accepted."
+      - "Missing local and inherited required assignments were rejected at the property path."
+      - "A disconnected internal node was independently checked."
+    implementation_gap_reproduced: false
+    reason: "The frozen partial classification was conservative because direct substituting-template evidence was absent."
+  mutation_check:
+    performed: true
+    mutation: "Temporarily disabled only the IsRequired branch in Values.RenderProperties."
+    affected_tests:
+      - TestPartialSubstitutingTemplateRejectsMissingRequiredProperty
+      - TestPartialSubstitutingTemplateInheritedRequiredProperty
+      - TestPartialSubstitutingTemplateChecksEveryInternalNode
+      - TestPartialSubstitutingRequiredPropertyDiagnosticIsDeterministic
+    expected_tests_failed: true
+    production_diff_restored: true
+  results:
+    TOSCA13-3.8.8.3-005:
+      implementation_status: implemented
+      verification_status: verified
+
+verification:
+  focused_required_properties: passed
+  protected_tosca_1_3_blocks: passed
+  tosca_2_0_conformance: passed
+  go_test_all: passed
+  go_test_race_all: passed
+  go_vet_all: passed
+  git_diff_check: passed
+  audit_generation_twice: passed
+  audit_sha256_identical: true
+  denominator: 223
+  resulting_metrics:
+    implemented: 216
+    partial: 7
+    missing: 0
+    non_compliant: 0
+    verified: 166
+    indirectly_tested: 26
+    untested: 31

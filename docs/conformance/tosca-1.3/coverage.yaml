@@ -65607,8 +65607,8 @@ requirements:
   strength: REQUIRED
   category: assignment
   subject: notes
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -65618,47 +65618,65 @@ requirements:
     issue: null
     counted: true
   implementation:
-    entry_point: parser.Context.Parse
+    entry_point: parser.Context.ReadRoot
     packages:
-    - tosca/grammars/tosca_v2_0
+    - tosca/grammars
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/parser/phase5-rendering.go
-    - tosca/grammars/tosca_v2_0/attribute-definition.go
-    - tosca/grammars/tosca_v2_0/property-definition.go
-    - tosca/grammars/tosca_v2_0/value.go
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render
-    - tosca_v2_0.PropertyDefinition.Render
-    - tosca_v2_0.Values.RenderProperties
-    parser_phase: rendering
+    - grammars.DetectGrammar
+    - parsing.Context.Read
+    - tosca_v1_3.ReadServiceFile
+    parser_phase: read
     execution_path:
-    - parser.Context.Parse
-    - parser.Context.LookupNames
-    - parser.Context.Inherit
-    - parser.Context.Render
-    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
-    - tosca_v2_0.Value.Render
-    trace_summary: Assignments and supplied mappings are resolved and type-checked, but the complete conditional/all-definitions coverage rule
-      is not enforced.
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
-    positive: []
-    negative: []
-    boundary: []
-    regression: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateRequiredPropertiesAssigned
+    - tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateDefaultsAndOptionalProperties
+    - tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateFunctionAssignmentIsValid
+    negative:
+    - tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateRejectsMissingRequiredProperty
+    - tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateChecksEveryInternalNode
+    boundary:
+    - tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateDefaultsAndOptionalProperties
+    - tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingRequiredPropertyDiagnosticIsDeterministic
+    regression:
+    - tests/conformance/tosca_1_3/property_attribute_reflection_test.go
+    inheritance:
+    - tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateInheritedRequiredProperty
+    normalization:
+    - tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateRequiredPropertiesAssigned
+    - tests/conformance/tosca_1_3/partial_substituting_required_properties_test.go#TestPartialSubstitutingTemplateFunctionAssignmentIsValid
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Assignment coverage/conditional validation is incomplete.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Assignment coverage/conditional validation is incomplete.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily disabled only the IsRequired branch in Values.RenderProperties.
+    affected_tests:
+    - TestPartialSubstitutingTemplateRejectsMissingRequiredProperty
+    - TestPartialSubstitutingTemplateInheritedRequiredProperty
+    - TestPartialSubstitutingTemplateChecksEveryInternalNode
+    - TestPartialSubstitutingRequiredPropertyDiagnosticIsDeterministic
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.8.8.3-006
   section: 3.8.8.3
   section_title: Notes

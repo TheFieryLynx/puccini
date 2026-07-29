@@ -14,17 +14,17 @@ This report covers the continuation trace of every formerly-unknown record that 
 
 ## Stable denominator result
 
-- implemented: **215**.
-- partial: **8**.
+- implemented: **216**.
+- partial: **7**.
 - missing: **0**.
 - non-compliant: **0**.
-- verified: **165**.
+- verified: **166**.
 - indirectly-tested: **26**.
-- untested: **32**.
+- untested: **31**.
 - unverifiable: **0**.
-- implementation coverage: **215/223 (96.41%)**.
-- verified conformance coverage: **165/223 (73.99%)**.
-- broad test evidence coverage: **191/223 (85.65%)**.
+- implementation coverage: **216/223 (96.86%)**.
+- verified conformance coverage: **166/223 (74.44%)**.
+- broad test evidence coverage: **192/223 (86.10%)**.
 
 ## Continuation trace by subsystem
 
@@ -35,7 +35,7 @@ This report covers the continuation trace of every formerly-unknown record that 
 | Imports and namespaces | 10 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | 0 |
 | Type system and hierarchy | 6 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | 0 |
 | Inheritance and refinement | 3 | 3 | 0 | 0 | 0 | 1 | 0 | 2 | 0 |
-| Properties, attributes and assignments | 20 | 18 | 2 | 0 | 0 | 13 | 1 | 6 | 0 |
+| Properties, attributes and assignments | 20 | 19 | 1 | 0 | 0 | 14 | 1 | 5 | 0 |
 | Constraints | 8 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | 0 |
 | Intrinsic functions | 22 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | 0 |
 | Requirements and capabilities | 6 | 6 | 0 | 0 | 0 | 5 | 0 | 1 | 0 |
