@@ -1,0 +1,38 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+node_types:
+  Parent:
+    derived_from: tosca.nodes.Root
+    properties:
+      name:
+        type: string
+        default: inherited
+    attributes:
+      state:
+        type: string
+    artifacts:
+      config:
+        type: tosca.artifacts.File
+        file: config.txt
+    interfaces:
+      Test:
+        type: tosca.interfaces.Root
+        operations:
+          create:
+            outputs:
+              result:
+                type: string
+  Child:
+    derived_from: Parent
+topology_template:
+  node_templates:
+    node:
+      type: Child
+  outputs:
+    property:
+      value: { get_property: [node, name] }
+    attribute:
+      value: { get_attribute: [node, state] }
+    operation:
+      value: { get_operation_output: [node, Test, create, result] }
+    artifact:
+      value: { get_artifact: [node, config] }

@@ -47,3 +47,11 @@ mutations:
     expected_corpus_failures: true
     observed_result: the missing-type node template was accepted and the corpus runner failed
     production_diff_restored: true
+  - category: intrinsic-functions
+    production_validation_path: tosca_v1_3 intrinsic function argument validator -> token
+    mutation: accepted the two-argument token form by suppressing only its missing substring_index diagnostic
+    affected_cases:
+      - TOSCA13-CORPUS-FUNCTION-ARGUMENTS-INVALID
+    expected_corpus_failures: true
+    observed_result: the incomplete token call was accepted and the corpus runner failed
+    production_diff_restored: true

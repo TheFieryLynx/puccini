@@ -764,3 +764,65 @@ cases:
     coverage:
       variation_axes: [copy:one-level, assignment:override, normalization:independent-copy]
       related_cases: [TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID]
+
+  - id: TOSCA13-CORPUS-FUNCTION-NESTED-VALID
+    file: sections/4-functions/functions/nested-valid.yaml
+    specification:
+      sections: ["4.3.1.2", "4.3.2.2", "4.3.3.2", "4.4.1.2"]
+      requirement_ids: [TOSCA13-4.3.1.2-003, TOSCA13-4.3.2.2-003, TOSCA13-4.3.3.2-003, TOSCA13-4.3.3.2-006, TOSCA13-4.3.3.2-010, TOSCA13-4.4.1.2-003]
+    classification: {kind: valid, category: normalization, features: [functions, nested, concat, get_input]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [output_exists:result]}
+    coverage:
+      variation_axes: [function:direct, function:nested, arguments:minimum-and-multiple, normalization:function-preserved]
+      related_cases: [TOSCA13-CORPUS-FUNCTION-ARGUMENTS-INVALID]
+
+  - id: TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID
+    file: sections/4-functions/functions/resolution-valid.yaml
+    specification:
+      sections: ["4.4.2.2", "4.5.1.2", "4.6.1.2", "4.7.1.2", "4.8.1.2"]
+      requirement_ids:
+        - TOSCA13-4.4.2.2-002
+        - TOSCA13-4.4.2.2-004
+        - TOSCA13-4.4.2.2-010
+        - TOSCA13-4.5.1.2-002
+        - TOSCA13-4.5.1.2-004
+        - TOSCA13-4.5.1.2-010
+        - TOSCA13-4.6.1.2-001
+        - TOSCA13-4.6.1.2-003
+        - TOSCA13-4.6.1.2-004
+        - TOSCA13-4.6.1.2-006
+        - TOSCA13-4.6.1.2-007
+        - TOSCA13-4.6.1.2-009
+        - TOSCA13-4.6.1.2-010
+        - TOSCA13-4.6.1.2-012
+        - TOSCA13-4.7.1.2-003
+        - TOSCA13-4.8.1.2-002
+        - TOSCA13-4.8.1.2-004
+        - TOSCA13-4.8.1.2-007
+    classification: {kind: valid, category: resolution, features: [functions, inheritance, references]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [output_exists:property, output_exists:attribute, output_exists:operation, output_exists:artifact]}
+    coverage:
+      variation_axes: [reference:inherited-property, reference:inherited-attribute, reference:operation-output, reference:artifact]
+      related_cases: [TOSCA13-CORPUS-FUNCTION-REFERENCE-INVALID]
+
+  - id: TOSCA13-CORPUS-FUNCTION-ARGUMENTS-INVALID
+    file: sections/4-functions/functions/arguments-invalid.yaml
+    specification:
+      sections: ["4.3.3.2"]
+      requirement_ids: [TOSCA13-4.3.3.2-003, TOSCA13-4.3.3.2-006, TOSCA13-4.3.3.2-010]
+    classification: {kind: invalid, category: grammar, features: [functions, argument-count]}
+    expected: {accepted: false, phase: read, diagnostic: {category: substring_index, path: token}, assertions: []}
+    coverage:
+      variation_axes: [arguments:missing-required, function:token]
+      related_cases: [TOSCA13-CORPUS-FUNCTION-NESTED-VALID]
+
+  - id: TOSCA13-CORPUS-FUNCTION-REFERENCE-INVALID
+    file: sections/4-functions/functions/reference-invalid.yaml
+    specification:
+      sections: ["4.4.2.2"]
+      requirement_ids: [TOSCA13-4.4.2.2-002, TOSCA13-4.4.2.2-004]
+    classification: {kind: invalid, category: resolution, features: [functions, missing-reference]}
+    expected: {accepted: false, phase: rendering, diagnostic: {category: malformed, path: absent}, assertions: []}
+    coverage:
+      variation_axes: [reference:missing-property, function:get_property]
+      related_cases: [TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID]
