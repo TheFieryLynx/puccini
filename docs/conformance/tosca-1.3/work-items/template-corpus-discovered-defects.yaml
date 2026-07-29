@@ -15,4 +15,8 @@ defects:
       - parsing.GetHierarchy
       - map iteration over entity types
     proposed_remediation_group: deterministic-type-hierarchy
-    status: discovered
+    remediation:
+      file: tosca/parsing/inheritance.go
+      symbol: NewHierarchyFor
+      behavior: collect hierarchical entities and sort them by source URL and structural path before constructing the hierarchy
+    status: remediated

@@ -31,3 +31,11 @@ mutations:
     expected_corpus_failures: true
     observed_result: cycle termination remained bounded but the required loop diagnostic disappeared
     production_diff_restored: true
+  - category: deterministic-type-hierarchy
+    production_validation_path: parsing.NewHierarchyFor ordered entity traversal
+    mutation: removed deterministic source-URL and structural-path ordering (the pre-remediation implementation)
+    affected_cases:
+      - TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-INVALID
+    expected_corpus_failures: true
+    observed_result: count-20 execution alternated the loop diagnostic between First and Second
+    production_diff_restored: true

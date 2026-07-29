@@ -68,13 +68,27 @@ func NewHierarchy() *Hierarchy {
 
 func NewHierarchyFor(entityPtr EntityPtr, work reflection.EntityWork, hierarchyContext HierarchyContext) *Hierarchy {
 	self := NewHierarchy()
+	var hierarchicalEntities EntityPtrs
 
 	work.TraverseEntities(entityPtr, func(entityPtr EntityPtr) bool {
-		if parentPtr, ok := GetParent(entityPtr); ok {
-			self.add(entityPtr, parentPtr, hierarchyContext, nil)
+		if _, ok := GetParent(entityPtr); ok {
+			hierarchicalEntities = append(hierarchicalEntities, entityPtr)
 		}
 		return true
 	})
+
+	sort.SliceStable(hierarchicalEntities, func(left, right int) bool {
+		leftContext := GetContext(hierarchicalEntities[left])
+		rightContext := GetContext(hierarchicalEntities[right])
+		leftKey := fmt.Sprintf("%s|%s", leftContext.URL.String(), leftContext.Path)
+		rightKey := fmt.Sprintf("%s|%s", rightContext.URL.String(), rightContext.Path)
+		return leftKey < rightKey
+	})
+
+	for _, entityPtr := range hierarchicalEntities {
+		parentPtr, _ := GetParent(entityPtr)
+		self.add(entityPtr, parentPtr, hierarchyContext, nil)
+	}
 
 	return self
 }
