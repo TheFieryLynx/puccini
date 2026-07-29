@@ -14,6 +14,9 @@ func CopyTemplate(context *parsing.Context) {
 					templates_ := context.Parent.Data
 					if templates, ok := templates_.(ard.Map); ok {
 						if copyFromTemplate, ok := templates[copyFromName]; ok {
+							if context.Grammar.TemplateCopyValidator != nil {
+								context.Grammar.TemplateCopyValidator(context, copyFromName, copyFromTemplate)
+							}
 							if copied, ok := CopyAndMerge(copyFromTemplate, context.Data, nil, templates); ok {
 								context.Data = copied
 							} else {

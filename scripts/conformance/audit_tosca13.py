@@ -525,6 +525,34 @@ for requirement_id in WORKFLOW_OPERATION_HOST_IDS:
         ],
     }
 
+TEMPLATE_COPY_DEPTH_IDS = {
+    "TOSCA13-3.8.3.3-001",
+    "TOSCA13-3.8.4.3-001",
+}
+for requirement_id in TEMPLATE_COPY_DEPTH_IDS:
+    DIRECT_TESTS[requirement_id] = {
+        "positive": [
+            "tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialNodeTemplateCopyAcceptsCompleteSource",
+            "tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialRelationshipTemplateCopyAcceptsCompleteSource",
+        ],
+        "negative": [
+            "tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialNodeTemplateCopyRejectsCopiedSource",
+            "tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialRelationshipTemplateCopyRejectsCopiedSource",
+            "tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialTemplateCopyLoopStillRejected",
+        ],
+        "boundary": [
+            "tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialTemplateCopyDepthDiagnosticIsDeterministic",
+        ],
+        "normalization": [
+            "tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialNodeTemplateCopyAcceptsCompleteSource",
+        ],
+        "regression": [
+            "tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialTemplateCopyDepthDoesNotChangeTOSCA20",
+            "puccini_test.go#TestParse/1.3/copy.yaml",
+            "tests/conformance/tosca_2_0/conformance_test.go#TestCopyExample",
+        ],
+    }
+
 CSAR_REMEDIATED_IDS = {
     "TOSCA13-6.1-004",
     "TOSCA13-6.1-006",
@@ -1034,6 +1062,18 @@ for requirement_id in WORKFLOW_OPERATION_HOST_IDS:
             "TestPartialWorkflowOperationHostRejectsInvalidRelationshipHosts",
             "TestPartialWorkflowOperationHostNodeTargetApplicability",
             "TestPartialWorkflowOperationHostDiagnosticIsDeterministic",
+        ],
+        "expected_tests_failed": True,
+        "production_diff_restored": True,
+    }
+for requirement_id in TEMPLATE_COPY_DEPTH_IDS:
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutation": "Temporarily removed only the TOSCA 1.3 template-copy validator registration.",
+        "affected_tests": [
+            "TestPartialNodeTemplateCopyRejectsCopiedSource",
+            "TestPartialRelationshipTemplateCopyRejectsCopiedSource",
+            "TestPartialTemplateCopyDepthDiagnosticIsDeterministic",
         ],
         "expected_tests_failed": True,
         "production_diff_restored": True,
@@ -2522,6 +2562,45 @@ def implementation(requirement: dict[str, Any], app: str) -> tuple[str, dict[str
                 "classification → conditional operation_host requiredness and "
                 "SOURCE/TARGET validation → activity rendering and normalized "
                 "host; TOSCA 2.0 leaves the policy hook unset"
+            ),
+        }, None
+    if requirement_id in TEMPLATE_COPY_DEPTH_IDS:
+        return "implemented", {
+            "entry_point": "parser.Context.ReadRoot",
+            "packages": [
+                "tosca/grammars/tosca_v1_3",
+                "tosca/grammars/tosca_v2_0",
+                "tosca/parsing",
+                "tosca/parser",
+            ],
+            "files": [
+                "tosca/grammars/tosca_v1_3/template-copy.go",
+                "tosca/grammars/tosca_v1_3/common.go",
+                "tosca/grammars/tosca_v2_0/copy.go",
+                "tosca/parsing/grammars.go",
+                "tosca/parsing/reading.go",
+                "tests/conformance/tosca_1_3/partial_template_copy_depth_test.go",
+            ],
+            "symbols": [
+                "parsing.Grammar.TemplateCopyValidator",
+                "tosca_v2_0.CopyTemplate",
+                "tosca_v1_3.validateTemplateCopySource",
+                "tosca_v2_0.CopyAndMerge",
+            ],
+            "parser_phase": "read before template field decoding",
+            "execution_path": [
+                "parser.Context.ReadRoot",
+                "parsing.Context.ReadFields",
+                "NodeTemplate.PreRead/RelationshipTemplate.PreRead",
+                "tosca_v2_0.CopyTemplate",
+                "tosca_v1_3.validateTemplateCopySource",
+                "tosca_v2_0.CopyAndMerge",
+            ],
+            "trace_summary": (
+                "TOSCA 1.3 template PreRead → raw copy-source lookup → "
+                "source-completeness validation → unchanged copy-and-merge; "
+                "only the v1.3 grammar installs the policy, so TOSCA 2.0 "
+                "retains recursive-copy behavior"
             ),
         }, None
     if requirement_id in DATATYPE_SHAPE_IDS:

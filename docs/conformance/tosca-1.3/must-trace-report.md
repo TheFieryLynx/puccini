@@ -14,24 +14,24 @@ This report covers the continuation trace of every formerly-unknown record that 
 
 ## Stable denominator result
 
-- implemented: **213**.
-- partial: **10**.
+- implemented: **215**.
+- partial: **8**.
 - missing: **0**.
 - non-compliant: **0**.
-- verified: **163**.
+- verified: **165**.
 - indirectly-tested: **26**.
-- untested: **34**.
+- untested: **32**.
 - unverifiable: **0**.
-- implementation coverage: **213/223 (95.52%)**.
-- verified conformance coverage: **163/223 (73.09%)**.
-- broad test evidence coverage: **189/223 (84.75%)**.
+- implementation coverage: **215/223 (96.41%)**.
+- verified conformance coverage: **165/223 (73.99%)**.
+- broad test evidence coverage: **191/223 (85.65%)**.
 
 ## Continuation trace by subsystem
 
 | Subsystem | Reviewed | implemented | partial | missing | non-compliant | verified | indirectly-tested | untested | blocked |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Service Template and tosca_definitions_version | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
-| Grammar and structural validation | 35 | 33 | 2 | 0 | 0 | 23 | 0 | 12 | 0 |
+| Grammar and structural validation | 35 | 35 | 0 | 0 | 0 | 25 | 0 | 10 | 0 |
 | Imports and namespaces | 10 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | 0 |
 | Type system and hierarchy | 6 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | 0 |
 | Inheritance and refinement | 3 | 3 | 0 | 0 | 0 | 1 | 0 | 2 | 0 |

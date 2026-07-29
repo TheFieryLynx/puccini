@@ -1,0 +1,173 @@
+remediation_group: template-copy-depth
+remediation_order: 13
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+parser_phase: read, before template field decoding and rendering
+execution_path:
+  - parser.Context.ReadRoot
+  - parsing.Context.ReadFields
+  - tosca_v2_0.NodeTemplate.PreRead or RelationshipTemplate.PreRead
+  - tosca_v2_0.CopyTemplate
+  - tosca_v1_3.validateTemplateCopySource
+  - tosca_v2_0.CopyAndMerge
+
+requirements:
+  - requirement_id: TOSCA13-3.8.3.3-001
+    section: "3.8.3.3"
+    section_title: "Additional requirements"
+    normative_rule: >-
+      The source node template named by copy MUST NOT itself use copy; it must
+      be a complete node template description.
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "copy is read as a symbolic node-template name."
+      - "A complete source node template is copied before local values are merged."
+      - "Local values override copied values."
+      - "Unknown sources and recursive loops are diagnosed by existing paths."
+    missing_parts:
+      - "A node template could copy a source that itself used copy."
+      - "Copy chains longer than one edge were recursively expanded."
+      - "The v1.3 source-completeness rule had no direct test."
+    implementation:
+      packages:
+        - tosca/grammars/tosca_v1_3
+        - tosca/grammars/tosca_v2_0
+        - tosca/parsing
+      files:
+        - tosca/parsing/grammars.go
+        - tosca/grammars/tosca_v2_0/copy.go
+        - tosca/grammars/tosca_v1_3/template-copy.go
+        - tosca/grammars/tosca_v1_3/common.go
+      symbols:
+        - parsing.Grammar.TemplateCopyValidator
+        - tosca_v2_0.CopyTemplate
+        - tosca_v1_3.validateTemplateCopySource
+      parser_phase: read
+      execution_path:
+        - parsing.Context.ReadFields
+        - NodeTemplate.PreRead
+        - tosca_v2_0.CopyTemplate
+        - tosca_v1_3.validateTemplateCopySource
+    remediation_group: template-copy-depth
+    remediation_order: 13
+    dependencies: []
+    risk: low
+    planned_tests:
+      positive:
+        - TestPartialNodeTemplateCopyAcceptsCompleteSource
+      negative:
+        - TestPartialNodeTemplateCopyRejectsCopiedSource
+        - TestPartialTemplateCopyLoopStillRejected
+      boundary:
+        - TestPartialTemplateCopyDepthDiagnosticIsDeterministic
+      inheritance: []
+      resolution:
+        - TestPartialNodeTemplateCopyRejectsCopiedSource
+      normalization:
+        - TestPartialNodeTemplateCopyAcceptsCompleteSource
+      regression:
+        - TestPartialTemplateCopyDepthDoesNotChangeTOSCA20
+
+  - requirement_id: TOSCA13-3.8.4.3-001
+    section: "3.8.4.3"
+    section_title: "Additional requirements"
+    normative_rule: >-
+      The source relationship template named by copy MUST NOT itself use copy;
+      it must be a complete relationship template description.
+    current_implementation_status: partial
+    current_verification_status: untested
+    implemented_parts:
+      - "copy is read as a symbolic relationship-template name."
+      - "A complete source relationship template is copied before local values are merged."
+      - "Local values override copied values."
+      - "Recursive copy loops are diagnosed by the shared copy path."
+    missing_parts:
+      - "A relationship template could copy a source that itself used copy."
+      - "Relationship copy chains longer than one edge were recursively expanded."
+      - "The v1.3 source-completeness rule had no direct test."
+    implementation:
+      packages:
+        - tosca/grammars/tosca_v1_3
+        - tosca/grammars/tosca_v2_0
+        - tosca/parsing
+      files:
+        - tosca/parsing/grammars.go
+        - tosca/grammars/tosca_v2_0/copy.go
+        - tosca/grammars/tosca_v1_3/template-copy.go
+        - tosca/grammars/tosca_v1_3/common.go
+      symbols:
+        - parsing.Grammar.TemplateCopyValidator
+        - tosca_v2_0.CopyTemplate
+        - tosca_v1_3.validateTemplateCopySource
+      parser_phase: read
+      execution_path:
+        - parsing.Context.ReadFields
+        - RelationshipTemplate.PreRead
+        - tosca_v2_0.CopyTemplate
+        - tosca_v1_3.validateTemplateCopySource
+      remediation_group: template-copy-depth
+      remediation_order: 13
+      dependencies: []
+      risk: low
+      planned_tests:
+        positive:
+          - TestPartialRelationshipTemplateCopyAcceptsCompleteSource
+        negative:
+          - TestPartialRelationshipTemplateCopyRejectsCopiedSource
+        boundary:
+          - TestPartialTemplateCopyDepthDiagnosticIsDeterministic
+        inheritance: []
+        resolution:
+          - TestPartialRelationshipTemplateCopyRejectsCopiedSource
+        normalization: []
+        regression:
+          - TestPartialTemplateCopyDepthDoesNotChangeTOSCA20
+
+group_implementation:
+  version_isolation: >-
+    Shared copy processing exposes a neutral optional policy hook. Only the
+    TOSCA 1.3 grammar installs the source-completeness validator; TOSCA 2.0
+    leaves it unset and retains its existing recursive-copy behavior.
+  baseline_reproduction:
+    performed: true
+    observed_failures:
+      - "A node template whose source itself used copy was accepted."
+      - "A relationship template whose source itself used copy was accepted."
+    correct_failure_reason_verified: true
+  mutation_check:
+    performed: true
+    mutation: "Temporarily removed only the TOSCA 1.3 template-copy validator registration."
+    affected_tests:
+      - TestPartialNodeTemplateCopyRejectsCopiedSource
+      - TestPartialRelationshipTemplateCopyRejectsCopiedSource
+      - TestPartialTemplateCopyDepthDiagnosticIsDeterministic
+    expected_tests_failed: true
+    production_diff_restored: true
+  results:
+    TOSCA13-3.8.3.3-001:
+      implementation_status: implemented
+      verification_status: verified
+    TOSCA13-3.8.4.3-001:
+      implementation_status: implemented
+      verification_status: verified
+
+verification:
+  focused_template_copy: passed
+  copy_example: passed
+  protected_tosca_1_3_blocks: passed
+  tosca_2_0_conformance: passed
+  go_test_all: passed
+  go_test_race_all: passed
+  go_vet_all: passed
+  git_diff_check: passed
+  audit_generation_twice: passed
+  audit_sha256_identical: true
+  denominator: 223
+  resulting_metrics:
+    implemented: 215
+    partial: 8
+    missing: 0
+    non_compliant: 0
+    verified: 165
+    indirectly_tested: 26
+    untested: 32

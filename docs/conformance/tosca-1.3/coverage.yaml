@@ -59976,8 +59976,8 @@ requirements:
   strength: MUST_NOT
   category: semantic
   subject: additional-requirements
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -59990,46 +59990,68 @@ requirements:
     entry_point: parser.Context.ReadRoot
     packages:
     - tosca/grammars/tosca_v1_3
-    - tosca/parser
+    - tosca/grammars/tosca_v2_0
     - tosca/parsing
+    - tosca/parser
     files:
     - tosca/grammars/tosca_v1_3/node-template.go
+    - tosca/grammars/tosca_v1_3/template-copy.go
     - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v2_0/copy.go
+    - tosca/parsing/grammars.go
     - tosca/parsing/reading.go
-    - tosca/parsing/validation.go
-    - tosca/parser/phase1-read.go
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go
     symbols:
     - tosca_v1_3.ReadNodeTemplate
-    - tosca_v1_3.Grammar
-    - parsing.Context.ReadFields
-    - parsing.ValidateRequiredFields
-    - parsing.Context.ValidateUnsupportedFields
-    parser_phase: read
+    - parsing.Grammar.TemplateCopyValidator
+    - tosca_v2_0.CopyTemplate
+    - tosca_v1_3.validateTemplateCopySource
+    - tosca_v2_0.CopyAndMerge
+    parser_phase: read before template field decoding
     execution_path:
     - parser.Context.ReadRoot
-    - parser.Context.read
-    - tosca_v1_3.ReadNodeTemplate
     - parsing.Context.ReadFields
-    - parsing.ValidateRequiredFields
-    trace_summary: CopyTemplate recursively expands copy chains and reports loops, but it permits a source template that itself uses copy, contrary
-      to this stricter v1.3 rule.
+    - NodeTemplate.PreRead/RelationshipTemplate.PreRead
+    - tosca_v2_0.CopyTemplate
+    - tosca_v1_3.validateTemplateCopySource
+    - tosca_v2_0.CopyAndMerge
+    trace_summary: TOSCA 1.3 template PreRead → raw copy-source lookup → source-completeness validation → unchanged copy-and-merge; only the v1.3
+      grammar installs the policy, so TOSCA 2.0 retains recursive-copy behavior
   tests:
-    positive: []
-    negative: []
-    boundary: []
-    regression: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialNodeTemplateCopyAcceptsCompleteSource
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialRelationshipTemplateCopyAcceptsCompleteSource
+    negative:
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialNodeTemplateCopyRejectsCopiedSource
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialRelationshipTemplateCopyRejectsCopiedSource
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialTemplateCopyLoopStillRejected
+    boundary:
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialTemplateCopyDepthDiagnosticIsDeterministic
+    regression:
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialTemplateCopyDepthDoesNotChangeTOSCA20
+    - puccini_test.go#TestParse/1.3/copy.yaml
+    - tests/conformance/tosca_2_0/conformance_test.go#TestCopyExample
+    normalization:
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialNodeTemplateCopyAcceptsCompleteSource
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Copy-chain syntax is implemented; the source-must-be-complete restriction is absent.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Copy-chain syntax is implemented; the source-must-be-complete restriction is absent.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily removed only the TOSCA 1.3 template-copy validator registration.
+    affected_tests:
+    - TestPartialNodeTemplateCopyRejectsCopiedSource
+    - TestPartialRelationshipTemplateCopyRejectsCopiedSource
+    - TestPartialTemplateCopyDepthDiagnosticIsDeterministic
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.8.4-001
   section: 3.8.4
   section_title: Relationship Template
@@ -61384,8 +61406,8 @@ requirements:
   strength: MUST_NOT
   category: semantic
   subject: additional-requirements
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -61399,46 +61421,67 @@ requirements:
     packages:
     - tosca/grammars/tosca_v1_3
     - tosca/grammars/tosca_v2_0
-    - tosca/parser
     - tosca/parsing
+    - tosca/parser
     files:
     - tosca/grammars/tosca_v2_0/relationship-template.go
+    - tosca/grammars/tosca_v1_3/template-copy.go
     - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v2_0/copy.go
+    - tosca/parsing/grammars.go
     - tosca/parsing/reading.go
-    - tosca/parsing/validation.go
-    - tosca/parser/phase1-read.go
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go
     symbols:
     - tosca_v2_0.ReadRelationshipTemplate
-    - tosca_v1_3.Grammar
-    - parsing.Context.ReadFields
-    - parsing.ValidateRequiredFields
-    - parsing.Context.ValidateUnsupportedFields
-    parser_phase: read
+    - parsing.Grammar.TemplateCopyValidator
+    - tosca_v2_0.CopyTemplate
+    - tosca_v1_3.validateTemplateCopySource
+    - tosca_v2_0.CopyAndMerge
+    parser_phase: read before template field decoding
     execution_path:
     - parser.Context.ReadRoot
-    - parser.Context.read
-    - tosca_v2_0.ReadRelationshipTemplate
     - parsing.Context.ReadFields
-    - parsing.ValidateRequiredFields
-    trace_summary: CopyTemplate recursively expands copy chains and reports loops, but it permits a source template that itself uses copy, contrary
-      to this stricter v1.3 rule.
+    - NodeTemplate.PreRead/RelationshipTemplate.PreRead
+    - tosca_v2_0.CopyTemplate
+    - tosca_v1_3.validateTemplateCopySource
+    - tosca_v2_0.CopyAndMerge
+    trace_summary: TOSCA 1.3 template PreRead → raw copy-source lookup → source-completeness validation → unchanged copy-and-merge; only the v1.3
+      grammar installs the policy, so TOSCA 2.0 retains recursive-copy behavior
   tests:
-    positive: []
-    negative: []
-    boundary: []
-    regression: []
+    positive:
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialNodeTemplateCopyAcceptsCompleteSource
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialRelationshipTemplateCopyAcceptsCompleteSource
+    negative:
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialNodeTemplateCopyRejectsCopiedSource
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialRelationshipTemplateCopyRejectsCopiedSource
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialTemplateCopyLoopStillRejected
+    boundary:
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialTemplateCopyDepthDiagnosticIsDeterministic
+    regression:
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialTemplateCopyDepthDoesNotChangeTOSCA20
+    - puccini_test.go#TestParse/1.3/copy.yaml
+    - tests/conformance/tosca_2_0/conformance_test.go#TestCopyExample
+    normalization:
+    - tests/conformance/tosca_1_3/partial_template_copy_depth_test.go#TestPartialNodeTemplateCopyAcceptsCompleteSource
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
-    existing_test_executed: false
-    tests_executed: false
-    correct_failure_reason_verified: false
+    existing_test_executed: true
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Copy-chain syntax is implemented; the source-must-be-complete restriction is absent.
-  - Verification status is untested; no requirement-isolating direct test proves conformance.
-  notes: Copy-chain syntax is implemented; the source-must-be-complete restriction is absent.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Temporarily removed only the TOSCA 1.3 template-copy validator registration.
+    affected_tests:
+    - TestPartialNodeTemplateCopyRejectsCopiedSource
+    - TestPartialRelationshipTemplateCopyRejectsCopiedSource
+    - TestPartialTemplateCopyDepthDiagnosticIsDeterministic
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-3.8.5.1-001
   section: 3.8.5.1
   section_title: Keynames

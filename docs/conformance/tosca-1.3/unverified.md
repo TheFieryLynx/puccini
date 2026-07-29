@@ -1,6 +1,6 @@
 # Unverified TOSCA 1.3 requirements
 
-Untested or currently unverifiable records: **2347**.
+Untested or currently unverifiable records: **2345**.
 
 | Requirement | Implementation | Verification | Applicability | Reason |
 |---|---|---|---|---|
@@ -1085,7 +1085,6 @@ Untested or currently unverifiable records: **2347**.
 | `TOSCA13-3.8.3.2-011` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.8.3.2-012` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.8.3.2-013` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.8.3.3-001` | partial | untested | applicable | Copy-chain syntax is implemented; the source-must-be-complete restriction is absent.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.8.4-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.8.4.1-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.8.4.1-003` | partial | untested | applicable | Construct is represented, but the complete requirement-specific validation is absent.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: duplicate. |
@@ -1114,7 +1113,6 @@ Untested or currently unverifiable records: **2347**.
 | `TOSCA13-3.8.4.2-006` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.8.4.2-007` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.8.4.2-008` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-3.8.4.3-001` | partial | untested | applicable | Copy-chain syntax is implemented; the source-must-be-complete restriction is absent.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.8.5.1-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.8.5.1-003` | partial | untested | applicable | Construct is represented, but the complete requirement-specific validation is absent.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: duplicate. |
 | `TOSCA13-3.8.5.1-004` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
