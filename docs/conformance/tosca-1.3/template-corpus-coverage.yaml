@@ -92,3 +92,25 @@ grammar_entities:
       required_key: [inherited]
     fixtures: [TOSCA13-CORPUS-INHERITED-REQUIRED-KEY-VALID]
     status: complete
+
+  - entity: grammar-definitions
+    sections: ["3.6.3.3", "3.6.3.4", "3.6.6", "3.6.7", "3.6.9", "3.6.10", "3.6.12", "3.6.14", "3.6.15", "3.6.17", "3.6.19", "3.6.20", "3.6.21", "3.6.22"]
+    parser_phases: [read, inheritance, rendering, normalization]
+    variation_axes:
+      grammar_form: [minimal, complete, short, long, equivalent]
+      keynames: [required-present, required-absent, optional-individual, all-optional]
+      yaml_type_equivalence_classes: [mapping, string, integer-instead-of-boolean]
+      constraints: [conjunction, collection-length, incompatible-operator]
+      cardinality: [zero, one, UNBOUNDED]
+    fixtures:
+      - TOSCA13-CORPUS-REPOSITORY-SHORT-VALID
+      - TOSCA13-CORPUS-REPOSITORY-LONG-VALID
+      - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+      - TOSCA13-CORPUS-PROPERTY-MISSING-TYPE-INVALID
+      - TOSCA13-CORPUS-PROPERTY-REQUIRED-WRONG-TYPE-INVALID
+      - TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID
+      - TOSCA13-CORPUS-CONSTRAINT-OPERAND-INVALID
+    equivalence_notes:
+      - Non-boolean YAML scalars share the same field reader for boolean keynames; integer is the representative opposing class.
+      - Unknown keynames are validated by the common grammar-context map reader and are covered again by the CI integrity seed.
+    status: complete

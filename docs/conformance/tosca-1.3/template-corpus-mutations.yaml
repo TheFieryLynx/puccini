@@ -15,3 +15,11 @@ mutations:
     expected_corpus_failures: true
     observed_result: incomplete scalar-unit value was accepted and the corpus runner failed
     production_diff_restored: true
+  - category: grammar-definitions
+    production_validation_path: tosca_v1_3.ReadPropertyDefinition -> required-key validation
+    mutation: injected an implicit string type only when a property definition omitted its required type
+    affected_cases:
+      - TOSCA13-CORPUS-PROPERTY-MISSING-TYPE-INVALID
+    expected_corpus_failures: true
+    observed_result: the missing-type definition was accepted and the corpus runner failed
+    production_diff_restored: true

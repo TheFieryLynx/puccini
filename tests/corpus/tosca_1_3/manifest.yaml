@@ -525,3 +525,124 @@ cases:
     coverage:
       variation_axes: [inheritance:required-key-from-parent, refinement:default-only]
       related_cases: []
+
+  - id: TOSCA13-CORPUS-REPOSITORY-SHORT-VALID
+    file: sections/3.6-grammar-definitions/repository/short-valid.yaml
+    specification:
+      sections: ["3.6.6.1", "3.6.6.2.2"]
+      requirement_ids: [TOSCA13-3.6.6.1-004, TOSCA13-3.6.6.1-006, TOSCA13-3.6.6.2.2-003]
+    classification: {kind: valid, category: grammar, features: [repository, short-notation]}
+    expected: {accepted: true, phase: read, diagnostic: {category: null, path: null}, assertions: [service_template_non_nil]}
+    coverage:
+      variation_axes: [grammar-form:short, yaml-type:string]
+      related_cases: [TOSCA13-CORPUS-REPOSITORY-LONG-VALID]
+
+  - id: TOSCA13-CORPUS-REPOSITORY-LONG-VALID
+    file: sections/3.6-grammar-definitions/repository/long-valid.yaml
+    specification:
+      sections: ["3.6.6.1", "3.6.6.2.2"]
+      requirement_ids: [TOSCA13-3.6.6.1-004, TOSCA13-3.6.6.1-006, TOSCA13-3.6.6.2.2-003, TOSCA13-3.6.6.2.2-005]
+    classification: {kind: valid, category: grammar, features: [repository, long-notation]}
+    expected: {accepted: true, phase: read, diagnostic: {category: null, path: null}, assertions: [service_template_non_nil]}
+    coverage:
+      variation_axes: [grammar-form:long, keynames:all-optional]
+      related_cases: [TOSCA13-CORPUS-REPOSITORY-SHORT-VALID]
+
+  - id: TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+    file: sections/3.6-grammar-definitions/definitions/complete-valid.yaml
+    specification:
+      sections: ["3.6.7.1", "3.6.7.2.2", "3.6.9.1", "3.6.10.2", "3.6.10.4", "3.6.10.5", "3.6.12.2", "3.6.12.3", "3.6.12.4", "3.6.14.2", "3.6.14.3", "3.6.15.1", "3.6.17.2.3", "3.6.17.3", "3.6.19.2", "3.6.20.2.2", "3.6.21.1", "3.6.22.1", "3.6.22.3.2"]
+      requirement_ids:
+        - TOSCA13-3.6.7.1-001
+        - TOSCA13-3.6.7.1-003
+        - TOSCA13-3.6.7.1-004
+        - TOSCA13-3.6.7.1-006
+        - TOSCA13-3.6.7.2.2-003
+        - TOSCA13-3.6.7.2.2-005
+        - TOSCA13-3.6.7.2.2-006
+        - TOSCA13-3.6.9.1-001
+        - TOSCA13-3.6.10.2-001
+        - TOSCA13-3.6.10.4-004
+        - TOSCA13-3.6.10.4-007
+        - TOSCA13-3.6.10.4-008
+        - TOSCA13-3.6.10.5-001
+        - TOSCA13-3.6.10.5-003
+        - TOSCA13-3.6.10.5-004
+        - TOSCA13-3.6.10.5-005
+        - TOSCA13-3.6.12.2-001
+        - TOSCA13-3.6.12.2-010
+        - TOSCA13-3.6.12.3-004
+        - TOSCA13-3.6.12.4-002
+        - TOSCA13-3.6.14.2-008
+        - TOSCA13-3.6.14.2-014
+        - TOSCA13-3.6.14.2-015
+        - TOSCA13-3.6.14.3-002
+        - TOSCA13-3.6.14.3-003
+        - TOSCA13-3.6.15.1-005
+        - TOSCA13-3.6.15.1-012
+        - TOSCA13-3.6.17.2.3-003
+        - TOSCA13-3.6.17.3-002
+        - TOSCA13-3.6.19.2-004
+        - TOSCA13-3.6.20.2.2-003
+        - TOSCA13-3.6.20.2.2-004
+        - TOSCA13-3.6.20.2.2-007
+        - TOSCA13-3.6.20.2.2-008
+        - TOSCA13-3.6.21.1-001
+        - TOSCA13-3.6.21.1-003
+        - TOSCA13-3.6.22.1-004
+        - TOSCA13-3.6.22.1-020
+        - TOSCA13-3.6.22.3.2-002
+        - TOSCA13-3.6.22.3.2-004
+    classification: {kind: valid, category: semantic, features: [definitions, complete, inheritance, normalization]}
+    expected:
+      accepted: true
+      phase: normalization
+      diagnostic: {category: null, path: null}
+      assertions: [node_exists:component, input_exists:label, output_exists:label]
+    coverage:
+      variation_axes: [grammar-form:complete, keynames:all-optional, yaml-type:mapping, cardinality:zero-one-unbounded, inheritance:direct]
+      related_cases: [TOSCA13-CORPUS-PROPERTY-MISSING-TYPE-INVALID, TOSCA13-CORPUS-PROPERTY-REQUIRED-WRONG-TYPE-INVALID]
+
+  - id: TOSCA13-CORPUS-PROPERTY-MISSING-TYPE-INVALID
+    file: sections/3.6-grammar-definitions/definitions/missing-property-type-invalid.yaml
+    specification:
+      sections: ["3.6.10.4"]
+      requirement_ids: [TOSCA13-3.6.10.4-004]
+    classification: {kind: invalid, category: grammar, features: [property-definition, required-key]}
+    expected: {accepted: false, phase: read, diagnostic: {category: missing, path: type}, assertions: []}
+    coverage:
+      variation_axes: [keynames:required-type-absent, grammar-form:long]
+      related_cases: [TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID]
+
+  - id: TOSCA13-CORPUS-PROPERTY-REQUIRED-WRONG-TYPE-INVALID
+    file: sections/3.6-grammar-definitions/definitions/wrong-required-type-invalid.yaml
+    specification:
+      sections: ["3.6.10.4"]
+      requirement_ids: [TOSCA13-3.6.10.4-007]
+    classification: {kind: invalid, category: grammar, features: [property-definition, yaml-type]}
+    expected: {accepted: false, phase: read, diagnostic: {category: boolean, path: required}, assertions: []}
+    coverage:
+      variation_axes: [yaml-type:integer-instead-of-boolean, keynames:optional-required]
+      related_cases: [TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID]
+
+  - id: TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID
+    file: sections/3.6-grammar-definitions/constraints/boundaries-valid.yaml
+    specification:
+      sections: ["3.6.3.3", "3.6.3.4", "3.6.10.5"]
+      requirement_ids: [TOSCA13-3.6.3.3-001, TOSCA13-3.6.3.3-002, TOSCA13-3.6.3.3-003, TOSCA13-3.6.3.4-004, TOSCA13-3.6.3.4-005, TOSCA13-3.6.3.4-007, TOSCA13-3.6.10.5-004]
+    classification: {kind: valid, category: semantic, features: [constraints, boundaries, conjunction]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
+    coverage:
+      variation_axes: [constraint:conjunction, boundary:inclusive-upper, collection:length]
+      related_cases: [TOSCA13-CORPUS-CONSTRAINT-OPERAND-INVALID]
+
+  - id: TOSCA13-CORPUS-CONSTRAINT-OPERAND-INVALID
+    file: sections/3.6-grammar-definitions/constraints/operand-invalid.yaml
+    specification:
+      sections: ["3.6.3.3", "3.6.10.5"]
+      requirement_ids: [TOSCA13-3.6.3.3-003, TOSCA13-3.6.10.5-004]
+    classification: {kind: invalid, category: semantic, features: [constraints, operand-type]}
+    expected: {accepted: false, phase: inheritance, diagnostic: {category: incompatible, path: pattern}, assertions: []}
+    coverage:
+      variation_axes: [constraint:incompatible-operator, yaml-type:string-pattern-on-integer]
+      related_cases: [TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID]

@@ -1,0 +1,86 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+artifact_types:
+  Payload:
+    derived_from: tosca.artifacts.File
+data_types:
+  Record:
+    derived_from: tosca.datatypes.Root
+    properties:
+      name:
+        type: string
+        required: true
+        default: corpus
+        constraints:
+          - min_length: 1
+      tags:
+        type: list
+        required: false
+        entry_schema:
+          type: string
+capability_types:
+  CorpusEndpoint:
+    derived_from: tosca.capabilities.Endpoint
+interface_types:
+  Lifecycle:
+    derived_from: tosca.interfaces.Root
+    inputs:
+      message:
+        type: string
+        required: false
+    operations:
+      run:
+        description: run operation
+relationship_types:
+  Link:
+    derived_from: tosca.relationships.Root
+    properties:
+      weight:
+        type: integer
+        required: false
+node_types:
+  Component:
+    derived_from: tosca.nodes.Root
+    properties:
+      record:
+        type: Record
+        required: false
+    attributes:
+      state:
+        type: string
+    artifacts:
+      payload:
+        type: Payload
+        file: payload.bin
+    capabilities:
+      endpoint:
+        type: CorpusEndpoint
+        occurrences: [0, UNBOUNDED]
+    requirements:
+      - peer:
+          capability: CorpusEndpoint
+          relationship: Link
+          occurrences: [0, 1]
+    interfaces:
+      Lifecycle:
+        type: Lifecycle
+group_types:
+  ComponentGroup:
+    derived_from: tosca.groups.Root
+    members: [Component]
+policy_types:
+  ComponentPolicy:
+    derived_from: tosca.policies.Root
+    targets: [Component, ComponentGroup]
+topology_template:
+  inputs:
+    label:
+      type: string
+      required: false
+      default: corpus
+  node_templates:
+    component:
+      type: Component
+  outputs:
+    label:
+      type: string
+      value: { get_input: label }
