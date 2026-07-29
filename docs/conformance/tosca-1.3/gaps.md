@@ -14,7 +14,7 @@ Implementation gaps and verification gaps are counted independently.
 | 6 | function | 68 | 64 | 4 | 64 |
 | 7 | hierarchy | 61 | 59 | 2 | 59 |
 | 8 | default | 55 | 55 | 0 | 55 |
-| 9 | csar | 31 | 26 | 0 | 31 |
+| 9 | csar | 26 | 26 | 0 | 26 |
 | 10 | refinement | 17 | 17 | 0 | 17 |
 
 ## grammar
@@ -728,10 +728,7 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-6-002` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-6.1-002` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-6.1-003` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-6.1-005` — implementation=implemented; verification=untested; Verification status is untested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-6.1-008` — implementation=implemented; verification=untested; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-6.1-009` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-6.2-001` — implementation=implemented; verification=untested; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-6.2-003` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-6.2-004` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-6.2-006` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
@@ -750,8 +747,6 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-6.2.1-003` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-6.2.1-004` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-6.3-001` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-6.3-002` — implementation=implemented; verification=untested; Verification status is untested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-6.3-005` — implementation=implemented; verification=untested; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-6.3-007` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-6.3-009` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-6.3-010` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.

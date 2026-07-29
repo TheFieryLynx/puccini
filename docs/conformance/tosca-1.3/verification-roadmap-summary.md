@@ -33,16 +33,16 @@ protection only and never TOSCA 1.3 normative evidence.
 
 ## Current matrix
 
-After verification group 6 (`normative-connectivity`), both connectivity
-requirements have direct effective-definition, resolution, diagnostic, and
-normalization evidence. Profile-file mutations prove sensitivity to the exact
-ConnectsTo target type and Endpoint port entry schema. The denominator and
-implementation axis remain fixed.
+After verification group 7 (`csar-entry-processing`), all 50 records in the
+initial backlog have requirement-ID-specific direct evidence and restored
+mutation checks. CSAR selection tests assert the normalized entry definition,
+not merely successful archive opening. The denominator and implementation axis
+remain fixed.
 
 | Implementation status | verified | indirectly-tested | untested | Total |
 |---|---:|---:|---:|---:|
-| implemented | 218 | 0 | 5 | 223 |
+| implemented | 223 | 0 | 0 | 223 |
 | partial | 0 | 0 | 0 | 0 |
 | missing | 0 | 0 | 0 | 0 |
 | non-compliant | 0 | 0 | 0 | 0 |
-| **Total** | **218** | **0** | **5** | **223** |
+| **Total** | **223** | **0** | **0** | **223** |

@@ -1,0 +1,87 @@
+verification_group: csar-entry-processing
+verification_order: 7
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+sections:
+  - "6.1 Overall Structure of a CSAR"
+  - "6.2 TOSCA Meta File"
+  - "6.3 Archive without TOSCA-Metadata"
+parser_phase: CSAR metadata/root selection followed by TOSCA 1.3 service-file read
+execution_path:
+  - parser.Context.ReadRoot
+  - csar.ResolveServiceTemplateURL
+  - csar.ReadMetaFromURL or csar.GetRootPath
+  - parsing.Context.Read
+  - grammars.DetectGrammar
+  - tosca_v1_3.ReadServiceFile
+  - tosca_v1_3.validateCSAR
+  - ServiceFile.NormalizeServiceTemplate
+
+requirements:
+  - requirement_id: TOSCA13-6.1-005
+    normative_rule: the root YAML entry is a valid TOSCA definition template
+    initial_status: implemented/untested
+    final_status: implemented/verified
+  - requirement_id: TOSCA13-6.1-008
+    normative_rule: definitions YAML files may occur in any directory within the CSAR
+    initial_status: implemented/untested
+    final_status: implemented/verified
+  - requirement_id: TOSCA13-6.2-001
+    normative_rule: TOSCA.meta needs only block_0, whose Entry-Definitions selects a valid TOSCA definitions YAML file
+    initial_status: implemented/untested
+    final_status: implemented/verified
+  - requirement_id: TOSCA13-6.3-002
+    normative_rule: an archive without TOSCA-Metadata has exactly one root YAML file
+    initial_status: implemented/untested
+    final_status: implemented/verified
+  - requirement_id: TOSCA13-6.3-005
+    normative_rule: the root entry is valid TOSCA definitions YAML with required metadata, template_name, and template_version
+    initial_status: implemented/untested
+    final_status: implemented/verified
+
+direct_evidence:
+  test: tests/conformance/tosca_1_3/verification_csar_entry_processing_test.go#TestVerificationCSAREntryProcessing
+  positive:
+    - the selected root, arbitrary-directory, block_0-only, and .yml entry definitions are asserted by their normalized node names
+    - a subdirectory YAML file does not compete with the sole root entry
+  negative:
+    - a root document with a TOSCA 2.0-only key is rejected as invalid TOSCA 1.3
+    - block_0 without Entry-Definitions is rejected by TOSCA 1.3 meta validation
+    - multiple root YAML candidates are rejected
+    - a root-fallback document without required metadata is rejected
+  diagnostic:
+    - every invalid case checks the stable CSAR structure, metadata, grammar, or field-specific reason
+
+baseline_reproduction:
+  performed: true
+  result: all five requirement-ID subtests passed; no implementation defect was discovered
+
+mutation_check:
+  performed: true
+  mutations:
+    - description: allowed service_template in the TOSCA 1.3 service-file reader
+      affected_tests:
+        - TestVerificationCSAREntryProcessing/TOSCA13-6.1-005
+      expected_tests_failed: true
+    - description: forced Entry-Definitions beneath a Definitions directory
+      affected_tests:
+        - TestVerificationCSAREntryProcessing/TOSCA13-6.1-008
+      expected_tests_failed: true
+    - description: bypassed TOSCA 1.3 meta validation for a present TOSCA.meta
+      affected_tests:
+        - TestVerificationCSAREntryProcessing/TOSCA13-6.2-001
+      expected_tests_failed: true
+    - description: selected the first of multiple root YAML candidates
+      affected_tests:
+        - TestVerificationCSAREntryProcessing/TOSCA13-6.3-002
+      expected_tests_failed: true
+    - description: bypassed root-fallback metadata validation
+      affected_tests:
+        - TestVerificationCSAREntryProcessing/TOSCA13-6.3-005
+      expected_tests_failed: true
+  production_diff_restored: true
+
+results:
+  implementation_status: implemented
+  verification_status: verified
+  requirement_count: 5
+  defects_discovered: 0

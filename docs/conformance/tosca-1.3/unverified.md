@@ -1,6 +1,6 @@
 # Unverified TOSCA 1.3 requirements
 
-Untested or currently unverifiable records: **2318**.
+Untested or currently unverifiable records: **2313**.
 
 | Requirement | Implementation | Verification | Applicability | Reason |
 |---|---|---|---|---|
@@ -2097,10 +2097,7 @@ Untested or currently unverifiable records: **2318**.
 | `TOSCA13-6.1-001` | unknown | unverifiable | ambiguous | No complete requirement-specific execution trace was established.; Verification status is unverifiable; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-6.1-002` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-6.1-003` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-6.1-005` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-6.1-008` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-6.1-009` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-6.2-001` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-6.2-002` | unknown | unverifiable | ambiguous | No complete requirement-specific execution trace was established.; Verification status is unverifiable; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-6.2-003` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-6.2-004` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
@@ -2121,8 +2118,6 @@ Untested or currently unverifiable records: **2318**.
 | `TOSCA13-6.2.1-004` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-6.2.1-005` | unknown | unverifiable | ambiguous | No complete requirement-specific execution trace was established.; Verification status is unverifiable; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-6.3-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-6.3-002` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
-| `TOSCA13-6.3-005` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-6.3-007` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-6.3-008` | unknown | unverifiable | ambiguous | No complete requirement-specific execution trace was established.; Verification status is unverifiable; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-6.3-009` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |

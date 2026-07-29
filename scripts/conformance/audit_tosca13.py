@@ -929,6 +929,31 @@ for requirement_id in CSAR_REMEDIATED_IDS:
         ],
     }
 
+CSAR_ENTRY_VERIFICATION_IDS = {
+    "TOSCA13-6.1-005",
+    "TOSCA13-6.1-008",
+    "TOSCA13-6.2-001",
+    "TOSCA13-6.3-002",
+    "TOSCA13-6.3-005",
+}
+for requirement_id in CSAR_ENTRY_VERIFICATION_IDS:
+    direct_test = (
+        "tests/conformance/tosca_1_3/verification_csar_entry_processing_test.go"
+        f"#TestVerificationCSAREntryProcessing/{requirement_id}"
+    )
+    DIRECT_TESTS[requirement_id] = {
+        "positive": [direct_test],
+        "negative": [] if requirement_id == "TOSCA13-6.1-008" else [direct_test],
+        "boundary": [direct_test] if requirement_id == "TOSCA13-6.3-002" else [],
+        "resolution": [
+            direct_test
+        ] if requirement_id in {"TOSCA13-6.1-008", "TOSCA13-6.3-002"} else [],
+        "normalization": [direct_test],
+        "regression": [
+            "tests/conformance/tosca_1_3/csar_test.go#TestCSARValidationDoesNotChangeTosca20",
+        ],
+    }
+
 NETWORK_PORT_ORDER_REQUIRED_ID = "TOSCA13-8.5.2.3-008"
 DIRECT_TESTS[NETWORK_PORT_ORDER_REQUIRED_ID] = {
     "positive": [
@@ -1845,6 +1870,41 @@ for requirement_id in CSAR_REMEDIATED_IDS:
             "TestCSARMetaRequiresVersion11",
             "TestCSARMetaRejectsUnsafeEntryDefinitions",
         ],
+        "expected_tests_failed": True,
+        "production_diff_restored": True,
+    }
+CSAR_ENTRY_MUTATIONS = {
+    "TOSCA13-6.1-005": (
+        "Temporarily allowed the TOSCA 2.0-only service_template key in the "
+        "TOSCA 1.3 service-file reader.",
+        ["TestVerificationCSAREntryProcessing/TOSCA13-6.1-005"],
+    ),
+    "TOSCA13-6.1-008": (
+        "Temporarily forced Entry-Definitions beneath a Definitions directory "
+        "instead of resolving its exact arbitrary archive path.",
+        ["TestVerificationCSAREntryProcessing/TOSCA13-6.1-008"],
+    ),
+    "TOSCA13-6.2-001": (
+        "Temporarily bypassed only TOSCA 1.3 meta validation when a TOSCA.meta "
+        "file was present.",
+        ["TestVerificationCSAREntryProcessing/TOSCA13-6.2-001"],
+    ),
+    "TOSCA13-6.3-002": (
+        "Temporarily selected the first root YAML file when multiple root "
+        "candidates existed.",
+        ["TestVerificationCSAREntryProcessing/TOSCA13-6.3-002"],
+    ),
+    "TOSCA13-6.3-005": (
+        "Temporarily bypassed the metadata restriction for a root-fallback "
+        "TOSCA 1.3 entry definition.",
+        ["TestVerificationCSAREntryProcessing/TOSCA13-6.3-005"],
+    ),
+}
+for requirement_id, (mutation, affected_tests) in CSAR_ENTRY_MUTATIONS.items():
+    MUTATION_CHECKS[requirement_id] = {
+        "performed": True,
+        "mutation": mutation,
+        "affected_tests": affected_tests,
         "expected_tests_failed": True,
         "production_diff_restored": True,
     }
