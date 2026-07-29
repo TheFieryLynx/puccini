@@ -1,0 +1,54 @@
+cases:
+  - id: TOSCA13-CORPUS-SERVICE-TEMPLATE-MINIMAL-VALID
+    file: sections/3.10-service-template/service-template/minimal-valid.yaml
+    specification:
+      sections: ["3.10.1"]
+      requirement_ids:
+        - TOSCA13-3.10.1-001
+        - TOSCA13-3.10.1-002
+        - TOSCA13-3.10.1-003
+    classification:
+      kind: valid
+      category: grammar
+      features: [service-template, minimal, version-selection]
+    expected:
+      accepted: true
+      phase: normalization
+      diagnostic:
+        category: null
+        path: null
+      assertions:
+        - service_template_non_nil
+    coverage:
+      variation_axes:
+        - grammar-form:minimal
+        - keynames:required-present
+        - yaml-type:version-string
+      related_cases:
+        - TOSCA13-CORPUS-SERVICE-TEMPLATE-V20-KEY-INVALID
+
+  - id: TOSCA13-CORPUS-SERVICE-TEMPLATE-V20-KEY-INVALID
+    file: version-isolation/tosca-2.0-service-template-key-invalid.yaml
+    specification:
+      sections: ["3.10.1"]
+      requirement_ids:
+        - TOSCA13-3.10.1-001
+        - TOSCA13-3.10.1-003
+    classification:
+      kind: invalid
+      category: grammar
+      features: [service-template, version-isolation, unknown-key]
+    expected:
+      accepted: false
+      phase: read
+      diagnostic:
+        category: unsupported keyname
+        path: service_template
+      assertions: []
+    coverage:
+      variation_axes:
+        - keynames:tosca-2.0-only
+        - yaml-type:mapping
+        - version-isolation:1.3-rejects-2.0-form
+      related_cases:
+        - TOSCA13-CORPUS-SERVICE-TEMPLATE-MINIMAL-VALID
