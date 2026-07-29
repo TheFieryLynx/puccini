@@ -1,0 +1,2686 @@
+requirements:
+- requirement_id: TOSCA13-3.3.2.1-004
+  section: 3.3.2.1
+  section_title: Grammar
+  normative_rule: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have
+    the following meaning` includes `major_version: is a required integer value greater than or equal to 0 (zero)`.'
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v2_0/version.go
+    - tosca/grammars/tosca_v2_0/range.go
+    - tosca/grammars/tosca_v1_3/scalar-unit.go
+    - tosca/parser/phase5-rendering.go
+    symbols:
+    - tosca_v2_0.ReadVersion
+    - tosca_v2_0.ReadRange
+    - tosca_v1_3.ReadScalarUnit
+    - parser.Context.Render
+    parser_phase: rendering
+    execution_path:
+    - parser.Context.ReadRoot
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v2_0.ReadValue
+    - tosca_v2_0.Value.RenderDataType
+    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: scalar-semantics
+  verification_order: 1
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.2.1-004
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.3.2.1-005
+  section: 3.3.2.1
+  section_title: Grammar
+  normative_rule: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have
+    the following meaning` includes `minor_version: is a required integer value greater than or equal to 0 (zero).`.'
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v2_0/version.go
+    - tosca/grammars/tosca_v2_0/range.go
+    - tosca/grammars/tosca_v1_3/scalar-unit.go
+    - tosca/parser/phase5-rendering.go
+    symbols:
+    - tosca_v2_0.ReadVersion
+    - tosca_v2_0.ReadRange
+    - tosca_v1_3.ReadScalarUnit
+    - parser.Context.Render
+    parser_phase: rendering
+    execution_path:
+    - parser.Context.ReadRoot
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v2_0.ReadValue
+    - tosca_v2_0.Value.RenderDataType
+    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: scalar-semantics
+  verification_order: 1
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.2.1-005
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.3.3.1-004
+  section: 3.3.3.1
+  section_title: Grammar
+  normative_rule: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have
+    the following meaning` includes `lower_bound: is a required integer value that denotes the lower boundary of
+    the range.`.'
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v2_0/version.go
+    - tosca/grammars/tosca_v2_0/range.go
+    - tosca/grammars/tosca_v1_3/scalar-unit.go
+    - tosca/parser/phase5-rendering.go
+    symbols:
+    - tosca_v2_0.ReadVersion
+    - tosca_v2_0.ReadRange
+    - tosca_v1_3.ReadScalarUnit
+    - parser.Context.Render
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v2_0.ReadValue
+    - tosca_v2_0.Value.RenderDataType
+    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: scalar-semantics
+  verification_order: 1
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.3.1-004
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.3.1-004
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.3.3.1-005
+  section: 3.3.3.1
+  section_title: Grammar
+  normative_rule: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have
+    the following meaning` includes `upper_bound: is a required integer value that denotes the upper boundary of
+    the range.`.'
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v2_0/version.go
+    - tosca/grammars/tosca_v2_0/range.go
+    - tosca/grammars/tosca_v1_3/scalar-unit.go
+    - tosca/parser/phase5-rendering.go
+    symbols:
+    - tosca_v2_0.ReadVersion
+    - tosca_v2_0.ReadRange
+    - tosca_v1_3.ReadScalarUnit
+    - parser.Context.Render
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v2_0.ReadValue
+    - tosca_v2_0.Value.RenderDataType
+    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: scalar-semantics
+  verification_order: 1
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.3.1-005
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.3.1-005
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.3.3.1-006
+  section: 3.3.3.1
+  section_title: Grammar
+  normative_rule: This value MUST be greater than or equal to lower_bound.
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v2_0/version.go
+    - tosca/grammars/tosca_v2_0/range.go
+    - tosca/grammars/tosca_v1_3/scalar-unit.go
+    - tosca/parser/phase5-rendering.go
+    symbols:
+    - tosca_v2_0.ReadVersion
+    - tosca_v2_0.ReadRange
+    - tosca_v1_3.ReadScalarUnit
+    - parser.Context.Render
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v2_0.ReadValue
+    - tosca_v2_0.Value.RenderDataType
+    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: scalar-semantics
+  verification_order: 1
+  risk: medium
+  planned_direct_tests:
+    positive:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.3.1-006
+    negative: []
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic: []
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.3.5.1.2-002
+  section: 3.3.5.1.2
+  section_title: Multi-line grammar
+  normative_rule: 'entry_key_*: is the required key for an entry in the map.'
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    - tosca/parsing
+    files:
+    - tosca/grammars/tosca_v1_3/common.go
+    - tosca/parsing/reading.go
+    - tosca/parsing/validation.go
+    - tosca/parser/phase1-read.go
+    symbols:
+    - tosca_v1_3.Grammar
+    - parsing.Context.ReadFields
+    - parsing.ValidateRequiredFields
+    - parsing.Context.ValidateUnsupportedFields
+    parser_phase: read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - tosca_v1_3.Grammar reader
+    - parsing.Context.ReadFields
+    - parsing.ValidateRequiredFields
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: map-entry-grammar
+  verification_order: 2
+  risk: low
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_map_entry_grammar_test.go#TestVerificationMultilineMapEntryKey/TOSCA13-3.3.5.1.2-002
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_map_entry_grammar_test.go#TestVerificationMultilineMapEntryKey/TOSCA13-3.3.5.1.2-002
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.3.6.1-004
+  section: 3.3.6.1
+  section_title: Grammar
+  normative_rule: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have
+    the following meaning` includes `scalar: is a required scalar value.`.'
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v2_0/version.go
+    - tosca/grammars/tosca_v2_0/range.go
+    - tosca/grammars/tosca_v1_3/scalar-unit.go
+    - tosca/parser/phase5-rendering.go
+    symbols:
+    - tosca_v2_0.ReadVersion
+    - tosca_v2_0.ReadRange
+    - tosca_v1_3.ReadScalarUnit
+    - parser.Context.Render
+    parser_phase: rendering
+    execution_path:
+    - parser.Context.ReadRoot
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v2_0.ReadValue
+    - tosca_v2_0.Value.RenderDataType
+    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: scalar-semantics
+  verification_order: 1
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.1-004
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.1-004
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.3.6.1-005
+  section: 3.3.6.1
+  section_title: Grammar
+  normative_rule: 'The preceding rule `In the above grammar, the pseudo values that appear in angle brackets have
+    the following meaning` includes `unit: is a required unit value.`.'
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v2_0/version.go
+    - tosca/grammars/tosca_v2_0/range.go
+    - tosca/grammars/tosca_v1_3/scalar-unit.go
+    - tosca/parser/phase5-rendering.go
+    symbols:
+    - tosca_v2_0.ReadVersion
+    - tosca_v2_0.ReadRange
+    - tosca_v1_3.ReadScalarUnit
+    - parser.Context.Render
+    parser_phase: rendering
+    execution_path:
+    - parser.Context.ReadRoot
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v2_0.ReadValue
+    - tosca_v2_0.Value.RenderDataType
+    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: scalar-semantics
+  verification_order: 1
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.1-005
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.1-005
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.3.6.1-006
+  section: 3.3.6.1
+  section_title: Grammar
+  normative_rule: The unit value MUST be type-compatible with the scalar.
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v2_0/version.go
+    - tosca/grammars/tosca_v2_0/range.go
+    - tosca/grammars/tosca_v1_3/scalar-unit.go
+    - tosca/parser/phase5-rendering.go
+    symbols:
+    - tosca_v2_0.ReadVersion
+    - tosca_v2_0.ReadRange
+    - tosca_v1_3.ReadScalarUnit
+    - parser.Context.Render
+    parser_phase: rendering
+    execution_path:
+    - parser.Context.ReadRoot
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v2_0.ReadValue
+    - tosca_v2_0.Value.RenderDataType
+    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: scalar-semantics
+  verification_order: 1
+  risk: medium
+  planned_direct_tests:
+    positive:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.1-006
+    negative: []
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic: []
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.3.6.2-001
+  section: 3.3.6.2
+  section_title: Additional requirements
+  normative_rule: 'Whitespace: any number of spaces (including zero or none) SHALL be allowed between the scalar
+    value and the unit value.'
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v2_0/version.go
+    - tosca/grammars/tosca_v2_0/range.go
+    - tosca/grammars/tosca_v1_3/scalar-unit.go
+    - tosca/parser/phase5-rendering.go
+    symbols:
+    - tosca_v2_0.ReadVersion
+    - tosca_v2_0.ReadRange
+    - tosca_v1_3.ReadScalarUnit
+    - parser.Context.Render
+    parser_phase: rendering
+    execution_path:
+    - parser.Context.ReadRoot
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v2_0.ReadValue
+    - tosca_v2_0.Value.RenderDataType
+    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: scalar-semantics
+  verification_order: 1
+  risk: medium
+  planned_direct_tests:
+    positive:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.2-001
+    negative: []
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic: []
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.3.6.2-002
+  section: 3.3.6.2
+  section_title: Additional requirements
+  normative_rule: It SHALL be considered an error if either the scalar or unit portion is missing on a property
+    or attribute declaration derived from any scalar-unit type.
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v2_0/version.go
+    - tosca/grammars/tosca_v2_0/range.go
+    - tosca/grammars/tosca_v1_3/scalar-unit.go
+    - tosca/parser/phase5-rendering.go
+    symbols:
+    - tosca_v2_0.ReadVersion
+    - tosca_v2_0.ReadRange
+    - tosca_v1_3.ReadScalarUnit
+    - parser.Context.Render
+    parser_phase: rendering
+    execution_path:
+    - parser.Context.ReadRoot
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v2_0.ReadValue
+    - tosca_v2_0.Value.RenderDataType
+    - tosca_v2_0.ReadVersion/ReadRange or tosca_v1_3.ReadScalarUnit
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: scalar-semantics
+  verification_order: 1
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.2-002
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_scalar_semantics_test.go#TestVerificationScalarSemantics/TOSCA13-3.3.6.2-002
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.6.10.4-008
+  section: 3.6.10.4
+  section_title: Grammar
+  normative_rule: If this keyname is not present on a property definition, then the property SHALL be considered
+    required (i.e., true) by default.
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/property-definition.go
+    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/tosca_v2_0/attribute-definition.go
+    - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/value.go
+    symbols:
+    - tosca_v1_3.ReadPropertyDefinition
+    - parser.Context.Render
+    - tosca_v2_0.AttributeDefinition.Render
+    - tosca_v2_0.PropertyDefinition.Render
+    - tosca_v2_0.Values.RenderProperties
+    parser_phase: rendering
+    execution_path:
+    - parser.Context.Parse
+    - parser.Context.LookupNames
+    - parser.Context.Inherit
+    - parser.Context.Render
+    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
+    - tosca_v2_0.Value.Render
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: definition-defaults
+  verification_order: 3
+  risk: medium
+  planned_direct_tests:
+    positive:
+    - tests/conformance/tosca_1_3/verification_definition_defaults_test.go#TestVerificationDefinitionDefaults/TOSCA13-3.6.10.4-008
+    negative: []
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic: []
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.6.10.5-003
+  section: 3.6.10.5
+  section_title: Additional Requirements
+  normative_rule: "The value provided on a property definition\u2019s default keyname SHALL be type compatible with\
+    \ the type declared on the definition\u2019s type keyname."
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/property-definition.go
+    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/tosca_v2_0/attribute-definition.go
+    - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/value.go
+    symbols:
+    - tosca_v1_3.ReadPropertyDefinition
+    - parser.Context.Render
+    - tosca_v2_0.AttributeDefinition.Render
+    - tosca_v2_0.PropertyDefinition.Render
+    - tosca_v2_0.Values.RenderProperties
+    parser_phase: rendering
+    execution_path:
+    - parser.Context.Parse
+    - parser.Context.LookupNames
+    - parser.Context.Inherit
+    - parser.Context.Render
+    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
+    - tosca_v2_0.Value.Render
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: definition-defaults
+  verification_order: 3
+  risk: medium
+  planned_direct_tests:
+    positive:
+    - tests/conformance/tosca_1_3/verification_definition_defaults_test.go#TestVerificationDefinitionDefaults/TOSCA13-3.6.10.5-003
+    negative: []
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic: []
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.6.12.2-010
+  section: 3.6.12.2
+  section_title: Keynames
+  normative_rule: "For `default`: This value SHALL be type compatible with the type declared by the property definition\u2019\
+    s type keyname."
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/attribute-definition.go
+    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/tosca_v2_0/attribute-definition.go
+    - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/value.go
+    symbols:
+    - tosca_v1_3.ReadAttributeDefinition
+    - parser.Context.Render
+    - tosca_v2_0.AttributeDefinition.Render
+    - tosca_v2_0.PropertyDefinition.Render
+    - tosca_v2_0.Values.RenderProperties
+    parser_phase: rendering
+    execution_path:
+    - parser.Context.Parse
+    - parser.Context.LookupNames
+    - parser.Context.Inherit
+    - parser.Context.Render
+    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
+    - tosca_v2_0.Value.Render
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (subject occurs in positive example corpus)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: definition-defaults
+  verification_order: 3
+  risk: medium
+  planned_direct_tests:
+    positive:
+    - tests/conformance/tosca_1_3/verification_definition_defaults_test.go#TestVerificationDefinitionDefaults/TOSCA13-3.6.12.2-010
+    negative: []
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic: []
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.6.14.2-015
+  section: 3.6.14.2
+  section_title: Grammar
+  normative_rule: If this keyname is not present on a parameter definition, then the property SHALL be considered
+    required (i.e., true) by default.
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/parameter-definition.go
+    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/tosca_v2_0/attribute-definition.go
+    - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/value.go
+    symbols:
+    - tosca_v1_3.ReadParameterDefinition
+    - parser.Context.Render
+    - tosca_v2_0.AttributeDefinition.Render
+    - tosca_v2_0.PropertyDefinition.Render
+    - tosca_v2_0.Values.RenderProperties
+    parser_phase: rendering
+    execution_path:
+    - parser.Context.Parse
+    - parser.Context.LookupNames
+    - parser.Context.Inherit
+    - parser.Context.Render
+    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
+    - tosca_v2_0.Value.Render
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: definition-defaults
+  verification_order: 3
+  risk: medium
+  planned_direct_tests:
+    positive:
+    - tests/conformance/tosca_1_3/verification_definition_defaults_test.go#TestVerificationDefinitionDefaults/TOSCA13-3.6.14.2-015
+    negative: []
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic: []
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.6.14.3-002
+  section: 3.6.14.3
+  section_title: Additional Requirements
+  normative_rule: "The value provided on a parameter definition\u2019s default keyname SHALL be type compatible\
+    \ with the type declared on the definition\u2019s type keyname."
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/parameter-definition.go
+    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/tosca_v2_0/attribute-definition.go
+    - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/value.go
+    symbols:
+    - tosca_v1_3.ReadParameterDefinition
+    - parser.Context.Render
+    - tosca_v2_0.AttributeDefinition.Render
+    - tosca_v2_0.PropertyDefinition.Render
+    - tosca_v2_0.Values.RenderProperties
+    parser_phase: rendering
+    execution_path:
+    - parser.Context.Parse
+    - parser.Context.LookupNames
+    - parser.Context.Inherit
+    - parser.Context.Render
+    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
+    - tosca_v2_0.Value.Render
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: definition-defaults
+  verification_order: 3
+  risk: medium
+  planned_direct_tests:
+    positive:
+    - tests/conformance/tosca_1_3/verification_definition_defaults_test.go#TestVerificationDefinitionDefaults/TOSCA13-3.6.14.3-002
+    negative: []
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic: []
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.6.17.3-002
+  section: 3.6.17.3
+  section_title: Additional requirements
+  normative_rule: The default sub-classing behavior for implementations of operations SHALL be override.
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v2_0/operation-definition.go
+    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/tosca_v2_0/attribute-definition.go
+    - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/value.go
+    symbols:
+    - tosca_v2_0.ReadOperationDefinition
+    - parser.Context.Render
+    - tosca_v2_0.AttributeDefinition.Render
+    - tosca_v2_0.PropertyDefinition.Render
+    - tosca_v2_0.Values.RenderProperties
+    parser_phase: inheritance/rendering
+    execution_path:
+    - parser.Context.Parse
+    - parser.Context.LookupNames
+    - parser.Context.Inherit
+    - parser.Context.Render
+    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
+    - tosca_v2_0.Value.Render
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: override-workflow-occurrences
+  verification_order: 4
+  risk: medium
+  planned_direct_tests:
+    positive:
+    - tests/conformance/tosca_1_3/verification_override_workflow_occurrences_test.go#TestVerificationOverrideWorkflowAndOccurrences/TOSCA13-3.6.17.3-002
+    negative: []
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic: []
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.6.25.2.1-002
+  section: 3.6.25.2.1
+  section_title: And clause
+  normative_rule: All condition clauses MUST be asserted to true so that the and clause is asserted to true.
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v2_0/condition-clause.go
+    - tosca/grammars/tosca_v2_0/workflow-activity-definition.go
+    - tosca/grammars/tosca_v2_0/workflow-step-definition.go
+    - tosca/grammars/tosca_v2_0/workflow-precondition-definition.go
+    - tosca/parser/phase5-rendering.go
+    symbols:
+    - tosca_v2_0.ReadConditionClauseAnd
+    - tosca_v2_0.ReadWorkflowActivityDefinition
+    - tosca_v2_0.ReadWorkflowStepDefinition
+    - tosca_v2_0.ReadWorkflowPreconditionDefinition
+    - tosca_v2_0.WorkflowStepDefinition.Render
+    parser_phase: rendering/function-evaluation
+    execution_path:
+    - parser.Context.ReadRoot
+    - tosca_v1_3.ReadServiceFile
+    - tosca_v2_0.ReadWorkflowDefinition
+    - tosca_v2_0.ReadWorkflowStepDefinition/ReadWorkflowActivityDefinition
+    - parser.Context.LookupNames
+    - tosca_v2_0.WorkflowStepDefinition.Render
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: override-workflow-occurrences
+  verification_order: 4
+  risk: medium
+  planned_direct_tests:
+    positive:
+    - tests/conformance/tosca_1_3/verification_override_workflow_occurrences_test.go#TestVerificationOverrideWorkflowAndOccurrences/TOSCA13-3.6.25.2.1-002
+    negative: []
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic: []
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-3.7.3.3-002
+  section: 3.7.3.3
+  section_title: Additional Requirements
+  normative_rule: If the occurrences keyname is not present, then the occurrence of the requirement SHALL be one
+    and only one; that is a default declaration as follows would be assumed.
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/requirement-definition.go
+    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/tosca_v2_0/attribute-definition.go
+    - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/value.go
+    symbols:
+    - tosca_v1_3.ReadRequirementDefinition
+    - parser.Context.Render
+    - tosca_v2_0.AttributeDefinition.Render
+    - tosca_v2_0.PropertyDefinition.Render
+    - tosca_v2_0.Values.RenderProperties
+    parser_phase: rendering
+    execution_path:
+    - parser.Context.Parse
+    - parser.Context.LookupNames
+    - parser.Context.Inherit
+    - parser.Context.Render
+    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
+    - tosca_v2_0.Value.Render
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: override-workflow-occurrences
+  verification_order: 4
+  risk: medium
+  planned_direct_tests:
+    positive:
+    - tests/conformance/tosca_1_3/verification_override_workflow_occurrences_test.go#TestVerificationOverrideWorkflowAndOccurrences/TOSCA13-3.7.3.3-002
+    negative: []
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic: []
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.3.6.1-005
+  section: 5.3.6.1
+  section_title: Properties
+  normative_rule: 'For `token_type`: The required token type.'
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/data.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.datatypes.Credential.properties.token_type
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.6.1-005
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.6.1-005
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.3.6.1-008
+  section: 5.3.6.1
+  section_title: Properties
+  normative_rule: 'For `token`: The required token used as a credential for authorization or access to a networked
+    resource.'
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/data.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.datatypes.Credential.properties.token
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.6.1-008
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.6.1-008
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.3.7.1-002
+  section: 5.3.7.1
+  section_title: Properties
+  normative_rule: The `start_time` entry is required.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/data.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.datatypes.TimeInterval.properties.start_time
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.7.1-002
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.7.1-002
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.3.7.1-005
+  section: 5.3.7.1
+  section_title: Properties
+  normative_rule: The `end_time` entry is required.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/data.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.datatypes.TimeInterval.properties.end_time
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.7.1-005
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.7.1-005
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.3.7.2-005
+  section: 5.3.7.2
+  section_title: Definition
+  normative_rule: '`tosca.datatypes.TimeInterval.properties.start_time` is required.'
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/data.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.datatypes.timeinterval.properties.start_time.required
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.7.2-005
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.7.2-005
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.3.7.2-008
+  section: 5.3.7.2
+  section_title: Definition
+  normative_rule: '`tosca.datatypes.TimeInterval.properties.end_time` is required.'
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/data.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.datatypes.timeinterval.properties.end_time.required
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.7.2-008
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.7.2-008
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.3.11.1-002
+  section: 5.3.11.1
+  section_title: Properties
+  normative_rule: 'For `protocol`: The required protocol used on the port.'
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/data.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.datatypes.network.PortSpec.properties.protocol
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.11.1-002
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.11.1-002
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.3.11.2-005
+  section: 5.3.11.2
+  section_title: Definition
+  normative_rule: '`tosca.datatypes.network.PortSpec.properties.protocol` is required.'
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/data.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.datatypes.network.portspec.properties.protocol.required
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.11.2-005
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.11.2-005
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.5.7.1-003
+  section: 5.5.7.1
+  section_title: Properties
+  normative_rule: The `protocol` entry is required.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/capabilities.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.capabilities.Endpoint.properties.protocol
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.7.1-003
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.7.1-003
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.5.7.2-002
+  section: 5.5.7.2
+  section_title: Attributes
+  normative_rule: The `ip_address` entry is required.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/capabilities.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.capabilities.Endpoint.attributes.ip_address
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.7.2-002
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.7.2-002
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.5.7.3-005
+  section: 5.5.7.3
+  section_title: Definition
+  normative_rule: '`tosca.capabilities.Endpoint.properties.protocol` is required.'
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/capabilities.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.capabilities.endpoint.properties.protocol.required
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.7.3-005
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.7.3-005
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.5.13.1-003
+  section: 5.5.13.1
+  section_title: Properties
+  normative_rule: The `min_instances` entry is required.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/capabilities.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.capabilities.Scalable.properties.min_instances
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.13.1-003
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.13.1-003
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.5.13.1-007
+  section: 5.5.13.1
+  section_title: Properties
+  normative_rule: The `max_instances` entry is required.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/capabilities.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.capabilities.Scalable.properties.max_instances
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.13.1-007
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.13.1-007
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.7.1.1-002
+  section: 5.7.1.1
+  section_title: Attributes
+  normative_rule: The `tosca_id` entry is required.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/relationships.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.relationships.Root.attributes.tosca_id
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.7.1.1-002
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.7.1.1-002
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.7.1.1-005
+  section: 5.7.1.1
+  section_title: Attributes
+  normative_rule: The `tosca_name` entry is required.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/relationships.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.relationships.Root.attributes.tosca_name
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.7.1.1-005
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.7.1.1-005
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.7.1.1-010
+  section: 5.7.1.1
+  section_title: Attributes
+  normative_rule: The `state` entry is required.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/relationships.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.relationships.Root.attributes.state
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.7.1.1-010
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.7.1.1-010
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.7.5.1-003
+  section: 5.7.5.1
+  section_title: Properties
+  normative_rule: The `location` entry is required.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/relationships.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.relationships.AttachesTo.properties.location
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.7.5.1-003
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.7.5.1-003
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.8.1-004
+  section: 5.8.1
+  section_title: Additional Requirements
+  normative_rule: The default behavior when providing scripts for an operation in a sub-type (sub-class) or a template
+    of an existing type which already has a script provided for that operation SHALL be override.
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/grammars/tosca_v1_3
+    - tosca/grammars/tosca_v2_0
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - tosca/parser/phase5-rendering.go
+    - tosca/grammars/tosca_v2_0/attribute-definition.go
+    - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/value.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.Render
+    - tosca_v2_0.AttributeDefinition.Render
+    - tosca_v2_0.PropertyDefinition.Render
+    - tosca_v2_0.Values.RenderProperties
+    parser_phase: inheritance/rendering
+    execution_path:
+    - parser.Context.Parse
+    - parser.Context.LookupNames
+    - parser.Context.Inherit
+    - parser.Context.Render
+    - tosca_v2_0.AttributeDefinition.Render/PropertyDefinition.Render
+    - tosca_v2_0.Value.Render
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: override-workflow-occurrences
+  verification_order: 4
+  risk: medium
+  planned_direct_tests:
+    positive:
+    - tests/conformance/tosca_1_3/verification_override_workflow_occurrences_test.go#TestVerificationOverrideWorkflowAndOccurrences/TOSCA13-5.8.1-004
+    negative: []
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic: []
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.9.1.2-002
+  section: 5.9.1.2
+  section_title: Attributes
+  normative_rule: The `tosca_id` entry is required.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/nodes.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.nodes.Root.attributes.tosca_id
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.1.2-002
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.1.2-002
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.9.1.2-005
+  section: 5.9.1.2
+  section_title: Attributes
+  normative_rule: The `tosca_name` entry is required.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/nodes.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.nodes.Root.attributes.tosca_name
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.1.2-005
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.1.2-005
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.9.1.2-010
+  section: 5.9.1.2
+  section_title: Attributes
+  normative_rule: The `state` entry is required.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/nodes.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.nodes.Root.attributes.state
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.1.2-010
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.1.2-010
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.9.5.3-001
+  section: 5.9.5.3
+  section_title: Additional Requirements
+  normative_rule: This node SHALL export both a secure endpoint capability (i.e., admin_endpoint), typically for
+    administration, as well as a regular endpoint (i.e., data_endpoint) for serving data.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.5.3-001
+    negative: []
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic: []
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.9.8.1-002
+  section: 5.9.8.1
+  section_title: Properties
+  normative_rule: The `name` entry is required.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/nodes.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.nodes.Database.properties.name
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.8.1-002
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.8.1-002
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-5.9.9.1-002
+  section: 5.9.9.1
+  section_title: Properties
+  normative_rule: The `name` entry is required.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/nodes.yaml
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - tosca.nodes.Abstract.Storage.properties.name
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-profile-fields
+  verification_order: 5
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.9.1-002
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.9.1-002
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-6.1-005
+  section: '6.1'
+  section_title: Overall Structure of a CSAR
+  normative_rule: The root YAML file is a valid TOSCA definition template.
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/csar
+    - tosca/parser
+    files:
+    - tosca/parser/phase1-read.go
+    - tosca/csar/url.go
+    - tosca/csar/meta.go
+    - tosca/csar/paths.go
+    symbols:
+    - parser.Context.read
+    - csar.GetServiceTemplateURL
+    - csar.ReadMeta
+    - csar.GetRootPath
+    - csar.GetRootPaths
+    parser_phase: csar/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - csar.GetServiceTemplateURL
+    - csar.ReadMetaFromURL or csar.GetRootPath
+    - parsing.Context.Read
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: csar-entry-processing
+  verification_order: 7
+  risk: high
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_csar_entry_processing_test.go#TestVerificationCSAREntryProcessing/TOSCA13-6.1-005
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_csar_entry_processing_test.go#TestVerificationCSAREntryProcessing/TOSCA13-6.1-005
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-6.1-008
+  section: '6.1'
+  section_title: Overall Structure of a CSAR
+  normative_rule: "Note that in contrast to the TOSCA 1.0 specification, it is not required to put TOSCA definitions\
+    \ files into a special \u201CDefinitions\u201D directory, but definitions YAML files can be placed into any\
+    \ directory within the CSAR file."
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/csar
+    - tosca/parser
+    files:
+    - tosca/parser/phase1-read.go
+    - tosca/csar/url.go
+    - tosca/csar/meta.go
+    - tosca/csar/paths.go
+    symbols:
+    - parser.Context.read
+    - csar.GetServiceTemplateURL
+    - csar.ReadMeta
+    - csar.GetRootPath
+    - csar.GetRootPaths
+    parser_phase: csar/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - csar.GetServiceTemplateURL
+    - csar.ReadMetaFromURL or csar.GetRootPath
+    - parsing.Context.Read
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: csar-entry-processing
+  verification_order: 7
+  risk: high
+  planned_direct_tests:
+    positive:
+    - tests/conformance/tosca_1_3/verification_csar_entry_processing_test.go#TestVerificationCSAREntryProcessing/TOSCA13-6.1-008
+    negative: []
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic: []
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-6.2-001
+  section: '6.2'
+  section_title: TOSCA Meta File
+  normative_rule: Only `block_0` is required in `TOSCA.meta`.
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/csar
+    - tosca/parser
+    files:
+    - tosca/parser/phase1-read.go
+    - tosca/csar/url.go
+    - tosca/csar/meta.go
+    - tosca/csar/paths.go
+    symbols:
+    - parser.Context.read
+    - csar.GetServiceTemplateURL
+    - csar.ReadMeta
+    - csar.GetRootPath
+    - csar.GetRootPaths
+    parser_phase: csar/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - csar.GetServiceTemplateURL
+    - csar.ReadMetaFromURL or csar.GetRootPath
+    - parsing.Context.Read
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: csar-entry-processing
+  verification_order: 7
+  risk: high
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_csar_entry_processing_test.go#TestVerificationCSAREntryProcessing/TOSCA13-6.2-001
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_csar_entry_processing_test.go#TestVerificationCSAREntryProcessing/TOSCA13-6.2-001
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-6.3-002
+  section: '6.3'
+  section_title: Archive without TOSCA-Metadata
+  normative_rule: An archive without `TOSCA-Metadata` requires exactly one YAML file at the archive root.
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/csar
+    - tosca/parser
+    files:
+    - tosca/parser/phase1-read.go
+    - tosca/csar/url.go
+    - tosca/csar/meta.go
+    - tosca/csar/paths.go
+    symbols:
+    - parser.Context.read
+    - csar.GetServiceTemplateURL
+    - csar.ReadMeta
+    - csar.GetRootPath
+    - csar.GetRootPaths
+    parser_phase: csar/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - csar.GetServiceTemplateURL
+    - csar.ReadMetaFromURL or csar.GetRootPath
+    - parsing.Context.Read
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: csar-entry-processing
+  verification_order: 7
+  risk: high
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_csar_entry_processing_test.go#TestVerificationCSAREntryProcessing/TOSCA13-6.3-002
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_csar_entry_processing_test.go#TestVerificationCSAREntryProcessing/TOSCA13-6.3-002
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-6.3-005
+  section: '6.3'
+  section_title: Archive without TOSCA-Metadata
+  normative_rule: The root entry file must be a valid TOSCA definitions YAML file.
+  implementation_status: implemented
+  current_verification_status: untested
+  implementation:
+    packages:
+    - tosca/csar
+    - tosca/parser
+    files:
+    - tosca/parser/phase1-read.go
+    - tosca/csar/url.go
+    - tosca/csar/meta.go
+    - tosca/csar/paths.go
+    symbols:
+    - parser.Context.read
+    - csar.GetServiceTemplateURL
+    - csar.ReadMeta
+    - csar.GetRootPath
+    - csar.GetRootPaths
+    parser_phase: csar/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - parser.Context.read
+    - csar.GetServiceTemplateURL
+    - csar.ReadMetaFromURL or csar.GetRootPath
+    - parsing.Context.Read
+    - grammars.DetectGrammar
+    - tosca_v1_3.ReadServiceFile
+  existing_test_evidence:
+    tests: []
+    evidence_kind: none
+    limitations:
+    - No permanent requirement-isolating test was mapped to this record.
+  verification_group: csar-entry-processing
+  verification_order: 7
+  risk: high
+  planned_direct_tests:
+    positive: []
+    negative:
+    - tests/conformance/tosca_1_3/verification_csar_entry_processing_test.go#TestVerificationCSAREntryProcessing/TOSCA13-6.3-005
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic:
+    - tests/conformance/tosca_1_3/verification_csar_entry_processing_test.go#TestVerificationCSAREntryProcessing/TOSCA13-6.3-005
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-8.2-002
+  section: '8.2'
+  section_title: Connectivity semantics
+  normative_rule: "A special Relationship Type, tosca.relationships.ConnectsTo, is used to implicitly or explicitly\
+    \ relate the source Node Type\u2019s endpoint to the required endpoint in the target node type."
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-connectivity
+  verification_order: 6
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative: []
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic: []
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
+- requirement_id: TOSCA13-8.3.2-001
+  section: 8.3.2
+  section_title: Specifying layer 4 ports
+  normative_rule: The layer 4 ports required for application component intercommunication are specified in tosca.capabilities.Endpoint.
+  implementation_status: implemented
+  current_verification_status: indirectly-tested
+  implementation:
+    packages:
+    - assets/tosca/profiles/simple/1.3
+    - tosca/grammars
+    - tosca/grammars/tosca_v1_3
+    - tosca/parser
+    files:
+    - tosca/grammars/tosca_v1_3/service-file.go
+    - assets/tosca/profiles/simple/1.3/profile.yaml
+    - tosca/grammars/parse.go
+    - tosca/parser/phase1-read.go
+    - tosca/parser/phase3-hierarchies.go
+    - tosca/parser/phase4-inheritance.go
+    symbols:
+    - tosca_v1_3.ReadServiceFile
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+    parser_phase: implicit-profile/read
+    execution_path:
+    - parser.Context.ReadRoot
+    - grammars.GetImplicitImportSpec
+    - parser.Context.goReadImports
+    - tosca_v1_3.ReadServiceFile
+    - parser.Context.AddNamespaces
+    - parser.Context.AddHierarchies
+    - parser.Context.Inherit
+  existing_test_evidence:
+    tests:
+    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    evidence_kind: indirect
+    limitations:
+    - The broad example corpus loads the declaration but does not identify this requirement ID or assert its exact
+      effective field/value.
+  verification_group: normative-connectivity
+  verification_order: 6
+  risk: medium
+  planned_direct_tests:
+    positive: []
+    negative: []
+    boundary: []
+    inheritance: []
+    resolution: []
+    normalization: []
+    diagnostic: []
+    regression:
+    - tests/conformance/tosca_2_0/conformance_test.go (regression only; not normative evidence)
