@@ -18,12 +18,12 @@ This report covers the continuation trace of every formerly-unknown record that 
 - partial: **0**.
 - missing: **0**.
 - non-compliant: **0**.
-- verified: **193**.
-- indirectly-tested: **25**.
+- verified: **216**.
+- indirectly-tested: **2**.
 - untested: **5**.
 - unverifiable: **0**.
 - implementation coverage: **223/223 (100.00%)**.
-- verified conformance coverage: **193/223 (86.55%)**.
+- verified conformance coverage: **216/223 (96.86%)**.
 - broad test evidence coverage: **218/223 (97.76%)**.
 
 ## Continuation trace by subsystem
@@ -43,7 +43,7 @@ This report covers the continuation trace of every formerly-unknown record that 
 | Groups and policies | 5 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | 0 |
 | Substitution mappings | 2 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 |
 | Workflows | 15 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | 0 |
-| Normative profile types | 29 | 29 | 0 | 0 | 0 | 8 | 21 | 0 | 0 |
+| Normative profile types | 29 | 29 | 0 | 0 | 0 | 27 | 2 | 0 | 0 |
 | CSAR | 6 | 6 | 0 | 0 | 0 | 1 | 0 | 5 | 0 |
 | Normalization | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
 | Conformance and error requirements | 23 | 23 | 0 | 0 | 0 | 23 | 0 | 0 | 0 |

@@ -85541,7 +85541,7 @@ requirements:
   category: grammar
   subject: token_type
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -85553,53 +85553,50 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/data.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.datatypes.Credential.properties.token_type
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.3.6.1 with `assets/tosca/profiles/simple/1.3/data.yaml`: `tosca.datatypes.Credential.properties.token_type` exists
-      and is required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
-    negative: []
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.6.1-005
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.6.1-005
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Credential, TimeInterval.start_time, and PortSpec declarations from data.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.3.6.1-005
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.3.6.1-006
   section: 5.3.6.1
   section_title: Properties
@@ -85716,7 +85713,7 @@ requirements:
   category: grammar
   subject: token
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -85728,53 +85725,50 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/data.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.datatypes.Credential.properties.token
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.3.6.1 with `assets/tosca/profiles/simple/1.3/data.yaml`: `tosca.datatypes.Credential.properties.token` exists
-      and is required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
-    negative: []
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.6.1-008
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.6.1-008
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Credential, TimeInterval.start_time, and PortSpec declarations from data.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.3.6.1-008
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.3.6.1-009
   section: 5.3.6.1
   section_title: Properties
@@ -87280,7 +87274,7 @@ requirements:
   category: grammar
   subject: start_time
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -87292,53 +87286,50 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/data.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.datatypes.TimeInterval.properties.start_time
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.3.7.1 with `assets/tosca/profiles/simple/1.3/data.yaml`: `tosca.datatypes.TimeInterval.properties.start_time`
-      exists and is required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
-    negative: []
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.7.1-002
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.7.1-002
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Credential, TimeInterval.start_time, and PortSpec declarations from data.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.3.7.1-002
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.3.7.1-003
   section: 5.3.7.1
   section_title: Properties
@@ -87428,7 +87419,7 @@ requirements:
   category: grammar
   subject: end_time
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -87440,53 +87431,50 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/data.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.datatypes.TimeInterval.properties.end_time
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.3.7.1 with `assets/tosca/profiles/simple/1.3/data.yaml`: `tosca.datatypes.TimeInterval.properties.end_time` exists
-      and is required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
-    negative: []
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.7.1-005
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.7.1-005
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target TimeInterval.end_time declaration from data.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.3.7.1-005
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.3.7.1-006
   section: 5.3.7.1
   section_title: Properties
@@ -87746,7 +87734,7 @@ requirements:
   category: normative-type
   subject: tosca.datatypes.timeinterval.properties.start_time.required
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -87758,53 +87746,50 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/data.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.datatypes.timeinterval.properties.start_time.required
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: Resolved generated normative path `tosca.datatypes.timeinterval.properties.start_time.required` against `assets/tosca/profiles/simple/1.3/data.yaml`
-      and followed implicit profile loading through hierarchy/inheritance.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
-    negative: []
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.7.2-005
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.7.2-005
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Exact bundled-profile path/value matches the pinned normative definition.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Credential, TimeInterval.start_time, and PortSpec declarations from data.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.3.7.2-005
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.3.7.2-006
   section: 5.3.7.2
   section_title: Definition
@@ -87924,7 +87909,7 @@ requirements:
   category: normative-type
   subject: tosca.datatypes.timeinterval.properties.end_time.required
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -87936,53 +87921,50 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/data.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.datatypes.timeinterval.properties.end_time.required
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: Resolved generated normative path `tosca.datatypes.timeinterval.properties.end_time.required` against `assets/tosca/profiles/simple/1.3/data.yaml`
-      and followed implicit profile loading through hierarchy/inheritance.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
-    negative: []
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.7.2-008
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.7.2-008
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Exact bundled-profile path/value matches the pinned normative definition.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target TimeInterval.end_time declaration from data.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.3.7.2-008
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.3.8-001
   section: 5.3.8
   section_title: tosca.datatypes.network.NetworkInfo
@@ -90710,7 +90692,7 @@ requirements:
   category: grammar
   subject: protocol
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -90722,53 +90704,50 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/data.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.datatypes.network.PortSpec.properties.protocol
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.3.11.1 with `assets/tosca/profiles/simple/1.3/data.yaml`: `tosca.datatypes.network.PortSpec.properties.protocol`
-      exists and is required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
-    negative: []
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.11.1-002
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.11.1-002
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Credential, TimeInterval.start_time, and PortSpec declarations from data.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.3.11.1-002
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.3.11.1-003
   section: 5.3.11.1
   section_title: Properties
@@ -91752,7 +91731,7 @@ requirements:
   category: normative-type
   subject: tosca.datatypes.network.portspec.properties.protocol.required
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -91764,53 +91743,50 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/data.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.datatypes.network.portspec.properties.protocol.required
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: Resolved generated normative path `tosca.datatypes.network.portspec.properties.protocol.required` against `assets/tosca/profiles/simple/1.3/data.yaml`
-      and followed implicit profile loading through hierarchy/inheritance.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
-    negative: []
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.11.2-005
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.3.11.2-005
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Exact bundled-profile path/value matches the pinned normative definition.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Credential, TimeInterval.start_time, and PortSpec declarations from data.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.3.11.2-005
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.3.11.2-006
   section: 5.3.11.2
   section_title: Definition
@@ -99357,7 +99333,7 @@ requirements:
   category: grammar
   subject: protocol
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -99369,53 +99345,50 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/capabilities.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.capabilities.Endpoint.properties.protocol
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.5.7.1 with `assets/tosca/profiles/simple/1.3/capabilities.yaml`: `tosca.capabilities.Endpoint.properties.protocol`
-      exists and is required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
-    negative: []
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.7.1-003
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.7.1-003
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Endpoint and Scalable declarations from capabilities.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.5.7.1-003
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.5.7.1-004
   section: 5.5.7.1
   section_title: Properties
@@ -100737,7 +100710,7 @@ requirements:
   category: grammar
   subject: ip_address
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -100749,53 +100722,49 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/capabilities.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.capabilities.Endpoint.attributes.ip_address
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.5.7.2 with `assets/tosca/profiles/simple/1.3/capabilities.yaml`: `tosca.capabilities.Endpoint.attributes.ip_address`
-      exists and is required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.7.2-002
     negative: []
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Endpoint and Scalable declarations from capabilities.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.5.7.2-002
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.5.7.2-003
   section: 5.5.7.2
   section_title: Attributes
@@ -101055,7 +101024,7 @@ requirements:
   category: normative-type
   subject: tosca.capabilities.endpoint.properties.protocol.required
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -101067,53 +101036,50 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/capabilities.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.capabilities.endpoint.properties.protocol.required
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: Resolved generated normative path `tosca.capabilities.endpoint.properties.protocol.required` against `assets/tosca/profiles/simple/1.3/capabilities.yaml`
-      and followed implicit profile loading through hierarchy/inheritance.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
-    negative: []
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.7.3-005
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.7.3-005
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Exact bundled-profile path/value matches the pinned normative definition.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Endpoint and Scalable declarations from capabilities.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.5.7.3-005
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.5.7.3-006
   section: 5.5.7.3
   section_title: Definition
@@ -107043,7 +107009,7 @@ requirements:
   category: grammar
   subject: min_instances
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -107055,53 +107021,50 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/capabilities.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.capabilities.Scalable.properties.min_instances
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.5.13.1 with `assets/tosca/profiles/simple/1.3/capabilities.yaml`: `tosca.capabilities.Scalable.properties.min_instances`
-      exists and is required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
-    negative: []
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.13.1-003
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.13.1-003
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Endpoint and Scalable declarations from capabilities.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.5.13.1-003
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.5.13.1-004
   section: 5.5.13.1
   section_title: Properties
@@ -107232,7 +107195,7 @@ requirements:
   category: grammar
   subject: max_instances
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -107244,53 +107207,50 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/capabilities.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.capabilities.Scalable.properties.max_instances
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.5.13.1 with `assets/tosca/profiles/simple/1.3/capabilities.yaml`: `tosca.capabilities.Scalable.properties.max_instances`
-      exists and is required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
-    negative: []
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.13.1-007
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.5.13.1-007
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Endpoint and Scalable declarations from capabilities.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.5.13.1-007
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.5.13.1-008
   section: 5.5.13.1
   section_title: Properties
@@ -108545,7 +108505,7 @@ requirements:
   category: grammar
   subject: tosca_id
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -108557,53 +108517,49 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/relationships.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.relationships.Root.attributes.tosca_id
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.7.1.1 with `assets/tosca/profiles/simple/1.3/relationships.yaml`: `tosca.relationships.Root.attributes.tosca_id`
-      exists and is required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.7.1.1-002
     negative: []
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Root attributes and AttachesTo.location from relationships.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.7.1.1-002
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.7.1.1-003
   section: 5.7.1.1
   section_title: Attributes
@@ -108693,7 +108649,7 @@ requirements:
   category: grammar
   subject: tosca_name
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -108705,53 +108661,49 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/relationships.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.relationships.Root.attributes.tosca_name
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.7.1.1 with `assets/tosca/profiles/simple/1.3/relationships.yaml`: `tosca.relationships.Root.attributes.tosca_name`
-      exists and is required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.7.1.1-005
     negative: []
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Root attributes and AttachesTo.location from relationships.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.7.1.1-005
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.7.1.1-006
   section: 5.7.1.1
   section_title: Attributes
@@ -108923,7 +108875,7 @@ requirements:
   category: grammar
   subject: state
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -108935,53 +108887,49 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/relationships.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.relationships.Root.attributes.state
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.7.1.1 with `assets/tosca/profiles/simple/1.3/relationships.yaml`: `tosca.relationships.Root.attributes.state`
-      exists and is required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.7.1.1-010
     negative: []
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Root attributes and AttachesTo.location from relationships.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.7.1.1-010
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.7.1.1-011
   section: 5.7.1.1
   section_title: Attributes
@@ -111015,7 +110963,7 @@ requirements:
   category: grammar
   subject: location
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -111027,53 +110975,50 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/relationships.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.relationships.AttachesTo.properties.location
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.7.5.1 with `assets/tosca/profiles/simple/1.3/relationships.yaml`: `tosca.relationships.AttachesTo.properties.location`
-      exists and is required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
-    negative: []
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.7.5.1-003
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.7.5.1-003
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Root attributes and AttachesTo.location from relationships.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.7.5.1-003
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.7.5.1-004
   section: 5.7.5.1
   section_title: Properties
@@ -114918,7 +114863,7 @@ requirements:
   category: grammar
   subject: tosca_id
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -114930,53 +114875,49 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/nodes.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.nodes.Root.attributes.tosca_id
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.9.1.2 with `assets/tosca/profiles/simple/1.3/nodes.yaml`: `tosca.nodes.Root.attributes.tosca_id` exists and is
-      required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.1.2-002
     negative: []
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Root attributes, WebServer endpoints, and required name properties from nodes.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.9.1.2-002
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.9.1.2-003
   section: 5.9.1.2
   section_title: Attributes
@@ -115066,7 +115007,7 @@ requirements:
   category: grammar
   subject: tosca_name
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -115078,53 +115019,49 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/nodes.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.nodes.Root.attributes.tosca_name
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.9.1.2 with `assets/tosca/profiles/simple/1.3/nodes.yaml`: `tosca.nodes.Root.attributes.tosca_name` exists and
-      is required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.1.2-005
     negative: []
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Root attributes, WebServer endpoints, and required name properties from nodes.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.9.1.2-005
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.9.1.2-006
   section: 5.9.1.2
   section_title: Attributes
@@ -115296,7 +115233,7 @@ requirements:
   category: grammar
   subject: state
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -115308,53 +115245,49 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/nodes.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.nodes.Root.attributes.state
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.9.1.2 with `assets/tosca/profiles/simple/1.3/nodes.yaml`: `tosca.nodes.Root.attributes.state` exists and is required
-      (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.1.2-010
     negative: []
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Root attributes, WebServer endpoints, and required name properties from nodes.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.9.1.2-010
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.9.1.2-011
   section: 5.9.1.2
   section_title: Attributes
@@ -120879,7 +120812,7 @@ requirements:
   category: semantic
   subject: additional-requirements
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -120891,50 +120824,49 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: The exact normative profile type/capability/relationship path is present and loaded through the v1.3 implicit profile.
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.5.3-001
     negative: []
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Bundled normative profile contains the required declaration.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Root attributes, WebServer endpoints, and required name properties from nodes.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.9.5.3-001
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.9.6-001
   section: 5.9.6
   section_title: tosca.nodes.WebApplication
@@ -122942,7 +122874,7 @@ requirements:
   category: grammar
   subject: name
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -122954,53 +122886,50 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/nodes.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.nodes.Database.properties.name
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.9.8.1 with `assets/tosca/profiles/simple/1.3/nodes.yaml`: `tosca.nodes.Database.properties.name` exists and is
-      required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
-    negative: []
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.8.1-002
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.8.1-002
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Root attributes, WebServer endpoints, and required name properties from nodes.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.9.8.1-002
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.9.8.1-003
   section: 5.9.8.1
   section_title: Properties
@@ -124756,7 +124685,7 @@ requirements:
   category: grammar
   subject: name
   implementation_status: implemented
-  verification_status: indirectly-tested
+  verification_status: verified
   applicability: applicable
   catalog_quality: atomic
   included_in_must_denominator: true
@@ -124768,53 +124697,50 @@ requirements:
   implementation:
     entry_point: parser.Context.ReadRoot
     packages:
-    - assets/tosca/profiles/simple/1.3
     - tosca/grammars
-    - tosca/grammars/tosca_v1_3
     - tosca/parser
+    - tosca/grammars/tosca_v1_3
     files:
-    - tosca/grammars/tosca_v1_3/service-file.go
-    - assets/tosca/profiles/simple/1.3/nodes.yaml
-    - assets/tosca/profiles/simple/1.3/profile.yaml
     - tosca/grammars/parse.go
     - tosca/parser/phase1-read.go
-    - tosca/parser/phase3-hierarchies.go
-    - tosca/parser/phase4-inheritance.go
+    - tosca/grammars/tosca_v1_3/service-file.go
     symbols:
+    - grammars.DetectGrammar
+    - parsing.Context.Read
     - tosca_v1_3.ReadServiceFile
-    - tosca.nodes.Abstract.Storage.properties.name
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    parser_phase: implicit-profile/read
+    parser_phase: read
     execution_path:
     - parser.Context.ReadRoot
-    - grammars.GetImplicitImportSpec
-    - parser.Context.goReadImports
+    - parser.Context.read
+    - grammars.DetectGrammarVersion
+    - grammars.DetectGrammar
     - tosca_v1_3.ReadServiceFile
-    - parser.Context.AddNamespaces
-    - parser.Context.AddHierarchies
-    - parser.Context.Inherit
-    trace_summary: 'Compared §5.9.9.1 with `assets/tosca/profiles/simple/1.3/nodes.yaml`: `tosca.nodes.Abstract.Storage.properties.name` exists
-      and is required (explicitly or by the §3.6.10 default).'
+    trace_summary: YAML decode → exact tosca_definitions_version lookup/type check → v1.3 grammar dispatch → service-file reader
   tests:
     positive:
-    - puccini_test.go#TestExamples (implicit profile load / broad integration)
-    negative: []
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.9.1-002
+    negative:
+    - tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields/TOSCA13-5.9.9.1-002
     boundary: []
-    regression: []
+    regression:
+    - tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation
   evidence:
     specification_verified: true
     code_path_traced: true
     runtime_probe_executed: false
     existing_test_executed: true
-    tests_executed: false
-    correct_failure_reason_verified: false
+    tests_executed: true
+    correct_failure_reason_verified: true
     generic_logic_applicability_explained: false
-  gaps:
-  - Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-  notes: Literal profile declaration matches the atomic required-field rule.
+  gaps: []
+  notes: null
+  mutation_check:
+    performed: true
+    mutation: Removed the target Root attributes, WebServer endpoints, and required name properties from nodes.yaml.
+    affected_tests:
+    - TestVerificationNormativeProfileFields/TOSCA13-5.9.9.1-002
+    expected_tests_failed: true
+    production_diff_restored: true
 - requirement_id: TOSCA13-5.9.9.1-003
   section: 5.9.9.1
   section_title: Properties

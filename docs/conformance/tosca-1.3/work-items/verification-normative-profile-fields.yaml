@@ -1,0 +1,111 @@
+verification_group: normative-profile-fields
+verification_order: 5
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+sections:
+  - "5.3.6 Credential"
+  - "5.3.7 TimeInterval"
+  - "5.3.11 PortSpec"
+  - "5.5.7 Endpoint"
+  - "5.5.13 Scalable"
+  - "5.7.1 Relationship Root"
+  - "5.7.5 AttachesTo"
+  - "5.9.1 Node Root"
+  - "5.9.5 WebServer"
+  - "5.9.8 Database"
+  - "5.9.9 Abstract.Storage"
+parser_phase: implicit normative profile read, hierarchy, inheritance, and refinement validation
+execution_path:
+  - parser.Context.ReadRoot
+  - implicit TOSCA 1.3 profile import
+  - tosca_v1_3.ReadFile
+  - type lookup and hierarchy construction
+  - property and attribute effective definitions
+  - PropertyDefinition.Inherit requiredness validation
+
+requirements:
+  - {requirement_id: TOSCA13-5.3.6.1-005, normative_rule: Credential.token_type is required, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.3.6.1-008, normative_rule: Credential.token is required, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.3.7.1-002, normative_rule: TimeInterval.start_time is required, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.3.7.1-005, normative_rule: TimeInterval.end_time is required, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.3.7.2-005, normative_rule: effective TimeInterval.start_time is required, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.3.7.2-008, normative_rule: effective TimeInterval.end_time is required, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.3.11.1-002, normative_rule: PortSpec.protocol is required, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.3.11.2-005, normative_rule: effective PortSpec.protocol is required, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.5.7.1-003, normative_rule: Endpoint.protocol is required, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.5.7.2-002, normative_rule: Endpoint.ip_address attribute is present, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.5.7.3-005, normative_rule: effective Endpoint.protocol is required, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.5.13.1-003, normative_rule: Scalable.min_instances is required, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.5.13.1-007, normative_rule: Scalable.max_instances is required, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.7.1.1-002, normative_rule: Relationship Root.tosca_id attribute is present, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.7.1.1-005, normative_rule: Relationship Root.tosca_name attribute is present, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.7.1.1-010, normative_rule: Relationship Root.state attribute is present, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.7.5.1-003, normative_rule: AttachesTo.location is required, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.9.1.2-002, normative_rule: Node Root.tosca_id attribute is present, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.9.1.2-005, normative_rule: Node Root.tosca_name attribute is present, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.9.1.2-010, normative_rule: Node Root.state attribute is present, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.9.5.3-001, normative_rule: WebServer exports regular and secure endpoint capabilities, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.9.8.1-002, normative_rule: Database.name is required, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+  - {requirement_id: TOSCA13-5.9.9.1-002, normative_rule: Abstract.Storage.name is required, initial_status: implemented/indirectly-tested, final_status: implemented/verified}
+
+direct_evidence:
+  test: tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go#TestVerificationNormativeProfileFields
+  positive:
+    - each subtest locates the named field in the effective profile entity and asserts its data type
+    - WebServer exports data_endpoint as Endpoint and admin_endpoint as Endpoint.Admin
+  negative:
+    - every required property rejects a derived-type attempt to refine required true to false
+  diagnostic:
+    - requiredness rejection identifies the exact property path and cannot-refine reason
+
+baseline_reproduction:
+  performed: true
+  result: all 23 direct subtests passed; no implementation defect was discovered
+
+mutation_check:
+  performed: true
+  mutations:
+    - description: removed target Credential, TimeInterval.start_time, and PortSpec declarations from data.yaml
+      affected_tests:
+        - TestVerificationNormativeProfileFields/TOSCA13-5.3.6.1-005
+        - TestVerificationNormativeProfileFields/TOSCA13-5.3.6.1-008
+        - TestVerificationNormativeProfileFields/TOSCA13-5.3.7.1-002
+        - TestVerificationNormativeProfileFields/TOSCA13-5.3.7.2-005
+        - TestVerificationNormativeProfileFields/TOSCA13-5.3.11.1-002
+        - TestVerificationNormativeProfileFields/TOSCA13-5.3.11.2-005
+      expected_tests_failed: true
+    - description: removed TimeInterval.end_time from data.yaml
+      affected_tests:
+        - TestVerificationNormativeProfileFields/TOSCA13-5.3.7.1-005
+        - TestVerificationNormativeProfileFields/TOSCA13-5.3.7.2-008
+      expected_tests_failed: true
+    - description: removed target Endpoint and Scalable declarations from capabilities.yaml
+      affected_tests:
+        - TestVerificationNormativeProfileFields/TOSCA13-5.5.7.1-003
+        - TestVerificationNormativeProfileFields/TOSCA13-5.5.7.2-002
+        - TestVerificationNormativeProfileFields/TOSCA13-5.5.7.3-005
+        - TestVerificationNormativeProfileFields/TOSCA13-5.5.13.1-003
+        - TestVerificationNormativeProfileFields/TOSCA13-5.5.13.1-007
+      expected_tests_failed: true
+    - description: removed target Root attributes and AttachesTo.location from relationships.yaml
+      affected_tests:
+        - TestVerificationNormativeProfileFields/TOSCA13-5.7.1.1-002
+        - TestVerificationNormativeProfileFields/TOSCA13-5.7.1.1-005
+        - TestVerificationNormativeProfileFields/TOSCA13-5.7.1.1-010
+        - TestVerificationNormativeProfileFields/TOSCA13-5.7.5.1-003
+      expected_tests_failed: true
+    - description: removed target Root attributes, WebServer endpoints, and name properties from nodes.yaml
+      affected_tests:
+        - TestVerificationNormativeProfileFields/TOSCA13-5.9.1.2-002
+        - TestVerificationNormativeProfileFields/TOSCA13-5.9.1.2-005
+        - TestVerificationNormativeProfileFields/TOSCA13-5.9.1.2-010
+        - TestVerificationNormativeProfileFields/TOSCA13-5.9.5.3-001
+        - TestVerificationNormativeProfileFields/TOSCA13-5.9.8.1-002
+        - TestVerificationNormativeProfileFields/TOSCA13-5.9.9.1-002
+      expected_tests_failed: true
+  production_diff_restored: true
+
+results:
+  implementation_status: implemented
+  verification_status: verified
+  requirement_count: 23
+  defects_discovered: 0

@@ -264,6 +264,62 @@ for requirement_id in OVERRIDE_WORKFLOW_OCCURRENCE_VERIFICATION_IDS:
         "regression": [],
     }
 
+NORMATIVE_PROFILE_FIELD_VERIFICATION_IDS = {
+    "TOSCA13-5.3.6.1-005",
+    "TOSCA13-5.3.6.1-008",
+    "TOSCA13-5.3.7.1-002",
+    "TOSCA13-5.3.7.1-005",
+    "TOSCA13-5.3.7.2-005",
+    "TOSCA13-5.3.7.2-008",
+    "TOSCA13-5.3.11.1-002",
+    "TOSCA13-5.3.11.2-005",
+    "TOSCA13-5.5.7.1-003",
+    "TOSCA13-5.5.7.2-002",
+    "TOSCA13-5.5.7.3-005",
+    "TOSCA13-5.5.13.1-003",
+    "TOSCA13-5.5.13.1-007",
+    "TOSCA13-5.7.1.1-002",
+    "TOSCA13-5.7.1.1-005",
+    "TOSCA13-5.7.1.1-010",
+    "TOSCA13-5.7.5.1-003",
+    "TOSCA13-5.9.1.2-002",
+    "TOSCA13-5.9.1.2-005",
+    "TOSCA13-5.9.1.2-010",
+    "TOSCA13-5.9.5.3-001",
+    "TOSCA13-5.9.8.1-002",
+    "TOSCA13-5.9.9.1-002",
+}
+NORMATIVE_PROFILE_REQUIRED_PROPERTY_IDS = {
+    "TOSCA13-5.3.6.1-005",
+    "TOSCA13-5.3.6.1-008",
+    "TOSCA13-5.3.7.1-002",
+    "TOSCA13-5.3.7.1-005",
+    "TOSCA13-5.3.7.2-005",
+    "TOSCA13-5.3.7.2-008",
+    "TOSCA13-5.3.11.1-002",
+    "TOSCA13-5.3.11.2-005",
+    "TOSCA13-5.5.7.1-003",
+    "TOSCA13-5.5.7.3-005",
+    "TOSCA13-5.5.13.1-003",
+    "TOSCA13-5.5.13.1-007",
+    "TOSCA13-5.7.5.1-003",
+    "TOSCA13-5.9.8.1-002",
+    "TOSCA13-5.9.9.1-002",
+}
+for requirement_id in NORMATIVE_PROFILE_FIELD_VERIFICATION_IDS:
+    test = (
+        "tests/conformance/tosca_1_3/verification_normative_profile_fields_test.go"
+        f"#TestVerificationNormativeProfileFields/{requirement_id}"
+    )
+    DIRECT_TESTS[requirement_id] = {
+        "positive": [test],
+        "negative": [test] if requirement_id in NORMATIVE_PROFILE_REQUIRED_PROPERTY_IDS else [],
+        "boundary": [],
+        "regression": [
+            "tests/conformance/tosca_1_3/normative_profile_test.go#TestNormativeProfileTosca20Isolation",
+        ],
+    }
+
 INTERFACE_RESERVED_OPERATION_NAME_ID = "TOSCA13-3.7.5.4-002"
 DIRECT_TESTS[INTERFACE_RESERVED_OPERATION_NAME_ID] = {
     "positive": [
@@ -1254,6 +1310,71 @@ for requirement_id in OVERRIDE_WORKFLOW_OCCURRENCE_VERIFICATION_IDS:
         ],
         "production_diff_restored": True,
     }
+NORMATIVE_PROFILE_DATA_START_IDS = {
+    "TOSCA13-5.3.6.1-005",
+    "TOSCA13-5.3.6.1-008",
+    "TOSCA13-5.3.7.1-002",
+    "TOSCA13-5.3.7.2-005",
+    "TOSCA13-5.3.11.1-002",
+    "TOSCA13-5.3.11.2-005",
+}
+NORMATIVE_PROFILE_DATA_END_IDS = {
+    "TOSCA13-5.3.7.1-005",
+    "TOSCA13-5.3.7.2-008",
+}
+NORMATIVE_PROFILE_CAPABILITY_IDS = {
+    "TOSCA13-5.5.7.1-003",
+    "TOSCA13-5.5.7.2-002",
+    "TOSCA13-5.5.7.3-005",
+    "TOSCA13-5.5.13.1-003",
+    "TOSCA13-5.5.13.1-007",
+}
+NORMATIVE_PROFILE_RELATIONSHIP_IDS = {
+    "TOSCA13-5.7.1.1-002",
+    "TOSCA13-5.7.1.1-005",
+    "TOSCA13-5.7.1.1-010",
+    "TOSCA13-5.7.5.1-003",
+}
+NORMATIVE_PROFILE_NODE_IDS = {
+    "TOSCA13-5.9.1.2-002",
+    "TOSCA13-5.9.1.2-005",
+    "TOSCA13-5.9.1.2-010",
+    "TOSCA13-5.9.5.3-001",
+    "TOSCA13-5.9.8.1-002",
+    "TOSCA13-5.9.9.1-002",
+}
+for requirement_ids, mutation in (
+    (
+        NORMATIVE_PROFILE_DATA_START_IDS,
+        "Removed the target Credential, TimeInterval.start_time, and PortSpec declarations from data.yaml.",
+    ),
+    (
+        NORMATIVE_PROFILE_DATA_END_IDS,
+        "Removed the target TimeInterval.end_time declaration from data.yaml.",
+    ),
+    (
+        NORMATIVE_PROFILE_CAPABILITY_IDS,
+        "Removed the target Endpoint and Scalable declarations from capabilities.yaml.",
+    ),
+    (
+        NORMATIVE_PROFILE_RELATIONSHIP_IDS,
+        "Removed the target Root attributes and AttachesTo.location from relationships.yaml.",
+    ),
+    (
+        NORMATIVE_PROFILE_NODE_IDS,
+        "Removed the target Root attributes, WebServer endpoints, and required name properties from nodes.yaml.",
+    ),
+):
+    for requirement_id in requirement_ids:
+        MUTATION_CHECKS[requirement_id] = {
+            "performed": True,
+            "mutation": mutation,
+            "affected_tests": [
+                f"TestVerificationNormativeProfileFields/{requirement_id}",
+            ],
+            "expected_tests_failed": True,
+            "production_diff_restored": True,
+        }
 for requirement_id in {
     "TOSCA13-4.4.1.2-003",
     "TOSCA13-4.4.2.2-002", "TOSCA13-4.4.2.2-004", "TOSCA13-4.4.2.2-010",

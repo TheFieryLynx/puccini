@@ -6,9 +6,9 @@ Implementation gaps and verification gaps are counted independently.
 
 | Rank | Area | Records | Implementation unknown/missing/partial | Non-compliant | Not directly verified |
 |---:|---|---:|---:|---:|---:|
-| 1 | grammar | 1094 | 966 | 3 | 1091 |
-| 2 | normative-type | 489 | 111 | 3 | 486 |
-| 3 | semantic | 382 | 371 | 10 | 372 |
+| 1 | grammar | 1076 | 966 | 3 | 1073 |
+| 2 | normative-type | 485 | 111 | 3 | 482 |
+| 3 | semantic | 381 | 371 | 10 | 371 |
 | 4 | assignment | 117 | 117 | 0 | 117 |
 | 5 | constraint | 93 | 92 | 1 | 92 |
 | 6 | function | 68 | 64 | 4 | 64 |
@@ -119,7 +119,7 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-3.6.7.1-013` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.6.7.1-014` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.6.7.1-015` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- … 994 additional records are available in `coverage.yaml`.
+- … 976 additional records are available in `coverage.yaml`.
 
 ## normative-type
 
@@ -152,10 +152,8 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-5.3.7-001` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.7.2-003` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.7.2-004` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-5.3.7.2-005` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.7.2-006` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.7.2-007` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-5.3.7.2-008` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.8-001` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.8.2-003` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.8.2-004` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
@@ -181,7 +179,6 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-5.3.11-001` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.11.2-003` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.11.2-004` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-- `TOSCA13-5.3.11.2-005` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.11.2-006` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.11.2-008` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.3.11.2-009` — implementation=unknown; verification=untested; The generated profile path/value does not match; no non-compliant status is assigned without an individually reviewed finding.; Verification status is untested; no requirement-isolating direct test proves conformance.
@@ -223,7 +220,10 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-5.5.3.2-008` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.5.3.2-010` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-5.5.3.2-011` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
-- … 389 additional records are available in `coverage.yaml`.
+- `TOSCA13-5.5.3.2-012` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+- `TOSCA13-5.5.3.2-014` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+- `TOSCA13-5.5.3.2-015` — implementation=implemented; verification=indirectly-tested; Verification status is indirectly-tested; no requirement-isolating direct test proves conformance.
+- … 385 additional records are available in `coverage.yaml`.
 
 ## semantic
 
@@ -327,7 +327,7 @@ Implementation gaps and verification gaps are counted independently.
 - `TOSCA13-3.6.7.1-022` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.6.7.1-025` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
 - `TOSCA13-3.6.7.1-028` — implementation=unknown; verification=untested; No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance.
-- … 282 additional records are available in `coverage.yaml`.
+- … 281 additional records are available in `coverage.yaml`.
 
 ## assignment
 
