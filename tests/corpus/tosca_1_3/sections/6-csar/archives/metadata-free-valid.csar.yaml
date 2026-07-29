@@ -1,0 +1,7 @@
+entries:
+  service.yaml: |
+    tosca_definitions_version: tosca_simple_yaml_1_3
+    metadata:
+      template_name: corpus
+      template_version: 1.0
+    topology_template: {}

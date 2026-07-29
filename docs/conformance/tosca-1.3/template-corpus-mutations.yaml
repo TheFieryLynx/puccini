@@ -63,3 +63,11 @@ mutations:
     expected_corpus_failures: true
     observed_result: a derived Port made order optional and the corpus runner failed
     production_diff_restored: true
+  - category: csar
+    production_validation_path: csar.ValidateTOSCA13Meta -> Entry-Definitions root confinement
+    mutation: bypassed only the ../ prefix rejection while retaining all other path checks
+    affected_cases:
+      - TOSCA13-CORPUS-CSAR-TRAVERSAL-INVALID
+    expected_corpus_failures: true
+    observed_result: the archive entry outside the logical CSAR root was selected and accepted
+    production_diff_restored: true

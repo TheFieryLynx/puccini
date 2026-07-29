@@ -1,6 +1,7 @@
 package tosca_1_3_corpus_test
 
 import (
+	"archive/zip"
 	"context"
 	"fmt"
 	"os"
@@ -227,6 +228,9 @@ func TestTOSCA13Corpus(t *testing.T) {
 func runCorpusCase(t *testing.T, root string, testCase corpusCase) {
 	t.Helper()
 	path := filepath.Join(root, filepath.FromSlash(testCase.File))
+	if testCase.Classification.Category == "csar" {
+		path = materializeCSAR(t, path)
+	}
 	serviceTemplate, firstProblems, firstErr := parseCorpusFile(t, path)
 	if testCase.Expected.Accepted {
 		if firstErr != nil {
@@ -255,6 +259,44 @@ func runCorpusCase(t *testing.T, root string, testCase corpusCase) {
 		t.Fatalf("%s diagnostic is not deterministic:\nfirst:\n%s\nsecond:\n%s",
 			testCase.ID, firstProblems, secondProblems)
 	}
+}
+
+func materializeCSAR(t *testing.T, recipePath string) string {
+	t.Helper()
+	var recipe struct {
+		Entries map[string]string `yaml:"entries"`
+	}
+	loadYAML(t, recipePath, &recipe)
+	if len(recipe.Entries) == 0 {
+		t.Fatalf("CSAR recipe %s has no entries", recipePath)
+	}
+	path := filepath.Join(t.TempDir(), "fixture.csar")
+	file, err := os.Create(path)
+	if err != nil {
+		t.Fatalf("create CSAR: %v", err)
+	}
+	writer := zip.NewWriter(file)
+	names := make([]string, 0, len(recipe.Entries))
+	for name := range recipe.Entries {
+		names = append(names, name)
+	}
+	sort.Strings(names)
+	for _, name := range names {
+		entry, createErr := writer.Create(name)
+		if createErr != nil {
+			t.Fatalf("create CSAR entry %q: %v", name, createErr)
+		}
+		if _, writeErr := entry.Write([]byte(recipe.Entries[name])); writeErr != nil {
+			t.Fatalf("write CSAR entry %q: %v", name, writeErr)
+		}
+	}
+	if err := writer.Close(); err != nil {
+		t.Fatalf("close CSAR writer: %v", err)
+	}
+	if err := file.Close(); err != nil {
+		t.Fatalf("close CSAR file: %v", err)
+	}
+	return path
 }
 
 func assertCorpusResult(t *testing.T, caseID string, serviceTemplate *normal.ServiceTemplate, assertion string) {

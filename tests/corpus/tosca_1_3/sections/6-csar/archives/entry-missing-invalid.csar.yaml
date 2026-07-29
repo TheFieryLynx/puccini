@@ -1,0 +1,6 @@
+entries:
+  TOSCA-Metadata/TOSCA.meta: |
+    TOSCA-Meta-File-Version: 1.1
+    CSAR-Version: 1.1
+    Created-By: corpus
+    Entry-Definitions: definitions/absent.yaml
