@@ -197,6 +197,24 @@ for requirement_id in SCALAR_VERIFICATION_IDS:
         "regression": [],
     }
 
+MAP_ENTRY_KEY_VERIFICATION_ID = "TOSCA13-3.3.5.1.2-002"
+DIRECT_TESTS[MAP_ENTRY_KEY_VERIFICATION_ID] = {
+    "positive": [
+        (
+            "tests/conformance/tosca_1_3/verification_map_entry_grammar_test.go"
+            "#TestVerificationMultilineMapEntryKey/TOSCA13-3.3.5.1.2-002"
+        ),
+    ],
+    "negative": [
+        (
+            "tests/conformance/tosca_1_3/verification_map_entry_grammar_test.go"
+            "#TestVerificationMultilineMapEntryKey/TOSCA13-3.3.5.1.2-002"
+        ),
+    ],
+    "boundary": [],
+    "regression": [],
+}
+
 INTERFACE_RESERVED_OPERATION_NAME_ID = "TOSCA13-3.7.5.4-002"
 DIRECT_TESTS[INTERFACE_RESERVED_OPERATION_NAME_ID] = {
     "positive": [
@@ -1113,6 +1131,15 @@ for requirement_id in SCALAR_VERIFICATION_IDS:
         ],
         "production_diff_restored": True,
     }
+MUTATION_CHECKS[MAP_ENTRY_KEY_VERIFICATION_ID] = {
+    "performed": True,
+    "mutation": "Temporarily bypassed only internal map value validation and rendering.",
+    "affected_tests": [
+        "TestVerificationMultilineMapEntryKey/TOSCA13-3.3.5.1.2-002",
+    ],
+    "expected_tests_failed": True,
+    "production_diff_restored": True,
+}
 for requirement_id in {
     "TOSCA13-4.4.1.2-003",
     "TOSCA13-4.4.2.2-002", "TOSCA13-4.4.2.2-004", "TOSCA13-4.4.2.2-010",

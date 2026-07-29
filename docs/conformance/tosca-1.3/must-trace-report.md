@@ -18,20 +18,20 @@ This report covers the continuation trace of every formerly-unknown record that 
 - partial: **0**.
 - missing: **0**.
 - non-compliant: **0**.
-- verified: **183**.
+- verified: **184**.
 - indirectly-tested: **26**.
-- untested: **14**.
+- untested: **13**.
 - unverifiable: **0**.
 - implementation coverage: **223/223 (100.00%)**.
-- verified conformance coverage: **183/223 (82.06%)**.
-- broad test evidence coverage: **209/223 (93.72%)**.
+- verified conformance coverage: **184/223 (82.51%)**.
+- broad test evidence coverage: **210/223 (94.17%)**.
 
 ## Continuation trace by subsystem
 
 | Subsystem | Reviewed | implemented | partial | missing | non-compliant | verified | indirectly-tested | untested | blocked |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Service Template and tosca_definitions_version | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
-| Grammar and structural validation | 35 | 35 | 0 | 0 | 0 | 34 | 0 | 1 | 0 |
+| Grammar and structural validation | 35 | 35 | 0 | 0 | 0 | 35 | 0 | 0 | 0 |
 | Imports and namespaces | 10 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | 0 |
 | Type system and hierarchy | 6 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | 0 |
 | Inheritance and refinement | 3 | 3 | 0 | 0 | 0 | 1 | 0 | 2 | 0 |

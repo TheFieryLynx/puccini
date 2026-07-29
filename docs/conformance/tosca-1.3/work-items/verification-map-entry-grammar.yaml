@@ -1,0 +1,45 @@
+verification_group: map-entry-grammar
+verification_order: 2
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+section: "3.3.5.1.2"
+section_title: Multi-line grammar
+parser_phase: rendering and normalization of a map-typed assignment
+execution_path:
+  - parser.Context.ReadRoot
+  - tosca_v1_3.ReadServiceFile
+  - tosca_v2_0.Value.Render
+  - ard.TypeMap validator
+  - tosca_v2_0.ValueMap.Normalize
+
+requirements:
+  - requirement_id: TOSCA13-3.3.5.1.2-002
+    normative_rule: every entry_key_* is the required key for its map entry
+    initial_status: implemented/untested
+    final_status: implemented/verified
+
+direct_evidence:
+  test: tests/conformance/tosca_1_3/verification_map_entry_grammar_test.go#TestVerificationMultilineMapEntryKey
+  positive:
+    - two keyed multi-line entries are accepted and both key/value pairs are asserted in normalized output
+  negative:
+    - an unkeyed YAML sequence is rejected at properties["payload"] as a non-map
+  diagnostic:
+    - the negative fixture is valid YAML and reaches map value rendering, avoiding an unrelated YAML syntax error
+
+baseline_reproduction:
+  performed: true
+  result: direct positive and negative tests passed; no implementation defect was discovered
+
+mutation_check:
+  performed: true
+  mutation: temporarily bypassed only internal map value validation and rendering
+  affected_tests:
+    - TestVerificationMultilineMapEntryKey/TOSCA13-3.3.5.1.2-002
+  expected_tests_failed: true
+  production_diff_restored: true
+
+results:
+  implementation_status: implemented
+  verification_status: verified
+  requirement_count: 1
+  defects_discovered: 0

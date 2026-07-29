@@ -1,6 +1,6 @@
 # Unverified TOSCA 1.3 requirements
 
-Untested or currently unverifiable records: **2327**.
+Untested or currently unverifiable records: **2326**.
 
 | Requirement | Implementation | Verification | Applicability | Reason |
 |---|---|---|---|---|
@@ -54,7 +54,6 @@ Untested or currently unverifiable records: **2327**.
 | `TOSCA13-3.3.5.1-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.5.1.1-001` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: dependent-grammar-umbrella. |
 | `TOSCA13-3.3.5.1.2-001` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: dependent-grammar-umbrella. |
-| `TOSCA13-3.3.5.1.2-002` | implemented | untested | applicable | Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.6.1-001` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
 | `TOSCA13-3.3.6.1-002` | unknown | untested | not-applicable | Outside processor conformance or invalid catalog record.; Verification status is untested; no requirement-isolating direct test proves conformance.; Catalog issue: dependent-grammar-umbrella. |
 | `TOSCA13-3.3.6.1-003` | unknown | untested | applicable | No complete requirement-specific execution trace was established.; Verification status is untested; no requirement-isolating direct test proves conformance. |
