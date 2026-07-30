@@ -60,7 +60,7 @@ artifact_types:
       server) including operating system and installed software along with any configurations and
       can be run on another machine using a hypervisor which virtualizes typical server (i.e.,
       hardware) resources.
-    derived_from: tosca.artifacts.Deployment
+    derived_from: tosca.artifacts.Deployment.Image
 
   #
   # Implementations

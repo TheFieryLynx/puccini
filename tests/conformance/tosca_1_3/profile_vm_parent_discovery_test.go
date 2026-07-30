@@ -1,5 +1,3 @@
-//go:build profile_discovery
-
 package tosca_1_3_test
 
 import (

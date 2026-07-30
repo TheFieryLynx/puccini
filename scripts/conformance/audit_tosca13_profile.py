@@ -502,6 +502,20 @@ SECONDARY_CLASSIFICATIONS = {
     ("tosca.groups.Root", "interfaces"): ["community-profile defect"],
 }
 
+REMEDIATED_FIELDS = {
+    ("tosca.artifacts.Deployment.Image.VM", "derived_from"),
+    ("tosca.groups.Root", "interfaces"),
+    ("tosca.nodes.Abstract.Storage", "derived_from"),
+    ("tosca.nodes.Abstract.Storage", "properties.size.constraints"),
+    ("tosca.nodes.Abstract.Storage", "properties.size.default"),
+    ("tosca.nodes.Abstract.Storage", "properties.size.required"),
+    (
+        "tosca.nodes.Container.Application",
+        "requirements.network.capability",
+    ),
+    ("tosca.nodes.Container.Runtime", "capabilities.host.type"),
+}
+
 
 def load_catalog_parser() -> tuple[Any, Any]:
     path = ROOT / "scripts/conformance/catalog_tosca13.py"
@@ -899,6 +913,11 @@ def build_outputs() -> tuple[dict[str, Any], dict[str, Any], str]:
         ):
             if left is not None and right is not None:
                 field_paths.update(path for path, _, _ in flatten_differences(left, right))
+        field_paths.update(
+            path
+            for type_name, path in REMEDIATED_FIELDS
+            if type_name == name
+        )
 
         type_differences: list[dict[str, Any]] = []
         for path in sorted(field_paths):
@@ -911,16 +930,29 @@ def build_outputs() -> tuple[dict[str, Any], dict[str, Any], str]:
                 return current
 
             classification = classify_difference(name, path)
+            specification_value = value_at(spec_semantic, path)
+            oasis_value = value_at(oasis_semantic, path)
+            puccini_value = value_at(puccini_semantic, path)
+            puccini_remediated = (
+                (name, path) in REMEDIATED_FIELDS
+                and classification == "Puccini defect"
+                and specification_value == puccini_value
+            )
             difference = {
                 "path": path,
-                "specification": value_at(spec_semantic, path),
-                "oasis_community_profile": value_at(oasis_semantic, path),
-                "puccini_profile": value_at(puccini_semantic, path),
+                "specification": specification_value,
+                "oasis_community_profile": oasis_value,
+                "puccini_profile": puccini_value,
                 "classification": classification,
                 "secondary_classifications": SECONDARY_CLASSIFICATIONS.get(
                     (name, path), []
                 ),
-                "resolution_status": resolution_status(classification),
+                "resolution_status": (
+                    "remediated"
+                    if puccini_remediated
+                    else resolution_status(classification)
+                ),
+                "puccini_remediated": puccini_remediated,
             }
             type_differences.append(difference)
             discrepancies.append(

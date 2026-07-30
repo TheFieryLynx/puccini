@@ -23,8 +23,8 @@ The prose Standard is the conformance authority.
 | Pair | Exact | Equivalent | Conflicting | Missing |
 |---|---:|---:|---:|---:|
 | specification_vs_oasis | 56 | 2 | 8 | 0 |
-| specification_vs_puccini | 53 | 3 | 10 | 0 |
-| oasis_vs_puccini | 50 | 4 | 12 | 0 |
+| specification_vs_puccini | 54 | 3 | 9 | 0 |
+| oasis_vs_puccini | 51 | 4 | 11 | 0 |
 
 ## Field discrepancies
 
@@ -32,10 +32,10 @@ The prose Standard is the conformance authority.
 
 - Specification section: §5.4.3.4
 - Classification: **Puccini defect**
-- Resolution: **confirmed**
+- Resolution: **remediated**
 - Specification: `tosca.artifacts.Deployment.Image`
 - OASIS community: `tosca.artifacts.Deployment.Image`
-- Puccini: `tosca.artifacts.Deployment`
+- Puccini: `tosca.artifacts.Deployment.Image`
 
 ### PROFILE13-002: `tosca.capabilities.Scalable` `properties.default_instances.default`
 
