@@ -1,0 +1,48 @@
+schema_version: 1
+frozen_must:
+  denominator: 223
+  implemented_verified: 223
+  changed_by_this_catalog: false
+non_must:
+  record_count: 2391
+  source_strengths:
+    DEFAULT: 70
+    ERROR: 2
+    GRAMMAR: 888
+    MAY: 10
+    OPTIONAL: 680
+    SEMANTIC: 733
+    SHOULD: 8
+  implementation_policies:
+    implementation-defined: 1
+    required: 1696
+    supported: 690
+    unsupported: 4
+  status_matrix:
+    implemented+verified: 2387
+    unsupported+verified: 4
+corpus:
+  case_count: 29
+  kinds:
+    invalid: 9
+    policy: 3
+    valid: 17
+  tiers:
+    implementation-defined: 1
+    processor-default: 1
+    processor-may: 21
+    processor-should: 6
+  example_cases: 1
+sections:
+  classified: 590
+  classifications:
+    archive-target: 1
+    definition-only: 26
+    duplicate-obligation: 8
+    example: 1
+    generator-only: 1
+    not-applicable: 50
+    orchestrator-only: 29
+    processor-must-covered: 111
+    processor-non-must-applicable: 362
+    service-template-author: 1

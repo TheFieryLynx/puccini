@@ -33,3 +33,9 @@ mutations:
   - TOSCA13-NONMUST-CORPUS-POLICY-NAMESPACE-COLLISION
   expected_cases_failed: true
   production_diff_restored: true
+- group: full-section-coverage
+  mutation: Emit an unknown primary classification for every frozen-MUST section.
+  affected_gates:
+  - scripts/conformance/check_tosca13_non_must.py
+  expected_gates_failed: true
+  production_diff_restored: true

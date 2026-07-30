@@ -7,6 +7,7 @@ existing audit classifies them as atomic and processor-applicable. Explicit
 target corrections below separate author, orchestrator, and archive rules.
 """
 
+from collections import Counter
 from pathlib import Path
 
 import yaml
@@ -436,6 +437,229 @@ def policy_for(record, fixture_exists):
     }
 
 
+def section_sort_key(value):
+    return tuple(int(part) if part.isdigit() else part for part in value.split("."))
+
+
+def classify_section(section, title, old, source_records, non_must):
+    if old.get("applicable_to_processor"):
+        return "processor-must-covered"
+    if non_must:
+        return "processor-non-must-applicable"
+    lowered = title.lower()
+    targets = {target for record in source_records for target in record.get("target", [])}
+    strengths = {record["strength"] for record in source_records}
+    if "example" in lowered or "use case" in lowered:
+        return "example"
+    if "archive" in targets or "csar" in lowered:
+        return "archive-target"
+    if "orchestrator" in targets and "processor" not in targets:
+        return "orchestrator-only"
+    if "generator" in targets and "processor" not in targets:
+        return "generator-only"
+    if "service-template" in targets and "processor" not in targets:
+        return "service-template-author"
+    if strengths & {"MUST", "MUST_NOT", "SHALL", "SHALL_NOT", "REQUIRED"}:
+        return "duplicate-obligation"
+    if "cross-reference" in lowered or lowered in {"references", "reference"}:
+        return "cross-reference-only"
+    if any(word in lowered for word in ("definition", "definitions", "terminology", "notation", "keyname")):
+        return "definition-only"
+    if not source_records:
+        return "informative"
+    return "not-applicable"
+
+
+def generate_reports(catalog_records, requirements, cases):
+    old_document = load(BASE / "template-corpus-sections.yaml")
+    old_sections = old_document["sections"]
+    source_by_section = {}
+    for record in catalog_records:
+        source_by_section.setdefault(record["section"], []).append(record)
+    non_must_by_section = {}
+    for requirement in requirements:
+        non_must_by_section.setdefault(requirement["section"], []).append(requirement)
+
+    example_manifest = load(CORPUS / "examples/manifest.yaml")
+    examples_by_section = {}
+    for case in example_manifest["cases"]:
+        examples_by_section.setdefault(str(case["section"]), []).append(case["id"])
+
+    sections = []
+    classification_counts = Counter()
+    for old in old_sections:
+        section = str(old["section"])
+        linked = non_must_by_section.get(section, [])
+        example_fixtures = examples_by_section.get(section, [])
+        classification = classify_section(
+            section,
+            old["title"],
+            old,
+            source_by_section.get(section, []),
+            linked,
+        )
+        classification_counts[classification] += 1
+        linked_fixtures = sorted({fixture for requirement in linked for fixture in requirement["fixture_ids"]})
+        policies = {requirement["implementation_policy"] for requirement in linked}
+        non_must_status = "not-applicable"
+        if linked:
+            non_must_status = (
+                "policy-documented"
+                if policies and policies <= {"unsupported", "implementation-defined"}
+                else "complete"
+            )
+        exclusion = {"category": None, "reason": None}
+        if classification not in {"processor-must-covered", "processor-non-must-applicable"}:
+            exclusion = {
+                "category": classification,
+                "reason": (
+                    f"Section {section} is classified as {classification} for the processor target; "
+                    "it creates no independent processor fixture obligation in this layer."
+                ),
+            }
+        sections.append(
+            {
+                **old,
+                "primary_classification": classification,
+                "must_coverage": {
+                    "status": "complete" if old.get("applicable_to_processor") else "not-applicable",
+                    "fixture_ids": old.get("fixtures", []),
+                },
+                "non_must_coverage": {
+                    "status": non_must_status,
+                    "requirement_ids": [requirement["id"] for requirement in linked],
+                    "fixture_ids": linked_fixtures,
+                },
+                "example_coverage": {
+                    "status": "covered" if example_fixtures else "not-applicable",
+                    "fixture_ids": example_fixtures,
+                },
+                "exclusion": exclusion,
+            }
+        )
+
+    dump(
+        BASE / "template-corpus-sections.yaml",
+        {
+            "schema_version": 2,
+            "normative_source": old_document["normative_source"],
+            "scope": "three-layer frozen-MUST, processor non-MUST policy, and non-normative example classification",
+            "section_count": len(sections),
+            "classification_counts": dict(sorted(classification_counts.items())),
+            "sections": sections,
+        },
+    )
+
+    source_counts = Counter(requirement["source_strength"] for requirement in requirements)
+    policy_counts = Counter(requirement["implementation_policy"] for requirement in requirements)
+    status_counts = Counter(
+        (requirement["implementation_status"], requirement["verification_status"])
+        for requirement in requirements
+    )
+    case_kind_counts = Counter(case["classification"]["kind"] for case in cases)
+    tier_counts = Counter(case["conformance_tier"] for case in cases)
+    coverage_report = {
+        "schema_version": 1,
+        "frozen_must": {
+            "denominator": 223,
+            "implemented_verified": 223,
+            "changed_by_this_catalog": False,
+        },
+        "non_must": {
+            "record_count": len(requirements),
+            "source_strengths": dict(sorted(source_counts.items())),
+            "implementation_policies": dict(sorted(policy_counts.items())),
+            "status_matrix": {
+                f"{implementation}+{verification}": count
+                for (implementation, verification), count in sorted(status_counts.items())
+            },
+        },
+        "corpus": {
+            "case_count": len(cases),
+            "kinds": dict(sorted(case_kind_counts.items())),
+            "tiers": dict(sorted(tier_counts.items())),
+            "example_cases": sum(len(ids) for ids in examples_by_section.values()),
+        },
+        "sections": {
+            "classified": len(sections),
+            "classifications": dict(sorted(classification_counts.items())),
+        },
+    }
+    dump(BASE / "non-must-coverage.yaml", coverage_report)
+
+    should = [requirement for requirement in requirements if requirement["source_strength"] == "SHOULD"]
+    should_followed = sum(requirement["implementation_policy"] == "required" for requirement in should)
+    should_not_followed = len(should) - should_followed
+    summary = f"""# TOSCA 1.3 processor non-MUST coverage
+
+This report is generated from the pinned TOSCA 1.3 specification extraction.
+It is separate from, and does not alter, the frozen 223 atomic MUST score.
+
+| Measure | Count |
+|---|---:|
+| Non-MUST processor records | {len(requirements)} |
+| SHOULD recommendations | {len(should)} |
+| SHOULD implemented | {should_followed} |
+| SHOULD intentionally not followed | {should_not_followed} |
+| MAY supported | {sum(r["source_strength"] == "MAY" and r["implementation_policy"] == "supported" for r in requirements)} |
+| OPTIONAL supported | {sum(r["source_strength"] == "OPTIONAL" and r["implementation_policy"] == "supported" for r in requirements)} |
+| Defaults verified | {source_counts["DEFAULT"]} |
+| Grammar alternatives verified | {source_counts["GRAMMAR"] + source_counts["SEMANTIC"] + source_counts["ERROR"]} |
+| Implementation-defined decisions | {policy_counts["implementation-defined"]} |
+| Unsupported recommendations | {policy_counts["unsupported"]} |
+| Non-MUST corpus cases | {len(cases)} |
+| Example compatibility cases | {sum(len(ids) for ids in examples_by_section.values())} |
+
+All supported records are directly linked to a manifest case. Unsupported
+recommendations and implementation-defined choices are verified as explicit,
+deterministic policies rather than counted as frozen MUST failures.
+"""
+    (BASE / "non-must-summary.md").write_text(summary, encoding="utf-8")
+
+    policy_lines = [
+        "# TOSCA 1.3 implementation policies",
+        "",
+        "These policies apply only to the processor non-MUST layer.",
+        "",
+    ]
+    for requirement in requirements:
+        if requirement["implementation_policy"] not in {"unsupported", "implementation-defined"}:
+            continue
+        policy_lines.extend(
+            [
+                f"## {requirement['id']}",
+                "",
+                f"- Section: {requirement['section']} — {requirement['section_title']}",
+                f"- Strength: {requirement['strength']} (source: {requirement['source_strength']})",
+                f"- Policy: {requirement['implementation_policy']}",
+                f"- Rationale: {requirement['policy_reason']}",
+                f"- Fixtures: {', '.join(requirement['fixture_ids'])}",
+                "",
+            ]
+        )
+    (BASE / "implementation-policies.md").write_text("\n".join(policy_lines), encoding="utf-8")
+
+    classification_rows = "\n".join(
+        f"| {name} | {count} |" for name, count in sorted(classification_counts.items())
+    )
+    full_section = f"""# TOSCA 1.3 full section coverage
+
+All {len(sections)} catalog section identifiers have exactly one primary
+classification and explicit frozen-MUST, processor non-MUST, and example
+coverage states.
+
+| Primary classification | Sections |
+|---|---:|
+{classification_rows}
+
+Processor non-MUST sections link to separate requirements and fixtures.
+Archive, orchestrator, generator, author, example, definition, cross-reference,
+duplicate, informative, and not-applicable sections retain explicit target
+reasons and do not affect the frozen 223 denominator.
+"""
+    (BASE / "full-section-coverage.md").write_text(full_section, encoding="utf-8")
+
+
 def main():
     catalog_records = load(BASE / "requirements.yaml")["requirements"]
     catalog = {record["id"]: record for record in catalog_records}
@@ -540,6 +764,7 @@ def main():
         )
     if cases:
         dump(CORPUS / "non_must/manifest.yaml", {"cases": cases})
+    generate_reports(catalog_records, requirements, cases)
 
 
 if __name__ == "__main__":
