@@ -1,0 +1,10 @@
+58453e11d007d28e18b013fbc3f42b16118fef687ae502cc4e605907a4ccb815  third_party/oasis/tosca-simple-profile/1.3/artifact.yaml
+a37051d05cd5338b5abbe27b732fc21eeebdee4b3df47bb4e9049452c22cd0f8  third_party/oasis/tosca-simple-profile/1.3/capability.yaml
+cf6e8cf8df67bbb581d07a374d5105a0ce7a0ec9855a7445aa4d70d9097c4ff5  third_party/oasis/tosca-simple-profile/1.3/data.yaml
+59237fbf361d0c2a1e291c06e35712479ad9e7865209d16e6345d61a491b7d43  third_party/oasis/tosca-simple-profile/1.3/group.yaml
+178aaa9f1c8f4bb6b01b870db386cad0d7fb2792c23a32bd5d328f4f49de1c69  third_party/oasis/tosca-simple-profile/1.3/interface.yaml
+b02001480814cd152773965580b801ce1fbf3f4212933610311630ea9d6c1054  third_party/oasis/tosca-simple-profile/1.3/node.yaml
+44322cdec031126735cf662b31a733d1ce9e25b6991840de6bd505cac8c388a1  third_party/oasis/tosca-simple-profile/1.3/policy.yaml
+70e766f957b5f6865aa72dc8f3df80d2988c8d19084ed03ca4491acf51d71e20  third_party/oasis/tosca-simple-profile/1.3/profile.yaml
+c6fe5b8adc515c901bf45ea0eb606ce0e0df673780c3f9d9daa80ea8d715c566  third_party/oasis/tosca-simple-profile/1.3/relationship.yaml
+82de42f59b0c39babcc100a32edb1e0f54a4ddfb7c14550dd2951b2c58a8d9ef  third_party/oasis/tosca-simple-profile/1.3/SOURCE_COMMIT

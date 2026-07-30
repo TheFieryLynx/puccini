@@ -545,3 +545,66 @@ The final response must include:
 A task that created persistent repository changes is not complete if those
 changes remain uncommitted.
 
+## OASIS TOSCA 1.3 machine-readable profile
+
+The repository contains a pinned copy of the OASIS TOSCA community
+machine-readable Simple Profile 1.3 from:
+
+`https://github.com/oasis-open/tosca-community-contributions/tree/master/profiles/org/oasis-open/simple/1.3`
+
+The pinned local copy is stored in:
+
+`third_party/oasis/tosca-simple-profile/1.3/`
+
+Its source revision is recorded in:
+
+`third_party/oasis/tosca-simple-profile/1.3/SOURCE_COMMIT`
+
+Its file hashes are recorded in:
+
+`third_party/oasis/tosca-simple-profile/1.3/SHA256SUMS`
+
+The profile is an OASIS TC Open Repository artifact and a machine-readable
+reference implementation maintained in the OASIS-hosted TOSCA community
+repository.
+
+The normative prose source remains:
+
+`docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html`
+
+Do not assume that either the bundled Puccini profile or the community
+machine-readable profile is correct merely because it already exists.
+
+For every normative profile definition, compare all three sources:
+
+1. the normative TOSCA 1.3 specification;
+2. the pinned OASIS community machine-readable profile;
+3. the Puccini bundled profile in `assets/tosca/profiles/simple/1.3/`.
+
+When all three agree, add direct corpus evidence.
+
+When they disagree:
+
+1. identify the exact type, field, and specification section;
+2. determine whether the difference is semantic or only representational;
+3. treat the normative specification as the conformance authority unless the
+   machine-readable artifact is proven to be formally declared normative for
+   the TOSCA 1.3 Work Product;
+4. record the discrepancy;
+5. add a minimal reproducing test template;
+6. do not silently copy one profile over another;
+7. create a decision record when the specification is ambiguous;
+8. apply any Puccini correction in a separate atomic commit.
+
+The pinned third-party profile must not be edited manually.
+
+Updates to the pinned profile must be performed as a dedicated dependency
+update that records:
+
+* old source commit;
+* new source commit;
+* changed files;
+* changed type definitions;
+* conformance impact;
+* full TOSCA 1.3 regression results.
+
