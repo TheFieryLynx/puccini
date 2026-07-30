@@ -1,0 +1,41 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+node_types:
+  Parent:
+    derived_from: tosca.nodes.Root
+    properties:
+      setting:
+        type: string
+        required: false
+        default: parent
+  Derived:
+    derived_from: Parent
+    properties:
+      setting:
+        default: derived
+  Unrelated:
+    derived_from: tosca.nodes.Root
+    properties:
+      other:
+        type: string
+        required: false
+        default: unrelated
+topology_template:
+  inputs:
+    selected:
+      type: string
+      default: input
+  node_templates:
+    base:
+      type: Parent
+    explicit:
+      type: Parent
+      properties:
+        setting: explicit
+    derived:
+      type: Derived
+    function:
+      type: Parent
+      properties:
+        setting: { get_input: selected }
+    unrelated:
+      type: Unrelated

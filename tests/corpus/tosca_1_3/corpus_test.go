@@ -321,6 +321,36 @@ func assertCorpusResult(t *testing.T, caseID string, serviceTemplate *normal.Ser
 		if serviceTemplate == nil || serviceTemplate.Outputs[name] == nil {
 			t.Fatalf("%s normalized output %q is absent", caseID, name)
 		}
+	case strings.HasPrefix(assertion, "node_property_primitive:"):
+		parts := strings.SplitN(assertion, ":", 4)
+		if len(parts) != 4 {
+			t.Fatalf("%s has malformed primitive property assertion %q", caseID, assertion)
+		}
+		node := serviceTemplate.NodeTemplates[parts[1]]
+		if node == nil {
+			t.Fatalf("%s normalized node %q is absent", caseID, parts[1])
+		}
+		value, ok := node.Properties[parts[2]].(*normal.Primitive)
+		if !ok || fmt.Sprint(value.Primitive) != parts[3] {
+			t.Fatalf("%s property %s.%s = %#v, want primitive %q", caseID, parts[1], parts[2], node.Properties[parts[2]], parts[3])
+		}
+	case strings.HasPrefix(assertion, "node_property_function:"):
+		parts := strings.SplitN(assertion, ":", 4)
+		if len(parts) != 4 {
+			t.Fatalf("%s has malformed function property assertion %q", caseID, assertion)
+		}
+		node := serviceTemplate.NodeTemplates[parts[1]]
+		if node == nil {
+			t.Fatalf("%s normalized node %q is absent", caseID, parts[1])
+		}
+		value, ok := node.Properties[parts[2]].(*normal.FunctionCall)
+		if !ok || value.FunctionCall == nil || value.FunctionCall.Name != parts[3] {
+			actual := ""
+			if ok && value.FunctionCall != nil {
+				actual = value.FunctionCall.Name
+			}
+			t.Fatalf("%s property %s.%s function = %q, want %q", caseID, parts[1], parts[2], actual, parts[3])
+		}
 	case strings.HasPrefix(assertion, "requirement_target:"):
 		parts := strings.Split(assertion, ":")
 		if len(parts) != 4 {

@@ -13,3 +13,9 @@ mutations:
   - TOSCA13-NONMUST-CORPUS-MAY-TYPE-ONLY
   expected_cases_failed: true
   production_diff_restored: true
+- group: defaults
+  mutation: Skip insertion of property-definition defaults in Values.RenderProperties.
+  affected_cases:
+  - TOSCA13-NONMUST-CORPUS-DEFAULTS
+  expected_cases_failed: true
+  production_diff_restored: true

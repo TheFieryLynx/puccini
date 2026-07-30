@@ -62,8 +62,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-3.2-002
@@ -92,8 +92,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-3.3-001
@@ -205,8 +205,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-3.3.2-001
@@ -4062,8 +4062,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-3.6.10.2-009
@@ -4146,8 +4146,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-3.6.10.2-015
@@ -4412,8 +4412,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-3.6.10.3-002
@@ -4540,8 +4540,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-3.6.10.4-010
@@ -4995,8 +4995,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-3.6.12.2-012
@@ -5193,8 +5193,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-3.6.12.3-008
@@ -5556,8 +5556,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-3.6.14.2-017
@@ -9710,8 +9710,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-3.7.2.1-018
@@ -16944,8 +16944,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-3.9.2.1-002
@@ -16958,8 +16958,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-3.9.2.1.1-001
@@ -17204,8 +17204,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-3.10.1-005
@@ -19781,8 +19781,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.3.1.1-002
@@ -20035,8 +20035,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.3.6.1-006
@@ -20245,8 +20245,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.3.6.2-009
@@ -21309,8 +21309,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.3.11.1-003
@@ -21603,8 +21603,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.3.11.2-007
@@ -21841,8 +21841,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.4.1.1-002
@@ -22374,8 +22374,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.1.1-002
@@ -22683,8 +22683,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.3.1-015
@@ -22739,8 +22739,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.3.1-019
@@ -23440,8 +23440,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.7-003
@@ -23454,8 +23454,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.7-004
@@ -23496,8 +23496,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.7.1-002
@@ -23594,8 +23594,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.7.1-011
@@ -23734,8 +23734,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.7.1-021
@@ -23847,8 +23847,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.7.1-029
@@ -24015,8 +24015,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.7.3-007
@@ -24113,8 +24113,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.7.3-014
@@ -24253,8 +24253,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.7.3-024
@@ -24309,8 +24309,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.7.3-028
@@ -24519,8 +24519,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.8.1-006
@@ -24604,8 +24604,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.8.1-012
@@ -24716,8 +24716,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.9-003
@@ -24814,8 +24814,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.9.2-006
@@ -24856,8 +24856,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.10-003
@@ -24941,8 +24941,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.11-003
@@ -25025,8 +25025,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.12-003
@@ -25431,8 +25431,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.13-003
@@ -25473,8 +25473,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.13.1-002
@@ -25516,8 +25516,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.13.1-006
@@ -25644,8 +25644,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.13.2-006
@@ -25686,8 +25686,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.5.13.2-009
@@ -25855,8 +25855,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.7.1.1-001
@@ -25941,8 +25941,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.7.1.1-009
@@ -26870,8 +26870,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.8.3.1-002
@@ -27508,8 +27508,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.9.1-003
@@ -27635,8 +27635,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.9.1.2-009
@@ -30189,8 +30189,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.9.9.1-006
@@ -30301,8 +30301,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.9.9.2-008
@@ -30371,8 +30371,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.9.10.1-003
@@ -31354,8 +31354,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.10.1.1-002
@@ -31424,8 +31424,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.11.1.1-002
@@ -31466,8 +31466,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.11.2.1-002
@@ -31523,8 +31523,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.11.3.1-002
@@ -31580,8 +31580,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.11.4.1-002
@@ -31638,8 +31638,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-5.11.5.1-002
@@ -32194,8 +32194,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-8.5.1-001
@@ -32264,8 +32264,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-8.5.1.1-003
@@ -32558,8 +32558,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-8.5.1.1-041
@@ -32684,8 +32684,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-8.5.1.3-007
@@ -33216,8 +33216,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-8.5.2.1-008
@@ -33258,8 +33258,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-8.5.2.1-013
@@ -33273,8 +33273,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-8.5.2.1-014
@@ -33287,8 +33287,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-8.5.2.1-015
@@ -33497,8 +33497,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-8.5.2.3-010
@@ -33567,8 +33567,8 @@ requirements:
   processor_applicable: true
   implementation_policy: required
   policy_reason: This grammar, default, or semantic rule is required for the selected TOSCA 1.3 interpretation.
-  implementation_status: partial
-  verification_status: untested
+  implementation_status: implemented
+  verification_status: verified
   fixture_ids:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
 - id: TOSCA13-NONMUST-8.5.2.3-015

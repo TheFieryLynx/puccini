@@ -216,6 +216,22 @@ CASE_EXPECTATIONS = {
         "diagnostic": None,
         "assertions": ["node_exists:component", "input_exists:label", "output_exists:label"],
     },
+    "TOSCA13-NONMUST-CORPUS-DEFAULTS": {
+        "tier": "processor-default",
+        "kind": "valid",
+        "category": "default",
+        "features": ["property-default", "inheritance", "refinement", "explicit-override", "function-assignment"],
+        "accepted": True,
+        "phase": "normalization",
+        "diagnostic": None,
+        "assertions": [
+            "node_property_primitive:base:setting:parent",
+            "node_property_primitive:explicit:setting:explicit",
+            "node_property_primitive:derived:setting:derived",
+            "node_property_function:function:setting:tosca.function.get_input",
+            "node_property_primitive:unrelated:other:unrelated",
+        ],
+    },
 }
 
 
