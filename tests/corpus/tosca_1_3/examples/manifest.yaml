@@ -1,0 +1,12 @@
+cases:
+- id: TOSCA13-EXAMPLE-CORPUS-OAM-NETWORK
+  file: examples/oam-network-adapted.yaml
+  section: 8.4.3.1
+  source_kind: minimally-adapted-equivalent
+  accepted: true
+  normative_evidence: false
+  indirectly_demonstrates:
+  - custom node type derivation
+  - normative network type resolution
+  - property default and explicit assignment
+  note: Example compatibility is reported separately and does not affect frozen MUST or non-MUST policy metrics.

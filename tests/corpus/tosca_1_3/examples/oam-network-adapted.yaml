@@ -1,0 +1,20 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+description: Minimal processor-focused adaptation of the OAM Network use case.
+node_types:
+  OAMEndpoint:
+    derived_from: tosca.nodes.Root
+    properties:
+      role:
+        type: string
+        required: false
+        default: endpoint
+  OAMNetwork:
+    derived_from: tosca.nodes.network.Network
+topology_template:
+  node_templates:
+    management_network:
+      type: OAMNetwork
+    managed_endpoint:
+      type: OAMEndpoint
+      properties:
+        role: managed
