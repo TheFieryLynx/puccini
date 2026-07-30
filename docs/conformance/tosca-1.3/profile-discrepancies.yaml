@@ -1,0 +1,320 @@
+schema_version: 1
+applicable_specification: TOSCA Simple Profile in YAML Version 1.3
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+oasis_community_upstream_commit: e5b0a3ee46488921ff409bbe0feba37af2a3233e
+allowed_classifications:
+- Puccini defect
+- community-profile defect
+- prose specification ambiguity
+- semantically equivalent representation
+- version mismatch
+- extension
+- obsolete declaration
+- unresolved
+discrepancies:
+- id: PROFILE13-001
+  canonical_name: tosca.artifacts.Deployment.Image.VM
+  path: derived_from
+  specification: tosca.artifacts.Deployment.Image
+  oasis_community_profile: tosca.artifacts.Deployment.Image
+  puccini_profile: tosca.artifacts.Deployment
+  classification: Puccini defect
+  secondary_classifications: []
+  resolution_status: confirmed
+  specification_section: 5.4.3.4
+  decision_record: null
+- id: PROFILE13-002
+  canonical_name: tosca.capabilities.Scalable
+  path: properties.default_instances.default
+  specification: null
+  oasis_community_profile: 1
+  puccini_profile: null
+  classification: community-profile defect
+  secondary_classifications: []
+  resolution_status: confirmed
+  specification_section: 5.5.13
+  decision_record: null
+- id: PROFILE13-003
+  canonical_name: tosca.datatypes.json
+  path: constraints
+  specification: null
+  oasis_community_profile: null
+  puccini_profile:
+  - _format: json
+  classification: extension
+  secondary_classifications: []
+  resolution_status: interpreted
+  specification_section: 5.3.2
+  decision_record: null
+- id: PROFILE13-004
+  canonical_name: tosca.datatypes.network.NetworkInfo
+  path: properties.addresses.required
+  specification: false
+  oasis_community_profile: true
+  puccini_profile: false
+  classification: prose specification ambiguity
+  secondary_classifications: []
+  resolution_status: documented
+  specification_section: 5.3.8
+  decision_record: docs/decisions/tosca-1.3-network-info-requiredness.md
+- id: PROFILE13-005
+  canonical_name: tosca.datatypes.network.NetworkInfo
+  path: properties.network_id.required
+  specification: false
+  oasis_community_profile: true
+  puccini_profile: false
+  classification: prose specification ambiguity
+  secondary_classifications: []
+  resolution_status: documented
+  specification_section: 5.3.8
+  decision_record: docs/decisions/tosca-1.3-network-info-requiredness.md
+- id: PROFILE13-006
+  canonical_name: tosca.datatypes.network.NetworkInfo
+  path: properties.network_name.required
+  specification: false
+  oasis_community_profile: true
+  puccini_profile: false
+  classification: prose specification ambiguity
+  secondary_classifications: []
+  resolution_status: documented
+  specification_section: 5.3.8
+  decision_record: docs/decisions/tosca-1.3-network-info-requiredness.md
+- id: PROFILE13-007
+  canonical_name: tosca.datatypes.network.PortInfo
+  path: properties.addresses.required
+  specification: false
+  oasis_community_profile: true
+  puccini_profile: false
+  classification: prose specification ambiguity
+  secondary_classifications: []
+  resolution_status: documented
+  specification_section: 5.3.9
+  decision_record: docs/decisions/tosca-1.3-network-info-requiredness.md
+- id: PROFILE13-008
+  canonical_name: tosca.datatypes.network.PortInfo
+  path: properties.mac_address.required
+  specification: false
+  oasis_community_profile: true
+  puccini_profile: false
+  classification: prose specification ambiguity
+  secondary_classifications: []
+  resolution_status: documented
+  specification_section: 5.3.9
+  decision_record: docs/decisions/tosca-1.3-network-info-requiredness.md
+- id: PROFILE13-009
+  canonical_name: tosca.datatypes.network.PortInfo
+  path: properties.network_id.required
+  specification: false
+  oasis_community_profile: true
+  puccini_profile: false
+  classification: prose specification ambiguity
+  secondary_classifications: []
+  resolution_status: documented
+  specification_section: 5.3.9
+  decision_record: docs/decisions/tosca-1.3-network-info-requiredness.md
+- id: PROFILE13-010
+  canonical_name: tosca.datatypes.network.PortInfo
+  path: properties.port_id.required
+  specification: false
+  oasis_community_profile: true
+  puccini_profile: false
+  classification: prose specification ambiguity
+  secondary_classifications: []
+  resolution_status: documented
+  specification_section: 5.3.9
+  decision_record: docs/decisions/tosca-1.3-network-info-requiredness.md
+- id: PROFILE13-011
+  canonical_name: tosca.datatypes.network.PortInfo
+  path: properties.port_name.required
+  specification: false
+  oasis_community_profile: true
+  puccini_profile: false
+  classification: prose specification ambiguity
+  secondary_classifications: []
+  resolution_status: documented
+  specification_section: 5.3.9
+  decision_record: docs/decisions/tosca-1.3-network-info-requiredness.md
+- id: PROFILE13-012
+  canonical_name: tosca.datatypes.xml
+  path: constraints
+  specification: null
+  oasis_community_profile: null
+  puccini_profile:
+  - _format: xml
+  classification: extension
+  secondary_classifications: []
+  resolution_status: interpreted
+  specification_section: 5.3.4
+  decision_record: null
+- id: PROFILE13-013
+  canonical_name: tosca.groups.Root
+  path: interfaces
+  specification:
+    Standard:
+      type: tosca.interfaces.node.lifecycle.Standard
+  oasis_community_profile: null
+  puccini_profile: null
+  classification: Puccini defect
+  secondary_classifications:
+  - community-profile defect
+  resolution_status: confirmed
+  specification_section: 5.10.1
+  decision_record: null
+- id: PROFILE13-014
+  canonical_name: tosca.interfaces.Root
+  path: derived_from
+  specification: tosca.entity.Root
+  oasis_community_profile: null
+  puccini_profile: null
+  classification: obsolete declaration
+  secondary_classifications: []
+  resolution_status: interpreted
+  specification_section: 5.8.3
+  decision_record: null
+- id: PROFILE13-015
+  canonical_name: tosca.interfaces.relationship.Configure
+  path: operations.remove_source
+  specification: null
+  oasis_community_profile: null
+  puccini_profile: {}
+  classification: extension
+  secondary_classifications: []
+  resolution_status: interpreted
+  specification_section: 5.8.5
+  decision_record: null
+- id: PROFILE13-016
+  canonical_name: tosca.nodes.Abstract.Compute
+  path: valid_source_types
+  specification: []
+  oasis_community_profile: null
+  puccini_profile: null
+  classification: obsolete declaration
+  secondary_classifications: []
+  resolution_status: interpreted
+  specification_section: 5.9.2
+  decision_record: null
+- id: PROFILE13-017
+  canonical_name: tosca.nodes.Abstract.Storage
+  path: derived_from
+  specification: tosca.nodes.Root
+  oasis_community_profile: tosca.nodes.Root
+  puccini_profile: null
+  classification: Puccini defect
+  secondary_classifications: []
+  resolution_status: confirmed
+  specification_section: 5.9.9
+  decision_record: null
+- id: PROFILE13-018
+  canonical_name: tosca.nodes.Abstract.Storage
+  path: properties.size.constraints
+  specification:
+  - greater_or_equal: 0 MB
+  oasis_community_profile:
+  - greater_or_equal: 0 MB
+  puccini_profile:
+  - greater_or_equal: 0 GB
+  classification: Puccini defect
+  secondary_classifications: []
+  resolution_status: confirmed
+  specification_section: 5.9.9
+  decision_record: null
+- id: PROFILE13-019
+  canonical_name: tosca.nodes.Abstract.Storage
+  path: properties.size.default
+  specification: 0 MB
+  oasis_community_profile: 0 MB
+  puccini_profile: null
+  classification: Puccini defect
+  secondary_classifications: []
+  resolution_status: confirmed
+  specification_section: 5.9.9
+  decision_record: null
+- id: PROFILE13-020
+  canonical_name: tosca.nodes.Abstract.Storage
+  path: properties.size.required
+  specification: true
+  oasis_community_profile: true
+  puccini_profile: false
+  classification: Puccini defect
+  secondary_classifications: []
+  resolution_status: confirmed
+  specification_section: 5.9.9
+  decision_record: null
+- id: PROFILE13-021
+  canonical_name: tosca.nodes.Container.Application
+  path: requirements.network.capability
+  specification: tosca.capabilities.Endpoint
+  oasis_community_profile: tosca.capabilities.Endpoint
+  puccini_profile: tosca.capabilities.Network
+  classification: Puccini defect
+  secondary_classifications: []
+  resolution_status: confirmed
+  specification_section: 5.9.13
+  decision_record: null
+- id: PROFILE13-022
+  canonical_name: tosca.nodes.Container.Runtime
+  path: capabilities.host.type
+  specification: tosca.capabilities.Compute
+  oasis_community_profile: tosca.capabilities.Compute
+  puccini_profile: tosca.capabilities.Container
+  classification: Puccini defect
+  secondary_classifications: []
+  resolution_status: confirmed
+  specification_section: 5.9.12
+  decision_record: null
+- id: PROFILE13-023
+  canonical_name: tosca.nodes.Storage.BlockStorage
+  path: properties.size
+  specification: null
+  oasis_community_profile:
+    default: 1 MB
+    constraints:
+    - greater_or_equal: 1 MB
+    required: true
+  puccini_profile: null
+  classification: prose specification ambiguity
+  secondary_classifications: []
+  resolution_status: documented
+  specification_section: 5.9.11
+  decision_record: docs/conformance/tosca-1.3/ambiguities.md#tosca13-amb-013-blockstorage-size-has-conditional-requiredness-and-volume_id-precedence
+- id: PROFILE13-024
+  canonical_name: tosca.nodes.Storage.ObjectStorage
+  path: properties.maxsize.constraints.greater_or_equal
+  specification:
+    properties_table: 1 GB
+    definition: 0 GB
+  oasis_community_profile: 0 GB
+  puccini_profile: 0 GB
+  classification: prose specification ambiguity
+  resolution_status: documented
+  secondary_classifications: []
+  specification_section: 5.9.10
+  decision_record: docs/conformance/tosca-1.3/ambiguities.md#tosca13-amb-012-objectstorage-maxsize-lower-bound-conflicts
+- id: PROFILE13-025
+  canonical_name: tosca.nodes.network.Port
+  path: properties.order.required
+  specification:
+    properties_table: false
+    definition: true
+  oasis_community_profile: true
+  puccini_profile: true
+  classification: prose specification ambiguity
+  resolution_status: interpreted
+  secondary_classifications: []
+  specification_section: 8.5.2
+  decision_record: docs/decisions/0008-tosca-1.3-network-port-order-requiredness.md
+- id: PROFILE13-026
+  canonical_name: tosca.relationships.AttachesTo
+  path: attributes
+  specification:
+    device:
+      type: string
+  oasis_community_profile: null
+  puccini_profile:
+    device:
+      type: string
+  classification: community-profile defect
+  secondary_classifications: []
+  resolution_status: confirmed
+  specification_section: 5.7.5
+  decision_record: null
