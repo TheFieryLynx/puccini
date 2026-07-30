@@ -13,7 +13,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / "docs/conformance/tosca-1.3"
-CORPUS = ROOT / "tests/corpus/tosca_1_3/non_must"
+CORPUS = ROOT / "tests/corpus/tosca_1_3"
 
 NON_MUST_STRENGTHS = {
     "SHOULD",
@@ -31,8 +31,13 @@ NON_PROCESSOR_RECORDS = {
     "TOSCA13-3.6.2.4-002",
     "TOSCA13-3.6.10.2-030",
     "TOSCA13-3.6.13.3-001",
+    "TOSCA13-3.6.25.5-001",
     "TOSCA13-3.7.9.4-001",
     "TOSCA13-3.7.10.3-001",
+    "TOSCA13-3.7.11.4-001",
+    "TOSCA13-3.8.5.4-001",
+    "TOSCA13-3.8.10.3-001",
+    "TOSCA13-3.8.11.3-001",
     "TOSCA13-3.8.13.5-001",
     "TOSCA13-3.10.3.3.4-001",
     "TOSCA13-3.10.3.5.4-001",
@@ -55,29 +60,91 @@ UNSUPPORTED_RECOMMENDATIONS = {
 }
 
 CASE_PATHS = {
-    "TOSCA13-NONMUST-CORPUS-SHOULD-EXTERNAL-SCHEMA": "should/external-schema-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-SHOULD-IMPORTS": "should/import-resolution-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-SHOULD-IMPORT-POLICY": "unsupported-policy/import-namespace-uri-policy.yaml",
-    "TOSCA13-NONMUST-CORPUS-SHOULD-CONDITION-ORDER": "should/condition-order-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-SHOULD-CAPABILITY-MAPPING": "should/capability-mapping-policy.yaml",
-    "TOSCA13-NONMUST-CORPUS-SHOULD-GROUP-RELATIONSHIPS": "should/group-relationship-policy.yaml",
-    "TOSCA13-NONMUST-CORPUS-SHOULD-DATATYPE-SYNTAX": "unsupported-policy/json-xml-syntax-policy.yaml",
-    "TOSCA13-NONMUST-CORPUS-MAY-CONSTRAINT-REFINEMENT": "may/in-range-refinement-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-MAY-IMPORT-NAMESPACE": "may/import-namespace-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-MAY-OPERATION-INPUT": "may/operation-input-extension-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-MAY-TYPE-ONLY": "may/type-only-service-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-MAY-FUNCTION-CONTEXT": "may/function-context-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-MAY-NORMATIVE-SHORTHAND": "may/normative-shorthand-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-DEFAULTS": "defaults/default-semantics-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-GRAMMAR-DATA": "grammar-alternatives/data-types-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-GRAMMAR-DEFINITIONS": "grammar-alternatives/definitions-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-GRAMMAR-TYPES": "grammar-alternatives/type-definitions-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-GRAMMAR-TEMPLATES": "grammar-alternatives/template-definitions-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-GRAMMAR-FUNCTIONS": "grammar-alternatives/functions-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-GRAMMAR-WORKFLOWS": "grammar-alternatives/workflows-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-GRAMMAR-PROFILE": "grammar-alternatives/normative-profile-valid.yaml",
-    "TOSCA13-NONMUST-CORPUS-POLICY-NETWORK": "implementation-defined/network-disabled-policy.yaml",
-    "TOSCA13-NONMUST-CORPUS-POLICY-EXTENSIONS": "implementation-defined/unknown-extension-policy.yaml",
+    "TOSCA13-NONMUST-CORPUS-SHOULD-EXTERNAL-SCHEMA": "non_must/should/external-schema-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-SHOULD-EXTERNAL-SCHEMA-INVALID": "non_must/should/external-schema-invalid.yaml",
+    "TOSCA13-NONMUST-CORPUS-SHOULD-IMPORTS": "non_must/should/import-resolution-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-SHOULD-IMPORT-FAILURE": "non_must/should/import-missing-invalid.yaml",
+    "TOSCA13-NONMUST-CORPUS-SHOULD-IMPORT-POLICY": "non_must/unsupported-policy/import-namespace-uri-policy.yaml",
+    "TOSCA13-NONMUST-CORPUS-SHOULD-DATATYPE-SYNTAX": "non_must/unsupported-policy/json-xml-syntax-policy.yaml",
+    "TOSCA13-NONMUST-CORPUS-MAY-CONSTRAINT-REFINEMENT": "non_must/may/in-range-refinement-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-MAY-IMPORT-NAMESPACE": "non_must/may/import-namespace-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-MAY-OPERATION-INPUT": "non_must/may/operation-input-extension-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-MAY-TYPE-ONLY": "non_must/may/type-only-service-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-MAY-FUNCTION-CONTEXT": "non_must/may/function-context-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-MAY-NORMATIVE-SHORTHAND": "non_must/may/normative-shorthand-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-DEFAULTS": "non_must/defaults/default-semantics-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-DATA": "non_must/grammar-alternatives/data-types-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-DEFINITIONS": "non_must/grammar-alternatives/definitions-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-TYPES": "non_must/grammar-alternatives/type-definitions-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-TEMPLATES": "non_must/grammar-alternatives/template-definitions-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-FUNCTIONS": "non_must/grammar-alternatives/functions-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-WORKFLOWS": "non_must/grammar-alternatives/workflows-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-PROFILE": "non_must/grammar-alternatives/normative-profile-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-POLICY-NETWORK": "non_must/implementation-defined/network-disabled-policy.yaml",
+    "TOSCA13-NONMUST-CORPUS-POLICY-EXTENSIONS": "non_must/implementation-defined/unknown-extension-policy.yaml",
+}
+
+CASE_EXPECTATIONS = {
+    "TOSCA13-NONMUST-CORPUS-SHOULD-EXTERNAL-SCHEMA": {
+        "tier": "processor-should",
+        "kind": "valid",
+        "category": "semantic",
+        "features": ["external-schema", "recommendation"],
+        "accepted": True,
+        "phase": "normalization",
+        "diagnostic": None,
+        "assertions": ["node_exists:node"],
+    },
+    "TOSCA13-NONMUST-CORPUS-SHOULD-EXTERNAL-SCHEMA-INVALID": {
+        "tier": "processor-should",
+        "kind": "invalid",
+        "category": "semantic",
+        "features": ["external-schema", "recommendation", "invalid-schema"],
+        "accepted": False,
+        "phase": "rendering",
+        "diagnostic": {"category": "external schema compilation failure", "path": "payload"},
+        "assertions": [],
+    },
+    "TOSCA13-NONMUST-CORPUS-SHOULD-IMPORTS": {
+        "tier": "processor-should",
+        "kind": "valid",
+        "category": "semantic",
+        "features": ["imports", "relative-resolution"],
+        "accepted": True,
+        "phase": "normalization",
+        "diagnostic": None,
+        "assertions": ["node_exists:node"],
+    },
+    "TOSCA13-NONMUST-CORPUS-SHOULD-IMPORT-FAILURE": {
+        "tier": "processor-should",
+        "kind": "invalid",
+        "category": "semantic",
+        "features": ["imports", "resolution-failure"],
+        "accepted": False,
+        "phase": "read",
+        "diagnostic": {"category": "invalid URL", "path": "imports[0]"},
+        "assertions": [],
+    },
+    "TOSCA13-NONMUST-CORPUS-SHOULD-IMPORT-POLICY": {
+        "tier": "processor-should",
+        "kind": "policy",
+        "category": "compatibility",
+        "features": ["imports", "namespace-uri", "unsupported-policy"],
+        "accepted": False,
+        "phase": "read",
+        "diagnostic": {"category": "invalid URL", "path": "imports[0]"},
+        "assertions": [],
+    },
+    "TOSCA13-NONMUST-CORPUS-SHOULD-DATATYPE-SYNTAX": {
+        "tier": "processor-should",
+        "kind": "policy",
+        "category": "compatibility",
+        "features": ["json", "xml", "unsupported-recommendation"],
+        "accepted": True,
+        "phase": "normalization",
+        "diagnostic": None,
+        "assertions": ["node_exists:node"],
+    },
 }
 
 
@@ -108,6 +175,8 @@ def fixture_for(record):
     if requirement_id in {"TOSCA13-3.6.8.2.4-002", "TOSCA13-3.6.8.2.4-005"}:
         return "TOSCA13-NONMUST-CORPUS-SHOULD-IMPORT-POLICY"
     if section == "3.6.8.2.4":
+        if requirement_id == "TOSCA13-3.6.8.2.4-010":
+            return "TOSCA13-NONMUST-CORPUS-SHOULD-IMPORT-FAILURE"
         return "TOSCA13-NONMUST-CORPUS-SHOULD-IMPORTS"
     if requirement_id == "TOSCA13-3.6.25.5-001":
         return "TOSCA13-NONMUST-CORPUS-SHOULD-CONDITION-ORDER"
@@ -146,6 +215,16 @@ def fixture_for(record):
     if section.startswith(("6.", "7.", "13.", "14.")):
         return "TOSCA13-NONMUST-CORPUS-GRAMMAR-WORKFLOWS"
     return "TOSCA13-NONMUST-CORPUS-GRAMMAR-DEFINITIONS"
+
+
+def fixtures_for(record):
+    fixture = fixture_for(record)
+    if record["requirement_id"] == "TOSCA13-3.6.3.3-005":
+        return [
+            fixture,
+            "TOSCA13-NONMUST-CORPUS-SHOULD-EXTERNAL-SCHEMA-INVALID",
+        ]
+    return [fixture]
 
 
 def policy_for(record, fixture_exists):
@@ -198,8 +277,8 @@ def main():
     requirements = []
     for record in selected:
         source = catalog[record["requirement_id"]]
-        fixture_id = fixture_for(record)
-        fixture_exists = (CORPUS / CASE_PATHS[fixture_id]).is_file()
+        fixture_ids = fixtures_for(record)
+        fixture_exists = all((CORPUS / CASE_PATHS[fixture_id]).is_file() for fixture_id in fixture_ids)
         policy = policy_for(record, fixture_exists)
         requirements.append(
             {
@@ -212,7 +291,7 @@ def main():
                 "normative_rule": source["requirement"],
                 "processor_applicable": True,
                 **policy,
-                "fixture_ids": [fixture_id],
+                "fixture_ids": fixture_ids,
             }
         )
 
@@ -233,6 +312,53 @@ def main():
             "requirements": requirements,
         },
     )
+
+    by_fixture = {}
+    for requirement in requirements:
+        for fixture_id in requirement["fixture_ids"]:
+            by_fixture.setdefault(fixture_id, []).append(requirement)
+
+    cases = []
+    for case_id, relative_path in CASE_PATHS.items():
+        if not (CORPUS / relative_path).is_file():
+            continue
+        linked = by_fixture.get(case_id, [])
+        if not linked:
+            continue
+        expected = CASE_EXPECTATIONS[case_id]
+        policies = {requirement["implementation_policy"] for requirement in linked}
+        support = "unsupported" if policies == {"unsupported"} else ("implementation-defined" if "implementation-defined" in policies else "supported")
+        cases.append(
+            {
+                "id": case_id,
+                "file": relative_path,
+                "conformance_tier": expected["tier"],
+                "specification": {
+                    "sections": sorted(
+                        {requirement["section"] for requirement in linked},
+                        key=lambda value: tuple(int(part) if part.isdigit() else part for part in value.split(".")),
+                    ),
+                    "non_must_requirement_ids": sorted(requirement["id"] for requirement in linked),
+                },
+                "policy": {
+                    "support": support,
+                    "rationale": "All linked rules use the cataloged implementation policy; this case exercises their shared processor path.",
+                },
+                "classification": {
+                    "kind": expected["kind"],
+                    "category": expected["category"],
+                    "features": expected["features"],
+                },
+                "expected": {
+                    "accepted": expected["accepted"],
+                    "phase": expected["phase"],
+                    "diagnostic": expected["diagnostic"],
+                    "assertions": expected["assertions"],
+                },
+            }
+        )
+    if cases:
+        dump(CORPUS / "non_must/manifest.yaml", {"cases": cases})
 
 
 if __name__ == "__main__":

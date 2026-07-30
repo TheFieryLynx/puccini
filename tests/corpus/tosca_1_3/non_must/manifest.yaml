@@ -1,0 +1,149 @@
+cases:
+- id: TOSCA13-NONMUST-CORPUS-SHOULD-EXTERNAL-SCHEMA
+  file: non_must/should/external-schema-valid.yaml
+  conformance_tier: processor-should
+  specification:
+    sections:
+    - 3.6.3.3
+    non_must_requirement_ids:
+    - TOSCA13-NONMUST-3.6.3.3-005
+  policy:
+    support: supported
+    rationale: All linked rules use the cataloged implementation policy; this case exercises their shared processor path.
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - external-schema
+    - recommendation
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic: null
+    assertions:
+    - node_exists:node
+- id: TOSCA13-NONMUST-CORPUS-SHOULD-EXTERNAL-SCHEMA-INVALID
+  file: non_must/should/external-schema-invalid.yaml
+  conformance_tier: processor-should
+  specification:
+    sections:
+    - 3.6.3.3
+    non_must_requirement_ids:
+    - TOSCA13-NONMUST-3.6.3.3-005
+  policy:
+    support: supported
+    rationale: All linked rules use the cataloged implementation policy; this case exercises their shared processor path.
+  classification:
+    kind: invalid
+    category: semantic
+    features:
+    - external-schema
+    - recommendation
+    - invalid-schema
+  expected:
+    accepted: false
+    phase: rendering
+    diagnostic:
+      category: external schema compilation failure
+      path: payload
+    assertions: []
+- id: TOSCA13-NONMUST-CORPUS-SHOULD-IMPORTS
+  file: non_must/should/import-resolution-valid.yaml
+  conformance_tier: processor-should
+  specification:
+    sections:
+    - 3.6.8.2.4
+    non_must_requirement_ids:
+    - TOSCA13-NONMUST-3.6.8.2.4-006
+    - TOSCA13-NONMUST-3.6.8.2.4-007
+  policy:
+    support: supported
+    rationale: All linked rules use the cataloged implementation policy; this case exercises their shared processor path.
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - imports
+    - relative-resolution
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic: null
+    assertions:
+    - node_exists:node
+- id: TOSCA13-NONMUST-CORPUS-SHOULD-IMPORT-FAILURE
+  file: non_must/should/import-missing-invalid.yaml
+  conformance_tier: processor-should
+  specification:
+    sections:
+    - 3.6.8.2.4
+    non_must_requirement_ids:
+    - TOSCA13-NONMUST-3.6.8.2.4-010
+  policy:
+    support: supported
+    rationale: All linked rules use the cataloged implementation policy; this case exercises their shared processor path.
+  classification:
+    kind: invalid
+    category: semantic
+    features:
+    - imports
+    - resolution-failure
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: invalid URL
+      path: imports[0]
+    assertions: []
+- id: TOSCA13-NONMUST-CORPUS-SHOULD-IMPORT-POLICY
+  file: non_must/unsupported-policy/import-namespace-uri-policy.yaml
+  conformance_tier: processor-should
+  specification:
+    sections:
+    - 3.6.8.2.4
+    non_must_requirement_ids:
+    - TOSCA13-NONMUST-3.6.8.2.4-002
+    - TOSCA13-NONMUST-3.6.8.2.4-005
+  policy:
+    support: unsupported
+    rationale: All linked rules use the cataloged implementation policy; this case exercises their shared processor path.
+  classification:
+    kind: policy
+    category: compatibility
+    features:
+    - imports
+    - namespace-uri
+    - unsupported-policy
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: invalid URL
+      path: imports[0]
+    assertions: []
+- id: TOSCA13-NONMUST-CORPUS-SHOULD-DATATYPE-SYNTAX
+  file: non_must/unsupported-policy/json-xml-syntax-policy.yaml
+  conformance_tier: processor-should
+  specification:
+    sections:
+    - 5.3.3
+    - 5.3.5
+    non_must_requirement_ids:
+    - TOSCA13-NONMUST-5.3.3-001
+    - TOSCA13-NONMUST-5.3.5-001
+  policy:
+    support: unsupported
+    rationale: All linked rules use the cataloged implementation policy; this case exercises their shared processor path.
+  classification:
+    kind: policy
+    category: compatibility
+    features:
+    - json
+    - xml
+    - unsupported-recommendation
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic: null
+    assertions:
+    - node_exists:node

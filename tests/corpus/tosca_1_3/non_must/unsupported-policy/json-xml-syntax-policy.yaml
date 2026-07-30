@@ -1,0 +1,16 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+node_types:
+  OpaquePayloads:
+    derived_from: tosca.nodes.Root
+    properties:
+      json_payload:
+        type: json
+      xml_payload:
+        type: xml
+topology_template:
+  node_templates:
+    node:
+      type: OpaquePayloads
+      properties:
+        json_payload: '{not-json'
+        xml_payload: '<not-closed>'

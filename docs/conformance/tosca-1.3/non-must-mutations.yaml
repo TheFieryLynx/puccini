@@ -1,0 +1,9 @@
+mutations:
+  - group: should
+    production_path: tosca_v1_3.ServiceFile.Render -> validateExternalPropertySchemas
+    mutation: disabled only the TOSCA 1.3 external-schema validation hook
+    affected_fixtures:
+      - TOSCA13-NONMUST-CORPUS-SHOULD-EXTERNAL-SCHEMA-INVALID
+    expected_tests_failed: true
+    observed_result: invalid external schema was accepted and the non-MUST runner failed
+    production_diff_restored: true
