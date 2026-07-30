@@ -419,7 +419,7 @@ func canonicalCorpusPath(path string) (string, bool) {
 	return clean, true
 }
 
-func corpusRoot(t *testing.T) string {
+func corpusRoot(t testing.TB) string {
 	t.Helper()
 	_, file, _, ok := runtime.Caller(0)
 	if !ok {
