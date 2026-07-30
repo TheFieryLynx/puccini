@@ -1350,10 +1350,10 @@ types:
         type: tosca.interfaces.node.lifecycle.Standard
     oasis_community_profile: null
     puccini_profile: null
-    classification: Puccini defect
+    classification: prose specification ambiguity
     secondary_classifications:
-    - community-profile defect
-    resolution_status: confirmed
+    - obsolete declaration
+    resolution_status: documented
     puccini_remediated: false
   effective_field_differences:
   - path: interfaces
@@ -1362,12 +1362,12 @@ types:
         type: tosca.interfaces.node.lifecycle.Standard
     oasis_community_profile: null
     puccini_profile: null
-    classification: Puccini defect
-    resolution_status: confirmed
+    classification: prose specification ambiguity
+    resolution_status: documented
     inherited_from: null
   corpus_cases:
   - TOSCA13-OASIS-COMMUNITY-GROUP
-  decision_record: null
+  decision_record: docs/decisions/tosca-1.3-group-root-interface-contradiction.md
 - canonical_name: tosca.interfaces.Root
   category: interface_type
   specification:

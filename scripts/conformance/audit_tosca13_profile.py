@@ -376,6 +376,9 @@ DECISIONS = {
     "tosca.nodes.Storage.BlockStorage": (
         "docs/conformance/tosca-1.3/ambiguities.md#tosca13-amb-013-blockstorage-size-has-conditional-requiredness-and-volume_id-precedence"
     ),
+    "tosca.groups.Root": (
+        "docs/decisions/tosca-1.3-group-root-interface-contradiction.md"
+    ),
     "tosca.nodes.network.Port": (
         "docs/decisions/0008-tosca-1.3-network-port-order-requiredness.md"
     ),
@@ -451,9 +454,12 @@ CLASSIFICATIONS = {
         "tosca.nodes.Storage.BlockStorage",
         "properties.size",
     ): "prose specification ambiguity",
-    ("tosca.groups.Root", "interfaces.Standard"): "Puccini defect",
-    ("tosca.groups.Root", "interfaces.Standard.type"): "Puccini defect",
-    ("tosca.groups.Root", "interfaces"): "Puccini defect",
+    ("tosca.groups.Root", "interfaces.Standard"): "prose specification ambiguity",
+    (
+        "tosca.groups.Root",
+        "interfaces.Standard.type",
+    ): "prose specification ambiguity",
+    ("tosca.groups.Root", "interfaces"): "prose specification ambiguity",
     ("tosca.interfaces.Root", "derived_from"): "obsolete declaration",
     (
         "tosca.nodes.Abstract.Compute",
@@ -499,12 +505,11 @@ INTRINSIC_SPEC_DISCREPANCIES = {
 }
 
 SECONDARY_CLASSIFICATIONS = {
-    ("tosca.groups.Root", "interfaces"): ["community-profile defect"],
+    ("tosca.groups.Root", "interfaces"): ["obsolete declaration"],
 }
 
 REMEDIATED_FIELDS = {
     ("tosca.artifacts.Deployment.Image.VM", "derived_from"),
-    ("tosca.groups.Root", "interfaces"),
     ("tosca.nodes.Abstract.Storage", "derived_from"),
     ("tosca.nodes.Abstract.Storage", "properties.size.constraints"),
     ("tosca.nodes.Abstract.Storage", "properties.size.default"),

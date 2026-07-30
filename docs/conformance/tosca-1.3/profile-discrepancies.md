@@ -12,11 +12,11 @@ The prose Standard is the conformance authority.
 
 | Classification | Fields |
 |---|---:|
-| Puccini defect | 8 |
+| Puccini defect | 7 |
 | community-profile defect | 2 |
 | extension | 3 |
 | obsolete declaration | 2 |
-| prose specification ambiguity | 11 |
+| prose specification ambiguity | 12 |
 
 ## Pairwise type summary
 
@@ -147,12 +147,13 @@ The prose Standard is the conformance authority.
 ### PROFILE13-013: `tosca.groups.Root` `interfaces`
 
 - Specification section: §5.10.1
-- Classification: **Puccini defect**
-- Resolution: **confirmed**
+- Classification: **prose specification ambiguity**
+- Resolution: **documented**
 - Specification: `{'Standard': {'type': 'tosca.interfaces.node.lifecycle.Standard'}}`
 - OASIS community: `None`
 - Puccini: `None`
-- Secondary classification: **community-profile defect**
+- Decision/ambiguity record: `docs/decisions/tosca-1.3-group-root-interface-contradiction.md`
+- Secondary classification: **obsolete declaration**
 
 ### PROFILE13-014: `tosca.interfaces.Root` `derived_from`
 
