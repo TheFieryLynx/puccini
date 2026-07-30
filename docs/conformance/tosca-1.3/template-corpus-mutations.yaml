@@ -79,3 +79,12 @@ mutations:
     expected_corpus_failures: true
     observed_result: a workflow step without target was accepted and the corpus runner failed
     production_diff_restored: true
+  - category: requirement-target-normalization
+    production_validation_path: RequirementAssignment.Normalize target-node linkage after NodeTemplates.Normalize creates all normalized nodes
+    mutation: disabled propagation of the resolved target node template into the normalized requirement
+    affected_cases:
+      - TOSCA13-CORPUS-INTERACTION-REQUIREMENTS-CAPABILITIES
+      - TestVerificationConnectsToEndpointSemantics
+    expected_corpus_failures: true
+    observed_result: both the corpus assertion and the direct ConnectsTo test reported a nil target node
+    production_diff_restored: true

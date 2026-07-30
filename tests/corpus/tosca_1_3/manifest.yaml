@@ -1015,9 +1015,9 @@ cases:
 
   - id: TOSCA13-CORPUS-INTERACTION-REQUIREMENTS-CAPABILITIES
     file: interactions/requirements-capabilities/connection-valid.yaml
-    specification: {sections: ["3.6.20.2.2", "3.8.3.2"], requirement_ids: [TOSCA13-3.6.20.2.2-003, TOSCA13-3.8.3.2-003]}
+    specification: {sections: ["3.6.20.2.2", "3.8.3.2", "8.2"], requirement_ids: [TOSCA13-3.6.20.2.2-003, TOSCA13-3.8.3.2-003, TOSCA13-8.2-002]}
     classification: {kind: valid, category: resolution, features: [interaction, requirements, capabilities]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:source, node_exists:target]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:source, node_exists:target, "requirement_target:source:target:target"]}
     coverage: {variation_axes: [interaction:requirement-capability, cardinality:exactly-one], related_cases: [TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID]}
 
   - id: TOSCA13-CORPUS-INTERACTION-WORKFLOWS-INTERFACES

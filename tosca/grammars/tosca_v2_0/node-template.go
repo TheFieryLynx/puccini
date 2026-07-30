@@ -164,10 +164,12 @@ func (self *NodeTemplate) normalizeInstance(normalServiceTemplate *normal.Servic
 	self.Interfaces.NormalizeForNodeTemplate(self, normalNodeTemplate)
 	self.Artifacts.Normalize(normalNodeTemplate)
 
-	// Normalize requirements and update their paths to reflect the instance name
+	return normalNodeTemplate
+}
+
+func (self *NodeTemplate) normalizeRequirements(normalNodeTemplate *normal.NodeTemplate, instanceName string) {
 	self.Requirements.Normalize(self, normalNodeTemplate)
 
-	// Update requirement paths to reflect the correct instance name
 	if instanceName != self.Name {
 		for _, requirement := range normalNodeTemplate.Requirements {
 			if requirement.Location != nil {
@@ -175,8 +177,6 @@ func (self *NodeTemplate) normalizeInstance(normalServiceTemplate *normal.Servic
 			}
 		}
 	}
-
-	return normalNodeTemplate
 }
 
 //
@@ -207,6 +207,22 @@ func (self NodeTemplates) Normalize(normalServiceTemplate *normal.ServiceTemplat
 		}
 	}
 
-	// Requirements normalization is now handled in normalizeInstance method
-	// This ensures paths are correctly updated for each instance
+	// Second pass: resolve requirements only after every node template exists in
+	// the normalized service template. Otherwise a source normalized before its
+	// target loses the target pointer.
+	for _, nodeTemplate := range self {
+		count := int64(1)
+		if nodeTemplate.Count != nil {
+			count = *nodeTemplate.Count
+		}
+
+		if count > 1 {
+			for i := int64(0); i < count; i++ {
+				instanceName := fmt.Sprintf("%s_%d", nodeTemplate.Name, i)
+				nodeTemplate.normalizeRequirements(normalServiceTemplate.NodeTemplates[instanceName], instanceName)
+			}
+		} else {
+			nodeTemplate.normalizeRequirements(normalServiceTemplate.NodeTemplates[nodeTemplate.Name], nodeTemplate.Name)
+		}
+	}
 }

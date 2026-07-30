@@ -321,6 +321,25 @@ func assertCorpusResult(t *testing.T, caseID string, serviceTemplate *normal.Ser
 		if serviceTemplate == nil || serviceTemplate.Outputs[name] == nil {
 			t.Fatalf("%s normalized output %q is absent", caseID, name)
 		}
+	case strings.HasPrefix(assertion, "requirement_target:"):
+		parts := strings.Split(assertion, ":")
+		if len(parts) != 4 {
+			t.Fatalf("%s has malformed requirement target assertion %q", caseID, assertion)
+		}
+		source := serviceTemplate.NodeTemplates[parts[1]]
+		if source == nil {
+			t.Fatalf("%s normalized source node %q is absent", caseID, parts[1])
+		}
+		for _, requirement := range source.Requirements {
+			if requirement.Name == parts[2] {
+				if requirement.NodeTemplate == nil || requirement.NodeTemplate.Name != parts[3] {
+					t.Fatalf("%s requirement %q target = %#v, want %q",
+						caseID, parts[2], requirement.NodeTemplate, parts[3])
+				}
+				return
+			}
+		}
+		t.Fatalf("%s normalized requirement %q is absent from node %q", caseID, parts[2], parts[1])
 	default:
 		t.Fatalf("%s has unsupported assertion %q", caseID, assertion)
 	}

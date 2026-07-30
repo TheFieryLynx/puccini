@@ -20,3 +20,28 @@ defects:
       symbol: NewHierarchyFor
       behavior: collect hierarchical entities and sort them by source URL and structural path before constructing the hierarchy
     status: remediated
+  - id: TOSCA13-CORPUS-DEFECT-002
+    discovered_by: TOSCA13-CORPUS-INTERACTION-REQUIREMENTS-CAPABILITIES
+    specification:
+      sections:
+        - "3.8.2"
+        - "8.2"
+      requirement_id: TOSCA13-8.2-002
+      normative_scope: a concrete requirement assignment names the target node template, and ConnectsTo relates the source node to the target Endpoint
+    frozen_must_status_changed: false
+    status_reason: the requirement already had a direct positive test; the corpus run exposed nondeterministic normalized target linkage and remediation restored its verified invariant before the next matrix generation
+    reproducer: tests/corpus/tosca_1_3/interactions/requirements-capabilities/connection-valid.yaml
+    actual_behavior: when the source node normalized before the target node, the normalized requirement target pointer was nil
+    expected_behavior: normalized requirement linkage is independent of node-template traversal order and points to the named target node
+    execution_path:
+      - tosca_v2_0.NodeTemplates.Normalize
+      - tosca_v2_0.NodeTemplate.normalizeInstance
+      - tosca_v2_0.RequirementAssignment.Normalize
+    proposed_remediation_group: two-pass-node-requirement-normalization
+    remediation:
+      file: tosca/grammars/tosca_v2_0/node-template.go
+      symbols:
+        - NodeTemplates.Normalize
+        - NodeTemplate.normalizeRequirements
+      behavior: create every normalized node template in a first pass and resolve requirement targets in a second pass
+    status: remediated
