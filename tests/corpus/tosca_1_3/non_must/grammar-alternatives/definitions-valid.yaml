@@ -1,0 +1,22 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+artifact_types:
+  Payload:
+    derived_from: tosca.artifacts.File
+capability_types:
+  CorpusEndpoint:
+    derived_from: tosca.capabilities.Root
+node_types:
+  Component:
+    derived_from: tosca.nodes.Root
+    properties:
+      label:
+        type: string
+        required: false
+        default: corpus
+    capabilities:
+      endpoint:
+        type: CorpusEndpoint
+topology_template:
+  node_templates:
+    node:
+      type: Component

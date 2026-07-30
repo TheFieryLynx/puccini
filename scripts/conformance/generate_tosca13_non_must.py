@@ -75,12 +75,19 @@ CASE_PATHS = {
     "TOSCA13-NONMUST-CORPUS-OPTIONAL-COMPLETE": "non_must/optional/complete-forms-valid.yaml",
     "TOSCA13-NONMUST-CORPUS-DEFAULTS": "non_must/defaults/default-semantics-valid.yaml",
     "TOSCA13-NONMUST-CORPUS-GRAMMAR-DATA": "non_must/grammar-alternatives/data-types-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-DATA-INVALID": "non_must/grammar-alternatives/data-types-invalid.yaml",
     "TOSCA13-NONMUST-CORPUS-GRAMMAR-DEFINITIONS": "non_must/grammar-alternatives/definitions-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-DEFINITIONS-INVALID": "non_must/grammar-alternatives/definitions-invalid.yaml",
     "TOSCA13-NONMUST-CORPUS-GRAMMAR-TYPES": "non_must/grammar-alternatives/type-definitions-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-TYPES-INVALID": "non_must/grammar-alternatives/type-definitions-invalid.yaml",
     "TOSCA13-NONMUST-CORPUS-GRAMMAR-TEMPLATES": "non_must/grammar-alternatives/template-definitions-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-TEMPLATES-INVALID": "non_must/grammar-alternatives/template-definitions-invalid.yaml",
     "TOSCA13-NONMUST-CORPUS-GRAMMAR-FUNCTIONS": "non_must/grammar-alternatives/functions-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-FUNCTIONS-INVALID": "non_must/grammar-alternatives/functions-invalid.yaml",
     "TOSCA13-NONMUST-CORPUS-GRAMMAR-WORKFLOWS": "non_must/grammar-alternatives/workflows-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-WORKFLOWS-INVALID": "non_must/grammar-alternatives/workflows-invalid.yaml",
     "TOSCA13-NONMUST-CORPUS-GRAMMAR-PROFILE": "non_must/grammar-alternatives/normative-profile-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-PROFILE-INVALID": "non_must/grammar-alternatives/normative-profile-invalid.yaml",
     "TOSCA13-NONMUST-CORPUS-POLICY-NETWORK": "non_must/implementation-defined/network-disabled-policy.yaml",
     "TOSCA13-NONMUST-CORPUS-POLICY-EXTENSIONS": "non_must/implementation-defined/unknown-extension-policy.yaml",
 }
@@ -232,7 +239,57 @@ CASE_EXPECTATIONS = {
             "node_property_primitive:unrelated:other:unrelated",
         ],
     },
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-DATA": {
+        "tier": "processor-may", "kind": "valid", "category": "grammar",
+        "features": ["data-type", "scalar-list-map"], "accepted": True, "phase": "normalization",
+        "diagnostic": None, "assertions": ["node_exists:node"],
+    },
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-DEFINITIONS": {
+        "tier": "processor-may", "kind": "valid", "category": "grammar",
+        "features": ["definition", "short-long-notation"], "accepted": True, "phase": "normalization",
+        "diagnostic": None, "assertions": ["node_exists:node"],
+    },
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-TYPES": {
+        "tier": "processor-may", "kind": "valid", "category": "grammar",
+        "features": ["type-definition", "inheritance"], "accepted": True, "phase": "normalization",
+        "diagnostic": None, "assertions": ["node_exists:node"],
+    },
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-TEMPLATES": {
+        "tier": "processor-may", "kind": "valid", "category": "grammar",
+        "features": ["template-definition", "assignment"], "accepted": True, "phase": "normalization",
+        "diagnostic": None, "assertions": ["node_exists:source", "node_exists:target"],
+    },
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-FUNCTIONS": {
+        "tier": "processor-may", "kind": "valid", "category": "semantic",
+        "features": ["intrinsic-function", "nested"], "accepted": True, "phase": "normalization",
+        "diagnostic": None, "assertions": ["output_exists:joined"],
+    },
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-WORKFLOWS": {
+        "tier": "processor-may", "kind": "valid", "category": "grammar",
+        "features": ["workflow", "activity"], "accepted": True, "phase": "normalization",
+        "diagnostic": None, "assertions": ["node_exists:node"],
+    },
+    "TOSCA13-NONMUST-CORPUS-GRAMMAR-PROFILE": {
+        "tier": "processor-may", "kind": "valid", "category": "semantic",
+        "features": ["normative-profile", "derived-custom-type"], "accepted": True, "phase": "normalization",
+        "diagnostic": None, "assertions": ["node_exists:compute"],
+    },
 }
+
+for _case_id in tuple(CASE_EXPECTATIONS):
+    if not _case_id.startswith("TOSCA13-NONMUST-CORPUS-GRAMMAR-") or _case_id.endswith("-INVALID"):
+        continue
+    _invalid_id = f"{_case_id}-INVALID"
+    CASE_EXPECTATIONS[_invalid_id] = {
+        "tier": "processor-may",
+        "kind": "invalid",
+        "category": "grammar",
+        "features": CASE_EXPECTATIONS[_case_id]["features"] + ["invalid-sibling"],
+        "accepted": False,
+        "phase": "read",
+        "diagnostic": {"category": "unsupported keyname", "path": "unknown_key"},
+        "assertions": [],
+    }
 
 
 def load(path):
@@ -281,7 +338,7 @@ def fixture_for(record):
         return "TOSCA13-NONMUST-CORPUS-MAY-OPERATION-INPUT"
     if section == "3.10.2.2":
         return "TOSCA13-NONMUST-CORPUS-MAY-TYPE-ONLY"
-    if section.startswith("4."):
+    if section.startswith("4.") and strength == "MAY":
         return "TOSCA13-NONMUST-CORPUS-MAY-FUNCTION-CONTEXT"
     if section == "5.2":
         return "TOSCA13-NONMUST-CORPUS-MAY-NORMATIVE-SHORTHAND"
@@ -313,6 +370,8 @@ def fixtures_for(record):
             fixture,
             "TOSCA13-NONMUST-CORPUS-SHOULD-EXTERNAL-SCHEMA-INVALID",
         ]
+    if fixture.startswith("TOSCA13-NONMUST-CORPUS-GRAMMAR-"):
+        return [fixture, f"{fixture}-INVALID"]
     return [fixture]
 
 

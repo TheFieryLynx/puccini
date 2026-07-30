@@ -1,0 +1,17 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+node_types:
+  Parent:
+    derived_from: tosca.nodes.Root
+    properties:
+      label:
+        type: string
+        required: false
+  Child:
+    derived_from: Parent
+    properties:
+      label:
+        default: inherited
+topology_template:
+  node_templates:
+    node:
+      type: Child

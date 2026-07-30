@@ -19,3 +19,11 @@ mutations:
   - TOSCA13-NONMUST-CORPUS-DEFAULTS
   expected_cases_failed: true
   production_diff_restored: true
+- group: grammar-alternatives
+  mutation: Bypass unknown-key validation in the shared node-type reader while retaining field decoding.
+  affected_cases:
+  - TOSCA13-NONMUST-CORPUS-GRAMMAR-DEFINITIONS-INVALID
+  - TOSCA13-NONMUST-CORPUS-GRAMMAR-TYPES-INVALID
+  - TOSCA13-NONMUST-CORPUS-GRAMMAR-PROFILE-INVALID
+  expected_cases_failed: true
+  production_diff_restored: true

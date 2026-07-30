@@ -1,0 +1,25 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+data_types:
+  Record:
+    derived_from: tosca.datatypes.Root
+    properties:
+      name:
+        type: string
+      tags:
+        type: list
+        entry_schema:
+          type: string
+node_types:
+  Component:
+    derived_from: tosca.nodes.Root
+    properties:
+      record:
+        type: Record
+topology_template:
+  node_templates:
+    node:
+      type: Component
+      properties:
+        record:
+          name: corpus
+          tags: [one, two]

@@ -1,0 +1,24 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+capability_types:
+  CorpusEndpoint:
+    derived_from: tosca.capabilities.Root
+node_types:
+  Target:
+    derived_from: tosca.nodes.Root
+    capabilities:
+      endpoint:
+        type: CorpusEndpoint
+  Source:
+    derived_from: tosca.nodes.Root
+    requirements:
+      - peer:
+          capability: CorpusEndpoint
+          occurrences: [0, 1]
+topology_template:
+  node_templates:
+    target:
+      type: Target
+    source:
+      type: Source
+      requirements:
+        - peer: target

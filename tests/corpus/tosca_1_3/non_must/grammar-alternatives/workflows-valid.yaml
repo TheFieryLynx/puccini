@@ -1,0 +1,23 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+interface_types:
+  Lifecycle:
+    derived_from: tosca.interfaces.Root
+    operations:
+      run: {}
+node_types:
+  Component:
+    derived_from: tosca.nodes.Root
+    interfaces:
+      Lifecycle:
+        type: Lifecycle
+topology_template:
+  node_templates:
+    node:
+      type: Component
+  workflows:
+    run:
+      steps:
+        execute:
+          target: node
+          activities:
+            - call_operation: Lifecycle.run
