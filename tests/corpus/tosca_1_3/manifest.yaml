@@ -991,3 +991,66 @@ cases:
     coverage:
       variation_axes: [normalization:inherited-default, function:get-property, constraint:default, interaction:function-inheritance]
       related_cases: [TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID]
+
+  - id: TOSCA13-CORPUS-INTERACTION-IMPORTS-INHERITANCE
+    file: interactions/imports-inheritance/derived-valid.yaml
+    specification: {sections: ["3.1.3.1", "3.7.3.1"], requirement_ids: [TOSCA13-3.1.3.1-004, TOSCA13-3.7.3.1-001]}
+    classification: {kind: valid, category: resolution, features: [interaction, imports, inheritance]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
+    coverage: {variation_axes: [interaction:imports-inheritance, notation:short-import], related_cases: [TOSCA13-CORPUS-IMPORT-SHORT-VALID]}
+
+  - id: TOSCA13-CORPUS-INTERACTION-INHERITANCE-REFINEMENT
+    file: interactions/inheritance-refinement/default-valid.yaml
+    specification: {sections: ["3.5.1", "3.7.3.1"], requirement_ids: [TOSCA13-3.5.1-002, TOSCA13-3.7.3.1-001]}
+    classification: {kind: valid, category: normalization, features: [interaction, inheritance, refinement]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
+    coverage: {variation_axes: [interaction:inheritance-refinement, default:overridden], related_cases: [TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID]}
+
+  - id: TOSCA13-CORPUS-INTERACTION-FUNCTIONS-CONSTRAINTS
+    file: interactions/functions-constraints/assignment-valid.yaml
+    specification: {sections: ["3.6.10.5", "4.4.1.2"], requirement_ids: [TOSCA13-3.6.10.5-004, TOSCA13-4.4.1.2-003]}
+    classification: {kind: valid, category: normalization, features: [interaction, functions, constraints]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
+    coverage: {variation_axes: [interaction:function-constraint, assignment:function], related_cases: [TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID]}
+
+  - id: TOSCA13-CORPUS-INTERACTION-REQUIREMENTS-CAPABILITIES
+    file: interactions/requirements-capabilities/connection-valid.yaml
+    specification: {sections: ["3.6.20.2.2", "3.8.3.2"], requirement_ids: [TOSCA13-3.6.20.2.2-003, TOSCA13-3.8.3.2-003]}
+    classification: {kind: valid, category: resolution, features: [interaction, requirements, capabilities]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:source, node_exists:target]}
+    coverage: {variation_axes: [interaction:requirement-capability, cardinality:exactly-one], related_cases: [TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID]}
+
+  - id: TOSCA13-CORPUS-INTERACTION-WORKFLOWS-INTERFACES
+    file: interactions/workflows-interfaces/call-valid.yaml
+    specification: {sections: ["3.6.23.3.1", "3.6.27.1"], requirement_ids: [TOSCA13-3.6.23.3.1-004, TOSCA13-3.6.27.1-020]}
+    classification: {kind: valid, category: semantic, features: [interaction, workflows, interfaces]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
+    coverage: {variation_axes: [interaction:workflow-interface, notation:short-operation], related_cases: [TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID]}
+
+  - id: TOSCA13-CORPUS-INTERACTION-CONSTRAINTS-DEFAULTS
+    file: interactions/constraints-defaults/default-valid.yaml
+    specification: {sections: ["3.6.3.3", "3.6.10.5"], requirement_ids: [TOSCA13-3.6.3.3-003, TOSCA13-3.6.10.5-004]}
+    classification: {kind: valid, category: normalization, features: [interaction, constraints, defaults]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
+    coverage: {variation_axes: [interaction:constraint-default, boundary:lower], related_cases: [TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID]}
+
+  - id: TOSCA13-CORPUS-INTERACTION-CONSTRAINTS-ASSIGNMENTS
+    file: interactions/constraints-assignments/boundary-valid.yaml
+    specification: {sections: ["3.6.3.3", "3.6.10.5"], requirement_ids: [TOSCA13-3.6.3.3-003, TOSCA13-3.6.10.5-004]}
+    classification: {kind: valid, category: normalization, features: [interaction, constraints, assignments]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
+    coverage: {variation_axes: [interaction:constraint-assignment, boundary:upper], related_cases: [TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID]}
+
+  - id: TOSCA13-CORPUS-INTERACTION-NORMATIVE-DERIVATION
+    file: interactions/normative-profile/derived-port-valid.yaml
+    specification: {sections: ["5.2.1", "8.5.2.3"], requirement_ids: [TOSCA13-5.2.1-001, TOSCA13-8.5.2.3-008]}
+    classification: {kind: valid, category: normalization, features: [interaction, normative-profile, inheritance]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:port]}
+    coverage: {variation_axes: [interaction:normative-custom-type, default:inherited], related_cases: [TOSCA13-CORPUS-NETWORK-PORT-VALID]}
+
+  - id: TOSCA13-CORPUS-INTERACTION-CSAR-IMPORTS
+    file: interactions/csar-imports/archive-valid.csar.yaml
+    specification: {sections: ["3.1.3.1", "6.2"], requirement_ids: [TOSCA13-3.1.3.1-004, TOSCA13-6.2-018]}
+    classification: {kind: valid, category: csar, features: [interaction, csar, imports]}
+    expected: {accepted: true, phase: csar, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
+    coverage: {variation_axes: [interaction:csar-import, resolution:archive-relative], related_cases: [TOSCA13-CORPUS-CSAR-METADATA-VALID]}

@@ -1,0 +1,7 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+node_types:
+  CorpusPort:
+    derived_from: tosca.nodes.network.Port
+topology_template:
+  node_templates:
+    port: { type: CorpusPort }
