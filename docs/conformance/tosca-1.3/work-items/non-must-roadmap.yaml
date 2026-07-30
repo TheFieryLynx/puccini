@@ -1,0 +1,59 @@
+schema_version: 1
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+frozen_baseline:
+  denominator: 223
+  implemented_verified: 223
+  protected: true
+scope:
+  target: processor-non-must
+  source_section_identifiers: 590
+  catalog: docs/conformance/tosca-1.3/non-must-requirements.yaml
+classification_order:
+  - processor-must-covered
+  - processor-non-must-applicable
+  - service-template-author
+  - orchestrator-only
+  - generator-only
+  - archive-target
+  - informative
+  - example
+  - definition-only
+  - cross-reference-only
+  - duplicate-obligation
+  - not-applicable
+groups:
+  - order: 1
+    name: should
+    strengths: [SHOULD, SHOULD_NOT, RECOMMENDED]
+    parser_phases: [read, namespaces, inheritance, rendering]
+    planned_fixture_root: tests/corpus/tosca_1_3/non_must/should
+  - order: 2
+    name: may-optional
+    strengths: [MAY, OPTIONAL]
+    parser_phases: [read, namespaces, rendering, normalization]
+    planned_fixture_root: tests/corpus/tosca_1_3/non_must/may
+  - order: 3
+    name: defaults
+    strengths: [DEFAULT]
+    parser_phases: [inheritance, rendering, normalization]
+    planned_fixture_root: tests/corpus/tosca_1_3/non_must/defaults
+  - order: 4
+    name: grammar-alternatives
+    strengths: [SEMANTIC]
+    parser_phases: [read, namespaces, hierarchy, inheritance, rendering, normalization]
+    planned_fixture_root: tests/corpus/tosca_1_3/non_must/grammar-alternatives
+  - order: 5
+    name: implementation-defined
+    strengths: [MAY, OPTIONAL]
+    parser_phases: [read, namespaces]
+    planned_fixture_root: tests/corpus/tosca_1_3/non_must/implementation-defined
+  - order: 6
+    name: examples
+    normative_evidence: false
+    planned_fixture_root: tests/corpus/tosca_1_3/examples
+  - order: 7
+    name: full-section-classification
+    generated_artifact: docs/conformance/tosca-1.3/template-corpus-sections.yaml
+  - order: 8
+    name: ci-integration
+    gates: [frozen-must, non-must-policy, full-section-classification]
