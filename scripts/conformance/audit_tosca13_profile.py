@@ -807,6 +807,60 @@ def classify_difference(name: str, path: str) -> str:
     return "unresolved"
 
 
+def resolution_status(classification: str) -> str:
+    if classification in {
+        "semantically equivalent representation",
+        "extension",
+        "obsolete declaration",
+    }:
+        return "interpreted"
+    if classification == "prose specification ambiguity":
+        return "documented"
+    if classification in {"Puccini defect", "community-profile defect"}:
+        return "confirmed"
+    return "unresolved"
+
+
+def ancestor_names(
+    name: str, source: dict[str, dict[str, Any]]
+) -> list[str]:
+    result: list[str] = []
+    current = name
+    seen: set[str] = set()
+    while current in source and current not in seen:
+        result.append(current)
+        seen.add(current)
+        parent = semantic_definition(source[current]["definition"]).get("derived_from")
+        if not isinstance(parent, str):
+            break
+        current = parent
+    return result
+
+
+def classify_effective_difference(
+    name: str,
+    path: str,
+    sources: tuple[dict[str, dict[str, Any]], ...],
+) -> tuple[str, str | None]:
+    candidates: list[str] = []
+    for source in sources:
+        for ancestor in ancestor_names(name, source):
+            if ancestor not in candidates:
+                candidates.append(ancestor)
+    for ancestor in candidates:
+        classification = classify_difference(ancestor, path)
+        if classification != "unresolved":
+            return classification, ancestor
+    # A wrong or missing parent removes otherwise unrelated inherited fields.
+    # Attribute the resulting effective-definition delta to that hierarchy
+    # defect when no field-specific classification exists.
+    for ancestor in candidates:
+        classification = classify_difference(ancestor, "derived_from")
+        if classification in {"Puccini defect", "community-profile defect"}:
+            return classification, ancestor
+    return "unresolved", None
+
+
 def build_outputs() -> tuple[dict[str, Any], dict[str, Any], str]:
     commit, checked = verify_pinned_integrity()
     specification = extract_specification()
@@ -866,21 +920,7 @@ def build_outputs() -> tuple[dict[str, Any], dict[str, Any], str]:
                 "secondary_classifications": SECONDARY_CLASSIFICATIONS.get(
                     (name, path), []
                 ),
-                "resolution_status": (
-                    "interpreted"
-                    if classification
-                    in {
-                        "semantically equivalent representation",
-                        "extension",
-                        "obsolete declaration",
-                    }
-                    else "documented"
-                    if classification == "prose specification ambiguity"
-                    else "confirmed"
-                    if classification
-                    in {"Puccini defect", "community-profile defect"}
-                    else "unresolved"
-                ),
+                "resolution_status": resolution_status(classification),
             }
             type_differences.append(difference)
             discrepancies.append(
@@ -939,6 +979,55 @@ def build_outputs() -> tuple[dict[str, Any], dict[str, Any], str]:
                 allow_unicode=True,
             ).encode("utf-8")
             return hashlib.sha256(payload).hexdigest()
+
+        effective_spec = (
+            effective_definition(name, specification) if spec_item else None
+        )
+        effective_oasis = effective_definition(name, oasis) if oasis_item else None
+        effective_puccini = (
+            effective_definition(name, puccini) if puccini_item else None
+        )
+        effective_paths: set[str] = set()
+        for left, right in (
+            (effective_spec, effective_oasis),
+            (effective_spec, effective_puccini),
+            (effective_oasis, effective_puccini),
+        ):
+            if left is not None and right is not None:
+                effective_paths.update(
+                    path for path, _, _ in flatten_differences(left, right)
+                )
+
+        def effective_value_at(value: Any, dotted: str) -> Any:
+            current = value
+            for component in dotted.split("."):
+                if not isinstance(current, dict) or component not in current:
+                    return None
+                current = current[component]
+            return current
+
+        effective_differences: list[dict[str, Any]] = []
+        for path in sorted(effective_paths):
+            classification, inherited_from = classify_effective_difference(
+                name, path, (specification, oasis, puccini)
+            )
+            effective_differences.append(
+                {
+                    "path": path,
+                    "specification": effective_value_at(effective_spec, path),
+                    "oasis_community_profile": effective_value_at(
+                        effective_oasis, path
+                    ),
+                    "puccini_profile": effective_value_at(
+                        effective_puccini, path
+                    ),
+                    "classification": classification,
+                    "resolution_status": resolution_status(classification),
+                    "inherited_from": (
+                        inherited_from if inherited_from != name else None
+                    ),
+                }
+            )
 
         types.append(
             {
@@ -1008,6 +1097,7 @@ def build_outputs() -> tuple[dict[str, Any], dict[str, Any], str]:
                     ),
                 },
                 "field_differences": type_differences,
+                "effective_field_differences": effective_differences,
                 "corpus_cases": sorted(evidence.get(name, [])),
                 "decision_record": DECISIONS.get(name),
             }
