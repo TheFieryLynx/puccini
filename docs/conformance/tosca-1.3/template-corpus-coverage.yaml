@@ -186,3 +186,26 @@ grammar_entities:
       - TOSCA13-CORPUS-CSAR-ENTRY-MISSING-INVALID
       - TOSCA13-CORPUS-CSAR-TRAVERSAL-INVALID
     status: complete
+
+  - entity: workflows-and-substitution
+    sections: ["3.6.23", "3.6.25", "3.6.26", "3.6.27", "3.8.13", "3.10.1"]
+    parser_phases: [read, namespaces, rendering, normalization]
+    variation_axes:
+      workflow: [precondition, step, set-state, call-operation, inline, success-failure]
+      required_keys: [present, missing-target]
+      substitution: [imported-qualified-node-type]
+      interactions: [workflow-interface, substitution-import]
+    fixtures:
+      - TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID
+      - TOSCA13-CORPUS-WORKFLOW-MISSING-TARGET-INVALID
+      - TOSCA13-CORPUS-SUBSTITUTION-IMPORTS-VALID
+    status: complete
+
+  - entity: normalization-interactions
+    sections: ["3.6.10.5", "3.7.3.1", "4.4.2.2"]
+    parser_phases: [inheritance, rendering, normalization]
+    variation_axes:
+      semantics: [inherited-default, constraint, intrinsic-function]
+      determinism: [repeatable]
+    fixtures: [TOSCA13-CORPUS-NORMALIZATION-FUNCTION-INHERITANCE-VALID]
+    status: complete

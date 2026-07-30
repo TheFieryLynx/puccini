@@ -1,0 +1,40 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+interface_types:
+  TestInterface:
+    operations:
+      run: {}
+node_types:
+  TestNode:
+    derived_from: tosca.nodes.Root
+    interfaces:
+      Test:
+        type: TestInterface
+topology_template:
+  node_templates:
+    node:
+      type: TestNode
+  workflows:
+    nested:
+      steps: {}
+    main:
+      inputs:
+        message:
+          type: string
+          required: false
+      preconditions:
+        ready:
+          target: node
+          condition: []
+      steps:
+        run:
+          target: node
+          activities:
+            - set_state: started
+            - call_operation:
+                operation: Test.run
+                inputs: {}
+            - inline:
+                workflow: nested
+                inputs: {}
+          on_success: []
+          on_failure: []

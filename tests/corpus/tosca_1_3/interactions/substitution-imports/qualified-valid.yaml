@@ -1,0 +1,10 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+imports:
+  - file: _support/abstract.yaml
+    namespace_prefix: ext
+topology_template:
+  node_templates:
+    internal:
+      type: tosca.nodes.Root
+  substitution_mappings:
+    node_type: ext:Abstract

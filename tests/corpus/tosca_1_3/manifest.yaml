@@ -934,3 +934,60 @@ cases:
     coverage:
       variation_axes: [csar:path-traversal, security:root-confinement]
       related_cases: [TOSCA13-CORPUS-CSAR-METADATA-VALID]
+
+  - id: TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID
+    file: sections/3.6-grammar-definitions/workflows/activities-valid.yaml
+    specification:
+      sections: ["3.6.23.1.1", "3.6.23.2.1", "3.6.23.3.1", "3.6.23.4.1", "3.6.25.2.1", "3.6.26.1", "3.6.27.1", "3.10.1"]
+      requirement_ids:
+        - TOSCA13-3.6.23.1.1-003
+        - TOSCA13-3.6.23.2.1-002
+        - TOSCA13-3.6.23.3.1-004
+        - TOSCA13-3.6.23.3.1-007
+        - TOSCA13-3.6.23.4.1-003
+        - TOSCA13-3.6.23.4.1-004
+        - TOSCA13-3.6.25.2.1-002
+        - TOSCA13-3.6.26.1-002
+        - TOSCA13-3.6.27.1-002
+        - TOSCA13-3.6.27.1-008
+        - TOSCA13-3.6.27.1-010
+        - TOSCA13-3.6.27.1-020
+        - TOSCA13-3.10.1-002
+    classification: {kind: valid, category: semantic, features: [workflow, interfaces, operations]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
+    coverage:
+      variation_axes: [workflow:precondition, workflow:set-state, workflow:call-operation-long, workflow:inline-long, operation-host:default]
+      related_cases: [TOSCA13-CORPUS-WORKFLOW-MISSING-TARGET-INVALID]
+
+  - id: TOSCA13-CORPUS-WORKFLOW-MISSING-TARGET-INVALID
+    file: sections/3.6-grammar-definitions/workflows/missing-target-invalid.yaml
+    specification:
+      sections: ["3.6.27.1"]
+      requirement_ids: [TOSCA13-3.6.27.1-002]
+    classification: {kind: invalid, category: grammar, features: [workflow, required-key]}
+    expected: {accepted: false, phase: read, diagnostic: {category: missing, path: target}, assertions: []}
+    coverage:
+      variation_axes: [keynames:required-target-absent, workflow:step]
+      related_cases: [TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID]
+
+  - id: TOSCA13-CORPUS-SUBSTITUTION-IMPORTS-VALID
+    file: interactions/substitution-imports/qualified-valid.yaml
+    specification:
+      sections: ["3.1.3.1", "3.8.13.1", "3.8.13.2", "3.8.13.4"]
+      requirement_ids: [TOSCA13-3.1.3.1-004, TOSCA13-3.8.13.1-001, TOSCA13-3.8.13.1-003, TOSCA13-3.8.13.2-004, TOSCA13-3.8.13.4-001]
+    classification: {kind: valid, category: normalization, features: [substitution, imports, namespace]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [service_template_non_nil]}
+    coverage:
+      variation_axes: [substitution:imported-node-type, imports:qualified, normalization:substitution-preserved]
+      related_cases: [TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID]
+
+  - id: TOSCA13-CORPUS-NORMALIZATION-FUNCTION-INHERITANCE-VALID
+    file: interactions/normalization/function-inheritance-valid.yaml
+    specification:
+      sections: ["3.6.10.5", "3.7.3.1", "4.4.2.2"]
+      requirement_ids: [TOSCA13-3.6.10.5-001, TOSCA13-3.6.10.5-004, TOSCA13-3.7.3.1-001, TOSCA13-4.4.2.2-004]
+    classification: {kind: valid, category: normalization, features: [normalization, function, inheritance, constraints]}
+    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node, output_exists:label]}
+    coverage:
+      variation_axes: [normalization:inherited-default, function:get-property, constraint:default, interaction:function-inheritance]
+      related_cases: [TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID]

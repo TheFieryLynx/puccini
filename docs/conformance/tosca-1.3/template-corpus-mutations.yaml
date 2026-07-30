@@ -71,3 +71,11 @@ mutations:
     expected_corpus_failures: true
     observed_result: the archive entry outside the logical CSAR root was selected and accepted
     production_diff_restored: true
+  - category: workflows-interactions
+    production_validation_path: WorkflowStepDefinition.TargetNodeTemplateOrGroupName mandatory read tag
+    mutation: removed only the mandatory marker from the workflow step target field
+    affected_cases:
+      - TOSCA13-CORPUS-WORKFLOW-MISSING-TARGET-INVALID
+    expected_corpus_failures: true
+    observed_result: a workflow step without target was accepted and the corpus runner failed
+    production_diff_restored: true
