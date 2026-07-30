@@ -1,0 +1,33 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+capability_types:
+  corpus.oasis_community.capability_types.01:
+    derived_from: tosca.capabilities.Root
+  corpus.oasis_community.capability_types.02:
+    derived_from: tosca.capabilities.Node
+  corpus.oasis_community.capability_types.03:
+    derived_from: tosca.capabilities.Container
+  corpus.oasis_community.capability_types.04:
+    derived_from: tosca.capabilities.Compute
+  corpus.oasis_community.capability_types.05:
+    derived_from: tosca.capabilities.Network
+  corpus.oasis_community.capability_types.06:
+    derived_from: tosca.capabilities.Storage
+  corpus.oasis_community.capability_types.07:
+    derived_from: tosca.capabilities.Endpoint
+  corpus.oasis_community.capability_types.08:
+    derived_from: tosca.capabilities.Endpoint.Public
+  corpus.oasis_community.capability_types.09:
+    derived_from: tosca.capabilities.Endpoint.Admin
+  corpus.oasis_community.capability_types.10:
+    derived_from: tosca.capabilities.Endpoint.Database
+  corpus.oasis_community.capability_types.11:
+    derived_from: tosca.capabilities.Attachment
+  corpus.oasis_community.capability_types.12:
+    derived_from: tosca.capabilities.OperatingSystem
+  corpus.oasis_community.capability_types.13:
+    derived_from: tosca.capabilities.Scalable
+  corpus.oasis_community.capability_types.14:
+    derived_from: tosca.capabilities.network.Bindable
+  corpus.oasis_community.capability_types.15:
+    derived_from: tosca.capabilities.network.Linkable
+topology_template: {}

@@ -1,0 +1,9 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+interface_types:
+  corpus.oasis_community.interface_types.01:
+    derived_from: tosca.interfaces.Root
+  corpus.oasis_community.interface_types.02:
+    derived_from: tosca.interfaces.node.lifecycle.Standard
+  corpus.oasis_community.interface_types.03:
+    derived_from: tosca.interfaces.relationship.Configure
+topology_template: {}

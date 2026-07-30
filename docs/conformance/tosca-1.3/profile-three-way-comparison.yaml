@@ -111,7 +111,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-ARTIFACT
   decision_record: null
 - canonical_name: tosca.artifacts.Deployment.Image
   category: artifact_type
@@ -141,7 +142,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-ARTIFACT
   decision_record: null
 - canonical_name: tosca.artifacts.Deployment.Image.VM
   category: artifact_type
@@ -178,7 +180,8 @@ types:
     classification: Puccini defect
     secondary_classifications: []
     resolution_status: confirmed
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-ARTIFACT
   decision_record: null
 - canonical_name: tosca.artifacts.File
   category: artifact_type
@@ -208,7 +211,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-ARTIFACT
   decision_record: null
 - canonical_name: tosca.artifacts.Implementation
   category: artifact_type
@@ -238,7 +242,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-ARTIFACT
   decision_record: null
 - canonical_name: tosca.artifacts.Implementation.Bash
   category: artifact_type
@@ -268,7 +273,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-ARTIFACT
   decision_record: null
 - canonical_name: tosca.artifacts.Implementation.Python
   category: artifact_type
@@ -298,7 +304,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-ARTIFACT
   decision_record: null
 - canonical_name: tosca.artifacts.Root
   category: artifact_type
@@ -328,7 +335,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-ARTIFACT
   decision_record: null
 - canonical_name: tosca.artifacts.template
   category: artifact_type
@@ -358,7 +366,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-ARTIFACT
   decision_record: null
 - canonical_name: tosca.capabilities.Attachment
   category: capability_type
@@ -388,7 +397,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-CAPABILITY
   decision_record: null
 - canonical_name: tosca.capabilities.Compute
   category: capability_type
@@ -418,7 +428,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-CAPABILITY
   decision_record: null
 - canonical_name: tosca.capabilities.Container
   category: capability_type
@@ -448,7 +459,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-CAPABILITY
   decision_record: null
 - canonical_name: tosca.capabilities.Endpoint
   category: capability_type
@@ -478,7 +490,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-CAPABILITY
   decision_record: null
 - canonical_name: tosca.capabilities.Endpoint.Admin
   category: capability_type
@@ -508,7 +521,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-CAPABILITY
   decision_record: null
 - canonical_name: tosca.capabilities.Endpoint.Database
   category: capability_type
@@ -538,7 +552,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-CAPABILITY
   decision_record: null
 - canonical_name: tosca.capabilities.Endpoint.Public
   category: capability_type
@@ -568,7 +583,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-CAPABILITY
   decision_record: null
 - canonical_name: tosca.capabilities.Network
   category: capability_type
@@ -598,7 +614,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-CAPABILITY
   decision_record: null
 - canonical_name: tosca.capabilities.Node
   category: capability_type
@@ -628,7 +645,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-CAPABILITY
   decision_record: null
 - canonical_name: tosca.capabilities.OperatingSystem
   category: capability_type
@@ -658,7 +676,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-CAPABILITY
   decision_record: null
 - canonical_name: tosca.capabilities.Root
   category: capability_type
@@ -688,7 +707,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-CAPABILITY
   decision_record: null
 - canonical_name: tosca.capabilities.Scalable
   category: capability_type
@@ -725,7 +745,8 @@ types:
     classification: community-profile defect
     secondary_classifications: []
     resolution_status: confirmed
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-CAPABILITY
   decision_record: null
 - canonical_name: tosca.capabilities.Storage
   category: capability_type
@@ -755,7 +776,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-CAPABILITY
   decision_record: null
 - canonical_name: tosca.capabilities.network.Bindable
   category: capability_type
@@ -785,7 +807,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-CAPABILITY
   decision_record: null
 - canonical_name: tosca.capabilities.network.Linkable
   category: capability_type
@@ -815,7 +838,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-CAPABILITY
   decision_record: null
 - canonical_name: tosca.datatypes.Credential
   category: data_type
@@ -845,7 +869,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-DATA
   decision_record: null
 - canonical_name: tosca.datatypes.Root
   category: data_type
@@ -875,7 +900,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-DATA
   decision_record: null
 - canonical_name: tosca.datatypes.TimeInterval
   category: data_type
@@ -905,7 +931,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-DATA
   decision_record: null
 - canonical_name: tosca.datatypes.json
   category: data_type
@@ -943,7 +970,8 @@ types:
     classification: extension
     secondary_classifications: []
     resolution_status: interpreted
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-DATA
   decision_record: null
 - canonical_name: tosca.datatypes.network.NetworkInfo
   category: data_type
@@ -994,7 +1022,8 @@ types:
     classification: prose specification ambiguity
     secondary_classifications: []
     resolution_status: documented
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-DATA
   decision_record: docs/decisions/tosca-1.3-network-info-requiredness.md
 - canonical_name: tosca.datatypes.network.PortDef
   category: data_type
@@ -1024,7 +1053,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-DATA
   decision_record: null
 - canonical_name: tosca.datatypes.network.PortInfo
   category: data_type
@@ -1089,7 +1119,8 @@ types:
     classification: prose specification ambiguity
     secondary_classifications: []
     resolution_status: documented
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-DATA
   decision_record: docs/decisions/tosca-1.3-network-info-requiredness.md
 - canonical_name: tosca.datatypes.network.PortSpec
   category: data_type
@@ -1119,7 +1150,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-DATA
   decision_record: null
 - canonical_name: tosca.datatypes.xml
   category: data_type
@@ -1157,7 +1189,8 @@ types:
     classification: extension
     secondary_classifications: []
     resolution_status: interpreted
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-DATA
   decision_record: null
 - canonical_name: tosca.groups.Root
   category: group_type
@@ -1197,7 +1230,8 @@ types:
     secondary_classifications:
     - community-profile defect
     resolution_status: confirmed
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-GROUP
   decision_record: null
 - canonical_name: tosca.interfaces.Root
   category: interface_type
@@ -1234,7 +1268,8 @@ types:
     classification: obsolete declaration
     secondary_classifications: []
     resolution_status: interpreted
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-INTERFACE
   decision_record: null
 - canonical_name: tosca.interfaces.node.lifecycle.Standard
   category: interface_type
@@ -1264,7 +1299,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-INTERFACE
   decision_record: null
 - canonical_name: tosca.interfaces.relationship.Configure
   category: interface_type
@@ -1301,7 +1337,8 @@ types:
     classification: extension
     secondary_classifications: []
     resolution_status: interpreted
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-INTERFACE
   decision_record: null
 - canonical_name: tosca.nodes.Abstract.Compute
   category: node_type
@@ -1338,7 +1375,8 @@ types:
     classification: obsolete declaration
     secondary_classifications: []
     resolution_status: interpreted
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: null
 - canonical_name: tosca.nodes.Abstract.Storage
   category: node_type
@@ -1399,7 +1437,8 @@ types:
     classification: Puccini defect
     secondary_classifications: []
     resolution_status: confirmed
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: null
 - canonical_name: tosca.nodes.Compute
   category: node_type
@@ -1429,7 +1468,8 @@ types:
     specification_vs_puccini: conflicting
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: null
 - canonical_name: tosca.nodes.Container.Application
   category: node_type
@@ -1466,7 +1506,8 @@ types:
     classification: Puccini defect
     secondary_classifications: []
     resolution_status: confirmed
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: null
 - canonical_name: tosca.nodes.Container.Runtime
   category: node_type
@@ -1503,7 +1544,8 @@ types:
     classification: Puccini defect
     secondary_classifications: []
     resolution_status: confirmed
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: null
 - canonical_name: tosca.nodes.DBMS
   category: node_type
@@ -1533,7 +1575,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: null
 - canonical_name: tosca.nodes.Database
   category: node_type
@@ -1563,7 +1606,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: null
 - canonical_name: tosca.nodes.LoadBalancer
   category: node_type
@@ -1593,7 +1637,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: null
 - canonical_name: tosca.nodes.Root
   category: node_type
@@ -1623,7 +1668,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: null
 - canonical_name: tosca.nodes.SoftwareComponent
   category: node_type
@@ -1653,7 +1699,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: null
 - canonical_name: tosca.nodes.Storage.BlockStorage
   category: node_type
@@ -1694,7 +1741,8 @@ types:
     classification: prose specification ambiguity
     secondary_classifications: []
     resolution_status: documented
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: docs/conformance/tosca-1.3/ambiguities.md#tosca13-amb-013-blockstorage-size-has-conditional-requiredness-and-volume_id-precedence
 - canonical_name: tosca.nodes.Storage.ObjectStorage
   category: node_type
@@ -1733,7 +1781,8 @@ types:
     classification: prose specification ambiguity
     resolution_status: documented
     secondary_classifications: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: docs/conformance/tosca-1.3/ambiguities.md#tosca13-amb-012-objectstorage-maxsize-lower-bound-conflicts
 - canonical_name: tosca.nodes.WebApplication
   category: node_type
@@ -1763,7 +1812,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: null
 - canonical_name: tosca.nodes.WebServer
   category: node_type
@@ -1793,7 +1843,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: null
 - canonical_name: tosca.nodes.network.Network
   category: node_type
@@ -1823,7 +1874,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: null
 - canonical_name: tosca.nodes.network.Port
   category: node_type
@@ -1862,7 +1914,8 @@ types:
     classification: prose specification ambiguity
     resolution_status: interpreted
     secondary_classifications: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: docs/decisions/0008-tosca-1.3-network-port-order-requiredness.md
 - canonical_name: tosca.policies.Performance
   category: policy_type
@@ -1892,7 +1945,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-POLICY
   decision_record: null
 - canonical_name: tosca.policies.Placement
   category: policy_type
@@ -1922,7 +1976,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-POLICY
   decision_record: null
 - canonical_name: tosca.policies.Root
   category: policy_type
@@ -1952,7 +2007,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-POLICY
   decision_record: null
 - canonical_name: tosca.policies.Scaling
   category: policy_type
@@ -1982,7 +2038,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-POLICY
   decision_record: null
 - canonical_name: tosca.policies.Update
   category: policy_type
@@ -2012,7 +2069,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-POLICY
   decision_record: null
 - canonical_name: tosca.relationships.AttachesTo
   category: relationship_type
@@ -2053,7 +2111,8 @@ types:
     classification: community-profile defect
     secondary_classifications: []
     resolution_status: confirmed
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-RELATIONSHIP
   decision_record: null
 - canonical_name: tosca.relationships.ConnectsTo
   category: relationship_type
@@ -2083,7 +2142,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-RELATIONSHIP
   decision_record: null
 - canonical_name: tosca.relationships.DependsOn
   category: relationship_type
@@ -2113,7 +2173,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-RELATIONSHIP
   decision_record: null
 - canonical_name: tosca.relationships.HostedOn
   category: relationship_type
@@ -2143,7 +2204,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-RELATIONSHIP
   decision_record: null
 - canonical_name: tosca.relationships.Root
   category: relationship_type
@@ -2173,7 +2235,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-RELATIONSHIP
   decision_record: null
 - canonical_name: tosca.relationships.RoutesTo
   category: relationship_type
@@ -2203,7 +2266,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-RELATIONSHIP
   decision_record: null
 - canonical_name: tosca.relationships.network.BindsTo
   category: relationship_type
@@ -2233,7 +2297,8 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-RELATIONSHIP
   decision_record: null
 - canonical_name: tosca.relationships.network.LinksTo
   category: relationship_type
@@ -2263,5 +2328,6 @@ types:
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   field_differences: []
-  corpus_cases: []
+  corpus_cases:
+  - TOSCA13-OASIS-COMMUNITY-RELATIONSHIP
   decision_record: null

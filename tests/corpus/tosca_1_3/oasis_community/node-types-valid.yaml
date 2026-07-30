@@ -1,0 +1,35 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+node_types:
+  corpus.oasis_community.node_types.01:
+    derived_from: tosca.nodes.Root
+  corpus.oasis_community.node_types.02:
+    derived_from: tosca.nodes.Abstract.Compute
+  corpus.oasis_community.node_types.03:
+    derived_from: tosca.nodes.Compute
+  corpus.oasis_community.node_types.04:
+    derived_from: tosca.nodes.SoftwareComponent
+  corpus.oasis_community.node_types.05:
+    derived_from: tosca.nodes.WebServer
+  corpus.oasis_community.node_types.06:
+    derived_from: tosca.nodes.WebApplication
+  corpus.oasis_community.node_types.07:
+    derived_from: tosca.nodes.DBMS
+  corpus.oasis_community.node_types.08:
+    derived_from: tosca.nodes.Database
+  corpus.oasis_community.node_types.09:
+    derived_from: tosca.nodes.Abstract.Storage
+  corpus.oasis_community.node_types.10:
+    derived_from: tosca.nodes.Storage.ObjectStorage
+  corpus.oasis_community.node_types.11:
+    derived_from: tosca.nodes.Storage.BlockStorage
+  corpus.oasis_community.node_types.12:
+    derived_from: tosca.nodes.Container.Runtime
+  corpus.oasis_community.node_types.13:
+    derived_from: tosca.nodes.Container.Application
+  corpus.oasis_community.node_types.14:
+    derived_from: tosca.nodes.LoadBalancer
+  corpus.oasis_community.node_types.15:
+    derived_from: tosca.nodes.network.Network
+  corpus.oasis_community.node_types.16:
+    derived_from: tosca.nodes.network.Port
+topology_template: {}

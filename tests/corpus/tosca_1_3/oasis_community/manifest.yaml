@@ -1,0 +1,444 @@
+schema_version: 1
+layer: OASIS community independent comparison corpus
+upstream_repository: https://github.com/oasis-open/tosca-community-contributions
+upstream_commit: e5b0a3ee46488921ff409bbe0feba37af2a3233e
+pinned_profile_root: third_party/oasis/tosca-simple-profile/1.3
+cases:
+- id: TOSCA13-OASIS-COMMUNITY-DATA
+  file: data-types-valid.yaml
+  upstream:
+    repository: https://github.com/oasis-open/tosca-community-contributions
+    commit: e5b0a3ee46488921ff409bbe0feba37af2a3233e
+    original_path: profiles/org/oasis-open/simple/1.3/data.yaml
+    pinned_path: third_party/oasis/tosca-simple-profile/1.3/data.yaml
+    original_license: Apache-2.0
+    license_file: third_party/oasis/tosca-simple-profile/LICENSE
+  adaptation:
+    status: adapted
+    explanation: Each upstream normative type name is used as derived_from by a minimal local declaration.
+      Descriptions and field bodies are not copied; the case isolates profile loading, exact name resolution,
+      category resolution, hierarchy construction, and inheritance.
+    diff_summary: Replaced 9 upstream declarations with 9 minimal derived declarations and added an empty
+      topology_template.
+  specification:
+    version: TOSCA Simple Profile in YAML Version 1.3
+    sections:
+    - 5.3.1
+    - 5.3.2
+    - 5.3.4
+    - 5.3.6
+    - 5.3.7
+    - 5.3.8
+    - 5.3.9
+    - 5.3.10
+    - 5.3.11
+    frozen_requirement_ids: []
+    frozen_requirement_rationale: Normative type-presence declarations are tracked in the independent
+      non-MUST/full-section catalog and do not alter the frozen 223 MUST denominator.
+    non_must_requirement_ids:
+    - TOSCA13-NONMUST-5.3.1-001
+    - TOSCA13-NONMUST-5.3.2-001
+    - TOSCA13-NONMUST-5.3.4-001
+    - TOSCA13-NONMUST-5.3.6-001
+    - TOSCA13-NONMUST-5.3.7-001
+    - TOSCA13-NONMUST-5.3.8-001
+    - TOSCA13-NONMUST-5.3.9-001
+    - TOSCA13-NONMUST-5.3.10-001
+    - TOSCA13-NONMUST-5.3.11-001
+  types_covered:
+  - tosca.datatypes.Root
+  - tosca.datatypes.json
+  - tosca.datatypes.xml
+  - tosca.datatypes.Credential
+  - tosca.datatypes.TimeInterval
+  - tosca.datatypes.network.NetworkInfo
+  - tosca.datatypes.network.PortInfo
+  - tosca.datatypes.network.PortDef
+  - tosca.datatypes.network.PortSpec
+  expected:
+    processor_result: accept
+    phase: hierarchy
+    assertions:
+    - all exact case-sensitive parent type names resolve
+    - all derived declarations inherit from the requested normative type
+- id: TOSCA13-OASIS-COMMUNITY-ARTIFACT
+  file: artifact-types-valid.yaml
+  upstream:
+    repository: https://github.com/oasis-open/tosca-community-contributions
+    commit: e5b0a3ee46488921ff409bbe0feba37af2a3233e
+    original_path: profiles/org/oasis-open/simple/1.3/artifact.yaml
+    pinned_path: third_party/oasis/tosca-simple-profile/1.3/artifact.yaml
+    original_license: Apache-2.0
+    license_file: third_party/oasis/tosca-simple-profile/LICENSE
+  adaptation:
+    status: adapted
+    explanation: Each upstream normative type name is used as derived_from by a minimal local declaration.
+      Descriptions and field bodies are not copied; the case isolates profile loading, exact name resolution,
+      category resolution, hierarchy construction, and inheritance.
+    diff_summary: Replaced 9 upstream declarations with 9 minimal derived declarations and added an empty
+      topology_template.
+  specification:
+    version: TOSCA Simple Profile in YAML Version 1.3
+    sections:
+    - 5.4.1
+    - 5.4.2
+    - 5.4.3.1
+    - 5.4.3.3
+    - 5.4.3.4
+    - 5.4.4.1
+    - 5.4.4.3
+    - 5.4.4.4
+    - 5.4.5.1
+    frozen_requirement_ids: []
+    frozen_requirement_rationale: Normative type-presence declarations are tracked in the independent
+      non-MUST/full-section catalog and do not alter the frozen 223 MUST denominator.
+    non_must_requirement_ids:
+    - TOSCA13-NONMUST-5.4.1-001
+    - TOSCA13-NONMUST-5.4.2-001
+    - TOSCA13-NONMUST-5.4.3.1-001
+    - TOSCA13-NONMUST-5.4.3.3-001
+    - TOSCA13-NONMUST-5.4.3.4-001
+    - TOSCA13-NONMUST-5.4.4.1-001
+    - TOSCA13-NONMUST-5.4.4.3-001
+    - TOSCA13-NONMUST-5.4.4.4-001
+    - TOSCA13-NONMUST-5.4.5.1-001
+  types_covered:
+  - tosca.artifacts.Root
+  - tosca.artifacts.File
+  - tosca.artifacts.Deployment
+  - tosca.artifacts.Deployment.Image
+  - tosca.artifacts.Deployment.Image.VM
+  - tosca.artifacts.Implementation
+  - tosca.artifacts.Implementation.Bash
+  - tosca.artifacts.Implementation.Python
+  - tosca.artifacts.template
+  expected:
+    processor_result: accept
+    phase: hierarchy
+    assertions:
+    - all exact case-sensitive parent type names resolve
+    - all derived declarations inherit from the requested normative type
+- id: TOSCA13-OASIS-COMMUNITY-CAPABILITY
+  file: capability-types-valid.yaml
+  upstream:
+    repository: https://github.com/oasis-open/tosca-community-contributions
+    commit: e5b0a3ee46488921ff409bbe0feba37af2a3233e
+    original_path: profiles/org/oasis-open/simple/1.3/capability.yaml
+    pinned_path: third_party/oasis/tosca-simple-profile/1.3/capability.yaml
+    original_license: Apache-2.0
+    license_file: third_party/oasis/tosca-simple-profile/LICENSE
+  adaptation:
+    status: adapted
+    explanation: Each upstream normative type name is used as derived_from by a minimal local declaration.
+      Descriptions and field bodies are not copied; the case isolates profile loading, exact name resolution,
+      category resolution, hierarchy construction, and inheritance.
+    diff_summary: Replaced 15 upstream declarations with 15 minimal derived declarations and added an
+      empty topology_template.
+  specification:
+    version: TOSCA Simple Profile in YAML Version 1.3
+    sections:
+    - 5.5.1
+    - 5.5.2
+    - 5.5.6
+    - 5.5.3
+    - 5.5.4
+    - 5.5.5
+    - 5.5.7
+    - 5.5.8
+    - 5.5.9
+    - 5.5.10
+    - 5.5.11
+    - 5.5.12
+    - 5.5.13
+    - 5.5.14
+    - 8.5.3
+    frozen_requirement_ids: []
+    frozen_requirement_rationale: Normative type-presence declarations are tracked in the independent
+      non-MUST/full-section catalog and do not alter the frozen 223 MUST denominator.
+    non_must_requirement_ids:
+    - TOSCA13-NONMUST-5.5.1-001
+    - TOSCA13-NONMUST-5.5.2-001
+    - TOSCA13-NONMUST-5.5.6-001
+    - TOSCA13-NONMUST-5.5.3-001
+    - TOSCA13-NONMUST-5.5.4-001
+    - TOSCA13-NONMUST-5.5.5-001
+    - TOSCA13-NONMUST-5.5.7-001
+    - TOSCA13-NONMUST-5.5.8-001
+    - TOSCA13-NONMUST-5.5.9-001
+    - TOSCA13-NONMUST-5.5.10-001
+    - TOSCA13-NONMUST-5.5.11-001
+    - TOSCA13-NONMUST-5.5.12-001
+    - TOSCA13-NONMUST-5.5.13-001
+    - TOSCA13-NONMUST-5.5.14-001
+    - TOSCA13-NONMUST-8.5.3-001
+  types_covered:
+  - tosca.capabilities.Root
+  - tosca.capabilities.Node
+  - tosca.capabilities.Container
+  - tosca.capabilities.Compute
+  - tosca.capabilities.Network
+  - tosca.capabilities.Storage
+  - tosca.capabilities.Endpoint
+  - tosca.capabilities.Endpoint.Public
+  - tosca.capabilities.Endpoint.Admin
+  - tosca.capabilities.Endpoint.Database
+  - tosca.capabilities.Attachment
+  - tosca.capabilities.OperatingSystem
+  - tosca.capabilities.Scalable
+  - tosca.capabilities.network.Bindable
+  - tosca.capabilities.network.Linkable
+  expected:
+    processor_result: accept
+    phase: hierarchy
+    assertions:
+    - all exact case-sensitive parent type names resolve
+    - all derived declarations inherit from the requested normative type
+- id: TOSCA13-OASIS-COMMUNITY-RELATIONSHIP
+  file: relationship-types-valid.yaml
+  upstream:
+    repository: https://github.com/oasis-open/tosca-community-contributions
+    commit: e5b0a3ee46488921ff409bbe0feba37af2a3233e
+    original_path: profiles/org/oasis-open/simple/1.3/relationship.yaml
+    pinned_path: third_party/oasis/tosca-simple-profile/1.3/relationship.yaml
+    original_license: Apache-2.0
+    license_file: third_party/oasis/tosca-simple-profile/LICENSE
+  adaptation:
+    status: adapted
+    explanation: Each upstream normative type name is used as derived_from by a minimal local declaration.
+      Descriptions and field bodies are not copied; the case isolates profile loading, exact name resolution,
+      category resolution, hierarchy construction, and inheritance.
+    diff_summary: Replaced 8 upstream declarations with 8 minimal derived declarations and added an empty
+      topology_template.
+  specification:
+    version: TOSCA Simple Profile in YAML Version 1.3
+    sections:
+    - 5.7.1
+    - 5.7.2
+    - 5.7.3
+    - 5.7.4
+    - 5.7.5
+    - 5.7.6
+    - 8.5.4
+    - 8.5.5
+    frozen_requirement_ids: []
+    frozen_requirement_rationale: Normative type-presence declarations are tracked in the independent
+      non-MUST/full-section catalog and do not alter the frozen 223 MUST denominator.
+    non_must_requirement_ids:
+    - TOSCA13-NONMUST-5.7.1-001
+    - TOSCA13-NONMUST-5.7.2-001
+    - TOSCA13-NONMUST-5.7.3-001
+    - TOSCA13-NONMUST-5.7.4-001
+    - TOSCA13-NONMUST-5.7.5-001
+    - TOSCA13-NONMUST-5.7.6-001
+    - TOSCA13-NONMUST-8.5.4-001
+    - TOSCA13-NONMUST-8.5.5-001
+  types_covered:
+  - tosca.relationships.Root
+  - tosca.relationships.DependsOn
+  - tosca.relationships.HostedOn
+  - tosca.relationships.ConnectsTo
+  - tosca.relationships.AttachesTo
+  - tosca.relationships.RoutesTo
+  - tosca.relationships.network.LinksTo
+  - tosca.relationships.network.BindsTo
+  expected:
+    processor_result: accept
+    phase: hierarchy
+    assertions:
+    - all exact case-sensitive parent type names resolve
+    - all derived declarations inherit from the requested normative type
+- id: TOSCA13-OASIS-COMMUNITY-INTERFACE
+  file: interface-types-valid.yaml
+  upstream:
+    repository: https://github.com/oasis-open/tosca-community-contributions
+    commit: e5b0a3ee46488921ff409bbe0feba37af2a3233e
+    original_path: profiles/org/oasis-open/simple/1.3/interface.yaml
+    pinned_path: third_party/oasis/tosca-simple-profile/1.3/interface.yaml
+    original_license: Apache-2.0
+    license_file: third_party/oasis/tosca-simple-profile/LICENSE
+  adaptation:
+    status: adapted
+    explanation: Each upstream normative type name is used as derived_from by a minimal local declaration.
+      Descriptions and field bodies are not copied; the case isolates profile loading, exact name resolution,
+      category resolution, hierarchy construction, and inheritance.
+    diff_summary: Replaced 3 upstream declarations with 3 minimal derived declarations and added an empty
+      topology_template.
+  specification:
+    version: TOSCA Simple Profile in YAML Version 1.3
+    sections:
+    - 5.8.3
+    - 5.8.4
+    - 5.8.5
+    frozen_requirement_ids: []
+    frozen_requirement_rationale: Normative type-presence declarations are tracked in the independent
+      non-MUST/full-section catalog and do not alter the frozen 223 MUST denominator.
+    non_must_requirement_ids:
+    - TOSCA13-NONMUST-5.8.3-001
+    - TOSCA13-NONMUST-5.8.4-001
+    - TOSCA13-NONMUST-5.8.5-001
+  types_covered:
+  - tosca.interfaces.Root
+  - tosca.interfaces.node.lifecycle.Standard
+  - tosca.interfaces.relationship.Configure
+  expected:
+    processor_result: accept
+    phase: hierarchy
+    assertions:
+    - all exact case-sensitive parent type names resolve
+    - all derived declarations inherit from the requested normative type
+- id: TOSCA13-OASIS-COMMUNITY-NODE
+  file: node-types-valid.yaml
+  upstream:
+    repository: https://github.com/oasis-open/tosca-community-contributions
+    commit: e5b0a3ee46488921ff409bbe0feba37af2a3233e
+    original_path: profiles/org/oasis-open/simple/1.3/node.yaml
+    pinned_path: third_party/oasis/tosca-simple-profile/1.3/node.yaml
+    original_license: Apache-2.0
+    license_file: third_party/oasis/tosca-simple-profile/LICENSE
+  adaptation:
+    status: adapted
+    explanation: Each upstream normative type name is used as derived_from by a minimal local declaration.
+      Descriptions and field bodies are not copied; the case isolates profile loading, exact name resolution,
+      category resolution, hierarchy construction, and inheritance.
+    diff_summary: Replaced 16 upstream declarations with 16 minimal derived declarations and added an
+      empty topology_template.
+  specification:
+    version: TOSCA Simple Profile in YAML Version 1.3
+    sections:
+    - 5.9.1
+    - 5.9.2
+    - 5.9.3
+    - 5.9.4
+    - 5.9.5
+    - 5.9.6
+    - 5.9.7
+    - 5.9.8
+    - 5.9.9
+    - 5.9.10
+    - 5.9.11
+    - 5.9.12
+    - 5.9.13
+    - 5.9.14
+    - 8.5.1
+    - 8.5.2
+    frozen_requirement_ids: []
+    frozen_requirement_rationale: Normative type-presence declarations are tracked in the independent
+      non-MUST/full-section catalog and do not alter the frozen 223 MUST denominator.
+    non_must_requirement_ids:
+    - TOSCA13-NONMUST-5.9.1-001
+    - TOSCA13-NONMUST-5.9.2-001
+    - TOSCA13-NONMUST-5.9.3-001
+    - TOSCA13-NONMUST-5.9.4-001
+    - TOSCA13-NONMUST-5.9.5-001
+    - TOSCA13-NONMUST-5.9.6-001
+    - TOSCA13-NONMUST-5.9.7-001
+    - TOSCA13-NONMUST-5.9.8-001
+    - TOSCA13-NONMUST-5.9.9-001
+    - TOSCA13-NONMUST-5.9.10-001
+    - TOSCA13-NONMUST-5.9.11-001
+    - TOSCA13-NONMUST-5.9.12-001
+    - TOSCA13-NONMUST-5.9.13-001
+    - TOSCA13-NONMUST-5.9.14-001
+    - TOSCA13-NONMUST-8.5.1-001
+    - TOSCA13-NONMUST-8.5.2-001
+  types_covered:
+  - tosca.nodes.Root
+  - tosca.nodes.Abstract.Compute
+  - tosca.nodes.Compute
+  - tosca.nodes.SoftwareComponent
+  - tosca.nodes.WebServer
+  - tosca.nodes.WebApplication
+  - tosca.nodes.DBMS
+  - tosca.nodes.Database
+  - tosca.nodes.Abstract.Storage
+  - tosca.nodes.Storage.ObjectStorage
+  - tosca.nodes.Storage.BlockStorage
+  - tosca.nodes.Container.Runtime
+  - tosca.nodes.Container.Application
+  - tosca.nodes.LoadBalancer
+  - tosca.nodes.network.Network
+  - tosca.nodes.network.Port
+  expected:
+    processor_result: accept
+    phase: hierarchy
+    assertions:
+    - all exact case-sensitive parent type names resolve
+    - all derived declarations inherit from the requested normative type
+- id: TOSCA13-OASIS-COMMUNITY-GROUP
+  file: group-types-valid.yaml
+  upstream:
+    repository: https://github.com/oasis-open/tosca-community-contributions
+    commit: e5b0a3ee46488921ff409bbe0feba37af2a3233e
+    original_path: profiles/org/oasis-open/simple/1.3/group.yaml
+    pinned_path: third_party/oasis/tosca-simple-profile/1.3/group.yaml
+    original_license: Apache-2.0
+    license_file: third_party/oasis/tosca-simple-profile/LICENSE
+  adaptation:
+    status: adapted
+    explanation: Each upstream normative type name is used as derived_from by a minimal local declaration.
+      Descriptions and field bodies are not copied; the case isolates profile loading, exact name resolution,
+      category resolution, hierarchy construction, and inheritance.
+    diff_summary: Replaced 1 upstream declarations with 1 minimal derived declarations and added an empty
+      topology_template.
+  specification:
+    version: TOSCA Simple Profile in YAML Version 1.3
+    sections:
+    - 5.10.1
+    frozen_requirement_ids: []
+    frozen_requirement_rationale: Normative type-presence declarations are tracked in the independent
+      non-MUST/full-section catalog and do not alter the frozen 223 MUST denominator.
+    non_must_requirement_ids:
+    - TOSCA13-NONMUST-5.10.1-001
+  types_covered:
+  - tosca.groups.Root
+  expected:
+    processor_result: accept
+    phase: hierarchy
+    assertions:
+    - all exact case-sensitive parent type names resolve
+    - all derived declarations inherit from the requested normative type
+- id: TOSCA13-OASIS-COMMUNITY-POLICY
+  file: policy-types-valid.yaml
+  upstream:
+    repository: https://github.com/oasis-open/tosca-community-contributions
+    commit: e5b0a3ee46488921ff409bbe0feba37af2a3233e
+    original_path: profiles/org/oasis-open/simple/1.3/policy.yaml
+    pinned_path: third_party/oasis/tosca-simple-profile/1.3/policy.yaml
+    original_license: Apache-2.0
+    license_file: third_party/oasis/tosca-simple-profile/LICENSE
+  adaptation:
+    status: adapted
+    explanation: Each upstream normative type name is used as derived_from by a minimal local declaration.
+      Descriptions and field bodies are not copied; the case isolates profile loading, exact name resolution,
+      category resolution, hierarchy construction, and inheritance.
+    diff_summary: Replaced 5 upstream declarations with 5 minimal derived declarations and added an empty
+      topology_template.
+  specification:
+    version: TOSCA Simple Profile in YAML Version 1.3
+    sections:
+    - 5.11.1
+    - 5.11.2
+    - 5.11.3
+    - 5.11.4
+    - 5.11.5
+    frozen_requirement_ids: []
+    frozen_requirement_rationale: Normative type-presence declarations are tracked in the independent
+      non-MUST/full-section catalog and do not alter the frozen 223 MUST denominator.
+    non_must_requirement_ids:
+    - TOSCA13-NONMUST-5.11.1-001
+    - TOSCA13-NONMUST-5.11.2-001
+    - TOSCA13-NONMUST-5.11.3-001
+    - TOSCA13-NONMUST-5.11.4-001
+    - TOSCA13-NONMUST-5.11.5-001
+  types_covered:
+  - tosca.policies.Root
+  - tosca.policies.Placement
+  - tosca.policies.Scaling
+  - tosca.policies.Update
+  - tosca.policies.Performance
+  expected:
+    processor_result: accept
+    phase: hierarchy
+    assertions:
+    - all exact case-sensitive parent type names resolve
+    - all derived declarations inherit from the requested normative type

@@ -1,0 +1,21 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+artifact_types:
+  corpus.oasis_community.artifact_types.01:
+    derived_from: tosca.artifacts.Root
+  corpus.oasis_community.artifact_types.02:
+    derived_from: tosca.artifacts.File
+  corpus.oasis_community.artifact_types.03:
+    derived_from: tosca.artifacts.Deployment
+  corpus.oasis_community.artifact_types.04:
+    derived_from: tosca.artifacts.Deployment.Image
+  corpus.oasis_community.artifact_types.05:
+    derived_from: tosca.artifacts.Deployment.Image.VM
+  corpus.oasis_community.artifact_types.06:
+    derived_from: tosca.artifacts.Implementation
+  corpus.oasis_community.artifact_types.07:
+    derived_from: tosca.artifacts.Implementation.Bash
+  corpus.oasis_community.artifact_types.08:
+    derived_from: tosca.artifacts.Implementation.Python
+  corpus.oasis_community.artifact_types.09:
+    derived_from: tosca.artifacts.template
+topology_template: {}

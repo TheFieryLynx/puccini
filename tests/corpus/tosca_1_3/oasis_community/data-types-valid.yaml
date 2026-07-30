@@ -1,0 +1,21 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+data_types:
+  corpus.oasis_community.data_types.01:
+    derived_from: tosca.datatypes.Root
+  corpus.oasis_community.data_types.02:
+    derived_from: tosca.datatypes.json
+  corpus.oasis_community.data_types.03:
+    derived_from: tosca.datatypes.xml
+  corpus.oasis_community.data_types.04:
+    derived_from: tosca.datatypes.Credential
+  corpus.oasis_community.data_types.05:
+    derived_from: tosca.datatypes.TimeInterval
+  corpus.oasis_community.data_types.06:
+    derived_from: tosca.datatypes.network.NetworkInfo
+  corpus.oasis_community.data_types.07:
+    derived_from: tosca.datatypes.network.PortInfo
+  corpus.oasis_community.data_types.08:
+    derived_from: tosca.datatypes.network.PortDef
+  corpus.oasis_community.data_types.09:
+    derived_from: tosca.datatypes.network.PortSpec
+topology_template: {}
