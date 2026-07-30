@@ -6,4 +6,10 @@ mutations:
       - TOSCA13-NONMUST-CORPUS-SHOULD-EXTERNAL-SCHEMA-INVALID
     expected_tests_failed: true
     observed_result: invalid external schema was accepted and the non-MUST runner failed
-    production_diff_restored: true
+  production_diff_restored: true
+- group: may-optional
+  mutation: Return no normalized service template when topology_template is absent, disabling the permitted type-only service-template branch.
+  affected_cases:
+  - TOSCA13-NONMUST-CORPUS-MAY-TYPE-ONLY
+  expected_cases_failed: true
+  production_diff_restored: true

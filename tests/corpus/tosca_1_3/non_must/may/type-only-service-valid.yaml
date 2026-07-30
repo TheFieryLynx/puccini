@@ -1,0 +1,5 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+description: A service template that intentionally contains only type definitions.
+node_types:
+  LibraryNode:
+    derived_from: tosca.nodes.Root

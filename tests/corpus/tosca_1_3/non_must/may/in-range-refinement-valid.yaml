@@ -1,0 +1,21 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+node_types:
+  Parent:
+    derived_from: tosca.nodes.Root
+    properties:
+      value:
+        type: integer
+        constraints:
+          - in_range: [0, 10]
+  Child:
+    derived_from: Parent
+    properties:
+      value:
+        constraints:
+          - in_range: [2, 8]
+topology_template:
+  node_templates:
+    child:
+      type: Child
+      properties:
+        value: 5

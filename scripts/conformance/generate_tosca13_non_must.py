@@ -72,6 +72,7 @@ CASE_PATHS = {
     "TOSCA13-NONMUST-CORPUS-MAY-TYPE-ONLY": "non_must/may/type-only-service-valid.yaml",
     "TOSCA13-NONMUST-CORPUS-MAY-FUNCTION-CONTEXT": "non_must/may/function-context-valid.yaml",
     "TOSCA13-NONMUST-CORPUS-MAY-NORMATIVE-SHORTHAND": "non_must/may/normative-shorthand-valid.yaml",
+    "TOSCA13-NONMUST-CORPUS-OPTIONAL-COMPLETE": "non_must/optional/complete-forms-valid.yaml",
     "TOSCA13-NONMUST-CORPUS-DEFAULTS": "non_must/defaults/default-semantics-valid.yaml",
     "TOSCA13-NONMUST-CORPUS-GRAMMAR-DATA": "non_must/grammar-alternatives/data-types-valid.yaml",
     "TOSCA13-NONMUST-CORPUS-GRAMMAR-DEFINITIONS": "non_must/grammar-alternatives/definitions-valid.yaml",
@@ -145,6 +146,76 @@ CASE_EXPECTATIONS = {
         "diagnostic": None,
         "assertions": ["node_exists:node"],
     },
+    "TOSCA13-NONMUST-CORPUS-MAY-CONSTRAINT-REFINEMENT": {
+        "tier": "processor-may",
+        "kind": "valid",
+        "category": "semantic",
+        "features": ["constraint-refinement", "in-range"],
+        "accepted": True,
+        "phase": "normalization",
+        "diagnostic": None,
+        "assertions": ["node_exists:child"],
+    },
+    "TOSCA13-NONMUST-CORPUS-MAY-IMPORT-NAMESPACE": {
+        "tier": "processor-may",
+        "kind": "valid",
+        "category": "semantic",
+        "features": ["imports", "namespace-prefix"],
+        "accepted": True,
+        "phase": "normalization",
+        "diagnostic": None,
+        "assertions": ["node_exists:node"],
+    },
+    "TOSCA13-NONMUST-CORPUS-MAY-OPERATION-INPUT": {
+        "tier": "processor-may",
+        "kind": "valid",
+        "category": "semantic",
+        "features": ["operation-input", "undeclared-assignment"],
+        "accepted": True,
+        "phase": "normalization",
+        "diagnostic": None,
+        "assertions": ["node_exists:node"],
+    },
+    "TOSCA13-NONMUST-CORPUS-MAY-TYPE-ONLY": {
+        "tier": "processor-may",
+        "kind": "valid",
+        "category": "semantic",
+        "features": ["service-template", "type-only"],
+        "accepted": True,
+        "phase": "normalization",
+        "diagnostic": None,
+        "assertions": ["service_template_non_nil"],
+    },
+    "TOSCA13-NONMUST-CORPUS-MAY-FUNCTION-CONTEXT": {
+        "tier": "processor-may",
+        "kind": "valid",
+        "category": "semantic",
+        "features": ["intrinsic-function", "topology-output"],
+        "accepted": True,
+        "phase": "normalization",
+        "diagnostic": None,
+        "assertions": ["output_exists:copy"],
+    },
+    "TOSCA13-NONMUST-CORPUS-MAY-NORMATIVE-SHORTHAND": {
+        "tier": "processor-may",
+        "kind": "valid",
+        "category": "grammar",
+        "features": ["normative-type", "shorthand-name"],
+        "accepted": True,
+        "phase": "normalization",
+        "diagnostic": None,
+        "assertions": ["node_exists:node"],
+    },
+    "TOSCA13-NONMUST-CORPUS-OPTIONAL-COMPLETE": {
+        "tier": "processor-may",
+        "kind": "valid",
+        "category": "grammar",
+        "features": ["optional-keynames", "complete-form"],
+        "accepted": True,
+        "phase": "normalization",
+        "diagnostic": None,
+        "assertions": ["node_exists:component", "input_exists:label", "output_exists:label"],
+    },
 }
 
 
@@ -198,6 +269,8 @@ def fixture_for(record):
         return "TOSCA13-NONMUST-CORPUS-MAY-FUNCTION-CONTEXT"
     if section == "5.2":
         return "TOSCA13-NONMUST-CORPUS-MAY-NORMATIVE-SHORTHAND"
+    if strength == "OPTIONAL":
+        return "TOSCA13-NONMUST-CORPUS-OPTIONAL-COMPLETE"
     if strength == "DEFAULT":
         return "TOSCA13-NONMUST-CORPUS-DEFAULTS"
     if section.startswith(("3.3", "3.4", "3.5")):
