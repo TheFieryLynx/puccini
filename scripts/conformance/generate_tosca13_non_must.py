@@ -23,6 +23,7 @@ NON_MUST_STRENGTHS = {
     "DEFAULT",
     "SEMANTIC",
     "GRAMMAR",
+    "ERROR",
 }
 
 # These extracted records address authors, orchestrators, or the archive
@@ -42,10 +43,18 @@ NON_PROCESSOR_RECORDS = {
     "TOSCA13-3.10.3.3.4-001",
     "TOSCA13-3.10.3.5.4-001",
     "TOSCA13-5.2-004",
+    "TOSCA13-5.8.5.5-006",
     "TOSCA13-5.9.1.4-001",
     "TOSCA13-5.9.3.4-001",
     "TOSCA13-5.9.4.4-001",
     "TOSCA13-6.3-001",
+}
+
+IMPLEMENTATION_DEFINED_RECORDS = {
+    # Section 3.6.8.2.3 explicitly permits processors to choose how namespace
+    # collisions are resolved. The frozen applicability is not modified; the
+    # separate non-MUST catalog records Puccini's deterministic strict policy.
+    "TOSCA13-3.6.8.2.3-006",
 }
 
 UNSUPPORTED_RECOMMENDATIONS = {
@@ -89,7 +98,7 @@ CASE_PATHS = {
     "TOSCA13-NONMUST-CORPUS-GRAMMAR-PROFILE": "non_must/grammar-alternatives/normative-profile-valid.yaml",
     "TOSCA13-NONMUST-CORPUS-GRAMMAR-PROFILE-INVALID": "non_must/grammar-alternatives/normative-profile-invalid.yaml",
     "TOSCA13-NONMUST-CORPUS-POLICY-NETWORK": "non_must/implementation-defined/network-disabled-policy.yaml",
-    "TOSCA13-NONMUST-CORPUS-POLICY-EXTENSIONS": "non_must/implementation-defined/unknown-extension-policy.yaml",
+    "TOSCA13-NONMUST-CORPUS-POLICY-NAMESPACE-COLLISION": "non_must/implementation-defined/namespace-collision-policy.yaml",
 }
 
 CASE_EXPECTATIONS = {
@@ -274,6 +283,16 @@ CASE_EXPECTATIONS = {
         "features": ["normative-profile", "derived-custom-type"], "accepted": True, "phase": "normalization",
         "diagnostic": None, "assertions": ["node_exists:compute"],
     },
+    "TOSCA13-NONMUST-CORPUS-POLICY-NAMESPACE-COLLISION": {
+        "tier": "implementation-defined",
+        "kind": "policy",
+        "category": "semantic",
+        "features": ["imports", "namespace-collision", "deterministic-error-policy"],
+        "accepted": False,
+        "phase": "namespaces",
+        "diagnostic": {"category": "equivalent", "path": "Shared"},
+        "assertions": [],
+    },
 }
 
 for _case_id in tuple(CASE_EXPECTATIONS):
@@ -304,7 +323,7 @@ def dump(path, value):
 
 
 def mapped_strength(source_strength):
-    if source_strength == "GRAMMAR":
+    if source_strength in {"GRAMMAR", "ERROR"}:
         return "SEMANTIC"
     return source_strength
 
@@ -333,6 +352,8 @@ def fixture_for(record):
     if requirement_id == "TOSCA13-3.6.3.1-017":
         return "TOSCA13-NONMUST-CORPUS-MAY-CONSTRAINT-REFINEMENT"
     if section == "3.6.8.2.3":
+        if requirement_id == "TOSCA13-3.6.8.2.3-006":
+            return "TOSCA13-NONMUST-CORPUS-POLICY-NAMESPACE-COLLISION"
         return "TOSCA13-NONMUST-CORPUS-MAY-IMPORT-NAMESPACE"
     if requirement_id == "TOSCA13-3.6.17.3-003":
         return "TOSCA13-NONMUST-CORPUS-MAY-OPERATION-INPUT"
@@ -379,6 +400,15 @@ def policy_for(record, fixture_exists):
     source_strength = record["strength"]
     requirement_id = record["requirement_id"]
     unsupported = requirement_id in UNSUPPORTED_RECOMMENDATIONS
+    implementation_defined = requirement_id in IMPLEMENTATION_DEFINED_RECORDS
+
+    if implementation_defined:
+        return {
+            "implementation_policy": "implementation-defined",
+            "policy_reason": "The specification permits processor choice; Puccini deterministically rejects non-equivalent imported definitions with the same identity.",
+            "implementation_status": "implemented" if fixture_exists else "partial",
+            "verification_status": "verified" if fixture_exists else "untested",
+        }
 
     if unsupported:
         return {
@@ -414,7 +444,10 @@ def main():
     for record in coverage:
         if record["strength"] not in NON_MUST_STRENGTHS:
             continue
-        if record["applicability"] != "applicable" or record["catalog_quality"] != "atomic":
+        if (
+            record["requirement_id"] not in IMPLEMENTATION_DEFINED_RECORDS
+            and record["applicability"] != "applicable"
+        ) or record["catalog_quality"] != "atomic":
             continue
         if record.get("included_in_must_denominator"):
             continue

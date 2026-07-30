@@ -2938,6 +2938,7 @@ cases:
     - TOSCA13-NONMUST-3.8.2.2.1-004
     - TOSCA13-NONMUST-3.8.2.2.2-001
     - TOSCA13-NONMUST-3.8.2.2.3-001
+    - TOSCA13-NONMUST-3.8.2.2.3-017
     - TOSCA13-NONMUST-3.8.3.1-002
     - TOSCA13-NONMUST-3.8.3.1-005
     - TOSCA13-NONMUST-3.8.3.1-007
@@ -3192,6 +3193,7 @@ cases:
     - TOSCA13-NONMUST-3.8.2.2.1-004
     - TOSCA13-NONMUST-3.8.2.2.2-001
     - TOSCA13-NONMUST-3.8.2.2.3-001
+    - TOSCA13-NONMUST-3.8.2.2.3-017
     - TOSCA13-NONMUST-3.8.3.1-002
     - TOSCA13-NONMUST-3.8.3.1-005
     - TOSCA13-NONMUST-3.8.3.1-007
@@ -5694,4 +5696,29 @@ cases:
     diagnostic:
       category: unsupported keyname
       path: unknown_key
+    assertions: []
+- id: TOSCA13-NONMUST-CORPUS-POLICY-NAMESPACE-COLLISION
+  file: non_must/implementation-defined/namespace-collision-policy.yaml
+  conformance_tier: implementation-defined
+  specification:
+    sections:
+    - 3.6.8.2.3
+    non_must_requirement_ids:
+    - TOSCA13-NONMUST-3.6.8.2.3-006
+  policy:
+    support: implementation-defined
+    rationale: All linked rules use the cataloged implementation policy; this case exercises their shared processor path.
+  classification:
+    kind: policy
+    category: semantic
+    features:
+    - imports
+    - namespace-collision
+    - deterministic-error-policy
+  expected:
+    accepted: false
+    phase: namespaces
+    diagnostic:
+      category: equivalent
+      path: Shared
     assertions: []
