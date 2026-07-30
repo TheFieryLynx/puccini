@@ -88,3 +88,11 @@ mutations:
     expected_corpus_failures: true
     observed_result: both the corpus assertion and the direct ConnectsTo test reported a nil target node
     production_diff_restored: true
+  - category: corpus-ci-gate
+    production_validation_path: TestTOSCA13CorpusFrozenManifestCoverage manifest-to-frozen-matrix coverage
+    mutation: removed one frozen requirement ID from its manifest case
+    affected_cases:
+      - TOSCA13-5.9.9.1-002
+    expected_corpus_failures: true
+    observed_result: the gate reported the exact absent frozen requirement ID
+    production_diff_restored: true

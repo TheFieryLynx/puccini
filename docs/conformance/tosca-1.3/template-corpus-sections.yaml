@@ -1,0 +1,6897 @@
+schema_version: 1
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+scope: frozen atomic MUST processor target plus explicit classification of every catalog section
+sections:
+- section: '1.6'
+  title: Notational Conventions
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '3.1'
+  title: TOSCA Namespace URI and alias
+  applicable_to_processor: true
+  grammar_entities:
+  - tosca-namespace-uri-and-alias
+  requirement_ids:
+  - TOSCA13-3.1-001
+  variation_axes:
+  - keynames:required-first
+  - namespace:default
+  - reference:normative-type
+  fixtures:
+  - TOSCA13-CORPUS-NAMESPACE-DEFAULT-VALID
+  status: complete
+  exclusions: []
+- section: 3.1.1
+  title: TOSCA Namespace prefix
+  applicable_to_processor: true
+  grammar_entities:
+  - tosca-namespace-prefix
+  requirement_ids:
+  - TOSCA13-3.1.1-001
+  variation_axes:
+  - keynames:required-first
+  - namespace:default
+  - reference:normative-type
+  fixtures:
+  - TOSCA13-CORPUS-NAMESPACE-DEFAULT-VALID
+  status: complete
+  exclusions: []
+- section: 3.1.2
+  title: TOSCA Namespacing in TOSCA Service Templates
+  applicable_to_processor: true
+  grammar_entities:
+  - tosca-namespacing-in-tosca-service-templates
+  requirement_ids:
+  - TOSCA13-3.1.2-001
+  - TOSCA13-3.1.2-002
+  - TOSCA13-3.1.2-003
+  - TOSCA13-3.1.2-004
+  - TOSCA13-3.1.2-005
+  variation_axes:
+  - keynames:required-first
+  - namespace:default
+  - reference:normative-type
+  fixtures:
+  - TOSCA13-CORPUS-NAMESPACE-DEFAULT-VALID
+  status: complete
+  exclusions: []
+- section: 3.1.3.1
+  title: Additional Requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-3.1.3.1-001
+  - TOSCA13-3.1.3.1-002
+  - TOSCA13-3.1.3.1-004
+  - TOSCA13-3.1.3.1-005
+  - TOSCA13-3.1.3.1-007
+  - TOSCA13-3.1.3.1-008
+  - TOSCA13-3.1.3.1-009
+  - TOSCA13-3.1.3.1-010
+  - TOSCA13-3.1.3.1-011
+  - TOSCA13-3.1.3.1-012
+  - TOSCA13-3.1.3.1-013
+  - TOSCA13-3.1.3.1-015
+  - TOSCA13-3.1.3.1-016
+  - TOSCA13-3.1.3.1-017
+  - TOSCA13-3.1.3.1-018
+  - TOSCA13-3.1.3.1-020
+  - TOSCA13-3.1.3.1-021
+  - TOSCA13-3.1.3.1-022
+  - TOSCA13-3.1.3.1-023
+  - TOSCA13-3.1.3.1-024
+  - TOSCA13-3.1.3.1-025
+  - TOSCA13-3.1.3.1-026
+  - TOSCA13-3.1.3.1-027
+  variation_axes:
+  - determinism:stable-identity
+  - diagnostic:deterministic
+  - diagnostic:yaml-decode
+  - grammar-form:long
+  - graph:bounded-cycle-detection
+  - imports:cross-version
+  - imports:cycle
+  - imports:duplicate-idempotent
+  - imports:name-collision
+  - imports:namespace-qualified
+  - imports:qualified
+  - imports:transitive
+  - inheritance:imported-parent
+  - interaction:csar-import
+  - interaction:imports-inheritance
+  - keynames:duplicate-map-key-equivalence-class
+  - namespace:known-prefix
+  - namespace:local
+  - namespace:reserved-uri-hierarchy
+  - namespace:unqualified
+  - normalization:substitution-preserved
+  - notation:long
+  - notation:short-import
+  - reference:imported-target
+  - reference:missing-qualified-name
+  - resolution:archive-relative
+  - substitution:imported-node-type
+  - values:forbidden
+  - version-isolation:1.3-imports-2.0
+  fixtures:
+  - TOSCA13-CORPUS-IMPORT-COLLISION-INVALID
+  - TOSCA13-CORPUS-IMPORT-CYCLE-INVALID
+  - TOSCA13-CORPUS-IMPORT-DIFFERENT-VERSION-INVALID
+  - TOSCA13-CORPUS-IMPORT-DUPLICATE-IDEMPOTENT-VALID
+  - TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
+  - TOSCA13-CORPUS-IMPORT-TRANSITIVE-VALID
+  - TOSCA13-CORPUS-IMPORT-UNKNOWN-QUALIFIED-INVALID
+  - TOSCA13-CORPUS-INTERACTION-CSAR-IMPORTS
+  - TOSCA13-CORPUS-INTERACTION-IMPORTS-INHERITANCE
+  - TOSCA13-CORPUS-LOCAL-DUPLICATE-NAME-INVALID
+  - TOSCA13-CORPUS-NAMESPACE-RESERVED-INVALID
+  - TOSCA13-CORPUS-SUBSTITUTION-IMPORTS-VALID
+  status: complete
+  exclusions: []
+- section: '3.2'
+  title: Using Namespaces
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '3.3'
+  title: Parameter and property types
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.1
+  title: Referenced YAML Types
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.1.1
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.2
+  title: TOSCA version
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.2.1
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.3.2.1-004
+  - TOSCA13-3.3.2.1-005
+  variation_axes:
+  - boundary:zero-version
+  - normalization:unspecified-sentinel
+  fixtures:
+  - TOSCA13-CORPUS-VERSION-ZERO-VALID
+  status: complete
+  exclusions: []
+- section: 3.3.2.2
+  title: Version Comparison
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.2.4
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.2.5
+  title: Additional Requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-3.3.2.5-001
+  - TOSCA13-3.3.2.5-002
+  variation_axes:
+  - boundary:zero-version
+  - boundary:zero-with-qualifier
+  - normalization:unspecified-sentinel
+  - values:forbidden-combination
+  fixtures:
+  - TOSCA13-CORPUS-VERSION-QUALIFIED-ZERO-INVALID
+  - TOSCA13-CORPUS-VERSION-ZERO-VALID
+  status: complete
+  exclusions: []
+- section: 3.3.3
+  title: TOSCA range type
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.3.1
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.3.3.1-004
+  - TOSCA13-3.3.3.1-005
+  - TOSCA13-3.3.3.1-006
+  variation_axes:
+  - boundary:immediately-reversed
+  - cardinality:UNBOUNDED
+  - cardinality:equal-bounds
+  - cardinality:invalid-range-order
+  fixtures:
+  - TOSCA13-CORPUS-RANGE-BOUNDARIES-VALID
+  - TOSCA13-CORPUS-RANGE-REVERSED-INVALID
+  status: complete
+  exclusions: []
+- section: 3.3.3.2
+  title: Keywords
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.4
+  title: TOSCA list type
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.4.1.1
+  title: Square bracket notation
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.4.1.2
+  title: Bulleted list notation
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.5
+  title: TOSCA map type
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.5.1
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.5.1.1
+  title: Single-line grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.5.1.2
+  title: Multi-line grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - multi-line-grammar
+  requirement_ids:
+  - TOSCA13-3.3.5.1.2-002
+  variation_axes:
+  - cardinality:multiple
+  - keynames:missing-entry-key
+  - yaml-type:mapping
+  - yaml-type:sequence-instead-of-map
+  fixtures:
+  - TOSCA13-CORPUS-MAP-KEYED-VALID
+  - TOSCA13-CORPUS-MAP-UNKEYED-INVALID
+  status: complete
+  exclusions: []
+- section: 3.3.6.1
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.3.6.1-004
+  - TOSCA13-3.3.6.1-005
+  - TOSCA13-3.3.6.1-006
+  variation_axes:
+  - grammar-form:compact
+  - grammar-form:spaced
+  - whitespace:zero-or-many
+  fixtures:
+  - TOSCA13-CORPUS-SCALAR-UNIT-WHITESPACE-VALID
+  status: complete
+  exclusions: []
+- section: 3.3.6.2
+  title: Additional requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-3.3.6.2-001
+  - TOSCA13-3.3.6.2-002
+  - TOSCA13-3.3.6.2-003
+  variation_axes:
+  - boundary:inclusive-range
+  - constraint:unit-conversion
+  - grammar-form:compact
+  - grammar-form:spaced
+  - keynames:missing-unit
+  - values:incomplete-scalar-unit
+  - whitespace:zero-or-many
+  fixtures:
+  - TOSCA13-CORPUS-SCALAR-UNIT-CONSTRAINT-BOUNDARY-VALID
+  - TOSCA13-CORPUS-SCALAR-UNIT-MISSING-UNIT-INVALID
+  - TOSCA13-CORPUS-SCALAR-UNIT-WHITESPACE-VALID
+  status: complete
+  exclusions: []
+- section: 3.3.6.3
+  title: Concrete Types
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.6.4.1
+  title: Recognized Units
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.6.4.3
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.6.5.1
+  title: Recognized Units
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.6.6.1
+  title: Recognized Units
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.3.6.7.1
+  title: Recognized Units
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.4.1
+  title: Node States
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.4.2
+  title: Relationship States
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.4.2.1
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.4.3
+  title: Directives
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.4.4
+  title: Network Name aliases
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.4.4.1
+  title: Usage
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '3.5'
+  title: TOSCA Metamodel
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.5.1
+  title: Required Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - required-keynames
+  requirement_ids:
+  - TOSCA13-3.5.1-002
+  variation_axes:
+  - default:overridden
+  - inheritance:required-key-from-parent
+  - interaction:inheritance-refinement
+  - refinement:default-only
+  fixtures:
+  - TOSCA13-CORPUS-INHERITED-REQUIRED-KEY-VALID
+  - TOSCA13-CORPUS-INTERACTION-INHERITANCE-REFINEMENT
+  status: complete
+  exclusions: []
+- section: 3.6.1
+  title: Description definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.1.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.1.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.2
+  title: Metadata
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.2.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.2.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.2.4
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.3
+  title: Constraint clause
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.3.1
+  title: Operator keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.3.1.1
+  title: Comparable value types
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.3.2
+  title: Schema Constraint purpose
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.3.3
+  title: Additional Requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-3.6.3.3-001
+  - TOSCA13-3.6.3.3-002
+  - TOSCA13-3.6.3.3-003
+  variation_axes:
+  - boundary:inclusive-upper
+  - boundary:lower
+  - boundary:upper
+  - collection:length
+  - constraint:conjunction
+  - constraint:incompatible-operator
+  - interaction:constraint-assignment
+  - interaction:constraint-default
+  - yaml-type:string-pattern-on-integer
+  fixtures:
+  - TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID
+  - TOSCA13-CORPUS-CONSTRAINT-OPERAND-INVALID
+  - TOSCA13-CORPUS-INTERACTION-CONSTRAINTS-ASSIGNMENTS
+  - TOSCA13-CORPUS-INTERACTION-CONSTRAINTS-DEFAULTS
+  status: complete
+  exclusions: []
+- section: 3.6.3.4
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.6.3.4-004
+  - TOSCA13-3.6.3.4-005
+  - TOSCA13-3.6.3.4-007
+  variation_axes:
+  - boundary:inclusive-upper
+  - collection:length
+  - constraint:conjunction
+  fixtures:
+  - TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.4
+  title: Property Filter definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.4.1.1
+  title: 'Short notation:'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.4.1.2
+  title: 'Extended notation:'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.4.2
+  title: Additional Requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.5.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.5.2
+  title: Additional filtering on named Capability properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.5.3
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.5.4
+  title: Additional requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.6.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - url
+  requirement_ids:
+  - TOSCA13-3.6.6.1-004
+  - TOSCA13-3.6.6.1-006
+  variation_axes:
+  - grammar-form:long
+  - grammar-form:short
+  - keynames:all-optional
+  - yaml-type:string
+  fixtures:
+  - TOSCA13-CORPUS-REPOSITORY-LONG-VALID
+  - TOSCA13-CORPUS-REPOSITORY-SHORT-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.6.2.1
+  title: 'Single-line grammar (no credential):'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.6.2.2
+  title: Multi-line grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - multi-line-grammar
+  requirement_ids:
+  - TOSCA13-3.6.6.2.2-003
+  - TOSCA13-3.6.6.2.2-005
+  variation_axes:
+  - grammar-form:long
+  - grammar-form:short
+  - keynames:all-optional
+  - yaml-type:string
+  fixtures:
+  - TOSCA13-CORPUS-REPOSITORY-LONG-VALID
+  - TOSCA13-CORPUS-REPOSITORY-SHORT-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.7.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - file
+  - type
+  requirement_ids:
+  - TOSCA13-3.6.7.1-001
+  - TOSCA13-3.6.7.1-003
+  - TOSCA13-3.6.7.1-004
+  - TOSCA13-3.6.7.1-006
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.7.2.1
+  title: Short notation
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.7.2.2
+  title: 'Extended notation:'
+  applicable_to_processor: true
+  grammar_entities:
+  - extended-notation
+  requirement_ids:
+  - TOSCA13-3.6.7.2.2-003
+  - TOSCA13-3.6.7.2.2-005
+  - TOSCA13-3.6.7.2.2-006
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.8
+  title: Import definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.8.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - file
+  requirement_ids:
+  - TOSCA13-3.6.8.1-002
+  - TOSCA13-3.6.8.1-003
+  variation_axes:
+  - grammar-form:invalid
+  - grammar-form:long
+  - grammar-form:short
+  - imports:missing-resource
+  - imports:namespace-qualified
+  - imports:relative
+  - reference:imported-target
+  - reference:imported-unqualified
+  - reference:unresolved
+  - yaml-type:scalar-number-equivalence-class
+  fixtures:
+  - TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
+  - TOSCA13-CORPUS-IMPORT-MISSING-FILE-INVALID
+  - TOSCA13-CORPUS-IMPORT-SHORT-VALID
+  - TOSCA13-CORPUS-IMPORT-WRONG-YAML-TYPE-INVALID
+  status: complete
+  exclusions: []
+- section: 3.6.8.2.1
+  title: 'Single-line grammar:'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.8.2.2
+  title: Multi-line grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - multi-line-grammar
+  requirement_ids:
+  - TOSCA13-3.6.8.2.2-003
+  variation_axes:
+  - grammar-form:invalid
+  - grammar-form:long
+  - grammar-form:short
+  - imports:namespace-qualified
+  - imports:relative
+  - reference:imported-target
+  - reference:imported-unqualified
+  - yaml-type:scalar-number-equivalence-class
+  fixtures:
+  - TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
+  - TOSCA13-CORPUS-IMPORT-SHORT-VALID
+  - TOSCA13-CORPUS-IMPORT-WRONG-YAML-TYPE-INVALID
+  status: complete
+  exclusions: []
+- section: 3.6.8.2.3
+  title: Requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - requirements
+  requirement_ids:
+  - TOSCA13-3.6.8.2.3-002
+  variation_axes:
+  - grammar-form:long
+  - imports:missing-resource
+  - imports:namespace-qualified
+  - reference:imported-target
+  - reference:unresolved
+  fixtures:
+  - TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
+  - TOSCA13-CORPUS-IMPORT-MISSING-FILE-INVALID
+  status: complete
+  exclusions: []
+- section: 3.6.8.2.4
+  title: Import URI processing requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.9
+  title: Schema Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.9.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - type
+  requirement_ids:
+  - TOSCA13-3.6.9.1-001
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.9.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.10.2
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - type
+  requirement_ids:
+  - TOSCA13-3.6.10.2-001
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.10.3
+  title: Status values
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.10.4
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.6.10.4-004
+  - TOSCA13-3.6.10.4-007
+  - TOSCA13-3.6.10.4-008
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - grammar-form:long
+  - inheritance:direct
+  - keynames:all-optional
+  - keynames:optional-required
+  - keynames:required-type-absent
+  - yaml-type:integer-instead-of-boolean
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  - TOSCA13-CORPUS-PROPERTY-MISSING-TYPE-INVALID
+  - TOSCA13-CORPUS-PROPERTY-REQUIRED-WRONG-TYPE-INVALID
+  status: complete
+  exclusions: []
+- section: 3.6.10.5
+  title: Additional Requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-3.6.10.5-001
+  - TOSCA13-3.6.10.5-003
+  - TOSCA13-3.6.10.5-004
+  - TOSCA13-3.6.10.5-005
+  variation_axes:
+  - assignment:function
+  - boundary:inclusive-upper
+  - boundary:lower
+  - boundary:upper
+  - cardinality:zero-one-unbounded
+  - collection:length
+  - constraint:conjunction
+  - constraint:default
+  - constraint:incompatible-operator
+  - function:get-property
+  - grammar-form:complete
+  - inheritance:direct
+  - interaction:constraint-assignment
+  - interaction:constraint-default
+  - interaction:function-constraint
+  - interaction:function-inheritance
+  - keynames:all-optional
+  - normalization:inherited-default
+  - yaml-type:mapping
+  - yaml-type:string-pattern-on-integer
+  fixtures:
+  - TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID
+  - TOSCA13-CORPUS-CONSTRAINT-OPERAND-INVALID
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  - TOSCA13-CORPUS-INTERACTION-CONSTRAINTS-ASSIGNMENTS
+  - TOSCA13-CORPUS-INTERACTION-CONSTRAINTS-DEFAULTS
+  - TOSCA13-CORPUS-INTERACTION-FUNCTIONS-CONSTRAINTS
+  - TOSCA13-CORPUS-NORMALIZATION-FUNCTION-INHERITANCE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.10.6
+  title: Refining Property Definitions
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.11
+  title: Property assignment
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.11.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.11.2.1
+  title: 'Short notation:'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.12.2
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - default
+  - type
+  requirement_ids:
+  - TOSCA13-3.6.12.2-001
+  - TOSCA13-3.6.12.2-010
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.12.3
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.6.12.3-004
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.12.4
+  title: Additional Requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-3.6.12.4-002
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.13
+  title: Attribute assignment
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.13.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.13.2.1
+  title: 'Short notation:'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.13.2.2
+  title: 'Extended notation:'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.13.3
+  title: Additional requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.14
+  title: Parameter definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.14.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.14.2
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.6.14.2-008
+  - TOSCA13-3.6.14.2-014
+  - TOSCA13-3.6.14.2-015
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.14.3
+  title: Additional Requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-3.6.14.3-002
+  - TOSCA13-3.6.14.3-003
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.15
+  title: Attribute Mapping definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.15.1
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - attribute_name
+  - self-source-target
+  requirement_ids:
+  - TOSCA13-3.6.15.1-005
+  - TOSCA13-3.6.15.1-012
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.16
+  title: Operation implementation definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.16.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.16.2.1
+  title: Short notation for use with single artifact
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.16.2.2
+  title: Short notation for use with multiple artifact
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.16.2.3
+  title: Extended notation for use with single artifact
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.16.2.4
+  title: Extended notation for use with multiple artifacts
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.17.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.17.2.1
+  title: Short notation
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.17.2.2
+  title: Extended notation for use in Type definitions
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.17.2.3
+  title: Extended notation for use in Template definitions
+  applicable_to_processor: true
+  grammar_entities:
+  - extended-notation-for-use-in-template-definitions
+  requirement_ids:
+  - TOSCA13-3.6.17.2.3-003
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.17.3
+  title: Additional requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-3.6.17.3-002
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.18
+  title: Notification implementation definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.18.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.18.2.1
+  title: Short notation for use with single artifact
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.18.2.2
+  title: Short notation for use with multiple artifact
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.19.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.19.2
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.6.19.2-004
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.20.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.20.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.20.2.1
+  title: Extended notation for use in Type definitions
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.20.2.2
+  title: Extended notation for use in Template definitions
+  applicable_to_processor: true
+  grammar_entities:
+  - extended-notation-for-use-in-template-definitions
+  requirement_ids:
+  - TOSCA13-3.6.20.2.2-003
+  - TOSCA13-3.6.20.2.2-004
+  - TOSCA13-3.6.20.2.2-007
+  - TOSCA13-3.6.20.2.2-008
+  variation_axes:
+  - cardinality:exactly-one
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - interaction:requirement-capability
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  - TOSCA13-CORPUS-INTERACTION-REQUIREMENTS-CAPABILITIES
+  status: complete
+  exclusions: []
+- section: 3.6.20.3
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.21.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - node
+  requirement_ids:
+  - TOSCA13-3.6.21.1-001
+  - TOSCA13-3.6.21.1-003
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.21.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.22.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - action
+  - event
+  requirement_ids:
+  - TOSCA13-3.6.22.1-004
+  - TOSCA13-3.6.22.1-020
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.22.2
+  title: Additional keynames for the extended condition notation
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.22.3.1
+  title: Short notation
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.22.3.2
+  title: 'Extended notation:'
+  applicable_to_processor: true
+  grammar_entities:
+  - extended-notation
+  requirement_ids:
+  - TOSCA13-3.6.22.3.2-002
+  - TOSCA13-3.6.22.3.2-004
+  variation_axes:
+  - cardinality:zero-one-unbounded
+  - grammar-form:complete
+  - inheritance:direct
+  - keynames:all-optional
+  - yaml-type:mapping
+  fixtures:
+  - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.23
+  title: Activity definitions
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.23.1.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - delegate
+  requirement_ids:
+  - TOSCA13-3.6.23.1.1-003
+  variation_axes:
+  - operation-host:default
+  - workflow:call-operation-long
+  - workflow:inline-long
+  - workflow:precondition
+  - workflow:set-state
+  fixtures:
+  - TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.23.1.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.23.1.2.1
+  title: Short notation
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.23.1.2.2
+  title: Extended notation
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.23.2.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - set_state
+  requirement_ids:
+  - TOSCA13-3.6.23.2.1-002
+  variation_axes:
+  - operation-host:default
+  - workflow:call-operation-long
+  - workflow:inline-long
+  - workflow:precondition
+  - workflow:set-state
+  fixtures:
+  - TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.23.2.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.23.3.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - call_operation
+  - operation
+  requirement_ids:
+  - TOSCA13-3.6.23.3.1-004
+  - TOSCA13-3.6.23.3.1-007
+  variation_axes:
+  - interaction:workflow-interface
+  - notation:short-operation
+  - operation-host:default
+  - workflow:call-operation-long
+  - workflow:inline-long
+  - workflow:precondition
+  - workflow:set-state
+  fixtures:
+  - TOSCA13-CORPUS-INTERACTION-WORKFLOWS-INTERFACES
+  - TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.23.3.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.23.3.2.1
+  title: Short notation
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.23.3.2.2
+  title: Extended notation
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.23.4
+  title: Inline workflow activity definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.23.4.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - inline
+  - workflow
+  requirement_ids:
+  - TOSCA13-3.6.23.4.1-003
+  - TOSCA13-3.6.23.4.1-004
+  variation_axes:
+  - operation-host:default
+  - workflow:call-operation-long
+  - workflow:inline-long
+  - workflow:precondition
+  - workflow:set-state
+  fixtures:
+  - TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.23.4.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.23.4.2.1
+  title: Short notation
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.23.4.2.2
+  title: Extended notation
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.24.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.25.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.25.2.1
+  title: And clause
+  applicable_to_processor: true
+  grammar_entities:
+  - and-clause
+  requirement_ids:
+  - TOSCA13-3.6.25.2.1-002
+  variation_axes:
+  - operation-host:default
+  - workflow:call-operation-long
+  - workflow:inline-long
+  - workflow:precondition
+  - workflow:set-state
+  fixtures:
+  - TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.25.2.2
+  title: Or clause
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.25.2.3
+  title: Not clause
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.25.3
+  title: Direct assertion definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.25.4
+  title: Additional Requirement
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.25.5
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.26.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - target
+  requirement_ids:
+  - TOSCA13-3.6.26.1-002
+  variation_axes:
+  - operation-host:default
+  - workflow:call-operation-long
+  - workflow:inline-long
+  - workflow:precondition
+  - workflow:set-state
+  fixtures:
+  - TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID
+  status: complete
+  exclusions: []
+- section: 3.6.26.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.6.27.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - activities
+  - operation_host
+  - target
+  requirement_ids:
+  - TOSCA13-3.6.27.1-002
+  - TOSCA13-3.6.27.1-008
+  - TOSCA13-3.6.27.1-010
+  - TOSCA13-3.6.27.1-020
+  variation_axes:
+  - interaction:workflow-interface
+  - keynames:required-target-absent
+  - notation:short-operation
+  - operation-host:default
+  - workflow:call-operation-long
+  - workflow:inline-long
+  - workflow:precondition
+  - workflow:set-state
+  - workflow:step
+  fixtures:
+  - TOSCA13-CORPUS-INTERACTION-WORKFLOWS-INTERFACES
+  - TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID
+  - TOSCA13-CORPUS-WORKFLOW-MISSING-TARGET-INVALID
+  status: complete
+  exclusions: []
+- section: 3.6.27.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.1.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes:
+  - graph:bounded-cycle-detection
+  - inheritance:cycle
+  fixtures:
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-INVALID
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.1.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.1.3
+  title: Additional Requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.2.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - type
+  requirement_ids:
+  - TOSCA13-3.7.2.1-001
+  variation_axes:
+  - cardinality:narrowing
+  - inheritance:direct
+  - inheritance:multilevel
+  - refinement:default
+  - refinement:type-compatible
+  fixtures:
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  status: complete
+  exclusions: []
+- section: 3.7.2.2.1
+  title: Short notation
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.2.2.2
+  title: Extended notation
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.2.4
+  title: Additional requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-3.7.2.4-001
+  - TOSCA13-3.7.2.4-002
+  variation_axes:
+  - cardinality:narrowing
+  - inheritance:direct
+  - inheritance:multilevel
+  - refinement:default
+  - refinement:type-compatible
+  fixtures:
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  status: complete
+  exclusions: []
+- section: 3.7.3
+  title: Requirement definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.3.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - capability
+  requirement_ids:
+  - TOSCA13-3.7.3.1-001
+  variation_axes:
+  - cardinality:narrowing
+  - constraint:default
+  - default:overridden
+  - function:get-property
+  - inheritance:direct
+  - inheritance:multilevel
+  - interaction:function-inheritance
+  - interaction:imports-inheritance
+  - interaction:inheritance-refinement
+  - normalization:inherited-default
+  - notation:short-import
+  - refinement:default
+  - refinement:type-compatible
+  fixtures:
+  - TOSCA13-CORPUS-INTERACTION-IMPORTS-INHERITANCE
+  - TOSCA13-CORPUS-INTERACTION-INHERITANCE-REFINEMENT
+  - TOSCA13-CORPUS-NORMALIZATION-FUNCTION-INHERITANCE-VALID
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  status: complete
+  exclusions: []
+- section: 3.7.3.1.1
+  title: Additional Keynames for multi-line relationship grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.3.2.1
+  title: Simple grammar (Capability Type only)
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.3.2.2
+  title: Extended grammar (with Node and Relationship Types)
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.3.2.3
+  title: Extended grammar for declaring Property Definitions on the relationship’s Interfaces
+  applicable_to_processor: true
+  grammar_entities:
+  - extended-grammar-for-declaring-property-definitions-on-the-relationship-s-interfaces
+  requirement_ids:
+  - TOSCA13-3.7.3.2.3-003
+  - TOSCA13-3.7.3.2.3-004
+  variation_axes:
+  - cardinality:narrowing
+  - inheritance:direct
+  - inheritance:multilevel
+  - refinement:default
+  - refinement:type-compatible
+  fixtures:
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  status: complete
+  exclusions: []
+- section: 3.7.3.3
+  title: Additional Requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-3.7.3.3-001
+  - TOSCA13-3.7.3.3-002
+  variation_axes:
+  - cardinality:narrowing
+  - inheritance:direct
+  - inheritance:multilevel
+  - inheritance:one-level
+  - refinement:default
+  - refinement:invalid-widening
+  - refinement:type-compatible
+  fixtures:
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  - TOSCA13-CORPUS-TYPE-REQUIRED-WIDENING-INVALID
+  status: complete
+  exclusions: []
+- section: 3.7.3.4
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.3.5
+  title: Requirement Type definition is a tuple
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.3.5.1
+  title: Property filter
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.4
+  title: Artifact Type
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.4.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.4.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.4.4
+  title: Additional Requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.5.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.5.2
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.7.5.2-004
+  - TOSCA13-3.7.5.2-008
+  - TOSCA13-3.7.5.2-009
+  variation_axes:
+  - cardinality:narrowing
+  - inheritance:direct
+  - inheritance:multilevel
+  - refinement:default
+  - refinement:type-compatible
+  fixtures:
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  status: complete
+  exclusions: []
+- section: 3.7.5.4
+  title: Additional Requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-3.7.5.4-001
+  - TOSCA13-3.7.5.4-002
+  variation_axes:
+  - cardinality:narrowing
+  - inheritance:direct
+  - inheritance:multilevel
+  - inheritance:one-level
+  - refinement:default
+  - refinement:invalid-widening
+  - refinement:type-compatible
+  fixtures:
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  - TOSCA13-CORPUS-TYPE-REQUIRED-WIDENING-INVALID
+  status: complete
+  exclusions: []
+- section: 3.7.5.5
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.6.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.6.2
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.7.6.2-004
+  variation_axes:
+  - cardinality:narrowing
+  - inheritance:direct
+  - inheritance:multilevel
+  - refinement:default
+  - refinement:type-compatible
+  fixtures:
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  status: complete
+  exclusions: []
+- section: 3.7.6.3
+  title: Additional Requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-3.7.6.3-001
+  - TOSCA13-3.7.6.3-002
+  - TOSCA13-3.7.6.3-003
+  variation_axes:
+  - cardinality:narrowing
+  - inheritance:direct
+  - inheritance:multilevel
+  - refinement:default
+  - refinement:type-compatible
+  fixtures:
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  status: complete
+  exclusions: []
+- section: 3.7.7.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.7.2
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.7.7.2-004
+  variation_axes:
+  - cardinality:narrowing
+  - inheritance:direct
+  - inheritance:multilevel
+  - refinement:default
+  - refinement:type-compatible
+  fixtures:
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  status: complete
+  exclusions: []
+- section: 3.7.8
+  title: Requirement Type
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.9
+  title: Node Type
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.9.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.9.2
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.7.9.2-004
+  variation_axes:
+  - cardinality:narrowing
+  - inheritance:direct
+  - inheritance:multilevel
+  - refinement:default
+  - refinement:type-compatible
+  fixtures:
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  status: complete
+  exclusions: []
+- section: 3.7.9.3
+  title: Additional Requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.9.4
+  title: Best Practices
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.10
+  title: Relationship Type
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.10.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.10.2
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.7.10.2-004
+  variation_axes:
+  - cardinality:narrowing
+  - inheritance:direct
+  - inheritance:multilevel
+  - refinement:default
+  - refinement:type-compatible
+  fixtures:
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  status: complete
+  exclusions: []
+- section: 3.7.10.3
+  title: Best Practices
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.11
+  title: Group Type
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.11.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.11.2
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.7.11.2-003
+  variation_axes:
+  - cardinality:narrowing
+  - inheritance:direct
+  - inheritance:multilevel
+  - refinement:default
+  - refinement:type-compatible
+  fixtures:
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  status: complete
+  exclusions: []
+- section: 3.7.11.3
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.11.4
+  title: Additional Requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-3.7.11.4-002
+  variation_axes:
+  - cardinality:narrowing
+  - inheritance:direct
+  - inheritance:multilevel
+  - refinement:default
+  - refinement:type-compatible
+  fixtures:
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  status: complete
+  exclusions: []
+- section: 3.7.12.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.7.12.2
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.7.12.2-004
+  variation_axes:
+  - cardinality:narrowing
+  - inheritance:direct
+  - inheritance:multilevel
+  - refinement:default
+  - refinement:type-compatible
+  fixtures:
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  status: complete
+  exclusions: []
+- section: 3.8.1.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.1.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.2
+  title: Requirement assignment
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.2.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.2.2.1
+  title: 'Short notation:'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.2.2.2
+  title: 'Extended notation:'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.2.2.3
+  title: Extended grammar with Property Assignments for the relationship’s Interfaces
+  applicable_to_processor: true
+  grammar_entities:
+  - extended-grammar-with-property-assignments-for-the-relationship-s-interfaces
+  requirement_ids:
+  - TOSCA13-3.8.2.2.3-015
+  variation_axes:
+  - assignment:override
+  - copy:one-level
+  - normalization:independent-copy
+  fixtures:
+  - TOSCA13-CORPUS-TEMPLATE-COPY-VALID
+  status: complete
+  exclusions: []
+- section: 3.8.3.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - type
+  requirement_ids:
+  - TOSCA13-3.8.3.1-001
+  variation_axes:
+  - cardinality:multiple
+  - keynames:required-type-absent
+  - reference:existing-target
+  - template-kind:node
+  - template-kind:node-relationship-group-policy
+  fixtures:
+  - TOSCA13-CORPUS-NODE-TEMPLATE-MISSING-TYPE-INVALID
+  - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.8.3.2
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.8.3.2-003
+  variation_axes:
+  - cardinality:exactly-one
+  - cardinality:multiple
+  - interaction:requirement-capability
+  - reference:existing-target
+  - template-kind:node-relationship-group-policy
+  fixtures:
+  - TOSCA13-CORPUS-INTERACTION-REQUIREMENTS-CAPABILITIES
+  - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.8.3.3
+  title: Additional requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-3.8.3.3-001
+  variation_axes:
+  - cardinality:multiple
+  - reference:existing-target
+  - template-kind:node-relationship-group-policy
+  fixtures:
+  - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.8.4
+  title: Relationship Template
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.4.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - type
+  requirement_ids:
+  - TOSCA13-3.8.4.1-001
+  variation_axes:
+  - cardinality:multiple
+  - reference:existing-target
+  - template-kind:node-relationship-group-policy
+  fixtures:
+  - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.8.4.2
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.8.4.2-003
+  variation_axes:
+  - cardinality:multiple
+  - reference:existing-target
+  - template-kind:node-relationship-group-policy
+  fixtures:
+  - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.8.4.3
+  title: Additional requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-3.8.4.3-001
+  variation_axes:
+  - cardinality:multiple
+  - reference:existing-target
+  - template-kind:node-relationship-group-policy
+  fixtures:
+  - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.8.5.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - type
+  requirement_ids:
+  - TOSCA13-3.8.5.1-001
+  variation_axes:
+  - cardinality:multiple
+  - reference:existing-target
+  - template-kind:node-relationship-group-policy
+  fixtures:
+  - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.8.5.2
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.8.5.2-003
+  - TOSCA13-3.8.5.2-007
+  variation_axes:
+  - cardinality:multiple
+  - reference:existing-target
+  - template-kind:node-relationship-group-policy
+  fixtures:
+  - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.8.5.3
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.5.4
+  title: Additional Requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.6.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - type
+  requirement_ids:
+  - TOSCA13-3.8.6.1-001
+  - TOSCA13-3.8.6.1-003
+  variation_axes:
+  - cardinality:multiple
+  - reference:existing-target
+  - template-kind:node-relationship-group-policy
+  fixtures:
+  - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.8.6.2
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.8.6.2-003
+  variation_axes:
+  - cardinality:multiple
+  - reference:existing-target
+  - reference:missing-target
+  - template-kind:group
+  - template-kind:node-relationship-group-policy
+  fixtures:
+  - TOSCA13-CORPUS-GROUP-MEMBER-INVALID
+  - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.8.7.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.7.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.8.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.8.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.8.3
+  title: Notes
+  applicable_to_processor: true
+  grammar_entities:
+  - notes
+  requirement_ids:
+  - TOSCA13-3.8.8.3-005
+  variation_axes:
+  - cardinality:multiple
+  - reference:existing-target
+  - template-kind:node-relationship-group-policy
+  fixtures:
+  - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.8.8.4
+  title: Additional constraints
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.9.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.9.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.10.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.10.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.10.3
+  title: Additional requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.11
+  title: Requirement mapping
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.11.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.11.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.11.3
+  title: Additional requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.12.1
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.8.13.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - node_type
+  requirement_ids:
+  - TOSCA13-3.8.13.1-001
+  - TOSCA13-3.8.13.1-003
+  variation_axes:
+  - cardinality:multiple
+  - imports:qualified
+  - normalization:substitution-preserved
+  - reference:existing-target
+  - substitution:imported-node-type
+  - template-kind:node-relationship-group-policy
+  fixtures:
+  - TOSCA13-CORPUS-SUBSTITUTION-IMPORTS-VALID
+  - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.8.13.2
+  title: Grammar
+  applicable_to_processor: true
+  grammar_entities:
+  - grammar
+  requirement_ids:
+  - TOSCA13-3.8.13.2-004
+  variation_axes:
+  - cardinality:multiple
+  - imports:qualified
+  - normalization:substitution-preserved
+  - reference:existing-target
+  - substitution:imported-node-type
+  - template-kind:node-relationship-group-policy
+  fixtures:
+  - TOSCA13-CORPUS-SUBSTITUTION-IMPORTS-VALID
+  - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.8.13.4
+  title: Additional requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-3.8.13.4-001
+  variation_axes:
+  - cardinality:multiple
+  - imports:qualified
+  - normalization:substitution-preserved
+  - reference:existing-target
+  - substitution:imported-node-type
+  - template-kind:node-relationship-group-policy
+  fixtures:
+  - TOSCA13-CORPUS-SUBSTITUTION-IMPORTS-VALID
+  - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+  status: complete
+  exclusions: []
+- section: 3.8.13.5
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '3.9'
+  title: Topology Template definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.9.1
+  title: Keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.9.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.9.2.1
+  title: inputs
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.9.2.1.1
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.9.2.2.1
+  title: grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.9.2.3
+  title: relationship_templates
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.9.2.3.1
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.9.2.4.1
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.9.2.5
+  title: groups
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.9.2.5.1
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.9.2.6.1
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.9.2.7.1
+  title: requirement_mapping
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '3.10'
+  title: Service Template definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.1
+  title: Keynames
+  applicable_to_processor: true
+  grammar_entities:
+  - tosca_definitions_version
+  requirement_ids:
+  - TOSCA13-3.10.1-002
+  variation_axes:
+  - grammar-form:minimal
+  - keynames:required-present
+  - keynames:tosca-2.0-only
+  - operation-host:default
+  - version-isolation:1.3-rejects-2.0-form
+  - workflow:call-operation-long
+  - workflow:inline-long
+  - workflow:precondition
+  - workflow:set-state
+  - yaml-type:mapping
+  - yaml-type:version-string
+  fixtures:
+  - TOSCA13-CORPUS-SERVICE-TEMPLATE-MINIMAL-VALID
+  - TOSCA13-CORPUS-SERVICE-TEMPLATE-V20-KEY-INVALID
+  - TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID
+  status: complete
+  exclusions: []
+- section: 3.10.1.1
+  title: Metadata keynames
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.2.1
+  title: Requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.2.2
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.1
+  title: tosca_definitions_version
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.1.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.1.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.2.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.2.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.3
+  title: template_name
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.3.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.3.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.3.4
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.4
+  title: template_author
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.4.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.4.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.5
+  title: template_version
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.5.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.5.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.5.4
+  title: 'Notes:'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.6
+  title: description
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.6.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.7
+  title: dsl_definitions
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.7.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.7.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.8
+  title: repositories
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.8.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.8.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.9
+  title: imports
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.9.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.9.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.10
+  title: artifact_types
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.10.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.10.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.11
+  title: data_types
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.11.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.11.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.12
+  title: capability_types
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.12.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.12.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.13
+  title: interface_types
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.13.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.13.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.14
+  title: relationship_types
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.14.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.14.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.15
+  title: node_types
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.15.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.15.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.16
+  title: group_types
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.16.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.16.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.17
+  title: policy_types
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.17.1
+  title: Keyname
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 3.10.3.17.2
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '4.1'
+  title: Reserved Function Keywords
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.2.1
+  title: Reserved Environment Variable Names and Usage
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.3.1
+  title: concat
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.3.1.1
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.3.1.2
+  title: Parameters
+  applicable_to_processor: true
+  grammar_entities:
+  - string_value_expressions_
+  requirement_ids:
+  - TOSCA13-4.3.1.2-003
+  variation_axes:
+  - arguments:minimum-and-multiple
+  - function:direct
+  - function:nested
+  - normalization:function-preserved
+  fixtures:
+  - TOSCA13-CORPUS-FUNCTION-NESTED-VALID
+  status: complete
+  exclusions: []
+- section: 4.3.2
+  title: join
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.3.2.1
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.3.2.2
+  title: Parameters
+  applicable_to_processor: true
+  grammar_entities:
+  - list-of-string_value_expressions_
+  requirement_ids:
+  - TOSCA13-4.3.2.2-003
+  variation_axes:
+  - arguments:minimum-and-multiple
+  - function:direct
+  - function:nested
+  - normalization:function-preserved
+  fixtures:
+  - TOSCA13-CORPUS-FUNCTION-NESTED-VALID
+  status: complete
+  exclusions: []
+- section: 4.3.3
+  title: token
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.3.3.1
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.3.3.2
+  title: Parameters
+  applicable_to_processor: true
+  grammar_entities:
+  - string_of_token_chars
+  - string_with_tokens
+  - substring_index
+  requirement_ids:
+  - TOSCA13-4.3.3.2-003
+  - TOSCA13-4.3.3.2-006
+  - TOSCA13-4.3.3.2-010
+  variation_axes:
+  - arguments:minimum-and-multiple
+  - arguments:missing-required
+  - function:direct
+  - function:nested
+  - function:token
+  - normalization:function-preserved
+  fixtures:
+  - TOSCA13-CORPUS-FUNCTION-ARGUMENTS-INVALID
+  - TOSCA13-CORPUS-FUNCTION-NESTED-VALID
+  status: complete
+  exclusions: []
+- section: '4.4'
+  title: Property functions
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.4.1
+  title: get_input
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.4.1.1
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.4.1.2
+  title: Parameters
+  applicable_to_processor: true
+  grammar_entities:
+  - input_property_name
+  requirement_ids:
+  - TOSCA13-4.4.1.2-003
+  variation_axes:
+  - arguments:minimum-and-multiple
+  - assignment:function
+  - function:direct
+  - function:nested
+  - interaction:function-constraint
+  - normalization:function-preserved
+  fixtures:
+  - TOSCA13-CORPUS-FUNCTION-NESTED-VALID
+  - TOSCA13-CORPUS-INTERACTION-FUNCTIONS-CONSTRAINTS
+  status: complete
+  exclusions: []
+- section: 4.4.2
+  title: get_property
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.4.2.1
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.4.2.2
+  title: Parameters
+  applicable_to_processor: true
+  grammar_entities:
+  - modelable-entity-name-self-source-target-host
+  - property_name
+  requirement_ids:
+  - TOSCA13-4.4.2.2-002
+  - TOSCA13-4.4.2.2-004
+  - TOSCA13-4.4.2.2-010
+  variation_axes:
+  - constraint:default
+  - function:get-property
+  - function:get_property
+  - interaction:function-inheritance
+  - normalization:inherited-default
+  - reference:artifact
+  - reference:inherited-attribute
+  - reference:inherited-property
+  - reference:missing-property
+  - reference:operation-output
+  fixtures:
+  - TOSCA13-CORPUS-FUNCTION-REFERENCE-INVALID
+  - TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID
+  - TOSCA13-CORPUS-NORMALIZATION-FUNCTION-INHERITANCE-VALID
+  status: complete
+  exclusions: []
+- section: '4.5'
+  title: Attribute functions
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.5.1
+  title: get_attribute
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.5.1.1
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.5.1.2
+  title: Parameters
+  applicable_to_processor: true
+  grammar_entities:
+  - attribute_name
+  - modelable-entity-name-self-source-target-host
+  requirement_ids:
+  - TOSCA13-4.5.1.2-002
+  - TOSCA13-4.5.1.2-004
+  - TOSCA13-4.5.1.2-010
+  variation_axes:
+  - reference:artifact
+  - reference:inherited-attribute
+  - reference:inherited-property
+  - reference:operation-output
+  fixtures:
+  - TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID
+  status: complete
+  exclusions: []
+- section: 4.5.1.4
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.6.1
+  title: get_operation_output
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.6.1.1
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.6.1.2
+  title: Parameters
+  applicable_to_processor: true
+  grammar_entities:
+  - interface_name
+  - modelable-entity-name-self-source-target
+  - operation_name
+  - output_variable_name
+  requirement_ids:
+  - TOSCA13-4.6.1.2-001
+  - TOSCA13-4.6.1.2-003
+  - TOSCA13-4.6.1.2-004
+  - TOSCA13-4.6.1.2-006
+  - TOSCA13-4.6.1.2-007
+  - TOSCA13-4.6.1.2-009
+  - TOSCA13-4.6.1.2-010
+  - TOSCA13-4.6.1.2-012
+  variation_axes:
+  - reference:artifact
+  - reference:inherited-attribute
+  - reference:inherited-property
+  - reference:operation-output
+  fixtures:
+  - TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID
+  status: complete
+  exclusions: []
+- section: 4.6.1.3
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.7.1
+  title: get_nodes_of_type
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.7.1.1
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.7.1.2
+  title: Parameters
+  applicable_to_processor: true
+  grammar_entities:
+  - node_type_name
+  requirement_ids:
+  - TOSCA13-4.7.1.2-003
+  variation_axes:
+  - reference:artifact
+  - reference:inherited-attribute
+  - reference:inherited-property
+  - reference:operation-output
+  fixtures:
+  - TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID
+  status: complete
+  exclusions: []
+- section: 4.7.1.3
+  title: Returns
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.8.1
+  title: get_artifact
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.8.1.1
+  title: Grammar
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 4.8.1.2
+  title: Parameters
+  applicable_to_processor: true
+  grammar_entities:
+  - artifact_name
+  - modelable-entity-name-self-source-target-host
+  requirement_ids:
+  - TOSCA13-4.8.1.2-002
+  - TOSCA13-4.8.1.2-004
+  - TOSCA13-4.8.1.2-007
+  variation_axes:
+  - reference:artifact
+  - reference:inherited-attribute
+  - reference:inherited-property
+  - reference:operation-output
+  fixtures:
+  - TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID
+  status: complete
+  exclusions: []
+- section: 4.9.1.1
+  title: Goals
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '5'
+  title: TOSCA normative type definitions
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '5.2'
+  title: TOSCA normative type names
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.2.1
+  title: Additional requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-5.2.1-001
+  variation_axes:
+  - default:inherited
+  - inheritance:normative-parent
+  - interaction:normative-custom-type
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-INTERACTION-NORMATIVE-DERIVATION
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.3.1
+  title: tosca.datatypes.Root
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.1.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.2
+  title: tosca.datatypes.json
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.2.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.3
+  title: Additional Requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.4
+  title: tosca.datatypes.xml
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.4.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.5
+  title: Additional Requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.6
+  title: tosca.datatypes.Credential
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.6.1
+  title: Properties
+  applicable_to_processor: true
+  grammar_entities:
+  - token
+  - token_type
+  requirement_ids:
+  - TOSCA13-5.3.6.1-005
+  - TOSCA13-5.3.6.1-008
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.3.6.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.6.3
+  title: Additional requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.6.6
+  title: OpenStack SSH Keypair
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.7
+  title: tosca.datatypes.TimeInterval
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.7.1
+  title: Properties
+  applicable_to_processor: true
+  grammar_entities:
+  - end_time
+  - start_time
+  requirement_ids:
+  - TOSCA13-5.3.7.1-002
+  - TOSCA13-5.3.7.1-005
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.3.7.2
+  title: Definition
+  applicable_to_processor: true
+  grammar_entities:
+  - tosca.datatypes.timeinterval.properties.end_time.required
+  - tosca.datatypes.timeinterval.properties.start_time.required
+  requirement_ids:
+  - TOSCA13-5.3.7.2-005
+  - TOSCA13-5.3.7.2-008
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.3.8
+  title: tosca.datatypes.network.NetworkInfo
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.8.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.8.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.8.4
+  title: Additional Requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.9
+  title: tosca.datatypes.network.PortInfo
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.9.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.9.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.9.4
+  title: Additional Requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.10
+  title: tosca.datatypes.network.PortDef
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.10.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.11
+  title: tosca.datatypes.network.PortSpec
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.3.11.1
+  title: Properties
+  applicable_to_processor: true
+  grammar_entities:
+  - protocol
+  requirement_ids:
+  - TOSCA13-5.3.11.1-002
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.3.11.2
+  title: Definition
+  applicable_to_processor: true
+  grammar_entities:
+  - tosca.datatypes.network.portspec.properties.protocol.required
+  requirement_ids:
+  - TOSCA13-5.3.11.2-005
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.3.11.3
+  title: Additional requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-5.3.11.3-001
+  - TOSCA13-5.3.11.3-002
+  - TOSCA13-5.3.11.3-003
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.4.1
+  title: tosca.artifacts.Root
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.1.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.2
+  title: tosca.artifacts.File
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.2.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.3.1
+  title: tosca.artifacts.Deployment
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.3.1.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.3.2
+  title: Additional Requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.3.3
+  title: tosca.artifacts.Deployment.Image
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.3.3.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.3.4
+  title: tosca.artifacts.Deployment.Image.VM
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.3.4.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.3.4.2
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.4.1
+  title: tosca.artifacts.Implementation
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.4.1.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.4.2
+  title: Additional Requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.4.3
+  title: tosca.artifacts.Implementation.Bash
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.4.3.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.4.4
+  title: tosca.artifacts.Implementation.Python
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.4.4.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.5.1
+  title: tosca.artifacts.template
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.4.5.1.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.1
+  title: tosca.capabilities.Root
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.1.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.2
+  title: tosca.capabilities.Node
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.2.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.3
+  title: tosca.capabilities.Compute
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.3.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.3.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.4
+  title: tosca.capabilities.Network
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.4.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.4.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.5
+  title: tosca.capabilities.Storage
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.5.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.5.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.6
+  title: tosca.capabilities.Container
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.6.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.6.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.7
+  title: tosca.capabilities.Endpoint
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.7.1
+  title: Properties
+  applicable_to_processor: true
+  grammar_entities:
+  - protocol
+  requirement_ids:
+  - TOSCA13-5.5.7.1-003
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.5.7.2
+  title: Attributes
+  applicable_to_processor: true
+  grammar_entities:
+  - ip_address
+  requirement_ids:
+  - TOSCA13-5.5.7.2-002
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.5.7.3
+  title: Definition
+  applicable_to_processor: true
+  grammar_entities:
+  - tosca.capabilities.endpoint.properties.protocol.required
+  requirement_ids:
+  - TOSCA13-5.5.7.3-005
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.5.7.4
+  title: Additional requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-5.5.7.4-001
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.5.8
+  title: tosca.capabilities.Endpoint.Public
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.8.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.8.2
+  title: Additional requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.9
+  title: tosca.capabilities.Endpoint.Admin
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.9.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.9.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.9.3
+  title: Additional requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.10
+  title: tosca.capabilities.Endpoint.Database
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.10.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.10.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.11
+  title: tosca.capabilities.Attachment
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.11.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.11.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.12
+  title: tosca.capabilities.OperatingSystem
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.12.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.12.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.12.3
+  title: Additional Requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-5.5.12.3-001
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.5.13
+  title: tosca.capabilities.Scalable
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.13.1
+  title: Properties
+  applicable_to_processor: true
+  grammar_entities:
+  - default_instances
+  - max_instances
+  - min_instances
+  requirement_ids:
+  - TOSCA13-5.5.13.1-003
+  - TOSCA13-5.5.13.1-007
+  - TOSCA13-5.5.13.1-012
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.5.13.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.13.3
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.14
+  title: tosca.capabilities.network.Bindable
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.14.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.5.14.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '5.6'
+  title: Requirement Types
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.7.1
+  title: tosca.relationships.Root
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.7.1.1
+  title: Attributes
+  applicable_to_processor: true
+  grammar_entities:
+  - state
+  - tosca_id
+  - tosca_name
+  requirement_ids:
+  - TOSCA13-5.7.1.1-002
+  - TOSCA13-5.7.1.1-005
+  - TOSCA13-5.7.1.1-010
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.7.1.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.7.2
+  title: tosca.relationships.DependsOn
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.7.2.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.7.3
+  title: tosca.relationships.HostedOn
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.7.3.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.7.4
+  title: tosca.relationships.ConnectsTo
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.7.4.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.7.4.2
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.7.5
+  title: tosca.relationships.AttachesTo
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.7.5.1
+  title: Properties
+  applicable_to_processor: true
+  grammar_entities:
+  - location
+  requirement_ids:
+  - TOSCA13-5.7.5.1-003
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.7.5.2
+  title: Attributes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.7.5.3
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.7.6
+  title: tosca.relationships.RoutesTo
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.7.6.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '5.8'
+  title: Interface Types
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.8.1
+  title: Additional Requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-5.8.1-004
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.8.2
+  title: Best Practices
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.8.3
+  title: tosca.interfaces.Root
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.8.3.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.8.4
+  title: tosca.interfaces.node.lifecycle.Standard
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.8.4.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.8.4.4
+  title: Operation sequencing and node state
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.8.5
+  title: tosca.interfaces.relationship.Configure
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.8.5.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.8.5.4
+  title: Node-Relationship configuration sequence
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.8.5.5
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.1
+  title: tosca.nodes.Root
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.1.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.1.2
+  title: Attributes
+  applicable_to_processor: true
+  grammar_entities:
+  - state
+  - tosca_id
+  - tosca_name
+  requirement_ids:
+  - TOSCA13-5.9.1.2-002
+  - TOSCA13-5.9.1.2-005
+  - TOSCA13-5.9.1.2-010
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.9.1.3
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.1.4
+  title: Additional Requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.2
+  title: tosca.nodes.Abstract.Compute
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.2.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.2.2
+  title: Attributes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.2.3
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.3
+  title: tosca.nodes.Compute
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.3.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.3.2
+  title: Attributes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.3.3
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.3.4
+  title: Additional Requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.4
+  title: tosca.nodes.SoftwareComponent
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.4.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.4.2
+  title: Attributes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.4.3
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.4.4
+  title: Additional Requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.5
+  title: tosca.nodes.WebServer
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.5.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.5.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.5.3
+  title: Additional Requirements
+  applicable_to_processor: true
+  grammar_entities:
+  - additional-requirements
+  requirement_ids:
+  - TOSCA13-5.9.5.3-001
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.9.6
+  title: tosca.nodes.WebApplication
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.6.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.6.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.7
+  title: tosca.nodes.DBMS
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.7.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.7.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.8
+  title: tosca.nodes.Database
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.8.1
+  title: Properties
+  applicable_to_processor: true
+  grammar_entities:
+  - name
+  requirement_ids:
+  - TOSCA13-5.9.8.1-002
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.9.8.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.9
+  title: tosca.nodes.Abstract.Storage
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.9.1
+  title: Properties
+  applicable_to_processor: true
+  grammar_entities:
+  - name
+  requirement_ids:
+  - TOSCA13-5.9.9.1-002
+  variation_axes:
+  - inheritance:normative-parent
+  - normative-profile:effective-types
+  - version-isolation:tosca-1.3
+  fixtures:
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  status: complete
+  exclusions: []
+- section: 5.9.9.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.10
+  title: tosca.nodes.Storage.ObjectStorage
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.10.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.10.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.10.3
+  title: 'Notes:'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.11
+  title: tosca.nodes.Storage.BlockStorage
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.11.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.11.2
+  title: Attributes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.11.3
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.11.4
+  title: Additional Requirements
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.12
+  title: tosca.nodes.Container.Runtime
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.12.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.13
+  title: tosca.nodes.Container.Application
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.13.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.14
+  title: tosca.nodes.LoadBalancer
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.9.14.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '5.10'
+  title: Group Types
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.10.1
+  title: tosca.groups.Root
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.10.1.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.11.1
+  title: tosca.policies.Root
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.11.1.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.11.2
+  title: tosca.policies.Placement
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.11.2.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.11.3
+  title: tosca.policies.Scaling
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.11.3.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.11.4
+  title: tosca.policies.Update
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.11.4.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.11.5
+  title: tosca.policies.Performance
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 5.11.5.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '6'
+  title: TOSCA Cloud Service Archive (CSAR) format
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '6.1'
+  title: Overall Structure of a CSAR
+  applicable_to_processor: true
+  grammar_entities:
+  - overall-structure-of-a-csar
+  requirement_ids:
+  - TOSCA13-6.1-004
+  - TOSCA13-6.1-005
+  - TOSCA13-6.1-006
+  - TOSCA13-6.1-007
+  - TOSCA13-6.1-008
+  variation_axes:
+  - csar:metadata-free-root
+  - csar:valid-metadata
+  - entry-selection:explicit
+  - metadata:required-template-name-version
+  - version:1.1
+  fixtures:
+  - TOSCA13-CORPUS-CSAR-METADATA-FREE-VALID
+  - TOSCA13-CORPUS-CSAR-METADATA-VALID
+  status: complete
+  exclusions: []
+- section: '6.2'
+  title: TOSCA Meta File
+  applicable_to_processor: true
+  grammar_entities:
+  - tosca-meta-file
+  requirement_ids:
+  - TOSCA13-6.2-001
+  - TOSCA13-6.2-005
+  - TOSCA13-6.2-010
+  - TOSCA13-6.2-018
+  variation_axes:
+  - csar:missing-entry-definitions
+  - csar:path-traversal
+  - csar:valid-metadata
+  - entry-selection:explicit
+  - interaction:csar-import
+  - reference:missing
+  - resolution:archive-relative
+  - security:root-confinement
+  - version:1.1
+  fixtures:
+  - TOSCA13-CORPUS-CSAR-ENTRY-MISSING-INVALID
+  - TOSCA13-CORPUS-CSAR-METADATA-VALID
+  - TOSCA13-CORPUS-CSAR-TRAVERSAL-INVALID
+  - TOSCA13-CORPUS-INTERACTION-CSAR-IMPORTS
+  status: complete
+  exclusions: []
+- section: 6.2.1
+  title: Custom keynames in the TOSCA.meta file
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '6.3'
+  title: Archive without TOSCA-Metadata
+  applicable_to_processor: true
+  grammar_entities:
+  - archive-without-tosca-metadata
+  requirement_ids:
+  - TOSCA13-6.3-002
+  - TOSCA13-6.3-005
+  variation_axes:
+  - csar:metadata-free-root
+  - metadata:required-template-name-version
+  fixtures:
+  - TOSCA13-CORPUS-CSAR-METADATA-FREE-VALID
+  status: complete
+  exclusions: []
+- section: '7.1'
+  title: Normative workflows
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 7.1.1
+  title: Notes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '7.2'
+  title: Declarative workflows
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 7.2.1.1
+  title: Orchestrator provided nodes lifecycle and weaving
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 7.2.2.1
+  title: tosca.relationships.DependsOn
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 7.2.2.2
+  title: Note
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 7.2.2.4
+  title: tosca.relationships.HostedOn
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 7.2.3.3
+  title: Target operations and get_attribute on source
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '7.3'
+  title: Imperative workflows
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 7.3.1
+  title: Defining sequence of operations in an imperative workflow
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 7.3.1.1
+  title: Using on_success to define steps ordering
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 7.3.3
+  title: Specifying preconditions to a workflow
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 7.3.5
+  title: Defining conditional logic on some part of the workflow
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 7.3.7
+  title: Handle operation failure
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '8.2'
+  title: Connectivity semantics
+  applicable_to_processor: true
+  grammar_entities:
+  - connectivity-semantics
+  requirement_ids:
+  - TOSCA13-8.2-002
+  variation_axes:
+  - boundary:explicit-zero
+  - cardinality:exactly-one
+  - constraint:greater-or-equal
+  - default:order
+  - interaction:requirement-capability
+  fixtures:
+  - TOSCA13-CORPUS-INTERACTION-REQUIREMENTS-CAPABILITIES
+  - TOSCA13-CORPUS-NETWORK-PORT-VALID
+  status: complete
+  exclusions: []
+- section: 8.3.1
+  title: Connection initiation semantics
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.3.1.1
+  title: Source to Target
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.3.1.2
+  title: Target to Source
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.3.1.3
+  title: Peer-to-Peer
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.3.2
+  title: Specifying layer 4 ports
+  applicable_to_processor: true
+  grammar_entities:
+  - specifying-layer-4-ports
+  requirement_ids:
+  - TOSCA13-8.3.2-001
+  variation_axes:
+  - boundary:explicit-zero
+  - constraint:greater-or-equal
+  - default:order
+  fixtures:
+  - TOSCA13-CORPUS-NETWORK-PORT-VALID
+  status: complete
+  exclusions: []
+- section: 8.4.1
+  title: Declarative network provisioning
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.4.2
+  title: Implicit network fulfillment
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.4.3
+  title: Controlling network fulfillment
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.4.3.1
+  title: 'Use case: OAM Network'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.5.1
+  title: tosca.nodes.network.Network
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.5.1.1
+  title: Properties
+  applicable_to_processor: true
+  grammar_entities:
+  - physical_network
+  requirement_ids:
+  - TOSCA13-8.5.1.1-036
+  variation_axes:
+  - boundary:explicit-zero
+  - constraint:greater-or-equal
+  - default:order
+  fixtures:
+  - TOSCA13-CORPUS-NETWORK-PORT-VALID
+  status: complete
+  exclusions: []
+- section: 8.5.1.2
+  title: Attributes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.5.1.3
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.5.2
+  title: tosca.nodes.network.Port
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.5.2.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.5.2.2
+  title: Attributes
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.5.2.3
+  title: Definition
+  applicable_to_processor: true
+  grammar_entities:
+  - tosca.nodes.network.port.properties.order.required
+  requirement_ids:
+  - TOSCA13-8.5.2.3-008
+  variation_axes:
+  - boundary:explicit-zero
+  - constraint:greater-or-equal
+  - default:inherited
+  - default:order
+  - interaction:normative-custom-type
+  - normative-profile:effective-property
+  - refinement:invalid-required-widening
+  fixtures:
+  - TOSCA13-CORPUS-INTERACTION-NORMATIVE-DERIVATION
+  - TOSCA13-CORPUS-NETWORK-PORT-REFINEMENT-INVALID
+  - TOSCA13-CORPUS-NETWORK-PORT-VALID
+  status: complete
+  exclusions: []
+- section: 8.5.3
+  title: tosca.capabilities.network.Linkable
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.5.3.1
+  title: Properties
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.5.3.2
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.5.4
+  title: tosca.relationships.network.LinksTo
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.5.4.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.5.5
+  title: tosca.relationships.network.BindsTo
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.5.5.1
+  title: Definition
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 8.6.2
+  title: 'Option 2: Specifying network requirements within the application’s Service Template'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 13.2.7
+  title: Pass Inputs and Retrieve Results or Errors
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: 13.2.8
+  title: Cleanup
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '14.1'
+  title: Conformance Targets
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '14.2'
+  title: 'Conformance Clause 1: TOSCA YAML service template'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '14.3'
+  title: 'Conformance Clause 2: TOSCA processor'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '14.4'
+  title: 'Conformance Clause 3: TOSCA orchestrator'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '14.5'
+  title: 'Conformance Clause 4: TOSCA generator'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog
+- section: '14.6'
+  title: 'Conformance Clause 5: TOSCA archive'
+  applicable_to_processor: false
+  grammar_entities: []
+  requirement_ids: []
+  variation_axes: []
+  fixtures: []
+  status: complete
+  exclusions:
+  - outside the frozen atomic MUST processor target; classified explicitly from the catalog

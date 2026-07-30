@@ -1,0 +1,167 @@
+schema_version: 1
+method: pairwise selection over independent normative equivalence axes; impossible combinations are excluded explicitly
+pairs:
+- axes:
+  - notation
+  - inheritance
+  values:
+    notation:
+    - short
+    - long
+    inheritance:
+    - direct
+    - inherited
+  fixtures:
+  - TOSCA13-CORPUS-IMPORT-COLLISION-INVALID
+  - TOSCA13-CORPUS-IMPORT-CYCLE-INVALID
+  - TOSCA13-CORPUS-IMPORT-DIFFERENT-VERSION-INVALID
+  - TOSCA13-CORPUS-IMPORT-DUPLICATE-IDEMPOTENT-VALID
+  - TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
+  - TOSCA13-CORPUS-IMPORT-MISSING-FILE-INVALID
+  - TOSCA13-CORPUS-IMPORT-SHORT-VALID
+  - TOSCA13-CORPUS-IMPORT-TRANSITIVE-VALID
+  - TOSCA13-CORPUS-IMPORT-UNKNOWN-QUALIFIED-INVALID
+  - TOSCA13-CORPUS-IMPORT-WRONG-YAML-TYPE-INVALID
+  - TOSCA13-CORPUS-INTERACTION-CSAR-IMPORTS
+  - TOSCA13-CORPUS-INTERACTION-IMPORTS-INHERITANCE
+  - TOSCA13-CORPUS-SUBSTITUTION-IMPORTS-VALID
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-INVALID
+  - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  uncovered_combinations: []
+- axes:
+  - notation
+  - imports
+  values:
+    notation:
+    - short
+    - long
+    imports:
+    - direct
+    - qualified
+    - transitive
+  fixtures:
+  - TOSCA13-CORPUS-IMPORT-COLLISION-INVALID
+  - TOSCA13-CORPUS-IMPORT-CYCLE-INVALID
+  - TOSCA13-CORPUS-IMPORT-DIFFERENT-VERSION-INVALID
+  - TOSCA13-CORPUS-IMPORT-DUPLICATE-IDEMPOTENT-VALID
+  - TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
+  - TOSCA13-CORPUS-IMPORT-MISSING-FILE-INVALID
+  - TOSCA13-CORPUS-IMPORT-SHORT-VALID
+  - TOSCA13-CORPUS-IMPORT-TRANSITIVE-VALID
+  - TOSCA13-CORPUS-IMPORT-UNKNOWN-QUALIFIED-INVALID
+  - TOSCA13-CORPUS-IMPORT-WRONG-YAML-TYPE-INVALID
+  - TOSCA13-CORPUS-INTERACTION-CSAR-IMPORTS
+  - TOSCA13-CORPUS-INTERACTION-IMPORTS-INHERITANCE
+  - TOSCA13-CORPUS-SUBSTITUTION-IMPORTS-VALID
+  uncovered_combinations: []
+- axes:
+  - function
+  - assignment-context
+  values:
+    function:
+    - get_input
+    - get_property
+    - get_attribute
+    assignment-context:
+    - output
+    - template
+  fixtures:
+  - TOSCA13-CORPUS-FUNCTION-ARGUMENTS-INVALID
+  - TOSCA13-CORPUS-FUNCTION-NESTED-VALID
+  - TOSCA13-CORPUS-FUNCTION-REFERENCE-INVALID
+  - TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID
+  - TOSCA13-CORPUS-INTERACTION-FUNCTIONS-CONSTRAINTS
+  - TOSCA13-CORPUS-NORMALIZATION-FUNCTION-INHERITANCE-VALID
+  uncovered_combinations:
+  - combination:
+    - get_attribute
+    - definition-default
+    reason: attribute values are runtime values; a property-reflection fixture covers the effective-value path
+- axes:
+  - constraint
+  - data-type
+  values:
+    constraint:
+    - range
+    - length
+    - pattern
+    data-type:
+    - integer
+    - collection
+    - string
+  fixtures:
+  - TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID
+  - TOSCA13-CORPUS-CONSTRAINT-OPERAND-INVALID
+  - TOSCA13-CORPUS-INTERACTION-CONSTRAINTS-ASSIGNMENTS
+  - TOSCA13-CORPUS-INTERACTION-CONSTRAINTS-DEFAULTS
+  - TOSCA13-CORPUS-INTERACTION-FUNCTIONS-CONSTRAINTS
+  - TOSCA13-CORPUS-SCALAR-UNIT-CONSTRAINT-BOUNDARY-VALID
+  - TOSCA13-CORPUS-SCALAR-UNIT-MISSING-UNIT-INVALID
+  - TOSCA13-CORPUS-SCALAR-UNIT-WHITESPACE-VALID
+  uncovered_combinations:
+  - combination:
+    - pattern
+    - integer
+    reason: normatively incompatible and covered as an invalid operand case
+- axes:
+  - default
+  - refinement
+  values:
+    default:
+    - inherited
+    - overridden
+    refinement:
+    - direct
+    - derived
+  fixtures:
+  - TOSCA13-CORPUS-INTERACTION-INHERITANCE-REFINEMENT
+  - TOSCA13-CORPUS-INTERACTION-NORMATIVE-DERIVATION
+  - TOSCA13-CORPUS-NORMALIZATION-FUNCTION-INHERITANCE-VALID
+  - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  uncovered_combinations: []
+- axes:
+  - reference-kind
+  - namespace
+  values:
+    reference-kind:
+    - type
+    - template
+    - property
+    namespace:
+    - local
+    - qualified
+  fixtures:
+  - TOSCA13-CORPUS-IMPORT-COLLISION-INVALID
+  - TOSCA13-CORPUS-IMPORT-CYCLE-INVALID
+  - TOSCA13-CORPUS-IMPORT-DIFFERENT-VERSION-INVALID
+  - TOSCA13-CORPUS-IMPORT-DUPLICATE-IDEMPOTENT-VALID
+  - TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
+  - TOSCA13-CORPUS-IMPORT-MISSING-FILE-INVALID
+  - TOSCA13-CORPUS-IMPORT-SHORT-VALID
+  - TOSCA13-CORPUS-IMPORT-TRANSITIVE-VALID
+  - TOSCA13-CORPUS-IMPORT-UNKNOWN-QUALIFIED-INVALID
+  - TOSCA13-CORPUS-IMPORT-WRONG-YAML-TYPE-INVALID
+  - TOSCA13-CORPUS-INTERACTION-CSAR-IMPORTS
+  - TOSCA13-CORPUS-INTERACTION-IMPORTS-INHERITANCE
+  - TOSCA13-CORPUS-SUBSTITUTION-IMPORTS-VALID
+  uncovered_combinations: []
+- axes:
+  - template-kind
+  - normalization
+  values:
+    template-kind:
+    - node
+    - relationship
+    - group
+    - policy
+    normalization:
+    - direct
+    - interaction
+  fixtures:
+  - TOSCA13-CORPUS-NODE-TEMPLATE-MISSING-TYPE-INVALID
+  - TOSCA13-CORPUS-NORMALIZATION-FUNCTION-INHERITANCE-VALID
+  - TOSCA13-CORPUS-SERVICE-TEMPLATE-MINIMAL-VALID
+  - TOSCA13-CORPUS-SERVICE-TEMPLATE-V20-KEY-INVALID
+  - TOSCA13-CORPUS-TEMPLATE-COPY-VALID
+  - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+  uncovered_combinations: []

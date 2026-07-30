@@ -1,0 +1,10 @@
+schema_version: 1
+total_cases: 63
+valid_cases: 37
+invalid_cases: 26
+interaction_cases: 11
+csar_cases: 5
+normalization_cases: 13
+frozen_requirement_ids_covered: 223
+frozen_denominator: 223
+applicable_sections: 111

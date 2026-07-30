@@ -6,7 +6,7 @@ specification:
   requirements_catalog: docs/conformance/tosca-1.3/requirements.yaml
   requirements_catalog_sha256: 1861a9652dd659636702f29737818ac6f1c69355ee442e1bebe98739b21aabf0
 audit:
-  date: '2026-07-29'
+  date: '2026-07-30'
   production_code_changed: true
   requirement_count: 3101
   sample_seed: 20260727
