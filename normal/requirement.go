@@ -24,7 +24,16 @@ type Requirement struct {
 	Relationship                   *Relationship
 	Directives                     []string
 	Optional                       bool
+	Occurrences                    *OccurrenceRange
 	Location                       *Location
+}
+
+// OccurrenceRange retains a declarative multiplicity interval. A nil Upper
+// means unbounded. Absence of the whole field preserves the existing model
+// used by grammars that expand an exact count into individual requirements.
+type OccurrenceRange struct {
+	Lower uint64  `json:"lower" yaml:"lower"`
+	Upper *uint64 `json:"upper" yaml:"upper"`
 }
 
 func (self *NodeTemplate) NewRequirement(name string, location *Location) *Requirement {
@@ -50,6 +59,7 @@ type MarshalableRequirement struct {
 	Relationship                   *Relationship      `json:"relationship" yaml:"relationship"`
 	Directives                     []string           `json:"directives" yaml:"directives"`
 	Optional                       bool               `json:"optional" yaml:"optional"`
+	Occurrences                    *OccurrenceRange   `json:"occurrences,omitempty" yaml:"occurrences,omitempty"`
 	Location                       *Location          `json:"location" yaml:"location"`
 }
 
@@ -82,6 +92,7 @@ func (self *Requirement) Marshalable() any {
 		Relationship:                   self.Relationship,
 		Directives:                     self.Directives,
 		Optional:                       self.Optional,
+		Occurrences:                    self.Occurrences,
 		Location:                       self.Location,
 	}
 }

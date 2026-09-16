@@ -16,6 +16,7 @@ type SubstitutionMappingsValidator func(EntityPtr)
 type PropertyDefinitionInheritor func(EntityPtr, EntityPtr)
 type PropertyAssignmentValidator func(*Context, EntityPtr)
 type AdditionalNormativeNames func(string, bool) []string
+type RequirementAssignmentNormalizer func(EntityPtr, EntityPtr, any) bool
 
 //
 // Grammar
@@ -38,6 +39,7 @@ type Grammar struct {
 	PropertyDefinitionInheritor             PropertyDefinitionInheritor
 	PropertyAssignmentValidator             PropertyAssignmentValidator
 	AdditionalNormativeNames                AdditionalNormativeNames
+	RequirementAssignmentNormalizer         RequirementAssignmentNormalizer
 }
 
 func NewGrammar() Grammar {

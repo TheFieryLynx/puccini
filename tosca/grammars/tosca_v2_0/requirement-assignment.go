@@ -318,6 +318,9 @@ func (self *RequirementAssignments) Render(sourceNodeTemplate *NodeTemplate, con
 
 func (self RequirementAssignments) Normalize(nodeTemplate *NodeTemplate, normalNodeTemplate *normal.NodeTemplate) {
 	for _, requirement := range self {
+		if normalize := requirement.Context.Grammar.RequirementAssignmentNormalizer; normalize != nil && normalize(requirement, nodeTemplate, normalNodeTemplate) {
+			continue
+		}
 		var count int
 		if requirement.Count != nil {
 			count = int(*requirement.Count)

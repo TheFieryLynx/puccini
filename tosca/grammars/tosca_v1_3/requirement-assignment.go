@@ -20,6 +20,8 @@ func ReadRequirementAssignment(context *parsing.Context) parsing.EntityPtr {
 	//context.SetReadTag("Allocation", "")
 
 	self := tosca_v2_0.NewRequirementAssignment(context)
+	state := &requirementOccurrences{}
+	context.GrammarData = state
 
 	if context.Is(ard.TypeMap) {
 		// Long notation
@@ -27,9 +29,10 @@ func ReadRequirementAssignment(context *parsing.Context) parsing.EntityPtr {
 
 		if occurrences := ard.With(self.Context.Data).Get("occurrences"); occurrences != ard.NoNode {
 			occurrences_ := tosca_v2_0.ReadRange(context.FieldChild("occurrences", occurrences.Value)).(*tosca_v2_0.Range)
+			state.Range = occurrences_
 			lower := int64(occurrences_.Lower)
 			self.Count = &lower
-			// TODO: have no idea what to do with max bound in "occurrences" keyname
+			// Keep the complete interval for validation and normalization.
 		}
 	} else if context.ValidateType(ard.TypeMap, ard.TypeString) {
 		// Short notation

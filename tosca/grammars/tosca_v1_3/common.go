@@ -99,6 +99,7 @@ func init() {
 	Grammar.PropertyDefinitionInheritor = inheritPropertyDefinition
 	Grammar.PropertyAssignmentValidator = validateFixedPropertyAssignment
 	Grammar.AdditionalNormativeNames = additionalNormativeNames
+	Grammar.RequirementAssignmentNormalizer = normalizeRequirementOccurrences
 	Grammar.DataValueValidator = validateConstraintValue
 	Grammar.CapabilityDefinitionRefinementValidator = validateCapabilityDefinitionRefinement
 	Grammar.CapabilityAssignmentValidator = validateCapabilityAssignmentProfile

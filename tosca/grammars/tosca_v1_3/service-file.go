@@ -79,6 +79,7 @@ func (self *ServiceFile) ValidateNamespace() {
 func (self *ServiceFile) Inherit() {
 	validateFilePropertyRefinements(self.File)
 	validateArtifactChecksums(self.File, self.ServiceTemplate)
+	validateRequirementOccurrences(self.ServiceTemplate)
 }
 
 // ([parsing.Renderable] interface)
