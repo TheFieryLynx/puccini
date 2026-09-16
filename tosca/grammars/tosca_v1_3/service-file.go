@@ -78,6 +78,7 @@ func (self *ServiceFile) ValidateNamespace() {
 // ([parsing.Inheritable] interface)
 func (self *ServiceFile) Inherit() {
 	validateFilePropertyRefinements(self.File)
+	validateArtifactChecksums(self.File, self.ServiceTemplate)
 }
 
 // ([parsing.Renderable] interface)

@@ -43,6 +43,7 @@ func ReadFile(context *parsing.Context) parsing.EntityPtr {
 // ([parsing.Inheritable] interface)
 func (self *File) Inherit() {
 	validateFilePropertyRefinements(self.File)
+	validateArtifactChecksums(self.File, nil)
 }
 
 // ([parsing.Renderable] interface)
