@@ -88,15 +88,15 @@ func assertVersionValue(t *testing.T, value string, major, minor uint32) {
 	}
 }
 
-func assertRangeValue(t *testing.T, value string, lower, upper uint64) {
+func assertRangeValue(t *testing.T, value string, lower, upper int64) {
 	t.Helper()
 	primitive := parseScalarPrimitive(t, "range", value)
-	rangeValue, ok := primitive.(*tosca_v2_0.Range)
+	rangeValue, ok := primitive.(*tosca_v1_3.Range)
 	if !ok {
 		t.Fatalf("normalized range has type %T", primitive)
 	}
-	if rangeValue.Lower != lower || rangeValue.Upper != upper {
-		t.Fatalf("normalized range = [%d,%d], want [%d,%d]", rangeValue.Lower, rangeValue.Upper, lower, upper)
+	if rangeValue.Lower != lower || rangeValue.Upper == nil || *rangeValue.Upper != upper {
+		t.Fatalf("normalized range = %#v, want [%d,%d]", rangeValue, lower, upper)
 	}
 }
 

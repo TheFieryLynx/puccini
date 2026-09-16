@@ -58,7 +58,7 @@ func init() {
 	Grammar.RegisterReader("PropertyDefinition", ReadPropertyDefinition)
 	Grammar.RegisterReader("PropertyFilter", tosca_v2_0.ReadPropertyFilter)
 	Grammar.RegisterReader("PropertyMapping", tosca_v2_0.ReadPropertyMapping)
-	Grammar.RegisterReader("range", tosca_v2_0.ReadRange)
+	Grammar.RegisterReader("range", ReadRange)
 	Grammar.RegisterReader("RangeEntity", tosca_v2_0.ReadRangeEntity)
 	Grammar.RegisterReader("RelationshipAssignment", tosca_v2_0.ReadRelationshipAssignment)
 	Grammar.RegisterReader("RelationshipDefinition", tosca_v2_0.ReadRelationshipDefinition)

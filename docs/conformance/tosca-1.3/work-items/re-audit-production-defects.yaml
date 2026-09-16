@@ -119,6 +119,7 @@ findings:
     tests:
     - TestReAuditFixedPropertyRefinement
     test_status: permanent direct phase and semantic assertions pass; pre-fix targeted failures observed
+    pre_fix_production_commit: 56afd6ca
   remediation_group: A
   remediation_order: 1
   implementation_status: implemented
@@ -127,7 +128,27 @@ findings:
     result: caught
     mutation: reject value key again
     log_sha256: 8e7b874f2570ec347ccd1315fe4ac8f36460a136c384d621c21537fa2fdd230a
+    replay:
+      file: tosca/grammars/tosca_v1_3/property-definition.go
+      fixed_fragment: state.Fixed = reader.Value
+      mutated_fragment: if reader.Value != nil { ctx.FieldChild("value", nil).ReportKeynameUnsupported() }; state.Fixed
+        = reader.Value
+      command: go test -count=1 ./tests/conformance/tosca_1_3 -run TestReAuditFixedPropertyRefinement
+      restoration: original file bytes restored in finally before regression or commit
+    failure_excerpt: "--- FAIL: TestReAuditFixedPropertyRefinement (0.42s)\n    --- FAIL: TestReAuditFixedPropertyRefinement/{_value:_7_}\
+      \ (0.01s)\n        re_audit_property_refinement_test.go:22: expected accepted template, failed in read:\n\
+      \            Problems (1)\n              file:///tmp/TestReAuditFixedPropertyRefinement{_value_7_}661555554/001/template.yaml\n\
+      \                @10,12 node_types[\"Child\"].properties[\"p\"].value: unsupported keyname\n    --- FAIL:\
+      \ TestReAuditFixedPropertyRefinement/{_value:_7,_default:_3_} (0.01s)\n        re_audit_property_refinement_test.go:22:\
+      \ expected accepted template, failed in read:\n            Problems (1)\n              file:///tmp/TestReAuditFixedPropertyRefinement{_value_7,_default_3_}230321164/001/template.yaml\n\
+      \                @10,12 node_types[\"Child\"].properties[\"p\"].value: unsupported keyname\n    --- FAIL:\
+      \ TestReAuditFixedPropertyRefinement/multi-level-final-value (0.01s)\n        re_audit_property_refinement_test.go:31:\
+      \ expected accepted template, failed in read:\n            Problems (1)\n              file:///tmp/TestReAuditFixedPropertyRefinementmulti-level-final-value1529344194/001/template.yaml\n\
+      \                @10,12 node_types[\"Child\"].properties[\"p\"].value: unsupported keyname\n    --- FAIL:\
+      \ TestReAuditFixedPropertyRefinement/same-final-value (0.01s)\n        re_audit_property_refinement_test.go:34:\
+      \ expected accepted template, failed in read:\n            Problems (2)\n              file:///tmp/TestReAuditFixedPropertyRefinementsame-final-value1178409623/00"
   remediation_commit_subject: 'fix(tosca-1.3): correct property refinement semantics'
+  remediation_commit: '93476846'
 - finding_id: F03
   specification:
     version: TOSCA Simple Profile in YAML 1.3
@@ -180,6 +201,7 @@ findings:
     tests:
     - TestReAuditInheritedPropertyConstraints
     test_status: permanent direct phase and semantic assertions pass; pre-fix targeted failures observed
+    pre_fix_production_commit: 56afd6ca
   remediation_group: A
   remediation_order: 1
   implementation_status: implemented
@@ -188,7 +210,29 @@ findings:
     result: caught
     mutation: disable inherited constraint conjunction
     log_sha256: 6376a22da870fee3f37826ab3934a5048006b20d458c3dae75507f847085e2a0
+    replay:
+      file: tosca/grammars/tosca_v1_3/property-refinement.go
+      fixed_fragment: if parent.ValidationClause != nil && child.ValidationClause != nil
+      mutated_fragment: if false && parent.ValidationClause != nil && child.ValidationClause != nil
+      command: go test -count=1 ./tests/conformance/tosca_1_3 -run TestReAuditInheritedPropertyConstraints
+      restoration: original file bytes restored in finally before regression or commit
+    failure_excerpt: "--- FAIL: TestReAuditInheritedPropertyConstraints (0.33s)\n    --- FAIL: TestReAuditInheritedPropertyConstraints/12\
+      \ (0.01s)\n        re_audit_property_refinement_test.go:115: normalized inherited validator less_or_equal\
+      \ lost: {\"$meta\":{\"type\":\"integer\",\"validators\":[{\"$functionCall\":{\"name\":\"tosca.validation.greater_or_equal\"\
+      ,\"arguments\":[{\"$primitive\":12}],\"url\":\"file:///tmp/TestReAuditInheritedPropertyConstraints123570394600/001/template.yaml\"\
+      ,\"row\":19,\"column\":21,\"path\":\"topology_template.node_templates[\\\"n\\\"].properties[\\\"p\\\"]\"}}]},\"\
+      $primitive\":12}\n    --- FAIL: TestReAuditInheritedPropertyConstraints/15 (0.02s)\n        re_audit_property_refinement_test.go:115:\
+      \ normalized inherited validator less_or_equal lost: {\"$meta\":{\"type\":\"integer\",\"validators\":[{\"\
+      $functionCall\":{\"name\":\"tosca.validation.greater_or_equal\",\"arguments\":[{\"$primitive\":12}],\"url\"\
+      :\"file:///tmp/TestReAuditInheritedPropertyConstraints152215349592/001/template.yaml\",\"row\":19,\"column\"\
+      :21,\"path\":\"topology_template.node_templates[\\\"n\\\"].properties[\\\"p\\\"]\"}}]},\"$primitive\":15}\n\
+      \    --- FAIL: TestReAuditInheritedPropertyConstraints/20 (0.05s)\n        re_audit_property_refinement_test.go:115:\
+      \ normalized inherited validator less_or_equal lost: {\"$meta\":{\"type\":\"integer\",\"validators\":[{\"\
+      $functionCall\":{\"name\":\"tosca.validation.greater_or_equal\",\"arguments\":[{\"$primitive\":12}],\"url\"\
+      :\"file:///tmp/TestReAuditInheritedPropertyConstraints20448395911/001/template.yaml\",\"row\":19,\"column\"\
+      :21,\"path\":\"topology_template.node_tem"
   remediation_commit_subject: 'fix(tosca-1.3): correct property refinement semantics'
+  remediation_commit: '93476846'
 - finding_id: F05
   specification:
     version: TOSCA Simple Profile in YAML 1.3
@@ -254,6 +298,7 @@ findings:
     tests:
     - TestReAuditPropertyStatus
     test_status: permanent direct phase and semantic assertions pass; targeted pre-fix failure observed
+    pre_fix_production_commit: '93476846'
   remediation_group: B-status
   remediation_order: 2
   implementation_status: implemented
@@ -265,7 +310,14 @@ findings:
     failure_excerpt: "--- FAIL: TestReAuditPropertyStatus (0.02s)\n    --- FAIL: TestReAuditPropertyStatus/invalid-unknown\
       \ (0.02s)\n        re_audit_property_status_test.go:37: expected read rejection, got phase \"\":\nFAIL\nFAIL\t\
       github.com/tliron/go-puccini/tests/conformance/tosca_1_3\t0.025s\nFAIL\n"
+    replay:
+      file: tosca/grammars/tosca_v1_3/property-definition.go
+      fixed_fragment: if v2prop.Status != nil {
+      mutated_fragment: if false && v2prop.Status != nil {
+      command: go test -count=1 ./tests/conformance/tosca_1_3 -run TestReAuditPropertyStatus/invalid-unknown
+      restoration: original file bytes restored in finally before regression or commit
   remediation_commit_subject: 'fix(tosca-1.3): validate property status values'
+  remediation_commit: 9b84d6f1
 - finding_id: F06
   specification:
     version: TOSCA Simple Profile in YAML 1.3
@@ -364,6 +416,7 @@ findings:
     tests:
     - TestReAuditArtifactChecksum
     test_status: permanent direct phase and semantic assertions pass; targeted pre-fix failure observed
+    pre_fix_production_commit: 9b84d6f1
   remediation_group: B-artifact
   remediation_order: 3
   implementation_status: implemented
@@ -381,9 +434,16 @@ findings:
       \ expected inheritance rejection, got phase \"\":\n    --- FAIL: TestReAuditArtifactChecksum/empty-checksum-still-requires-algorithm\
       \ (0.01s)\n        re_audit_artifact_checksum_test.go:57: expected inheritance rejection, got phase \"\":\n\
       FAIL\nFAIL\tgithub.com/tliron/go-puccini/tests/conformance/tosca_1_3\t0.556s\nFAIL\n"
+    replay:
+      file: tosca/grammars/tosca_v1_3/artifact-checksum.go
+      fixed_fragment: if pair[0] != nil && pair[1] == nil {
+      mutated_fragment: if false && pair[0] != nil && pair[1] == nil {
+      command: go test -count=1 ./tests/conformance/tosca_1_3 -run TestReAuditArtifactChecksum
+      restoration: original file bytes restored in finally before regression or commit
   phase_rationale: Section 3.5.1 permits required keynames to inherit; read-time rejection would reject valid inherited
     algorithms. Template fallbacks are inspected after hierarchy/inheritance without forcing rendering.
   remediation_commit_subject: 'fix(tosca-1.3): require checksum algorithm for artifacts'
+  remediation_commit: 183cc717
 - finding_id: F07
   specification:
     version: TOSCA Simple Profile in YAML 1.3
@@ -442,6 +502,7 @@ findings:
     - TestReAuditContainerProfile
     - TestReAuditContainerAssignments
     test_status: permanent direct phase and semantic assertions pass; targeted pre-fix failure observed
+    pre_fix_production_commit: 183cc717
   remediation_group: C-profile
   remediation_order: 4
   implementation_status: implemented
@@ -458,8 +519,17 @@ findings:
       \ ValidSourceNodeTypes:tosca_v2_0.NodeTypes{(*tosca_v2_0.NodeType)(0x23a565a01300)}, ValidRelationshipTypes:tosca_v2_0.RelationshipTypes(nil),\
       \ typeMissingProblemReported:false}\nFAIL\nFAIL\tgithub.com/tliron/go-puccini/tests/conformance/tosca_1_3\t\
       0.033s\nFAIL\n"
+    replay:
+      file: assets/tosca/profiles/simple/1.3/nodes.yaml
+      fixed_fragment: "type: tosca.capabilities.Compute\n        valid_source_types: [ tosca.nodes.Container.Application\
+        \ ]"
+      mutated_fragment: "type: tosca.capabilities.Container\n        valid_source_types: [ tosca.nodes.Container.Application\
+        \ ]"
+      command: go test -count=1 ./tests/conformance/tosca_1_3 -run TestReAuditContainerProfile
+      restoration: original file bytes restored in finally before regression or commit
   remediation_commit_subject: 'fix(tosca-1.3): correct container profile definitions'
   three_way_report: docs/conformance/tosca-1.3/re-audit/remediation-profile-three-way.yaml
+  remediation_commit: a6d34ec4
 - finding_id: F08
   specification:
     version: TOSCA Simple Profile in YAML 1.3
@@ -508,6 +578,7 @@ findings:
     - TestReAuditContainerProfile
     - TestReAuditContainerAssignments
     test_status: permanent direct phase and semantic assertions pass; targeted pre-fix failure observed
+    pre_fix_production_commit: 183cc717
   remediation_group: C-profile
   remediation_order: 4
   implementation_status: implemented
@@ -523,8 +594,15 @@ findings:
       \ NodeFilter:(*tosca_v2_0.NodeFilter)(nil), TargetCapabilityType:(*tosca_v2_0.CapabilityType)(0x244006568ae0),\
       \ TargetNodeType:(*tosca_v2_0.NodeType)(nil), DefaultCountRange:[]interface {}{1, 1}, capabilityMissingProblemReported:false}\n\
       FAIL\nFAIL\tgithub.com/tliron/go-puccini/tests/conformance/tosca_1_3\t0.038s\nFAIL\n"
+    replay:
+      file: assets/tosca/profiles/simple/1.3/nodes.yaml
+      fixed_fragment: "- network:\n        capability: tosca.capabilities.Endpoint"
+      mutated_fragment: "- network:\n        capability: tosca.capabilities.Network"
+      command: go test -count=1 ./tests/conformance/tosca_1_3 -run TestReAuditContainerProfile
+      restoration: original file bytes restored in finally before regression or commit
   remediation_commit_subject: 'fix(tosca-1.3): correct container profile definitions'
   three_way_report: docs/conformance/tosca-1.3/re-audit/remediation-profile-three-way.yaml
+  remediation_commit: a6d34ec4
 - finding_id: F16
   specification:
     version: TOSCA Simple Profile in YAML 1.3
@@ -652,6 +730,7 @@ findings:
     - TestReAuditNormativeAliases
     - TestReAuditAliasPolicyIsolation
     test_status: permanent direct phase and semantic assertions pass; targeted pre-fix failure observed
+    pre_fix_production_commit: a6d34ec4
   remediation_group: C-aliases
   remediation_order: 5
   implementation_status: implemented
@@ -664,8 +743,15 @@ findings:
       \ (0.01s)\n        re_audit_aliases_test.go:35: namespace: Problems (1)\n              file:///tmp/TestReAuditNormativeAliasestoscaBlockStorage154259334/001/template.yaml\n\
       \                @3,13 node_types[\"Custom\"].derived_from: reference to unknown node type: tosca:BlockStorage\n\
       FAIL\nFAIL\tgithub.com/tliron/go-puccini/tests/conformance/tosca_1_3\t0.017s\nFAIL\n"
+    replay:
+      file: tosca/grammars/tosca_v1_3/normative-names.go
+      fixed_fragment: short, qualified = "BlockStorage", "tosca:BlockStorage"
+      mutated_fragment: short, qualified = "BlockStorage", ""
+      command: go test -count=1 ./tests/conformance/tosca_1_3 -run TestReAuditNormativeAliases/tosca:BlockStorage
+      restoration: original file bytes restored in finally before regression or commit
   remediation_commit_subject: 'fix(tosca-1.3): resolve normative profile aliases'
   three_way_report: docs/conformance/tosca-1.3/re-audit/remediation-profile-three-way.yaml
+  remediation_commit: f5030091
 - finding_id: F09
   specification:
     version: TOSCA Simple Profile in YAML 1.3
@@ -795,6 +881,7 @@ findings:
     - TestReAuditRequirementOccurrences
     - TestReAuditOccurrencePolicyIsolation
     test_status: permanent direct phase and semantic assertions pass; targeted pre-fix failure observed
+    pre_fix_production_commit: f5030091
   remediation_group: D
   remediation_order: 6
   implementation_status: implemented
@@ -810,8 +897,15 @@ findings:
       :{\"lower\":1,\"upper\":null},\"location\":{\"path\":\"topology_template.node_templates[\\\"n\\\"].requirements{0}\"\
       ,\"row\":15,\"column\":30}}\nFAIL\nFAIL\tgithub.com/tliron/go-puccini/tests/conformance/tosca_1_3\t0.026s\n\
       FAIL\n"
+    replay:
+      file: tosca/grammars/tosca_v1_3/requirement-occurrences.go
+      fixed_fragment: occurrence.Upper = &upper
+      mutated_fragment: '_ = upper // mutation: drop upper bound'
+      command: go test -count=1 ./tests/conformance/tosca_1_3 -run TestReAuditRequirementOccurrences/finite
+      restoration: original file bytes restored in finally before regression or commit
   normalization_decision: docs/decisions/0013-tosca-1.3-requirement-occurrence-normalization.md
   remediation_commit_subject: 'fix(tosca-1.3): preserve requirement occurrence bounds'
+  remediation_commit: 69f6286b
 - finding_id: F10
   specification:
     version: TOSCA Simple Profile in YAML 1.3
@@ -860,13 +954,17 @@ findings:
   catalog_gap: false
   implementation:
     files:
-    - tosca/grammars/tosca_v2_0/range.go
+    - tosca/grammars/tosca_v1_3/range.go
     - tosca/grammars/tosca_v1_3/common.go
+    - tosca/grammars/tosca_v1_3/constraint-validation.go
     symbols:
     - ReadRange
-    - Value.Render
+    - Range.InRange
+    - Range.Within
+    - rangeConstraintBounds
     - validateConstraintOperands
     - evaluateConstraint
+    - validatePortRangePair
     parser_phase: read of native range value during rendering; occurrence structural reads remain separate
     execution_path:
     - tosca_definitions_version selects tosca_v1_3 grammar
@@ -881,12 +979,44 @@ findings:
     permanent_direct_test_before_task: false
     tests:
     - TestReAuditSignedRange
-    test_status: planned; report-embedded reproducers will become permanent tests
+    test_status: permanent direct phase and semantic assertions pass; targeted pre-fix failure observed
+    pre_fix_production_commit: 69f6286b
   remediation_group: E
   remediation_order: 7
-  implementation_status: non-compliant
-  verification_status: audit counterexample reproduced; remediation pending
-  mutation_evidence: null
+  implementation_status: implemented
+  verification_status: verified
+  mutation_evidence:
+    result: caught
+    method: temporarily restore the old defective behavior; run permanent direct test; restore original bytes
+    log_sha256: 9add589060cd4601ab7b1926e3f03ac8cc4ce4f39c03e5c24b11d8256193f5e4
+    failure_excerpt: "--- FAIL: TestReAuditSignedRange (1.25s)\n    --- FAIL: TestReAuditSignedRange/[-2,_-1] (0.02s)\n\
+      \        re_audit_signed_range_test.go:27: rendering: Problems (2)\n              file:///tmp/TestReAuditSignedRange-2,_-11215762768/001/template.yaml\n\
+      \                @10,21 topology_template.node_templates[\"n\"].properties[\"p\"]: malformed range, lower\
+      \ bound negative: [-2 -1]\n                @10,21 topology_template.node_templates[\"n\"].properties[\"p\"\
+      ]: malformed range, upper bound negative: [-2 -1]\n    --- FAIL: TestReAuditSignedRange/[-1,_0] (0.02s)\n\
+      \        re_audit_signed_range_test.go:27: rendering: Problems (1)\n              file:///tmp/TestReAuditSignedRange-1,_03280326549/001/template.yaml\n\
+      \                @10,21 topology_template.node_templates[\"n\"].properties[\"p\"]: malformed range, lower\
+      \ bound negative: [-1 0]\n    --- FAIL: TestReAuditSignedRange/[-2,_4] (0.04s)\n        re_audit_signed_range_test.go:27:\
+      \ rendering: Problems (1)\n              file:///tmp/TestReAuditSignedRange-2,_4912527373/001/template.yaml\n\
+      \                @10,21 topology_template.node_templates[\"n\"].properties[\"p\"]: malformed range, lower\
+      \ bound negative: [-2 4]\n    --- FAIL: TestReAuditSignedRange/[-2,_UNBOUNDED] (0.05s)\n        re_audit_signed_range_test.go:27:\
+      \ rendering: Problems (1)\n              file:///tmp/TestReAuditSignedRange-2,_UNBOUNDED630501885/001/template.yaml\n\
+      \                @10,21 topology_template.node_templates[\"n\"].properties[\"p\"]: malformed range, lower\
+      \ bound negative: [-2 UNBOUNDED]\n    --- FAIL: TestReAuditSignedRange/constraint-[-2,_-1] (0.06s)\n     \
+      \   re_audit_signed_range_test.go:60: rendering: Problems (5)\n              file:///tmp/TestReAuditSignedRangeconstraint--2,_-11337549888/001/template.yaml\n\
+      \                @5,19 node_types[\"N\"].properties[\"p\"].validation.in_range[0]: \"integer\" instead of\
+      \ \"list\"\n                @5,19 node_types[\"N\"].properties[\"p\"].validation.in_range[1]: \"integer\"\
+      \ instead of \"list\"\n                @10,21 topology_template.node_templates[\"n\"].properties[\"p\"]: malformed\
+      \ constraint, in_range constraint not satisfied: &{Lower:0 Upper:0}\n                @10,21 topology_template.node_templates[\"\
+      n\"].properties[\"p\"]: malformed range, lower bound negative: ["
+    replay:
+      file: tosca/grammars/tosca_v1_3/common.go
+      fixed_fragment: Grammar.RegisterReader("range", ReadRange)
+      mutated_fragment: Grammar.RegisterReader("range", tosca_v2_0.ReadRange)
+      command: go test -count=1 ./tests/conformance/tosca_1_3 -run TestReAuditSignedRange
+      restoration: original file bytes restored in finally before regression or commit
+  normalization_decision: docs/decisions/0014-tosca-1.3-signed-range-values.md
+  remediation_commit_subject: 'fix(tosca-1.3): support signed range bounds'
 verification_runs:
 - group: A
   commands:
@@ -972,3 +1102,39 @@ verification_runs:
   - template corpus
   - full TOSCA 1.3 suite
   - full TOSCA 2.0 suite
+- group: E
+  commands:
+  - focused direct TOSCA 1.3 tests
+  - go test -count=1 ./...
+  - go test -race -count=1 ./...
+  - go vet ./...
+  - git diff --check
+  result: passed
+  includes:
+  - template corpus
+  - full TOSCA 1.3 suite
+  - full TOSCA 2.0 suite
+  final_community_repeat:
+    total: 65
+    expected_pass: 21
+    expected_reject: 18
+    unexpected_pass: 2
+    unexpected_reject: 0
+    ambiguous: 24
+    same_outcomes_after_all_fixes: true
+    unchanged_expectations: true
+completion:
+  production_findings_implemented: 9
+  directly_verified: 9
+  mutations_attempted: 9
+  mutations_caught: 9
+  mutations_restored: 9
+  frozen_denominator: 223
+  frozen_denominator_is_complete_claim: false
+  catalog_and_coverage_sha256_unchanged: true
+  full_tosca_1_3_conformance_confirmed: false
+  matrix_scope: This remediation matrix supersedes audit status only for the nine findings. Historical global requirements/coverage
+    snapshots remain unchanged.
+  temporary_probes_and_mutations_removed: true
+  pinned_oasis_sha256sums: 10/10 verified
+  frozen_status_sum_verified: 223

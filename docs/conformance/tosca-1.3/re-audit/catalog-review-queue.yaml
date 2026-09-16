@@ -34,7 +34,7 @@ proposals:
   proposed_denominator_delta: null
   status: proposed only
 - finding_id: F05
-  section: 3.6.10.2
+  section: 3.6.10.3
   normative_rule: Property status must be supported, unsupported, experimental, or deprecated; omitted status defaults
     to supported.
   proposed_atomic_requirements:
@@ -49,7 +49,7 @@ proposals:
   proposed_denominator_delta: null
   status: proposed only
 - finding_id: F06
-  section: 3.5.1
+  section: 3.6.7.1
   normative_rule: checksum_algorithm shall be specified if checksum is specified; required keynames can be inherited
     where an effective artifact definition refines its parent.
   proposed_atomic_requirements:
@@ -64,7 +64,7 @@ proposals:
   proposed_denominator_delta: null
   status: proposed only
 - finding_id: F07
-  section: 3.1.2
+  section: 5.9.12.1
   normative_rule: The automatically imported Container.Runtime host capability has type tosca.capabilities.Compute.
   proposed_atomic_requirements:
   - predicate: The automatically imported Container.Runtime host capability has type tosca.capabilities.Compute.
@@ -76,7 +76,7 @@ proposals:
   proposed_denominator_delta: null
   status: proposed only
 - finding_id: F08
-  section: 3.1.2
+  section: 5.9.13.1
   normative_rule: The automatically imported Container.Application network requirement has capability tosca.capabilities.Endpoint.
   proposed_atomic_requirements:
   - predicate: The automatically imported Container.Application network requirement has capability tosca.capabilities.Endpoint.

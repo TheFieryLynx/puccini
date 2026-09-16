@@ -119,10 +119,8 @@ func validateConstraintOperands(constraint constraintSpec, dataType *tosca_v2_0.
 			return
 		}
 		if isRangeDataType(dataType) {
-			lower, lowerOK := integerOperand(constraint.operands[0])
-			upper, upperOK := integerOperand(constraint.operands[1])
-			if !lowerOK || !upperOK || lower < 0 || upper < lower {
-				constraint.context.ReportValueMalformed("constraint", "in_range on range requires two ordered non-negative integer operands")
+			if _, ok := rangeConstraintBounds(constraint.operands); !ok {
+				constraint.context.ReportValueMalformed("constraint", "in_range on range requires ordered integer bounds or an UNBOUNDED upper bound")
 			}
 			return
 		}
@@ -199,11 +197,9 @@ func evaluateConstraint(value any, constraint constraintSpec, dataType *tosca_v2
 		if len(constraint.operands) != 2 {
 			return false
 		}
-		if rangeValue, ok := value.(*tosca_v2_0.Range); ok {
-			lower, lowerOK := integerOperand(constraint.operands[0])
-			upper, upperOK := integerOperand(constraint.operands[1])
-			return lowerOK && upperOK && lower >= 0 && upper >= lower &&
-				rangeValue.Lower >= uint64(lower) && rangeValue.Upper <= uint64(upper)
+		if rangeValue, ok := value.(*Range); ok {
+			bounds, ok := rangeConstraintBounds(constraint.operands)
+			return ok && rangeValue.Within(bounds)
 		}
 		lower, lowerOK := compareConstraintValues(value, renderConstraintOperand(constraint, 0, dataType, definition))
 		upper, upperOK := compareConstraintValues(value, renderConstraintOperand(constraint, 1, dataType, definition))
@@ -362,7 +358,7 @@ func validatePortRangePair(context *parsing.Context, fields ard.Map, portName, r
 	if !rangePresent {
 		return
 	}
-	rangeValue, ok := renderedValueData(rangeData).(*tosca_v2_0.Range)
+	rangeValue, ok := renderedValueData(rangeData).(*Range)
 	if !ok {
 		return
 	}
@@ -379,7 +375,7 @@ func validatePortRangePair(context *parsing.Context, fields ard.Map, portName, r
 	if !ok || port < 0 {
 		return
 	}
-	if !rangeValue.InRange(uint64(port)) {
+	if !rangeValue.InRange(int64(port)) {
 		context.MapChild(portName, port).ReportValueMalformed(
 			"PortSpec",
 			fmt.Sprintf("%s must be within %s", portName, rangeName),
