@@ -29,6 +29,7 @@ type constraintComparable interface {
 func validateConstraintDefinition(entity parsing.EntityPtr) {
 	switch definition := entity.(type) {
 	case *tosca_v2_0.PropertyDefinition:
+		validateRefinementDefault(definition)
 		validateConstraintCompatibility(definition.ValidationClause, definition.DataType, definition)
 	case *tosca_v2_0.DataType:
 		if definition.Parent != nil {

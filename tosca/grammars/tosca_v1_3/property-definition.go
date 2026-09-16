@@ -22,6 +22,15 @@ func (p *PropertyDefinition) GetConstraintClauses() ConstraintClauses {
 
 // [parsing.Reader] signature
 func ReadPropertyDefinition(ctx *parsing.Context) parsing.EntityPtr {
+	state := &propertyRefinement{}
+	ctx.GrammarData = state
+	if isShortPropertyRefinement(ctx.Data) {
+		// Section 3.6.10.6 uses parameter grammar, including its short
+		// fixed-value notation. Inheritance determines whether it is a refinement.
+		self := tosca_v2_0.NewPropertyDefinition(ctx)
+		state.Fixed = tosca_v2_0.ReadValue(ctx.FieldChild("value", ctx.Data)).(*tosca_v2_0.Value)
+		return self
+	}
 
 	// Convert "constraints" list (1.x) to "validation" (2.0)
 	if m, ok := ctx.Data.(ard.Map); ok {
@@ -45,8 +54,20 @@ func ReadPropertyDefinition(ctx *parsing.Context) parsing.EntityPtr {
 	// Metadata supported in TOSCA 1.3
 	// ctx.SetReadTag("Metadata", "") // Removed: metadata is supported in 1.3
 
-	// Use the tosca_v2_0 parser
-	v2prop := tosca_v2_0.ReadPropertyDefinition(ctx).(*tosca_v2_0.PropertyDefinition)
+	// Extend only the 1.3 reader with the parameter value field. The shared
+	// property model and the 2.0 reader do not recognize this keyname.
+	reader := struct {
+		*tosca_v2_0.PropertyDefinition
+		Value *tosca_v2_0.Value `read:"value,Value"`
+	}{PropertyDefinition: tosca_v2_0.NewPropertyDefinition(ctx)}
+	ignore := ctx.ReadFields(&reader)
+	if ctx.HasQuirk(parsing.QuirkAnnotationsIgnore) {
+		ignore = append(ignore, "annotations")
+	}
+	ctx.ValidateUnsupportedFields(ignore)
+	v2prop := reader.PropertyDefinition
+	state.Fixed = reader.Value
+	state.DeclaredDefault = v2prop.Default
 
 	// Return the v2.0 entity to match NodeType.Properties type
 	return v2prop

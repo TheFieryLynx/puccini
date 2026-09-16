@@ -13,6 +13,8 @@ type AttributeDefinitionValidator func(EntityPtr)
 type WorkflowStepDefinitionValidator func(EntityPtr)
 type TemplateCopyValidator func(*Context, string, ard.Value)
 type SubstitutionMappingsValidator func(EntityPtr)
+type PropertyDefinitionInheritor func(EntityPtr, EntityPtr)
+type PropertyAssignmentValidator func(*Context, EntityPtr)
 
 //
 // Grammar
@@ -32,6 +34,8 @@ type Grammar struct {
 	WorkflowStepDefinitionValidator         WorkflowStepDefinitionValidator
 	TemplateCopyValidator                   TemplateCopyValidator
 	SubstitutionMappingsValidator           SubstitutionMappingsValidator
+	PropertyDefinitionInheritor             PropertyDefinitionInheritor
+	PropertyAssignmentValidator             PropertyAssignmentValidator
 }
 
 func NewGrammar() Grammar {

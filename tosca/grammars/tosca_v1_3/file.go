@@ -40,6 +40,11 @@ func ReadFile(context *parsing.Context) parsing.EntityPtr {
 	return self
 }
 
+// ([parsing.Inheritable] interface)
+func (self *File) Inherit() {
+	validateFilePropertyRefinements(self.File)
+}
+
 // ([parsing.Renderable] interface)
 func (self *File) Render() {
 	validateArtifactDefinitionRequiredKeynames(self.File)

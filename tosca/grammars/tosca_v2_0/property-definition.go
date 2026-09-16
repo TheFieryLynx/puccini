@@ -46,6 +46,9 @@ func (self *PropertyDefinition) Inherit(parentDefinition *PropertyDefinition) {
 	if (self.Required == nil) && (parentDefinition.Required != nil) {
 		self.Required = parentDefinition.Required
 	}
+	if inherit := self.Context.Grammar.PropertyDefinitionInheritor; inherit != nil {
+		inherit(self, parentDefinition)
+	}
 }
 
 // ([parsing.Renderable] interface)

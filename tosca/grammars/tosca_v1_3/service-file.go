@@ -75,6 +75,11 @@ func (self *ServiceFile) ValidateNamespace() {
 	validateImportedDefinitionIdentities(self.Context)
 }
 
+// ([parsing.Inheritable] interface)
+func (self *ServiceFile) Inherit() {
+	validateFilePropertyRefinements(self.File)
+}
+
 // ([parsing.Renderable] interface)
 func (self *ServiceFile) Render() {
 	validateArtifactDefinitionRequiredKeynames(self.File)

@@ -94,11 +94,16 @@ findings:
     - tosca/grammars/tosca_v1_3/property-definition.go
     - tosca/grammars/tosca_v2_0/property-definition.go
     - tosca/grammars/tosca_v2_0/attribute-definition.go
+    - tosca/grammars/tosca_v1_3/property-refinement.go
+    - tosca/parsing/grammars.go
     symbols:
     - ReadPropertyDefinition
     - PropertyDefinitions.Inherit
     - PropertyDefinition.Inherit
     - Values.RenderProperties
+    - inheritPropertyDefinition
+    - validateFixedPropertyAssignment
+    - validateFilePropertyRefinements
     parser_phase: inheritance, then rendering
     execution_path:
     - tosca_definitions_version selects tosca_v1_3 grammar
@@ -113,12 +118,16 @@ findings:
     permanent_direct_test_before_task: false
     tests:
     - TestReAuditFixedPropertyRefinement
-    test_status: planned; report-embedded reproducers will become permanent tests
+    test_status: permanent direct phase and semantic assertions pass; pre-fix targeted failures observed
   remediation_group: A
   remediation_order: 1
-  implementation_status: non-compliant
-  verification_status: audit counterexample reproduced; remediation pending
-  mutation_evidence: null
+  implementation_status: implemented
+  verification_status: verified
+  mutation_evidence:
+    result: caught
+    mutation: reject value key again
+    log_sha256: 8e7b874f2570ec347ccd1315fe4ac8f36460a136c384d621c21537fa2fdd230a
+  remediation_commit_subject: 'fix(tosca-1.3): correct property refinement semantics'
 - finding_id: F03
   specification:
     version: TOSCA Simple Profile in YAML 1.3
@@ -146,11 +155,16 @@ findings:
     files:
     - tosca/grammars/tosca_v2_0/attribute-definition.go
     - tosca/grammars/tosca_v1_3/property-definition.go
+    - tosca/grammars/tosca_v1_3/property-refinement.go
+    - tosca/parsing/grammars.go
     symbols:
     - ReadPropertyDefinition
     - PropertyDefinition.Inherit
     - AttributeDefinition.Inherit
     - validateConstraintValue
+    - inheritPropertyDefinition
+    - validateFixedPropertyAssignment
+    - validateFilePropertyRefinements
     parser_phase: inheritance, then rendering
     execution_path:
     - tosca_definitions_version selects tosca_v1_3 grammar
@@ -165,12 +179,16 @@ findings:
     permanent_direct_test_before_task: false
     tests:
     - TestReAuditInheritedPropertyConstraints
-    test_status: planned; report-embedded reproducers will become permanent tests
+    test_status: permanent direct phase and semantic assertions pass; pre-fix targeted failures observed
   remediation_group: A
   remediation_order: 1
-  implementation_status: non-compliant
-  verification_status: audit counterexample reproduced; remediation pending
-  mutation_evidence: null
+  implementation_status: implemented
+  verification_status: verified
+  mutation_evidence:
+    result: caught
+    mutation: disable inherited constraint conjunction
+    log_sha256: 6376a22da870fee3f37826ab3934a5048006b20d458c3dae75507f847085e2a0
+  remediation_commit_subject: 'fix(tosca-1.3): correct property refinement semantics'
 - finding_id: F05
   specification:
     version: TOSCA Simple Profile in YAML 1.3
@@ -791,3 +809,17 @@ findings:
   implementation_status: non-compliant
   verification_status: audit counterexample reproduced; remediation pending
   mutation_evidence: null
+verification_runs:
+- group: A
+  commands:
+  - go test -count=1 ./tests/conformance/tosca_1_3 ./tests/conformance/tosca_2_0 -run TestReAudit
+  - go test -count=1 ./...
+  - go test -race -count=1 ./...
+  - go vet ./...
+  - git diff --check
+  result: passed
+  includes:
+  - template corpus
+  - full TOSCA 1.3 suite
+  - full TOSCA 2.0 suite
+  decision: docs/decisions/0012-tosca-1.3-fixed-property-refinement.md

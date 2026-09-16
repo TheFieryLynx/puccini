@@ -391,6 +391,9 @@ func (self Values) RenderProperties(definitions PropertyDefinitions, context *pa
 			if value != definition.Default {
 				if definition.DataType != nil {
 					value.RenderProperty(definition.DataType, definition)
+					if validate := context.Grammar.PropertyAssignmentValidator; validate != nil {
+						validate(value.Context, definition)
+					}
 				}
 			}
 		} else {

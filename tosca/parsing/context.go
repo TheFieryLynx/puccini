@@ -69,9 +69,12 @@ type Context struct {
 	Problems           *problems.Problems
 	Quirks             Quirks
 	Grammar            *Grammar
-	FunctionPrefix     string
-	ReadTagOverrides   map[string]string
-	CSAR               *CSARContext
+	// GrammarData belongs to this entity's version-specific reader/policy.
+	// Child contexts do not inherit it.
+	GrammarData      any
+	FunctionPrefix   string
+	ReadTagOverrides map[string]string
+	CSAR             *CSARContext
 }
 
 type CSARContext struct {

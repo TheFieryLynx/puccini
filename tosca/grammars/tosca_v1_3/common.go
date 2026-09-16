@@ -96,6 +96,8 @@ func init() {
 
 	Grammar.InvalidNamespaceCharacters = ":"
 	Grammar.DataDefinitionValidator = validateConstraintDefinition
+	Grammar.PropertyDefinitionInheritor = inheritPropertyDefinition
+	Grammar.PropertyAssignmentValidator = validateFixedPropertyAssignment
 	Grammar.DataValueValidator = validateConstraintValue
 	Grammar.CapabilityDefinitionRefinementValidator = validateCapabilityDefinitionRefinement
 	Grammar.CapabilityAssignmentValidator = validateCapabilityAssignmentProfile
