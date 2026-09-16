@@ -129,6 +129,7 @@ func TestTOSCA13NonMUSTCorpus(t *testing.T) {
 			path := filepath.Join(root, filepath.FromSlash(testCase.File))
 			result := parseCorpusPhases(t, path)
 			serviceTemplate, firstProblems, firstErr := result.Template, result.Problems, result.Err
+			t.Logf("EVIDENCE phase=%s assertions=%d", result.Phase, len(testCase.Assertions))
 			for _, a := range testCase.Assertions {
 				if err := assertionResult(a, result); err != nil {
 					t.Fatal(err)
