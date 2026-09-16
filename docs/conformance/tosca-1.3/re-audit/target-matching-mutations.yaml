@@ -1,0 +1,63 @@
+finding_id: REAUDIT-TARGET-MATCHING
+attempted: 8
+caught: 8
+missed: 0
+restoration: All four mutated production files restored byte-for-byte before regression runs.
+execution: Each mutation was applied independently, then go test -count=1 ran its direct test; all exited 1 with assertion failures, not compile errors.
+mutations:
+- id: compatibility
+  file: tosca/grammars/tosca_v1_3/requirement-target.go
+  replace: 'if !hierarchy.IsCompatible(definition.TargetCapabilityType, actualType) {'
+  with: 'if false {'
+  test: TestReAuditTargetMatchingSelectorBoundaries/incompatible-without-relationship
+  failure: Expected rendering rejection, got successful acceptance.
+  qualification: The first replay hit a positive normalization assertion; the isolated negative replay above was then added and executed to prove the intended rejection obligation.
+- id: subtype-direction
+  file: tosca/grammars/tosca_v1_3/requirement-target.go
+  replace: hierarchy.IsCompatible(definition.TargetCapabilityType, actualType)
+  with: hierarchy.IsCompatible(actualType, definition.TargetCapabilityType)
+  test: TestReAuditTargetMatching/derived; TestReAuditTargetMatching/reverse-subtype
+  failure: Required Base with actual Derived rejected; required Derived with actual Base accepted. Sibling remains invalid under either direction, as expected.
+- id: first-capability
+  file: tosca/grammars/tosca_v1_3/requirement-target.go
+  replace: var candidates []string
+  with: 'if !explicit && len(names)>0 {state.SelectedCapability=&names[0];return true}; var candidates []string'
+  test: TestReAuditTargetMatching/multiple-one-match
+  failure: Selected incompatible bad capability instead of good.
+- id: relationship-target-types
+  file: tosca/grammars/tosca_v1_3/requirement-target.go
+  replace: relationship != nil && relationship.ValidCapabilityTypeNames != nil
+  with: false && relationship != nil && relationship.ValidCapabilityTypeNames != nil
+  test: TestReAuditTargetMatching/relationship-targets
+  failure: Expected rendering rejection, got successful acceptance.
+- id: node-filter
+  patches:
+  - file: tosca/grammars/tosca_v1_3/requirement-target.go
+    replace: if assignment.TargetNodeFilter != nil {
+    with: if false {
+  - file: tosca/grammars/tosca_v1_3/requirement-assignment.go
+    replace: if assignment.TargetNodeFilter == nil {
+    with: if true {
+  test: TestReAuditTargetMatchingFilters
+  failure: All four concrete filter combinations incorrectly accepted; phase assertions failed.
+  qualification: Concrete filters are prohibited, so the normative mutation is disabling that prohibition, not inventing an orchestrator filter evaluator.
+- id: map-iteration
+  file: tosca/grammars/tosca_v1_3/requirement-target.go
+  insert_before: '// Several candidates are valid'
+  insert: 'if len(candidates)>1 {for name := range target.NodeType.CapabilityDefinitions {state.SelectedCapability=&name;break}}'
+  test: TestReAuditTargetMatchingDeterminism
+  failure: Ambiguous selection must remain deferred, got a binding selected from map iteration.
+  qualification: The semantic invariant catches every arbitrary binding; detection does not depend on probabilistically observing a different iteration order.
+
+- id: candidate-normalization
+  file: tosca/grammars/tosca_v1_3/requirement-occurrences.go
+  replace: requirement.CapabilityNames = append([]string(nil), state.CandidateCapabilities...)
+  with: requirement.CapabilityNames = nil
+  test: TestReAuditTargetMatchingCandidateNormalization
+  failure: Serialized admissible capability set lost.
+- id: candidate-resolution
+  file: assets/tosca/profiles/common/1.0/js/resolve.js
+  replace: if (requirement.capabilityNames && requirement.capabilityNames.indexOf(candidateCapabilityName) === -1)
+  with: if (false)
+  test: TestReAuditTargetMatchingCandidateResolution
+  failure: Ordinary Clout resolver selected excluded capability bad instead of admissible y or z.

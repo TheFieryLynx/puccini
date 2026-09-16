@@ -44,6 +44,9 @@ func ReadRequirementAssignment(context *parsing.Context) parsing.EntityPtr {
 
 func validateRequirementAssignmentNodeFilter(entityPtr parsing.EntityPtr) {
 	assignment := entityPtr.(*tosca_v2_0.RequirementAssignment)
+	if state, ok := assignment.Context.GrammarData.(*requirementOccurrences); ok {
+		state.CapabilityIsType = assignment.TargetCapabilityType != nil
+	}
 	if assignment.TargetNodeFilter == nil {
 		return
 	}

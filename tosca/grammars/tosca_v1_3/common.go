@@ -106,6 +106,7 @@ func init() {
 	Grammar.NodeTemplateValidator = validateNetworkNodeTemplate
 	Grammar.GroupTypeValidator = validateGroupTypeMembers
 	Grammar.RequirementAssignmentValidator = validateRequirementAssignmentNodeFilter
+	Grammar.RequirementTargetValidator = validateRequirementTarget
 	Grammar.AttributeDefinitionValidator = validateAttributeDefaultProvenance
 	Grammar.WorkflowStepDefinitionValidator = validateWorkflowStepOperationHost
 	Grammar.TemplateCopyValidator = validateTemplateCopySource

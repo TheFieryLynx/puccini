@@ -1,0 +1,170 @@
+finding:
+  id: REAUDIT-TARGET-MATCHING
+  baseline:
+    head: 6ce702b7482087dd3d9d817e603999f9b872d2c3
+    working_tree: clean
+  specification:
+    source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+    sections:
+      - '3.7.2 Capability definition (including valid_source_types)'
+      - '3.7.3 Requirement definition; 3.7.3.5 Requirement Type definition is a tuple'
+      - '3.7.7 Capability Type; 3.7.9 Node Type (derived_from)'
+      - '3.7.10 Relationship Type (valid_target_types)'
+      - '3.8.2 Requirement assignment; 3.8.2.2.1 Short notation'
+      - '3.8.2.2.3 Extended grammar; 3.8.2.3 occurrence refinement'
+      - '3.6.5 Node filter definition'
+    normative_rule: >-
+      A concrete target must contain a capability fulfilling the effective requirement
+      definition. All declared tuple constraints apply together. Actual types must be
+      the required types or derive from them; the converse and siblings are invalid.
+    exact_excerpts:
+      short_notation: >-
+        This notation is only valid if the corresponding Requirement definition in the
+        Node Template’s parent Node Type declares (at a minimum) a valid Capability Type
+        which can be found in the declared target Node Template.
+      filters: >-
+        Note that this SHALL only be valid if the node keyname’s value is a Node Type
+        and is invalid if it is a Node Template.
+      relationship_targets: >-
+        An optional list of one or more names of Capability Types that are valid targets
+        for this relationship.
+    questions:
+      1: Definition capability constrains the actual capability type; node and relationship constrain the tuple.
+      2: Assignment node naming a template fixes that concrete target.
+      3: An explicit capability symbolic name selects that definition; it must still fulfill the requirement.
+      4: An omitted capability uses the requirement definition's type restriction.
+      5: Check existence of compatible capabilities on a concrete node; do not search for runtime nodes.
+      6: Hierarchy is directional, required base accepts actual derived, not vice versa.
+      7: Relationship valid_target_types restricts capability types, not target node types.
+      8: The target node must satisfy the effective requirement node type restriction.
+      9: Relationship assignment must fulfill the definition and accept the actual target capability.
+      10: Explicit Node Template plus assignment node_filter is invalid even if values pass the filter.
+      11: Reject at rendering with target-matching diagnostic if no capability can fulfill the concrete assignment.
+      12: No normative tie-break is specified; accept existence and defer ambiguous selection (decision 0015).
+      13: Reject explicit absent or incompatible symbolic capability; do not fall back to another capability.
+      14: Rendering after namespace, hierarchy and inheritance; use effective target definitions, no read-time check.
+  current_behavior: >-
+    TestReAuditContainerAssignments accepts Endpoint.network changed from Endpoint to Root;
+    Parse has no diagnostics and normalization retains the endpoint as app.network target.
+  expected_behavior: Reject incompatible concrete target; preserve admissible and abstract assignments.
+  existing_catalog:
+    requirement_ids: []
+    exact_mapping: false
+    related_non_frozen_ids: [TOSCA13-3.8.2.2.1-004, TOSCA13-3.8.2.2.1-003]
+    reason: Short-form semantic records are outside the frozen denominator; no frozen atom covers complete target matching.
+  catalog_gap: true
+  implementation:
+    files: [tosca/grammars/tosca_v1_3/requirement-target.go, tosca/grammars/tosca_v1_3/requirement-occurrences.go, tosca/grammars/tosca_v2_0/requirement-assignment.go, tosca/parsing/grammars.go, normal/requirement.go, assets/tosca/profiles/common/1.0/js/resolve.js]
+    symbols: [validateRequirementTarget, normalizeRequirementOccurrences, RequirementAssignments.Render, gatherCandidateCapabilities]
+    parser_phase: rendering
+    execution_path: [ReadRequirementAssignment, AddNamespaces, LookupNames, AddHierarchies, Inherit, NodeTemplate.Render, RequirementAssignments.Render, validateRequirementTarget, normalizeRequirementOccurrences]
+  test_matrix:
+    positive: [exact, derived, multiple-one-match, explicit-name, short]
+    negative: [no-match, wrong-name-type, missing-name, sibling, reverse-subtype, wrong-node-type]
+    inheritance: [inherited-capability, refined-capability, incompatible-refinement, requirement-refinement, multilevel]
+    explicit_capability: [name, type, missing, incompatible]
+    implicit_capability: [unique, multiple-deferred, none]
+    node_filter: [explicit-pass-invalid, explicit-property-fail-invalid, explicit-capability-fail-invalid, inherited-value-explicit-invalid, abstract-filter-preserved]
+    relationship: [valid-target-types, invalid-target-types, actual-derived, inherited-relationship, relationship-template]
+    occurrences: [within-range, above-upper, missing-abstract-declaration, upper-retained]
+    normalization: [target-node, unique-capability, multiple-deferred, node-order, repeat]
+  verification_status: verified
+  evidence:
+    implementation_status: implemented
+    verification_status: verified
+    claim_scope: Only the concrete-target obligation and the tests listed here; no full conformance claim.
+    test_first:
+      command: go test -count=1 ./tests/conformance/tosca_1_3 -run 'TestReAudit(TargetMatching|ContainerAssignments)'
+      production_head: 6ce702b7482087dd3d9d817e603999f9b872d2c3
+      observed_failures:
+        - Original network Root reproducer accepted with no rendering diagnostics.
+        - No-match, missing-name, wrong-name-type, wrong-node-type, reverse-subtype and sibling cases accepted.
+        - Unique capability missing from normalized CapabilityName.
+        - Relationship allowing Derived incorrectly rejected actual Derived because the definition requested Base.
+      excluded_evidence: Initial test compile error was corrected before the successful baseline execution; not counted as reproduction.
+    original_reproducer:
+      source: tests/conformance/tosca_1_3/re_audit_container_profile_test.go at baseline HEAD
+      symbol: TestReAuditContainerAssignments
+      change: Replace network capability type tosca.capabilities.Endpoint with tosca.capabilities.Root.
+      old_result: accepted; empty diagnostics; app.network targets endpoint
+      fixture_correction: >-
+        The original fixture additionally bound the app Storage requirement to BlockStorage,
+        which only exports Attachment and Node. Its positive sibling now derives a custom
+        Storage type exporting Storage. The negative network sibling therefore reaches the
+        intended edge without an unrelated storage error. The normative profile is unchanged.
+    tests:
+      - TestReAuditTargetMatching
+      - TestReAuditTargetMatchingFilters
+      - TestReAuditTargetMatchingInheritance
+      - TestReAuditTargetMatchingOccurrences
+      - TestReAuditTargetMatchingImports
+      - TestReAuditTargetMatchingDeterminism
+      - TestReAuditTargetMatchingCandidateNormalization
+      - TestReAuditTargetMatchingCandidateResolution
+      - TestReAuditTargetMatchingSelectorBoundaries
+      - TestReAuditContainerAssignments
+      - TestVerificationConnectsToRejectsNonEndpoint
+      - TestReAuditTargetMatchingPolicyIsolation (TOSCA 2.0 observable regression only)
+    shared_code_policy: >-
+      Grammar hook is nil by default. Only tosca_v1_3 enables it; the existing abstract
+      and TOSCA 2.0 valid-capability path remains the fallback. No 1.3 semantics reside
+      in the shared structural reader. The shared normalized model and resolver honor an optional
+      candidate set only when populated by 1.3; the 2.0 Parse/Compile/Resolve regression
+      verifies absence and unchanged binding. No normative 2.0 claim is inferred.
+    diagnostics: >-
+      Concrete matching failures use [TOSCA13-TARGET-MATCH] with source, requirement,
+      target, requested selector, expected type and sorted actual capability name/type
+      pairs. Existing earlier inheritance and occurrence diagnostics remain in their
+      original phases. ConnectsTo's old diagnostic assertion now checks the full edge
+      and rendering phase; its rejection expectation is unchanged.
+    candidate_set_follow_up:
+      test_first: Normalization lost the relationship-constrained set; ordinary Clout resolver selected bad, whose Base type was excluded by relationship valid_target_types Derived.
+      correction: Sorted capabilityNames retains all valid concrete candidates; resolver honors the optional set. No first-candidate selection is added by the parser.
+      mutations: Dropping serialization and ignoring the list in the resolver each fail their permanent direct test.
+    normalization: >-
+      Unique and explicit capability names, target node, effective capability type,
+      relationship and both occurrence bounds are asserted. Several matches keep an
+      unset CapabilityName; 32 parses vary node order, with repeated normalization of
+      each context. Abstract filter predicates and capability restrictions are retained.
+    frozen_baseline:
+      denominator: 223
+      requirement_ids_or_classifications_changed: false
+      requirements_sha256: 1861a9652dd659636702f29737818ac6f1c69355ee442e1bebe98739b21aabf0
+      coverage_sha256: 1238b594dfeb73c07f517efe8315b8e38742bf24db5350c1a1a5bf4ded73e11a
+      status_sum: 223
+      qualification: Unchanged historical snapshot, not renewed evidence for its global implemented claim.
+  requested_matrix_reconciliation:
+    1: exact and short
+    2: derived; reverse-subtype is its invalid sibling
+    3: multiple-one-match
+    4: explicit-name
+    5: inherited-capability
+    6: TestReAuditTargetMatchingImports unprefixed import
+    7: TestReAuditTargetMatchingImports remote namespace
+    8: no-match
+    9: explicit-incompatible-no-fallback; wrong-name-type
+    10: missing-name; case-sensitive
+    11: sibling-not-derived
+    12: Relationship valid_target_types constrains capability types, tested by relationship-targets; capability valid_source_types is tested separately.
+    13: wrong-node-type
+    14: relationship-targets; relationship-actual-derived; relationship-template
+    15: exact
+    16: multiple-deferred (decision 0015; no normative uniqueness or first-match rule)
+    17: no-match; incompatible-without-relationship
+    18: Concrete node_filter invalid by 3.8.2.2.3 even when size equals 4.
+    19: Concrete node_filter invalid by 3.8.2.2.3 when size differs from 9.
+    20: Concrete capability filter invalid by 3.8.2.2.3 regardless of property values.
+    21: inherited-value-still-invalid; abstract predicates retained for runtime matching.
+    22: filter-and-type-invalid; abstract-preserves-conjunction
+    23: TestReAuditTargetMatchingInheritance/Derived
+    24: TestReAuditTargetMatchingInheritance/Sibling rejects at inheritance
+    25: requirement-narrowing; requirement-widening
+    26: multilevel; inherited requirement on SourceChild
+    27: TestReAuditTargetMatchingOccurrences within-range
+    28: occurrence interval outside definition rejected at inheritance; excess assignment count rejected at rendering
+    29: Omitted assignment remains a required abstract obligation, not an error; consistent with existing semantics and runtime fulfillment.
+    30: All targetRequirement assertions retain [1,2]; complete earlier F09 suite also rerun.
+    31: All positive targetRequirement assertions verify node target.
+    32: Unique and named matches assert CapabilityName; multi-match remains unbound.
+    33: TestReAuditTargetMatchingDeterminism alternates node declaration order.
+    34: TestReAuditTargetMatchingDeterminism normalizes each context twice.

@@ -120,3 +120,16 @@ proposals:
     denominator membership cannot change in remediation.
   proposed_denominator_delta: null
   status: proposed only
+- finding_id: REAUDIT-TARGET-MATCHING
+  section: 3.7.3; 3.8.2.2.1; 3.8.2.2.3; 3.7.10.1
+  normative_rule: Concrete requirement targets must contain a capability fulfilling all effective tuple restrictions.
+  proposed_atomic_requirements:
+  - Reject a concrete target without a capability of the required type or a derived type.
+  - Validate an explicit capability symbolic name directly without fallback to another capability.
+  - Enforce the requirement node type on a concrete target.
+  - Enforce relationship valid_target_types on the actual target capability type.
+  - Enforce capability valid_source_types on the concrete source node.
+  existing_related_ids: [TOSCA13-3.8.2.2.1-003, TOSCA13-3.8.2.2.1-004]
+  reason: Related semantic records are outside the frozen denominator; atomic reconciliation remains separate.
+  proposed_denominator_delta: null
+  status: proposed only

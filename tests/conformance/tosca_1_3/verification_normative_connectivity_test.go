@@ -73,23 +73,11 @@ func TestVerificationConnectsToEndpointSemantics(t *testing.T) {
 // derived from Endpoint, at requirement-assignment rendering.
 // Category: negative, resolution, diagnostic, direct
 func TestVerificationConnectsToRejectsNonEndpoint(t *testing.T) {
-	_, problems, err := testsupport.ParseSource(t, connectivityTemplate(
-		"tosca.capabilities.Container",
-		"container",
-	))
-	if err == nil {
-		t.Fatal("ConnectsTo accepted a non-Endpoint target capability")
-	}
-	for _, expected := range []string{
-		`requirements{0}.capability`,
-		"tosca::Container",
-		"tosca::ConnectsTo",
-		"tosca.capabilities.Endpoint",
-	} {
-		if !strings.Contains(problems, expected) {
-			t.Fatalf("ConnectsTo diagnostic does not contain %q:\n%s", expected, problems)
-		}
-	}
+	reAuditReject(t, connectivityTemplate("tosca.capabilities.Container", "container"),
+		"rendering", "[TOSCA13-TARGET-MATCH]", `source="source"`,
+		`requirement="connect"`, `target="target"`, `requested="container"`,
+		"tosca.capabilities.Container", "tosca.relationships.ConnectsTo",
+		"valid_target_types", "tosca.capabilities.Endpoint")
 }
 
 // Specification: TOSCA Simple Profile in YAML 1.3

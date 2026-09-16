@@ -231,6 +231,11 @@ function gatherCandidateCapabilities(requirement, candidateNodeTemplates) {
         for (let cc = 0, ll = candidateCapabilities.length; cc < ll; cc++) {
             let candidateCapabilityName = candidateCapabilities[cc].name;
 
+            // A grammar may have already validated a concrete admissible set.
+            // Preserve that restriction when resolving an otherwise unbound edge.
+            if (requirement.capabilityNames && requirement.capabilityNames.indexOf(candidateCapabilityName) === -1)
+                continue;
+
             if ((capabilityName !== '') && (capabilityName !== candidateCapabilityName)) {
                 env.log.debugf('%s: capability %q in node template %q is not named %q', path, candidateCapabilityName, candidateNodeTemplateName, capabilityName);
                 continue;

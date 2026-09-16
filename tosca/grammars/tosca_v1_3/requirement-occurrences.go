@@ -9,7 +9,13 @@ import (
 	"github.com/tliron/go-puccini/tosca/parsing"
 )
 
-type requirementOccurrences struct{ Range *tosca_v2_0.Range }
+type requirementOccurrences struct {
+	Range                 *tosca_v2_0.Range
+	CapabilityIsType      bool
+	CapabilityIsSymbol    bool
+	SelectedCapability    *string
+	CandidateCapabilities []string
+}
 
 func requirementDefinitionOccurrences(definition *tosca_v2_0.RequirementDefinition) *tosca_v2_0.Range {
 	if definition.CountRange != nil {
@@ -76,6 +82,16 @@ func normalizeRequirementOccurrences(entity, source parsing.EntityPtr, target an
 		}
 	}
 	requirement := assignment.Normalize(node, normalNode)
+	if declared && assignment.TargetNodeTemplate != nil {
+		requirement.CapabilityName = state.SelectedCapability
+		requirement.CapabilityNames = append([]string(nil), state.CandidateCapabilities...)
+		if state.CapabilityIsSymbol {
+			if definition, ok := assignment.GetDefinition(node); ok && definition.TargetCapabilityType != nil {
+				name := parsing.GetCanonicalName(definition.TargetCapabilityType)
+				requirement.CapabilityTypeName = &name
+			}
+		}
+	}
 	if bounds != nil {
 		occurrence := &normal.OccurrenceRange{Lower: bounds.Lower}
 		if bounds.Upper != math.MaxUint64 {

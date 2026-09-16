@@ -306,8 +306,12 @@ func (self *RequirementAssignments) Render(sourceNodeTemplate *NodeTemplate, con
 				}
 
 				assignment.Relationship.Render(definition.RelationshipDefinition, sourceNodeTemplate)
-
-				// Validate valid_capability_types constraint
+			}
+			handled := false
+			if validate := assignment.Context.Grammar.RequirementTargetValidator; validate != nil {
+				handled = validate(sourceNodeTemplate, assignment, definition)
+			}
+			if !handled && definition.RelationshipDefinition != nil {
 				assignment.validateValidCapabilityTypes()
 			}
 		} else {

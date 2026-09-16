@@ -14,9 +14,12 @@ import (
 type Requirement struct {
 	SourceNodeTemplate *NodeTemplate
 
-	Name                           string
-	CapabilityTypeName             *string
-	CapabilityName                 *string
+	Name               string
+	CapabilityTypeName *string
+	CapabilityName     *string
+	// CapabilityNames retains an admissible set when concrete matching is deferred.
+	// Nil means the grammar has not constrained selection to a concrete set.
+	CapabilityNames                []string
 	NodeTypeName                   *string
 	NodeTemplate                   *NodeTemplate
 	NodeTemplatePropertyValidation FunctionCallMap
@@ -52,6 +55,7 @@ type MarshalableRequirement struct {
 	Name                           string             `json:"name" yaml:"name"`
 	CapabilityTypeName             string             `json:"capabilityTypeName" yaml:"capabilityTypeName"`
 	CapabilityName                 string             `json:"capabilityName" yaml:"capabilityName"`
+	CapabilityNames                []string           `json:"capabilityNames,omitempty" yaml:"capabilityNames,omitempty"`
 	NodeTypeName                   string             `json:"nodeTypeName" yaml:"nodeTypeName"`
 	NodeTemplateName               string             `json:"nodeTemplateName" yaml:"nodeTemplateName"`
 	NodeTemplatePropertyValidators FunctionCallMap    `json:"nodeTemplatePropertyValidators" yaml:"nodeTemplatePropertyValidators"`
@@ -85,6 +89,7 @@ func (self *Requirement) Marshalable() any {
 		Name:                           self.Name,
 		CapabilityTypeName:             capabilityTypeName,
 		CapabilityName:                 capabilityName,
+		CapabilityNames:                self.CapabilityNames,
 		NodeTypeName:                   nodeTypeName,
 		NodeTemplateName:               nodeTemplateName,
 		NodeTemplatePropertyValidators: self.NodeTemplatePropertyValidation,

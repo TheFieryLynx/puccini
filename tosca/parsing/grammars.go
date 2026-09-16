@@ -9,6 +9,9 @@ type CapabilityAssignmentValidator func(EntityPtr, EntityPtr)
 type NodeTemplateValidator func(EntityPtr)
 type GroupTypeValidator func(EntityPtr)
 type RequirementAssignmentValidator func(EntityPtr)
+
+// Return true when the versioned policy handled target compatibility.
+type RequirementTargetValidator func(EntityPtr, EntityPtr, EntityPtr) bool
 type AttributeDefinitionValidator func(EntityPtr)
 type WorkflowStepDefinitionValidator func(EntityPtr)
 type TemplateCopyValidator func(*Context, string, ard.Value)
@@ -32,6 +35,7 @@ type Grammar struct {
 	NodeTemplateValidator                   NodeTemplateValidator
 	GroupTypeValidator                      GroupTypeValidator
 	RequirementAssignmentValidator          RequirementAssignmentValidator
+	RequirementTargetValidator              RequirementTargetValidator
 	AttributeDefinitionValidator            AttributeDefinitionValidator
 	WorkflowStepDefinitionValidator         WorkflowStepDefinitionValidator
 	TemplateCopyValidator                   TemplateCopyValidator

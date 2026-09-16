@@ -1,0 +1,1182 @@
+source_commit: e5b0a3ee46488921ff409bbe0feba37af2a3233e
+archive_sha256: 6f8db99d7e024211bfe196e6af4f60677562d935a836a5a42e8944112c54cb75
+expectations: Unchanged original re-audit expectations; community inputs are supplementary evidence only.
+results:
+- path: examples/1.3/TMForum_oda/diagrams/ODACoreCommerceManagement/DeclarativeWorkflows/ODACoreCommerceManagement.yaml
+  source_sha256: 74b0ab3b9808f9881a3b0dd9516b84c538efb24e45f745dd01fb4b14630399cf
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.5.1
+  - 3.7.9.1
+  expected: reject
+  reason: Source uses mappings where the corresponding node-filter/requirements grammar requires a list.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (4)\n  file://<pinned-community>/examples/1.3/TMForum_oda/diagrams/ODACoreCommerceManagement/DeclarativeWorkflows/ODACoreCommerceManagement.yaml\n\
+      \    @4,3 imports[0]: unsupported URL scheme: \"org.tmforum\" for org.tmforum:1.0\n    @16,5 node_types[\"\
+      TMFC002_c648_c663_r679\"].requirements: \"map\" instead of \"list\"\n    @24,5 node_types[\"TMFC027_r622\"\
+      ].requirements: \"map\" instead of \"list\"\n    @710,1 tosca_definitions_version: malformed tosca_definitions_version,\
+      \ must be the first line/key of YAML: tosca_simple_yaml_1_3"
+    error: read problems
+- path: examples/1.3/TMForum_oda/diagrams/ODACoreCommerceManagement/ODACoreCommerceManagement.yaml
+  source_sha256: c952aa68cc5b21fce4a71da33b30297b4193a1a61f5c6712a66f779d98dcfeab
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.8
+  expected: undetermined
+  reason: Pinned source cannot resolve stated dependency locations/profile locator extensions in this invocation.
+    This is not by itself a normative parser violation.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/examples/1.3/TMForum_oda/diagrams/ODACoreCommerceManagement/ODACoreCommerceManagement.yaml\n\
+      \    @6,5 imports[0]: unsupported URL scheme: \"org.tmforum\" for org.tmforum:1.0"
+    error: read problems
+- path: examples/1.3/TMForum_oda/diagrams/ODACoreCommerceManagement/apis.yaml
+  source_sha256: c05605d72ccb8a3db812e4af24bbd96d23f158a84721ebf27559657f66f75d2e
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.10
+  expected: reject
+  reason: New (non-refinement) property definitions use scalar shorthand rather than a property-definition
+    map.
+  classification: unexpected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/TMForum_oda/profiles/com/sigscale/1.0/profile.yaml
+  source_sha256: 34678877e92be6331966c4081ab578585473a862777b78aa140d9fa00daced52
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.10
+  expected: reject
+  reason: New (non-refinement) property definitions use scalar shorthand rather than a property-definition
+    map.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (3)\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/com/sigscale/1.0/profile.yaml\n\
+      \    @10,5 imports[0]: unsupported URL scheme: \"org.tmforum\" for org.tmforum:1.0\n    @61,9 node_types[\"\
+      sigscale_ocs\"].interfaces[\"Standard\"].create: unsupported keyname\n    @72,9 node_types[\"sigscale_ocs\"\
+      ].interfaces[\"Standard\"].delete: unsupported keyname"
+    error: read problems
+- path: examples/1.3/TMForum_oda/profiles/com/vodafone/1.0/profile.yaml
+  source_sha256: 75e525cfff00a75edddee0b64f3e85ee3385e75613d1ce9a171fb0c6b671b42f
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.10
+  expected: reject
+  reason: New (non-refinement) property definitions use scalar shorthand rather than a property-definition
+    map.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (3)\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/com/vodafone/1.0/profile.yaml\n\
+      \    @10,5 imports[0]: unsupported URL scheme: \"org.tmforum\" for org.tmforum:1.0\n    @26,9 node_types[\"\
+      vodafone_TMFC001\"].interfaces[\"Standard\"].create: unsupported keyname\n    @37,9 node_types[\"vodafone_TMFC001\"\
+      ].interfaces[\"Standard\"].delete: unsupported keyname"
+    error: read problems
+- path: examples/1.3/TMForum_oda/profiles/org/oasis-open/non-normative/1.3/artifact.yaml
+  source_sha256: b6c3b6d1a5c807a717cbf24c5c8f5fa66ebaa61f76127e693cc31a4d3cf667f4
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/TMForum_oda/profiles/org/oasis-open/non-normative/1.3/capability.yaml
+  source_sha256: 7e6eac070bcd5b91e1efc9e50b6465ec1474217c54d8ff2995728a1ad2b82fc6
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - '3.7'
+  expected: reject
+  reason: Source contains unsupported short_name/entity keynames absent from normative 1.3 grammar.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/non-normative/1.3/capability.yaml\n\
+      \    @16,5 capability_types[\"tosca.capabilities.Container.Docker\"].short_name: unsupported keyname"
+    error: read problems
+- path: examples/1.3/TMForum_oda/profiles/org/oasis-open/non-normative/1.3/node.yaml
+  source_sha256: 6f4966ab140a87d4622c68225dd8eb9c43ef6c8a917dfdf92e9f82a1b0c9b0bc
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - '3.7'
+  expected: reject
+  reason: Source contains unsupported short_name/entity keynames absent from normative 1.3 grammar.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/non-normative/1.3/capability.yaml\n\
+      \    @16,5 capability_types[\"tosca.capabilities.Container.Docker\"].short_name: unsupported keyname"
+    error: read problems
+- path: examples/1.3/TMForum_oda/profiles/org/oasis-open/non-normative/1.3/profile.yaml
+  source_sha256: bd3391745e9d6654dfb464021e80660c105e68a13e01bed49feb2164b4d77295
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - '3.7'
+  expected: reject
+  reason: Source contains unsupported short_name/entity keynames absent from normative 1.3 grammar.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (2)\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/non-normative/1.3/capability.yaml\n\
+      \    @16,5 capability_types[\"tosca.capabilities.Container.Docker\"].short_name: unsupported keyname\n\
+      \  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/non-normative/1.3/profile.yaml\n\
+      \    @10,1 namespace: invalid namespace, reserved for TOSCA-approved specifications and work: http://docs.oasis-open.org/tosca/simple/nn/1.3"
+    error: read problems
+- path: examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/artifact_types.yaml
+  source_sha256: 81a283c0397afdc718b29d3c3619b30be50fe427e1ae2becb9653aa7125ee604
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - '3.7'
+  expected: reject
+  reason: Source contains unsupported short_name/entity keynames absent from normative 1.3 grammar.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (5)\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/artifact_types.yaml\n\
+      \    @45,5 artifact_types[\"tosca.artifacts.Deployment.Image\"].short_name: unsupported keyname\n   \
+      \ @53,5 artifact_types[\"tosca.artifacts.Deployment.Image.VM\"].short_name: unsupported keyname\n   \
+      \ @29,5 artifact_types[\"tosca.artifacts.File\"].short_name: unsupported keyname\n    @67,5 artifact_types[\"\
+      tosca.artifacts.Implementation.Bash\"].short_name: unsupported keyname\n    @76,5 artifact_types[\"tosca.artifacts.Implementation.Python\"\
+      ].short_name: unsupported keyname"
+    error: read problems
+- path: examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/capability_types.yaml
+  source_sha256: 307dcd6ccd512e8273382af8b0c5bc9eda375683e5dad4bd0c69368f3e378565
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - '3.7'
+  expected: reject
+  reason: Source contains unsupported short_name/entity keynames absent from normative 1.3 grammar.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (13)\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/capability_types.yaml\n\
+      \    @202,5 capability_types[\"tosca.capabilities.Attachment\"].short_name: unsupported keyname\n   \
+      \ @49,5 capability_types[\"tosca.capabilities.Compute\"].short_name: unsupported keyname\n    @39,5 capability_types[\"\
+      tosca.capabilities.Container\"].short_name: unsupported keyname\n    @90,5 capability_types[\"tosca.capabilities.Endpoint\"\
+      ].short_name: unsupported keyname\n    @183,5 capability_types[\"tosca.capabilities.Endpoint.Admin\"\
+      ].short_name: unsupported keyname\n    @193,5 capability_types[\"tosca.capabilities.Endpoint.Database\"\
+      ].short_name: unsupported keyname\n    @158,5 capability_types[\"tosca.capabilities.Endpoint.Public\"\
+      ].short_name: unsupported keyname\n    @272,5 capability_types[\"tosca.capabilities.Network\"].short_name:\
+      \ unsupported keyname\n    @29,5 capability_types[\"tosca.capabilities.Node\"].short_name: unsupported\
+      \ keyname\n    @210,5 capability_types[\"tosca.capabilities.OperatingSystem\"].short_name: unsupported\
+      \ keyname\n    @243,5 capability_types[\"tosca.capabilities.Scalable\"].short_name: unsupported keyname\n\
+      \    @280,5 capability_types[\"tosca.capabilities.network.Bindable\"].short_name: unsupported keyname\n\
+      \    @289,5 capability_types[\"tosca.capabilities.network.Linkable\"].short_name: unsupported keyname"
+    error: read problems
+- path: examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/data_types.yaml
+  source_sha256: 85d1e9a94a3ce668dbb3b2f8f2b2121fcc74efcf0bd3346eb26d1721d5a5df5d
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - '3.7'
+  expected: reject
+  reason: Source contains unsupported short_name/entity keynames absent from normative 1.3 grammar.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (6)\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/data_types.yaml\n\
+      \    @53,5 data_types[\"tosca.datatypes.Credential\"].short_name: unsupported keyname\n    @14,3 data_types[\"\
+      tosca.datatypes.Root\"]: malformed data type definition, requires derived_from or at least one property\
+      \ definition: map[description:The TOSCA base data type from which all other normative TOSCA data types\
+      \ derive.\xB6]\n    @100,5 data_types[\"tosca.datatypes.network.NetworkInfo\"].short_name: unsupported\
+      \ keyname\n    @152,5 data_types[\"tosca.datatypes.network.PortDef\"].short_name: unsupported keyname\n\
+      \    @123,5 data_types[\"tosca.datatypes.network.PortInfo\"].short_name: unsupported keyname\n    @163,5\
+      \ data_types[\"tosca.datatypes.network.PortSpec\"].short_name: unsupported keyname"
+    error: read problems
+- path: examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/group_types.yaml
+  source_sha256: b82d85a9dbf7568508cbcded213afae813a7792836e1b23f3ef88f2e21aff189
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.1.2
+  - 3.1.3.1
+  - 3.7.6.3
+  expected: undetermined
+  reason: Explicit normative profile collides with implicit profile or its root-type special handling. Identical-name
+    equivalence and root exemptions need a controlled replay; neither a community failure nor automatic expected
+    rejection is proof.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/group_types.yaml\n\
+      \    @19,3 ambiguous group type name \"tosca.groups.Root\", can be in \"file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/group_types.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/groups.yaml\""
+    error: parsing problems
+- path: examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/interface_types.yaml
+  source_sha256: 254fdbece95224f4e44b3f6f285d60fee59f98382b6fd2abf9fd02122eec7fb3
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - '3.7'
+  expected: reject
+  reason: Source contains unsupported short_name/entity keynames absent from normative 1.3 grammar.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (2)\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/interface_types.yaml\n\
+      \    @29,5 interface_types[\"tosca.interfaces.node.lifecycle.Standard\"].short_name: unsupported keyname\n\
+      \    @50,5 interface_types[\"tosca.interfaces.relationship.Configure\"].short_name: unsupported keyname"
+    error: read problems
+- path: examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/node_types.yaml
+  source_sha256: 9db311adf8523d6828598da56c58109a3a1bfcac66d3dc7fdb89c55c4c5746ba
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - '3.7'
+  expected: reject
+  reason: Source contains unsupported short_name/entity keynames absent from normative 1.3 grammar.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (16)\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/node_types.yaml\n\
+      \    @47,5 node_types[\"tosca.nodes.Abstract.Compute\"].short_name: unsupported keyname\n    @241,5 node_types[\"\
+      tosca.nodes.Abstract.Storage\"].short_name: unsupported keyname\n    @278,5 node_types[\"tosca.nodes.BlockStorage\"\
+      ].short_name: unsupported keyname\n    @62,5 node_types[\"tosca.nodes.Compute\"].short_name: unsupported\
+      \ keyname\n    @323,5 node_types[\"tosca.nodes.Container.Application\"].short_name: unsupported keyname\n\
+      \    @310,5 node_types[\"tosca.nodes.Container.Runtime\"].short_name: unsupported keyname\n    @180,5\
+      \ node_types[\"tosca.nodes.DBMS\"].short_name: unsupported keyname\n    @204,5 node_types[\"tosca.nodes.Database\"\
+      ].short_name: unsupported keyname\n    @485,5 node_types[\"tosca.nodes.LoadBalancer\"].short_name: unsupported\
+      \ keyname\n    @255,5 node_types[\"tosca.nodes.ObjectStorage\"].short_name: unsupported keyname\n   \
+      \ @23,5 node_types[\"tosca.nodes.Root\"].short_name: unsupported keyname\n    @113,5 node_types[\"tosca.nodes.SoftwareComponent\"\
+      ].short_name: unsupported keyname\n    @157,5 node_types[\"tosca.nodes.WebApplication\"].short_name:\
+      \ unsupported keyname\n    @138,5 node_types[\"tosca.nodes.WebServer\"].short_name: unsupported keyname\n\
+      \    @336,5 node_types[\"tosca.nodes.network.Network\"].short_name: unsupported keyname\n    @427,5 node_types[\"\
+      tosca.nodes.network.Port\"].short_name: unsupported keyname"
+    error: read problems
+- path: examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/policy_types.yaml
+  source_sha256: 00c7006f3bb381f6567fc4bb2a6477555d229a8f038672d71535811a6306edf8
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.1.2
+  - 3.1.3.1
+  - 3.7.6.3
+  expected: undetermined
+  reason: Explicit normative profile collides with implicit profile or its root-type special handling. Identical-name
+    equivalence and root exemptions need a controlled replay; neither a community failure nor automatic expected
+    rejection is proof.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (5)\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/policy_types.yaml\n\
+      \    @45,3 ambiguous policy type name \"tosca.policies.Performance\", can be in \"file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/policy_types.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/policies.yaml\"\n    @24,3 ambiguous policy type name \"tosca.policies.Placement\"\
+      , can be in \"file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/policy_types.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/policies.yaml\"\n    @19,3 ambiguous policy type name \"tosca.policies.Root\"\
+      , can be in \"file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/policy_types.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/policies.yaml\"\n    @31,3 ambiguous policy type name \"tosca.policies.Scaling\"\
+      , can be in \"file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/policy_types.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/policies.yaml\"\n    @38,3 ambiguous policy type name \"tosca.policies.Update\"\
+      , can be in \"file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/policy_types.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/policies.yaml\""
+    error: parsing problems
+- path: examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/profile.yaml
+  source_sha256: 5b1dc49fbbc9e6a17131456602864618b120975edea1026ab4f951dd74f01e39
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - '3.7'
+  expected: reject
+  reason: Source contains unsupported short_name/entity keynames absent from normative 1.3 grammar.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (50)\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/artifact_types.yaml\n\
+      \    @45,5 artifact_types[\"tosca.artifacts.Deployment.Image\"].short_name: unsupported keyname\n   \
+      \ @53,5 artifact_types[\"tosca.artifacts.Deployment.Image.VM\"].short_name: unsupported keyname\n   \
+      \ @29,5 artifact_types[\"tosca.artifacts.File\"].short_name: unsupported keyname\n    @67,5 artifact_types[\"\
+      tosca.artifacts.Implementation.Bash\"].short_name: unsupported keyname\n    @76,5 artifact_types[\"tosca.artifacts.Implementation.Python\"\
+      ].short_name: unsupported keyname\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/capability_types.yaml\n\
+      \    @202,5 capability_types[\"tosca.capabilities.Attachment\"].short_name: unsupported keyname\n   \
+      \ @49,5 capability_types[\"tosca.capabilities.Compute\"].short_name: unsupported keyname\n    @39,5 capability_types[\"\
+      tosca.capabilities.Container\"].short_name: unsupported keyname\n    @90,5 capability_types[\"tosca.capabilities.Endpoint\"\
+      ].short_name: unsupported keyname\n    @183,5 capability_types[\"tosca.capabilities.Endpoint.Admin\"\
+      ].short_name: unsupported keyname\n    @193,5 capability_types[\"tosca.capabilities.Endpoint.Database\"\
+      ].short_name: unsupported keyname\n    @158,5 capability_types[\"tosca.capabilities.Endpoint.Public\"\
+      ].short_name: unsupported keyname\n    @272,5 capability_types[\"tosca.capabilities.Network\"].short_name:\
+      \ unsupported keyname\n    @29,5 capability_types[\"tosca.capabilities.Node\"].short_name: unsupported\
+      \ keyname\n    @210,5 capability_types[\"tosca.capabilities.OperatingSystem\"].short_name: unsupported\
+      \ keyname\n    @243,5 capability_types[\"tosca.capabilities.Scalable\"].short_name: unsupported keyname\n\
+      \    @280,5 capability_types[\"tosca.capabilities.network.Bindable\"].short_name: unsupported keyname\n\
+      \    @289,5 capability_types[\"tosca.capabilities.network.Linkable\"].short_name: unsupported keyname\n\
+      \  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/data_types.yaml\n\
+      \    @53,5 data_types[\"tosca.datatypes.Credential\"].short_name: unsupported keyname\n    @14,3 data_types[\"\
+      tosca.datatypes.Root\"]: malformed data type definition, requires derived_from or at least one property\
+      \ definition: map[description:The TOSCA base data type from which all other normative TOSCA data types\
+      \ derive.\xB6]\n    @100,5 data_types[\"tosca.datatypes.network.NetworkInfo\"].short_name: unsupported\
+      \ keyname\n    @152,5 data_types[\"tosca.datatypes.network.PortDef\"].short_name: unsupported keyname\n\
+      \    @123,5 data_types[\"tosca.datatypes.network.PortInfo\"].short_name: unsupported keyname\n    @163,5\
+      \ data_types[\"tosca.datatypes.network.PortSpec\"].short_name: unsupported keyname\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/interface_types.yaml\n\
+      \    @29,5 interface_types[\"tosca.interfaces.node.lifecycle.Standard\"].short_name: unsupported keyname\n\
+      \    @50,5 interface_types[\"tosca.interfaces.relationship.Configure\"].short_name: unsupported keyname\n\
+      \  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/node_types.yaml\n\
+      \    @47,5 node_types[\"tosca.nodes.Abstract.Compute\"].short_name: unsupported keyname\n    @241,5 node_types[\"\
+      tosca.nodes.Abstract.Storage\"].short_name: unsupported keyname\n    @278,5 node_types[\"tosca.nodes.BlockStorage\"\
+      ].short_name: unsupported keyname\n    @62,5 node_types[\"tosca.nodes.Compute\"].short_name: unsupported\
+      \ keyname\n    @323,5 node_types[\"tosca.nodes.Container.Application\"].short_name: unsupported keyname\n\
+      \    @310,5 node_types[\"tosca.nodes.Container.Runtime\"].short_name: unsupported keyname\n    @180,5\
+      \ node_types[\"tosca.nodes.DBMS\"].short_name: unsupported keyname\n    @204,5 node_types[\"tosca.nodes.Database\"\
+      ].short_name: unsupported keyname\n    @485,5 node_types[\"tosca.nodes.LoadBalancer\"].short_name: unsupported\
+      \ keyname\n    @255,5 node_types[\"tosca.nodes.ObjectStorage\"].short_name: unsupported keyname\n   \
+      \ @23,5 node_types[\"tosca.nodes.Root\"].short_name: unsupported keyname\n    @113,5 node_types[\"tosca.nodes.SoftwareComponent\"\
+      ].short_name: unsupported keyname\n    @157,5 node_types[\"tosca.nodes.WebApplication\"].short_name:\
+      \ unsupported keyname\n    @138,5 node_types[\"tosca.nodes.WebServer\"].short_name: unsupported keyname\n\
+      \    @336,5 node_types[\"tosca.nodes.network.Network\"].short_name: unsupported keyname\n    @427,5 node_types[\"\
+      tosca.nodes.network.Port\"].short_name: unsupported keyname\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/profile.yaml\n\
+      \    @10,1 namespace: invalid namespace, reserved for TOSCA-approved specifications and work: http://docs.oasis-open.org/tosca/simple/1.3\n\
+      \  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/relationship_types.yaml\n\
+      \    @68,5 relationship_types[\"tosca.relationships.AttachesTo\"].short_name: unsupported keyname\n \
+      \   @51,5 relationship_types[\"tosca.relationships.ConnectsTo\"].short_name: unsupported keyname\n  \
+      \  @34,5 relationship_types[\"tosca.relationships.DependsOn\"].short_name: unsupported keyname\n    @42,5\
+      \ relationship_types[\"tosca.relationships.HostedOn\"].short_name: unsupported keyname\n    @108,5 relationship_types[\"\
+      tosca.relationships.RoutesTo\"].short_name: unsupported keyname\n    @99,5 relationship_types[\"tosca.relationships.network.BindsTo\"\
+      ].short_name: unsupported keyname\n    @90,5 relationship_types[\"tosca.relationships.network.LinksTo\"\
+      ].short_name: unsupported keyname"
+    error: read problems
+- path: examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/relationship_types.yaml
+  source_sha256: 28fc5314e2e339dc9e7c068ee2017d0a759e5c9685f3fd5a11764eeac5883a6d
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - '3.7'
+  expected: reject
+  reason: Source contains unsupported short_name/entity keynames absent from normative 1.3 grammar.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (7)\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/oasis-open/simple/1.3/relationship_types.yaml\n\
+      \    @68,5 relationship_types[\"tosca.relationships.AttachesTo\"].short_name: unsupported keyname\n \
+      \   @51,5 relationship_types[\"tosca.relationships.ConnectsTo\"].short_name: unsupported keyname\n  \
+      \  @34,5 relationship_types[\"tosca.relationships.DependsOn\"].short_name: unsupported keyname\n    @42,5\
+      \ relationship_types[\"tosca.relationships.HostedOn\"].short_name: unsupported keyname\n    @108,5 relationship_types[\"\
+      tosca.relationships.RoutesTo\"].short_name: unsupported keyname\n    @99,5 relationship_types[\"tosca.relationships.network.BindsTo\"\
+      ].short_name: unsupported keyname\n    @90,5 relationship_types[\"tosca.relationships.network.LinksTo\"\
+      ].short_name: unsupported keyname"
+    error: read problems
+- path: examples/1.3/TMForum_oda/profiles/org/tmforum/1.0/apis.yaml
+  source_sha256: c05605d72ccb8a3db812e4af24bbd96d23f158a84721ebf27559657f66f75d2e
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.10
+  expected: reject
+  reason: New (non-refinement) property definitions use scalar shorthand rather than a property-definition
+    map.
+  classification: unexpected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/TMForum_oda/profiles/org/tmforum/1.0/profile.yaml
+  source_sha256: 9257554437185d3617fce9f43a3434fc526bd309409eee3ec142614cd06b8f65
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - '3.7'
+  expected: reject
+  reason: Source contains unsupported short_name/entity keynames absent from normative 1.3 grammar.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (7)\n  file://<pinned-community>/examples/1.3/TMForum_oda/profiles/org/tmforum/1.0/profile.yaml\n\
+      \    @329,39 node_types[\"linuxfile\"].interfaces[\"Standard\"].operations[\"create\"].inputs[\"linux_file_content\"\
+      ].get_property: unsupported keyname\n    @328,34 node_types[\"linuxfile\"].interfaces[\"Standard\"].operations[\"\
+      create\"].inputs[\"linux_file_path\"].get_property: unsupported keyname\n    @336,34 node_types[\"linuxfile\"\
+      ].interfaces[\"Standard\"].operations[\"delete\"].inputs[\"linux_file_path\"].get_property: unsupported\
+      \ keyname\n    @129,37 node_types[\"oda_component\"].interfaces[\"Standard\"].operations[\"create\"].inputs[\"\
+      oda_component_defn\"].get_property: unsupported keyname\n    @128,46 node_types[\"oda_component\"].interfaces[\"\
+      Standard\"].operations[\"create\"].inputs[\"oda_component_instance_name\"].get_property: unsupported\
+      \ keyname\n    @132,48 node_types[\"oda_component\"].interfaces[\"Standard\"].operations[\"delete\"].inputs[\"\
+      oda_component_definition_name\"].get_property: unsupported keyname\n    @67,9 node_types[\"oda_sailcloth\"\
+      ].interfaces[\"Standard\"].create: unsupported keyname"
+    error: read problems
+- path: examples/1.3/TMForum_oda/services/ODACoreCommerceManagement/ODACoreCommerceManagement.yaml
+  source_sha256: c952aa68cc5b21fce4a71da33b30297b4193a1a61f5c6712a66f779d98dcfeab
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.8
+  expected: undetermined
+  reason: Pinned source cannot resolve stated dependency locations/profile locator extensions in this invocation.
+    This is not by itself a normative parser violation.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/examples/1.3/TMForum_oda/services/ODACoreCommerceManagement/ODACoreCommerceManagement.yaml\n\
+      \    @6,5 imports[0]: unsupported URL scheme: \"org.tmforum\" for org.tmforum:1.0"
+    error: read problems
+- path: examples/1.3/TMForum_oda/services/ODAcomponent/ODAcomponent.yaml
+  source_sha256: 3902164d6660155fd062c56714ed64d7eb2900fdb05c1b20b2ea162667b00de3
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.8
+  expected: undetermined
+  reason: Pinned source cannot resolve stated dependency locations/profile locator extensions in this invocation.
+    This is not by itself a normative parser violation.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/examples/1.3/TMForum_oda/services/ODAcomponent/ODAcomponent.yaml\n\
+      \    @7,5 imports[0]: unsupported URL scheme: \"org.tmforum\" for org.tmforum:1.0"
+    error: read problems
+- path: examples/1.3/TMForum_oda/services/ODAcomponents_dependant/ODAcomponents_dependant.yaml
+  source_sha256: 7ef55346de92b86614dcf3c59bfcac0dd2e0f325adc09492df31761cedc1859e
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.8
+  expected: undetermined
+  reason: Pinned source cannot resolve stated dependency locations/profile locator extensions in this invocation.
+    This is not by itself a normative parser violation.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (3)\n  file://<pinned-community>/examples/1.3/TMForum_oda/services/ODAcomponents_dependant/ODAcomponents_dependant.yaml\n\
+      \    @7,5 imports[0]: unsupported URL scheme: \"org.tmforum\" for org.tmforum:1.0\n    @9,5 imports[1]:\
+      \ unsupported URL scheme: \"com.sigscale\" for com.sigscale:1.0\n    @11,5 imports[2]: unsupported URL\
+      \ scheme: \"com.vodafone\" for com.vodafone:1.0"
+    error: read problems
+- path: examples/1.3/examples-from-spec/hello-world/hello-world.yaml
+  source_sha256: 381574053ded3aab0d495534759e56ae7f4fbabc0c1a9d7f9131a97995d1df52
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/examples-from-spec/inputs-and-outputs/inputs-and-outputs.yaml
+  source_sha256: 211e56c040152a3e5b4b728dfb2df007ec1440baefd31037e2a9a2b6d6a8b36b
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.14
+  expected: undetermined
+  reason: Required external inputs were not supplied. Template validity and this concrete rendering invocation
+    must be distinguished.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/examples/1.3/examples-from-spec/inputs-and-outputs/inputs-and-outputs.yaml\n\
+      \    @16,6 topology_template.inputs[\"db_server_num_cpus\"]: unassigned required input definition"
+    error: parsing problems
+- path: examples/1.3/examples-from-spec/mysql/non-normative-types.yaml
+  source_sha256: 9d0ac5bb9a6d8a946f3fe879e9e70b776988a25105dfea135e94b17d84bfebcd
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: undetermined
+  reason: Requires complete dependency/input context and semantic review; not counted as a normative pass merely
+    because it parsed.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/examples/1.3/examples-from-spec/mysql/non-normative-types.yaml\n\
+      \    @119,9 node_types[\"tosca.nodes.DBMS.MySQL\"].capabilities[\"host\"].valid_source_types: type \"\
+      tosca.nodes.Database.MySQL\" must be derived from one of the types in the parent set"
+    error: parsing problems
+- path: examples/1.3/turandot/hello-world/hello-world.yaml
+  source_sha256: b4b3a15b0cd430bf45663368d30984fd9a6331b78c990e396ee83f11b3e72879
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.8
+  expected: undetermined
+  reason: Pinned source cannot resolve stated dependency locations/profile locator extensions in this invocation.
+    This is not by itself a normative parser violation.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (2)\n  file://<pinned-community>/examples/1.3/turandot/hello-world/hello-world.yaml\n\
+      \    @10,3 imports[0]: invalid URL: profiles/kubernetes/1.0/profile.yaml\n    @12,3 imports[1]: invalid\
+      \ URL: profiles/orchestration/1.0/profile.yaml"
+    error: read problems
+- path: examples/1.3/turandot/telephony-network-service/asterisk-cnf/asterisk-cnf.yaml
+  source_sha256: d952a5ccaf97da3caa4db72379111e2afa86189d16bc13e24ddf3d770b7f10d7
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.8
+  expected: undetermined
+  reason: Pinned source cannot resolve stated dependency locations/profile locator extensions in this invocation.
+    This is not by itself a normative parser violation.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (4)\n  file://<pinned-community>/examples/1.3/turandot/telephony-network-service/asterisk-cnf/asterisk-cnf.yaml\n\
+      \    @5,3 imports[0]: invalid URL: profiles/network-service/profile.yaml\n    @7,3 imports[1]: invalid\
+      \ URL: profiles/telephony/profile.yaml\n    @9,3 imports[2]: invalid URL: profiles/kubernetes/1.0/profile.yaml\n\
+      \    @11,3 imports[3]: invalid URL: profiles/orchestration/1.0/profile.yaml"
+    error: read problems
+- path: examples/1.3/turandot/telephony-network-service/asterisk-vnf/asterisk-vnf.yaml
+  source_sha256: 674a76bf0790c3cd1aade43f0288aa120596a409ee8c9526c6b9a4cb296dcafa
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.8
+  expected: undetermined
+  reason: Pinned source cannot resolve stated dependency locations/profile locator extensions in this invocation.
+    This is not by itself a normative parser violation.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (6)\n  file://<pinned-community>/examples/1.3/turandot/telephony-network-service/asterisk-vnf/asterisk-vnf.yaml\n\
+      \    @5,3 imports[0]: invalid URL: profiles/network-service/profile.yaml\n    @7,3 imports[1]: invalid\
+      \ URL: profiles/telephony/profile.yaml\n    @9,3 imports[2]: invalid URL: profiles/mariadb/profile.yaml\n\
+      \    @11,3 imports[3]: invalid URL: profiles/kubernetes/1.0/profile.yaml\n    @13,3 imports[4]: invalid\
+      \ URL: profiles/kubevirt/1.0/profile.yaml\n    @15,3 imports[5]: invalid URL: profiles/orchestration/1.0/profile.yaml"
+    error: read problems
+- path: examples/1.3/turandot/telephony-network-service/simple-data-plane/simple-data-plane.yaml
+  source_sha256: fc34f232d928f13e6ba9fb74aa1c73b0b26523782beabbffd4570ba7130f3096
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.8
+  expected: undetermined
+  reason: Pinned source cannot resolve stated dependency locations/profile locator extensions in this invocation.
+    This is not by itself a normative parser violation.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (3)\n  file://<pinned-community>/examples/1.3/turandot/telephony-network-service/simple-data-plane/simple-data-plane.yaml\n\
+      \    @5,3 imports[0]: invalid URL: profiles/network-service/profile.yaml\n    @7,3 imports[1]: invalid\
+      \ URL: profiles/kubernetes/1.0/profile.yaml\n    @9,3 imports[2]: invalid URL: profiles/orchestration/1.0/profile.yaml"
+    error: read problems
+- path: examples/1.3/turandot/telephony-network-service/telephony-network-service/profiles/network-service/profile.yaml
+  source_sha256: 8aaaf6e630eca6784be9c4002876121926ae60ca3137664bc7487a15aa699ca1
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/turandot/telephony-network-service/telephony-network-service/profiles/telephony/profile.yaml
+  source_sha256: ab1a5fa2ea425c9728ee95604bfd1ea804e97b832b4291254f53c500dd899273
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/turandot/telephony-network-service/telephony-network-service/telephony-network-service.yaml
+  source_sha256: 411b3fe910d6db93227f11d21dc97cbbffc4922cd7c28828f8508fda6a564849
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.8
+  expected: undetermined
+  reason: Pinned source cannot resolve stated dependency locations/profile locator extensions in this invocation.
+    This is not by itself a normative parser violation.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/examples/1.3/turandot/telephony-network-service/telephony-network-service/telephony-network-service.yaml\n\
+      \    @9,3 imports[2]: invalid URL: profiles/orchestration/1.0/profile.yaml"
+    error: read problems
+- path: examples/1.3/tutorial/artifacts.yaml
+  source_sha256: 68503709dde58e4d962450fbc54d4fa9e4185fa49e0674b21301b6c4b329e11f
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/tutorial/attributes.yaml
+  source_sha256: 2b9fdba27cccd4bebf2b46c0cf4ff9e3493b3a432c0190b0250bbab151295bff
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/tutorial/copy.yaml
+  source_sha256: 00727dbad7e68a935ba656866a3dc0e6e15a9aedfa80b0b46d614c51a63b9682
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.8.3.3
+  expected: reject
+  reason: Source forms a copy chain expressly prohibited by 3.8.3.3.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/examples/1.3/tutorial/copy.yaml\n    @49,7 topology_template.node_templates[\"\
+      client\"].copy: invalid source template, must not itself use copy: server2"
+    error: read problems
+- path: examples/1.3/tutorial/data-types.yaml
+  source_sha256: e05fdac40e6b1ee37d0f5951138f72ba5f1a37a0a6b8586c8ab6e9353c9b7de9
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: undetermined
+  reason: Requires complete dependency/input context and semantic review; not counted as a normative pass merely
+    because it parsed.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/examples/1.3/tutorial/data-types.yaml\n    @219,9\
+      \ topology_template.node_templates[\"data\"].properties[\"timestamp2\"]: \"timestamp\" instead of \"\
+      string\""
+    error: parsing problems
+- path: examples/1.3/tutorial/descriptions.yaml
+  source_sha256: b486e39d2075963912a5d4b9ba05ea9e57f02808b80549066ac6d99fb5cfd7ec
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/tutorial/dsl-definitions.yaml
+  source_sha256: 968f2aa0df884a868d33e6902ac994773d540e86ecd32c3d215b5fb9667bbe5d
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/tutorial/functions.yaml
+  source_sha256: 4961a49841ce0c37c1b927b22d4ba73b55041182c5009ce65c9b9e24d47b6163
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/tutorial/imports/mongodb.yaml
+  source_sha256: 77677070108f1631e97e813e6c0620f57ca35dc5f907e8b339acfef6b6c17e3c
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/tutorial/imports/nginx.yaml
+  source_sha256: 90534eaa9483d7deaebea3201d86eb40485cc61b8fe1b57a3a146237063d3043
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/tutorial/imports/super-load-balancer.yaml
+  source_sha256: 5f2fb0b705f430c8f6ec059de0d1dadd9c31d2bc93137fb8b0790791b6d22d44
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/tutorial/inputs-and-outputs.yaml
+  source_sha256: bf8bc2ef511070adeb68941c2d5d13a766684cb5eef71b3855b9815013a9613c
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.14
+  expected: undetermined
+  reason: Required external inputs were not supplied. Template validity and this concrete rendering invocation
+    must be distinguished.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/examples/1.3/tutorial/inputs-and-outputs.yaml\n\
+      \    @21,5 topology_template.inputs[\"ram\"]: unassigned required input definition"
+    error: parsing problems
+- path: examples/1.3/tutorial/interfaces.yaml
+  source_sha256: f27882208fdc27bacd7426fb3d2d5669867f5f3cb5028593d84d1f9a7d78345a
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/tutorial/metadata.yaml
+  source_sha256: 17c673b30a3cf164b9287401e663b37e2a088257d5ca55a3ca728efb8b1f870b
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/tutorial/namespaces.yaml
+  source_sha256: 3cefa50beb38a908054c02f55421f422aec3bad40a0992f964ae0bf54b84e6bd
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/tutorial/policies-and-groups.yaml
+  source_sha256: e3c195f54aefdd30980342993babb70b3c594ff4651cb5dac57ca2075b03bffb
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 5.9.10
+  - 5.9.11
+  - '5.2'
+  - 5.2.1
+  expected: accept
+  reason: The original source uses storage aliases explicitly declared in normative sections 5.9.10 and 5.9.11
+    and permitted by 5.2. The previous obsolete-alias hypothesis was disproved. A temporary sibling replacing
+    only these spellings by full Type URIs accepts. F16 independently minimizes the namespace defect.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/tutorial/requirements-and-capabilities.yaml
+  source_sha256: 7db76bfab35637c55ecd798147401cfc2938da1a42dd3e9ead50249d4bfead17
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.5.1
+  - 3.7.9.1
+  expected: reject
+  reason: Source uses mappings where the corresponding node-filter/requirements grammar requires a list.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (3)\n  file://<pinned-community>/examples/1.3/tutorial/requirements-and-capabilities.yaml\n\
+      \    @149,13 topology_template.node_templates[\"light7\"].requirements{0}.node_filter.properties: \"\
+      map\" instead of \"list\"\n    @159,9 topology_template.node_templates[\"light8\"].node_filter.properties:\
+      \ \"map\" instead of \"list\"\n    @175,17 topology_template.node_templates[\"light9\"].requirements{0}.node_filter.capabilities{0}.properties:\
+      \ \"map\" instead of \"list\""
+    error: read problems
+- path: examples/1.3/tutorial/source-and-target.yaml
+  source_sha256: 7ec9c5da68e9dd01126e9e639fa9e4fcc38270afbcf6057c360ee14720844202
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 5.9.10
+  - 5.9.11
+  - '5.2'
+  - 5.2.1
+  expected: accept
+  reason: The original source uses storage aliases explicitly declared in normative sections 5.9.10 and 5.9.11
+    and permitted by 5.2. The previous obsolete-alias hypothesis was disproved. A temporary sibling replacing
+    only these spellings by full Type URIs accepts. F16 independently minimizes the namespace defect.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/tutorial/substitution-mapping-client.yaml
+  source_sha256: 6ad723319d976fe4f047c0e26e19b9f70f5fa8120f07af5e0ad94e33aa495a8d
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/tutorial/substitution-mapping.yaml
+  source_sha256: bd5dca1c52978dcbf1873c9e055c19f4e8790c792e9ccdce1f75bc8cd44e14c1
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.8.13.4
+  expected: reject
+  reason: Source substitution mappings omit members of the exported type.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (4)\n  file://<pinned-community>/examples/1.3/tutorial/substitution-mapping.yaml\n\
+      \    @38,5 topology_template.substitution_mappings.capabilities[\"feature\"]: unassigned required capability\
+      \ mapping\n    @45,5 topology_template.substitution_mappings.properties[\"algorithm\"]: unassigned required\
+      \ property mapping\n    @41,5 topology_template.substitution_mappings.requirements[\"application\"]:\
+      \ unassigned required requirement mapping\n    @41,5 topology_template.substitution_mappings.requirements[\"\
+      dependency\"]: unassigned required requirement mapping"
+    error: parsing problems
+- path: examples/1.3/tutorial/unicode.yaml
+  source_sha256: 97acd7431965ac6cb0bd9ab9eff1395bb67c30154a69dae15f7b4bddecb4c43c
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: examples/1.3/tutorial/workflows.yaml
+  source_sha256: 6d6ee4675a5119b9529a343b549308da5783a991850e1a62100956e63a8d6eaa
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.6.3.1
+  expected: reject
+  reason: equals is not a listed constraint operator; equal is the standard spelling.
+  classification: expected-reject
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/examples/1.3/tutorial/workflows.yaml\n    @52,13\
+      \ topology_template.workflows[\"backup\"].steps[\"notify_users\"].filter[0][0][0][0]: malformed validation\
+      \ clause, unsupported operator: equals"
+    error: read problems
+- path: profiles/org/oasis-open/simple/1.3/artifact.yaml
+  source_sha256: 58453e11d007d28e18b013fbc3f42b16118fef687ae502cc4e605907a4ccb815
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.1.2
+  - 3.1.3.1
+  - 3.7.6.3
+  expected: undetermined
+  reason: Explicit normative profile collides with implicit profile or its root-type special handling. Identical-name
+    equivalence and root exemptions need a controlled replay; neither a community failure nor automatic expected
+    rejection is proof.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (9)\n  file://<pinned-community>/profiles/org/oasis-open/simple/1.3/artifact.yaml\n\
+      \    @27,3 ambiguous artifact type name \"tosca.artifacts.Deployment\", can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/artifact.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/artifacts.yaml\"\n    @32,3 ambiguous artifact type name \"tosca.artifacts.Deployment.Image\"\
+      , can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/artifact.yaml\" or \"internal:/profiles/simple/1.3/artifacts.yaml\"\
+      \n    @41,3 ambiguous artifact type name \"tosca.artifacts.Deployment.Image.VM\", can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/artifact.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/artifacts.yaml\"\n    @20,3 ambiguous artifact type name \"tosca.artifacts.File\"\
+      , can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/artifact.yaml\" or \"internal:/profiles/simple/1.3/artifacts.yaml\"\
+      \n    @52,3 ambiguous artifact type name \"tosca.artifacts.Implementation\", can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/artifact.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/artifacts.yaml\"\n    @57,3 ambiguous artifact type name \"tosca.artifacts.Implementation.Bash\"\
+      , can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/artifact.yaml\" or \"internal:/profiles/simple/1.3/artifacts.yaml\"\
+      \n    @64,3 ambiguous artifact type name \"tosca.artifacts.Implementation.Python\", can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/artifact.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/artifacts.yaml\"\n    @15,3 ambiguous artifact type name \"tosca.artifacts.Root\"\
+      , can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/artifact.yaml\" or \"internal:/profiles/simple/1.3/artifacts.yaml\"\
+      \n    @71,3 ambiguous artifact type name \"tosca.artifacts.template\", can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/artifact.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/artifacts.yaml\""
+    error: parsing problems
+- path: profiles/org/oasis-open/simple/1.3/capability.yaml
+  source_sha256: a37051d05cd5338b5abbe27b732fc21eeebdee4b3df47bb4e9049452c22cd0f8
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.1.2
+  - 3.1.3.1
+  - 3.7.6.3
+  expected: undetermined
+  reason: Explicit normative profile collides with implicit profile or its root-type special handling. Identical-name
+    equivalence and root exemptions need a controlled replay; neither a community failure nor automatic expected
+    rejection is proof.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/profiles/org/oasis-open/simple/1.3/data.yaml\n\
+      \    @15,3 data_types[\"tosca.datatypes.Root\"]: malformed data type definition, requires derived_from\
+      \ or at least one property definition: map[description:The TOSCA root Data Type all other TOSCA base\
+      \ Data Types derive from.]"
+    error: read problems
+- path: profiles/org/oasis-open/simple/1.3/data.yaml
+  source_sha256: cf6e8cf8df67bbb581d07a374d5105a0ce7a0ec9855a7445aa4d70d9097c4ff5
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.1.2
+  - 3.1.3.1
+  - 3.7.6.3
+  expected: undetermined
+  reason: Explicit normative profile collides with implicit profile or its root-type special handling. Identical-name
+    equivalence and root exemptions need a controlled replay; neither a community failure nor automatic expected
+    rejection is proof.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/profiles/org/oasis-open/simple/1.3/data.yaml\n\
+      \    @15,3 data_types[\"tosca.datatypes.Root\"]: malformed data type definition, requires derived_from\
+      \ or at least one property definition: map[description:The TOSCA root Data Type all other TOSCA base\
+      \ Data Types derive from.]"
+    error: read problems
+- path: profiles/org/oasis-open/simple/1.3/group.yaml
+  source_sha256: 59237fbf361d0c2a1e291c06e35712479ad9e7865209d16e6345d61a491b7d43
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.1.2
+  - 3.1.3.1
+  - 3.7.6.3
+  expected: undetermined
+  reason: Explicit normative profile collides with implicit profile or its root-type special handling. Identical-name
+    equivalence and root exemptions need a controlled replay; neither a community failure nor automatic expected
+    rejection is proof.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/profiles/org/oasis-open/simple/1.3/group.yaml\n\
+      \    @14,3 ambiguous group type name \"tosca.groups.Root\", can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/group.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/groups.yaml\""
+    error: parsing problems
+- path: profiles/org/oasis-open/simple/1.3/interface.yaml
+  source_sha256: 178aaa9f1c8f4bb6b01b870db386cad0d7fb2792c23a32bd5d328f4f49de1c69
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.1.2
+  - 3.1.3.1
+  - 3.7.6.3
+  expected: undetermined
+  reason: Explicit normative profile collides with implicit profile or its root-type special handling. Identical-name
+    equivalence and root exemptions need a controlled replay; neither a community failure nor automatic expected
+    rejection is proof.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (3)\n  file://<pinned-community>/profiles/org/oasis-open/simple/1.3/interface.yaml\n\
+      \    @15,3 ambiguous interface type name \"tosca.interfaces.Root\", can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/interface.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/interfaces.yaml\"\n    @20,3 ambiguous interface type name \"tosca.interfaces.node.lifecycle.Standard\"\
+      , can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/interface.yaml\" or \"internal:/profiles/simple/1.3/interfaces.yaml\"\
+      \n    @39,3 ambiguous interface type name \"tosca.interfaces.relationship.Configure\", can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/interface.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/interfaces.yaml\""
+    error: parsing problems
+- path: profiles/org/oasis-open/simple/1.3/node.yaml
+  source_sha256: b02001480814cd152773965580b801ce1fbf3f4212933610311630ea9d6c1054
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.1.2
+  - 3.1.3.1
+  - 3.7.6.3
+  expected: undetermined
+  reason: Explicit normative profile collides with implicit profile or its root-type special handling. Identical-name
+    equivalence and root exemptions need a controlled replay; neither a community failure nor automatic expected
+    rejection is proof.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/profiles/org/oasis-open/simple/1.3/data.yaml\n\
+      \    @15,3 data_types[\"tosca.datatypes.Root\"]: malformed data type definition, requires derived_from\
+      \ or at least one property definition: map[description:The TOSCA root Data Type all other TOSCA base\
+      \ Data Types derive from.]"
+    error: read problems
+- path: profiles/org/oasis-open/simple/1.3/policy.yaml
+  source_sha256: 44322cdec031126735cf662b31a733d1ce9e25b6991840de6bd505cac8c388a1
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.1.2
+  - 3.1.3.1
+  - 3.7.6.3
+  expected: undetermined
+  reason: Explicit normative profile collides with implicit profile or its root-type special handling. Identical-name
+    equivalence and root exemptions need a controlled replay; neither a community failure nor automatic expected
+    rejection is proof.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (5)\n  file://<pinned-community>/profiles/org/oasis-open/simple/1.3/policy.yaml\n\
+      \    @37,3 ambiguous policy type name \"tosca.policies.Performance\", can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/policy.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/policies.yaml\"\n    @19,3 ambiguous policy type name \"tosca.policies.Placement\"\
+      , can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/policy.yaml\" or \"internal:/profiles/simple/1.3/policies.yaml\"\
+      \n    @15,3 ambiguous policy type name \"tosca.policies.Root\", can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/policy.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/policies.yaml\"\n    @25,3 ambiguous policy type name \"tosca.policies.Scaling\"\
+      , can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/policy.yaml\" or \"internal:/profiles/simple/1.3/policies.yaml\"\
+      \n    @31,3 ambiguous policy type name \"tosca.policies.Update\", can be in \"file://<pinned-community>/profiles/org/oasis-open/simple/1.3/policy.yaml\"\
+      \ or \"internal:/profiles/simple/1.3/policies.yaml\""
+    error: parsing problems
+- path: profiles/org/oasis-open/simple/1.3/profile.yaml
+  source_sha256: 70e766f957b5f6865aa72dc8f3df80d2988c8d19084ed03ca4491acf51d71e20
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.1.2
+  - 3.1.3.1
+  - 3.7.6.3
+  expected: undetermined
+  reason: Explicit normative profile collides with implicit profile or its root-type special handling. Identical-name
+    equivalence and root exemptions need a controlled replay; neither a community failure nor automatic expected
+    rejection is proof.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (2)\n  file://<pinned-community>/profiles/org/oasis-open/simple/1.3/data.yaml\n\
+      \    @15,3 data_types[\"tosca.datatypes.Root\"]: malformed data type definition, requires derived_from\
+      \ or at least one property definition: map[description:The TOSCA root Data Type all other TOSCA base\
+      \ Data Types derive from.]\n  file://<pinned-community>/profiles/org/oasis-open/simple/1.3/profile.yaml\n\
+      \    @3,1 namespace: invalid namespace, reserved for TOSCA-approved specifications and work: http://docs.oasis-open.org/tosca/ns/simple/yaml/1.3"
+    error: read problems
+- path: profiles/org/oasis-open/simple/1.3/relationship.yaml
+  source_sha256: c6fe5b8adc515c901bf45ea0eb606ce0e0df673780c3f9d9daa80ea8d715c566
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  - 3.1.2
+  - 3.1.3.1
+  - 3.7.6.3
+  expected: undetermined
+  reason: Explicit normative profile collides with implicit profile or its root-type special handling. Identical-name
+    equivalence and root exemptions need a controlled replay; neither a community failure nor automatic expected
+    rejection is proof.
+  classification: ambiguous
+  actual:
+    accepted: false
+    diagnostics: "Problems (1)\n  file://<pinned-community>/profiles/org/oasis-open/simple/1.3/data.yaml\n\
+      \    @15,3 data_types[\"tosca.datatypes.Root\"]: malformed data type definition, requires derived_from\
+      \ or at least one property definition: map[description:The TOSCA root Data Type all other TOSCA base\
+      \ Data Types derive from.]"
+    error: read problems
+- path: tests/tosca_2_0/namespaces/imports/mongodb.yaml
+  source_sha256: 77677070108f1631e97e813e6c0620f57ca35dc5f907e8b339acfef6b6c17e3c
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+- path: tests/tosca_2_0/namespaces/imports/nginx.yaml
+  source_sha256: 90534eaa9483d7deaebea3201d86eb40485cc61b8fe1b57a3a146237063d3043
+  specification_sections:
+  - '3.10'
+  - '14.2'
+  - '14.3'
+  expected: accept
+  reason: Source uses recognized 1.3 type/template grammar; no independently established invalidity. Acceptance
+    is not exhaustive semantic verification.
+  classification: expected-pass
+  actual:
+    accepted: true
+    diagnostics: ''
+classification_counts:
+  ambiguous: 24
+  expected-pass: 21
+  expected-reject: 18
+  unexpected-pass: 2
+total: 65

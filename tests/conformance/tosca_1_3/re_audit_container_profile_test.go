@@ -61,6 +61,10 @@ func TestReAuditContainerAssignments(t *testing.T) {
 node_types:
   App: { derived_from: tosca.nodes.Container.Application }
   Runtime: { derived_from: tosca.nodes.Container.Runtime }
+  Storage:
+    derived_from: tosca.nodes.Storage.BlockStorage
+    capabilities:
+      storage: { type: tosca.capabilities.Storage }
   Endpoint:
     derived_from: tosca.nodes.Root
     capabilities:
@@ -72,7 +76,7 @@ topology_template:
       type: Runtime
       requirements: [{ host: vm }]
     storage:
-      type: tosca.nodes.Storage.BlockStorage
+      type: Storage
       properties: { name: disk, size: 1 GiB }
     endpoint: { type: Endpoint }
     app:
@@ -99,5 +103,7 @@ topology_template:
 	if !found {
 		t.Fatal("network requirement lost")
 	}
+	// Re-audit follow-up: a concrete target exists but its network is Root.
+	reAuditReject(t, strings.Replace(source, "network: { type: tosca.capabilities.Endpoint }", "network: { type: tosca.capabilities.Root }", 1), "rendering", "[TOSCA13-TARGET-MATCH]", `source="app"`, `requirement="network"`, `target="endpoint"`, "tosca.capabilities.Endpoint", "tosca.capabilities.Root")
 	reAuditReject(t, strings.Replace(source, "App: { derived_from: tosca.nodes.Container.Application }", "App: { derived_from: tosca.nodes.Container.Application, requirements: [{network: {capability: tosca.capabilities.Compute}}] }", 1), "inheritance", "must be derived from", "Endpoint")
 }
