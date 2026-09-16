@@ -1,0 +1,41 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+interface_types:
+  Test:
+    operations:
+      run: {}
+      keep: {}
+node_types:
+  Parent:
+    derived_from: tosca.nodes.Root
+    interfaces:
+      Test:
+        type: Test
+        operations:
+          run: parent.sh
+          keep: unrelated.sh
+  Child:
+    derived_from: Parent
+    interfaces:
+      Test:
+        operations:
+          run: child.sh
+  Grandchild:
+    derived_from: Child
+  LocalNoOverride:
+    derived_from: Parent
+    interfaces:
+      Test:
+        operations:
+          run: {description: local definition}
+topology_template:
+  node_templates:
+    parent: {type: Parent}
+    child: {type: Child}
+    grandchild: {type: Grandchild}
+    inherited: {type: LocalNoOverride}
+    local:
+      type: Child
+      interfaces:
+        Test:
+          operations:
+            run: local.sh

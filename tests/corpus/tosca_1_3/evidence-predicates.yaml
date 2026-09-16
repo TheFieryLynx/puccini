@@ -1,2 +1,131 @@
 schema_version: 1
-requirements: []
+requirements:
+- id: TOSCA13-3.6.17.3-002
+  predicate: The default sub-classing behavior for implementations of operations SHALL be override.
+  source_predicate_sha256: d8b0b4bee0fce801dbd259040f2e81442fbcf0993e91a2c2a6806bfd17d3ddae
+  evidence_kind: semantic-value
+  positive_required: true
+  negative_required: false
+  complete_predicate: true
+  mutation_paths:
+  - inheritance
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OPERATION-TYPE-INHERITANCE
+    fixture_sha256: ce26f1d62dfb0cfe51ff4d876d7d902b7ea02b3d0053e1809d70dc5795095698
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.6.17.3-002
+      kind: value
+      path: /nodeTemplates/parent/interfaces/Test/operations/run/implementation
+      expected: parent.sh
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OPERATION-TYPE-INHERITANCE
+    fixture_sha256: ce26f1d62dfb0cfe51ff4d876d7d902b7ea02b3d0053e1809d70dc5795095698
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-3.6.17.3-002
+      kind: value
+      path: /nodeTemplates/child/interfaces/Test/operations/run/implementation
+      expected: child.sh
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OPERATION-TYPE-INHERITANCE
+    fixture_sha256: ce26f1d62dfb0cfe51ff4d876d7d902b7ea02b3d0053e1809d70dc5795095698
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-3.6.17.3-002
+      kind: value
+      path: /nodeTemplates/grandchild/interfaces/Test/operations/run/implementation
+      expected: child.sh
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OPERATION-TYPE-INHERITANCE
+    fixture_sha256: ce26f1d62dfb0cfe51ff4d876d7d902b7ea02b3d0053e1809d70dc5795095698
+    assertion:
+      id: A4
+      requirement_ids:
+      - TOSCA13-3.6.17.3-002
+      kind: value
+      path: /nodeTemplates/inherited/interfaces/Test/operations/run/implementation
+      expected: parent.sh
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OPERATION-TYPE-INHERITANCE
+    fixture_sha256: ce26f1d62dfb0cfe51ff4d876d7d902b7ea02b3d0053e1809d70dc5795095698
+    assertion:
+      id: A5
+      requirement_ids:
+      - TOSCA13-3.6.17.3-002
+      kind: value
+      path: /nodeTemplates/local/interfaces/Test/operations/run/implementation
+      expected: local.sh
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OPERATION-TYPE-INHERITANCE
+    fixture_sha256: ce26f1d62dfb0cfe51ff4d876d7d902b7ea02b3d0053e1809d70dc5795095698
+    assertion:
+      id: A6
+      requirement_ids:
+      - TOSCA13-3.6.17.3-002
+      kind: value
+      path: /nodeTemplates/child/interfaces/Test/operations/keep/implementation
+      expected: unrelated.sh
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OPERATION-TYPE-INHERITANCE
+    fixture_sha256: ce26f1d62dfb0cfe51ff4d876d7d902b7ea02b3d0053e1809d70dc5795095698
+    assertion:
+      id: A7
+      requirement_ids:
+      - TOSCA13-3.6.17.3-002
+      kind: value
+      path: /nodeTemplates/grandchild/interfaces/Test/operations/keep/implementation
+      expected: unrelated.sh
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OPERATION-TYPE-INHERITANCE
+    fixture_sha256: ce26f1d62dfb0cfe51ff4d876d7d902b7ea02b3d0053e1809d70dc5795095698
+    assertion:
+      id: A8
+      requirement_ids:
+      - TOSCA13-3.6.17.3-002
+      kind: value
+      path: /nodeTemplates/local/interfaces/Test/operations/keep/implementation
+      expected: unrelated.sh
+- id: TOSCA13-5.8.1-004
+  predicate: The default behavior when providing scripts for an operation in a sub-type (sub-class) or a template of an existing
+    type which already has a script provided for that operation SHALL be override.
+  source_predicate_sha256: aec275ea57bbd36d84d2f2c62bb4dcb5c6e1ce874496fa2fc6d64821996a2be3
+  evidence_kind: semantic-value
+  positive_required: true
+  negative_required: false
+  complete_predicate: true
+  mutation_paths:
+  - inheritance
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OPERATION-TEMPLATE-OVERRIDE
+    fixture_sha256: 599ae06f5e7070fad0e7767dcc295590e2f195d610b82ad1b265618242189118
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-5.8.1-004
+      kind: value
+      path: /nodeTemplates/source/requirements/0/relationship/interfaces/Test/operations/run/implementation
+      expected: local.sh
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OPERATION-TEMPLATE-OVERRIDE
+    fixture_sha256: 599ae06f5e7070fad0e7767dcc295590e2f195d610b82ad1b265618242189118
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-5.8.1-004
+      kind: value
+      path: /nodeTemplates/source/requirements/0/relationship/interfaces/Test/operations/keep/implementation
+      expected: unrelated.sh
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OPERATION-TEMPLATE-INHERITED
+    fixture_sha256: 7cbceeae2aaa579d2db6829a1e2eb58f7a3fd3fe05e99ab5b5dbc8c02073fbae
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-5.8.1-004
+      kind: value
+      path: /nodeTemplates/source/requirements/0/relationship/interfaces/Test/operations/run/implementation
+      expected: parent.sh
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OPERATION-TEMPLATE-INHERITED
+    fixture_sha256: 7cbceeae2aaa579d2db6829a1e2eb58f7a3fd3fe05e99ab5b5dbc8c02073fbae
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-5.8.1-004
+      kind: value
+      path: /nodeTemplates/source/requirements/0/relationship/interfaces/Test/operations/keep/implementation
+      expected: unrelated.sh

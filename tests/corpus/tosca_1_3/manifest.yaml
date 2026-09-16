@@ -3565,4 +3565,160 @@ cases:
     supporting_requirements:
     - TOSCA13-3.6.27.1-002
   assertions: []
+- id: TOSCA13-CORPUS-EVIDENCE-OPERATION-TYPE-INHERITANCE
+  file: sections/evidence/operation-type-inheritance.yaml
+  specification:
+    sections:
+    - 3.6.17.3
+    requirement_ids:
+    - TOSCA13-3.6.17.3-002
+  classification:
+    kind: valid
+    category: inheritance
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.6.17.3-002
+    supporting_requirements: []
+    variation_axes:
+    - operation-type-inheritance
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.6.17.3-002
+    kind: value
+    path: /nodeTemplates/parent/interfaces/Test/operations/run/implementation
+    expected: parent.sh
+  - id: A2
+    requirement_ids:
+    - TOSCA13-3.6.17.3-002
+    kind: value
+    path: /nodeTemplates/child/interfaces/Test/operations/run/implementation
+    expected: child.sh
+  - id: A3
+    requirement_ids:
+    - TOSCA13-3.6.17.3-002
+    kind: value
+    path: /nodeTemplates/grandchild/interfaces/Test/operations/run/implementation
+    expected: child.sh
+  - id: A4
+    requirement_ids:
+    - TOSCA13-3.6.17.3-002
+    kind: value
+    path: /nodeTemplates/inherited/interfaces/Test/operations/run/implementation
+    expected: parent.sh
+  - id: A5
+    requirement_ids:
+    - TOSCA13-3.6.17.3-002
+    kind: value
+    path: /nodeTemplates/local/interfaces/Test/operations/run/implementation
+    expected: local.sh
+  - id: A6
+    requirement_ids:
+    - TOSCA13-3.6.17.3-002
+    kind: value
+    path: /nodeTemplates/child/interfaces/Test/operations/keep/implementation
+    expected: unrelated.sh
+  - id: A7
+    requirement_ids:
+    - TOSCA13-3.6.17.3-002
+    kind: value
+    path: /nodeTemplates/grandchild/interfaces/Test/operations/keep/implementation
+    expected: unrelated.sh
+  - id: A8
+    requirement_ids:
+    - TOSCA13-3.6.17.3-002
+    kind: value
+    path: /nodeTemplates/local/interfaces/Test/operations/keep/implementation
+    expected: unrelated.sh
+- id: TOSCA13-CORPUS-EVIDENCE-OPERATION-TEMPLATE-OVERRIDE
+  file: sections/evidence/operation-template-override.yaml
+  specification:
+    sections:
+    - 5.8.1
+    requirement_ids:
+    - TOSCA13-5.8.1-004
+  classification:
+    kind: valid
+    category: inheritance
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-5.8.1-004
+    supporting_requirements: []
+    variation_axes:
+    - operation-template-override
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-5.8.1-004
+    kind: value
+    path: /nodeTemplates/source/requirements/0/relationship/interfaces/Test/operations/run/implementation
+    expected: local.sh
+  - id: A2
+    requirement_ids:
+    - TOSCA13-5.8.1-004
+    kind: value
+    path: /nodeTemplates/source/requirements/0/relationship/interfaces/Test/operations/keep/implementation
+    expected: unrelated.sh
+- id: TOSCA13-CORPUS-EVIDENCE-OPERATION-TEMPLATE-INHERITED
+  file: sections/evidence/operation-template-inherited.yaml
+  specification:
+    sections:
+    - 5.8.1
+    requirement_ids:
+    - TOSCA13-5.8.1-004
+  classification:
+    kind: valid
+    category: inheritance
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-5.8.1-004
+    supporting_requirements: []
+    variation_axes:
+    - operation-template-inherited
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-5.8.1-004
+    kind: value
+    path: /nodeTemplates/source/requirements/0/relationship/interfaces/Test/operations/run/implementation
+    expected: parent.sh
+  - id: A2
+    requirement_ids:
+    - TOSCA13-5.8.1-004
+    kind: value
+    path: /nodeTemplates/source/requirements/0/relationship/interfaces/Test/operations/keep/implementation
+    expected: unrelated.sh
 schema_version: 2

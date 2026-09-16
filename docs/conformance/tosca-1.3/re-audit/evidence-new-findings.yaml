@@ -1,0 +1,26 @@
+schema_version: 1
+findings:
+- id: EVIDENCE-OPERATION-INHERITANCE
+  severity: high
+  discovered_during: F15 operation evidence hardening
+  specification:
+    version: '1.3'
+    source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+    sections: ['3.6.17.1', '3.6.17.3', '5.8.1']
+    normative_rule: Implementation artifacts assigned in subclasses override those in the parent; implementation is optional. Providing only description does not assign an overriding artifact.
+    interpretation: The absence of a new implementation preserves the inherited implementation. See the linked decision; the specification does not give a complete inheritance algorithm.
+  decision: docs/decisions/tosca-1.3-operation-implementation-inheritance.md
+  current_behavior: A local operation definition with description only loses the parent implementation and normalizes as an empty implementation.
+  expected_behavior: Preserve parent.sh unless an overriding implementation artifact is supplied.
+  parser_phase: inheritance
+  production_path: OperationDefinitions.Inherit -> OperationDefinition.Inherit -> OperationAssignments.Render -> InterfaceImplementation.NormalizeOperation
+  file: tosca/grammars/tosca_v2_0/operation-definition.go
+  reproducer: TOSCA13-CORPUS-EVIDENCE-OPERATION-TYPE-INHERITANCE
+  assertion: A4
+  before_result: 'got "", expected "parent.sh"'
+  discovery_commit_policy: Intentionally failing permanent regression committed separately as explicitly required by the evidence-hardening task. This is not a completed remediation commit.
+  status: confirmed
+  historical_mapping:
+    related_ids: [TOSCA13-3.6.17.3-002, TOSCA13-5.8.1-004]
+    exact_mapping: false
+    reason: Omitted implementation inheritance is an interpretation of override semantics, not a separately enumerated frozen predicate. No denominator change.
