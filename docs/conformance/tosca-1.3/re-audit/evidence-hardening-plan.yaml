@@ -1,0 +1,57 @@
+version: 1
+baseline:
+  head: 42666517913de4a55dff8826f13fcdf1eb64d44f
+  working_tree: clean
+  production_semantics: unchanged unless a separately committed discovery requires remediation
+  historical_denominator: 223
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+findings:
+- id: F12
+  description: Frozen atomicity and processor applicability require separate catalog review.
+  current_failure_mode: Historical membership and implemented/verified labels are treated as proof despite duplicate, bundled and potentially non-processor obligations.
+  affected_artifacts: [docs/conformance/tosca-1.3/requirements.yaml, docs/conformance/tosca-1.3/coverage.yaml, tests/corpus/tosca_1_3/coverage_gate_test.go]
+  false_confidence_risk: The historical denominator certifies itself and obscures applicability or atomicity uncertainty.
+  remediation:
+    - Preserve catalog bytes and membership; independently recompute evidence for each historical record.
+    - Do not award verified status from supporting labels or old verified fields.
+    - Keep F12 catalog atomicity/applicability correction explicitly open; only its evidence consequences are addressed here.
+  acceptance_tests: [historical-membership-not-proof, supporting-only-insufficient, frozen-hash-invariance]
+- id: F13
+  description: Large manifest label sets are not direct evidence of the labelled obligations.
+  current_failure_mode: Generic definition and Compute fixtures claim unrelated refinement, constraint and normative profile obligations without predicate assertions.
+  affected_artifacts: [tests/corpus/tosca_1_3/manifest.yaml, tests/corpus/tosca_1_3/non_must/manifest.yaml, scripts/conformance/generate_tosca13_corpus_docs.py]
+  false_confidence_risk: Hundreds of unrelated obligations inherit verification from a few successful parses.
+  remediation:
+    - Separate primary ownership from supporting dependencies; demote unreviewed labels.
+    - Require independently reviewed predicate bindings and executed owned assertions.
+    - Require semantic value/resolution assertions for semantic predicates and nearest-valid siblings for rejection evidence.
+  acceptance_tests: [missing-owned-assertion, unrelated-requirement-claim, supporting-only-insufficient, missing-nearest-valid, semantic-acceptance-insufficient]
+- id: F14
+  description: Corpus expected-phase metadata is not asserted.
+  current_failure_mode: Aggregate Parse errors and diagnostic substrings cannot establish which parser boundary failed.
+  affected_artifacts: [tests/corpus/tosca_1_3/corpus_test.go]
+  false_confidence_risk: An early unrelated error is credited as evidence for a later validation obligation.
+  remediation:
+    - Instrument existing phase APIs on the test side using stable phase identities.
+    - Compare actual and expected phases exactly, including repeated rejection runs.
+    - Add deliberate earlier-invalid siblings and identity-mismatch integrity tests.
+    - Treat CSAR opening and metadata checks as read lifecycle unless a distinct boundary actually exists; do not invent a normative normalization-error category.
+  acceptance_tests: [structural-read, namespace-resolution, hierarchy-cycle, inheritance-refinement, rendering-assignment, rendering-function-context, csar-read, wrong-phase-rejection]
+- id: F15
+  description: Mutation survivors disprove exhaustive regression sensitivity.
+  current_failure_mode: Operation CopyUnassigned overwrites and Credential.token_type default changes survive; only four old mutations are detected by template corpus alone.
+  affected_artifacts: [tests/corpus/tosca_1_3, tests/conformance/tosca_1_3, docs/conformance/tosca-1.3/re-audit/mutation-audit.yaml]
+  false_confidence_risk: Tests exist without sensitivity to the targeted production behavior.
+  remediation:
+    - Add permanent operation inheritance and Credential default predicate assertions.
+    - Replay all fifteen original patches and record exact detecting case/assertion ownership.
+    - Gate every required subsystem category on an existing detecting case and assertion.
+    - Require mutation sensitivity when recomputing historical verification.
+  acceptance_tests: [operation-override-mutation, credential-default-mutation, all-original-mutations, missing-mutation-category, missing-detecting-case, missing-detecting-assertion]
+commit_sequence:
+- corpus/evidence infrastructure
+- operation inheritance evidence
+- Credential default evidence
+- mutation coverage gate
+- evidence recheck report
+catalog_work_deferred: [F11, F12 atomicity/applicability correction, independent extraction, 218 mappings, strength disagreements, ambiguities, proven denominator]

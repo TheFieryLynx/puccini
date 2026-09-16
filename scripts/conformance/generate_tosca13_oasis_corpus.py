@@ -159,11 +159,13 @@ def generated_outputs() -> dict[pathlib.Path, str]:
             requirement_index,
             upstream_commit,
         )
+        case["coverage"] = {"primary_requirements": [], "supporting_requirements": []}
+        case["assertions"] = []
         cases.append(case)
         outputs[OUTPUT_ROOT / fixture_name] = fixture
 
     manifest = {
-        "schema_version": 1,
+        "schema_version": 2,
         "layer": "OASIS community independent comparison corpus",
         "upstream_repository": (
             "https://github.com/oasis-open/tosca-community-contributions"

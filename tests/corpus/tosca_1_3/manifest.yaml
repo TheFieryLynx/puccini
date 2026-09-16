@@ -1,1056 +1,3568 @@
 cases:
-  - id: TOSCA13-CORPUS-SERVICE-TEMPLATE-MINIMAL-VALID
-    file: sections/3.10-service-template/service-template/minimal-valid.yaml
-    specification:
-      sections: ["3.10.1"]
-      requirement_ids:
-        - TOSCA13-3.10.1-001
-        - TOSCA13-3.10.1-002
-        - TOSCA13-3.10.1-003
-    classification:
-      kind: valid
-      category: grammar
-      features: [service-template, minimal, version-selection]
-    expected:
-      accepted: true
-      phase: normalization
-      diagnostic:
-        category: null
-        path: null
-      assertions:
-        - service_template_non_nil
-    coverage:
-      variation_axes:
-        - grammar-form:minimal
-        - keynames:required-present
-        - yaml-type:version-string
-      related_cases:
-        - TOSCA13-CORPUS-SERVICE-TEMPLATE-V20-KEY-INVALID
-
-  - id: TOSCA13-CORPUS-SERVICE-TEMPLATE-V20-KEY-INVALID
-    file: version-isolation/tosca-2.0-service-template-key-invalid.yaml
-    specification:
-      sections: ["3.10.1"]
-      requirement_ids:
-        - TOSCA13-3.10.1-001
-        - TOSCA13-3.10.1-003
-    classification:
-      kind: invalid
-      category: grammar
-      features: [service-template, version-isolation, unknown-key]
-    expected:
-      accepted: false
-      phase: read
-      diagnostic:
-        category: unsupported keyname
-        path: service_template
-      assertions: []
-    coverage:
-      variation_axes:
-        - keynames:tosca-2.0-only
-        - yaml-type:mapping
-        - version-isolation:1.3-rejects-2.0-form
-      related_cases:
-        - TOSCA13-CORPUS-SERVICE-TEMPLATE-MINIMAL-VALID
-
-  - id: TOSCA13-CORPUS-NAMESPACE-DEFAULT-VALID
-    file: sections/3.1-namespaces/namespaces/default-valid.yaml
-    specification:
-      sections: ["3.1", "3.1.1", "3.1.2"]
-      requirement_ids:
-        - TOSCA13-3.1-001
-        - TOSCA13-3.1.1-001
-        - TOSCA13-3.1.2-001
-        - TOSCA13-3.1.2-002
-        - TOSCA13-3.1.2-003
-        - TOSCA13-3.1.2-004
-        - TOSCA13-3.1.2-005
-    classification:
-      kind: valid
-      category: resolution
-      features: [namespace, default-namespace, normative-type]
-    expected:
-      accepted: true
-      phase: normalization
-      diagnostic: {category: null, path: null}
-      assertions: [node_exists:node]
-    coverage:
-      variation_axes:
-        - namespace:default
-        - reference:normative-type
-        - keynames:required-first
-      related_cases: [TOSCA13-CORPUS-NAMESPACE-RESERVED-INVALID]
-
-  - id: TOSCA13-CORPUS-NAMESPACE-RESERVED-INVALID
-    file: sections/3.1-namespaces/namespaces/reserved-invalid.yaml
-    specification:
-      sections: ["3.1.3.1"]
-      requirement_ids:
-        - TOSCA13-3.1.3.1-001
-        - TOSCA13-3.1.3.1-002
-    classification:
-      kind: invalid
-      category: resolution
-      features: [namespace, reserved-name]
-    expected:
-      accepted: false
-      phase: read
-      diagnostic: {category: reserved, path: namespace}
-      assertions: []
-    coverage:
-      variation_axes:
-        - namespace:reserved-uri-hierarchy
-        - values:forbidden
-      related_cases: [TOSCA13-CORPUS-NAMESPACE-DEFAULT-VALID]
-
-  - id: TOSCA13-CORPUS-IMPORT-SHORT-VALID
-    file: sections/3.1-namespaces/imports/short-valid.yaml
-    specification:
-      sections: ["3.6.8.1", "3.6.8.2.2"]
-      requirement_ids:
-        - TOSCA13-3.6.8.1-002
-        - TOSCA13-3.6.8.1-003
-        - TOSCA13-3.6.8.2.2-003
-    classification:
-      kind: valid
-      category: resolution
-      features: [imports, short-notation, local-reference]
-    expected:
-      accepted: true
-      phase: normalization
-      diagnostic: {category: null, path: null}
-      assertions: [node_exists:node]
-    coverage:
-      variation_axes:
-        - grammar-form:short
-        - imports:relative
-        - reference:imported-unqualified
-      related_cases: [TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID]
-
-  - id: TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
-    file: sections/3.1-namespaces/imports/long-qualified-valid.yaml
-    specification:
-      sections: ["3.1.3.1", "3.6.8.1", "3.6.8.2.2", "3.6.8.2.3"]
-      requirement_ids:
-        - TOSCA13-3.1.3.1-004
-        - TOSCA13-3.1.3.1-005
-        - TOSCA13-3.6.8.1-002
-        - TOSCA13-3.6.8.1-003
-        - TOSCA13-3.6.8.2.2-003
-        - TOSCA13-3.6.8.2.3-002
-    classification:
-      kind: valid
-      category: resolution
-      features: [imports, long-notation, qualified-reference]
-    expected:
-      accepted: true
-      phase: normalization
-      diagnostic: {category: null, path: null}
-      assertions: [node_exists:node]
-    coverage:
-      variation_axes:
-        - grammar-form:long
-        - imports:namespace-qualified
-        - reference:imported-target
-      related_cases:
-        - TOSCA13-CORPUS-IMPORT-SHORT-VALID
-        - TOSCA13-CORPUS-IMPORT-UNKNOWN-QUALIFIED-INVALID
-
-  - id: TOSCA13-CORPUS-IMPORT-WRONG-YAML-TYPE-INVALID
-    file: sections/3.1-namespaces/imports/wrong-yaml-type-invalid.yaml
-    specification:
-      sections: ["3.6.8.1", "3.6.8.2.2"]
-      requirement_ids:
-        - TOSCA13-3.6.8.1-002
-        - TOSCA13-3.6.8.1-003
-        - TOSCA13-3.6.8.2.2-003
-    classification:
-      kind: invalid
-      category: grammar
-      features: [imports, yaml-type]
-    expected:
-      accepted: false
-      phase: read
-      diagnostic: {category: '"map" or "string"', path: imports}
-      assertions: []
-    coverage:
-      variation_axes:
-        - yaml-type:scalar-number-equivalence-class
-        - grammar-form:invalid
-      related_cases: [TOSCA13-CORPUS-IMPORT-SHORT-VALID]
-
-  - id: TOSCA13-CORPUS-IMPORT-MISSING-FILE-INVALID
-    file: sections/3.1-namespaces/imports/missing-file-invalid.yaml
-    specification:
-      sections: ["3.6.8.1", "3.6.8.2.3"]
-      requirement_ids:
-        - TOSCA13-3.6.8.1-002
-        - TOSCA13-3.6.8.1-003
-        - TOSCA13-3.6.8.2.3-002
-    classification:
-      kind: invalid
-      category: resolution
-      features: [imports, missing-resource]
-    expected:
-      accepted: false
-      phase: read
-      diagnostic: {category: invalid URL, path: absent.yaml}
-      assertions: []
-    coverage:
-      variation_axes:
-        - imports:missing-resource
-        - reference:unresolved
-      related_cases: [TOSCA13-CORPUS-IMPORT-SHORT-VALID]
-
-  - id: TOSCA13-CORPUS-IMPORT-UNKNOWN-QUALIFIED-INVALID
-    file: sections/3.1-namespaces/imports/unknown-qualified-invalid.yaml
-    specification:
-      sections: ["3.1.3.1"]
-      requirement_ids:
-        - TOSCA13-3.1.3.1-004
-        - TOSCA13-3.1.3.1-005
-    classification:
-      kind: invalid
-      category: resolution
-      features: [imports, qualified-reference, missing-name]
-    expected:
-      accepted: false
-      phase: namespaces
-      diagnostic: {category: unknown, path: derived_from}
-      assertions: []
-    coverage:
-      variation_axes:
-        - namespace:known-prefix
-        - reference:missing-qualified-name
-      related_cases: [TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID]
-
-  - id: TOSCA13-CORPUS-IMPORT-TRANSITIVE-VALID
-    file: sections/3.1-namespaces/imports/transitive-valid.yaml
-    specification:
-      sections: ["3.1.3.1"]
-      requirement_ids:
-        - TOSCA13-3.1.3.1-004
-        - TOSCA13-3.1.3.1-005
-    classification:
-      kind: valid
-      category: resolution
-      features: [imports, transitive-import, inheritance]
-    expected:
-      accepted: true
-      phase: normalization
-      diagnostic: {category: null, path: null}
-      assertions: [node_exists:node]
-    coverage:
-      variation_axes:
-        - imports:transitive
-        - notation:long
-        - inheritance:imported-parent
-      related_cases: [TOSCA13-CORPUS-IMPORT-CYCLE-INVALID]
-
-  - id: TOSCA13-CORPUS-IMPORT-CYCLE-INVALID
-    file: sections/3.1-namespaces/imports/cycle-invalid.yaml
-    specification:
-      sections: ["3.1.3.1"]
-      requirement_ids:
-        - TOSCA13-3.1.3.1-004
-        - TOSCA13-3.1.3.1-005
-    classification:
-      kind: invalid
-      category: resolution
-      features: [imports, cycle]
-    expected:
-      accepted: false
-      phase: namespaces
-      diagnostic: {category: endless loop, path: cycle-a.yaml}
-      assertions: []
-    coverage:
-      variation_axes:
-        - imports:cycle
-        - graph:bounded-cycle-detection
-      related_cases: [TOSCA13-CORPUS-IMPORT-TRANSITIVE-VALID]
-
-  - id: TOSCA13-CORPUS-IMPORT-DUPLICATE-IDEMPOTENT-VALID
-    file: sections/3.1-namespaces/imports/duplicate-idempotent-valid.yaml
-    specification:
-      sections: ["3.1.3.1"]
-      requirement_ids:
-        - TOSCA13-3.1.3.1-004
-        - TOSCA13-3.1.3.1-005
-    classification:
-      kind: valid
-      category: resolution
-      features: [imports, duplicate-import, determinism]
-    expected:
-      accepted: true
-      phase: normalization
-      diagnostic: {category: null, path: null}
-      assertions: [node_exists:node]
-    coverage:
-      variation_axes:
-        - imports:duplicate-idempotent
-        - determinism:stable-identity
-      related_cases: [TOSCA13-CORPUS-IMPORT-COLLISION-INVALID]
-
-  - id: TOSCA13-CORPUS-IMPORT-COLLISION-INVALID
-    file: sections/3.1-namespaces/imports/collision-invalid.yaml
-    specification:
-      sections: ["3.1.3.1"]
-      requirement_ids:
-        - TOSCA13-3.1.3.1-004
-        - TOSCA13-3.1.3.1-005
-    classification:
-      kind: invalid
-      category: resolution
-      features: [imports, collision, determinism]
-    expected:
-      accepted: false
-      phase: namespaces
-      diagnostic: {category: ambiguous, path: Collision}
-      assertions: []
-    coverage:
-      variation_axes:
-        - imports:name-collision
-        - namespace:unqualified
-        - diagnostic:deterministic
-      related_cases: [TOSCA13-CORPUS-IMPORT-DUPLICATE-IDEMPOTENT-VALID]
-
-  - id: TOSCA13-CORPUS-LOCAL-DUPLICATE-NAME-INVALID
-    file: sections/3.1-namespaces/namespaces/local-duplicate-invalid.yaml
-    specification:
-      sections: ["3.1.3.1"]
-      requirement_ids:
-        - TOSCA13-3.1.3.1-007
-        - TOSCA13-3.1.3.1-008
-        - TOSCA13-3.1.3.1-009
-        - TOSCA13-3.1.3.1-010
-        - TOSCA13-3.1.3.1-011
-        - TOSCA13-3.1.3.1-012
-        - TOSCA13-3.1.3.1-013
-        - TOSCA13-3.1.3.1-015
-        - TOSCA13-3.1.3.1-016
-        - TOSCA13-3.1.3.1-017
-        - TOSCA13-3.1.3.1-018
-        - TOSCA13-3.1.3.1-020
-        - TOSCA13-3.1.3.1-021
-        - TOSCA13-3.1.3.1-022
-        - TOSCA13-3.1.3.1-023
-        - TOSCA13-3.1.3.1-024
-        - TOSCA13-3.1.3.1-025
-        - TOSCA13-3.1.3.1-026
-        - TOSCA13-3.1.3.1-027
-    classification:
-      kind: invalid
-      category: grammar
-      features: [namespace, duplicate-local-name]
-    expected:
-      accepted: false
-      phase: read
-      diagnostic: {category: duplicate map key, path: Duplicate}
-      assertions: []
-    coverage:
-      variation_axes:
-        - keynames:duplicate-map-key-equivalence-class
-        - namespace:local
-        - diagnostic:yaml-decode
-      related_cases: [TOSCA13-CORPUS-NAMESPACE-DEFAULT-VALID]
-
-  - id: TOSCA13-CORPUS-IMPORT-DIFFERENT-VERSION-INVALID
-    file: version-isolation/import-tosca-2.0-invalid.yaml
-    specification:
-      sections: ["3.1.3.1"]
-      requirement_ids:
-        - TOSCA13-3.1.3.1-004
-        - TOSCA13-3.1.3.1-005
-    classification:
-      kind: invalid
-      category: resolution
-      features: [imports, version-isolation]
-    expected:
-      accepted: false
-      phase: namespaces
-      diagnostic: {category: incompatible import, path: different-version.yaml}
-      assertions: []
-    coverage:
-      variation_axes:
-        - imports:cross-version
-        - version-isolation:1.3-imports-2.0
-      related_cases: [TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID]
-
-  - id: TOSCA13-CORPUS-VERSION-ZERO-VALID
-    file: sections/3.3-data-types/version/zero-valid.yaml
-    specification:
-      sections: ["3.3.2.1", "3.3.2.5"]
-      requirement_ids: [TOSCA13-3.3.2.1-004, TOSCA13-3.3.2.1-005, TOSCA13-3.3.2.5-001]
-    classification: {kind: valid, category: normalization, features: [version, zero-sentinel]}
-    expected:
-      accepted: true
-      phase: normalization
-      diagnostic: {category: null, path: null}
-      assertions: [node_exists:node]
-    coverage:
-      variation_axes: [boundary:zero-version, normalization:unspecified-sentinel]
-      related_cases: [TOSCA13-CORPUS-VERSION-QUALIFIED-ZERO-INVALID]
-
-  - id: TOSCA13-CORPUS-VERSION-QUALIFIED-ZERO-INVALID
-    file: sections/3.3-data-types/version/qualified-zero-invalid.yaml
-    specification:
-      sections: ["3.3.2.5"]
-      requirement_ids: [TOSCA13-3.3.2.5-002]
-    classification: {kind: invalid, category: semantic, features: [version, qualifier]}
-    expected:
-      accepted: false
-      phase: rendering
-      diagnostic: {category: qualifier, path: release}
-      assertions: []
-    coverage:
-      variation_axes: [boundary:zero-with-qualifier, values:forbidden-combination]
-      related_cases: [TOSCA13-CORPUS-VERSION-ZERO-VALID]
-
-  - id: TOSCA13-CORPUS-RANGE-BOUNDARIES-VALID
-    file: sections/3.3-data-types/range/boundaries-valid.yaml
-    specification:
-      sections: ["3.3.3.1"]
-      requirement_ids: [TOSCA13-3.3.3.1-004, TOSCA13-3.3.3.1-005]
-    classification: {kind: valid, category: normalization, features: [range, unbounded]}
-    expected:
-      accepted: true
-      phase: normalization
-      diagnostic: {category: null, path: null}
-      assertions: [node_exists:node]
-    coverage:
-      variation_axes: [cardinality:equal-bounds, cardinality:UNBOUNDED]
-      related_cases: [TOSCA13-CORPUS-RANGE-REVERSED-INVALID]
-
-  - id: TOSCA13-CORPUS-RANGE-REVERSED-INVALID
-    file: sections/3.3-data-types/range/reversed-invalid.yaml
-    specification:
-      sections: ["3.3.3.1"]
-      requirement_ids: [TOSCA13-3.3.3.1-006]
-    classification: {kind: invalid, category: semantic, features: [range, ordering]}
-    expected:
-      accepted: false
-      phase: rendering
-      diagnostic: {category: upper, path: value}
-      assertions: []
-    coverage:
-      variation_axes: [cardinality:invalid-range-order, boundary:immediately-reversed]
-      related_cases: [TOSCA13-CORPUS-RANGE-BOUNDARIES-VALID]
-
-  - id: TOSCA13-CORPUS-MAP-KEYED-VALID
-    file: sections/3.3-data-types/map/keyed-valid.yaml
-    specification:
-      sections: ["3.3.5.1.2"]
-      requirement_ids: [TOSCA13-3.3.5.1.2-002]
-    classification: {kind: valid, category: normalization, features: [map, entry-key]}
-    expected:
-      accepted: true
-      phase: normalization
-      diagnostic: {category: null, path: null}
-      assertions: [node_exists:node]
-    coverage:
-      variation_axes: [yaml-type:mapping, cardinality:multiple]
-      related_cases: [TOSCA13-CORPUS-MAP-UNKEYED-INVALID]
-
-  - id: TOSCA13-CORPUS-MAP-UNKEYED-INVALID
-    file: sections/3.3-data-types/map/unkeyed-invalid.yaml
-    specification:
-      sections: ["3.3.5.1.2"]
-      requirement_ids: [TOSCA13-3.3.5.1.2-002]
-    classification: {kind: invalid, category: semantic, features: [map, entry-key]}
-    expected:
-      accepted: false
-      phase: rendering
-      diagnostic: {category: map, path: payload}
-      assertions: []
-    coverage:
-      variation_axes: [yaml-type:sequence-instead-of-map, keynames:missing-entry-key]
-      related_cases: [TOSCA13-CORPUS-MAP-KEYED-VALID]
-
-  - id: TOSCA13-CORPUS-SCALAR-UNIT-WHITESPACE-VALID
-    file: sections/3.3-data-types/scalar-unit/whitespace-valid.yaml
-    specification:
-      sections: ["3.3.6.1", "3.3.6.2"]
-      requirement_ids: [TOSCA13-3.3.6.1-004, TOSCA13-3.3.6.1-005, TOSCA13-3.3.6.1-006, TOSCA13-3.3.6.2-001]
-    classification: {kind: valid, category: normalization, features: [scalar-unit, whitespace]}
-    expected:
-      accepted: true
-      phase: normalization
-      diagnostic: {category: null, path: null}
-      assertions: [node_exists:node]
-    coverage:
-      variation_axes: [grammar-form:compact, grammar-form:spaced, whitespace:zero-or-many]
-      related_cases: [TOSCA13-CORPUS-SCALAR-UNIT-MISSING-UNIT-INVALID]
-
-  - id: TOSCA13-CORPUS-SCALAR-UNIT-MISSING-UNIT-INVALID
-    file: sections/3.3-data-types/scalar-unit/missing-unit-invalid.yaml
-    specification:
-      sections: ["3.3.6.2"]
-      requirement_ids: [TOSCA13-3.3.6.2-002]
-    classification: {kind: invalid, category: semantic, features: [scalar-unit, missing-component]}
-    expected:
-      accepted: false
-      phase: rendering
-      diagnostic: {category: malformed, path: value}
-      assertions: []
-    coverage:
-      variation_axes: [keynames:missing-unit, values:incomplete-scalar-unit]
-      related_cases: [TOSCA13-CORPUS-SCALAR-UNIT-WHITESPACE-VALID]
-
-  - id: TOSCA13-CORPUS-SCALAR-UNIT-CONSTRAINT-BOUNDARY-VALID
-    file: sections/3.3-data-types/scalar-unit/constraint-boundary-valid.yaml
-    specification:
-      sections: ["3.3.6.2"]
-      requirement_ids: [TOSCA13-3.3.6.2-003]
-    classification: {kind: valid, category: semantic, features: [scalar-unit, constraint]}
-    expected:
-      accepted: true
-      phase: normalization
-      diagnostic: {category: null, path: null}
-      assertions: [node_exists:node]
-    coverage:
-      variation_axes: [constraint:unit-conversion, boundary:inclusive-range]
-      related_cases: [TOSCA13-CORPUS-SCALAR-UNIT-WHITESPACE-VALID]
-
-  - id: TOSCA13-CORPUS-INHERITED-REQUIRED-KEY-VALID
-    file: sections/3.5-common-definitions/inherited-required-key-valid.yaml
-    specification:
-      sections: ["3.5.1"]
-      requirement_ids: [TOSCA13-3.5.1-002]
-    classification: {kind: valid, category: semantic, features: [inheritance, refinement]}
-    expected:
-      accepted: true
-      phase: normalization
-      diagnostic: {category: null, path: null}
-      assertions: [node_exists:node]
-    coverage:
-      variation_axes: [inheritance:required-key-from-parent, refinement:default-only]
-      related_cases: []
-
-  - id: TOSCA13-CORPUS-REPOSITORY-SHORT-VALID
-    file: sections/3.6-grammar-definitions/repository/short-valid.yaml
-    specification:
-      sections: ["3.6.6.1", "3.6.6.2.2"]
-      requirement_ids: [TOSCA13-3.6.6.1-004, TOSCA13-3.6.6.1-006, TOSCA13-3.6.6.2.2-003]
-    classification: {kind: valid, category: grammar, features: [repository, short-notation]}
-    expected: {accepted: true, phase: read, diagnostic: {category: null, path: null}, assertions: [service_template_non_nil]}
-    coverage:
-      variation_axes: [grammar-form:short, yaml-type:string]
-      related_cases: [TOSCA13-CORPUS-REPOSITORY-LONG-VALID]
-
-  - id: TOSCA13-CORPUS-REPOSITORY-LONG-VALID
-    file: sections/3.6-grammar-definitions/repository/long-valid.yaml
-    specification:
-      sections: ["3.6.6.1", "3.6.6.2.2"]
-      requirement_ids: [TOSCA13-3.6.6.1-004, TOSCA13-3.6.6.1-006, TOSCA13-3.6.6.2.2-003, TOSCA13-3.6.6.2.2-005]
-    classification: {kind: valid, category: grammar, features: [repository, long-notation]}
-    expected: {accepted: true, phase: read, diagnostic: {category: null, path: null}, assertions: [service_template_non_nil]}
-    coverage:
-      variation_axes: [grammar-form:long, keynames:all-optional]
-      related_cases: [TOSCA13-CORPUS-REPOSITORY-SHORT-VALID]
-
-  - id: TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
-    file: sections/3.6-grammar-definitions/definitions/complete-valid.yaml
-    specification:
-      sections: ["3.6.7.1", "3.6.7.2.2", "3.6.9.1", "3.6.10.2", "3.6.10.4", "3.6.10.5", "3.6.12.2", "3.6.12.3", "3.6.12.4", "3.6.14.2", "3.6.14.3", "3.6.15.1", "3.6.17.2.3", "3.6.17.3", "3.6.19.2", "3.6.20.2.2", "3.6.21.1", "3.6.22.1", "3.6.22.3.2"]
-      requirement_ids:
-        - TOSCA13-3.6.7.1-001
-        - TOSCA13-3.6.7.1-003
-        - TOSCA13-3.6.7.1-004
-        - TOSCA13-3.6.7.1-006
-        - TOSCA13-3.6.7.2.2-003
-        - TOSCA13-3.6.7.2.2-005
-        - TOSCA13-3.6.7.2.2-006
-        - TOSCA13-3.6.9.1-001
-        - TOSCA13-3.6.10.2-001
-        - TOSCA13-3.6.10.4-004
-        - TOSCA13-3.6.10.4-007
-        - TOSCA13-3.6.10.4-008
-        - TOSCA13-3.6.10.5-001
-        - TOSCA13-3.6.10.5-003
-        - TOSCA13-3.6.10.5-004
-        - TOSCA13-3.6.10.5-005
-        - TOSCA13-3.6.12.2-001
-        - TOSCA13-3.6.12.2-010
-        - TOSCA13-3.6.12.3-004
-        - TOSCA13-3.6.12.4-002
-        - TOSCA13-3.6.14.2-008
-        - TOSCA13-3.6.14.2-014
-        - TOSCA13-3.6.14.2-015
-        - TOSCA13-3.6.14.3-002
-        - TOSCA13-3.6.14.3-003
-        - TOSCA13-3.6.15.1-005
-        - TOSCA13-3.6.15.1-012
-        - TOSCA13-3.6.17.2.3-003
-        - TOSCA13-3.6.17.3-002
-        - TOSCA13-3.6.19.2-004
-        - TOSCA13-3.6.20.2.2-003
-        - TOSCA13-3.6.20.2.2-004
-        - TOSCA13-3.6.20.2.2-007
-        - TOSCA13-3.6.20.2.2-008
-        - TOSCA13-3.6.21.1-001
-        - TOSCA13-3.6.21.1-003
-        - TOSCA13-3.6.22.1-004
-        - TOSCA13-3.6.22.1-020
-        - TOSCA13-3.6.22.3.2-002
-        - TOSCA13-3.6.22.3.2-004
-    classification: {kind: valid, category: semantic, features: [definitions, complete, inheritance, normalization]}
-    expected:
-      accepted: true
-      phase: normalization
-      diagnostic: {category: null, path: null}
-      assertions: [node_exists:component, input_exists:label, output_exists:label]
-    coverage:
-      variation_axes: [grammar-form:complete, keynames:all-optional, yaml-type:mapping, cardinality:zero-one-unbounded, inheritance:direct]
-      related_cases: [TOSCA13-CORPUS-PROPERTY-MISSING-TYPE-INVALID, TOSCA13-CORPUS-PROPERTY-REQUIRED-WRONG-TYPE-INVALID]
-
-  - id: TOSCA13-CORPUS-PROPERTY-MISSING-TYPE-INVALID
-    file: sections/3.6-grammar-definitions/definitions/missing-property-type-invalid.yaml
-    specification:
-      sections: ["3.6.10.4"]
-      requirement_ids: [TOSCA13-3.6.10.4-004]
-    classification: {kind: invalid, category: grammar, features: [property-definition, required-key]}
-    expected: {accepted: false, phase: read, diagnostic: {category: missing, path: type}, assertions: []}
-    coverage:
-      variation_axes: [keynames:required-type-absent, grammar-form:long]
-      related_cases: [TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID]
-
-  - id: TOSCA13-CORPUS-PROPERTY-REQUIRED-WRONG-TYPE-INVALID
-    file: sections/3.6-grammar-definitions/definitions/wrong-required-type-invalid.yaml
-    specification:
-      sections: ["3.6.10.4"]
-      requirement_ids: [TOSCA13-3.6.10.4-007]
-    classification: {kind: invalid, category: grammar, features: [property-definition, yaml-type]}
-    expected: {accepted: false, phase: read, diagnostic: {category: boolean, path: required}, assertions: []}
-    coverage:
-      variation_axes: [yaml-type:integer-instead-of-boolean, keynames:optional-required]
-      related_cases: [TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID]
-
-  - id: TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID
-    file: sections/3.6-grammar-definitions/constraints/boundaries-valid.yaml
-    specification:
-      sections: ["3.6.3.3", "3.6.3.4", "3.6.10.5"]
-      requirement_ids: [TOSCA13-3.6.3.3-001, TOSCA13-3.6.3.3-002, TOSCA13-3.6.3.3-003, TOSCA13-3.6.3.4-004, TOSCA13-3.6.3.4-005, TOSCA13-3.6.3.4-007, TOSCA13-3.6.10.5-004]
-    classification: {kind: valid, category: semantic, features: [constraints, boundaries, conjunction]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
-    coverage:
-      variation_axes: [constraint:conjunction, boundary:inclusive-upper, collection:length]
-      related_cases: [TOSCA13-CORPUS-CONSTRAINT-OPERAND-INVALID]
-
-  - id: TOSCA13-CORPUS-CONSTRAINT-OPERAND-INVALID
-    file: sections/3.6-grammar-definitions/constraints/operand-invalid.yaml
-    specification:
-      sections: ["3.6.3.3", "3.6.10.5"]
-      requirement_ids: [TOSCA13-3.6.3.3-003, TOSCA13-3.6.10.5-004]
-    classification: {kind: invalid, category: semantic, features: [constraints, operand-type]}
-    expected: {accepted: false, phase: inheritance, diagnostic: {category: incompatible, path: pattern}, assertions: []}
-    coverage:
-      variation_axes: [constraint:incompatible-operator, yaml-type:string-pattern-on-integer]
-      related_cases: [TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID]
-
-  - id: TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
-    file: sections/3.7-type-definitions/hierarchy/multilevel-refinement-valid.yaml
-    specification:
-      sections: ["3.7.2.1", "3.7.2.4", "3.7.3.1", "3.7.3.2.3", "3.7.3.3", "3.7.5.2", "3.7.5.4", "3.7.6.2", "3.7.6.3", "3.7.7.2", "3.7.9.2", "3.7.10.2", "3.7.11.2", "3.7.11.4", "3.7.12.2"]
-      requirement_ids:
-        - TOSCA13-3.7.2.1-001
-        - TOSCA13-3.7.2.4-001
-        - TOSCA13-3.7.2.4-002
-        - TOSCA13-3.7.3.1-001
-        - TOSCA13-3.7.3.2.3-003
-        - TOSCA13-3.7.3.2.3-004
-        - TOSCA13-3.7.3.3-001
-        - TOSCA13-3.7.3.3-002
-        - TOSCA13-3.7.5.2-004
-        - TOSCA13-3.7.5.2-008
-        - TOSCA13-3.7.5.2-009
-        - TOSCA13-3.7.5.4-001
-        - TOSCA13-3.7.5.4-002
-        - TOSCA13-3.7.6.2-004
-        - TOSCA13-3.7.6.3-001
-        - TOSCA13-3.7.6.3-002
-        - TOSCA13-3.7.6.3-003
-        - TOSCA13-3.7.7.2-004
-        - TOSCA13-3.7.9.2-004
-        - TOSCA13-3.7.10.2-004
-        - TOSCA13-3.7.11.2-003
-        - TOSCA13-3.7.11.4-002
-        - TOSCA13-3.7.12.2-004
-    classification: {kind: valid, category: semantic, features: [type-hierarchy, inheritance, refinement]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
-    coverage:
-      variation_axes: [inheritance:direct, inheritance:multilevel, refinement:default, refinement:type-compatible, cardinality:narrowing]
-      related_cases: [TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-INVALID, TOSCA13-CORPUS-TYPE-REQUIRED-WIDENING-INVALID]
-
-  - id: TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-INVALID
-    file: sections/3.7-type-definitions/hierarchy/cycle-invalid.yaml
-    specification:
-      sections: ["3.7.1.1"]
-      requirement_ids: [TOSCA13-3.7.1.1-003]
-    classification: {kind: invalid, category: semantic, features: [type-hierarchy, cycle]}
-    expected: {accepted: false, phase: hierarchy, diagnostic: {category: loop, path: First}, assertions: []}
-    coverage:
-      variation_axes: [inheritance:cycle, graph:bounded-cycle-detection]
-      related_cases: [TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID]
-
-  - id: TOSCA13-CORPUS-TYPE-REQUIRED-WIDENING-INVALID
-    file: sections/3.7-type-definitions/refinement/required-widening-invalid.yaml
-    specification:
-      sections: ["3.7.3.3", "3.7.5.4"]
-      requirement_ids: [TOSCA13-3.7.3.3-002, TOSCA13-3.7.5.4-002]
-    classification: {kind: invalid, category: semantic, features: [refinement, required]}
-    expected: {accepted: false, phase: inheritance, diagnostic: {category: refinement, path: required}, assertions: []}
-    coverage:
-      variation_axes: [refinement:invalid-widening, inheritance:one-level]
-      related_cases: [TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID]
-
-  - id: TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
-    file: sections/3.8-template-definitions/templates/complete-valid.yaml
-    specification:
-      sections: ["3.8.3.1", "3.8.3.2", "3.8.3.3", "3.8.4.1", "3.8.4.2", "3.8.4.3", "3.8.5.1", "3.8.5.2", "3.8.6.1", "3.8.6.2", "3.8.8.3", "3.8.13.1", "3.8.13.2", "3.8.13.4"]
-      requirement_ids:
-        - TOSCA13-3.8.2.2.3-015
-        - TOSCA13-3.8.3.1-001
-        - TOSCA13-3.8.3.2-003
-        - TOSCA13-3.8.3.3-001
-        - TOSCA13-3.8.4.1-001
-        - TOSCA13-3.8.4.2-003
-        - TOSCA13-3.8.4.3-001
-        - TOSCA13-3.8.5.1-001
-        - TOSCA13-3.8.5.2-003
-        - TOSCA13-3.8.5.2-007
-        - TOSCA13-3.8.6.1-001
-        - TOSCA13-3.8.6.1-003
-        - TOSCA13-3.8.6.2-003
-        - TOSCA13-3.8.8.3-005
-        - TOSCA13-3.8.13.1-001
-        - TOSCA13-3.8.13.1-003
-        - TOSCA13-3.8.13.2-004
-        - TOSCA13-3.8.13.4-001
-    classification: {kind: valid, category: semantic, features: [templates, requirements, capabilities, groups, policies]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:source, node_exists:target]}
-    coverage:
-      variation_axes: [template-kind:node-relationship-group-policy, reference:existing-target, cardinality:multiple]
-      related_cases: [TOSCA13-CORPUS-NODE-TEMPLATE-MISSING-TYPE-INVALID, TOSCA13-CORPUS-GROUP-MEMBER-INVALID]
-
-  - id: TOSCA13-CORPUS-NODE-TEMPLATE-MISSING-TYPE-INVALID
-    file: sections/3.8-template-definitions/templates/node-type-missing-invalid.yaml
-    specification:
-      sections: ["3.8.3.1"]
-      requirement_ids: [TOSCA13-3.8.3.1-001]
-    classification: {kind: invalid, category: grammar, features: [node-template, required-key]}
-    expected: {accepted: false, phase: read, diagnostic: {category: missing, path: type}, assertions: []}
-    coverage:
-      variation_axes: [keynames:required-type-absent, template-kind:node]
-      related_cases: [TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID]
-
-  - id: TOSCA13-CORPUS-GROUP-MEMBER-INVALID
-    file: sections/3.8-template-definitions/templates/group-member-invalid.yaml
-    specification:
-      sections: ["3.8.6.2"]
-      requirement_ids: [TOSCA13-3.8.6.2-003]
-    classification: {kind: invalid, category: resolution, features: [group, member]}
-    expected: {accepted: false, phase: namespaces, diagnostic: {category: unknown, path: absent}, assertions: []}
-    coverage:
-      variation_axes: [reference:missing-target, template-kind:group]
-      related_cases: [TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID]
-
-  - id: TOSCA13-CORPUS-TEMPLATE-COPY-VALID
-    file: sections/3.8-template-definitions/templates/copy-valid.yaml
-    specification:
-      sections: ["3.8.2.2.3"]
-      requirement_ids: [TOSCA13-3.8.2.2.3-015]
-    classification: {kind: valid, category: semantic, features: [copy, assignment]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:base, node_exists:copy]}
-    coverage:
-      variation_axes: [copy:one-level, assignment:override, normalization:independent-copy]
-      related_cases: [TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID]
-
-  - id: TOSCA13-CORPUS-FUNCTION-NESTED-VALID
-    file: sections/4-functions/functions/nested-valid.yaml
-    specification:
-      sections: ["4.3.1.2", "4.3.2.2", "4.3.3.2", "4.4.1.2"]
-      requirement_ids: [TOSCA13-4.3.1.2-003, TOSCA13-4.3.2.2-003, TOSCA13-4.3.3.2-003, TOSCA13-4.3.3.2-006, TOSCA13-4.3.3.2-010, TOSCA13-4.4.1.2-003]
-    classification: {kind: valid, category: normalization, features: [functions, nested, concat, get_input]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [output_exists:result]}
-    coverage:
-      variation_axes: [function:direct, function:nested, arguments:minimum-and-multiple, normalization:function-preserved]
-      related_cases: [TOSCA13-CORPUS-FUNCTION-ARGUMENTS-INVALID]
-
-  - id: TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID
-    file: sections/4-functions/functions/resolution-valid.yaml
-    specification:
-      sections: ["4.4.2.2", "4.5.1.2", "4.6.1.2", "4.7.1.2", "4.8.1.2"]
-      requirement_ids:
-        - TOSCA13-4.4.2.2-002
-        - TOSCA13-4.4.2.2-004
-        - TOSCA13-4.4.2.2-010
-        - TOSCA13-4.5.1.2-002
-        - TOSCA13-4.5.1.2-004
-        - TOSCA13-4.5.1.2-010
-        - TOSCA13-4.6.1.2-001
-        - TOSCA13-4.6.1.2-003
-        - TOSCA13-4.6.1.2-004
-        - TOSCA13-4.6.1.2-006
-        - TOSCA13-4.6.1.2-007
-        - TOSCA13-4.6.1.2-009
-        - TOSCA13-4.6.1.2-010
-        - TOSCA13-4.6.1.2-012
-        - TOSCA13-4.7.1.2-003
-        - TOSCA13-4.8.1.2-002
-        - TOSCA13-4.8.1.2-004
-        - TOSCA13-4.8.1.2-007
-    classification: {kind: valid, category: resolution, features: [functions, inheritance, references]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [output_exists:property, output_exists:attribute, output_exists:operation, output_exists:artifact]}
-    coverage:
-      variation_axes: [reference:inherited-property, reference:inherited-attribute, reference:operation-output, reference:artifact]
-      related_cases: [TOSCA13-CORPUS-FUNCTION-REFERENCE-INVALID]
-
-  - id: TOSCA13-CORPUS-FUNCTION-ARGUMENTS-INVALID
-    file: sections/4-functions/functions/arguments-invalid.yaml
-    specification:
-      sections: ["4.3.3.2"]
-      requirement_ids: [TOSCA13-4.3.3.2-003, TOSCA13-4.3.3.2-006, TOSCA13-4.3.3.2-010]
-    classification: {kind: invalid, category: grammar, features: [functions, argument-count]}
-    expected: {accepted: false, phase: read, diagnostic: {category: substring_index, path: token}, assertions: []}
-    coverage:
-      variation_axes: [arguments:missing-required, function:token]
-      related_cases: [TOSCA13-CORPUS-FUNCTION-NESTED-VALID]
-
-  - id: TOSCA13-CORPUS-FUNCTION-REFERENCE-INVALID
-    file: sections/4-functions/functions/reference-invalid.yaml
-    specification:
-      sections: ["4.4.2.2"]
-      requirement_ids: [TOSCA13-4.4.2.2-002, TOSCA13-4.4.2.2-004]
-    classification: {kind: invalid, category: resolution, features: [functions, missing-reference]}
-    expected: {accepted: false, phase: rendering, diagnostic: {category: malformed, path: absent}, assertions: []}
-    coverage:
-      variation_axes: [reference:missing-property, function:get_property]
-      related_cases: [TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID]
-
-  - id: TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
-    file: sections/5-normative-types/profile/derived-valid.yaml
-    specification:
-      sections: ["5.2.1", "5.3.6.1", "5.3.7.1", "5.3.7.2", "5.3.11.1", "5.3.11.2", "5.3.11.3", "5.5.7.1", "5.5.7.2", "5.5.7.3", "5.5.7.4", "5.5.12.3", "5.5.13.1", "5.7.1.1", "5.7.5.1", "5.8.1", "5.9.1.2", "5.9.5.3", "5.9.8.1", "5.9.9.1"]
-      requirement_ids:
-        - TOSCA13-5.2.1-001
-        - TOSCA13-5.3.6.1-005
-        - TOSCA13-5.3.6.1-008
-        - TOSCA13-5.3.7.1-002
-        - TOSCA13-5.3.7.1-005
-        - TOSCA13-5.3.7.2-005
-        - TOSCA13-5.3.7.2-008
-        - TOSCA13-5.3.11.1-002
-        - TOSCA13-5.3.11.2-005
-        - TOSCA13-5.3.11.3-001
-        - TOSCA13-5.3.11.3-002
-        - TOSCA13-5.3.11.3-003
-        - TOSCA13-5.5.7.1-003
-        - TOSCA13-5.5.7.2-002
-        - TOSCA13-5.5.7.3-005
-        - TOSCA13-5.5.7.4-001
-        - TOSCA13-5.5.12.3-001
-        - TOSCA13-5.5.13.1-003
-        - TOSCA13-5.5.13.1-007
-        - TOSCA13-5.5.13.1-012
-        - TOSCA13-5.7.1.1-002
-        - TOSCA13-5.7.1.1-005
-        - TOSCA13-5.7.1.1-010
-        - TOSCA13-5.7.5.1-003
-        - TOSCA13-5.8.1-004
-        - TOSCA13-5.9.1.2-002
-        - TOSCA13-5.9.1.2-005
-        - TOSCA13-5.9.1.2-010
-        - TOSCA13-5.9.5.3-001
-        - TOSCA13-5.9.8.1-002
-        - TOSCA13-5.9.9.1-002
-    classification: {kind: valid, category: semantic, features: [normative-profile, derived-types]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:port]}
-    coverage:
-      variation_axes: [normative-profile:effective-types, inheritance:normative-parent, version-isolation:tosca-1.3]
-      related_cases: [TOSCA13-CORPUS-NETWORK-PORT-VALID]
-
-  - id: TOSCA13-CORPUS-NETWORK-PORT-VALID
-    file: sections/8-normative-node-types/network-port-valid.yaml
-    specification:
-      sections: ["8.2", "8.3.2", "8.5.1.1", "8.5.2.3"]
-      requirement_ids: [TOSCA13-8.2-002, TOSCA13-8.3.2-001, TOSCA13-8.5.1.1-036, TOSCA13-8.5.2.3-008]
-    classification: {kind: valid, category: normalization, features: [normative-profile, network-port, boundary]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:port]}
-    coverage:
-      variation_axes: [default:order, boundary:explicit-zero, constraint:greater-or-equal]
-      related_cases: [TOSCA13-CORPUS-NETWORK-PORT-REFINEMENT-INVALID]
-
-  - id: TOSCA13-CORPUS-NETWORK-PORT-REFINEMENT-INVALID
-    file: sections/8-normative-node-types/network-port-refinement-invalid.yaml
-    specification:
-      sections: ["8.5.2.3"]
-      requirement_ids: [TOSCA13-8.5.2.3-008]
-    classification: {kind: invalid, category: semantic, features: [normative-profile, refinement]}
-    expected: {accepted: false, phase: inheritance, diagnostic: {category: refine, path: required}, assertions: []}
-    coverage:
-      variation_axes: [refinement:invalid-required-widening, normative-profile:effective-property]
-      related_cases: [TOSCA13-CORPUS-NETWORK-PORT-VALID]
-
-  - id: TOSCA13-CORPUS-CSAR-METADATA-VALID
-    file: sections/6-csar/archives/metadata-valid.csar.yaml
-    specification:
-      sections: ["6.1", "6.2"]
-      requirement_ids: [TOSCA13-6.1-004, TOSCA13-6.1-005, TOSCA13-6.1-006, TOSCA13-6.1-007, TOSCA13-6.1-008, TOSCA13-6.2-001, TOSCA13-6.2-005, TOSCA13-6.2-010, TOSCA13-6.2-018]
-    classification: {kind: valid, category: csar, features: [csar, metadata, entry-definitions]}
-    expected: {accepted: true, phase: csar, diagnostic: {category: null, path: null}, assertions: [service_template_non_nil]}
-    coverage:
-      variation_axes: [csar:valid-metadata, version:1.1, entry-selection:explicit]
-      related_cases: [TOSCA13-CORPUS-CSAR-ENTRY-MISSING-INVALID, TOSCA13-CORPUS-CSAR-TRAVERSAL-INVALID]
-
-  - id: TOSCA13-CORPUS-CSAR-METADATA-FREE-VALID
-    file: sections/6-csar/archives/metadata-free-valid.csar.yaml
-    specification:
-      sections: ["6.1", "6.3"]
-      requirement_ids: [TOSCA13-6.1-004, TOSCA13-6.3-002, TOSCA13-6.3-005]
-    classification: {kind: valid, category: csar, features: [csar, metadata-free]}
-    expected: {accepted: true, phase: csar, diagnostic: {category: null, path: null}, assertions: [service_template_non_nil]}
-    coverage:
-      variation_axes: [csar:metadata-free-root, metadata:required-template-name-version]
-      related_cases: [TOSCA13-CORPUS-CSAR-METADATA-VALID]
-
-  - id: TOSCA13-CORPUS-CSAR-ENTRY-MISSING-INVALID
-    file: sections/6-csar/archives/entry-missing-invalid.csar.yaml
-    specification:
-      sections: ["6.2"]
-      requirement_ids: [TOSCA13-6.2-010, TOSCA13-6.2-018]
-    classification: {kind: invalid, category: csar, features: [csar, missing-file]}
-    expected: {accepted: false, phase: csar, diagnostic: {category: not found, path: absent.yaml}, assertions: []}
-    coverage:
-      variation_axes: [csar:missing-entry-definitions, reference:missing]
-      related_cases: [TOSCA13-CORPUS-CSAR-METADATA-VALID]
-
-  - id: TOSCA13-CORPUS-CSAR-TRAVERSAL-INVALID
-    file: sections/6-csar/archives/traversal-invalid.csar.yaml
-    specification:
-      sections: ["6.2"]
-      requirement_ids: [TOSCA13-6.2-010, TOSCA13-6.2-018]
-    classification: {kind: invalid, category: csar, features: [csar, traversal]}
-    expected: {accepted: false, phase: csar, diagnostic: {category: invalid, path: Entry-Definitions}, assertions: []}
-    coverage:
-      variation_axes: [csar:path-traversal, security:root-confinement]
-      related_cases: [TOSCA13-CORPUS-CSAR-METADATA-VALID]
-
-  - id: TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID
-    file: sections/3.6-grammar-definitions/workflows/activities-valid.yaml
-    specification:
-      sections: ["3.6.23.1.1", "3.6.23.2.1", "3.6.23.3.1", "3.6.23.4.1", "3.6.25.2.1", "3.6.26.1", "3.6.27.1", "3.10.1"]
-      requirement_ids:
-        - TOSCA13-3.6.23.1.1-003
-        - TOSCA13-3.6.23.2.1-002
-        - TOSCA13-3.6.23.3.1-004
-        - TOSCA13-3.6.23.3.1-007
-        - TOSCA13-3.6.23.4.1-003
-        - TOSCA13-3.6.23.4.1-004
-        - TOSCA13-3.6.25.2.1-002
-        - TOSCA13-3.6.26.1-002
-        - TOSCA13-3.6.27.1-002
-        - TOSCA13-3.6.27.1-008
-        - TOSCA13-3.6.27.1-010
-        - TOSCA13-3.6.27.1-020
-        - TOSCA13-3.10.1-002
-    classification: {kind: valid, category: semantic, features: [workflow, interfaces, operations]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
-    coverage:
-      variation_axes: [workflow:precondition, workflow:set-state, workflow:call-operation-long, workflow:inline-long, operation-host:default]
-      related_cases: [TOSCA13-CORPUS-WORKFLOW-MISSING-TARGET-INVALID]
-
-  - id: TOSCA13-CORPUS-WORKFLOW-MISSING-TARGET-INVALID
-    file: sections/3.6-grammar-definitions/workflows/missing-target-invalid.yaml
-    specification:
-      sections: ["3.6.27.1"]
-      requirement_ids: [TOSCA13-3.6.27.1-002]
-    classification: {kind: invalid, category: grammar, features: [workflow, required-key]}
-    expected: {accepted: false, phase: read, diagnostic: {category: missing, path: target}, assertions: []}
-    coverage:
-      variation_axes: [keynames:required-target-absent, workflow:step]
-      related_cases: [TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID]
-
-  - id: TOSCA13-CORPUS-SUBSTITUTION-IMPORTS-VALID
-    file: interactions/substitution-imports/qualified-valid.yaml
-    specification:
-      sections: ["3.1.3.1", "3.8.13.1", "3.8.13.2", "3.8.13.4"]
-      requirement_ids: [TOSCA13-3.1.3.1-004, TOSCA13-3.8.13.1-001, TOSCA13-3.8.13.1-003, TOSCA13-3.8.13.2-004, TOSCA13-3.8.13.4-001]
-    classification: {kind: valid, category: normalization, features: [substitution, imports, namespace]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [service_template_non_nil]}
-    coverage:
-      variation_axes: [substitution:imported-node-type, imports:qualified, normalization:substitution-preserved]
-      related_cases: [TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID]
-
-  - id: TOSCA13-CORPUS-NORMALIZATION-FUNCTION-INHERITANCE-VALID
-    file: interactions/normalization/function-inheritance-valid.yaml
-    specification:
-      sections: ["3.6.10.5", "3.7.3.1", "4.4.2.2"]
-      requirement_ids: [TOSCA13-3.6.10.5-001, TOSCA13-3.6.10.5-004, TOSCA13-3.7.3.1-001, TOSCA13-4.4.2.2-004]
-    classification: {kind: valid, category: normalization, features: [normalization, function, inheritance, constraints]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node, output_exists:label]}
-    coverage:
-      variation_axes: [normalization:inherited-default, function:get-property, constraint:default, interaction:function-inheritance]
-      related_cases: [TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID]
-
-  - id: TOSCA13-CORPUS-INTERACTION-IMPORTS-INHERITANCE
-    file: interactions/imports-inheritance/derived-valid.yaml
-    specification: {sections: ["3.1.3.1", "3.7.3.1"], requirement_ids: [TOSCA13-3.1.3.1-004, TOSCA13-3.7.3.1-001]}
-    classification: {kind: valid, category: resolution, features: [interaction, imports, inheritance]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
-    coverage: {variation_axes: [interaction:imports-inheritance, notation:short-import], related_cases: [TOSCA13-CORPUS-IMPORT-SHORT-VALID]}
-
-  - id: TOSCA13-CORPUS-INTERACTION-INHERITANCE-REFINEMENT
-    file: interactions/inheritance-refinement/default-valid.yaml
-    specification: {sections: ["3.5.1", "3.7.3.1"], requirement_ids: [TOSCA13-3.5.1-002, TOSCA13-3.7.3.1-001]}
-    classification: {kind: valid, category: normalization, features: [interaction, inheritance, refinement]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
-    coverage: {variation_axes: [interaction:inheritance-refinement, default:overridden], related_cases: [TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID]}
-
-  - id: TOSCA13-CORPUS-INTERACTION-FUNCTIONS-CONSTRAINTS
-    file: interactions/functions-constraints/assignment-valid.yaml
-    specification: {sections: ["3.6.10.5", "4.4.1.2"], requirement_ids: [TOSCA13-3.6.10.5-004, TOSCA13-4.4.1.2-003]}
-    classification: {kind: valid, category: normalization, features: [interaction, functions, constraints]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
-    coverage: {variation_axes: [interaction:function-constraint, assignment:function], related_cases: [TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID]}
-
-  - id: TOSCA13-CORPUS-INTERACTION-REQUIREMENTS-CAPABILITIES
-    file: interactions/requirements-capabilities/connection-valid.yaml
-    specification: {sections: ["3.6.20.2.2", "3.8.3.2", "8.2"], requirement_ids: [TOSCA13-3.6.20.2.2-003, TOSCA13-3.8.3.2-003, TOSCA13-8.2-002]}
-    classification: {kind: valid, category: resolution, features: [interaction, requirements, capabilities]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:source, node_exists:target, "requirement_target:source:target:target"]}
-    coverage: {variation_axes: [interaction:requirement-capability, cardinality:exactly-one], related_cases: [TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID]}
-
-  - id: TOSCA13-CORPUS-INTERACTION-WORKFLOWS-INTERFACES
-    file: interactions/workflows-interfaces/call-valid.yaml
-    specification: {sections: ["3.6.23.3.1", "3.6.27.1"], requirement_ids: [TOSCA13-3.6.23.3.1-004, TOSCA13-3.6.27.1-020]}
-    classification: {kind: valid, category: semantic, features: [interaction, workflows, interfaces]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
-    coverage: {variation_axes: [interaction:workflow-interface, notation:short-operation], related_cases: [TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID]}
-
-  - id: TOSCA13-CORPUS-INTERACTION-CONSTRAINTS-DEFAULTS
-    file: interactions/constraints-defaults/default-valid.yaml
-    specification: {sections: ["3.6.3.3", "3.6.10.5"], requirement_ids: [TOSCA13-3.6.3.3-003, TOSCA13-3.6.10.5-004]}
-    classification: {kind: valid, category: normalization, features: [interaction, constraints, defaults]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
-    coverage: {variation_axes: [interaction:constraint-default, boundary:lower], related_cases: [TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID]}
-
-  - id: TOSCA13-CORPUS-INTERACTION-CONSTRAINTS-ASSIGNMENTS
-    file: interactions/constraints-assignments/boundary-valid.yaml
-    specification: {sections: ["3.6.3.3", "3.6.10.5"], requirement_ids: [TOSCA13-3.6.3.3-003, TOSCA13-3.6.10.5-004]}
-    classification: {kind: valid, category: normalization, features: [interaction, constraints, assignments]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
-    coverage: {variation_axes: [interaction:constraint-assignment, boundary:upper], related_cases: [TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID]}
-
-  - id: TOSCA13-CORPUS-INTERACTION-NORMATIVE-DERIVATION
-    file: interactions/normative-profile/derived-port-valid.yaml
-    specification: {sections: ["5.2.1", "8.5.2.3"], requirement_ids: [TOSCA13-5.2.1-001, TOSCA13-8.5.2.3-008]}
-    classification: {kind: valid, category: normalization, features: [interaction, normative-profile, inheritance]}
-    expected: {accepted: true, phase: normalization, diagnostic: {category: null, path: null}, assertions: [node_exists:port]}
-    coverage: {variation_axes: [interaction:normative-custom-type, default:inherited], related_cases: [TOSCA13-CORPUS-NETWORK-PORT-VALID]}
-
-  - id: TOSCA13-CORPUS-INTERACTION-CSAR-IMPORTS
-    file: interactions/csar-imports/archive-valid.csar.yaml
-    specification: {sections: ["3.1.3.1", "6.2"], requirement_ids: [TOSCA13-3.1.3.1-004, TOSCA13-6.2-018]}
-    classification: {kind: valid, category: csar, features: [interaction, csar, imports]}
-    expected: {accepted: true, phase: csar, diagnostic: {category: null, path: null}, assertions: [node_exists:node]}
-    coverage: {variation_axes: [interaction:csar-import, resolution:archive-relative], related_cases: [TOSCA13-CORPUS-CSAR-METADATA-VALID]}
+- id: TOSCA13-CORPUS-SERVICE-TEMPLATE-MINIMAL-VALID
+  file: sections/3.10-service-template/service-template/minimal-valid.yaml
+  specification:
+    sections:
+    - 3.10.1
+    requirement_ids:
+    - TOSCA13-3.10.1-001
+    - TOSCA13-3.10.1-002
+    - TOSCA13-3.10.1-003
+  classification:
+    kind: valid
+    category: grammar
+    features:
+    - service-template
+    - minimal
+    - version-selection
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - grammar-form:minimal
+    - keynames:required-present
+    - yaml-type:version-string
+    related_cases:
+    - TOSCA13-CORPUS-SERVICE-TEMPLATE-V20-KEY-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.10.1-001
+    - TOSCA13-3.10.1-002
+    - TOSCA13-3.10.1-003
+  assertions: []
+- id: TOSCA13-CORPUS-SERVICE-TEMPLATE-V20-KEY-INVALID
+  file: version-isolation/tosca-2.0-service-template-key-invalid.yaml
+  specification:
+    sections:
+    - 3.10.1
+    requirement_ids:
+    - TOSCA13-3.10.1-001
+    - TOSCA13-3.10.1-003
+  classification:
+    kind: invalid
+    category: grammar
+    features:
+    - service-template
+    - version-isolation
+    - unknown-key
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: unsupported keyname
+      path: service_template
+    assertions: []
+  coverage:
+    variation_axes:
+    - keynames:tosca-2.0-only
+    - yaml-type:mapping
+    - version-isolation:1.3-rejects-2.0-form
+    related_cases:
+    - TOSCA13-CORPUS-SERVICE-TEMPLATE-MINIMAL-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.10.1-001
+    - TOSCA13-3.10.1-003
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-SERVICE-TEMPLATE-V20-KEY-NEAREST-VALID
+    change: SERVICE-TEMPLATE-V20-KEY target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-NAMESPACE-DEFAULT-VALID
+  file: sections/3.1-namespaces/namespaces/default-valid.yaml
+  specification:
+    sections:
+    - '3.1'
+    - 3.1.1
+    - 3.1.2
+    requirement_ids:
+    - TOSCA13-3.1-001
+    - TOSCA13-3.1.1-001
+    - TOSCA13-3.1.2-001
+    - TOSCA13-3.1.2-002
+    - TOSCA13-3.1.2-003
+    - TOSCA13-3.1.2-004
+    - TOSCA13-3.1.2-005
+  classification:
+    kind: valid
+    category: resolution
+    features:
+    - namespace
+    - default-namespace
+    - normative-type
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - namespace:default
+    - reference:normative-type
+    - keynames:required-first
+    related_cases:
+    - TOSCA13-CORPUS-NAMESPACE-RESERVED-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1-001
+    - TOSCA13-3.1.1-001
+    - TOSCA13-3.1.2-001
+    - TOSCA13-3.1.2-002
+    - TOSCA13-3.1.2-003
+    - TOSCA13-3.1.2-004
+    - TOSCA13-3.1.2-005
+  assertions: []
+- id: TOSCA13-CORPUS-NAMESPACE-RESERVED-INVALID
+  file: sections/3.1-namespaces/namespaces/reserved-invalid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    requirement_ids:
+    - TOSCA13-3.1.3.1-001
+    - TOSCA13-3.1.3.1-002
+  classification:
+    kind: invalid
+    category: resolution
+    features:
+    - namespace
+    - reserved-name
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: reserved
+      path: namespace
+    assertions: []
+  coverage:
+    variation_axes:
+    - namespace:reserved-uri-hierarchy
+    - values:forbidden
+    related_cases:
+    - TOSCA13-CORPUS-NAMESPACE-DEFAULT-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-001
+    - TOSCA13-3.1.3.1-002
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-NAMESPACE-RESERVED-NEAREST-VALID
+    change: NAMESPACE-RESERVED target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-IMPORT-SHORT-VALID
+  file: sections/3.1-namespaces/imports/short-valid.yaml
+  specification:
+    sections:
+    - 3.6.8.1
+    - 3.6.8.2.2
+    requirement_ids:
+    - TOSCA13-3.6.8.1-002
+    - TOSCA13-3.6.8.1-003
+    - TOSCA13-3.6.8.2.2-003
+  classification:
+    kind: valid
+    category: resolution
+    features:
+    - imports
+    - short-notation
+    - local-reference
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - grammar-form:short
+    - imports:relative
+    - reference:imported-unqualified
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.8.1-002
+    - TOSCA13-3.6.8.1-003
+    - TOSCA13-3.6.8.2.2-003
+  assertions: []
+- id: TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
+  file: sections/3.1-namespaces/imports/long-qualified-valid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    - 3.6.8.1
+    - 3.6.8.2.2
+    - 3.6.8.2.3
+    requirement_ids:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+    - TOSCA13-3.6.8.1-002
+    - TOSCA13-3.6.8.1-003
+    - TOSCA13-3.6.8.2.2-003
+    - TOSCA13-3.6.8.2.3-002
+  classification:
+    kind: valid
+    category: resolution
+    features:
+    - imports
+    - long-notation
+    - qualified-reference
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - grammar-form:long
+    - imports:namespace-qualified
+    - reference:imported-target
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-SHORT-VALID
+    - TOSCA13-CORPUS-IMPORT-UNKNOWN-QUALIFIED-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+    - TOSCA13-3.6.8.1-002
+    - TOSCA13-3.6.8.1-003
+    - TOSCA13-3.6.8.2.2-003
+    - TOSCA13-3.6.8.2.3-002
+  assertions: []
+- id: TOSCA13-CORPUS-IMPORT-WRONG-YAML-TYPE-INVALID
+  file: sections/3.1-namespaces/imports/wrong-yaml-type-invalid.yaml
+  specification:
+    sections:
+    - 3.6.8.1
+    - 3.6.8.2.2
+    requirement_ids:
+    - TOSCA13-3.6.8.1-002
+    - TOSCA13-3.6.8.1-003
+    - TOSCA13-3.6.8.2.2-003
+  classification:
+    kind: invalid
+    category: grammar
+    features:
+    - imports
+    - yaml-type
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: '"map" or "string"'
+      path: imports
+    assertions: []
+  coverage:
+    variation_axes:
+    - yaml-type:scalar-number-equivalence-class
+    - grammar-form:invalid
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-SHORT-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.8.1-002
+    - TOSCA13-3.6.8.1-003
+    - TOSCA13-3.6.8.2.2-003
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-IMPORT-WRONG-YAML-TYPE-NEAREST-VALID
+    change: IMPORT-WRONG-YAML-TYPE target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-IMPORT-MISSING-FILE-INVALID
+  file: sections/3.1-namespaces/imports/missing-file-invalid.yaml
+  specification:
+    sections:
+    - 3.6.8.1
+    - 3.6.8.2.3
+    requirement_ids:
+    - TOSCA13-3.6.8.1-002
+    - TOSCA13-3.6.8.1-003
+    - TOSCA13-3.6.8.2.3-002
+  classification:
+    kind: invalid
+    category: resolution
+    features:
+    - imports
+    - missing-resource
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: invalid URL
+      path: absent.yaml
+    assertions: []
+  coverage:
+    variation_axes:
+    - imports:missing-resource
+    - reference:unresolved
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-SHORT-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.8.1-002
+    - TOSCA13-3.6.8.1-003
+    - TOSCA13-3.6.8.2.3-002
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-IMPORT-MISSING-FILE-NEAREST-VALID
+    change: IMPORT-MISSING-FILE target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-IMPORT-UNKNOWN-QUALIFIED-INVALID
+  file: sections/3.1-namespaces/imports/unknown-qualified-invalid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    requirement_ids:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  classification:
+    kind: invalid
+    category: resolution
+    features:
+    - imports
+    - qualified-reference
+    - missing-name
+  expected:
+    accepted: false
+    phase: namespaces
+    diagnostic:
+      category: unknown
+      path: derived_from
+    assertions: []
+  coverage:
+    variation_axes:
+    - namespace:known-prefix
+    - reference:missing-qualified-name
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-IMPORT-UNKNOWN-QUALIFIED-NEAREST-VALID
+    change: IMPORT-UNKNOWN-QUALIFIED target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-IMPORT-TRANSITIVE-VALID
+  file: sections/3.1-namespaces/imports/transitive-valid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    requirement_ids:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  classification:
+    kind: valid
+    category: resolution
+    features:
+    - imports
+    - transitive-import
+    - inheritance
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - imports:transitive
+    - notation:long
+    - inheritance:imported-parent
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-CYCLE-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  assertions: []
+- id: TOSCA13-CORPUS-IMPORT-CYCLE-INVALID
+  file: sections/3.1-namespaces/imports/cycle-invalid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    requirement_ids:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  classification:
+    kind: invalid
+    category: resolution
+    features:
+    - imports
+    - cycle
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: endless loop
+      path: cycle-a.yaml
+    assertions: []
+  coverage:
+    variation_axes:
+    - imports:cycle
+    - graph:bounded-cycle-detection
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-TRANSITIVE-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-IMPORT-CYCLE-NEAREST-VALID
+    change: IMPORT-CYCLE target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-IMPORT-DUPLICATE-IDEMPOTENT-VALID
+  file: sections/3.1-namespaces/imports/duplicate-idempotent-valid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    requirement_ids:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  classification:
+    kind: valid
+    category: resolution
+    features:
+    - imports
+    - duplicate-import
+    - determinism
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - imports:duplicate-idempotent
+    - determinism:stable-identity
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-COLLISION-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  assertions: []
+- id: TOSCA13-CORPUS-IMPORT-COLLISION-INVALID
+  file: sections/3.1-namespaces/imports/collision-invalid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    requirement_ids:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  classification:
+    kind: invalid
+    category: resolution
+    features:
+    - imports
+    - collision
+    - determinism
+  expected:
+    accepted: false
+    phase: namespaces
+    diagnostic:
+      category: ambiguous
+      path: Collision
+    assertions: []
+  coverage:
+    variation_axes:
+    - imports:name-collision
+    - namespace:unqualified
+    - diagnostic:deterministic
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-DUPLICATE-IDEMPOTENT-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-IMPORT-COLLISION-NEAREST-VALID
+    change: IMPORT-COLLISION target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-LOCAL-DUPLICATE-NAME-INVALID
+  file: sections/3.1-namespaces/namespaces/local-duplicate-invalid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    requirement_ids:
+    - TOSCA13-3.1.3.1-007
+    - TOSCA13-3.1.3.1-008
+    - TOSCA13-3.1.3.1-009
+    - TOSCA13-3.1.3.1-010
+    - TOSCA13-3.1.3.1-011
+    - TOSCA13-3.1.3.1-012
+    - TOSCA13-3.1.3.1-013
+    - TOSCA13-3.1.3.1-015
+    - TOSCA13-3.1.3.1-016
+    - TOSCA13-3.1.3.1-017
+    - TOSCA13-3.1.3.1-018
+    - TOSCA13-3.1.3.1-020
+    - TOSCA13-3.1.3.1-021
+    - TOSCA13-3.1.3.1-022
+    - TOSCA13-3.1.3.1-023
+    - TOSCA13-3.1.3.1-024
+    - TOSCA13-3.1.3.1-025
+    - TOSCA13-3.1.3.1-026
+    - TOSCA13-3.1.3.1-027
+  classification:
+    kind: invalid
+    category: grammar
+    features:
+    - namespace
+    - duplicate-local-name
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: duplicate map key
+      path: Duplicate
+    assertions: []
+  coverage:
+    variation_axes:
+    - keynames:duplicate-map-key-equivalence-class
+    - namespace:local
+    - diagnostic:yaml-decode
+    related_cases:
+    - TOSCA13-CORPUS-NAMESPACE-DEFAULT-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-007
+    - TOSCA13-3.1.3.1-008
+    - TOSCA13-3.1.3.1-009
+    - TOSCA13-3.1.3.1-010
+    - TOSCA13-3.1.3.1-011
+    - TOSCA13-3.1.3.1-012
+    - TOSCA13-3.1.3.1-013
+    - TOSCA13-3.1.3.1-015
+    - TOSCA13-3.1.3.1-016
+    - TOSCA13-3.1.3.1-017
+    - TOSCA13-3.1.3.1-018
+    - TOSCA13-3.1.3.1-020
+    - TOSCA13-3.1.3.1-021
+    - TOSCA13-3.1.3.1-022
+    - TOSCA13-3.1.3.1-023
+    - TOSCA13-3.1.3.1-024
+    - TOSCA13-3.1.3.1-025
+    - TOSCA13-3.1.3.1-026
+    - TOSCA13-3.1.3.1-027
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-LOCAL-DUPLICATE-NAME-NEAREST-VALID
+    change: LOCAL-DUPLICATE-NAME target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-IMPORT-DIFFERENT-VERSION-INVALID
+  file: version-isolation/import-tosca-2.0-invalid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    requirement_ids:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  classification:
+    kind: invalid
+    category: resolution
+    features:
+    - imports
+    - version-isolation
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: incompatible import
+      path: different-version.yaml
+    assertions: []
+  coverage:
+    variation_axes:
+    - imports:cross-version
+    - version-isolation:1.3-imports-2.0
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-IMPORT-DIFFERENT-VERSION-NEAREST-VALID
+    change: IMPORT-DIFFERENT-VERSION target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-VERSION-ZERO-VALID
+  file: sections/3.3-data-types/version/zero-valid.yaml
+  specification:
+    sections:
+    - 3.3.2.1
+    - 3.3.2.5
+    requirement_ids:
+    - TOSCA13-3.3.2.1-004
+    - TOSCA13-3.3.2.1-005
+    - TOSCA13-3.3.2.5-001
+  classification:
+    kind: valid
+    category: normalization
+    features:
+    - version
+    - zero-sentinel
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - boundary:zero-version
+    - normalization:unspecified-sentinel
+    related_cases:
+    - TOSCA13-CORPUS-VERSION-QUALIFIED-ZERO-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.3.2.1-004
+    - TOSCA13-3.3.2.1-005
+    - TOSCA13-3.3.2.5-001
+  assertions: []
+- id: TOSCA13-CORPUS-VERSION-QUALIFIED-ZERO-INVALID
+  file: sections/3.3-data-types/version/qualified-zero-invalid.yaml
+  specification:
+    sections:
+    - 3.3.2.5
+    requirement_ids:
+    - TOSCA13-3.3.2.5-002
+  classification:
+    kind: invalid
+    category: semantic
+    features:
+    - version
+    - qualifier
+  expected:
+    accepted: false
+    phase: rendering
+    diagnostic:
+      category: qualifier
+      path: release
+    assertions: []
+  coverage:
+    variation_axes:
+    - boundary:zero-with-qualifier
+    - values:forbidden-combination
+    related_cases:
+    - TOSCA13-CORPUS-VERSION-ZERO-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.3.2.5-002
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-VERSION-QUALIFIED-ZERO-NEAREST-VALID
+    change: VERSION-QUALIFIED-ZERO target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-RANGE-BOUNDARIES-VALID
+  file: sections/3.3-data-types/range/boundaries-valid.yaml
+  specification:
+    sections:
+    - 3.3.3.1
+    requirement_ids:
+    - TOSCA13-3.3.3.1-004
+    - TOSCA13-3.3.3.1-005
+  classification:
+    kind: valid
+    category: normalization
+    features:
+    - range
+    - unbounded
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - cardinality:equal-bounds
+    - cardinality:UNBOUNDED
+    related_cases:
+    - TOSCA13-CORPUS-RANGE-REVERSED-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.3.3.1-004
+    - TOSCA13-3.3.3.1-005
+  assertions: []
+- id: TOSCA13-CORPUS-RANGE-REVERSED-INVALID
+  file: sections/3.3-data-types/range/reversed-invalid.yaml
+  specification:
+    sections:
+    - 3.3.3.1
+    requirement_ids:
+    - TOSCA13-3.3.3.1-006
+  classification:
+    kind: invalid
+    category: semantic
+    features:
+    - range
+    - ordering
+  expected:
+    accepted: false
+    phase: rendering
+    diagnostic:
+      category: upper
+      path: value
+    assertions: []
+  coverage:
+    variation_axes:
+    - cardinality:invalid-range-order
+    - boundary:immediately-reversed
+    related_cases:
+    - TOSCA13-CORPUS-RANGE-BOUNDARIES-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.3.3.1-006
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-RANGE-REVERSED-NEAREST-VALID
+    change: RANGE-REVERSED target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-MAP-KEYED-VALID
+  file: sections/3.3-data-types/map/keyed-valid.yaml
+  specification:
+    sections:
+    - 3.3.5.1.2
+    requirement_ids:
+    - TOSCA13-3.3.5.1.2-002
+  classification:
+    kind: valid
+    category: normalization
+    features:
+    - map
+    - entry-key
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - yaml-type:mapping
+    - cardinality:multiple
+    related_cases:
+    - TOSCA13-CORPUS-MAP-UNKEYED-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.3.5.1.2-002
+  assertions: []
+- id: TOSCA13-CORPUS-MAP-UNKEYED-INVALID
+  file: sections/3.3-data-types/map/unkeyed-invalid.yaml
+  specification:
+    sections:
+    - 3.3.5.1.2
+    requirement_ids:
+    - TOSCA13-3.3.5.1.2-002
+  classification:
+    kind: invalid
+    category: semantic
+    features:
+    - map
+    - entry-key
+  expected:
+    accepted: false
+    phase: rendering
+    diagnostic:
+      category: map
+      path: payload
+    assertions: []
+  coverage:
+    variation_axes:
+    - yaml-type:sequence-instead-of-map
+    - keynames:missing-entry-key
+    related_cases:
+    - TOSCA13-CORPUS-MAP-KEYED-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.3.5.1.2-002
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-MAP-UNKEYED-NEAREST-VALID
+    change: MAP-UNKEYED target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-SCALAR-UNIT-WHITESPACE-VALID
+  file: sections/3.3-data-types/scalar-unit/whitespace-valid.yaml
+  specification:
+    sections:
+    - 3.3.6.1
+    - 3.3.6.2
+    requirement_ids:
+    - TOSCA13-3.3.6.1-004
+    - TOSCA13-3.3.6.1-005
+    - TOSCA13-3.3.6.1-006
+    - TOSCA13-3.3.6.2-001
+  classification:
+    kind: valid
+    category: normalization
+    features:
+    - scalar-unit
+    - whitespace
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - grammar-form:compact
+    - grammar-form:spaced
+    - whitespace:zero-or-many
+    related_cases:
+    - TOSCA13-CORPUS-SCALAR-UNIT-MISSING-UNIT-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.3.6.1-004
+    - TOSCA13-3.3.6.1-005
+    - TOSCA13-3.3.6.1-006
+    - TOSCA13-3.3.6.2-001
+  assertions: []
+- id: TOSCA13-CORPUS-SCALAR-UNIT-MISSING-UNIT-INVALID
+  file: sections/3.3-data-types/scalar-unit/missing-unit-invalid.yaml
+  specification:
+    sections:
+    - 3.3.6.2
+    requirement_ids:
+    - TOSCA13-3.3.6.2-002
+  classification:
+    kind: invalid
+    category: semantic
+    features:
+    - scalar-unit
+    - missing-component
+  expected:
+    accepted: false
+    phase: rendering
+    diagnostic:
+      category: malformed
+      path: value
+    assertions: []
+  coverage:
+    variation_axes:
+    - keynames:missing-unit
+    - values:incomplete-scalar-unit
+    related_cases:
+    - TOSCA13-CORPUS-SCALAR-UNIT-WHITESPACE-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.3.6.2-002
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-SCALAR-UNIT-MISSING-UNIT-NEAREST-VALID
+    change: SCALAR-UNIT-MISSING-UNIT target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-SCALAR-UNIT-CONSTRAINT-BOUNDARY-VALID
+  file: sections/3.3-data-types/scalar-unit/constraint-boundary-valid.yaml
+  specification:
+    sections:
+    - 3.3.6.2
+    requirement_ids:
+    - TOSCA13-3.3.6.2-003
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - scalar-unit
+    - constraint
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - constraint:unit-conversion
+    - boundary:inclusive-range
+    related_cases:
+    - TOSCA13-CORPUS-SCALAR-UNIT-WHITESPACE-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.3.6.2-003
+  assertions: []
+- id: TOSCA13-CORPUS-INHERITED-REQUIRED-KEY-VALID
+  file: sections/3.5-common-definitions/inherited-required-key-valid.yaml
+  specification:
+    sections:
+    - 3.5.1
+    requirement_ids:
+    - TOSCA13-3.5.1-002
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - inheritance
+    - refinement
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - inheritance:required-key-from-parent
+    - refinement:default-only
+    related_cases: []
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.5.1-002
+  assertions: []
+- id: TOSCA13-CORPUS-REPOSITORY-SHORT-VALID
+  file: sections/3.6-grammar-definitions/repository/short-valid.yaml
+  specification:
+    sections:
+    - 3.6.6.1
+    - 3.6.6.2.2
+    requirement_ids:
+    - TOSCA13-3.6.6.1-004
+    - TOSCA13-3.6.6.1-006
+    - TOSCA13-3.6.6.2.2-003
+  classification:
+    kind: valid
+    category: grammar
+    features:
+    - repository
+    - short-notation
+  expected:
+    accepted: true
+    phase: read
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - grammar-form:short
+    - yaml-type:string
+    related_cases:
+    - TOSCA13-CORPUS-REPOSITORY-LONG-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.6.1-004
+    - TOSCA13-3.6.6.1-006
+    - TOSCA13-3.6.6.2.2-003
+  assertions: []
+- id: TOSCA13-CORPUS-REPOSITORY-LONG-VALID
+  file: sections/3.6-grammar-definitions/repository/long-valid.yaml
+  specification:
+    sections:
+    - 3.6.6.1
+    - 3.6.6.2.2
+    requirement_ids:
+    - TOSCA13-3.6.6.1-004
+    - TOSCA13-3.6.6.1-006
+    - TOSCA13-3.6.6.2.2-003
+    - TOSCA13-3.6.6.2.2-005
+  classification:
+    kind: valid
+    category: grammar
+    features:
+    - repository
+    - long-notation
+  expected:
+    accepted: true
+    phase: read
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - grammar-form:long
+    - keynames:all-optional
+    related_cases:
+    - TOSCA13-CORPUS-REPOSITORY-SHORT-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.6.1-004
+    - TOSCA13-3.6.6.1-006
+    - TOSCA13-3.6.6.2.2-003
+    - TOSCA13-3.6.6.2.2-005
+  assertions: []
+- id: TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+  file: sections/3.6-grammar-definitions/definitions/complete-valid.yaml
+  specification:
+    sections:
+    - 3.6.7.1
+    - 3.6.7.2.2
+    - 3.6.9.1
+    - 3.6.10.2
+    - 3.6.10.4
+    - 3.6.10.5
+    - 3.6.12.2
+    - 3.6.12.3
+    - 3.6.12.4
+    - 3.6.14.2
+    - 3.6.14.3
+    - 3.6.15.1
+    - 3.6.17.2.3
+    - 3.6.17.3
+    - 3.6.19.2
+    - 3.6.20.2.2
+    - 3.6.21.1
+    - 3.6.22.1
+    - 3.6.22.3.2
+    requirement_ids:
+    - TOSCA13-3.6.7.1-001
+    - TOSCA13-3.6.7.1-003
+    - TOSCA13-3.6.7.1-004
+    - TOSCA13-3.6.7.1-006
+    - TOSCA13-3.6.7.2.2-003
+    - TOSCA13-3.6.7.2.2-005
+    - TOSCA13-3.6.7.2.2-006
+    - TOSCA13-3.6.9.1-001
+    - TOSCA13-3.6.10.2-001
+    - TOSCA13-3.6.10.4-004
+    - TOSCA13-3.6.10.4-007
+    - TOSCA13-3.6.10.4-008
+    - TOSCA13-3.6.10.5-001
+    - TOSCA13-3.6.10.5-003
+    - TOSCA13-3.6.10.5-004
+    - TOSCA13-3.6.10.5-005
+    - TOSCA13-3.6.12.2-001
+    - TOSCA13-3.6.12.2-010
+    - TOSCA13-3.6.12.3-004
+    - TOSCA13-3.6.12.4-002
+    - TOSCA13-3.6.14.2-008
+    - TOSCA13-3.6.14.2-014
+    - TOSCA13-3.6.14.2-015
+    - TOSCA13-3.6.14.3-002
+    - TOSCA13-3.6.14.3-003
+    - TOSCA13-3.6.15.1-005
+    - TOSCA13-3.6.15.1-012
+    - TOSCA13-3.6.17.2.3-003
+    - TOSCA13-3.6.17.3-002
+    - TOSCA13-3.6.19.2-004
+    - TOSCA13-3.6.20.2.2-003
+    - TOSCA13-3.6.20.2.2-004
+    - TOSCA13-3.6.20.2.2-007
+    - TOSCA13-3.6.20.2.2-008
+    - TOSCA13-3.6.21.1-001
+    - TOSCA13-3.6.21.1-003
+    - TOSCA13-3.6.22.1-004
+    - TOSCA13-3.6.22.1-020
+    - TOSCA13-3.6.22.3.2-002
+    - TOSCA13-3.6.22.3.2-004
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - definitions
+    - complete
+    - inheritance
+    - normalization
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:component
+    - input_exists:label
+    - output_exists:label
+  coverage:
+    variation_axes:
+    - grammar-form:complete
+    - keynames:all-optional
+    - yaml-type:mapping
+    - cardinality:zero-one-unbounded
+    - inheritance:direct
+    related_cases:
+    - TOSCA13-CORPUS-PROPERTY-MISSING-TYPE-INVALID
+    - TOSCA13-CORPUS-PROPERTY-REQUIRED-WRONG-TYPE-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.7.1-001
+    - TOSCA13-3.6.7.1-003
+    - TOSCA13-3.6.7.1-004
+    - TOSCA13-3.6.7.1-006
+    - TOSCA13-3.6.7.2.2-003
+    - TOSCA13-3.6.7.2.2-005
+    - TOSCA13-3.6.7.2.2-006
+    - TOSCA13-3.6.9.1-001
+    - TOSCA13-3.6.10.2-001
+    - TOSCA13-3.6.10.4-004
+    - TOSCA13-3.6.10.4-007
+    - TOSCA13-3.6.10.4-008
+    - TOSCA13-3.6.10.5-001
+    - TOSCA13-3.6.10.5-003
+    - TOSCA13-3.6.10.5-004
+    - TOSCA13-3.6.10.5-005
+    - TOSCA13-3.6.12.2-001
+    - TOSCA13-3.6.12.2-010
+    - TOSCA13-3.6.12.3-004
+    - TOSCA13-3.6.12.4-002
+    - TOSCA13-3.6.14.2-008
+    - TOSCA13-3.6.14.2-014
+    - TOSCA13-3.6.14.2-015
+    - TOSCA13-3.6.14.3-002
+    - TOSCA13-3.6.14.3-003
+    - TOSCA13-3.6.15.1-005
+    - TOSCA13-3.6.15.1-012
+    - TOSCA13-3.6.17.2.3-003
+    - TOSCA13-3.6.17.3-002
+    - TOSCA13-3.6.19.2-004
+    - TOSCA13-3.6.20.2.2-003
+    - TOSCA13-3.6.20.2.2-004
+    - TOSCA13-3.6.20.2.2-007
+    - TOSCA13-3.6.20.2.2-008
+    - TOSCA13-3.6.21.1-001
+    - TOSCA13-3.6.21.1-003
+    - TOSCA13-3.6.22.1-004
+    - TOSCA13-3.6.22.1-020
+    - TOSCA13-3.6.22.3.2-002
+    - TOSCA13-3.6.22.3.2-004
+  assertions: []
+- id: TOSCA13-CORPUS-PROPERTY-MISSING-TYPE-INVALID
+  file: sections/3.6-grammar-definitions/definitions/missing-property-type-invalid.yaml
+  specification:
+    sections:
+    - 3.6.10.4
+    requirement_ids:
+    - TOSCA13-3.6.10.4-004
+  classification:
+    kind: invalid
+    category: grammar
+    features:
+    - property-definition
+    - required-key
+  expected:
+    accepted: false
+    phase: rendering
+    diagnostic:
+      category: missing
+      path: type
+    assertions: []
+  coverage:
+    variation_axes:
+    - keynames:required-type-absent
+    - grammar-form:long
+    related_cases:
+    - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.10.4-004
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-PROPERTY-MISSING-TYPE-NEAREST-VALID
+    change: PROPERTY-MISSING-TYPE target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-PROPERTY-REQUIRED-WRONG-TYPE-INVALID
+  file: sections/3.6-grammar-definitions/definitions/wrong-required-type-invalid.yaml
+  specification:
+    sections:
+    - 3.6.10.4
+    requirement_ids:
+    - TOSCA13-3.6.10.4-007
+  classification:
+    kind: invalid
+    category: grammar
+    features:
+    - property-definition
+    - yaml-type
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: boolean
+      path: required
+    assertions: []
+  coverage:
+    variation_axes:
+    - yaml-type:integer-instead-of-boolean
+    - keynames:optional-required
+    related_cases:
+    - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.10.4-007
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-PROPERTY-REQUIRED-WRONG-TYPE-NEAREST-VALID
+    change: PROPERTY-REQUIRED-WRONG-TYPE target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID
+  file: sections/3.6-grammar-definitions/constraints/boundaries-valid.yaml
+  specification:
+    sections:
+    - 3.6.3.3
+    - 3.6.3.4
+    - 3.6.10.5
+    requirement_ids:
+    - TOSCA13-3.6.3.3-001
+    - TOSCA13-3.6.3.3-002
+    - TOSCA13-3.6.3.3-003
+    - TOSCA13-3.6.3.4-004
+    - TOSCA13-3.6.3.4-005
+    - TOSCA13-3.6.3.4-007
+    - TOSCA13-3.6.10.5-004
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - constraints
+    - boundaries
+    - conjunction
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - constraint:conjunction
+    - boundary:inclusive-upper
+    - collection:length
+    related_cases:
+    - TOSCA13-CORPUS-CONSTRAINT-OPERAND-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.3.3-001
+    - TOSCA13-3.6.3.3-002
+    - TOSCA13-3.6.3.3-003
+    - TOSCA13-3.6.3.4-004
+    - TOSCA13-3.6.3.4-005
+    - TOSCA13-3.6.3.4-007
+    - TOSCA13-3.6.10.5-004
+  assertions: []
+- id: TOSCA13-CORPUS-CONSTRAINT-OPERAND-INVALID
+  file: sections/3.6-grammar-definitions/constraints/operand-invalid.yaml
+  specification:
+    sections:
+    - 3.6.3.3
+    - 3.6.10.5
+    requirement_ids:
+    - TOSCA13-3.6.3.3-003
+    - TOSCA13-3.6.10.5-004
+  classification:
+    kind: invalid
+    category: semantic
+    features:
+    - constraints
+    - operand-type
+  expected:
+    accepted: false
+    phase: rendering
+    diagnostic:
+      category: incompatible
+      path: pattern
+    assertions: []
+  coverage:
+    variation_axes:
+    - constraint:incompatible-operator
+    - yaml-type:string-pattern-on-integer
+    related_cases:
+    - TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.3.3-003
+    - TOSCA13-3.6.10.5-004
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-CONSTRAINT-OPERAND-NEAREST-VALID
+    change: CONSTRAINT-OPERAND target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+  file: sections/3.7-type-definitions/hierarchy/multilevel-refinement-valid.yaml
+  specification:
+    sections:
+    - 3.7.2.1
+    - 3.7.2.4
+    - 3.7.3.1
+    - 3.7.3.2.3
+    - 3.7.3.3
+    - 3.7.5.2
+    - 3.7.5.4
+    - 3.7.6.2
+    - 3.7.6.3
+    - 3.7.7.2
+    - 3.7.9.2
+    - 3.7.10.2
+    - 3.7.11.2
+    - 3.7.11.4
+    - 3.7.12.2
+    requirement_ids:
+    - TOSCA13-3.7.2.1-001
+    - TOSCA13-3.7.2.4-001
+    - TOSCA13-3.7.2.4-002
+    - TOSCA13-3.7.3.1-001
+    - TOSCA13-3.7.3.2.3-003
+    - TOSCA13-3.7.3.2.3-004
+    - TOSCA13-3.7.3.3-001
+    - TOSCA13-3.7.3.3-002
+    - TOSCA13-3.7.5.2-004
+    - TOSCA13-3.7.5.2-008
+    - TOSCA13-3.7.5.2-009
+    - TOSCA13-3.7.5.4-001
+    - TOSCA13-3.7.5.4-002
+    - TOSCA13-3.7.6.2-004
+    - TOSCA13-3.7.6.3-001
+    - TOSCA13-3.7.6.3-002
+    - TOSCA13-3.7.6.3-003
+    - TOSCA13-3.7.7.2-004
+    - TOSCA13-3.7.9.2-004
+    - TOSCA13-3.7.10.2-004
+    - TOSCA13-3.7.11.2-003
+    - TOSCA13-3.7.11.4-002
+    - TOSCA13-3.7.12.2-004
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - type-hierarchy
+    - inheritance
+    - refinement
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - inheritance:direct
+    - inheritance:multilevel
+    - refinement:default
+    - refinement:type-compatible
+    - cardinality:narrowing
+    related_cases:
+    - TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-INVALID
+    - TOSCA13-CORPUS-TYPE-REQUIRED-WIDENING-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.7.2.1-001
+    - TOSCA13-3.7.2.4-001
+    - TOSCA13-3.7.2.4-002
+    - TOSCA13-3.7.3.1-001
+    - TOSCA13-3.7.3.2.3-003
+    - TOSCA13-3.7.3.2.3-004
+    - TOSCA13-3.7.3.3-001
+    - TOSCA13-3.7.3.3-002
+    - TOSCA13-3.7.5.2-004
+    - TOSCA13-3.7.5.2-008
+    - TOSCA13-3.7.5.2-009
+    - TOSCA13-3.7.5.4-001
+    - TOSCA13-3.7.5.4-002
+    - TOSCA13-3.7.6.2-004
+    - TOSCA13-3.7.6.3-001
+    - TOSCA13-3.7.6.3-002
+    - TOSCA13-3.7.6.3-003
+    - TOSCA13-3.7.7.2-004
+    - TOSCA13-3.7.9.2-004
+    - TOSCA13-3.7.10.2-004
+    - TOSCA13-3.7.11.2-003
+    - TOSCA13-3.7.11.4-002
+    - TOSCA13-3.7.12.2-004
+  assertions: []
+- id: TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-INVALID
+  file: sections/3.7-type-definitions/hierarchy/cycle-invalid.yaml
+  specification:
+    sections:
+    - 3.7.1.1
+    requirement_ids:
+    - TOSCA13-3.7.1.1-003
+  classification:
+    kind: invalid
+    category: semantic
+    features:
+    - type-hierarchy
+    - cycle
+  expected:
+    accepted: false
+    phase: hierarchy
+    diagnostic:
+      category: loop
+      path: First
+    assertions: []
+  coverage:
+    variation_axes:
+    - inheritance:cycle
+    - graph:bounded-cycle-detection
+    related_cases:
+    - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.7.1.1-003
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-NEAREST-VALID
+    change: TYPE-HIERARCHY-CYCLE target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-TYPE-REQUIRED-WIDENING-INVALID
+  file: sections/3.7-type-definitions/refinement/required-widening-invalid.yaml
+  specification:
+    sections:
+    - 3.7.3.3
+    - 3.7.5.4
+    requirement_ids:
+    - TOSCA13-3.7.3.3-002
+    - TOSCA13-3.7.5.4-002
+  classification:
+    kind: invalid
+    category: semantic
+    features:
+    - refinement
+    - required
+  expected:
+    accepted: false
+    phase: inheritance
+    diagnostic:
+      category: refinement
+      path: required
+    assertions: []
+  coverage:
+    variation_axes:
+    - refinement:invalid-widening
+    - inheritance:one-level
+    related_cases:
+    - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.7.3.3-002
+    - TOSCA13-3.7.5.4-002
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-TYPE-REQUIRED-WIDENING-NEAREST-VALID
+    change: TYPE-REQUIRED-WIDENING target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+  file: sections/3.8-template-definitions/templates/complete-valid.yaml
+  specification:
+    sections:
+    - 3.8.3.1
+    - 3.8.3.2
+    - 3.8.3.3
+    - 3.8.4.1
+    - 3.8.4.2
+    - 3.8.4.3
+    - 3.8.5.1
+    - 3.8.5.2
+    - 3.8.6.1
+    - 3.8.6.2
+    - 3.8.8.3
+    - 3.8.13.1
+    - 3.8.13.2
+    - 3.8.13.4
+    requirement_ids:
+    - TOSCA13-3.8.2.2.3-015
+    - TOSCA13-3.8.3.1-001
+    - TOSCA13-3.8.3.2-003
+    - TOSCA13-3.8.3.3-001
+    - TOSCA13-3.8.4.1-001
+    - TOSCA13-3.8.4.2-003
+    - TOSCA13-3.8.4.3-001
+    - TOSCA13-3.8.5.1-001
+    - TOSCA13-3.8.5.2-003
+    - TOSCA13-3.8.5.2-007
+    - TOSCA13-3.8.6.1-001
+    - TOSCA13-3.8.6.1-003
+    - TOSCA13-3.8.6.2-003
+    - TOSCA13-3.8.8.3-005
+    - TOSCA13-3.8.13.1-001
+    - TOSCA13-3.8.13.1-003
+    - TOSCA13-3.8.13.2-004
+    - TOSCA13-3.8.13.4-001
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - templates
+    - requirements
+    - capabilities
+    - groups
+    - policies
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:source
+    - node_exists:target
+  coverage:
+    variation_axes:
+    - template-kind:node-relationship-group-policy
+    - reference:existing-target
+    - cardinality:multiple
+    related_cases:
+    - TOSCA13-CORPUS-NODE-TEMPLATE-MISSING-TYPE-INVALID
+    - TOSCA13-CORPUS-GROUP-MEMBER-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.8.2.2.3-015
+    - TOSCA13-3.8.3.1-001
+    - TOSCA13-3.8.3.2-003
+    - TOSCA13-3.8.3.3-001
+    - TOSCA13-3.8.4.1-001
+    - TOSCA13-3.8.4.2-003
+    - TOSCA13-3.8.4.3-001
+    - TOSCA13-3.8.5.1-001
+    - TOSCA13-3.8.5.2-003
+    - TOSCA13-3.8.5.2-007
+    - TOSCA13-3.8.6.1-001
+    - TOSCA13-3.8.6.1-003
+    - TOSCA13-3.8.6.2-003
+    - TOSCA13-3.8.8.3-005
+    - TOSCA13-3.8.13.1-001
+    - TOSCA13-3.8.13.1-003
+    - TOSCA13-3.8.13.2-004
+    - TOSCA13-3.8.13.4-001
+  assertions: []
+- id: TOSCA13-CORPUS-NODE-TEMPLATE-MISSING-TYPE-INVALID
+  file: sections/3.8-template-definitions/templates/node-type-missing-invalid.yaml
+  specification:
+    sections:
+    - 3.8.3.1
+    requirement_ids:
+    - TOSCA13-3.8.3.1-001
+  classification:
+    kind: invalid
+    category: grammar
+    features:
+    - node-template
+    - required-key
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: missing
+      path: type
+    assertions: []
+  coverage:
+    variation_axes:
+    - keynames:required-type-absent
+    - template-kind:node
+    related_cases:
+    - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.8.3.1-001
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-NODE-TEMPLATE-MISSING-TYPE-NEAREST-VALID
+    change: NODE-TEMPLATE-MISSING-TYPE target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-GROUP-MEMBER-INVALID
+  file: sections/3.8-template-definitions/templates/group-member-invalid.yaml
+  specification:
+    sections:
+    - 3.8.6.2
+    requirement_ids:
+    - TOSCA13-3.8.6.2-003
+  classification:
+    kind: invalid
+    category: resolution
+    features:
+    - group
+    - member
+  expected:
+    accepted: false
+    phase: namespaces
+    diagnostic:
+      category: unknown
+      path: absent
+    assertions: []
+  coverage:
+    variation_axes:
+    - reference:missing-target
+    - template-kind:group
+    related_cases:
+    - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.8.6.2-003
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-GROUP-MEMBER-NEAREST-VALID
+    change: GROUP-MEMBER target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-TEMPLATE-COPY-VALID
+  file: sections/3.8-template-definitions/templates/copy-valid.yaml
+  specification:
+    sections:
+    - 3.8.2.2.3
+    requirement_ids:
+    - TOSCA13-3.8.2.2.3-015
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - copy
+    - assignment
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:base
+    - node_exists:copy
+  coverage:
+    variation_axes:
+    - copy:one-level
+    - assignment:override
+    - normalization:independent-copy
+    related_cases:
+    - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.8.2.2.3-015
+  assertions: []
+- id: TOSCA13-CORPUS-FUNCTION-NESTED-VALID
+  file: sections/4-functions/functions/nested-valid.yaml
+  specification:
+    sections:
+    - 4.3.1.2
+    - 4.3.2.2
+    - 4.3.3.2
+    - 4.4.1.2
+    requirement_ids:
+    - TOSCA13-4.3.1.2-003
+    - TOSCA13-4.3.2.2-003
+    - TOSCA13-4.3.3.2-003
+    - TOSCA13-4.3.3.2-006
+    - TOSCA13-4.3.3.2-010
+    - TOSCA13-4.4.1.2-003
+  classification:
+    kind: valid
+    category: normalization
+    features:
+    - functions
+    - nested
+    - concat
+    - get_input
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - output_exists:result
+  coverage:
+    variation_axes:
+    - function:direct
+    - function:nested
+    - arguments:minimum-and-multiple
+    - normalization:function-preserved
+    related_cases:
+    - TOSCA13-CORPUS-FUNCTION-ARGUMENTS-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-4.3.1.2-003
+    - TOSCA13-4.3.2.2-003
+    - TOSCA13-4.3.3.2-003
+    - TOSCA13-4.3.3.2-006
+    - TOSCA13-4.3.3.2-010
+    - TOSCA13-4.4.1.2-003
+  assertions: []
+- id: TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID
+  file: sections/4-functions/functions/resolution-valid.yaml
+  specification:
+    sections:
+    - 4.4.2.2
+    - 4.5.1.2
+    - 4.6.1.2
+    - 4.7.1.2
+    - 4.8.1.2
+    requirement_ids:
+    - TOSCA13-4.4.2.2-002
+    - TOSCA13-4.4.2.2-004
+    - TOSCA13-4.4.2.2-010
+    - TOSCA13-4.5.1.2-002
+    - TOSCA13-4.5.1.2-004
+    - TOSCA13-4.5.1.2-010
+    - TOSCA13-4.6.1.2-001
+    - TOSCA13-4.6.1.2-003
+    - TOSCA13-4.6.1.2-004
+    - TOSCA13-4.6.1.2-006
+    - TOSCA13-4.6.1.2-007
+    - TOSCA13-4.6.1.2-009
+    - TOSCA13-4.6.1.2-010
+    - TOSCA13-4.6.1.2-012
+    - TOSCA13-4.7.1.2-003
+    - TOSCA13-4.8.1.2-002
+    - TOSCA13-4.8.1.2-004
+    - TOSCA13-4.8.1.2-007
+  classification:
+    kind: valid
+    category: resolution
+    features:
+    - functions
+    - inheritance
+    - references
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - output_exists:property
+    - output_exists:attribute
+    - output_exists:operation
+    - output_exists:artifact
+  coverage:
+    variation_axes:
+    - reference:inherited-property
+    - reference:inherited-attribute
+    - reference:operation-output
+    - reference:artifact
+    related_cases:
+    - TOSCA13-CORPUS-FUNCTION-REFERENCE-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-4.4.2.2-002
+    - TOSCA13-4.4.2.2-004
+    - TOSCA13-4.4.2.2-010
+    - TOSCA13-4.5.1.2-002
+    - TOSCA13-4.5.1.2-004
+    - TOSCA13-4.5.1.2-010
+    - TOSCA13-4.6.1.2-001
+    - TOSCA13-4.6.1.2-003
+    - TOSCA13-4.6.1.2-004
+    - TOSCA13-4.6.1.2-006
+    - TOSCA13-4.6.1.2-007
+    - TOSCA13-4.6.1.2-009
+    - TOSCA13-4.6.1.2-010
+    - TOSCA13-4.6.1.2-012
+    - TOSCA13-4.7.1.2-003
+    - TOSCA13-4.8.1.2-002
+    - TOSCA13-4.8.1.2-004
+    - TOSCA13-4.8.1.2-007
+  assertions: []
+- id: TOSCA13-CORPUS-FUNCTION-ARGUMENTS-INVALID
+  file: sections/4-functions/functions/arguments-invalid.yaml
+  specification:
+    sections:
+    - 4.3.3.2
+    requirement_ids:
+    - TOSCA13-4.3.3.2-003
+    - TOSCA13-4.3.3.2-006
+    - TOSCA13-4.3.3.2-010
+  classification:
+    kind: invalid
+    category: grammar
+    features:
+    - functions
+    - argument-count
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: substring_index
+      path: token
+    assertions: []
+  coverage:
+    variation_axes:
+    - arguments:missing-required
+    - function:token
+    related_cases:
+    - TOSCA13-CORPUS-FUNCTION-NESTED-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-4.3.3.2-003
+    - TOSCA13-4.3.3.2-006
+    - TOSCA13-4.3.3.2-010
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-FUNCTION-ARGUMENTS-NEAREST-VALID
+    change: FUNCTION-ARGUMENTS target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-FUNCTION-REFERENCE-INVALID
+  file: sections/4-functions/functions/reference-invalid.yaml
+  specification:
+    sections:
+    - 4.4.2.2
+    requirement_ids:
+    - TOSCA13-4.4.2.2-002
+    - TOSCA13-4.4.2.2-004
+  classification:
+    kind: invalid
+    category: resolution
+    features:
+    - functions
+    - missing-reference
+  expected:
+    accepted: false
+    phase: rendering
+    diagnostic:
+      category: malformed
+      path: absent
+    assertions: []
+  coverage:
+    variation_axes:
+    - reference:missing-property
+    - function:get_property
+    related_cases:
+    - TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-4.4.2.2-002
+    - TOSCA13-4.4.2.2-004
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-FUNCTION-REFERENCE-NEAREST-VALID
+    change: FUNCTION-REFERENCE target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
+  file: sections/5-normative-types/profile/derived-valid.yaml
+  specification:
+    sections:
+    - 5.2.1
+    - 5.3.6.1
+    - 5.3.7.1
+    - 5.3.7.2
+    - 5.3.11.1
+    - 5.3.11.2
+    - 5.3.11.3
+    - 5.5.7.1
+    - 5.5.7.2
+    - 5.5.7.3
+    - 5.5.7.4
+    - 5.5.12.3
+    - 5.5.13.1
+    - 5.7.1.1
+    - 5.7.5.1
+    - 5.8.1
+    - 5.9.1.2
+    - 5.9.5.3
+    - 5.9.8.1
+    - 5.9.9.1
+    requirement_ids:
+    - TOSCA13-5.2.1-001
+    - TOSCA13-5.3.6.1-005
+    - TOSCA13-5.3.6.1-008
+    - TOSCA13-5.3.7.1-002
+    - TOSCA13-5.3.7.1-005
+    - TOSCA13-5.3.7.2-005
+    - TOSCA13-5.3.7.2-008
+    - TOSCA13-5.3.11.1-002
+    - TOSCA13-5.3.11.2-005
+    - TOSCA13-5.3.11.3-001
+    - TOSCA13-5.3.11.3-002
+    - TOSCA13-5.3.11.3-003
+    - TOSCA13-5.5.7.1-003
+    - TOSCA13-5.5.7.2-002
+    - TOSCA13-5.5.7.3-005
+    - TOSCA13-5.5.7.4-001
+    - TOSCA13-5.5.12.3-001
+    - TOSCA13-5.5.13.1-003
+    - TOSCA13-5.5.13.1-007
+    - TOSCA13-5.5.13.1-012
+    - TOSCA13-5.7.1.1-002
+    - TOSCA13-5.7.1.1-005
+    - TOSCA13-5.7.1.1-010
+    - TOSCA13-5.7.5.1-003
+    - TOSCA13-5.8.1-004
+    - TOSCA13-5.9.1.2-002
+    - TOSCA13-5.9.1.2-005
+    - TOSCA13-5.9.1.2-010
+    - TOSCA13-5.9.5.3-001
+    - TOSCA13-5.9.8.1-002
+    - TOSCA13-5.9.9.1-002
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - normative-profile
+    - derived-types
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:port
+  coverage:
+    variation_axes:
+    - normative-profile:effective-types
+    - inheritance:normative-parent
+    - version-isolation:tosca-1.3
+    related_cases:
+    - TOSCA13-CORPUS-NETWORK-PORT-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-5.2.1-001
+    - TOSCA13-5.3.6.1-005
+    - TOSCA13-5.3.6.1-008
+    - TOSCA13-5.3.7.1-002
+    - TOSCA13-5.3.7.1-005
+    - TOSCA13-5.3.7.2-005
+    - TOSCA13-5.3.7.2-008
+    - TOSCA13-5.3.11.1-002
+    - TOSCA13-5.3.11.2-005
+    - TOSCA13-5.3.11.3-001
+    - TOSCA13-5.3.11.3-002
+    - TOSCA13-5.3.11.3-003
+    - TOSCA13-5.5.7.1-003
+    - TOSCA13-5.5.7.2-002
+    - TOSCA13-5.5.7.3-005
+    - TOSCA13-5.5.7.4-001
+    - TOSCA13-5.5.12.3-001
+    - TOSCA13-5.5.13.1-003
+    - TOSCA13-5.5.13.1-007
+    - TOSCA13-5.5.13.1-012
+    - TOSCA13-5.7.1.1-002
+    - TOSCA13-5.7.1.1-005
+    - TOSCA13-5.7.1.1-010
+    - TOSCA13-5.7.5.1-003
+    - TOSCA13-5.8.1-004
+    - TOSCA13-5.9.1.2-002
+    - TOSCA13-5.9.1.2-005
+    - TOSCA13-5.9.1.2-010
+    - TOSCA13-5.9.5.3-001
+    - TOSCA13-5.9.8.1-002
+    - TOSCA13-5.9.9.1-002
+  assertions: []
+- id: TOSCA13-CORPUS-NETWORK-PORT-VALID
+  file: sections/8-normative-node-types/network-port-valid.yaml
+  specification:
+    sections:
+    - '8.2'
+    - 8.3.2
+    - 8.5.1.1
+    - 8.5.2.3
+    requirement_ids:
+    - TOSCA13-8.2-002
+    - TOSCA13-8.3.2-001
+    - TOSCA13-8.5.1.1-036
+    - TOSCA13-8.5.2.3-008
+  classification:
+    kind: valid
+    category: normalization
+    features:
+    - normative-profile
+    - network-port
+    - boundary
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:port
+  coverage:
+    variation_axes:
+    - default:order
+    - boundary:explicit-zero
+    - constraint:greater-or-equal
+    related_cases:
+    - TOSCA13-CORPUS-NETWORK-PORT-REFINEMENT-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-8.2-002
+    - TOSCA13-8.3.2-001
+    - TOSCA13-8.5.1.1-036
+    - TOSCA13-8.5.2.3-008
+  assertions: []
+- id: TOSCA13-CORPUS-NETWORK-PORT-REFINEMENT-INVALID
+  file: sections/8-normative-node-types/network-port-refinement-invalid.yaml
+  specification:
+    sections:
+    - 8.5.2.3
+    requirement_ids:
+    - TOSCA13-8.5.2.3-008
+  classification:
+    kind: invalid
+    category: semantic
+    features:
+    - normative-profile
+    - refinement
+  expected:
+    accepted: false
+    phase: inheritance
+    diagnostic:
+      category: refine
+      path: required
+    assertions: []
+  coverage:
+    variation_axes:
+    - refinement:invalid-required-widening
+    - normative-profile:effective-property
+    related_cases:
+    - TOSCA13-CORPUS-NETWORK-PORT-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-8.5.2.3-008
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-NETWORK-PORT-REFINEMENT-NEAREST-VALID
+    change: NETWORK-PORT-REFINEMENT target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-CSAR-METADATA-VALID
+  file: sections/6-csar/archives/metadata-valid.csar.yaml
+  specification:
+    sections:
+    - '6.1'
+    - '6.2'
+    requirement_ids:
+    - TOSCA13-6.1-004
+    - TOSCA13-6.1-005
+    - TOSCA13-6.1-006
+    - TOSCA13-6.1-007
+    - TOSCA13-6.1-008
+    - TOSCA13-6.2-001
+    - TOSCA13-6.2-005
+    - TOSCA13-6.2-010
+    - TOSCA13-6.2-018
+  classification:
+    kind: valid
+    category: csar
+    features:
+    - csar
+    - metadata
+    - entry-definitions
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - csar:valid-metadata
+    - version:1.1
+    - entry-selection:explicit
+    related_cases:
+    - TOSCA13-CORPUS-CSAR-ENTRY-MISSING-INVALID
+    - TOSCA13-CORPUS-CSAR-TRAVERSAL-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-6.1-004
+    - TOSCA13-6.1-005
+    - TOSCA13-6.1-006
+    - TOSCA13-6.1-007
+    - TOSCA13-6.1-008
+    - TOSCA13-6.2-001
+    - TOSCA13-6.2-005
+    - TOSCA13-6.2-010
+    - TOSCA13-6.2-018
+  assertions: []
+- id: TOSCA13-CORPUS-CSAR-METADATA-FREE-VALID
+  file: sections/6-csar/archives/metadata-free-valid.csar.yaml
+  specification:
+    sections:
+    - '6.1'
+    - '6.3'
+    requirement_ids:
+    - TOSCA13-6.1-004
+    - TOSCA13-6.3-002
+    - TOSCA13-6.3-005
+  classification:
+    kind: valid
+    category: csar
+    features:
+    - csar
+    - metadata-free
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - csar:metadata-free-root
+    - metadata:required-template-name-version
+    related_cases:
+    - TOSCA13-CORPUS-CSAR-METADATA-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-6.1-004
+    - TOSCA13-6.3-002
+    - TOSCA13-6.3-005
+  assertions: []
+- id: TOSCA13-CORPUS-CSAR-ENTRY-MISSING-INVALID
+  file: sections/6-csar/archives/entry-missing-invalid.csar.yaml
+  specification:
+    sections:
+    - '6.2'
+    requirement_ids:
+    - TOSCA13-6.2-010
+    - TOSCA13-6.2-018
+  classification:
+    kind: invalid
+    category: csar
+    features:
+    - csar
+    - missing-file
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: not found
+      path: absent.yaml
+    assertions: []
+  coverage:
+    variation_axes:
+    - csar:missing-entry-definitions
+    - reference:missing
+    related_cases:
+    - TOSCA13-CORPUS-CSAR-METADATA-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-6.2-010
+    - TOSCA13-6.2-018
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-CSAR-ENTRY-MISSING-NEAREST-VALID
+    change: CSAR-ENTRY-MISSING target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-CSAR-TRAVERSAL-INVALID
+  file: sections/6-csar/archives/traversal-invalid.csar.yaml
+  specification:
+    sections:
+    - '6.2'
+    requirement_ids:
+    - TOSCA13-6.2-010
+    - TOSCA13-6.2-018
+  classification:
+    kind: invalid
+    category: csar
+    features:
+    - csar
+    - traversal
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: invalid
+      path: Entry-Definitions
+    assertions: []
+  coverage:
+    variation_axes:
+    - csar:path-traversal
+    - security:root-confinement
+    related_cases:
+    - TOSCA13-CORPUS-CSAR-METADATA-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-6.2-010
+    - TOSCA13-6.2-018
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-CSAR-TRAVERSAL-NEAREST-VALID
+    change: CSAR-TRAVERSAL target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID
+  file: sections/3.6-grammar-definitions/workflows/activities-valid.yaml
+  specification:
+    sections:
+    - 3.6.23.1.1
+    - 3.6.23.2.1
+    - 3.6.23.3.1
+    - 3.6.23.4.1
+    - 3.6.25.2.1
+    - 3.6.26.1
+    - 3.6.27.1
+    - 3.10.1
+    requirement_ids:
+    - TOSCA13-3.6.23.1.1-003
+    - TOSCA13-3.6.23.2.1-002
+    - TOSCA13-3.6.23.3.1-004
+    - TOSCA13-3.6.23.3.1-007
+    - TOSCA13-3.6.23.4.1-003
+    - TOSCA13-3.6.23.4.1-004
+    - TOSCA13-3.6.25.2.1-002
+    - TOSCA13-3.6.26.1-002
+    - TOSCA13-3.6.27.1-002
+    - TOSCA13-3.6.27.1-008
+    - TOSCA13-3.6.27.1-010
+    - TOSCA13-3.6.27.1-020
+    - TOSCA13-3.10.1-002
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - workflow
+    - interfaces
+    - operations
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - workflow:precondition
+    - workflow:set-state
+    - workflow:call-operation-long
+    - workflow:inline-long
+    - operation-host:default
+    related_cases:
+    - TOSCA13-CORPUS-WORKFLOW-MISSING-TARGET-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.23.1.1-003
+    - TOSCA13-3.6.23.2.1-002
+    - TOSCA13-3.6.23.3.1-004
+    - TOSCA13-3.6.23.3.1-007
+    - TOSCA13-3.6.23.4.1-003
+    - TOSCA13-3.6.23.4.1-004
+    - TOSCA13-3.6.25.2.1-002
+    - TOSCA13-3.6.26.1-002
+    - TOSCA13-3.6.27.1-002
+    - TOSCA13-3.6.27.1-008
+    - TOSCA13-3.6.27.1-010
+    - TOSCA13-3.6.27.1-020
+    - TOSCA13-3.10.1-002
+  assertions: []
+- id: TOSCA13-CORPUS-WORKFLOW-MISSING-TARGET-INVALID
+  file: sections/3.6-grammar-definitions/workflows/missing-target-invalid.yaml
+  specification:
+    sections:
+    - 3.6.27.1
+    requirement_ids:
+    - TOSCA13-3.6.27.1-002
+  classification:
+    kind: invalid
+    category: grammar
+    features:
+    - workflow
+    - required-key
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: missing
+      path: target
+    assertions: []
+  coverage:
+    variation_axes:
+    - keynames:required-target-absent
+    - workflow:step
+    related_cases:
+    - TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.27.1-002
+  assertions: []
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-WORKFLOW-MISSING-TARGET-NEAREST-VALID
+    change: WORKFLOW-MISSING-TARGET target characteristic repaired; see adjacent fixture diff
+- id: TOSCA13-CORPUS-SUBSTITUTION-IMPORTS-VALID
+  file: interactions/substitution-imports/qualified-valid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    - 3.8.13.1
+    - 3.8.13.2
+    - 3.8.13.4
+    requirement_ids:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.8.13.1-001
+    - TOSCA13-3.8.13.1-003
+    - TOSCA13-3.8.13.2-004
+    - TOSCA13-3.8.13.4-001
+  classification:
+    kind: valid
+    category: normalization
+    features:
+    - substitution
+    - imports
+    - namespace
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - substitution:imported-node-type
+    - imports:qualified
+    - normalization:substitution-preserved
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.8.13.1-001
+    - TOSCA13-3.8.13.1-003
+    - TOSCA13-3.8.13.2-004
+    - TOSCA13-3.8.13.4-001
+  assertions: []
+- id: TOSCA13-CORPUS-NORMALIZATION-FUNCTION-INHERITANCE-VALID
+  file: interactions/normalization/function-inheritance-valid.yaml
+  specification:
+    sections:
+    - 3.6.10.5
+    - 3.7.3.1
+    - 4.4.2.2
+    requirement_ids:
+    - TOSCA13-3.6.10.5-001
+    - TOSCA13-3.6.10.5-004
+    - TOSCA13-3.7.3.1-001
+    - TOSCA13-4.4.2.2-004
+  classification:
+    kind: valid
+    category: normalization
+    features:
+    - normalization
+    - function
+    - inheritance
+    - constraints
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+    - output_exists:label
+  coverage:
+    variation_axes:
+    - normalization:inherited-default
+    - function:get-property
+    - constraint:default
+    - interaction:function-inheritance
+    related_cases:
+    - TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.10.5-001
+    - TOSCA13-3.6.10.5-004
+    - TOSCA13-3.7.3.1-001
+    - TOSCA13-4.4.2.2-004
+  assertions: []
+- id: TOSCA13-CORPUS-INTERACTION-IMPORTS-INHERITANCE
+  file: interactions/imports-inheritance/derived-valid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    - 3.7.3.1
+    requirement_ids:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.7.3.1-001
+  classification:
+    kind: valid
+    category: resolution
+    features:
+    - interaction
+    - imports
+    - inheritance
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - interaction:imports-inheritance
+    - notation:short-import
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-SHORT-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.7.3.1-001
+  assertions: []
+- id: TOSCA13-CORPUS-INTERACTION-INHERITANCE-REFINEMENT
+  file: interactions/inheritance-refinement/default-valid.yaml
+  specification:
+    sections:
+    - 3.5.1
+    - 3.7.3.1
+    requirement_ids:
+    - TOSCA13-3.5.1-002
+    - TOSCA13-3.7.3.1-001
+  classification:
+    kind: valid
+    category: normalization
+    features:
+    - interaction
+    - inheritance
+    - refinement
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - interaction:inheritance-refinement
+    - default:overridden
+    related_cases:
+    - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.5.1-002
+    - TOSCA13-3.7.3.1-001
+  assertions: []
+- id: TOSCA13-CORPUS-INTERACTION-FUNCTIONS-CONSTRAINTS
+  file: interactions/functions-constraints/assignment-valid.yaml
+  specification:
+    sections:
+    - 3.6.10.5
+    - 4.4.1.2
+    requirement_ids:
+    - TOSCA13-3.6.10.5-004
+    - TOSCA13-4.4.1.2-003
+  classification:
+    kind: valid
+    category: normalization
+    features:
+    - interaction
+    - functions
+    - constraints
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - interaction:function-constraint
+    - assignment:function
+    related_cases:
+    - TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.10.5-004
+    - TOSCA13-4.4.1.2-003
+  assertions: []
+- id: TOSCA13-CORPUS-INTERACTION-REQUIREMENTS-CAPABILITIES
+  file: interactions/requirements-capabilities/connection-valid.yaml
+  specification:
+    sections:
+    - 3.6.20.2.2
+    - 3.8.3.2
+    - '8.2'
+    requirement_ids:
+    - TOSCA13-3.6.20.2.2-003
+    - TOSCA13-3.8.3.2-003
+    - TOSCA13-8.2-002
+  classification:
+    kind: valid
+    category: resolution
+    features:
+    - interaction
+    - requirements
+    - capabilities
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:source
+    - node_exists:target
+    - requirement_target:source:target:target
+  coverage:
+    variation_axes:
+    - interaction:requirement-capability
+    - cardinality:exactly-one
+    related_cases:
+    - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.20.2.2-003
+    - TOSCA13-3.8.3.2-003
+    - TOSCA13-8.2-002
+  assertions: []
+- id: TOSCA13-CORPUS-INTERACTION-WORKFLOWS-INTERFACES
+  file: interactions/workflows-interfaces/call-valid.yaml
+  specification:
+    sections:
+    - 3.6.23.3.1
+    - 3.6.27.1
+    requirement_ids:
+    - TOSCA13-3.6.23.3.1-004
+    - TOSCA13-3.6.27.1-020
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - interaction
+    - workflows
+    - interfaces
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - interaction:workflow-interface
+    - notation:short-operation
+    related_cases:
+    - TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.23.3.1-004
+    - TOSCA13-3.6.27.1-020
+  assertions: []
+- id: TOSCA13-CORPUS-INTERACTION-CONSTRAINTS-DEFAULTS
+  file: interactions/constraints-defaults/default-valid.yaml
+  specification:
+    sections:
+    - 3.6.3.3
+    - 3.6.10.5
+    requirement_ids:
+    - TOSCA13-3.6.3.3-003
+    - TOSCA13-3.6.10.5-004
+  classification:
+    kind: valid
+    category: normalization
+    features:
+    - interaction
+    - constraints
+    - defaults
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - interaction:constraint-default
+    - boundary:lower
+    related_cases:
+    - TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.3.3-003
+    - TOSCA13-3.6.10.5-004
+  assertions: []
+- id: TOSCA13-CORPUS-INTERACTION-CONSTRAINTS-ASSIGNMENTS
+  file: interactions/constraints-assignments/boundary-valid.yaml
+  specification:
+    sections:
+    - 3.6.3.3
+    - 3.6.10.5
+    requirement_ids:
+    - TOSCA13-3.6.3.3-003
+    - TOSCA13-3.6.10.5-004
+  classification:
+    kind: valid
+    category: normalization
+    features:
+    - interaction
+    - constraints
+    - assignments
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - interaction:constraint-assignment
+    - boundary:upper
+    related_cases:
+    - TOSCA13-CORPUS-CONSTRAINT-BOUNDARIES-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.3.3-003
+    - TOSCA13-3.6.10.5-004
+  assertions: []
+- id: TOSCA13-CORPUS-INTERACTION-NORMATIVE-DERIVATION
+  file: interactions/normative-profile/derived-port-valid.yaml
+  specification:
+    sections:
+    - 5.2.1
+    - 8.5.2.3
+    requirement_ids:
+    - TOSCA13-5.2.1-001
+    - TOSCA13-8.5.2.3-008
+  classification:
+    kind: valid
+    category: normalization
+    features:
+    - interaction
+    - normative-profile
+    - inheritance
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:port
+  coverage:
+    variation_axes:
+    - interaction:normative-custom-type
+    - default:inherited
+    related_cases:
+    - TOSCA13-CORPUS-NETWORK-PORT-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-5.2.1-001
+    - TOSCA13-8.5.2.3-008
+  assertions: []
+- id: TOSCA13-CORPUS-INTERACTION-CSAR-IMPORTS
+  file: interactions/csar-imports/archive-valid.csar.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    - '6.2'
+    requirement_ids:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-6.2-018
+  classification:
+    kind: valid
+    category: csar
+    features:
+    - interaction
+    - csar
+    - imports
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - node_exists:node
+  coverage:
+    variation_axes:
+    - interaction:csar-import
+    - resolution:archive-relative
+    related_cases:
+    - TOSCA13-CORPUS-CSAR-METADATA-VALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-6.2-018
+  assertions: []
+- id: TOSCA13-CORPUS-SERVICE-TEMPLATE-V20-KEY-NEAREST-VALID
+  file: version-isolation/tosca-2.0-service-template-key-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.10.1
+    requirement_ids:
+    - TOSCA13-3.10.1-001
+    - TOSCA13-3.10.1-003
+  classification:
+    kind: valid
+    category: grammar
+    features:
+    - service-template
+    - version-isolation
+    - unknown-key
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - keynames:tosca-2.0-only
+    - yaml-type:mapping
+    - version-isolation:1.3-rejects-2.0-form
+    related_cases:
+    - TOSCA13-CORPUS-SERVICE-TEMPLATE-V20-KEY-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.10.1-001
+    - TOSCA13-3.10.1-003
+  assertions: []
+- id: TOSCA13-CORPUS-NAMESPACE-RESERVED-NEAREST-VALID
+  file: sections/3.1-namespaces/namespaces/reserved-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    requirement_ids:
+    - TOSCA13-3.1.3.1-001
+    - TOSCA13-3.1.3.1-002
+  classification:
+    kind: valid
+    category: resolution
+    features:
+    - namespace
+    - reserved-name
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - namespace:reserved-uri-hierarchy
+    - values:forbidden
+    related_cases:
+    - TOSCA13-CORPUS-NAMESPACE-RESERVED-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-001
+    - TOSCA13-3.1.3.1-002
+  assertions: []
+- id: TOSCA13-CORPUS-IMPORT-WRONG-YAML-TYPE-NEAREST-VALID
+  file: sections/3.1-namespaces/imports/wrong-yaml-type-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.6.8.1
+    - 3.6.8.2.2
+    requirement_ids:
+    - TOSCA13-3.6.8.1-002
+    - TOSCA13-3.6.8.1-003
+    - TOSCA13-3.6.8.2.2-003
+  classification:
+    kind: valid
+    category: grammar
+    features:
+    - imports
+    - yaml-type
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - yaml-type:scalar-number-equivalence-class
+    - grammar-form:invalid
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-WRONG-YAML-TYPE-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.8.1-002
+    - TOSCA13-3.6.8.1-003
+    - TOSCA13-3.6.8.2.2-003
+  assertions: []
+- id: TOSCA13-CORPUS-IMPORT-MISSING-FILE-NEAREST-VALID
+  file: sections/3.1-namespaces/imports/missing-file-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.6.8.1
+    - 3.6.8.2.3
+    requirement_ids:
+    - TOSCA13-3.6.8.1-002
+    - TOSCA13-3.6.8.1-003
+    - TOSCA13-3.6.8.2.3-002
+  classification:
+    kind: valid
+    category: resolution
+    features:
+    - imports
+    - missing-resource
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - imports:missing-resource
+    - reference:unresolved
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-MISSING-FILE-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.8.1-002
+    - TOSCA13-3.6.8.1-003
+    - TOSCA13-3.6.8.2.3-002
+  assertions: []
+- id: TOSCA13-CORPUS-IMPORT-UNKNOWN-QUALIFIED-NEAREST-VALID
+  file: sections/3.1-namespaces/imports/unknown-qualified-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    requirement_ids:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  classification:
+    kind: valid
+    category: resolution
+    features:
+    - imports
+    - qualified-reference
+    - missing-name
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - namespace:known-prefix
+    - reference:missing-qualified-name
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-UNKNOWN-QUALIFIED-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  assertions: []
+- id: TOSCA13-CORPUS-IMPORT-CYCLE-NEAREST-VALID
+  file: sections/3.1-namespaces/imports/cycle-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    requirement_ids:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  classification:
+    kind: valid
+    category: resolution
+    features:
+    - imports
+    - cycle
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - imports:cycle
+    - graph:bounded-cycle-detection
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-CYCLE-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  assertions: []
+- id: TOSCA13-CORPUS-IMPORT-COLLISION-NEAREST-VALID
+  file: sections/3.1-namespaces/imports/collision-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    requirement_ids:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  classification:
+    kind: valid
+    category: resolution
+    features:
+    - imports
+    - collision
+    - determinism
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - imports:name-collision
+    - namespace:unqualified
+    - diagnostic:deterministic
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-COLLISION-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  assertions: []
+- id: TOSCA13-CORPUS-LOCAL-DUPLICATE-NAME-NEAREST-VALID
+  file: sections/3.1-namespaces/namespaces/local-duplicate-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    requirement_ids:
+    - TOSCA13-3.1.3.1-007
+    - TOSCA13-3.1.3.1-008
+    - TOSCA13-3.1.3.1-009
+    - TOSCA13-3.1.3.1-010
+    - TOSCA13-3.1.3.1-011
+    - TOSCA13-3.1.3.1-012
+    - TOSCA13-3.1.3.1-013
+    - TOSCA13-3.1.3.1-015
+    - TOSCA13-3.1.3.1-016
+    - TOSCA13-3.1.3.1-017
+    - TOSCA13-3.1.3.1-018
+    - TOSCA13-3.1.3.1-020
+    - TOSCA13-3.1.3.1-021
+    - TOSCA13-3.1.3.1-022
+    - TOSCA13-3.1.3.1-023
+    - TOSCA13-3.1.3.1-024
+    - TOSCA13-3.1.3.1-025
+    - TOSCA13-3.1.3.1-026
+    - TOSCA13-3.1.3.1-027
+  classification:
+    kind: valid
+    category: grammar
+    features:
+    - namespace
+    - duplicate-local-name
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - keynames:duplicate-map-key-equivalence-class
+    - namespace:local
+    - diagnostic:yaml-decode
+    related_cases:
+    - TOSCA13-CORPUS-LOCAL-DUPLICATE-NAME-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-007
+    - TOSCA13-3.1.3.1-008
+    - TOSCA13-3.1.3.1-009
+    - TOSCA13-3.1.3.1-010
+    - TOSCA13-3.1.3.1-011
+    - TOSCA13-3.1.3.1-012
+    - TOSCA13-3.1.3.1-013
+    - TOSCA13-3.1.3.1-015
+    - TOSCA13-3.1.3.1-016
+    - TOSCA13-3.1.3.1-017
+    - TOSCA13-3.1.3.1-018
+    - TOSCA13-3.1.3.1-020
+    - TOSCA13-3.1.3.1-021
+    - TOSCA13-3.1.3.1-022
+    - TOSCA13-3.1.3.1-023
+    - TOSCA13-3.1.3.1-024
+    - TOSCA13-3.1.3.1-025
+    - TOSCA13-3.1.3.1-026
+    - TOSCA13-3.1.3.1-027
+  assertions: []
+- id: TOSCA13-CORPUS-IMPORT-DIFFERENT-VERSION-NEAREST-VALID
+  file: version-isolation/import-tosca-2.0-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.1.3.1
+    requirement_ids:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  classification:
+    kind: valid
+    category: resolution
+    features:
+    - imports
+    - version-isolation
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - imports:cross-version
+    - version-isolation:1.3-imports-2.0
+    related_cases:
+    - TOSCA13-CORPUS-IMPORT-DIFFERENT-VERSION-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.1.3.1-004
+    - TOSCA13-3.1.3.1-005
+  assertions: []
+- id: TOSCA13-CORPUS-VERSION-QUALIFIED-ZERO-NEAREST-VALID
+  file: sections/3.3-data-types/version/qualified-zero-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.3.2.5
+    requirement_ids:
+    - TOSCA13-3.3.2.5-002
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - version
+    - qualifier
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - boundary:zero-with-qualifier
+    - values:forbidden-combination
+    related_cases:
+    - TOSCA13-CORPUS-VERSION-QUALIFIED-ZERO-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.3.2.5-002
+  assertions: []
+- id: TOSCA13-CORPUS-RANGE-REVERSED-NEAREST-VALID
+  file: sections/3.3-data-types/range/reversed-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.3.3.1
+    requirement_ids:
+    - TOSCA13-3.3.3.1-006
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - range
+    - ordering
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - cardinality:invalid-range-order
+    - boundary:immediately-reversed
+    related_cases:
+    - TOSCA13-CORPUS-RANGE-REVERSED-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.3.3.1-006
+  assertions: []
+- id: TOSCA13-CORPUS-MAP-UNKEYED-NEAREST-VALID
+  file: sections/3.3-data-types/map/unkeyed-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.3.5.1.2
+    requirement_ids:
+    - TOSCA13-3.3.5.1.2-002
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - map
+    - entry-key
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - yaml-type:sequence-instead-of-map
+    - keynames:missing-entry-key
+    related_cases:
+    - TOSCA13-CORPUS-MAP-UNKEYED-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.3.5.1.2-002
+  assertions: []
+- id: TOSCA13-CORPUS-SCALAR-UNIT-MISSING-UNIT-NEAREST-VALID
+  file: sections/3.3-data-types/scalar-unit/missing-unit-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.3.6.2
+    requirement_ids:
+    - TOSCA13-3.3.6.2-002
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - scalar-unit
+    - missing-component
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - keynames:missing-unit
+    - values:incomplete-scalar-unit
+    related_cases:
+    - TOSCA13-CORPUS-SCALAR-UNIT-MISSING-UNIT-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.3.6.2-002
+  assertions: []
+- id: TOSCA13-CORPUS-PROPERTY-MISSING-TYPE-NEAREST-VALID
+  file: sections/3.6-grammar-definitions/definitions/missing-property-type-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.6.10.4
+    requirement_ids:
+    - TOSCA13-3.6.10.4-004
+  classification:
+    kind: valid
+    category: grammar
+    features:
+    - property-definition
+    - required-key
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - keynames:required-type-absent
+    - grammar-form:long
+    related_cases:
+    - TOSCA13-CORPUS-PROPERTY-MISSING-TYPE-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.10.4-004
+  assertions: []
+- id: TOSCA13-CORPUS-PROPERTY-REQUIRED-WRONG-TYPE-NEAREST-VALID
+  file: sections/3.6-grammar-definitions/definitions/wrong-required-type-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.6.10.4
+    requirement_ids:
+    - TOSCA13-3.6.10.4-007
+  classification:
+    kind: valid
+    category: grammar
+    features:
+    - property-definition
+    - yaml-type
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - yaml-type:integer-instead-of-boolean
+    - keynames:optional-required
+    related_cases:
+    - TOSCA13-CORPUS-PROPERTY-REQUIRED-WRONG-TYPE-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.10.4-007
+  assertions: []
+- id: TOSCA13-CORPUS-CONSTRAINT-OPERAND-NEAREST-VALID
+  file: sections/3.6-grammar-definitions/constraints/operand-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.6.3.3
+    - 3.6.10.5
+    requirement_ids:
+    - TOSCA13-3.6.3.3-003
+    - TOSCA13-3.6.10.5-004
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - constraints
+    - operand-type
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - constraint:incompatible-operator
+    - yaml-type:string-pattern-on-integer
+    related_cases:
+    - TOSCA13-CORPUS-CONSTRAINT-OPERAND-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.3.3-003
+    - TOSCA13-3.6.10.5-004
+  assertions: []
+- id: TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-NEAREST-VALID
+  file: sections/3.7-type-definitions/hierarchy/cycle-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.7.1.1
+    requirement_ids:
+    - TOSCA13-3.7.1.1-003
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - type-hierarchy
+    - cycle
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - inheritance:cycle
+    - graph:bounded-cycle-detection
+    related_cases:
+    - TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.7.1.1-003
+  assertions: []
+- id: TOSCA13-CORPUS-TYPE-REQUIRED-WIDENING-NEAREST-VALID
+  file: sections/3.7-type-definitions/refinement/required-widening-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.7.3.3
+    - 3.7.5.4
+    requirement_ids:
+    - TOSCA13-3.7.3.3-002
+    - TOSCA13-3.7.5.4-002
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - refinement
+    - required
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - refinement:invalid-widening
+    - inheritance:one-level
+    related_cases:
+    - TOSCA13-CORPUS-TYPE-REQUIRED-WIDENING-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.7.3.3-002
+    - TOSCA13-3.7.5.4-002
+  assertions: []
+- id: TOSCA13-CORPUS-NODE-TEMPLATE-MISSING-TYPE-NEAREST-VALID
+  file: sections/3.8-template-definitions/templates/node-type-missing-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.8.3.1
+    requirement_ids:
+    - TOSCA13-3.8.3.1-001
+  classification:
+    kind: valid
+    category: grammar
+    features:
+    - node-template
+    - required-key
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - keynames:required-type-absent
+    - template-kind:node
+    related_cases:
+    - TOSCA13-CORPUS-NODE-TEMPLATE-MISSING-TYPE-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.8.3.1-001
+  assertions: []
+- id: TOSCA13-CORPUS-GROUP-MEMBER-NEAREST-VALID
+  file: sections/3.8-template-definitions/templates/group-member-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.8.6.2
+    requirement_ids:
+    - TOSCA13-3.8.6.2-003
+  classification:
+    kind: valid
+    category: resolution
+    features:
+    - group
+    - member
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - reference:missing-target
+    - template-kind:group
+    related_cases:
+    - TOSCA13-CORPUS-GROUP-MEMBER-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.8.6.2-003
+  assertions: []
+- id: TOSCA13-CORPUS-FUNCTION-ARGUMENTS-NEAREST-VALID
+  file: sections/4-functions/functions/arguments-nearest-valid.yaml
+  specification:
+    sections:
+    - 4.3.3.2
+    requirement_ids:
+    - TOSCA13-4.3.3.2-003
+    - TOSCA13-4.3.3.2-006
+    - TOSCA13-4.3.3.2-010
+  classification:
+    kind: valid
+    category: grammar
+    features:
+    - functions
+    - argument-count
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - arguments:missing-required
+    - function:token
+    related_cases:
+    - TOSCA13-CORPUS-FUNCTION-ARGUMENTS-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-4.3.3.2-003
+    - TOSCA13-4.3.3.2-006
+    - TOSCA13-4.3.3.2-010
+  assertions: []
+- id: TOSCA13-CORPUS-FUNCTION-REFERENCE-NEAREST-VALID
+  file: sections/4-functions/functions/reference-nearest-valid.yaml
+  specification:
+    sections:
+    - 4.4.2.2
+    requirement_ids:
+    - TOSCA13-4.4.2.2-002
+    - TOSCA13-4.4.2.2-004
+  classification:
+    kind: valid
+    category: resolution
+    features:
+    - functions
+    - missing-reference
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - reference:missing-property
+    - function:get_property
+    related_cases:
+    - TOSCA13-CORPUS-FUNCTION-REFERENCE-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-4.4.2.2-002
+    - TOSCA13-4.4.2.2-004
+  assertions: []
+- id: TOSCA13-CORPUS-NETWORK-PORT-REFINEMENT-NEAREST-VALID
+  file: sections/8-normative-node-types/network-port-refinement-nearest-valid.yaml
+  specification:
+    sections:
+    - 8.5.2.3
+    requirement_ids:
+    - TOSCA13-8.5.2.3-008
+  classification:
+    kind: valid
+    category: semantic
+    features:
+    - normative-profile
+    - refinement
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - refinement:invalid-required-widening
+    - normative-profile:effective-property
+    related_cases:
+    - TOSCA13-CORPUS-NETWORK-PORT-REFINEMENT-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-8.5.2.3-008
+  assertions: []
+- id: TOSCA13-CORPUS-CSAR-ENTRY-MISSING-NEAREST-VALID
+  file: sections/6-csar/archives/entry-missing-nearest-valid.csar.yaml
+  specification:
+    sections:
+    - '6.2'
+    requirement_ids:
+    - TOSCA13-6.2-010
+    - TOSCA13-6.2-018
+  classification:
+    kind: valid
+    category: csar
+    features:
+    - csar
+    - missing-file
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - csar:missing-entry-definitions
+    - reference:missing
+    related_cases:
+    - TOSCA13-CORPUS-CSAR-ENTRY-MISSING-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-6.2-010
+    - TOSCA13-6.2-018
+  assertions: []
+- id: TOSCA13-CORPUS-CSAR-TRAVERSAL-NEAREST-VALID
+  file: sections/6-csar/archives/traversal-nearest-valid.csar.yaml
+  specification:
+    sections:
+    - '6.2'
+    requirement_ids:
+    - TOSCA13-6.2-010
+    - TOSCA13-6.2-018
+  classification:
+    kind: valid
+    category: csar
+    features:
+    - csar
+    - traversal
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - csar:path-traversal
+    - security:root-confinement
+    related_cases:
+    - TOSCA13-CORPUS-CSAR-TRAVERSAL-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-6.2-010
+    - TOSCA13-6.2-018
+  assertions: []
+- id: TOSCA13-CORPUS-WORKFLOW-MISSING-TARGET-NEAREST-VALID
+  file: sections/3.6-grammar-definitions/workflows/missing-target-nearest-valid.yaml
+  specification:
+    sections:
+    - 3.6.27.1
+    requirement_ids:
+    - TOSCA13-3.6.27.1-002
+  classification:
+    kind: valid
+    category: grammar
+    features:
+    - workflow
+    - required-key
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    variation_axes:
+    - keynames:required-target-absent
+    - workflow:step
+    related_cases:
+    - TOSCA13-CORPUS-WORKFLOW-MISSING-TARGET-INVALID
+    primary_requirements: []
+    supporting_requirements:
+    - TOSCA13-3.6.27.1-002
+  assertions: []
+schema_version: 2

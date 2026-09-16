@@ -157,7 +157,7 @@ func loadOASISCommunityManifest(t *testing.T, root string) oasisCommunityManifes
 	t.Helper()
 	var manifest oasisCommunityManifest
 	loadYAML(t, filepath.Join(root, "oasis_community/manifest.yaml"), &manifest)
-	if manifest.SchemaVersion != 1 ||
+	if manifest.SchemaVersion != 2 ||
 		manifest.Layer == "" ||
 		manifest.UpstreamRepository == "" ||
 		manifest.PinnedProfileRoot == "" {

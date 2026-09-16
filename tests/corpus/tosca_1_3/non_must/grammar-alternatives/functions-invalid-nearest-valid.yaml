@@ -7,4 +7,3 @@ topology_template:
       type: string
       value:
         get_input: source
-      unknown_key: invalid

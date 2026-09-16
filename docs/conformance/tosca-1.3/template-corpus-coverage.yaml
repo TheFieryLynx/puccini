@@ -1,6 +1,7 @@
 schema_version: 1
 normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
-completeness_model: normative-equivalence-classes
+completeness_model: historical-axis-inventory-unvalidated
+verification_result: re-audit/evidence-recheck.yaml
 
 grammar_entities:
   - entity: namespace-declaration
@@ -19,7 +20,7 @@ grammar_entities:
       - TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
       - TOSCA13-CORPUS-IMPORT-UNKNOWN-QUALIFIED-INVALID
       - TOSCA13-CORPUS-IMPORT-COLLISION-INVALID
-    status: complete
+    status: insufficient-evidence
 
   - entity: import-definition
     sections: ["3.6.8.1", "3.6.8.2.2", "3.6.8.2.3"]
@@ -42,7 +43,7 @@ grammar_entities:
       - TOSCA13-CORPUS-IMPORT-DUPLICATE-IDEMPOTENT-VALID
       - TOSCA13-CORPUS-IMPORT-COLLISION-INVALID
       - TOSCA13-CORPUS-IMPORT-DIFFERENT-VERSION-INVALID
-    status: complete
+    status: insufficient-evidence
 
   - entity: version
     sections: ["3.3.2.1", "3.3.2.5"]
@@ -51,7 +52,7 @@ grammar_entities:
       components: [major-zero, minor-zero, qualifier]
       boundaries: [zero-sentinel, zero-with-qualifier-invalid]
     fixtures: [TOSCA13-CORPUS-VERSION-ZERO-VALID, TOSCA13-CORPUS-VERSION-QUALIFIED-ZERO-INVALID]
-    status: complete
+    status: insufficient-evidence
 
   - entity: range
     sections: ["3.3.3.1"]
@@ -60,7 +61,7 @@ grammar_entities:
       bounds: [equal, ordered, reversed, UNBOUNDED]
       yaml_type_equivalence_classes: [two-integers, integer-and-UNBOUNDED]
     fixtures: [TOSCA13-CORPUS-RANGE-BOUNDARIES-VALID, TOSCA13-CORPUS-RANGE-REVERSED-INVALID]
-    status: complete
+    status: insufficient-evidence
 
   - entity: map
     sections: ["3.3.5.1.2"]
@@ -69,7 +70,7 @@ grammar_entities:
       entries: [keyed, unkeyed-invalid]
       cardinality: [multiple]
     fixtures: [TOSCA13-CORPUS-MAP-KEYED-VALID, TOSCA13-CORPUS-MAP-UNKEYED-INVALID]
-    status: complete
+    status: insufficient-evidence
 
   - entity: scalar-unit
     sections: ["3.3.6.1", "3.3.6.2"]
@@ -82,7 +83,7 @@ grammar_entities:
       - TOSCA13-CORPUS-SCALAR-UNIT-WHITESPACE-VALID
       - TOSCA13-CORPUS-SCALAR-UNIT-MISSING-UNIT-INVALID
       - TOSCA13-CORPUS-SCALAR-UNIT-CONSTRAINT-BOUNDARY-VALID
-    status: complete
+    status: insufficient-evidence
 
   - entity: inherited-required-keynames
     sections: ["3.5.1"]
@@ -91,7 +92,7 @@ grammar_entities:
       definition: [direct-parent, refined-child]
       required_key: [inherited]
     fixtures: [TOSCA13-CORPUS-INHERITED-REQUIRED-KEY-VALID]
-    status: complete
+    status: insufficient-evidence
 
   - entity: grammar-definitions
     sections: ["3.6.3.3", "3.6.3.4", "3.6.6", "3.6.7", "3.6.9", "3.6.10", "3.6.12", "3.6.14", "3.6.15", "3.6.17", "3.6.19", "3.6.20", "3.6.21", "3.6.22"]
@@ -113,7 +114,7 @@ grammar_entities:
     equivalence_notes:
       - Non-boolean YAML scalars share the same field reader for boolean keynames; integer is the representative opposing class.
       - Unknown keynames are validated by the common grammar-context map reader and are covered again by the CI integrity seed.
-    status: complete
+    status: insufficient-evidence
 
   - entity: type-definitions
     sections: ["3.7.2", "3.7.3", "3.7.5", "3.7.6", "3.7.7", "3.7.9", "3.7.10", "3.7.11", "3.7.12"]
@@ -126,7 +127,7 @@ grammar_entities:
       - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
       - TOSCA13-CORPUS-TYPE-HIERARCHY-CYCLE-INVALID
       - TOSCA13-CORPUS-TYPE-REQUIRED-WIDENING-INVALID
-    status: complete
+    status: insufficient-evidence
 
   - entity: template-definitions
     sections: ["3.8.2", "3.8.3", "3.8.4", "3.8.5", "3.8.6", "3.8.8", "3.8.13"]
@@ -141,7 +142,7 @@ grammar_entities:
       - TOSCA13-CORPUS-NODE-TEMPLATE-MISSING-TYPE-INVALID
       - TOSCA13-CORPUS-GROUP-MEMBER-INVALID
       - TOSCA13-CORPUS-TEMPLATE-COPY-VALID
-    status: complete
+    status: insufficient-evidence
 
   - entity: intrinsic-functions
     sections: ["4.3", "4.4", "4.5", "4.6", "4.7", "4.8"]
@@ -156,7 +157,7 @@ grammar_entities:
       - TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID
       - TOSCA13-CORPUS-FUNCTION-ARGUMENTS-INVALID
       - TOSCA13-CORPUS-FUNCTION-REFERENCE-INVALID
-    status: complete
+    status: insufficient-evidence
 
   - entity: normative-profile
     sections: ["5.2", "5.3", "5.5", "5.7", "5.8", "5.9", "8.2", "8.3", "8.5"]
@@ -170,7 +171,7 @@ grammar_entities:
       - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
       - TOSCA13-CORPUS-NETWORK-PORT-VALID
       - TOSCA13-CORPUS-NETWORK-PORT-REFINEMENT-INVALID
-    status: complete
+    status: insufficient-evidence
 
   - entity: csar
     sections: ["6.1", "6.2", "6.3"]
@@ -185,7 +186,7 @@ grammar_entities:
       - TOSCA13-CORPUS-CSAR-METADATA-FREE-VALID
       - TOSCA13-CORPUS-CSAR-ENTRY-MISSING-INVALID
       - TOSCA13-CORPUS-CSAR-TRAVERSAL-INVALID
-    status: complete
+    status: insufficient-evidence
 
   - entity: workflows-and-substitution
     sections: ["3.6.23", "3.6.25", "3.6.26", "3.6.27", "3.8.13", "3.10.1"]
@@ -199,7 +200,7 @@ grammar_entities:
       - TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID
       - TOSCA13-CORPUS-WORKFLOW-MISSING-TARGET-INVALID
       - TOSCA13-CORPUS-SUBSTITUTION-IMPORTS-VALID
-    status: complete
+    status: insufficient-evidence
 
   - entity: normalization-interactions
     sections: ["3.6.10.5", "3.7.3.1", "4.4.2.2"]
@@ -208,4 +209,4 @@ grammar_entities:
       semantics: [inherited-default, constraint, intrinsic-function]
       determinism: [repeatable]
     fixtures: [TOSCA13-CORPUS-NORMALIZATION-FUNCTION-INHERITANCE-VALID]
-    status: complete
+    status: insufficient-evidence

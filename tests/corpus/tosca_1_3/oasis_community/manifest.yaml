@@ -1,4 +1,4 @@
-schema_version: 1
+schema_version: 2
 layer: OASIS community independent comparison corpus
 upstream_repository: https://github.com/oasis-open/tosca-community-contributions
 upstream_commit: e5b0a3ee46488921ff409bbe0feba37af2a3233e
@@ -61,6 +61,10 @@ cases:
     assertions:
     - all exact case-sensitive parent type names resolve
     - all derived declarations inherit from the requested normative type
+  coverage:
+    primary_requirements: []
+    supporting_requirements: []
+  assertions: []
 - id: TOSCA13-OASIS-COMMUNITY-ARTIFACT
   file: artifact-types-valid.yaml
   upstream:
@@ -118,6 +122,10 @@ cases:
     assertions:
     - all exact case-sensitive parent type names resolve
     - all derived declarations inherit from the requested normative type
+  coverage:
+    primary_requirements: []
+    supporting_requirements: []
+  assertions: []
 - id: TOSCA13-OASIS-COMMUNITY-CAPABILITY
   file: capability-types-valid.yaml
   upstream:
@@ -193,6 +201,10 @@ cases:
     assertions:
     - all exact case-sensitive parent type names resolve
     - all derived declarations inherit from the requested normative type
+  coverage:
+    primary_requirements: []
+    supporting_requirements: []
+  assertions: []
 - id: TOSCA13-OASIS-COMMUNITY-RELATIONSHIP
   file: relationship-types-valid.yaml
   upstream:
@@ -247,6 +259,10 @@ cases:
     assertions:
     - all exact case-sensitive parent type names resolve
     - all derived declarations inherit from the requested normative type
+  coverage:
+    primary_requirements: []
+    supporting_requirements: []
+  assertions: []
 - id: TOSCA13-OASIS-COMMUNITY-INTERFACE
   file: interface-types-valid.yaml
   upstream:
@@ -286,6 +302,10 @@ cases:
     assertions:
     - all exact case-sensitive parent type names resolve
     - all derived declarations inherit from the requested normative type
+  coverage:
+    primary_requirements: []
+    supporting_requirements: []
+  assertions: []
 - id: TOSCA13-OASIS-COMMUNITY-NODE
   file: node-types-valid.yaml
   upstream:
@@ -364,6 +384,10 @@ cases:
     assertions:
     - all exact case-sensitive parent type names resolve
     - all derived declarations inherit from the requested normative type
+  coverage:
+    primary_requirements: []
+    supporting_requirements: []
+  assertions: []
 - id: TOSCA13-OASIS-COMMUNITY-GROUP
   file: group-types-valid.yaml
   upstream:
@@ -397,6 +421,10 @@ cases:
     assertions:
     - all exact case-sensitive parent type names resolve
     - all derived declarations inherit from the requested normative type
+  coverage:
+    primary_requirements: []
+    supporting_requirements: []
+  assertions: []
 - id: TOSCA13-OASIS-COMMUNITY-POLICY
   file: policy-types-valid.yaml
   upstream:
@@ -442,3 +470,7 @@ cases:
     assertions:
     - all exact case-sensitive parent type names resolve
     - all derived declarations inherit from the requested normative type
+  coverage:
+    primary_requirements: []
+    supporting_requirements: []
+  assertions: []

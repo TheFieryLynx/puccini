@@ -12,9 +12,12 @@ type nonMUSTManifest struct {
 }
 
 type nonMUSTCase struct {
-	ID              string `yaml:"id"`
-	File            string `yaml:"file"`
-	ConformanceTier string `yaml:"conformance_tier"`
+	Coverage        corpusCoverage   `yaml:"coverage"`
+	Assertions      []ownedAssertion `yaml:"assertions"`
+	Related         relatedEvidence  `yaml:"related_cases"`
+	ID              string           `yaml:"id"`
+	File            string           `yaml:"file"`
+	ConformanceTier string           `yaml:"conformance_tier"`
 	Specification   struct {
 		Sections              []string `yaml:"sections"`
 		NonMUSTRequirementIDs []string `yaml:"non_must_requirement_ids"`
@@ -124,7 +127,13 @@ func TestTOSCA13NonMUSTCorpus(t *testing.T) {
 		}
 		t.Run(testCase.ID, func(t *testing.T) {
 			path := filepath.Join(root, filepath.FromSlash(testCase.File))
-			serviceTemplate, firstProblems, firstErr := parseCorpusFile(t, path)
+			result := parseCorpusPhases(t, path)
+			serviceTemplate, firstProblems, firstErr := result.Template, result.Problems, result.Err
+			for _, a := range testCase.Assertions {
+				if err := assertionResult(a, result); err != nil {
+					t.Fatal(err)
+				}
+			}
 			if testCase.Expected.Accepted {
 				if firstErr != nil {
 					t.Fatalf("%s rejected at %s: %v\n%s", testCase.ID, testCase.Expected.Phase, firstErr, firstProblems)
@@ -134,8 +143,8 @@ func TestTOSCA13NonMUSTCorpus(t *testing.T) {
 				}
 				return
 			}
-			if firstErr == nil {
-				t.Fatalf("%s was accepted, want rejection at %s", testCase.ID, testCase.Expected.Phase)
+			if err := checkExpectedPhase(testCase.Expected.Phase, result); err != nil {
+				t.Fatalf("%s: %v\n%s", testCase.ID, err, firstProblems)
 			}
 			_, secondProblems, secondErr := parseCorpusFile(t, path)
 			if secondErr == nil || firstProblems != secondProblems {

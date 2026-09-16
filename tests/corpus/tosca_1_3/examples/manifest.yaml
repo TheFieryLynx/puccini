@@ -10,3 +10,8 @@ cases:
   - normative network type resolution
   - property default and explicit assignment
   note: Example compatibility is reported separately and does not affect frozen MUST or non-MUST policy metrics.
+  coverage:
+    primary_requirements: []
+    supporting_requirements: []
+  assertions: []
+schema_version: 2

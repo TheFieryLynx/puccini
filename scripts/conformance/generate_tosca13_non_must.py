@@ -442,7 +442,7 @@ def section_sort_key(value):
 
 
 def classify_section(section, title, old, source_records, non_must):
-    if old.get("applicable_to_processor"):
+    if old.get("historical_frozen_membership"):
         return "processor-must-covered"
     if non_must:
         return "processor-non-must-applicable"
@@ -506,7 +506,7 @@ def generate_reports(catalog_records, requirements, cases):
             non_must_status = (
                 "policy-documented"
                 if policies and policies <= {"unsupported", "implementation-defined"}
-                else "complete"
+                else "insufficient-evidence"
             )
         exclusion = {"category": None, "reason": None}
         if classification not in {"processor-must-covered", "processor-non-must-applicable"}:
@@ -522,7 +522,7 @@ def generate_reports(catalog_records, requirements, cases):
                 **old,
                 "primary_classification": classification,
                 "must_coverage": {
-                    "status": "complete" if old.get("applicable_to_processor") else "not-applicable",
+                    "status": "insufficient-evidence",
                     "fixture_ids": old.get("fixtures", []),
                 },
                 "non_must_coverage": {
@@ -562,14 +562,14 @@ def generate_reports(catalog_records, requirements, cases):
         "schema_version": 1,
         "frozen_must": {
             "denominator": 223,
-            "implemented_verified": 223,
+            "historical_status_label": "223 implemented/verified; superseded by re-audit",
             "changed_by_this_catalog": False,
         },
         "non_must": {
             "record_count": len(requirements),
             "source_strengths": dict(sorted(source_counts.items())),
             "implementation_policies": dict(sorted(policy_counts.items())),
-            "status_matrix": {
+            "historical_unreviewed_status_labels": {
                 f"{implementation}+{verification}": count
                 for (implementation, verification), count in sorted(status_counts.items())
             },
@@ -603,16 +603,16 @@ It is separate from, and does not alter, the frozen 223 atomic MUST score.
 | SHOULD intentionally not followed | {should_not_followed} |
 | MAY supported | {sum(r["source_strength"] == "MAY" and r["implementation_policy"] == "supported" for r in requirements)} |
 | OPTIONAL supported | {sum(r["source_strength"] == "OPTIONAL" and r["implementation_policy"] == "supported" for r in requirements)} |
-| Defaults verified | {source_counts["DEFAULT"]} |
-| Grammar alternatives verified | {source_counts["GRAMMAR"] + source_counts["SEMANTIC"] + source_counts["ERROR"]} |
+| Defaults historically labelled | {source_counts["DEFAULT"]} |
+| Grammar alternatives historically labelled | {source_counts["GRAMMAR"] + source_counts["SEMANTIC"] + source_counts["ERROR"]} |
 | Implementation-defined decisions | {policy_counts["implementation-defined"]} |
 | Unsupported recommendations | {policy_counts["unsupported"]} |
 | Non-MUST corpus cases | {len(cases)} |
 | Example compatibility cases | {sum(len(ids) for ids in examples_by_section.values())} |
 
-All supported records are directly linked to a manifest case. Unsupported
-recommendations and implementation-defined choices are verified as explicit,
-deterministic policies rather than counted as frozen MUST failures.
+These are historical catalog labels and policy declarations, not hardened verification.
+Supporting fixture dependencies cannot establish verified status. Applicability,
+atomicity, and exclusions remain subject to independent catalog review.
 """
     (BASE / "non-must-summary.md").write_text(summary, encoding="utf-8")
 
@@ -653,14 +653,14 @@ coverage states.
 {classification_rows}
 
 Processor non-MUST sections link to separate requirements and fixtures.
-Archive, orchestrator, generator, author, example, definition, cross-reference,
-duplicate, informative, and not-applicable sections retain explicit target
-reasons and do not affect the frozen 223 denominator.
+Historical target classifications and exclusions remain unvalidated. They do not
+establish applicability or exhaustiveness. See re-audit/evidence-recheck.yaml;
+the historical 223 denominator is unchanged.
 """
     (BASE / "full-section-coverage.md").write_text(full_section, encoding="utf-8")
 
 
-def main():
+def rebuild_historical_catalog():
     catalog_records = load(BASE / "requirements.yaml")["requirements"]
     catalog = {record["id"]: record for record in catalog_records}
     coverage = load(BASE / "coverage.yaml")["requirements"]
@@ -765,6 +765,14 @@ def main():
     if cases:
         dump(CORPUS / "non_must/manifest.yaml", {"cases": cases})
     generate_reports(catalog_records, requirements, cases)
+
+
+def main():
+    # Evidence tasks regenerate reports only. Rebuilding classification and
+    # broad fixture labels requires a separate, explicitly authorized catalog review.
+    generate_reports(load(BASE / "requirements.yaml")["requirements"],
+                     load(BASE / "non-must-requirements.yaml")["requirements"],
+                     load(CORPUS / "non_must/manifest.yaml")["cases"])
 
 
 if __name__ == "__main__":

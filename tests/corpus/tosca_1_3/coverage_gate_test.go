@@ -27,7 +27,7 @@ type pairwiseInventory struct {
 	} `yaml:"pairs"`
 }
 
-func TestTOSCA13CorpusFrozenManifestCoverage(t *testing.T) {
+func TestTOSCA13HistoricalLabelInventory(t *testing.T) {
 	var coverage coverageCatalog
 	loadYAML(t, filepath.Join(repositoryRoot(t), "docs/conformance/tosca-1.3/coverage.yaml"), &coverage)
 	frozenIDs := make(map[string]bool)
@@ -54,15 +54,10 @@ func TestTOSCA13CorpusCoverageGate(t *testing.T) {
 		t.Fatal("section inventory is empty")
 	}
 	for _, section := range sections.Sections {
-		if section.Status != "complete" {
+		if section.Status != "insufficient-evidence" {
 			t.Errorf("section %s status = %s", section.Section, section.Status)
 		}
-		if section.ApplicableToProcessor && len(section.Fixtures) == 0 {
-			t.Errorf("applicable section %s has no fixture", section.Section)
-		}
-		if !section.ApplicableToProcessor && len(section.Exclusions) == 0 {
-			t.Errorf("non-applicable section %s has no explicit exclusion", section.Section)
-		}
+
 	}
 
 	var pairwise pairwiseInventory

@@ -11,13 +11,13 @@ It is separate from, and does not alter, the frozen 223 atomic MUST score.
 | SHOULD intentionally not followed | 4 |
 | MAY supported | 10 |
 | OPTIONAL supported | 680 |
-| Defaults verified | 70 |
-| Grammar alternatives verified | 1623 |
+| Defaults historically labelled | 70 |
+| Grammar alternatives historically labelled | 1623 |
 | Implementation-defined decisions | 1 |
 | Unsupported recommendations | 4 |
-| Non-MUST corpus cases | 29 |
+| Non-MUST corpus cases | 40 |
 | Example compatibility cases | 1 |
 
-All supported records are directly linked to a manifest case. Unsupported
-recommendations and implementation-defined choices are verified as explicit,
-deterministic policies rather than counted as frozen MUST failures.
+These are historical catalog labels and policy declarations, not hardened verification.
+Supporting fixture dependencies cannot establish verified status. Applicability,
+atomicity, and exclusions remain subject to independent catalog review.

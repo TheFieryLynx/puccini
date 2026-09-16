@@ -18,6 +18,6 @@ coverage states.
 | service-template-author | 1 |
 
 Processor non-MUST sections link to separate requirements and fixtures.
-Archive, orchestrator, generator, author, example, definition, cross-reference,
-duplicate, informative, and not-applicable sections retain explicit target
-reasons and do not affect the frozen 223 denominator.
+Historical target classifications and exclusions remain unvalidated. They do not
+establish applicability or exhaustiveness. See re-audit/evidence-recheck.yaml;
+the historical 223 denominator is unchanged.

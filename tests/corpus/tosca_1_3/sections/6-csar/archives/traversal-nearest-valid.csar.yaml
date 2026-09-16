@@ -1,0 +1,9 @@
+entries:
+  TOSCA-Metadata/TOSCA.meta: |
+    TOSCA-Meta-File-Version: 1.1
+    CSAR-Version: 1.1
+    Created-By: corpus
+    Entry-Definitions: service.yaml
+  service.yaml: |
+    tosca_definitions_version: tosca_simple_yaml_1_3
+    topology_template: {}

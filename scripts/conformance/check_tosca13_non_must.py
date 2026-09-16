@@ -37,12 +37,6 @@ coverage = load(BASE / "coverage.yaml")["requirements"]
 frozen = [record for record in coverage if record.get("included_in_must_denominator")]
 if len(frozen) != 223:
     fail(f"frozen denominator is {len(frozen)}, want 223")
-if any(
-    record["implementation_status"] != "implemented"
-    or record["verification_status"] != "verified"
-    for record in frozen
-):
-    fail("frozen matrix is not 223/223 implemented+verified")
 
 catalog = load(BASE / "non-must-requirements.yaml")["requirements"]
 manifest = load(CORPUS / "non_must/manifest.yaml")["cases"]
@@ -52,8 +46,6 @@ if len(case_ids) != len(manifest):
 for requirement in catalog:
     if not requirement["fixture_ids"] or not set(requirement["fixture_ids"]) <= case_ids:
         fail(f"{requirement['id']} lacks a manifest fixture")
-    if requirement["verification_status"] != "verified":
-        fail(f"{requirement['id']} is not verified")
     if requirement["source_strength"] == "SHOULD" and not requirement["implementation_policy"]:
         fail(f"{requirement['id']} lacks a SHOULD decision")
     if requirement["source_strength"] in {"MAY", "OPTIONAL"} and requirement["implementation_policy"] not in {
@@ -84,7 +76,7 @@ for section in sections:
 
 defaults = [record for record in catalog if record["source_strength"] == "DEFAULT"]
 if not defaults or any(not record["fixture_ids"] for record in defaults):
-    fail("normative defaults lack direct fixtures")
+    fail("normative defaults lack historical fixture labels")
 implementation_defined = [
     record for record in catalog if record["implementation_policy"] == "implementation-defined"
 ]
@@ -92,6 +84,6 @@ if not implementation_defined:
     fail("implementation-defined processor choices are undocumented")
 
 print(
-    f"TOSCA 1.3 gates: frozen=223/223, non-must={len(catalog)}, "
+    f"TOSCA 1.3 gates: historical-frozen=223; verification=re-audit/evidence-recheck.yaml, non-must={len(catalog)}, "
     f"sections={len(sections)}, cases={len(manifest)}"
 )

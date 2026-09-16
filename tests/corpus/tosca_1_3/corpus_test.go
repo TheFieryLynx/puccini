@@ -2,7 +2,6 @@ package tosca_1_3_corpus_test
 
 import (
 	"archive/zip"
-	"context"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -11,9 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/tliron/exturl"
 	"github.com/tliron/go-puccini/normal"
-	"github.com/tliron/go-puccini/tosca/parser"
 	"gopkg.in/yaml.v3"
 )
 
@@ -28,6 +25,8 @@ type corpusCase struct {
 	Classification corpusClassification `yaml:"classification"`
 	Expected       corpusExpected       `yaml:"expected"`
 	Coverage       corpusCoverage       `yaml:"coverage"`
+	Assertions     []ownedAssertion     `yaml:"assertions"`
+	Related        relatedEvidence      `yaml:"related_cases"`
 }
 
 type corpusSpecification struct {
@@ -54,8 +53,10 @@ type corpusDiagnostic struct {
 }
 
 type corpusCoverage struct {
-	VariationAxes []string `yaml:"variation_axes"`
-	RelatedCases  []string `yaml:"related_cases"`
+	PrimaryRequirements    []string `yaml:"primary_requirements"`
+	SupportingRequirements []string `yaml:"supporting_requirements"`
+	VariationAxes          []string `yaml:"variation_axes"`
+	RelatedCases           []string `yaml:"related_cases"`
 }
 
 type requirementCatalog struct {
@@ -81,7 +82,6 @@ var allowedPhases = map[string]bool{
 	"inheritance":   true,
 	"rendering":     true,
 	"normalization": true,
-	"csar":          true,
 }
 
 func TestTOSCA13CorpusManifestIntegrity(t *testing.T) {
@@ -148,7 +148,7 @@ func TestTOSCA13CorpusManifestIntegrity(t *testing.T) {
 		} else if !testCase.Expected.Accepted {
 			t.Errorf("%s is valid but expects rejection", testCase.ID)
 		} else if len(testCase.Expected.Assertions) == 0 {
-			t.Errorf("%s valid case has no semantic assertion", testCase.ID)
+			t.Errorf("%s valid smoke case has no smoke assertion", testCase.ID)
 		}
 	}
 
@@ -173,7 +173,7 @@ func TestTOSCA13CorpusManifestIntegrity(t *testing.T) {
 	}
 }
 
-func TestTOSCA13CorpusFrozenMUSTGate(t *testing.T) {
+func TestTOSCA13HistoricalBaselinePreserved(t *testing.T) {
 	var coverage coverageCatalog
 	loadYAML(t, filepath.Join(repositoryRoot(t), "docs/conformance/tosca-1.3/coverage.yaml"), &coverage)
 	count := 0
@@ -231,7 +231,13 @@ func runCorpusCase(t *testing.T, root string, testCase corpusCase) {
 	if testCase.Classification.Category == "csar" {
 		path = materializeCSAR(t, path)
 	}
-	serviceTemplate, firstProblems, firstErr := parseCorpusFile(t, path)
+	result := parseCorpusPhases(t, path)
+	serviceTemplate, firstProblems, firstErr := result.Template, result.Problems, result.Err
+	for _, assertion := range testCase.Assertions {
+		if err := assertionResult(assertion, result); err != nil {
+			t.Fatalf("%s/%s: %v", testCase.ID, assertion.ID, err)
+		}
+	}
 	if testCase.Expected.Accepted {
 		if firstErr != nil {
 			t.Fatalf("%s expected acceptance at %s: %v\n%s",
@@ -242,8 +248,8 @@ func runCorpusCase(t *testing.T, root string, testCase corpusCase) {
 		}
 		return
 	}
-	if firstErr == nil {
-		t.Fatalf("%s expected rejection at %s", testCase.ID, testCase.Expected.Phase)
+	if err := checkExpectedPhase(testCase.Expected.Phase, result); err != nil {
+		t.Fatalf("%s: %v\n%s", testCase.ID, err, firstProblems)
 	}
 	for label, fragment := range map[string]*string{
 		"category": testCase.Expected.Diagnostic.Category,
@@ -254,7 +260,11 @@ func runCorpusCase(t *testing.T, root string, testCase corpusCase) {
 				testCase.ID, label, valueOrEmpty(fragment), firstProblems)
 		}
 	}
-	_, secondProblems, secondErr := parseCorpusFile(t, path)
+	second := parseCorpusPhases(t, path)
+	secondProblems, secondErr := second.Problems, second.Err
+	if err := checkExpectedPhase(testCase.Expected.Phase, second); err != nil {
+		t.Fatal(err)
+	}
 	if secondErr == nil || firstProblems != secondProblems {
 		t.Fatalf("%s diagnostic is not deterministic:\nfirst:\n%s\nsecond:\n%s",
 			testCase.ID, firstProblems, secondProblems)
@@ -377,20 +387,8 @@ func assertCorpusResult(t *testing.T, caseID string, serviceTemplate *normal.Ser
 
 func parseCorpusFile(t *testing.T, path string) (*normal.ServiceTemplate, string, error) {
 	t.Helper()
-	absolutePath, err := filepath.Abs(path)
-	if err != nil {
-		t.Fatalf("resolve corpus fixture: %v", err)
-	}
-	urlContext := exturl.NewContext()
-	defer urlContext.Release()
-	parserContext := parser.NewParser().NewContext()
-	parserContext.URL = urlContext.NewFileURL(filepath.ToSlash(absolutePath))
-	serviceTemplate, parseErr := parserContext.Parse(context.Background())
-	problems := ""
-	if parserContext.Root != nil {
-		problems = parserContext.GetProblems().ToString(false)
-	}
-	return serviceTemplate, problems, parseErr
+	r := parseCorpusPhases(t, path)
+	return r.Template, r.Problems, r.Err
 }
 
 func loadManifest(t *testing.T, root string) corpusManifest {

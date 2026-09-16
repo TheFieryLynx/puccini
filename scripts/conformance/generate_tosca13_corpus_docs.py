@@ -11,7 +11,7 @@ CORPUS = ROOT / "tests/corpus/tosca_1_3"
 
 
 def load(path):
-    return yaml.safe_load(path.read_text(encoding="utf-8"))
+    return yaml.load(path.read_text(encoding="utf-8"), Loader=yaml.CSafeLoader)
 
 
 def dump(path, value):
@@ -51,13 +51,14 @@ for section in all_sections:
         {
             "section": section,
             "title": source["section_title"],
-            "applicable_to_processor": applicable,
+            "historical_frozen_membership": applicable,
+            "applicability_review": "deferred; membership is not applicability proof",
             "grammar_entities": sorted({catalog[i]["subject"] for i in frozen_sections.get(section, [])}),
             "requirement_ids": frozen_sections.get(section, []),
             "variation_axes": sorted(evidence["axes"]) if evidence else [],
             "fixtures": sorted(set(evidence["fixtures"])) if evidence else [],
-            "status": "complete" if applicable and evidence else ("uncovered" if applicable else "complete"),
-            "exclusions": [] if applicable else ["outside the frozen atomic MUST processor target; classified explicitly from the catalog"],
+            "status": "insufficient-evidence",
+            "exclusions": [],
         }
     )
 
@@ -66,7 +67,7 @@ dump(
     {
         "schema_version": 1,
         "normative_source": "docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html",
-        "scope": "frozen atomic MUST processor target plus explicit classification of every catalog section",
+        "scope": "historical section/fixture label inventory; neither applicability nor complete verification is established",
         "sections": sections,
     },
 )
@@ -74,7 +75,7 @@ dump(
 case_ids = {case["id"] for case in manifest}
 pairwise = {
     "schema_version": 1,
-    "method": "pairwise selection over independent normative equivalence axes; impossible combinations are excluded explicitly",
+    "method": "historical candidate axis inventory; combinations and exclusions need independent review; fixture names are not verification",
     "pairs": [
         {
             "axes": ["notation", "inheritance"],
@@ -149,11 +150,13 @@ summary = {
     "interaction_cases": sum(case["file"].startswith("interactions/") for case in manifest),
     "csar_cases": sum(case["classification"]["category"] == "csar" for case in manifest),
     "normalization_cases": sum(case["classification"]["category"] == "normalization" for case in manifest),
-    "frozen_requirement_ids_covered": len(
+    "historical_requirement_ids_labelled": len(
         {i for case in manifest for i in case["specification"]["requirement_ids"]}
         & {r["requirement_id"] for r in frozen}
     ),
-    "frozen_denominator": len(frozen),
-    "applicable_sections": len(frozen_sections),
+    "historical_denominator": len(frozen),
+    "owned_primary_requirements": len({i for c in manifest for i in c["coverage"]["primary_requirements"]}),
+    "verification_result": "re-audit/evidence-recheck.yaml",
+    "sections_with_historical_membership": len(frozen_sections),
 }
 dump(BASE / "template-corpus-summary.yaml", summary)
