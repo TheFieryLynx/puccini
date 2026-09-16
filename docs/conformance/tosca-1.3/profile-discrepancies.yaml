@@ -214,11 +214,11 @@ discrepancies:
   path: derived_from
   specification: tosca.nodes.Root
   oasis_community_profile: tosca.nodes.Root
-  puccini_profile: null
+  puccini_profile: tosca.nodes.Root
   classification: Puccini defect
   secondary_classifications: []
-  resolution_status: confirmed
-  puccini_remediated: false
+  resolution_status: remediated
+  puccini_remediated: true
   specification_section: 5.9.9
   decision_record: null
 - id: PROFILE13-018
@@ -229,11 +229,11 @@ discrepancies:
   oasis_community_profile:
   - greater_or_equal: 0 MB
   puccini_profile:
-  - greater_or_equal: 0 GB
+  - greater_or_equal: 0 MB
   classification: Puccini defect
   secondary_classifications: []
-  resolution_status: confirmed
-  puccini_remediated: false
+  resolution_status: remediated
+  puccini_remediated: true
   specification_section: 5.9.9
   decision_record: null
 - id: PROFILE13-019
@@ -241,11 +241,11 @@ discrepancies:
   path: properties.size.default
   specification: 0 MB
   oasis_community_profile: 0 MB
-  puccini_profile: null
+  puccini_profile: 0 MB
   classification: Puccini defect
   secondary_classifications: []
-  resolution_status: confirmed
-  puccini_remediated: false
+  resolution_status: remediated
+  puccini_remediated: true
   specification_section: 5.9.9
   decision_record: null
 - id: PROFILE13-020
@@ -253,11 +253,11 @@ discrepancies:
   path: properties.size.required
   specification: true
   oasis_community_profile: true
-  puccini_profile: false
+  puccini_profile: true
   classification: Puccini defect
   secondary_classifications: []
-  resolution_status: confirmed
-  puccini_remediated: false
+  resolution_status: remediated
+  puccini_remediated: true
   specification_section: 5.9.9
   decision_record: null
 - id: PROFILE13-021

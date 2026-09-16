@@ -72,14 +72,14 @@ summary:
       conflicting: 8
       missing: 0
     specification_vs_puccini:
-      exact: 54
+      exact: 55
       equivalent: 3
-      conflicting: 9
+      conflicting: 8
       missing: 0
     oasis_vs_puccini:
-      exact: 51
+      exact: 52
       equivalent: 4
-      conflicting: 11
+      conflicting: 10
       missing: 0
   discrepancy_count: 26
 types:
@@ -1559,147 +1559,52 @@ types:
     file: assets/tosca/profiles/simple/1.3/nodes.yaml
     path: node_types.tosca.nodes.Abstract.Storage
     placement: direct
-    effective_definition_sha256: b63e094d6ca87a6e0a985e7e2f93945c966b90b19d53117524de4fa21a9585f7
+    effective_definition_sha256: c7ae8f538008c8fc2682165b6a52746e11191313375b873c33ff125b87fe7c7c
   comparison:
     specification_vs_oasis: exact
-    specification_vs_puccini: conflicting
-    oasis_vs_puccini: conflicting
+    specification_vs_puccini: exact
+    oasis_vs_puccini: exact
   effective_comparison:
     specification_vs_oasis: exact
-    specification_vs_puccini: conflicting
-    oasis_vs_puccini: conflicting
+    specification_vs_puccini: exact
+    oasis_vs_puccini: exact
   field_differences:
   - path: derived_from
     specification: tosca.nodes.Root
     oasis_community_profile: tosca.nodes.Root
-    puccini_profile: null
+    puccini_profile: tosca.nodes.Root
     classification: Puccini defect
     secondary_classifications: []
-    resolution_status: confirmed
-    puccini_remediated: false
+    resolution_status: remediated
+    puccini_remediated: true
   - path: properties.size.constraints
     specification:
     - greater_or_equal: 0 MB
     oasis_community_profile:
     - greater_or_equal: 0 MB
     puccini_profile:
-    - greater_or_equal: 0 GB
+    - greater_or_equal: 0 MB
     classification: Puccini defect
     secondary_classifications: []
-    resolution_status: confirmed
-    puccini_remediated: false
+    resolution_status: remediated
+    puccini_remediated: true
   - path: properties.size.default
     specification: 0 MB
     oasis_community_profile: 0 MB
-    puccini_profile: null
+    puccini_profile: 0 MB
     classification: Puccini defect
     secondary_classifications: []
-    resolution_status: confirmed
-    puccini_remediated: false
+    resolution_status: remediated
+    puccini_remediated: true
   - path: properties.size.required
     specification: true
     oasis_community_profile: true
-    puccini_profile: false
+    puccini_profile: true
     classification: Puccini defect
     secondary_classifications: []
-    resolution_status: confirmed
-    puccini_remediated: false
-  effective_field_differences:
-  - path: attributes
-    specification:
-      tosca_id:
-        type: string
-      tosca_name:
-        type: string
-      state:
-        type: string
-        default: initial
-    oasis_community_profile:
-      tosca_id:
-        type: string
-      tosca_name:
-        type: string
-      state:
-        type: string
-        default: initial
-    puccini_profile: null
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: null
-  - path: capabilities
-    specification:
-      feature:
-        type: tosca.capabilities.Node
-    oasis_community_profile:
-      feature:
-        type: tosca.capabilities.Node
-    puccini_profile: null
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: null
-  - path: derived_from
-    specification: tosca.nodes.Root
-    oasis_community_profile: tosca.nodes.Root
-    puccini_profile: null
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: null
-  - path: interfaces
-    specification:
-      Standard:
-        type: tosca.interfaces.node.lifecycle.Standard
-    oasis_community_profile:
-      Standard:
-        type: tosca.interfaces.node.lifecycle.Standard
-    puccini_profile: null
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: null
-  - path: properties.size.constraints
-    specification:
-    - greater_or_equal: 0 MB
-    oasis_community_profile:
-    - greater_or_equal: 0 MB
-    puccini_profile:
-    - greater_or_equal: 0 GB
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: null
-  - path: properties.size.default
-    specification: 0 MB
-    oasis_community_profile: 0 MB
-    puccini_profile: null
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: null
-  - path: properties.size.required
-    specification: true
-    oasis_community_profile: true
-    puccini_profile: false
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: null
-  - path: requirements
-    specification:
-      dependency:
-        capability: tosca.capabilities.Node
-        node: tosca.nodes.Root
-        relationship: tosca.relationships.DependsOn
-        occurrences:
-        - 0
-        - UNBOUNDED
-    oasis_community_profile:
-      dependency:
-        capability: tosca.capabilities.Node
-        node: tosca.nodes.Root
-        relationship: tosca.relationships.DependsOn
-        occurrences:
-        - 0
-        - UNBOUNDED
-    puccini_profile: null
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: null
+    resolution_status: remediated
+    puccini_remediated: true
+  effective_field_differences: []
   corpus_cases:
   - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: null
@@ -2014,14 +1919,14 @@ types:
     file: assets/tosca/profiles/simple/1.3/nodes.yaml
     path: node_types.tosca.nodes.Storage.BlockStorage
     placement: direct
-    effective_definition_sha256: ba4121d1d9ba1104506147e84f287e867327efea203ec914e400245c391f2296
+    effective_definition_sha256: 8d9cd525f134212647087b70defc91e376312bfe401f6676fb4dfc09e44ae133
   comparison:
     specification_vs_oasis: conflicting
     specification_vs_puccini: exact
     oasis_vs_puccini: conflicting
   effective_comparison:
     specification_vs_oasis: conflicting
-    specification_vs_puccini: conflicting
+    specification_vs_puccini: exact
     oasis_vs_puccini: conflicting
   field_differences:
   - path: properties.size
@@ -2037,92 +1942,23 @@ types:
     resolution_status: documented
     puccini_remediated: false
   effective_field_differences:
-  - path: attributes
-    specification:
-      tosca_id:
-        type: string
-      tosca_name:
-        type: string
-      state:
-        type: string
-        default: initial
-    oasis_community_profile:
-      tosca_id:
-        type: string
-      tosca_name:
-        type: string
-      state:
-        type: string
-        default: initial
-    puccini_profile: null
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: tosca.nodes.Abstract.Storage
-  - path: capabilities.feature
-    specification:
-      type: tosca.capabilities.Node
-    oasis_community_profile:
-      type: tosca.capabilities.Node
-    puccini_profile: null
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: tosca.nodes.Abstract.Storage
-  - path: interfaces
-    specification:
-      Standard:
-        type: tosca.interfaces.node.lifecycle.Standard
-    oasis_community_profile:
-      Standard:
-        type: tosca.interfaces.node.lifecycle.Standard
-    puccini_profile: null
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: tosca.nodes.Abstract.Storage
   - path: properties.size.constraints
     specification:
     - greater_or_equal: 0 MB
     oasis_community_profile:
     - greater_or_equal: 1 MB
     puccini_profile:
-    - greater_or_equal: 0 GB
+    - greater_or_equal: 0 MB
     classification: prose specification ambiguity
     resolution_status: documented
     inherited_from: null
   - path: properties.size.default
     specification: 0 MB
     oasis_community_profile: 1 MB
-    puccini_profile: null
+    puccini_profile: 0 MB
     classification: prose specification ambiguity
     resolution_status: documented
     inherited_from: null
-  - path: properties.size.required
-    specification: true
-    oasis_community_profile: true
-    puccini_profile: false
-    classification: prose specification ambiguity
-    resolution_status: documented
-    inherited_from: null
-  - path: requirements
-    specification:
-      dependency:
-        capability: tosca.capabilities.Node
-        node: tosca.nodes.Root
-        relationship: tosca.relationships.DependsOn
-        occurrences:
-        - 0
-        - UNBOUNDED
-    oasis_community_profile:
-      dependency:
-        capability: tosca.capabilities.Node
-        node: tosca.nodes.Root
-        relationship: tosca.relationships.DependsOn
-        occurrences:
-        - 0
-        - UNBOUNDED
-    puccini_profile: null
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: tosca.nodes.Abstract.Storage
   corpus_cases:
   - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: docs/conformance/tosca-1.3/ambiguities.md#tosca13-amb-013-blockstorage-size-has-conditional-requiredness-and-volume_id-precedence
@@ -2144,15 +1980,15 @@ types:
     file: assets/tosca/profiles/simple/1.3/nodes.yaml
     path: node_types.tosca.nodes.Storage.ObjectStorage
     placement: direct
-    effective_definition_sha256: 296cdbf141a32015681fb58ec78a907fa59b113ee3a89383153f810667395ede
+    effective_definition_sha256: d5df4a0293a04cc231276d4c3ccfd8fae71f3190d86f201d934fef2a091fd0de
   comparison:
     specification_vs_oasis: exact
     specification_vs_puccini: exact
     oasis_vs_puccini: exact
   effective_comparison:
     specification_vs_oasis: exact
-    specification_vs_puccini: conflicting
-    oasis_vs_puccini: conflicting
+    specification_vs_puccini: exact
+    oasis_vs_puccini: exact
   field_differences:
   - path: properties.maxsize.constraints.greater_or_equal
     specification:
@@ -2163,93 +1999,7 @@ types:
     classification: prose specification ambiguity
     resolution_status: documented
     secondary_classifications: []
-  effective_field_differences:
-  - path: attributes
-    specification:
-      tosca_id:
-        type: string
-      tosca_name:
-        type: string
-      state:
-        type: string
-        default: initial
-    oasis_community_profile:
-      tosca_id:
-        type: string
-      tosca_name:
-        type: string
-      state:
-        type: string
-        default: initial
-    puccini_profile: null
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: tosca.nodes.Abstract.Storage
-  - path: capabilities.feature
-    specification:
-      type: tosca.capabilities.Node
-    oasis_community_profile:
-      type: tosca.capabilities.Node
-    puccini_profile: null
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: tosca.nodes.Abstract.Storage
-  - path: interfaces
-    specification:
-      Standard:
-        type: tosca.interfaces.node.lifecycle.Standard
-    oasis_community_profile:
-      Standard:
-        type: tosca.interfaces.node.lifecycle.Standard
-    puccini_profile: null
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: tosca.nodes.Abstract.Storage
-  - path: properties.size.constraints
-    specification:
-    - greater_or_equal: 0 MB
-    oasis_community_profile:
-    - greater_or_equal: 0 MB
-    puccini_profile:
-    - greater_or_equal: 0 GB
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: tosca.nodes.Abstract.Storage
-  - path: properties.size.default
-    specification: 0 MB
-    oasis_community_profile: 0 MB
-    puccini_profile: null
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: tosca.nodes.Abstract.Storage
-  - path: properties.size.required
-    specification: true
-    oasis_community_profile: true
-    puccini_profile: false
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: tosca.nodes.Abstract.Storage
-  - path: requirements
-    specification:
-      dependency:
-        capability: tosca.capabilities.Node
-        node: tosca.nodes.Root
-        relationship: tosca.relationships.DependsOn
-        occurrences:
-        - 0
-        - UNBOUNDED
-    oasis_community_profile:
-      dependency:
-        capability: tosca.capabilities.Node
-        node: tosca.nodes.Root
-        relationship: tosca.relationships.DependsOn
-        occurrences:
-        - 0
-        - UNBOUNDED
-    puccini_profile: null
-    classification: Puccini defect
-    resolution_status: confirmed
-    inherited_from: tosca.nodes.Abstract.Storage
+  effective_field_differences: []
   corpus_cases:
   - TOSCA13-OASIS-COMMUNITY-NODE
   decision_record: docs/conformance/tosca-1.3/ambiguities.md#tosca13-amb-012-objectstorage-maxsize-lower-bound-conflicts

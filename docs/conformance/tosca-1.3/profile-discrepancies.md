@@ -23,8 +23,8 @@ The prose Standard is the conformance authority.
 | Pair | Exact | Equivalent | Conflicting | Missing |
 |---|---:|---:|---:|---:|
 | specification_vs_oasis | 56 | 2 | 8 | 0 |
-| specification_vs_puccini | 54 | 3 | 9 | 0 |
-| oasis_vs_puccini | 51 | 4 | 11 | 0 |
+| specification_vs_puccini | 55 | 3 | 8 | 0 |
+| oasis_vs_puccini | 52 | 4 | 10 | 0 |
 
 ## Field discrepancies
 
@@ -186,37 +186,37 @@ The prose Standard is the conformance authority.
 
 - Specification section: §5.9.9
 - Classification: **Puccini defect**
-- Resolution: **confirmed**
+- Resolution: **remediated**
 - Specification: `tosca.nodes.Root`
 - OASIS community: `tosca.nodes.Root`
-- Puccini: `None`
+- Puccini: `tosca.nodes.Root`
 
 ### PROFILE13-018: `tosca.nodes.Abstract.Storage` `properties.size.constraints`
 
 - Specification section: §5.9.9
 - Classification: **Puccini defect**
-- Resolution: **confirmed**
+- Resolution: **remediated**
 - Specification: `[{'greater_or_equal': '0 MB'}]`
 - OASIS community: `[{'greater_or_equal': '0 MB'}]`
-- Puccini: `[{'greater_or_equal': '0 GB'}]`
+- Puccini: `[{'greater_or_equal': '0 MB'}]`
 
 ### PROFILE13-019: `tosca.nodes.Abstract.Storage` `properties.size.default`
 
 - Specification section: §5.9.9
 - Classification: **Puccini defect**
-- Resolution: **confirmed**
+- Resolution: **remediated**
 - Specification: `0 MB`
 - OASIS community: `0 MB`
-- Puccini: `None`
+- Puccini: `0 MB`
 
 ### PROFILE13-020: `tosca.nodes.Abstract.Storage` `properties.size.required`
 
 - Specification section: §5.9.9
 - Classification: **Puccini defect**
-- Resolution: **confirmed**
+- Resolution: **remediated**
 - Specification: `True`
 - OASIS community: `True`
-- Puccini: `False`
+- Puccini: `True`
 
 ### PROFILE13-021: `tosca.nodes.Container.Application` `requirements.network.capability`
 

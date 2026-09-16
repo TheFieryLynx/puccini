@@ -256,6 +256,7 @@ node_types:
     description: >-
       The TOSCA Abstract.Storage node represents an abstract storage resource without any
       requirements on compute or network resources.
+    derived_from: tosca.nodes.Root
     properties:
       name:
         description: >-
@@ -266,8 +267,8 @@ node_types:
           The requested initial storage size (default unit is in Gigabytes).
         type: scalar-unit.size
         constraints:
-        - greater_or_equal: 0 GB
-        required: false
+        - greater_or_equal: 0 MB
+        default: 0 MB
 
   tosca.nodes.Storage.ObjectStorage:
     metadata:

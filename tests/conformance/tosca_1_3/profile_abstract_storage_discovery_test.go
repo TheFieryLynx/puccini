@@ -1,10 +1,11 @@
-//go:build profile_discovery
-
 package tosca_1_3_test
 
 import (
 	"fmt"
+	"strings"
 	"testing"
+
+	"github.com/tliron/go-puccini/tests/conformance/internal/testsupport"
 )
 
 // Specification: TOSCA Simple Profile in YAML 1.3
@@ -49,4 +50,51 @@ func TestProfileAbstractStorageDefinition(t *testing.T) {
 				size.ValidationClause)
 		}
 	})
+}
+
+// Specification: TOSCA Simple Profile in YAML 1.3
+// Section: 5.9.9.2 Definition
+// Expected: rendering applies the 0 MB default, accepts the boundary, and
+// rejects an inherited attempt to make the required size optional.
+// Category: positive, negative, boundary, inheritance, rendering
+func TestProfileAbstractStorageSizeAssignments(t *testing.T) {
+	for _, size := range []string{"", "        size: 0 MB\n"} {
+		if _, problems, err := testsupport.ParseSource(
+			t, abstractStorageTemplate(size)); err != nil {
+			t.Fatalf("valid Abstract.Storage size %q failed: %v\n%s",
+				size, err, problems)
+		}
+	}
+
+	_, problems, err := testsupport.ParseSource(
+		t, `tosca_definitions_version: tosca_simple_yaml_1_3
+node_types:
+  InvalidOptionalStorage:
+    derived_from: tosca.nodes.Abstract.Storage
+    properties:
+      size:
+        required: false
+topology_template: {}
+`)
+	if err == nil {
+		t.Fatal("derived type made Abstract.Storage.size optional")
+	}
+	if !strings.Contains(problems, "cannot refine true to false") {
+		t.Fatalf("requiredness diagnostic does not identify the refinement:\n%s",
+			problems)
+	}
+}
+
+func abstractStorageTemplate(size string) string {
+	return `tosca_definitions_version: tosca_simple_yaml_1_3
+node_types:
+  ConcreteStorage:
+    derived_from: tosca.nodes.Abstract.Storage
+topology_template:
+  node_templates:
+    storage:
+      type: ConcreteStorage
+      properties:
+        name: storage
+` + size
 }
