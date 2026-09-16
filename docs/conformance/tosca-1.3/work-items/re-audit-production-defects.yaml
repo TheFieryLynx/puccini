@@ -1,0 +1,793 @@
+audit_commit: c8d711f3
+initial_head: c8d711f3e63f8496e9884eff34df5cb3491a007c
+initial_git_status_short: ''
+pre_existing_user_changes: []
+claim: Previous 223/223 complete conformance claim is refuted. 223 remains a frozen historical baseline, not an
+  independently certified denominator.
+frozen_baseline:
+  denominator: 223
+  status_sum:
+    implemented: 223
+  requirements_sha256: 1861a9652dd659636702f29737818ac6f1c69355ee442e1bebe98739b21aabf0
+  coverage_sha256_before_remediation: 1238b594dfeb73c07f517efe8315b8e38742bf24db5350c1a1a5bf4ded73e11a
+grouping_reason: Property/status and artifact dependency use different read/inheritance paths; alias lookup differs
+  from profile declarations. B and C are split into independent commits.
+phase_assertions: Use a local direct-test helper invoking the existing phase API; leave the general corpus runner
+  unchanged.
+findings:
+- finding_id: F02
+  specification:
+    version: TOSCA Simple Profile in YAML 1.3
+    sections:
+    - section: 3.6.10.6
+      title: Refining Property Definitions
+    - section: 3.6.14.2
+      title: Grammar
+    exact_rule: Refinements use parameter grammar; value assigns a final type-compatible fixed value; later value
+      changes are invalid.
+    source_excerpts:
+    - &id001
+      section: 3.6.10.6
+      title: Refining Property Definitions
+      text: 'TOSCA allows derived types to refine properties defined in base types. A property definition in a derived
+        type is considered a refinement when a property with the same name is already defined in one of the base
+        types for that type. Property definition refinements use parameter definition grammar rather than property
+        definition grammar . Specifically, this means the following: · The type keyname is optional. If no type
+        is specified, the property refinement reuses the type of the property it refines. If a type is specified,
+        the type must be the same as the type of the refined property or it must derive from the type of the refined
+        property. · Property definition refinements support the value keyname that specifies a fixed type-compatible
+        value to assign to the property. These value assignments are considered final, meaning that it is not valid
+        to change the property value later (e.g. using further refinements).. Property refinement definitions can
+        refine properties defined in one of base types by doing one or more of the following: · Assigning a new
+        (compatible) type as per the rules outlined above. · Assigning a (final) fixed value · Adding a default
+        value · Changing a default value · Adding constraints. · Turning an optional property into a required property.
+        No other refinements are allowed.'
+    - section: 3.6.14.2
+      title: Grammar
+      text: 'Named parameter definitions have the following grammar: < parameter_name >: type: < parameter_type
+        > description: < parameter_description > value: <parameter_value> | { <parameter_value_expression> } required:
+        < parameter_required > default: <parameter_default_value> status: < status_value > constraints: - < parameter_constraints
+        > key_schema : <key_schema_definition> entry_schema: <entry_schema_definition> In addition, the following
+        single-line grammar is supported when only a fixed value needs to be provided: < parameter_name > : <parameter_value>
+        | { <parameter_value_expression> } This single-line grammar is equivalent to the following: < parameter_name
+        > : value : <parameter_value> | { <parameter_value_expression> } In the above grammar, the pseudo values
+        that appear in angle brackets have the following meaning: · parameter_name : represents the required symbolic
+        name of the parameter as a string . · parameter_description : represents the optional description of the
+        parameter. · parameter_type : represents the optional data type of the parameter. Note, this keyname is
+        required for a TOSCA Property definition, but is not for a TOSCA Parameter definition. · parameter_value
+        , parameter_value_expresssion: represent the type-compatible value to assign to the named parameter. Parameter
+        values may be provided as the result from the evaluation of an expression or a function. · parameter_required
+        : represents an optional boolean value (true or false) indicating whether or not the parameter is required.
+        If this keyname is not present on a parameter definition, then the property SHALL be considered required
+        (i.e., true) by default . · default_value : contains a type-compatible value that may be used as a default
+        if not provided by another means. · status_value : a string that contains a keyword that indicates the status
+        of the parameter relative to the specification or implementation. · parameter_constraints : represents the
+        optional list of one or more sequenced constraint clauses on the parameter definition. · key_schema_definition
+        : if the parameter_type is map, represents the optional schema definition for they keys used to identify
+        entries in that map. · entry_schema_definition : if the parameter_type is map or list, represents the optional
+        schema definition for the entries in that map or list.'
+    classification: required conditional grammar/semantics; normative profile availability
+  existing_catalog:
+    requirement_ids:
+    - TOSCA13-3.6.10.6-003
+    - TOSCA13-3.6.10.6-007
+    - TOSCA13-3.6.10.6-008
+    frozen_requirement_ids: []
+    status_before_audit:
+      TOSCA13-3.6.10.6-003:
+        implementation_status: unknown
+        verification_status: untested
+        included_in_must_denominator: false
+      TOSCA13-3.6.10.6-007:
+        implementation_status: unknown
+        verification_status: untested
+        included_in_must_denominator: false
+      TOSCA13-3.6.10.6-008:
+        implementation_status: unknown
+        verification_status: untested
+        included_in_must_denominator: false
+    mapping_qualification: No blanket mapping to an implicit-import or case-sensitivity umbrella atom. Non-frozen
+      related records are not presented as frozen coverage.
+  catalog_gap: true
+  implementation:
+    files:
+    - tosca/grammars/tosca_v1_3/property-definition.go
+    - tosca/grammars/tosca_v2_0/property-definition.go
+    - tosca/grammars/tosca_v2_0/attribute-definition.go
+    symbols:
+    - ReadPropertyDefinition
+    - PropertyDefinitions.Inherit
+    - PropertyDefinition.Inherit
+    - Values.RenderProperties
+    parser_phase: inheritance, then rendering
+    execution_path:
+    - tosca_definitions_version selects tosca_v1_3 grammar
+    - ReadPropertyDefinition
+    - PropertyDefinitions.Inherit
+    - PropertyDefinition.Inherit
+    - Values.RenderProperties
+    - diagnostics and normalization
+  reproducer:
+    existing: true
+    location: docs/conformance/tosca-1.3/re-audit/findings.yaml#F02
+    permanent_direct_test_before_task: false
+    tests:
+    - TestReAuditFixedPropertyRefinement
+    test_status: planned; report-embedded reproducers will become permanent tests
+  remediation_group: A
+  remediation_order: 1
+  implementation_status: non-compliant
+  verification_status: audit counterexample reproduced; remediation pending
+  mutation_evidence: null
+- finding_id: F03
+  specification:
+    version: TOSCA Simple Profile in YAML 1.3
+    sections:
+    - section: 3.6.10.6
+      title: Refining Property Definitions
+    exact_rule: Refinement may add constraints; other refinements are prohibited. Added constraints must not remove
+      inherited constraints.
+    source_excerpts:
+    - *id001
+    classification: required conditional grammar/semantics; normative profile availability
+  existing_catalog:
+    requirement_ids:
+    - TOSCA13-3.6.10.6-014
+    frozen_requirement_ids: []
+    status_before_audit:
+      TOSCA13-3.6.10.6-014:
+        implementation_status: unknown
+        verification_status: untested
+        included_in_must_denominator: false
+    mapping_qualification: Record -014 is the enclosing permitted-refinement prohibition; it is not a separately
+      catalogued additive-constraint atom.
+  catalog_gap: true
+  implementation:
+    files:
+    - tosca/grammars/tosca_v2_0/attribute-definition.go
+    - tosca/grammars/tosca_v1_3/property-definition.go
+    symbols:
+    - ReadPropertyDefinition
+    - PropertyDefinition.Inherit
+    - AttributeDefinition.Inherit
+    - validateConstraintValue
+    parser_phase: inheritance, then rendering
+    execution_path:
+    - tosca_definitions_version selects tosca_v1_3 grammar
+    - ReadPropertyDefinition
+    - PropertyDefinition.Inherit
+    - AttributeDefinition.Inherit
+    - validateConstraintValue
+    - diagnostics and normalization
+  reproducer:
+    existing: true
+    location: docs/conformance/tosca-1.3/re-audit/findings.yaml#F03
+    permanent_direct_test_before_task: false
+    tests:
+    - TestReAuditInheritedPropertyConstraints
+    test_status: planned; report-embedded reproducers will become permanent tests
+  remediation_group: A
+  remediation_order: 1
+  implementation_status: non-compliant
+  verification_status: audit counterexample reproduced; remediation pending
+  mutation_evidence: null
+- finding_id: F05
+  specification:
+    version: TOSCA Simple Profile in YAML 1.3
+    sections:
+    - section: 3.6.10.2
+      title: Keynames
+    - section: 3.6.10.3
+      title: Status values
+    exact_rule: Property status must be supported, unsupported, experimental, or deprecated; omitted status defaults
+      to supported.
+    source_excerpts:
+    - section: 3.6.10.2
+      title: Keynames
+      text: 'The following is the list of recognized keynames for a TOSCA property definition: Keyname Required
+        Type Constraints Description type yes string None The required data type for the property. description no
+        description None The optional description for the property. required no boolean default: true An optional
+        key that declares a property as required ( true ) or not ( false ). default no <any> None An optional key
+        that may provide a value to be used as a default if not provided by another means. status no string default:
+        supported The optional status of the property relative to the specification or implementation. See table
+        below for valid values. constraints no list of constraint clauses None The optional list of sequenced constraint
+        clauses for the property. key_schema no schema_definition None The optional schema definition for the keys
+        used to identify entries in properties of type TOSCA map. entry_schema no schema_definition None The optional
+        schema definition for the entries in properties of TOSCA set types such as list or map. external-schema
+        no string None The optional key that contains a schema definition that TOSCA Orchestrators MAY use for validation
+        when the “type” key’s value indicates an External schema (e.g., “json”) See section “External schema” below
+        for further explanation and usage. metadata no map of string N/A Defines a section used to declare additional
+        metadata information.'
+    - section: 3.6.10.3
+      title: Status values
+      text: 'The following property status values are supported: Value Description supported Indicates the property
+        is supported. This is the default value for all property definitions. unsupported Indicates the property
+        is not supported. experimental Indicates the property is experimental and has no official standing. deprecated
+        Indicates the property has been deprecated by a new specification version.'
+    classification: required conditional grammar/semantics; normative profile availability
+  existing_catalog:
+    requirement_ids:
+    - TOSCA13-3.6.10.2-018
+    frozen_requirement_ids: []
+    status_before_audit:
+      TOSCA13-3.6.10.2-018:
+        implementation_status: unknown
+        verification_status: untested
+        included_in_must_denominator: false
+    mapping_qualification: No blanket mapping to an implicit-import or case-sensitivity umbrella atom. Non-frozen
+      related records are not presented as frozen coverage.
+  catalog_gap: true
+  implementation:
+    files:
+    - tosca/grammars/tosca_v2_0/attribute-definition.go
+    symbols:
+    - ReadPropertyDefinition
+    - ReadAttributeDefinition
+    parser_phase: read
+    execution_path:
+    - tosca_definitions_version selects tosca_v1_3 grammar
+    - ReadPropertyDefinition
+    - ReadAttributeDefinition
+    - diagnostics and normalization
+  reproducer:
+    existing: true
+    location: docs/conformance/tosca-1.3/re-audit/findings.yaml#F05
+    permanent_direct_test_before_task: false
+    tests:
+    - TestReAuditPropertyStatus
+    test_status: planned; report-embedded reproducers will become permanent tests
+  remediation_group: B-status
+  remediation_order: 2
+  implementation_status: non-compliant
+  verification_status: audit counterexample reproduced; remediation pending
+  mutation_evidence: null
+- finding_id: F06
+  specification:
+    version: TOSCA Simple Profile in YAML 1.3
+    sections:
+    - section: 3.5.1
+      title: Required Keynames
+    - section: 3.6.7.1
+      title: Keynames
+    - section: 3.6.7.2.1
+      title: Short notation
+    - section: 3.6.7.2.2
+      title: 'Extended notation:'
+    exact_rule: checksum_algorithm shall be specified if checksum is specified; required keynames can be inherited
+      where an effective artifact definition refines its parent.
+    source_excerpts:
+    - section: 3.5.1
+      title: Required Keynames
+      text: The TOSCA metamodel includes complex types (e.g., Node Types, Relationship Types, Capability Types,
+        Data Types, etc.) each of which include their own list of reserved keynames that are sometimes marked as
+        required . These types may be used to derive other types. These derived types (e.g., child types) do not
+        have to provide required keynames as long as they have been specified in the type they have been derived
+        from (i.e., their parent type).
+    - section: 3.6.7.1
+      title: Keynames
+      text: 'The following is the list of recognized keynames for a TOSCA artifact definition when using the extended
+        notation: Keyname Required Type Description type yes string The required artifact type for the artifact
+        definition. file yes string The required URI string (relative or absolute) which can be used to locate the
+        artifact’s file. repository no string The optional name of the repository definition which contains the
+        location of the external repository that contains the artifact. The artifact is expected to be referenceable
+        by its file URI within the repository. description no description The optional description for the artifact
+        definition. deploy_path no string The file path the associated file would be deployed into within the target
+        node’s container. artifact_version no string The version of this artifact. One use of this artifact_version
+        is to declare the particular version of this artifact type, in addition to its mime_type (that is declared
+        in the artifact type definition). Together with the mime_type it may be used to select a particular artifact
+        processor for this artifact. For example a python interpreter that can interpret python version 2.7.0 checksum
+        no string The checksum used to validate the integrity of the artifact. checksum_algorithm no string Algorithm
+        used to calculate the artifact checksum (e.g. MD5, SHA [Ref] ). Shall be specified if checksum is specified
+        for an artifact. properties no map of property assignments The optional map of property assignments associated
+        with the artifact.'
+    - section: 3.6.7.2.1
+      title: Short notation
+      text: 'The following single-line grammar may be used when the artifact’s type and mime type can be inferred
+        from the file URI: < artifact_name >: < artifact_file_URI >'
+    - section: 3.6.7.2.2
+      title: 'Extended notation:'
+      text: 'The following multi-line grammar may be used when the artifact’s definition’s type and mime type need
+        to be explicitly declared: < artifact_name >: description: < artifact_description > type: < artifact_type_name
+        > file: < artifact_file_URI > repository: < artifact_repository_name > deploy_path: < file_deployment_path
+        > version: <artifact _version> checksum: <artifact_checksum> checksum_algorithm: <artifact_checksum_algorithm>
+        properties: <property assignments> In the above grammars, the pseudo values that appear in angle brackets
+        have the following meaning: · artifact_name : represents the required symbolic name of the artifact as a
+        string . · artifact_description : represents the optional description for the artifact. · artifact_type_name
+        : represents the required artifact type the artifact definition is based upon. · artifact_file_URI : represents
+        the required URI string (relative or absolute) which can be used to locate the artifact’s file. · artifact_repository_name
+        : represents the optional name of the repository definition to use to retrieve the associated artifact (file)
+        from. · file_deployement_path : represents the optional path the artifact_file_URI would be copied into
+        within the target node’s container. · artifact_version : represents the version of artifact · artifact_checksum:
+        represents the checksum of the Artifact · artifact_checksum_algorithm: represents the algorithm for verifying
+        the checksum. Shall be specified if checksum is specified · properties : represents an optional map of property
+        assignments associated with the artifact'
+    classification: required conditional grammar/semantics; normative profile availability
+  existing_catalog:
+    requirement_ids:
+    - TOSCA13-3.6.7.1-029
+    frozen_requirement_ids: []
+    status_before_audit:
+      TOSCA13-3.6.7.1-029:
+        implementation_status: unknown
+        verification_status: untested
+        included_in_must_denominator: false
+    mapping_qualification: No blanket mapping to an implicit-import or case-sensitivity umbrella atom. Non-frozen
+      related records are not presented as frozen coverage.
+  catalog_gap: true
+  implementation:
+    files:
+    - tosca/grammars/tosca_v1_3/structural-readers.go
+    - tosca/grammars/tosca_v2_0/artifact-definition.go
+    symbols:
+    - ReadArtifactDefinition
+    - ArtifactDefinition.Inherit
+    - validateArtifactDefinitionRequiredKeynames
+    parser_phase: inheritance for effective dependency; read for field types
+    execution_path:
+    - tosca_definitions_version selects tosca_v1_3 grammar
+    - ReadArtifactDefinition
+    - ArtifactDefinition.Inherit
+    - validateArtifactDefinitionRequiredKeynames
+    - diagnostics and normalization
+  reproducer:
+    existing: true
+    location: docs/conformance/tosca-1.3/re-audit/findings.yaml#F06
+    permanent_direct_test_before_task: false
+    tests:
+    - TestReAuditArtifactChecksumDependency
+    test_status: planned; report-embedded reproducers will become permanent tests
+  remediation_group: B-artifact
+  remediation_order: 3
+  implementation_status: non-compliant
+  verification_status: audit counterexample reproduced; remediation pending
+  mutation_evidence: null
+- finding_id: F07
+  specification:
+    version: TOSCA Simple Profile in YAML 1.3
+    sections:
+    - section: 3.1.2
+      title: TOSCA Namespacing in TOSCA Service Templates
+    - section: 5.9.12.1
+      title: Definition
+    exact_rule: The automatically imported Container.Runtime host capability has type tosca.capabilities.Compute.
+    source_excerpts:
+    - &id002
+      section: 3.1.2
+      title: TOSCA Namespacing in TOSCA Service Templates
+      text: 'In the TOSCA Simple Profile, TOSCA Service Templates MUST always have, as the first line of YAML, the
+        keyword “ tosca_definitions_version ” with an associated TOSCA Namespace Alias value. This single line accomplishes
+        the following: 1. Establishes the TOSCA Simple Profile Specification version whose grammar MUST be used
+        to parse and interpret the contents for the remainder of the TOSCA Service Template. 2. Establishes the
+        default TOSCA Namespace URI and Namespace Prefix for all types found in the document that are not explicitly
+        namespaced. 3. Automatically imports (without the use of an explicit import statement) the normative type
+        definitions (e.g., Node, Relationship, Capability, Artifact, etc.) that are associated with the TOSCA Simple
+        Profile Specification the TOSCA Namespace Alias value identifies. 4. Associates the TOSCA Namespace URI
+        and Namespace Prefix to the automatically imported TOSCA type definitions.'
+    - section: 5.9.12.1
+      title: Definition
+      text: 'tosca.nodes.Container. Runtime: derived_from: tosca.nodes.SoftwareComponent capabilities: host: type:
+        tosca.capabilities.Compute valid_source_types: [ tosca.nodes.Container.Application ] scalable: type: tosca.capabilities.Scalable'
+    classification: required conditional grammar/semantics; normative profile availability
+  existing_catalog:
+    requirement_ids: []
+    frozen_requirement_ids: []
+    status_before_audit: {}
+    mapping_qualification: No blanket mapping to an implicit-import or case-sensitivity umbrella atom. Non-frozen
+      related records are not presented as frozen coverage.
+  catalog_gap: true
+  implementation:
+    files:
+    - assets/tosca/profiles/simple/1.3/nodes.yaml
+    symbols:
+    - ReadNodeType
+    - ReadCapabilityDefinition
+    - NodeType.Inherit
+    - CapabilityDefinition.Inherit
+    parser_phase: implicit import, inheritance, rendering
+    execution_path:
+    - tosca_definitions_version selects tosca_v1_3 grammar
+    - ReadNodeType
+    - ReadCapabilityDefinition
+    - NodeType.Inherit
+    - CapabilityDefinition.Inherit
+    - diagnostics and normalization
+  reproducer:
+    existing: true
+    location: docs/conformance/tosca-1.3/re-audit/findings.yaml#F07
+    permanent_direct_test_before_task: false
+    tests:
+    - TestReAuditContainerRuntimeProfile
+    test_status: planned; report-embedded reproducers will become permanent tests
+  remediation_group: C-profile
+  remediation_order: 4
+  implementation_status: non-compliant
+  verification_status: audit counterexample reproduced; remediation pending
+  mutation_evidence: null
+- finding_id: F08
+  specification:
+    version: TOSCA Simple Profile in YAML 1.3
+    sections:
+    - section: 3.1.2
+      title: TOSCA Namespacing in TOSCA Service Templates
+    - section: 5.9.13.1
+      title: Definition
+    exact_rule: The automatically imported Container.Application network requirement has capability tosca.capabilities.Endpoint.
+    source_excerpts:
+    - *id002
+    - section: 5.9.13.1
+      title: Definition
+      text: 'tosca.nodes.Container.Application: derived_from: tosca.nodes.Root requirements: - host: capability:
+        tosca.capabilities.Compute node: tosca.nodes.Container.Runtime relationship: tosca.relationships.HostedOn
+        - storage: capability: tosca.capabilities.Storage - network: capability: tosca.capabilities.Endpoint'
+    classification: required conditional grammar/semantics; normative profile availability
+  existing_catalog:
+    requirement_ids: []
+    frozen_requirement_ids: []
+    status_before_audit: {}
+    mapping_qualification: No blanket mapping to an implicit-import or case-sensitivity umbrella atom. Non-frozen
+      related records are not presented as frozen coverage.
+  catalog_gap: true
+  implementation:
+    files:
+    - assets/tosca/profiles/simple/1.3/nodes.yaml
+    symbols:
+    - ReadNodeType
+    - ReadRequirementDefinition
+    - NodeType.Inherit
+    - RequirementDefinition.Inherit
+    parser_phase: implicit import, inheritance, rendering
+    execution_path:
+    - tosca_definitions_version selects tosca_v1_3 grammar
+    - ReadNodeType
+    - ReadRequirementDefinition
+    - NodeType.Inherit
+    - RequirementDefinition.Inherit
+    - diagnostics and normalization
+  reproducer:
+    existing: true
+    location: docs/conformance/tosca-1.3/re-audit/findings.yaml#F08
+    permanent_direct_test_before_task: false
+    tests:
+    - TestReAuditContainerApplicationProfile
+    test_status: planned; report-embedded reproducers will become permanent tests
+  remediation_group: C-profile
+  remediation_order: 4
+  implementation_status: non-compliant
+  verification_status: audit counterexample reproduced; remediation pending
+  mutation_evidence: null
+- finding_id: F16
+  specification:
+    version: TOSCA Simple Profile in YAML 1.3
+    sections:
+    - section: '5.2'
+      title: TOSCA normative type names
+    - section: 5.2.1
+      title: Additional requirements
+    - section: 5.4.4.3
+      title: tosca.artifacts.Implementation.Bash
+    - section: 5.4.4.4
+      title: tosca.artifacts.Implementation.Python
+    - section: 5.5.14
+      title: tosca.capabilities.network.Bindable
+    - section: 5.9.9
+      title: tosca.nodes.Abstract.Storage
+    - section: 5.9.10
+      title: tosca.nodes.Storage.ObjectStorage
+    - section: 5.9.11
+      title: tosca.nodes.Storage.BlockStorage
+    - section: 8.5.5
+      title: tosca.relationships.network.BindsTo
+    exact_rule: Declared shorthand and qualified names may replace the full Type URI and must retain the exact case
+      declared in normative name tables.
+    source_excerpts:
+    - section: '5.2'
+      title: TOSCA normative type names
+      text: 'Every normative type has three names declared: 1. Type URI – This is the unique identifying name for
+        the type. a. These are reserved names within the TOSCA namespace. 2. Shorthand Name – This is the shorter
+        (simpler) name that can be used in place of its corresponding, full Type URI name. a. These are reserved
+        names within TOSCA namespace that MAY be used in place of the full Type URI. b. Profiles of the OASIS TOSCA
+        Simple Profile specifcaition SHALL assure non-collision of names for new types when they are introduced.
+        c. TOSCA type designers SHOULD NOT create new types with names that would collide with any TOSCA normative
+        type Shorthand Name. 3. Type Qualified Name – This is a modified Shorthand Name that includes the “ tosca
+        : ” namespace prefix which clearly qualifies it as being part of the TOSCA namespace. a. This name MAY be
+        used to assure there is no collision when types are imported from other (non) TOSCA approved sources.'
+    - section: 5.2.1
+      title: Additional requirements
+      text: · Case sensitivity - TOSCA Type URI, Shorthand and Type Qualified names SHALL be treated as case sensitive.
+        o The case of each type name has been carefully selected by the TOSCA working group and TOSCA orchestrators
+        and processors SHALL strictly recognize the name casing as specified in this specification or any of its
+        approved profiles.
+    - section: 5.4.4.3
+      title: tosca.artifacts.Implementation.Bash
+      text: This artifact type represents a Bash script type that contains Bash commands that can be executed on
+        the Unix Bash shell. Shorthand Name Bash Type Qualified Name tosca:Bash Type URI tosca.artifacts.Implementation.Bash
+    - section: 5.4.4.4
+      title: tosca.artifacts.Implementation.Python
+      text: This artifact type represents a Python file that contains Python language constructs that can be executed
+        within a Python interpreter. Shorthand Name Python Type Qualified Name tosca:Python Type URI tosca.artifacts.Implementation.Python
+    - section: 5.5.14
+      title: tosca.capabilities.network.Bindable
+      text: A node type that includes the Bindable capability indicates that it can be bound to a logical network
+        association via a network port. Shorthand Name network.Bindable Type Qualified Name tosca:network.Bindable
+        Type URI tosca.capabilities.network.Bindable
+    - section: 5.9.9
+      title: tosca.nodes.Abstract.Storage
+      text: The TOSCA Abstract.Storage node represents an abstract storage resource without any requirements on
+        compute or network resources. Shorthand Name AbstractStorage Type Qualified Name tosca:Abstract.Storage
+        Type URI tosca.nodes.Abstract.Storage
+    - section: 5.9.10
+      title: tosca.nodes.Storage.ObjectStorage
+      text: The TOSCA ObjectStorage node represents storage that provides the ability to store data as objects (or
+        BLOBs of data) without consideration for the underlying filesystem or devices. Shorthand Name ObjectStorage
+        Type Qualified Name tosca:ObjectStorage Type URI tosca.nodes.Storage.ObjectStorage
+    - section: 5.9.11
+      title: tosca.nodes.Storage.BlockStorage
+      text: 'The TOSCA BlockStorage node currently represents a server-local block storage device (i.e., not shared)
+        offering evenly sized blocks of data from which raw storage volumes can be created. Note : In this draft
+        of the TOSCA Simple Profile, distributed or Network Attached Storage (NAS) are not yet considered (nor are
+        clustered file systems), but the TC plans to do so in future drafts. Shorthand Name BlockStorage Type Qualified
+        Name tosca:BlockStorage Type URI tosca.nodes.Storage.BlockStorage'
+    - section: 8.5.5
+      title: tosca.relationships.network.BindsTo
+      text: This type represents a network association relationship between Port and Compute node types. Shorthand
+        Name network.BindsTo Type Qualified Name tosca:BindsTo Type URI tosca.relationships.network.BindsTo
+    classification: required conditional grammar/semantics; normative profile availability
+  existing_catalog:
+    requirement_ids:
+    - TOSCA13-5.2-002
+    - TOSCA13-5.2-005
+    - TOSCA13-5.2-006
+    frozen_requirement_ids: []
+    status_before_audit:
+      TOSCA13-5.2-002:
+        implementation_status: unknown
+        verification_status: untested
+        included_in_must_denominator: false
+      TOSCA13-5.2-005:
+        implementation_status: unknown
+        verification_status: untested
+        included_in_must_denominator: false
+      TOSCA13-5.2-006:
+        implementation_status: unknown
+        verification_status: untested
+        included_in_must_denominator: false
+    mapping_qualification: Frozen 5.2.1-001 covers case sensitivity, not the complete alias availability obligation.
+      Do not claim it maps all twelve aliases.
+  catalog_gap: true
+  implementation:
+    files:
+    - tosca/grammars/tosca_v2_0/import.go
+    - tosca/grammars/tosca_v1_3/import.go
+    - tosca/grammars/tosca_v2_0/file.go
+    symbols:
+    - ReadImport
+    - File.GetImportSpecs
+    - Import.NewImportSpec
+    - newImportNameTransformer
+    - getNormativeNames
+    - Context.LookupNames
+    parser_phase: namespace/name lookup
+    execution_path:
+    - tosca_definitions_version selects tosca_v1_3 grammar
+    - ReadImport
+    - File.GetImportSpecs
+    - Import.NewImportSpec
+    - newImportNameTransformer
+    - getNormativeNames
+    - Context.LookupNames
+    - diagnostics and normalization
+  reproducer:
+    existing: true
+    location: docs/conformance/tosca-1.3/re-audit/findings.yaml#F16
+    permanent_direct_test_before_task: false
+    tests:
+    - TestReAuditNormativeAliases
+    test_status: planned; report-embedded reproducers will become permanent tests
+  remediation_group: C-aliases
+  remediation_order: 5
+  implementation_status: non-compliant
+  verification_status: audit counterexample reproduced; remediation pending
+  mutation_evidence: null
+- finding_id: F09
+  specification:
+    version: TOSCA Simple Profile in YAML 1.3
+    sections:
+    - section: 3.3.3.1
+      title: Grammar
+    - section: 3.3.3.2
+      title: Keywords
+    - section: 3.7.3.1
+      title: Keynames
+    - section: 3.8.2.1
+      title: Keynames
+    - section: 3.8.2.2.2
+      title: 'Extended notation:'
+    - section: 3.8.2.3
+      title: 'min_occurrences, max_occurrences: lower and upper bounds of the range that further refines the minimum
+        and maximum occurrences for this requirement specified in the corresponding requirement definition. The
+        range specified here must fall completely within the occurrences range specified in the corresponding requirement
+        definitionExamples'
+    exact_rule: An assignment occurrence range must fall completely within its corresponding definition range; omission
+      uses the definition range. Retain both effective bounds when normalizing.
+    source_excerpts:
+    - &id003
+      section: 3.3.3.1
+      title: Grammar
+      text: 'TOSCA range values have the following grammar: [<lower_bound>, <upper_bound>] In the above grammar,
+        the pseudo values that appear in angle brackets have the following meaning: · lower_bound : is a required
+        integer value that denotes the lower boundary of the range. · upper_bound : is a required integer value
+        that denotes the upper boundary of the range. This value MUST be greater than or equal to lower_bound .'
+    - &id004
+      section: 3.3.3.2
+      title: Keywords
+      text: 'The following Keywords may be used in the TOSCA range type: Keyword Applicable Types Description UNBOUNDED
+        scalar Used to represent an unbounded upper bounds (positive) value in a set for a scalar type.'
+    - section: 3.7.3.1
+      title: Keynames
+      text: 'The following is the list of recognized keynames for a TOSCA requirement definition: Keyname Required
+        Type Constraints Description capability yes string N/A The required reserved keyname used that can be used
+        to provide the name of a valid Capability Type that can fulfill the requirement. node no string N/A The
+        optional reserved keyname used to provide the name of a valid Node Type that contains the capability definition
+        that can be used to fulfill the requirement. relationship no string N/A The optional reserved keyname used
+        to provide the name of a valid Relationship Type to construct when fulfilling the requirement. occurrences
+        no range of integer implied default of [1,1] The optional minimum and maximum occurrences for the requirement.
+        Note: the keyword UNBOUNDED is also supported to represent any positive integer.'
+    - section: 3.8.2.1
+      title: Keynames
+      text: 'The following is the list of recognized keynames for a TOSCA requirement assignment: Keyname Required
+        Type Description capability no string The optional reserved keyname used to provide the name of either a:
+        · Capability definition within a target node template that can fulfill the requirement. · Capability Type
+        that the provider will use to select a type-compatible target node template to fulfill the requirement at
+        runtime. node no string The optional reserved keyname used to identify the target node of a relationship.
+        specifically, it is used to provide either a: · Node Template name that can fulfill the target node requirement.
+        · Node Type name that the provider will use to select a type-compatible node template to fulfill the requirement
+        at runtime. relationship no string The optional reserved keyname used to provide the name of either a: ·
+        Relationship Template to use to relate the source node to the (capability in the) target node when fulfilling
+        the requirement. · Relationship Type that the provider will use to select a type-compatible relationship
+        template to relate the source node to the target node at runtime. node_filter no node filter The optional
+        filter definition that TOSCA orchestrators or providers would use to select a type-compatible target node
+        that can fulfill the associated abstract requirement at runtime. occurrences no range of integer An optional
+        range that further refines the optional minimum and maximum occurrences for this requirement. If no range
+        is specified, the range from the corresponding requirement definition is used. The following is the list
+        of recognized keynames for a TOSCA requirement assignment’s relationship keyname which is used when property
+        assignments or inputs of declared interfaces (or their operations) need to be provided: Keyname Required
+        Type Description type no string The optional reserved keyname used to provide the name of the Relationship
+        Type for the requirement assignment’s relationship keyname. properties no map of property assignments An
+        optional map of property assignments for the relationship. interfaces no map of interface definitions The
+        optional reserved keyname used to reference declared (named) interface definitions of the corresponding
+        Relationship Type in order to provide Property assignments for these interfaces or operations of these interfaces.'
+    - section: 3.8.2.2.2
+      title: 'Extended notation:'
+      text: 'The following grammar would be used if the requirement assignment needs to provide more information
+        than just the Node Template name: < requirement_name >: node: < node_template_name > | < node_type_name
+        > relationship: < relationship_template_name > | < relationship_type_name > capability: < capability_symbolic_name
+        > | < capability_type_name > node_filter: < node_filter_definition > occurrences: [ min_occurrences , max_occurrences
+        ]'
+    - section: 3.8.2.3
+      title: 'min_occurrences, max_occurrences: lower and upper bounds of the range that further refines the minimum
+        and maximum occurrences for this requirement specified in the corresponding requirement definition. The
+        range specified here must fall completely within the occurrences range specified in the corresponding requirement
+        definitionExamples'
+      text: ''
+    classification: required conditional grammar/semantics; normative profile availability
+  existing_catalog:
+    requirement_ids:
+    - TOSCA13-3.8.2.1-013
+    - TOSCA13-3.8.2.1-016
+    frozen_requirement_ids: []
+    status_before_audit:
+      TOSCA13-3.8.2.1-013:
+        implementation_status: unknown
+        verification_status: untested
+        included_in_must_denominator: false
+      TOSCA13-3.8.2.1-016:
+        implementation_status: unknown
+        verification_status: untested
+        included_in_must_denominator: false
+    mapping_qualification: Existing -013/-016 cover range shape and fallback; neither is the full containment predicate
+      embedded in the malformed 3.8.2.3 heading.
+  catalog_gap: true
+  implementation:
+    files:
+    - tosca/grammars/tosca_v1_3/requirement-assignment.go
+    - normal/requirement.go
+    symbols:
+    - ReadRequirementAssignment
+    - RequirementAssignment.Render
+    - RequirementAssignment.Normalize
+    - Requirement.Marshalable
+    parser_phase: rendering before normalization; structural range checks in read
+    execution_path:
+    - tosca_definitions_version selects tosca_v1_3 grammar
+    - ReadRequirementAssignment
+    - RequirementAssignment.Render
+    - RequirementAssignment.Normalize
+    - Requirement.Marshalable
+    - diagnostics and normalization
+  reproducer:
+    existing: true
+    location: docs/conformance/tosca-1.3/re-audit/findings.yaml#F09
+    permanent_direct_test_before_task: false
+    tests:
+    - TestReAuditRequirementOccurrenceBounds
+    test_status: planned; report-embedded reproducers will become permanent tests
+  remediation_group: D
+  remediation_order: 6
+  implementation_status: non-compliant
+  verification_status: audit counterexample reproduced; remediation pending
+  mutation_evidence: null
+- finding_id: F10
+  specification:
+    version: TOSCA Simple Profile in YAML 1.3
+    sections:
+    - section: 3.3.3
+      title: TOSCA range type
+    - section: 3.3.3.1
+      title: Grammar
+    - section: 3.3.3.2
+      title: Keywords
+    exact_rule: Generic range has exactly two integer bounds, upper >= lower, with UNBOUNDED allowed as the upper
+      bound. Generic bounds are not restricted to non-negative integers.
+    source_excerpts:
+    - section: 3.3.3
+      title: TOSCA range type
+      text: The range type can be used to define numeric ranges with a lower and upper boundary. For example, this
+        allows for specifying a range of ports to be opened in a firewall. Shorthand Name range Type Qualified Name
+        tosca:range
+    - *id003
+    - *id004
+    classification: required conditional grammar/semantics; normative profile availability
+  existing_catalog:
+    requirement_ids:
+    - TOSCA13-3.3.3.1-004
+    - TOSCA13-3.3.3.1-005
+    - TOSCA13-3.3.3.1-006
+    frozen_requirement_ids:
+    - TOSCA13-3.3.3.1-004
+    - TOSCA13-3.3.3.1-005
+    - TOSCA13-3.3.3.1-006
+    status_before_audit:
+      TOSCA13-3.3.3.1-004:
+        implementation_status: implemented
+        verification_status: verified
+        included_in_must_denominator: true
+      TOSCA13-3.3.3.1-005:
+        implementation_status: implemented
+        verification_status: verified
+        included_in_must_denominator: true
+      TOSCA13-3.3.3.1-006:
+        implementation_status: implemented
+        verification_status: verified
+        included_in_must_denominator: true
+    mapping_qualification: No blanket mapping to an implicit-import or case-sensitivity umbrella atom. Non-frozen
+      related records are not presented as frozen coverage.
+  catalog_gap: false
+  implementation:
+    files:
+    - tosca/grammars/tosca_v2_0/range.go
+    - tosca/grammars/tosca_v1_3/common.go
+    symbols:
+    - ReadRange
+    - Value.Render
+    - validateConstraintOperands
+    - evaluateConstraint
+    parser_phase: read of native range value during rendering; occurrence structural reads remain separate
+    execution_path:
+    - tosca_definitions_version selects tosca_v1_3 grammar
+    - ReadRange
+    - Value.Render
+    - validateConstraintOperands
+    - evaluateConstraint
+    - diagnostics and normalization
+  reproducer:
+    existing: true
+    location: docs/conformance/tosca-1.3/re-audit/findings.yaml#F10
+    permanent_direct_test_before_task: false
+    tests:
+    - TestReAuditSignedRange
+    test_status: planned; report-embedded reproducers will become permanent tests
+  remediation_group: E
+  remediation_order: 7
+  implementation_status: non-compliant
+  verification_status: audit counterexample reproduced; remediation pending
+  mutation_evidence: null

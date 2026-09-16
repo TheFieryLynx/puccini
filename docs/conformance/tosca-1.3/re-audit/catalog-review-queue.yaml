@@ -1,0 +1,122 @@
+scope: Proposals only; no frozen IDs, applicability, strength, deduplication, denominator membership or global conformance
+  claim changed. F11 and the full independent reconciliation remain separate work.
+proposals:
+- finding_id: F02
+  section: 3.6.10.6
+  normative_rule: Refinements use parameter grammar; value assigns a final type-compatible fixed value; later value
+    changes are invalid.
+  proposed_atomic_requirements:
+  - predicate: Refinements use parameter grammar; value assigns a final type-compatible fixed value; later value
+      changes are invalid.
+    atomicity_status: requires separate catalog review; split dimensions and per-alias/per-field obligations before
+      admission
+  existing_related_ids:
+  - TOSCA13-3.6.10.6-003
+  - TOSCA13-3.6.10.6-007
+  - TOSCA13-3.6.10.6-008
+  reason: No exact frozen ID represents the complete corrected obligation. Existing non-frozen records are retained;
+    denominator membership cannot change in remediation.
+  proposed_denominator_delta: null
+  status: proposed only
+- finding_id: F03
+  section: 3.6.10.6
+  normative_rule: Refinement may add constraints; other refinements are prohibited. Added constraints must not remove
+    inherited constraints.
+  proposed_atomic_requirements:
+  - predicate: Refinement may add constraints; other refinements are prohibited. Added constraints must not remove
+      inherited constraints.
+    atomicity_status: requires separate catalog review; split dimensions and per-alias/per-field obligations before
+      admission
+  existing_related_ids:
+  - TOSCA13-3.6.10.6-014
+  reason: No exact frozen ID represents the complete corrected obligation. Existing non-frozen records are retained;
+    denominator membership cannot change in remediation.
+  proposed_denominator_delta: null
+  status: proposed only
+- finding_id: F05
+  section: 3.6.10.2
+  normative_rule: Property status must be supported, unsupported, experimental, or deprecated; omitted status defaults
+    to supported.
+  proposed_atomic_requirements:
+  - predicate: Property status must be supported, unsupported, experimental, or deprecated; omitted status defaults
+      to supported.
+    atomicity_status: requires separate catalog review; split dimensions and per-alias/per-field obligations before
+      admission
+  existing_related_ids:
+  - TOSCA13-3.6.10.2-018
+  reason: No exact frozen ID represents the complete corrected obligation. Existing non-frozen records are retained;
+    denominator membership cannot change in remediation.
+  proposed_denominator_delta: null
+  status: proposed only
+- finding_id: F06
+  section: 3.5.1
+  normative_rule: checksum_algorithm shall be specified if checksum is specified; required keynames can be inherited
+    where an effective artifact definition refines its parent.
+  proposed_atomic_requirements:
+  - predicate: checksum_algorithm shall be specified if checksum is specified; required keynames can be inherited
+      where an effective artifact definition refines its parent.
+    atomicity_status: requires separate catalog review; split dimensions and per-alias/per-field obligations before
+      admission
+  existing_related_ids:
+  - TOSCA13-3.6.7.1-029
+  reason: No exact frozen ID represents the complete corrected obligation. Existing non-frozen records are retained;
+    denominator membership cannot change in remediation.
+  proposed_denominator_delta: null
+  status: proposed only
+- finding_id: F07
+  section: 3.1.2
+  normative_rule: The automatically imported Container.Runtime host capability has type tosca.capabilities.Compute.
+  proposed_atomic_requirements:
+  - predicate: The automatically imported Container.Runtime host capability has type tosca.capabilities.Compute.
+    atomicity_status: requires separate catalog review; split dimensions and per-alias/per-field obligations before
+      admission
+  existing_related_ids: []
+  reason: No exact frozen ID represents the complete corrected obligation. Existing non-frozen records are retained;
+    denominator membership cannot change in remediation.
+  proposed_denominator_delta: null
+  status: proposed only
+- finding_id: F08
+  section: 3.1.2
+  normative_rule: The automatically imported Container.Application network requirement has capability tosca.capabilities.Endpoint.
+  proposed_atomic_requirements:
+  - predicate: The automatically imported Container.Application network requirement has capability tosca.capabilities.Endpoint.
+    atomicity_status: requires separate catalog review; split dimensions and per-alias/per-field obligations before
+      admission
+  existing_related_ids: []
+  reason: No exact frozen ID represents the complete corrected obligation. Existing non-frozen records are retained;
+    denominator membership cannot change in remediation.
+  proposed_denominator_delta: null
+  status: proposed only
+- finding_id: F16
+  section: '5.2'
+  normative_rule: Declared shorthand and qualified names may replace the full Type URI and must retain the exact
+    case declared in normative name tables.
+  proposed_atomic_requirements:
+  - predicate: Declared shorthand and qualified names may replace the full Type URI and must retain the exact case
+      declared in normative name tables.
+    atomicity_status: requires separate catalog review; split dimensions and per-alias/per-field obligations before
+      admission
+  existing_related_ids:
+  - TOSCA13-5.2-002
+  - TOSCA13-5.2-005
+  - TOSCA13-5.2-006
+  reason: No exact frozen ID represents the complete corrected obligation. Existing non-frozen records are retained;
+    denominator membership cannot change in remediation.
+  proposed_denominator_delta: null
+  status: proposed only
+- finding_id: F09
+  section: 3.8.2.3
+  normative_rule: An assignment occurrence range must fall completely within its corresponding definition range;
+    omission uses the definition range. Retain both effective bounds when normalizing.
+  proposed_atomic_requirements:
+  - predicate: An assignment occurrence range must fall completely within its corresponding definition range; omission
+      uses the definition range. Retain both effective bounds when normalizing.
+    atomicity_status: requires separate catalog review; split dimensions and per-alias/per-field obligations before
+      admission
+  existing_related_ids:
+  - TOSCA13-3.8.2.1-013
+  - TOSCA13-3.8.2.1-016
+  reason: No exact frozen ID represents the complete corrected obligation. Existing non-frozen records are retained;
+    denominator membership cannot change in remediation.
+  proposed_denominator_delta: null
+  status: proposed only
