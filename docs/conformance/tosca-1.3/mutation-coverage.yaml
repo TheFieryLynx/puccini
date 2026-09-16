@@ -1,0 +1,419 @@
+schema_version: 1
+scope: Caught mutations establish sensitivity of identified assertions, not exhaustive variation coverage.
+required_categories:
+- structural-grammar
+- namespaces-imports
+- hierarchy
+- inheritance
+- refinement
+- constraints
+- intrinsic-functions
+- assignments
+- requirements-capabilities
+- interfaces-operations
+- workflows
+- substitution-mappings
+- normative-profile
+- csar
+- normalization
+production_paths:
+- id: structural-grammar
+  category: structural-grammar
+  original_mutation_id: M01
+  symbols:
+  - Context.ValidateUnsupportedFields
+  requirements:
+  - TOSCA13-3.1.2-002
+  mutation: "func (self *Context) ValidateUnsupportedFields(keys []string) {\n if self != nil { return }"
+  patch:
+    file: tosca/parsing/validation.go
+    before: func (self *Context) ValidateUnsupportedFields(keys []string) {
+    after: "func (self *Context) ValidateUnsupportedFields(keys []string) {\n if self != nil { return }"
+    expected_occurrences: 1
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-INVALID
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-INVALID/A1
+  status: caught
+  source_sha256: bd4904cbbd69e9bc2b9e2cfc36b3570c5f12ed0223792152e523e716444e0b20
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-INVALID/A1
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-INVALID: e6b03ed71f94b7b2c420f734075aad1156aec3be3613b197fa99ec4ae4d4215d
+- id: namespaces-imports
+  category: namespaces-imports
+  original_mutation_id: M02
+  symbols:
+  - validateImportPrefixes
+  requirements:
+  - TOSCA13-3.6.8.2.3-002
+  mutation: "func validateImportPrefixes(imports tosca_v2_0.Imports) {\n if len(imports) >= 0 { return }"
+  patch:
+    file: tosca/grammars/tosca_v1_3/namespace-validation.go
+    before: func validateImportPrefixes(imports tosca_v2_0.Imports) {
+    after: "func validateImportPrefixes(imports tosca_v2_0.Imports) {\n if len(imports) >= 0 { return }"
+    expected_occurrences: 1
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-INVALID
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-INVALID/A1
+  status: caught
+  source_sha256: 81cfb5dd938812b8c2965485f9f47a092e1e84485f1788d0cf61ea835008f412
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-INVALID/A1
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-INVALID: 2bbacb06594de641429a5ff8e247f9abcfbc57c2b2fe2f372589ffc07592443c
+- id: hierarchy
+  category: hierarchy
+  original_mutation_id: M03
+  symbols:
+  - Hierarchy.IsCompatible
+  requirements:
+  - TOSCA13-3.7.2.4-001
+  mutation: "func (self *Hierarchy) IsCompatible(baseEntityPtr EntityPtr, entityPtr EntityPtr) bool {\n if self != nil { return\
+    \ true }"
+  patch:
+    file: tosca/parsing/inheritance.go
+    before: func (self *Hierarchy) IsCompatible(baseEntityPtr EntityPtr, entityPtr EntityPtr) bool {
+    after: "func (self *Hierarchy) IsCompatible(baseEntityPtr EntityPtr, entityPtr EntityPtr) bool {\n if self != nil { return\
+      \ true }"
+    expected_occurrences: 1
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-INVALID
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-INVALID/A1
+  status: caught
+  source_sha256: 01caca580f4f256ea23682ce489cf2dd6c8a9aa59ba53195f611fa32c8ec7b31
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-INVALID/A1
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-INVALID: de53d17cdf975650608988250249ca80eed0fdd0a18390447636836004720aa3
+- id: inheritance
+  category: inheritance
+  original_mutation_id: M04
+  symbols:
+  - OperationAssignments.CopyUnassigned
+  requirements:
+  - TOSCA13-5.8.1-004
+  mutation: if assignment.Implementation != nil {
+  patch:
+    file: tosca/grammars/tosca_v2_0/operation-assignment.go
+    before: if selfAssignment.Implementation == nil {
+    after: if assignment.Implementation != nil {
+    expected_occurrences: 1
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-OPERATION-TEMPLATE-OVERRIDE
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-OPERATION-TEMPLATE-OVERRIDE/A1
+  status: caught
+  source_sha256: 34d37b49d30db4efe387c33003ecd3b414527a27abfb1248f50e1dbb2428570c
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-OPERATION-TEMPLATE-OVERRIDE/A1
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-OPERATION-TEMPLATE-OVERRIDE: 599ae06f5e7070fad0e7767dcc295590e2f195d610b82ad1b265618242189118
+- id: refinement
+  category: refinement
+  original_mutation_id: M05
+  symbols:
+  - PropertyDefinition.Inherit
+  requirements:
+  - TOSCA13-3.6.10.6-014
+  mutation: if parentDefinition.IsRequired() && !*self.Required && self == nil {
+  patch:
+    file: tosca/grammars/tosca_v2_0/property-definition.go
+    before: if parentDefinition.IsRequired() && !*self.Required {
+    after: if parentDefinition.IsRequired() && !*self.Required && self == nil {
+    expected_occurrences: 1
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-INVALID
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-INVALID/A1
+  status: caught
+  source_sha256: 4257ddb12427014e3f91541c4e78904af24b021485325375bbbd8f6f96e58c5f
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-INVALID/A1
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-INVALID: c5a5ebfa9e5ea4415a49e23a46372367d87599c0231ed3a261daaaa2a954e655
+- id: constraints
+  category: constraints
+  original_mutation_id: M06
+  symbols:
+  - evaluateConstraint
+  requirements:
+  - TOSCA13-3.6.3.1-010
+  mutation: "func evaluateConstraint(value any, constraint constraintSpec, dataType *tosca_v2_0.DataType, definition tosca_v2_0.DataDefinition)\
+    \ bool {\n if dataType != nil { return true }"
+  patch:
+    file: tosca/grammars/tosca_v1_3/constraint-validation.go
+    before: func evaluateConstraint(value any, constraint constraintSpec, dataType *tosca_v2_0.DataType, definition tosca_v2_0.DataDefinition)
+      bool {
+    after: "func evaluateConstraint(value any, constraint constraintSpec, dataType *tosca_v2_0.DataType, definition tosca_v2_0.DataDefinition)\
+      \ bool {\n if dataType != nil { return true }"
+    expected_occurrences: 1
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-INVALID
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-INVALID/A1
+  status: caught
+  source_sha256: ad90e9a09bb07bb958f552a233dd38acaef0798ac2d1d0f3c8d6344a873edaec
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-INVALID/A1
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-INVALID: ee2e064d525445bd40f9a0da29169fd9d8453b3526ac3e438f09c86967b9a75d
+- id: intrinsic-functions
+  category: intrinsic-functions
+  original_mutation_id: M07
+  symbols:
+  - ValidateServiceTemplateFunctions
+  requirements:
+  - TOSCA13-4.4.2.2-002
+  mutation: if self == nil { ValidateServiceTemplateFunctions(self) }
+  patch:
+    file: tosca/grammars/tosca_v1_3/service-template.go
+    before: ValidateServiceTemplateFunctions(self)
+    after: if self == nil { ValidateServiceTemplateFunctions(self) }
+    expected_occurrences: 1
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-INVALID
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-INVALID/A1
+  status: caught
+  source_sha256: ffc46776b763a4c6f6c2a5bb25cdcf2f5387530f50706106f696085d0d4fe9e9
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-INVALID/A1
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-INVALID: d3c211c0bae19e881dedf900c63dfe1f79043821f85312942b490d001b83b7e7
+- id: assignments
+  category: assignments
+  original_mutation_id: M08
+  symbols:
+  - Values.RenderProperties
+  requirements:
+  - TOSCA13-3.8.8.3-005
+  mutation: '} else if definition.IsRequired() && definition == nil {'
+  patch:
+    file: tosca/grammars/tosca_v2_0/value.go
+    before: '} else if definition.IsRequired() {'
+    after: '} else if definition.IsRequired() && definition == nil {'
+    expected_occurrences: 3
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-INVALID
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-INVALID/A1
+  status: caught
+  source_sha256: 82a0b1049a4148c4a79ef6eaf5e40505cddbfa0cd7b90de97455a21482d547ba
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-INVALID/A1
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-INVALID: 838ce34c9c5106df9879654ceaa75a97f68913587e57bf40608b3910bac45e15
+- id: requirements-capabilities
+  category: requirements-capabilities
+  original_mutation_id: M09
+  symbols:
+  - validateEndpointAssignment
+  requirements:
+  - TOSCA13-5.5.7.4-001
+  mutation: "func validateEndpointAssignment(assignment *tosca_v2_0.CapabilityAssignment) {\n if assignment != nil { return\
+    \ }"
+  patch:
+    file: tosca/grammars/tosca_v1_3/capability-assignment-validation.go
+    before: func validateEndpointAssignment(assignment *tosca_v2_0.CapabilityAssignment) {
+    after: "func validateEndpointAssignment(assignment *tosca_v2_0.CapabilityAssignment) {\n if assignment != nil { return\
+      \ }"
+    expected_occurrences: 1
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-INVALID
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-INVALID/A1
+  status: caught
+  source_sha256: ba46304ab5d36279476f85947ae48c1115fb062889987408cc33eeb788c3ab4c
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-INVALID/A1
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-INVALID: e0e84fc8c067d01ecab5fdc52fb60b308962cad56aacceed84ff1ae685906e36
+- id: interfaces-operations
+  category: interfaces-operations
+  original_mutation_id: M10
+  symbols:
+  - validateInterfaceTypeImplementations
+  requirements:
+  - TOSCA13-3.7.5.4-001
+  mutation: "func validateInterfaceTypeImplementations(context *parsing.Context, key string) {\n if context != nil { return\
+    \ }"
+  patch:
+    file: tosca/grammars/tosca_v1_3/structural-readers.go
+    before: func validateInterfaceTypeImplementations(context *parsing.Context, key string) {
+    after: "func validateInterfaceTypeImplementations(context *parsing.Context, key string) {\n if context != nil { return\
+      \ }"
+    expected_occurrences: 1
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-INVALID
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-INVALID/A1
+  status: caught
+  source_sha256: f783fb5a30f35dea104cdbfdd77cf23e0fcc5f6d9befeaa50e97ff0ff924cd07
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-INVALID/A1
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-INVALID: 0ddce0f235bb24eec37c396bc4d59e6262827afb6948c4011bbaaae10964941a
+- id: workflows
+  category: workflows
+  original_mutation_id: M11
+  symbols:
+  - validateWorkflowStepOperationHost
+  requirements:
+  - TOSCA13-3.6.27.1-008
+  mutation: Grammar.WorkflowStepDefinitionValidator = nil
+  patch:
+    file: tosca/grammars/tosca_v1_3/common.go
+    before: Grammar.WorkflowStepDefinitionValidator = validateWorkflowStepOperationHost
+    after: Grammar.WorkflowStepDefinitionValidator = nil
+    expected_occurrences: 1
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-INVALID
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-INVALID/A1
+  status: caught
+  source_sha256: 3d3ff4971ee550a03eae086fe54ca72d965d80edb0f2d99fcef3e3bfd29da6e1
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-INVALID/A1
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-INVALID: 443ff2c4ba9dd7b1ce67101b5961b24f1710681962af1a759e860530c07ef86f
+- id: substitution-mappings
+  category: substitution-mappings
+  original_mutation_id: M12
+  symbols:
+  - validateSubstitutionMappingCoverage
+  requirements:
+  - TOSCA13-3.8.13.4-001
+  mutation: Grammar.SubstitutionMappingsValidator = nil
+  patch:
+    file: tosca/grammars/tosca_v1_3/common.go
+    before: Grammar.SubstitutionMappingsValidator = validateSubstitutionMappingCoverage
+    after: Grammar.SubstitutionMappingsValidator = nil
+    expected_occurrences: 1
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-INVALID
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-INVALID/A1
+  status: caught
+  source_sha256: 3d3ff4971ee550a03eae086fe54ca72d965d80edb0f2d99fcef3e3bfd29da6e1
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-INVALID/A1
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-INVALID: 6a654e187e83643d9b187e8d0054cd8102b15a7d2fd06950e7fdfae181708ade
+- id: normative-profile
+  category: normative-profile
+  original_mutation_id: M13
+  symbols:
+  - tosca.datatypes.Credential.properties.token_type.default
+  requirements:
+  - TOSCA13-5.3.6.1-004
+  mutation: 'default: audit-mutant'
+  patch:
+    file: assets/tosca/profiles/simple/1.3/data.yaml
+    before: 'default: password'
+    after: 'default: audit-mutant'
+    expected_occurrences: 1
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-INHERITED-DEFAULT
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-INHERITED-DEFAULT/A1
+  status: caught
+  source_sha256: 40dd262977327d7b994a7ee3b8cd40d3b35eddfcdc3d4538e9d767c02e46c77f
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-INHERITED-DEFAULT/A1
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-INHERITED-DEFAULT: 576d4864f93f1f3de1b06d20a1bf26bfe26b38a38db03f52c99f36245860f176
+- id: csar
+  category: csar
+  original_mutation_id: M14
+  symbols:
+  - validateCSAR
+  requirements:
+  - TOSCA13-6.1-006
+  mutation: "func validateCSAR(context *parsing.Context, serviceFile *ServiceFile) {\n if context != nil { return }"
+  patch:
+    file: tosca/grammars/tosca_v1_3/service-file.go
+    before: func validateCSAR(context *parsing.Context, serviceFile *ServiceFile) {
+    after: "func validateCSAR(context *parsing.Context, serviceFile *ServiceFile) {\n if context != nil { return }"
+    expected_occurrences: 1
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-INVALID
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-INVALID/A1
+  status: caught
+  source_sha256: 5daee41b55dafcc8d2ebb1d6f2627d852490f72e3cfe33930c370a4d8c73d0a9
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-INVALID/A1
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-INVALID: f49d1a6d6c5b7787cb14f1dbb0f961fa8395820d6a61d8232014024f2177d16f
+- id: normalization
+  category: normalization
+  original_mutation_id: M15
+  symbols:
+  - normalizeOperatingSystemCapabilityAssignments
+  requirements:
+  - TOSCA13-5.5.12.3-001
+  mutation: strings.ToUpper(stringValue)
+  patch:
+    file: tosca/grammars/tosca_v1_3/os-capability-normalization.go
+    before: strings.ToLower(stringValue)
+    after: strings.ToUpper(stringValue)
+    expected_occurrences: 1
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-OS-LOWERCASE
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-OS-LOWERCASE/A1
+  status: caught
+  source_sha256: b96fe10ecfd09343830de4c5349a19f14e17823a51ce4330f080845ade84e09b
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-OS-LOWERCASE/A1
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-OS-LOWERCASE: 89dca2f7a74259bd0a85a552c71b664cd1f7a0e911d5e7913bdc18337e81a209
+- id: operation-definition-inheritance
+  category: inheritance
+  original_mutation_id: null
+  symbols:
+  - Grammar.OperationDefinitionInheritor
+  requirements:
+  - TOSCA13-3.6.17.3-002
+  mutation: Grammar.OperationDefinitionInheritor = nil
+  patch:
+    file: tosca/grammars/tosca_v1_3/common.go
+    before: Grammar.OperationDefinitionInheritor = inheritOperationDefinition
+    after: Grammar.OperationDefinitionInheritor = nil
+    expected_occurrences: 1
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-OPERATION-TYPE-INHERITANCE
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-OPERATION-TYPE-INHERITANCE/A4
+  status: caught
+  source_sha256: 3d3ff4971ee550a03eae086fe54ca72d965d80edb0f2d99fcef3e3bfd29da6e1
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-OPERATION-TYPE-INHERITANCE/A4
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-OPERATION-TYPE-INHERITANCE: ce26f1d62dfb0cfe51ff4d876d7d902b7ea02b3d0053e1809d70dc5795095698
+- id: token-data-disambiguation
+  category: intrinsic-functions
+  original_mutation_id: null
+  symbols:
+  - Grammar.FunctionCallLiteral
+  requirements:
+  - TOSCA13-5.3.6.1-004
+  mutation: Grammar.FunctionCallLiteral = nil
+  patch:
+    file: tosca/grammars/tosca_v1_3/common.go
+    before: Grammar.FunctionCallLiteral = isTokenStringData
+    after: Grammar.FunctionCallLiteral = nil
+    expected_occurrences: 1
+  detecting_cases:
+  - TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-OMITTED
+  detecting_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-OMITTED/A1
+  status: caught
+  source_sha256: 3d3ff4971ee550a03eae086fe54ca72d965d80edb0f2d99fcef3e3bfd29da6e1
+  detected_assertions:
+  - TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-OMITTED/A1
+  fixture_sha256:
+    TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-OMITTED: 8ae9cd84221d3f2dca0edfa9e6234df17883fb1fa156afbdcd7cf6cdb717e7cc

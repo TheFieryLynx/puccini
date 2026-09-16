@@ -1,0 +1,3 @@
+entries:
+  service.yaml: "tosca_definitions_version: tosca_simple_yaml_1_3\nmetadata:\n  template_version:\
+    \ 1.0.0\ntopology_template: {}\n"

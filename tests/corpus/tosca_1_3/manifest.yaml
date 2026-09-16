@@ -3957,4 +3957,1267 @@ cases:
     kind: value
     path: /nodeTemplates/n/properties/derived/$map/token_type/$primitive
     expected: password
+- id: TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-VALID
+  file: sections/evidence/structural-valid.yaml
+  specification:
+    sections:
+    - 3.1.2
+    requirement_ids:
+    - TOSCA13-3.1.2-002
+  classification:
+    kind: valid
+    category: structural-grammar
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.1.2-002
+    supporting_requirements: []
+    variation_axes:
+    - structural-valid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.1.2-002
+    kind: accept
+    path: accepted
+    expected: true
+- id: TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-INVALID
+  file: sections/evidence/structural-invalid.yaml
+  specification:
+    sections:
+    - 3.1.2
+    requirement_ids:
+    - TOSCA13-3.1.2-002
+  classification:
+    kind: invalid
+    category: structural-grammar
+    features:
+    - evidence-hardening
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: unsupported keyname
+      path: service_template
+    assertions: []
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.1.2-002
+    supporting_requirements: []
+    variation_axes:
+    - structural-invalid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.1.2-002
+    kind: diagnostic
+    path: category
+    expected: unsupported keyname
+  - id: A2
+    requirement_ids:
+    - TOSCA13-3.1.2-002
+    kind: diagnostic
+    path: entity
+    expected: service_template
+  - id: A3
+    requirement_ids:
+    - TOSCA13-3.1.2-002
+    kind: phase
+    path: processing_phase
+    expected: read
+  - id: A4
+    requirement_ids:
+    - TOSCA13-3.1.2-002
+    kind: reject
+    path: accepted
+    expected: false
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-VALID
+    change: 'Only root key changes from topology_template: {} to service_template: {}.'
+- id: TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-VALID
+  file: sections/evidence/import-prefix-valid.yaml
+  specification:
+    sections:
+    - 3.6.8.2.3
+    requirement_ids:
+    - TOSCA13-3.6.8.2.3-002
+  classification:
+    kind: valid
+    category: namespaces-imports
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.6.8.2.3-002
+    supporting_requirements: []
+    variation_axes:
+    - import-prefix-valid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.6.8.2.3-002
+    kind: accept
+    path: accepted
+    expected: true
+- id: TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-INVALID
+  file: sections/evidence/import-prefix-invalid.yaml
+  specification:
+    sections:
+    - 3.6.8.2.3
+    requirement_ids:
+    - TOSCA13-3.6.8.2.3-002
+  classification:
+    kind: invalid
+    category: namespaces-imports
+    features:
+    - evidence-hardening
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: reserved
+      path: namespace_prefix
+    assertions: []
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.6.8.2.3-002
+    supporting_requirements: []
+    variation_axes:
+    - import-prefix-invalid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.6.8.2.3-002
+    kind: diagnostic
+    path: category
+    expected: reserved
+  - id: A2
+    requirement_ids:
+    - TOSCA13-3.6.8.2.3-002
+    kind: diagnostic
+    path: entity
+    expected: namespace_prefix
+  - id: A3
+    requirement_ids:
+    - TOSCA13-3.6.8.2.3-002
+    kind: phase
+    path: processing_phase
+    expected: read
+  - id: A4
+    requirement_ids:
+    - TOSCA13-3.6.8.2.3-002
+    kind: reject
+    path: accepted
+    expected: false
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-VALID
+    change: Only namespace_prefix changes from ext to tosca.
+- id: TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-VALID
+  file: sections/evidence/capability-source-valid.yaml
+  specification:
+    sections:
+    - 3.7.2.4
+    requirement_ids:
+    - TOSCA13-3.7.2.4-001
+  classification:
+    kind: valid
+    category: hierarchy
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.7.2.4-001
+    supporting_requirements: []
+    variation_axes:
+    - capability-source-valid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.7.2.4-001
+    kind: value
+    path: /effective/nodeTypes/DerivedHost/capabilities/feature/validSourceTypes
+    expected:
+    - DerivedSource
+- id: TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-INVALID
+  file: sections/evidence/capability-source-invalid.yaml
+  specification:
+    sections:
+    - 3.7.2.4
+    requirement_ids:
+    - TOSCA13-3.7.2.4-001
+  classification:
+    kind: invalid
+    category: hierarchy
+    features:
+    - evidence-hardening
+  expected:
+    accepted: false
+    phase: inheritance
+    diagnostic:
+      category: derived from one of
+      path: valid_source_types
+    assertions: []
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.7.2.4-001
+    supporting_requirements: []
+    variation_axes:
+    - capability-source-invalid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.7.2.4-001
+    kind: diagnostic
+    path: category
+    expected: derived from one of
+  - id: A2
+    requirement_ids:
+    - TOSCA13-3.7.2.4-001
+    kind: diagnostic
+    path: entity
+    expected: valid_source_types
+  - id: A3
+    requirement_ids:
+    - TOSCA13-3.7.2.4-001
+    kind: phase
+    path: processing_phase
+    expected: inheritance
+  - id: A4
+    requirement_ids:
+    - TOSCA13-3.7.2.4-001
+    kind: reject
+    path: accepted
+    expected: false
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-VALID
+    change: Only valid_source_types changes from DerivedSource to Unrelated.
+- id: TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-VALID
+  file: sections/evidence/required-refinement-valid.yaml
+  specification:
+    sections:
+    - 3.6.10.6
+    requirement_ids:
+    - TOSCA13-3.6.10.6-014
+  classification:
+    kind: valid
+    category: refinement
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.6.10.6-014
+    supporting_requirements: []
+    variation_axes:
+    - required-refinement-valid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.6.10.6-014
+    kind: value
+    path: /effective/nodeTypes/Child/properties/p/required
+    expected: true
+- id: TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-INVALID
+  file: sections/evidence/required-refinement-invalid.yaml
+  specification:
+    sections:
+    - 3.6.10.6
+    requirement_ids:
+    - TOSCA13-3.6.10.6-014
+  classification:
+    kind: invalid
+    category: refinement
+    features:
+    - evidence-hardening
+  expected:
+    accepted: false
+    phase: inheritance
+    diagnostic:
+      category: refinement
+      path: required
+    assertions: []
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.6.10.6-014
+    supporting_requirements: []
+    variation_axes:
+    - required-refinement-invalid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.6.10.6-014
+    kind: diagnostic
+    path: category
+    expected: refinement
+  - id: A2
+    requirement_ids:
+    - TOSCA13-3.6.10.6-014
+    kind: diagnostic
+    path: entity
+    expected: required
+  - id: A3
+    requirement_ids:
+    - TOSCA13-3.6.10.6-014
+    kind: phase
+    path: processing_phase
+    expected: inheritance
+  - id: A4
+    requirement_ids:
+    - TOSCA13-3.6.10.6-014
+    kind: reject
+    path: accepted
+    expected: false
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-VALID
+    change: Only required changes from true to false.
+- id: TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-VALID
+  file: sections/evidence/constraint-boundary-valid.yaml
+  specification:
+    sections:
+    - 3.6.3.1
+    requirement_ids:
+    - TOSCA13-3.6.3.1-010
+  classification:
+    kind: valid
+    category: constraints
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.6.3.1-010
+    supporting_requirements: []
+    variation_axes:
+    - constraint-boundary-valid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.6.3.1-010
+    kind: value
+    path: /nodeTemplates/n/properties/p/$primitive
+    expected: 1
+- id: TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-INVALID
+  file: sections/evidence/constraint-boundary-invalid.yaml
+  specification:
+    sections:
+    - 3.6.3.1
+    requirement_ids:
+    - TOSCA13-3.6.3.1-010
+  classification:
+    kind: invalid
+    category: constraints
+    features:
+    - evidence-hardening
+  expected:
+    accepted: false
+    phase: rendering
+    diagnostic:
+      category: constraint
+      path: p
+    assertions: []
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.6.3.1-010
+    supporting_requirements: []
+    variation_axes:
+    - constraint-boundary-invalid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.6.3.1-010
+    kind: diagnostic
+    path: category
+    expected: constraint
+  - id: A2
+    requirement_ids:
+    - TOSCA13-3.6.3.1-010
+    kind: diagnostic
+    path: entity
+    expected: p
+  - id: A3
+    requirement_ids:
+    - TOSCA13-3.6.3.1-010
+    kind: phase
+    path: processing_phase
+    expected: rendering
+  - id: A4
+    requirement_ids:
+    - TOSCA13-3.6.3.1-010
+    kind: reject
+    path: accepted
+    expected: false
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-VALID
+    change: Only p changes from 1 to 0.
+- id: TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-VALID
+  file: sections/evidence/function-resolution-valid.yaml
+  specification:
+    sections:
+    - 4.4.2.2
+    requirement_ids:
+    - TOSCA13-4.4.2.2-002
+  classification:
+    kind: valid
+    category: intrinsic-functions
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-4.4.2.2-002
+    supporting_requirements: []
+    variation_axes:
+    - function-resolution-valid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-4.4.2.2-002
+    kind: value
+    path: /evaluated/outputs/result
+    expected: inherited
+- id: TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-INVALID
+  file: sections/evidence/function-resolution-invalid.yaml
+  specification:
+    sections:
+    - 4.4.2.2
+    requirement_ids:
+    - TOSCA13-4.4.2.2-002
+  classification:
+    kind: invalid
+    category: intrinsic-functions
+    features:
+    - evidence-hardening
+  expected:
+    accepted: false
+    phase: rendering
+    diagnostic:
+      category: malformed get_property function
+      path: absent
+    assertions: []
+  coverage:
+    primary_requirements:
+    - TOSCA13-4.4.2.2-002
+    supporting_requirements: []
+    variation_axes:
+    - function-resolution-invalid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-4.4.2.2-002
+    kind: diagnostic
+    path: category
+    expected: malformed get_property function
+  - id: A2
+    requirement_ids:
+    - TOSCA13-4.4.2.2-002
+    kind: diagnostic
+    path: entity
+    expected: absent
+  - id: A3
+    requirement_ids:
+    - TOSCA13-4.4.2.2-002
+    kind: phase
+    path: processing_phase
+    expected: rendering
+  - id: A4
+    requirement_ids:
+    - TOSCA13-4.4.2.2-002
+    kind: reject
+    path: accepted
+    expected: false
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-VALID
+    change: Only get_property property changes from p to absent.
+- id: TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-VALID
+  file: sections/evidence/required-assignment-valid.yaml
+  specification:
+    sections:
+    - 3.8.8.3
+    requirement_ids:
+    - TOSCA13-3.8.8.3-005
+  classification:
+    kind: valid
+    category: assignments
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.8.8.3-005
+    supporting_requirements: []
+    variation_axes:
+    - required-assignment-valid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.8.8.3-005
+    kind: value
+    path: /nodeTemplates/n/properties/p/$primitive
+    expected: configured
+- id: TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-INVALID
+  file: sections/evidence/required-assignment-invalid.yaml
+  specification:
+    sections:
+    - 3.8.8.3
+    requirement_ids:
+    - TOSCA13-3.8.8.3-005
+  classification:
+    kind: invalid
+    category: assignments
+    features:
+    - evidence-hardening
+  expected:
+    accepted: false
+    phase: rendering
+    diagnostic:
+      category: required property
+      path: p
+    assertions: []
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.8.8.3-005
+    supporting_requirements: []
+    variation_axes:
+    - required-assignment-invalid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.8.8.3-005
+    kind: diagnostic
+    path: category
+    expected: required property
+  - id: A2
+    requirement_ids:
+    - TOSCA13-3.8.8.3-005
+    kind: diagnostic
+    path: entity
+    expected: p
+  - id: A3
+    requirement_ids:
+    - TOSCA13-3.8.8.3-005
+    kind: phase
+    path: processing_phase
+    expected: rendering
+  - id: A4
+    requirement_ids:
+    - TOSCA13-3.8.8.3-005
+    kind: reject
+    path: accepted
+    expected: false
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-VALID
+    change: 'Only properties changes from {p: configured} to {}.'
+- id: TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-VALID
+  file: sections/evidence/endpoint-port-valid.yaml
+  specification:
+    sections:
+    - 5.5.7.4
+    requirement_ids:
+    - TOSCA13-5.5.7.4-001
+  classification:
+    kind: valid
+    category: requirements-capabilities
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-5.5.7.4-001
+    supporting_requirements: []
+    variation_axes:
+    - endpoint-port-valid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-5.5.7.4-001
+    kind: value
+    path: /nodeTemplates/n/capabilities/endpoint/properties/port/$primitive
+    expected: 80
+- id: TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-INVALID
+  file: sections/evidence/endpoint-port-invalid.yaml
+  specification:
+    sections:
+    - 5.5.7.4
+    requirement_ids:
+    - TOSCA13-5.5.7.4-001
+  classification:
+    kind: invalid
+    category: requirements-capabilities
+    features:
+    - evidence-hardening
+  expected:
+    accepted: false
+    phase: rendering
+    diagnostic:
+      category: one of port or ports
+      path: endpoint
+    assertions: []
+  coverage:
+    primary_requirements:
+    - TOSCA13-5.5.7.4-001
+    supporting_requirements: []
+    variation_axes:
+    - endpoint-port-invalid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-5.5.7.4-001
+    kind: diagnostic
+    path: category
+    expected: one of port or ports
+  - id: A2
+    requirement_ids:
+    - TOSCA13-5.5.7.4-001
+    kind: diagnostic
+    path: entity
+    expected: endpoint
+  - id: A3
+    requirement_ids:
+    - TOSCA13-5.5.7.4-001
+    kind: phase
+    path: processing_phase
+    expected: rendering
+  - id: A4
+    requirement_ids:
+    - TOSCA13-5.5.7.4-001
+    kind: reject
+    path: accepted
+    expected: false
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-VALID
+    change: 'Only Endpoint properties changes from {port: 80} to {}.'
+- id: TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-VALID
+  file: sections/evidence/interface-type-valid.yaml
+  specification:
+    sections:
+    - 3.7.5.4
+    requirement_ids:
+    - TOSCA13-3.7.5.4-001
+  classification:
+    kind: valid
+    category: interfaces-operations
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.7.5.4-001
+    supporting_requirements: []
+    variation_axes:
+    - interface-type-valid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.7.5.4-001
+    kind: accept
+    path: accepted
+    expected: true
+- id: TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-INVALID
+  file: sections/evidence/interface-type-invalid.yaml
+  specification:
+    sections:
+    - 3.7.5.4
+    requirement_ids:
+    - TOSCA13-3.7.5.4-001
+  classification:
+    kind: invalid
+    category: interfaces-operations
+    features:
+    - evidence-hardening
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: implementation
+      path: run
+    assertions: []
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.7.5.4-001
+    supporting_requirements: []
+    variation_axes:
+    - interface-type-invalid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.7.5.4-001
+    kind: diagnostic
+    path: category
+    expected: implementation
+  - id: A2
+    requirement_ids:
+    - TOSCA13-3.7.5.4-001
+    kind: diagnostic
+    path: entity
+    expected: run
+  - id: A3
+    requirement_ids:
+    - TOSCA13-3.7.5.4-001
+    kind: phase
+    path: processing_phase
+    expected: read
+  - id: A4
+    requirement_ids:
+    - TOSCA13-3.7.5.4-001
+    kind: reject
+    path: accepted
+    expected: false
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-VALID
+    change: 'Only operation changes from {} to {implementation: run.sh}.'
+- id: TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-VALID
+  file: sections/evidence/workflow-host-valid.yaml
+  specification:
+    sections:
+    - 3.6.27.1
+    requirement_ids:
+    - TOSCA13-3.6.27.1-008
+  classification:
+    kind: valid
+    category: workflows
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.6.27.1-008
+    supporting_requirements: []
+    variation_axes:
+    - workflow-host-valid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.6.27.1-008
+    kind: value
+    path: /effective/workflows/main/steps/run/operationHost
+    expected: SOURCE
+- id: TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-INVALID
+  file: sections/evidence/workflow-host-invalid.yaml
+  specification:
+    sections:
+    - 3.6.27.1
+    requirement_ids:
+    - TOSCA13-3.6.27.1-008
+  classification:
+    kind: invalid
+    category: workflows
+    features:
+    - evidence-hardening
+  expected:
+    accepted: false
+    phase: rendering
+    diagnostic:
+      category: operation_host
+      path: required
+    assertions: []
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.6.27.1-008
+    supporting_requirements: []
+    variation_axes:
+    - workflow-host-invalid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.6.27.1-008
+    kind: diagnostic
+    path: category
+    expected: operation_host
+  - id: A2
+    requirement_ids:
+    - TOSCA13-3.6.27.1-008
+    kind: diagnostic
+    path: entity
+    expected: required
+  - id: A3
+    requirement_ids:
+    - TOSCA13-3.6.27.1-008
+    kind: phase
+    path: processing_phase
+    expected: rendering
+  - id: A4
+    requirement_ids:
+    - TOSCA13-3.6.27.1-008
+    kind: reject
+    path: accepted
+    expected: false
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-VALID
+    change: 'Only operation_host changes from operation_host: SOURCE to # omitted.'
+- id: TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-VALID
+  file: sections/evidence/substitution-capability-valid.yaml
+  specification:
+    sections:
+    - 3.8.13.4
+    requirement_ids:
+    - TOSCA13-3.8.13.4-001
+  classification:
+    kind: valid
+    category: substitution-mappings
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.8.13.4-001
+    supporting_requirements: []
+    variation_axes:
+    - substitution-capability-valid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.8.13.4-001
+    kind: value
+    path: /substitution/capabilityPointers/feature/nodeTemplateName
+    expected: n
+- id: TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-INVALID
+  file: sections/evidence/substitution-capability-invalid.yaml
+  specification:
+    sections:
+    - 3.8.13.4
+    requirement_ids:
+    - TOSCA13-3.8.13.4-001
+  classification:
+    kind: invalid
+    category: substitution-mappings
+    features:
+    - evidence-hardening
+  expected:
+    accepted: false
+    phase: rendering
+    diagnostic:
+      category: mapping
+      path: feature
+    assertions: []
+  coverage:
+    primary_requirements:
+    - TOSCA13-3.8.13.4-001
+    supporting_requirements: []
+    variation_axes:
+    - substitution-capability-invalid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-3.8.13.4-001
+    kind: diagnostic
+    path: category
+    expected: mapping
+  - id: A2
+    requirement_ids:
+    - TOSCA13-3.8.13.4-001
+    kind: diagnostic
+    path: entity
+    expected: feature
+  - id: A3
+    requirement_ids:
+    - TOSCA13-3.8.13.4-001
+    kind: phase
+    path: processing_phase
+    expected: rendering
+  - id: A4
+    requirement_ids:
+    - TOSCA13-3.8.13.4-001
+    kind: reject
+    path: accepted
+    expected: false
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-VALID
+    change: 'Only capability mappings changes from {feature: [n, feature]} to {}.'
+- id: TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-VALID
+  file: sections/evidence/csar-name-valid.yaml
+  specification:
+    sections:
+    - '6.1'
+    requirement_ids:
+    - TOSCA13-6.1-006
+  classification:
+    kind: valid
+    category: csar
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-6.1-006
+    supporting_requirements: []
+    variation_axes:
+    - csar-name-valid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-6.1-006
+    kind: accept
+    path: accepted
+    expected: true
+- id: TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-INVALID
+  file: sections/evidence/csar-name-invalid.yaml
+  specification:
+    sections:
+    - '6.1'
+    requirement_ids:
+    - TOSCA13-6.1-006
+  classification:
+    kind: invalid
+    category: csar
+    features:
+    - evidence-hardening
+  expected:
+    accepted: false
+    phase: read
+    diagnostic:
+      category: template_name
+      path: metadata
+    assertions: []
+  coverage:
+    primary_requirements:
+    - TOSCA13-6.1-006
+    supporting_requirements: []
+    variation_axes:
+    - csar-name-invalid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-6.1-006
+    kind: diagnostic
+    path: category
+    expected: template_name
+  - id: A2
+    requirement_ids:
+    - TOSCA13-6.1-006
+    kind: diagnostic
+    path: entity
+    expected: metadata
+  - id: A3
+    requirement_ids:
+    - TOSCA13-6.1-006
+    kind: phase
+    path: processing_phase
+    expected: read
+  - id: A4
+    requirement_ids:
+    - TOSCA13-6.1-006
+    kind: reject
+    path: accepted
+    expected: false
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-VALID
+    change: Only required template_name metadata entry is removed.
+- id: TOSCA13-CORPUS-EVIDENCE-OS-LOWERCASE
+  file: sections/evidence/os-lowercase.yaml
+  specification:
+    sections:
+    - 5.5.12.3
+    requirement_ids:
+    - TOSCA13-5.5.12.3-001
+  classification:
+    kind: valid
+    category: normalization
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-5.5.12.3-001
+    supporting_requirements: []
+    variation_axes:
+    - os-lowercase
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-5.5.12.3-001
+    kind: normalization
+    path: /nodeTemplates/n/capabilities/os/properties/architecture/$primitive
+    expected: amd64
+  - id: A2
+    requirement_ids:
+    - TOSCA13-5.5.12.3-001
+    kind: normalization
+    path: /nodeTemplates/n/capabilities/os/properties/type/$primitive
+    expected: linux
+  - id: A3
+    requirement_ids:
+    - TOSCA13-5.5.12.3-001
+    kind: normalization
+    path: /nodeTemplates/n/capabilities/os/properties/distribution/$primitive
+    expected: debian
+- id: TOSCA13-CORPUS-EVIDENCE-OS-ALREADY-LOWERCASE
+  file: sections/evidence/os-already-lowercase.yaml
+  specification:
+    sections:
+    - 5.5.12.3
+    requirement_ids:
+    - TOSCA13-5.5.12.3-001
+  classification:
+    kind: valid
+    category: normalization
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-5.5.12.3-001
+    supporting_requirements: []
+    variation_axes:
+    - os-already-lowercase
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-5.5.12.3-001
+    kind: normalization
+    path: /nodeTemplates/n/capabilities/os/properties/architecture/$primitive
+    expected: amd64
+  - id: A2
+    requirement_ids:
+    - TOSCA13-5.5.12.3-001
+    kind: normalization
+    path: /nodeTemplates/n/capabilities/os/properties/type/$primitive
+    expected: linux
+  - id: A3
+    requirement_ids:
+    - TOSCA13-5.5.12.3-001
+    kind: normalization
+    path: /nodeTemplates/n/capabilities/os/properties/distribution/$primitive
+    expected: debian
+- id: TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORTS
+  file: sections/evidence/endpoint-ports.yaml
+  specification:
+    sections:
+    - 5.5.7.4
+    requirement_ids:
+    - TOSCA13-5.5.7.4-001
+  classification:
+    kind: valid
+    category: requirements-capabilities
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-5.5.7.4-001
+    supporting_requirements: []
+    variation_axes:
+    - endpoint-ports
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-5.5.7.4-001
+    kind: value
+    path: /nodeTemplates/n/capabilities/endpoint/properties/ports/$map/http/$map/target/$primitive
+    expected: 80
+- id: TOSCA13-CORPUS-EVIDENCE-ENDPOINT-BOTH
+  file: sections/evidence/endpoint-both.yaml
+  specification:
+    sections:
+    - 5.5.7.4
+    requirement_ids:
+    - TOSCA13-5.5.7.4-001
+  classification:
+    kind: valid
+    category: requirements-capabilities
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-5.5.7.4-001
+    supporting_requirements: []
+    variation_axes:
+    - endpoint-both
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-5.5.7.4-001
+    kind: value
+    path: /nodeTemplates/n/capabilities/endpoint/properties/ports/$map/http/$map/target/$primitive
+    expected: 80
+- id: TOSCA13-CORPUS-EVIDENCE-OS-INHERITED-DEFAULTS
+  file: sections/evidence/os-inherited-defaults.yaml
+  specification:
+    sections:
+    - 5.5.12.3
+    requirement_ids:
+    - TOSCA13-5.5.12.3-001
+  classification:
+    kind: valid
+    category: normalization
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-5.5.12.3-001
+    supporting_requirements: []
+    variation_axes:
+    - os-inherited-defaults
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-5.5.12.3-001
+    kind: normalization
+    path: /nodeTemplates/n/capabilities/os/properties/architecture/$primitive
+    expected: amd64
+  - id: A2
+    requirement_ids:
+    - TOSCA13-5.5.12.3-001
+    kind: normalization
+    path: /nodeTemplates/n/capabilities/os/properties/type/$primitive
+    expected: linux
+  - id: A3
+    requirement_ids:
+    - TOSCA13-5.5.12.3-001
+    kind: normalization
+    path: /nodeTemplates/n/capabilities/os/properties/distribution/$primitive
+    expected: debian
 schema_version: 2

@@ -233,9 +233,10 @@ func runCorpusCase(t *testing.T, root string, testCase corpusCase) {
 	}
 	result := parseCorpusPhases(t, path)
 	serviceTemplate, firstProblems, firstErr := result.Template, result.Problems, result.Err
+	t.Logf("EVIDENCE phase=%s assertions=%d", result.Phase, len(testCase.Assertions))
 	for _, assertion := range testCase.Assertions {
 		if err := assertionResult(assertion, result); err != nil {
-			t.Fatalf("%s/%s: %v", testCase.ID, assertion.ID, err)
+			t.Fatalf("%s/%s: %v\n%s", testCase.ID, assertion.ID, err, result.Problems)
 		}
 	}
 	if testCase.Expected.Accepted {

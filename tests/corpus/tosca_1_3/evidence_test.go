@@ -29,14 +29,15 @@ type predicateRegistry struct {
 	Requirements []reviewedPredicate `yaml:"requirements"`
 }
 type reviewedPredicate struct {
-	ID               string             `yaml:"id"`
-	Predicate        string             `yaml:"predicate"`
-	SourceSHA256     string             `yaml:"source_predicate_sha256"`
-	EvidenceKind     string             `yaml:"evidence_kind"`
-	PositiveRequired bool               `yaml:"positive_required"`
-	NegativeRequired bool               `yaml:"negative_required"`
-	Bindings         []predicateBinding `yaml:"bindings"`
-	MutationPaths    []string           `yaml:"mutation_paths"`
+	ID                string             `yaml:"id"`
+	Predicate         string             `yaml:"predicate"`
+	SourceSHA256      string             `yaml:"source_predicate_sha256"`
+	CompletePredicate bool               `yaml:"complete_predicate"`
+	EvidenceKind      string             `yaml:"evidence_kind"`
+	PositiveRequired  bool               `yaml:"positive_required"`
+	NegativeRequired  bool               `yaml:"negative_required"`
+	Bindings          []predicateBinding `yaml:"bindings"`
+	MutationPaths     []string           `yaml:"mutation_paths"`
 }
 
 // Independently reviewed bindings prevent changing both a case label and its
@@ -44,9 +45,11 @@ type reviewedPredicate struct {
 // Hashes force a fresh review when fixture bytes change. They are provenance,
 // not proof that a human interpretation of the specification is infallible.
 type predicateBinding struct {
-	CaseID        string         `yaml:"case_id"`
-	FixtureSHA256 string         `yaml:"fixture_sha256"`
-	Assertion     ownedAssertion `yaml:"assertion"`
+	CaseID        string          `yaml:"case_id"`
+	FixtureSHA256 string          `yaml:"fixture_sha256"`
+	Assertion     ownedAssertion  `yaml:"assertion"`
+	Related       relatedEvidence `yaml:"related_cases"`
+	SiblingSHA256 string          `yaml:"sibling_sha256"`
 }
 
 var evidenceKinds = map[string]bool{"structural-acceptance": true, "semantic-value": true, "semantic-resolution": true, "diagnostic": true, "normalization": true}
@@ -62,6 +65,9 @@ func registryIndex(reg predicateRegistry) map[string]reviewedPredicate {
 func validateEvidence(cases []corpusCase, reg predicateRegistry, read func(string) ([]byte, error)) error {
 	ids := map[string]corpusCase{}
 	predicates := registryIndex(reg)
+	if len(predicates) != len(reg.Requirements) {
+		return fmt.Errorf("duplicate reviewed predicate")
+	}
 	for _, c := range cases {
 		if _, ok := ids[c.ID]; ok {
 			return fmt.Errorf("duplicate case %s", c.ID)
@@ -116,6 +122,22 @@ func validateEvidence(cases []corpusCase, reg predicateRegistry, read func(strin
 			found := false
 			for _, b := range r.Bindings {
 				if b.CaseID == c.ID && b.FixtureSHA256 == digest && reflect.DeepEqual(b.Assertion, a) {
+					if !c.Expected.Accepted {
+						if !reflect.DeepEqual(b.Related, c.Related) {
+							continue
+						}
+						sibling, ok := ids[c.Related.NearestValid]
+						if ok {
+							data, err := read(sibling.File)
+							if err != nil {
+								return err
+							}
+							sum := sha256.Sum256(data)
+							if hex.EncodeToString(sum[:]) != b.SiblingSHA256 {
+								continue
+							}
+						}
+					}
 					found = true
 					break
 				}
@@ -136,6 +158,26 @@ func validateEvidence(cases []corpusCase, reg predicateRegistry, read func(strin
 				return fmt.Errorf("%s primary requirement %s has no owned assertion", c.ID, id)
 			}
 			r := predicates[id]
+			if !c.Expected.Accepted {
+				phase, category, entity := false, false, false
+				for _, a := range c.Assertions {
+					if !contains(a.RequirementIDs, id) {
+						continue
+					}
+					if a.Kind == "phase" && a.Expected == c.Expected.Phase {
+						phase = true
+					}
+					if a.Kind == "diagnostic" && a.Path == "category" {
+						category = true
+					}
+					if a.Kind == "diagnostic" && a.Path == "entity" {
+						entity = true
+					}
+				}
+				if !phase || !category || !entity {
+					return fmt.Errorf("%s rejection lacks owned phase/category/entity for %s", c.ID, id)
+				}
+			}
 			if c.Expected.Accepted && (strings.HasPrefix(r.EvidenceKind, "semantic-") || r.EvidenceKind == "normalization") && !semantic[id] {
 				return fmt.Errorf("%s semantic predicate %s has only acceptance evidence", c.ID, id)
 			}
@@ -160,7 +202,18 @@ func assertionResult(a ownedAssertion, r corpusResult) error {
 		if r.Err != nil || r.Template == nil {
 			return fmt.Errorf("no normalized result")
 		}
-		raw, err := json.Marshal(r.Template)
+		var subject any = r.Template
+		var err error
+		if strings.HasPrefix(a.Path, "/effective/") {
+			subject, err = effectiveEvidence(r)
+		}
+		if strings.HasPrefix(a.Path, "/evaluated/") {
+			subject, err = evaluatedEvidence(r)
+		}
+		if err != nil {
+			return err
+		}
+		raw, err := json.Marshal(subject)
 		if err != nil {
 			return err
 		}
@@ -222,7 +275,7 @@ func TestTOSCA13EvidenceOwnership(t *testing.T) {
 	cases := loadManifest(t, root).Cases
 	// Non-MUST corpus labels are also supporting unless explicitly reviewed.
 	for _, c := range loadNonMUSTManifest(t, root).Cases {
-		cases = append(cases, corpusCase{ID: c.ID, File: c.File, Expected: corpusExpected{Accepted: c.Expected.Accepted}, Coverage: c.Coverage, Assertions: c.Assertions, Related: c.Related})
+		cases = append(cases, corpusCase{ID: c.ID, File: c.File, Expected: corpusExpected{Accepted: c.Expected.Accepted, Phase: c.Expected.Phase}, Coverage: c.Coverage, Assertions: c.Assertions, Related: c.Related})
 	}
 	var reg predicateRegistry
 	loadYAML(t, filepath.Join(root, "evidence-predicates.yaml"), &reg)

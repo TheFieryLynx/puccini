@@ -8,7 +8,7 @@ requirements:
   negative_required: false
   complete_predicate: true
   mutation_paths:
-  - inheritance
+  - operation-definition-inheritance
   bindings:
   - case_id: TOSCA13-CORPUS-EVIDENCE-OPERATION-TYPE-INHERITANCE
     fixture_sha256: ce26f1d62dfb0cfe51ff4d876d7d902b7ea02b3d0053e1809d70dc5795095698
@@ -82,6 +82,11 @@ requirements:
       kind: value
       path: /nodeTemplates/local/interfaces/Test/operations/keep/implementation
       expected: unrelated.sh
+  section: 3.6.17.3
+  section_title: Additional requirements
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Predicate describes the semantic result of valid input; incorrect behavior is tested by mutation,
+    not invented invalid syntax.
 - id: TOSCA13-5.8.1-004
   predicate: The default behavior when providing scripts for an operation in a sub-type (sub-class) or a template of an existing
     type which already has a script provided for that operation SHALL be override.
@@ -129,6 +134,11 @@ requirements:
       kind: value
       path: /nodeTemplates/source/requirements/0/relationship/interfaces/Test/operations/keep/implementation
       expected: unrelated.sh
+  section: 5.8.1
+  section_title: Additional Requirements
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Predicate describes the semantic result of valid input; incorrect behavior is tested by mutation,
+    not invented invalid syntax.
 - id: TOSCA13-5.3.6.1-004
   predicate: The `token_type` entry defaults to `password`.
   source_predicate_sha256: 5f0d3bae5d4de567c8dd99ccef069a3b6556ef580b89a749d09f2a7708d9057a
@@ -138,6 +148,7 @@ requirements:
   complete_predicate: true
   mutation_paths:
   - normative-profile
+  - token-data-disambiguation
   bindings:
   - case_id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-OMITTED
     fixture_sha256: 8ae9cd84221d3f2dca0edfa9e6234df17883fb1fa156afbdcd7cf6cdb717e7cc
@@ -193,6 +204,11 @@ requirements:
       kind: value
       path: /nodeTemplates/n/properties/derived/$map/token_type/$primitive
       expected: password
+  section: 5.3.6.1
+  section_title: Properties
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Predicate describes the semantic result of valid input; incorrect behavior is tested by mutation,
+    not invented invalid syntax.
 - id: TOSCA13-5.3.6.1-006
   predicate: The `token_type` entry has type/schema `string`.
   source_predicate_sha256: 044775d1cd9b6cc7118b49a9a7f4cae56ecfe67790459ffeebee6268e4e3f012
@@ -221,6 +237,10 @@ requirements:
       kind: diagnostic
       path: category
       expected: instead of
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-TYPE-VALID
+      change: Only credential.token_type changes from string password to integer 7.
+    sibling_sha256: 8a7398b455787196557b75590b837fd5629544f560349ac24e795708e849e7ae
   - case_id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-TYPE-INVALID
     fixture_sha256: 4058c90c77c35d35f6f383ba0d62e9a6ae62b956c46fb6d43300b82edf01daa0
     assertion:
@@ -230,6 +250,10 @@ requirements:
       kind: diagnostic
       path: entity
       expected: token_type
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-TYPE-VALID
+      change: Only credential.token_type changes from string password to integer 7.
+    sibling_sha256: 8a7398b455787196557b75590b837fd5629544f560349ac24e795708e849e7ae
   - case_id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-TYPE-INVALID
     fixture_sha256: 4058c90c77c35d35f6f383ba0d62e9a6ae62b956c46fb6d43300b82edf01daa0
     assertion:
@@ -239,6 +263,10 @@ requirements:
       kind: phase
       path: processing_phase
       expected: rendering
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-TYPE-VALID
+      change: Only credential.token_type changes from string password to integer 7.
+    sibling_sha256: 8a7398b455787196557b75590b837fd5629544f560349ac24e795708e849e7ae
   - case_id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-TYPE-INVALID
     fixture_sha256: 4058c90c77c35d35f6f383ba0d62e9a6ae62b956c46fb6d43300b82edf01daa0
     assertion:
@@ -248,3 +276,1037 @@ requirements:
       kind: reject
       path: accepted
       expected: false
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-TYPE-VALID
+      change: Only credential.token_type changes from string password to integer 7.
+    sibling_sha256: 8a7398b455787196557b75590b837fd5629544f560349ac24e795708e849e7ae
+  section: 5.3.6.1
+  section_title: Properties
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Normative invalid input requires a targeted rejection and nearest-valid sibling.
+- id: TOSCA13-3.1.2-002
+  predicate: Establishes the TOSCA Simple Profile Specification version whose grammar MUST be used to parse and interpret
+    the contents for the remainder of the TOSCA Service Template.
+  source_predicate_sha256: 1fdfa28351bb8de50af178157268e2ad0d0e023c8bb8d6c30583f35339304fe9
+  evidence_kind: structural-acceptance
+  positive_required: true
+  negative_required: true
+  complete_predicate: false
+  mutation_paths:
+  - structural-grammar
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-VALID
+    fixture_sha256: e2e898d0ac27aeb6e93ba900bebb4065c27798c09452af31906fea6d3d8a29a2
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.1.2-002
+      kind: accept
+      path: accepted
+      expected: true
+  - case_id: TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-INVALID
+    fixture_sha256: e6b03ed71f94b7b2c420f734075aad1156aec3be3613b197fa99ec4ae4d4215d
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.1.2-002
+      kind: diagnostic
+      path: category
+      expected: unsupported keyname
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-VALID
+      change: 'Only root key changes from topology_template: {} to service_template: {}.'
+    sibling_sha256: e2e898d0ac27aeb6e93ba900bebb4065c27798c09452af31906fea6d3d8a29a2
+  - case_id: TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-INVALID
+    fixture_sha256: e6b03ed71f94b7b2c420f734075aad1156aec3be3613b197fa99ec4ae4d4215d
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-3.1.2-002
+      kind: diagnostic
+      path: entity
+      expected: service_template
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-VALID
+      change: 'Only root key changes from topology_template: {} to service_template: {}.'
+    sibling_sha256: e2e898d0ac27aeb6e93ba900bebb4065c27798c09452af31906fea6d3d8a29a2
+  - case_id: TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-INVALID
+    fixture_sha256: e6b03ed71f94b7b2c420f734075aad1156aec3be3613b197fa99ec4ae4d4215d
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-3.1.2-002
+      kind: phase
+      path: processing_phase
+      expected: read
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-VALID
+      change: 'Only root key changes from topology_template: {} to service_template: {}.'
+    sibling_sha256: e2e898d0ac27aeb6e93ba900bebb4065c27798c09452af31906fea6d3d8a29a2
+  - case_id: TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-INVALID
+    fixture_sha256: e6b03ed71f94b7b2c420f734075aad1156aec3be3613b197fa99ec4ae4d4215d
+    assertion:
+      id: A4
+      requirement_ids:
+      - TOSCA13-3.1.2-002
+      kind: reject
+      path: accepted
+      expected: false
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-VALID
+      change: 'Only root key changes from topology_template: {} to service_template: {}.'
+    sibling_sha256: e2e898d0ac27aeb6e93ba900bebb4065c27798c09452af31906fea6d3d8a29a2
+  section: 3.1.2
+  section_title: TOSCA Namespacing in TOSCA Service Templates
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Normative invalid input requires a targeted rejection and nearest-valid sibling.
+- id: TOSCA13-3.6.8.2.3-002
+  predicate: "SHALL NOT be used to as a value for \u201Cnamespace_prefix\u201D on import."
+  source_predicate_sha256: c6ed960de1a4e5ff6e6628a0c408a6559ce119e9afb1e03d4d72c934956992be
+  evidence_kind: structural-acceptance
+  positive_required: true
+  negative_required: true
+  complete_predicate: true
+  mutation_paths:
+  - namespaces-imports
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-VALID
+    fixture_sha256: a6fb7acd24cc75f88194ea6a002543e6a824fa0d905e1b65f5be6f360aff2020
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.6.8.2.3-002
+      kind: accept
+      path: accepted
+      expected: true
+  - case_id: TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-INVALID
+    fixture_sha256: 2bbacb06594de641429a5ff8e247f9abcfbc57c2b2fe2f372589ffc07592443c
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.6.8.2.3-002
+      kind: diagnostic
+      path: category
+      expected: reserved
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-VALID
+      change: Only namespace_prefix changes from ext to tosca.
+    sibling_sha256: a6fb7acd24cc75f88194ea6a002543e6a824fa0d905e1b65f5be6f360aff2020
+  - case_id: TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-INVALID
+    fixture_sha256: 2bbacb06594de641429a5ff8e247f9abcfbc57c2b2fe2f372589ffc07592443c
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-3.6.8.2.3-002
+      kind: diagnostic
+      path: entity
+      expected: namespace_prefix
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-VALID
+      change: Only namespace_prefix changes from ext to tosca.
+    sibling_sha256: a6fb7acd24cc75f88194ea6a002543e6a824fa0d905e1b65f5be6f360aff2020
+  - case_id: TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-INVALID
+    fixture_sha256: 2bbacb06594de641429a5ff8e247f9abcfbc57c2b2fe2f372589ffc07592443c
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-3.6.8.2.3-002
+      kind: phase
+      path: processing_phase
+      expected: read
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-VALID
+      change: Only namespace_prefix changes from ext to tosca.
+    sibling_sha256: a6fb7acd24cc75f88194ea6a002543e6a824fa0d905e1b65f5be6f360aff2020
+  - case_id: TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-INVALID
+    fixture_sha256: 2bbacb06594de641429a5ff8e247f9abcfbc57c2b2fe2f372589ffc07592443c
+    assertion:
+      id: A4
+      requirement_ids:
+      - TOSCA13-3.6.8.2.3-002
+      kind: reject
+      path: accepted
+      expected: false
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-VALID
+      change: Only namespace_prefix changes from ext to tosca.
+    sibling_sha256: a6fb7acd24cc75f88194ea6a002543e6a824fa0d905e1b65f5be6f360aff2020
+  section: 3.6.8.2.3
+  section_title: Requirements
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Normative invalid input requires a targeted rejection and nearest-valid sibling.
+- id: TOSCA13-3.7.2.4-001
+  predicate: Any Node Type (names) provides as values for the valid_source_types keyname SHALL be type-compatible (i.e., derived
+    from the same parent Node Type) with any Node Types defined using the same keyname in the parent Capability Type.
+  source_predicate_sha256: 5b85a6715bb164d9caadfcffc28d71516da1830c80c2e5815a230b9918cfb627
+  evidence_kind: semantic-resolution
+  positive_required: true
+  negative_required: true
+  complete_predicate: false
+  mutation_paths:
+  - hierarchy
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-VALID
+    fixture_sha256: 275637c7cff132cad8db8fa4513f7327ae2c683522a33647919587d979682b6e
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.7.2.4-001
+      kind: value
+      path: /effective/nodeTypes/DerivedHost/capabilities/feature/validSourceTypes
+      expected:
+      - DerivedSource
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-INVALID
+    fixture_sha256: de53d17cdf975650608988250249ca80eed0fdd0a18390447636836004720aa3
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.7.2.4-001
+      kind: diagnostic
+      path: category
+      expected: derived from one of
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-VALID
+      change: Only valid_source_types changes from DerivedSource to Unrelated.
+    sibling_sha256: 275637c7cff132cad8db8fa4513f7327ae2c683522a33647919587d979682b6e
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-INVALID
+    fixture_sha256: de53d17cdf975650608988250249ca80eed0fdd0a18390447636836004720aa3
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-3.7.2.4-001
+      kind: diagnostic
+      path: entity
+      expected: valid_source_types
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-VALID
+      change: Only valid_source_types changes from DerivedSource to Unrelated.
+    sibling_sha256: 275637c7cff132cad8db8fa4513f7327ae2c683522a33647919587d979682b6e
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-INVALID
+    fixture_sha256: de53d17cdf975650608988250249ca80eed0fdd0a18390447636836004720aa3
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-3.7.2.4-001
+      kind: phase
+      path: processing_phase
+      expected: inheritance
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-VALID
+      change: Only valid_source_types changes from DerivedSource to Unrelated.
+    sibling_sha256: 275637c7cff132cad8db8fa4513f7327ae2c683522a33647919587d979682b6e
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-INVALID
+    fixture_sha256: de53d17cdf975650608988250249ca80eed0fdd0a18390447636836004720aa3
+    assertion:
+      id: A4
+      requirement_ids:
+      - TOSCA13-3.7.2.4-001
+      kind: reject
+      path: accepted
+      expected: false
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-VALID
+      change: Only valid_source_types changes from DerivedSource to Unrelated.
+    sibling_sha256: 275637c7cff132cad8db8fa4513f7327ae2c683522a33647919587d979682b6e
+  section: 3.7.2.4
+  section_title: Additional requirements
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Normative invalid input requires a targeted rejection and nearest-valid sibling.
+- id: TOSCA13-3.6.10.6-014
+  predicate: No other refinements are allowed.
+  source_predicate_sha256: 706cd4bde2e17418aa96602d7c45d1181f7241a4411728b005c5dffce39145de
+  evidence_kind: semantic-value
+  positive_required: true
+  negative_required: true
+  complete_predicate: false
+  mutation_paths:
+  - refinement
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-VALID
+    fixture_sha256: 2f496072633469a5a4c517b063d878a37842f3fe097c400b9dd4ce023871b1c3
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.6.10.6-014
+      kind: value
+      path: /effective/nodeTypes/Child/properties/p/required
+      expected: true
+  - case_id: TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-INVALID
+    fixture_sha256: c5a5ebfa9e5ea4415a49e23a46372367d87599c0231ed3a261daaaa2a954e655
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.6.10.6-014
+      kind: diagnostic
+      path: category
+      expected: refinement
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-VALID
+      change: Only required changes from true to false.
+    sibling_sha256: 2f496072633469a5a4c517b063d878a37842f3fe097c400b9dd4ce023871b1c3
+  - case_id: TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-INVALID
+    fixture_sha256: c5a5ebfa9e5ea4415a49e23a46372367d87599c0231ed3a261daaaa2a954e655
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-3.6.10.6-014
+      kind: diagnostic
+      path: entity
+      expected: required
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-VALID
+      change: Only required changes from true to false.
+    sibling_sha256: 2f496072633469a5a4c517b063d878a37842f3fe097c400b9dd4ce023871b1c3
+  - case_id: TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-INVALID
+    fixture_sha256: c5a5ebfa9e5ea4415a49e23a46372367d87599c0231ed3a261daaaa2a954e655
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-3.6.10.6-014
+      kind: phase
+      path: processing_phase
+      expected: inheritance
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-VALID
+      change: Only required changes from true to false.
+    sibling_sha256: 2f496072633469a5a4c517b063d878a37842f3fe097c400b9dd4ce023871b1c3
+  - case_id: TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-INVALID
+    fixture_sha256: c5a5ebfa9e5ea4415a49e23a46372367d87599c0231ed3a261daaaa2a954e655
+    assertion:
+      id: A4
+      requirement_ids:
+      - TOSCA13-3.6.10.6-014
+      kind: reject
+      path: accepted
+      expected: false
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-VALID
+      change: Only required changes from true to false.
+    sibling_sha256: 2f496072633469a5a4c517b063d878a37842f3fe097c400b9dd4ce023871b1c3
+  section: 3.6.10.6
+  section_title: Refining Property Definitions
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Normative invalid input requires a targeted rejection and nearest-valid sibling.
+- id: TOSCA13-3.6.3.1-010
+  predicate: "For `greater_or_equal`: Constrains a property or parameter to a value greater than or equal to (\u2018>=\u2019\
+    ) the value declared."
+  source_predicate_sha256: 41c949cc6463f3739620ae735ee982f948f479ca540634b9d8b0a0fa79c08fd4
+  evidence_kind: semantic-value
+  positive_required: true
+  negative_required: true
+  complete_predicate: false
+  mutation_paths:
+  - constraints
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-VALID
+    fixture_sha256: 334cb7627ed0dd56304f373dff27f304eb32aa3483aa8bd59426700ad6c0d737
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.6.3.1-010
+      kind: value
+      path: /nodeTemplates/n/properties/p/$primitive
+      expected: 1
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-INVALID
+    fixture_sha256: ee2e064d525445bd40f9a0da29169fd9d8453b3526ac3e438f09c86967b9a75d
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.6.3.1-010
+      kind: diagnostic
+      path: category
+      expected: constraint
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-VALID
+      change: Only p changes from 1 to 0.
+    sibling_sha256: 334cb7627ed0dd56304f373dff27f304eb32aa3483aa8bd59426700ad6c0d737
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-INVALID
+    fixture_sha256: ee2e064d525445bd40f9a0da29169fd9d8453b3526ac3e438f09c86967b9a75d
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-3.6.3.1-010
+      kind: diagnostic
+      path: entity
+      expected: p
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-VALID
+      change: Only p changes from 1 to 0.
+    sibling_sha256: 334cb7627ed0dd56304f373dff27f304eb32aa3483aa8bd59426700ad6c0d737
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-INVALID
+    fixture_sha256: ee2e064d525445bd40f9a0da29169fd9d8453b3526ac3e438f09c86967b9a75d
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-3.6.3.1-010
+      kind: phase
+      path: processing_phase
+      expected: rendering
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-VALID
+      change: Only p changes from 1 to 0.
+    sibling_sha256: 334cb7627ed0dd56304f373dff27f304eb32aa3483aa8bd59426700ad6c0d737
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-INVALID
+    fixture_sha256: ee2e064d525445bd40f9a0da29169fd9d8453b3526ac3e438f09c86967b9a75d
+    assertion:
+      id: A4
+      requirement_ids:
+      - TOSCA13-3.6.3.1-010
+      kind: reject
+      path: accepted
+      expected: false
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-VALID
+      change: Only p changes from 1 to 0.
+    sibling_sha256: 334cb7627ed0dd56304f373dff27f304eb32aa3483aa8bd59426700ad6c0d737
+  section: 3.6.3.1
+  section_title: Operator keynames
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Normative invalid input requires a targeted rejection and nearest-valid sibling.
+- id: TOSCA13-4.4.2.2-002
+  predicate: 'For `<modelable entity name> | SELF | SOURCE | TARGET | HOST`: The required name of a modelable entity (e.g.,
+    Node Template or Relationship Template name) as declared in the service template that contains the named property definition
+    the function will return the value from.'
+  source_predicate_sha256: 79bed64dc6623edd7cfc19cf5f6a6f549a5bb06c2a9f0429dee033e47503253f
+  evidence_kind: semantic-resolution
+  positive_required: true
+  negative_required: true
+  complete_predicate: false
+  mutation_paths:
+  - intrinsic-functions
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-VALID
+    fixture_sha256: decbd8a04b99a8fc91252537736abebd70e701e11e024f9861415575a4c9df57
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-4.4.2.2-002
+      kind: value
+      path: /evaluated/outputs/result
+      expected: inherited
+  - case_id: TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-INVALID
+    fixture_sha256: d3c211c0bae19e881dedf900c63dfe1f79043821f85312942b490d001b83b7e7
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-4.4.2.2-002
+      kind: diagnostic
+      path: category
+      expected: malformed get_property function
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-VALID
+      change: Only get_property property changes from p to absent.
+    sibling_sha256: decbd8a04b99a8fc91252537736abebd70e701e11e024f9861415575a4c9df57
+  - case_id: TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-INVALID
+    fixture_sha256: d3c211c0bae19e881dedf900c63dfe1f79043821f85312942b490d001b83b7e7
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-4.4.2.2-002
+      kind: diagnostic
+      path: entity
+      expected: absent
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-VALID
+      change: Only get_property property changes from p to absent.
+    sibling_sha256: decbd8a04b99a8fc91252537736abebd70e701e11e024f9861415575a4c9df57
+  - case_id: TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-INVALID
+    fixture_sha256: d3c211c0bae19e881dedf900c63dfe1f79043821f85312942b490d001b83b7e7
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-4.4.2.2-002
+      kind: phase
+      path: processing_phase
+      expected: rendering
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-VALID
+      change: Only get_property property changes from p to absent.
+    sibling_sha256: decbd8a04b99a8fc91252537736abebd70e701e11e024f9861415575a4c9df57
+  - case_id: TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-INVALID
+    fixture_sha256: d3c211c0bae19e881dedf900c63dfe1f79043821f85312942b490d001b83b7e7
+    assertion:
+      id: A4
+      requirement_ids:
+      - TOSCA13-4.4.2.2-002
+      kind: reject
+      path: accepted
+      expected: false
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-VALID
+      change: Only get_property property changes from p to absent.
+    sibling_sha256: decbd8a04b99a8fc91252537736abebd70e701e11e024f9861415575a4c9df57
+  section: 4.4.2.2
+  section_title: Parameters
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Normative invalid input requires a targeted rejection and nearest-valid sibling.
+- id: TOSCA13-3.8.8.3-005
+  predicate: If the substituting template is a valid TOSCA template, then all the (required) properties of all its node templates
+    must have valid property assignments already defined.
+  source_predicate_sha256: 7d2f550d29d3e574572790afa02916375e155c9601a18f55d5ea46983983263c
+  evidence_kind: semantic-value
+  positive_required: true
+  negative_required: true
+  complete_predicate: false
+  mutation_paths:
+  - assignments
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-VALID
+    fixture_sha256: 703de5136a40ff3bf8462e6a12fcd52dc9caaf2b26fb9cecfbccd54a85e185fb
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.8.8.3-005
+      kind: value
+      path: /nodeTemplates/n/properties/p/$primitive
+      expected: configured
+  - case_id: TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-INVALID
+    fixture_sha256: 838ce34c9c5106df9879654ceaa75a97f68913587e57bf40608b3910bac45e15
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.8.8.3-005
+      kind: diagnostic
+      path: category
+      expected: required property
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-VALID
+      change: 'Only properties changes from {p: configured} to {}.'
+    sibling_sha256: 703de5136a40ff3bf8462e6a12fcd52dc9caaf2b26fb9cecfbccd54a85e185fb
+  - case_id: TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-INVALID
+    fixture_sha256: 838ce34c9c5106df9879654ceaa75a97f68913587e57bf40608b3910bac45e15
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-3.8.8.3-005
+      kind: diagnostic
+      path: entity
+      expected: p
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-VALID
+      change: 'Only properties changes from {p: configured} to {}.'
+    sibling_sha256: 703de5136a40ff3bf8462e6a12fcd52dc9caaf2b26fb9cecfbccd54a85e185fb
+  - case_id: TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-INVALID
+    fixture_sha256: 838ce34c9c5106df9879654ceaa75a97f68913587e57bf40608b3910bac45e15
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-3.8.8.3-005
+      kind: phase
+      path: processing_phase
+      expected: rendering
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-VALID
+      change: 'Only properties changes from {p: configured} to {}.'
+    sibling_sha256: 703de5136a40ff3bf8462e6a12fcd52dc9caaf2b26fb9cecfbccd54a85e185fb
+  - case_id: TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-INVALID
+    fixture_sha256: 838ce34c9c5106df9879654ceaa75a97f68913587e57bf40608b3910bac45e15
+    assertion:
+      id: A4
+      requirement_ids:
+      - TOSCA13-3.8.8.3-005
+      kind: reject
+      path: accepted
+      expected: false
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-VALID
+      change: 'Only properties changes from {p: configured} to {}.'
+    sibling_sha256: 703de5136a40ff3bf8462e6a12fcd52dc9caaf2b26fb9cecfbccd54a85e185fb
+  section: 3.8.8.3
+  section_title: Notes
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Normative invalid input requires a targeted rejection and nearest-valid sibling.
+- id: TOSCA13-5.5.7.4-001
+  predicate: Although both the port and ports properties are not required, one of port or ports must be provided in a valid
+    Endpoint.
+  source_predicate_sha256: 422793fc4b39d634a1a0b06dc00c127c96ce1554fd0fbc0311676792781b9c11
+  evidence_kind: semantic-value
+  positive_required: true
+  negative_required: true
+  complete_predicate: true
+  mutation_paths:
+  - requirements-capabilities
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-VALID
+    fixture_sha256: 2ec13807f99c7c111bbb61a9aac24eb495e86c75e19584bcbeeb2c6b942cfbdc
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-5.5.7.4-001
+      kind: value
+      path: /nodeTemplates/n/capabilities/endpoint/properties/port/$primitive
+      expected: 80
+  - case_id: TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-INVALID
+    fixture_sha256: e0e84fc8c067d01ecab5fdc52fb60b308962cad56aacceed84ff1ae685906e36
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-5.5.7.4-001
+      kind: diagnostic
+      path: category
+      expected: one of port or ports
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-VALID
+      change: 'Only Endpoint properties changes from {port: 80} to {}.'
+    sibling_sha256: 2ec13807f99c7c111bbb61a9aac24eb495e86c75e19584bcbeeb2c6b942cfbdc
+  - case_id: TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-INVALID
+    fixture_sha256: e0e84fc8c067d01ecab5fdc52fb60b308962cad56aacceed84ff1ae685906e36
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-5.5.7.4-001
+      kind: diagnostic
+      path: entity
+      expected: endpoint
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-VALID
+      change: 'Only Endpoint properties changes from {port: 80} to {}.'
+    sibling_sha256: 2ec13807f99c7c111bbb61a9aac24eb495e86c75e19584bcbeeb2c6b942cfbdc
+  - case_id: TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-INVALID
+    fixture_sha256: e0e84fc8c067d01ecab5fdc52fb60b308962cad56aacceed84ff1ae685906e36
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-5.5.7.4-001
+      kind: phase
+      path: processing_phase
+      expected: rendering
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-VALID
+      change: 'Only Endpoint properties changes from {port: 80} to {}.'
+    sibling_sha256: 2ec13807f99c7c111bbb61a9aac24eb495e86c75e19584bcbeeb2c6b942cfbdc
+  - case_id: TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-INVALID
+    fixture_sha256: e0e84fc8c067d01ecab5fdc52fb60b308962cad56aacceed84ff1ae685906e36
+    assertion:
+      id: A4
+      requirement_ids:
+      - TOSCA13-5.5.7.4-001
+      kind: reject
+      path: accepted
+      expected: false
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-VALID
+      change: 'Only Endpoint properties changes from {port: 80} to {}.'
+    sibling_sha256: 2ec13807f99c7c111bbb61a9aac24eb495e86c75e19584bcbeeb2c6b942cfbdc
+  - case_id: TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORTS
+    fixture_sha256: e01695e909e2dbaf6cf58ada56c9ee08325a169edbcb2978550327fc7c4c144c
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-5.5.7.4-001
+      kind: value
+      path: /nodeTemplates/n/capabilities/endpoint/properties/ports/$map/http/$map/target/$primitive
+      expected: 80
+  - case_id: TOSCA13-CORPUS-EVIDENCE-ENDPOINT-BOTH
+    fixture_sha256: d75e175a2345784e0ea3a2847f1b371621919dda765039a9d65f5879cc933ef5
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-5.5.7.4-001
+      kind: value
+      path: /nodeTemplates/n/capabilities/endpoint/properties/ports/$map/http/$map/target/$primitive
+      expected: 80
+  section: 5.5.7.4
+  section_title: Additional requirements
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Normative invalid input requires a targeted rejection and nearest-valid sibling.
+- id: TOSCA13-3.7.5.4-001
+  predicate: Interface Types MUST NOT include any implementations for defined operations or notifications; that is, the implementation
+    keyname is invalid in this context.
+  source_predicate_sha256: b9f8354b9276fce89266bafc650725a5f1ce2a17bf1b7569c948db53a6c543ab
+  evidence_kind: structural-acceptance
+  positive_required: true
+  negative_required: true
+  complete_predicate: false
+  mutation_paths:
+  - interfaces-operations
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-VALID
+    fixture_sha256: a1d65bdf641bb80016e19dc4c3b0d6b0d41c05a355548d123ed2d7c1f33e0ec1
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.7.5.4-001
+      kind: accept
+      path: accepted
+      expected: true
+  - case_id: TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-INVALID
+    fixture_sha256: 0ddce0f235bb24eec37c396bc4d59e6262827afb6948c4011bbaaae10964941a
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.7.5.4-001
+      kind: diagnostic
+      path: category
+      expected: implementation
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-VALID
+      change: 'Only operation changes from {} to {implementation: run.sh}.'
+    sibling_sha256: a1d65bdf641bb80016e19dc4c3b0d6b0d41c05a355548d123ed2d7c1f33e0ec1
+  - case_id: TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-INVALID
+    fixture_sha256: 0ddce0f235bb24eec37c396bc4d59e6262827afb6948c4011bbaaae10964941a
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-3.7.5.4-001
+      kind: diagnostic
+      path: entity
+      expected: run
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-VALID
+      change: 'Only operation changes from {} to {implementation: run.sh}.'
+    sibling_sha256: a1d65bdf641bb80016e19dc4c3b0d6b0d41c05a355548d123ed2d7c1f33e0ec1
+  - case_id: TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-INVALID
+    fixture_sha256: 0ddce0f235bb24eec37c396bc4d59e6262827afb6948c4011bbaaae10964941a
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-3.7.5.4-001
+      kind: phase
+      path: processing_phase
+      expected: read
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-VALID
+      change: 'Only operation changes from {} to {implementation: run.sh}.'
+    sibling_sha256: a1d65bdf641bb80016e19dc4c3b0d6b0d41c05a355548d123ed2d7c1f33e0ec1
+  - case_id: TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-INVALID
+    fixture_sha256: 0ddce0f235bb24eec37c396bc4d59e6262827afb6948c4011bbaaae10964941a
+    assertion:
+      id: A4
+      requirement_ids:
+      - TOSCA13-3.7.5.4-001
+      kind: reject
+      path: accepted
+      expected: false
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-VALID
+      change: 'Only operation changes from {} to {implementation: run.sh}.'
+    sibling_sha256: a1d65bdf641bb80016e19dc4c3b0d6b0d41c05a355548d123ed2d7c1f33e0ec1
+  section: 3.7.5.4
+  section_title: Additional Requirements
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Normative invalid input requires a targeted rejection and nearest-valid sibling.
+- id: TOSCA13-3.6.27.1-008
+  predicate: 'For `operation_host`: If target is a relationships operation_host is required and valid_values are SOURCE or
+    TARGET - referring to the relationship source or target node.'
+  source_predicate_sha256: 3b82ec6d12f20968e98acb4973c454dc7eef9b78a8fdb2a81025c9bc1e72b5e3
+  evidence_kind: semantic-resolution
+  positive_required: true
+  negative_required: true
+  complete_predicate: false
+  mutation_paths:
+  - workflows
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-VALID
+    fixture_sha256: 980b0f7dc5f170cfc70a980a06b3bb16ebabc0f1477afc7cf76e32fb696d303b
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.6.27.1-008
+      kind: value
+      path: /effective/workflows/main/steps/run/operationHost
+      expected: SOURCE
+  - case_id: TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-INVALID
+    fixture_sha256: 443ff2c4ba9dd7b1ce67101b5961b24f1710681962af1a759e860530c07ef86f
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.6.27.1-008
+      kind: diagnostic
+      path: category
+      expected: operation_host
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-VALID
+      change: 'Only operation_host changes from operation_host: SOURCE to # omitted.'
+    sibling_sha256: 980b0f7dc5f170cfc70a980a06b3bb16ebabc0f1477afc7cf76e32fb696d303b
+  - case_id: TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-INVALID
+    fixture_sha256: 443ff2c4ba9dd7b1ce67101b5961b24f1710681962af1a759e860530c07ef86f
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-3.6.27.1-008
+      kind: diagnostic
+      path: entity
+      expected: required
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-VALID
+      change: 'Only operation_host changes from operation_host: SOURCE to # omitted.'
+    sibling_sha256: 980b0f7dc5f170cfc70a980a06b3bb16ebabc0f1477afc7cf76e32fb696d303b
+  - case_id: TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-INVALID
+    fixture_sha256: 443ff2c4ba9dd7b1ce67101b5961b24f1710681962af1a759e860530c07ef86f
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-3.6.27.1-008
+      kind: phase
+      path: processing_phase
+      expected: rendering
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-VALID
+      change: 'Only operation_host changes from operation_host: SOURCE to # omitted.'
+    sibling_sha256: 980b0f7dc5f170cfc70a980a06b3bb16ebabc0f1477afc7cf76e32fb696d303b
+  - case_id: TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-INVALID
+    fixture_sha256: 443ff2c4ba9dd7b1ce67101b5961b24f1710681962af1a759e860530c07ef86f
+    assertion:
+      id: A4
+      requirement_ids:
+      - TOSCA13-3.6.27.1-008
+      kind: reject
+      path: accepted
+      expected: false
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-VALID
+      change: 'Only operation_host changes from operation_host: SOURCE to # omitted.'
+    sibling_sha256: 980b0f7dc5f170cfc70a980a06b3bb16ebabc0f1477afc7cf76e32fb696d303b
+  section: 3.6.27.1
+  section_title: Keynames
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Normative invalid input requires a targeted rejection and nearest-valid sibling.
+- id: TOSCA13-3.8.13.4-001
+  predicate: The substitution mapping MUST provide mapping for every property, capability and requirement defined in the specified
+    <node_type>.
+  source_predicate_sha256: 43daa09fba2c7deac16243167376b9caa72893691ea6d4dfb4cb1efe4e19eb2f
+  evidence_kind: semantic-resolution
+  positive_required: true
+  negative_required: true
+  complete_predicate: false
+  mutation_paths:
+  - substitution-mappings
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-VALID
+    fixture_sha256: b0293a21ff4e4d8483476d9099ff5ce7df7172423198498568d2a38d17600ecc
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.8.13.4-001
+      kind: value
+      path: /substitution/capabilityPointers/feature/nodeTemplateName
+      expected: n
+  - case_id: TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-INVALID
+    fixture_sha256: 6a654e187e83643d9b187e8d0054cd8102b15a7d2fd06950e7fdfae181708ade
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-3.8.13.4-001
+      kind: diagnostic
+      path: category
+      expected: mapping
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-VALID
+      change: 'Only capability mappings changes from {feature: [n, feature]} to {}.'
+    sibling_sha256: b0293a21ff4e4d8483476d9099ff5ce7df7172423198498568d2a38d17600ecc
+  - case_id: TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-INVALID
+    fixture_sha256: 6a654e187e83643d9b187e8d0054cd8102b15a7d2fd06950e7fdfae181708ade
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-3.8.13.4-001
+      kind: diagnostic
+      path: entity
+      expected: feature
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-VALID
+      change: 'Only capability mappings changes from {feature: [n, feature]} to {}.'
+    sibling_sha256: b0293a21ff4e4d8483476d9099ff5ce7df7172423198498568d2a38d17600ecc
+  - case_id: TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-INVALID
+    fixture_sha256: 6a654e187e83643d9b187e8d0054cd8102b15a7d2fd06950e7fdfae181708ade
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-3.8.13.4-001
+      kind: phase
+      path: processing_phase
+      expected: rendering
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-VALID
+      change: 'Only capability mappings changes from {feature: [n, feature]} to {}.'
+    sibling_sha256: b0293a21ff4e4d8483476d9099ff5ce7df7172423198498568d2a38d17600ecc
+  - case_id: TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-INVALID
+    fixture_sha256: 6a654e187e83643d9b187e8d0054cd8102b15a7d2fd06950e7fdfae181708ade
+    assertion:
+      id: A4
+      requirement_ids:
+      - TOSCA13-3.8.13.4-001
+      kind: reject
+      path: accepted
+      expected: false
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-VALID
+      change: 'Only capability mappings changes from {feature: [n, feature]} to {}.'
+    sibling_sha256: b0293a21ff4e4d8483476d9099ff5ce7df7172423198498568d2a38d17600ecc
+  section: 3.8.13.4
+  section_title: Additional requirements
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Normative invalid input requires a targeted rejection and nearest-valid sibling.
+- id: TOSCA13-6.1-006
+  predicate: The root YAML file metadata section requires `template_name`.
+  source_predicate_sha256: ccb409e04abb7a49bf5754a10959ea9bad85cfe430bb676dd95ec5a91853b7b0
+  evidence_kind: structural-acceptance
+  positive_required: true
+  negative_required: true
+  complete_predicate: false
+  mutation_paths:
+  - csar
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-VALID
+    fixture_sha256: c6d309667dba8a729e8bf75dbd167d5f1103d6b06adc2701038caf7f6b1535d1
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-6.1-006
+      kind: accept
+      path: accepted
+      expected: true
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-INVALID
+    fixture_sha256: f49d1a6d6c5b7787cb14f1dbb0f961fa8395820d6a61d8232014024f2177d16f
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-6.1-006
+      kind: diagnostic
+      path: category
+      expected: template_name
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-VALID
+      change: Only required template_name metadata entry is removed.
+    sibling_sha256: c6d309667dba8a729e8bf75dbd167d5f1103d6b06adc2701038caf7f6b1535d1
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-INVALID
+    fixture_sha256: f49d1a6d6c5b7787cb14f1dbb0f961fa8395820d6a61d8232014024f2177d16f
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-6.1-006
+      kind: diagnostic
+      path: entity
+      expected: metadata
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-VALID
+      change: Only required template_name metadata entry is removed.
+    sibling_sha256: c6d309667dba8a729e8bf75dbd167d5f1103d6b06adc2701038caf7f6b1535d1
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-INVALID
+    fixture_sha256: f49d1a6d6c5b7787cb14f1dbb0f961fa8395820d6a61d8232014024f2177d16f
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-6.1-006
+      kind: phase
+      path: processing_phase
+      expected: read
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-VALID
+      change: Only required template_name metadata entry is removed.
+    sibling_sha256: c6d309667dba8a729e8bf75dbd167d5f1103d6b06adc2701038caf7f6b1535d1
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-INVALID
+    fixture_sha256: f49d1a6d6c5b7787cb14f1dbb0f961fa8395820d6a61d8232014024f2177d16f
+    assertion:
+      id: A4
+      requirement_ids:
+      - TOSCA13-6.1-006
+      kind: reject
+      path: accepted
+      expected: false
+    related_cases:
+      nearest_valid: TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-VALID
+      change: Only required template_name metadata entry is removed.
+    sibling_sha256: c6d309667dba8a729e8bf75dbd167d5f1103d6b06adc2701038caf7f6b1535d1
+  section: '6.1'
+  section_title: Overall Structure of a CSAR
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Normative invalid input requires a targeted rejection and nearest-valid sibling.
+- id: TOSCA13-5.5.12.3-001
+  predicate: Please note that the string values for the properties architecture, type and distribution SHALL be normalized
+    to lowercase by processors of the service template for matching purposes.
+  source_predicate_sha256: 1c1322cf9cbeade8440831e0736d809016c16489cc5e7afeafb5504339991081
+  evidence_kind: normalization
+  positive_required: true
+  negative_required: false
+  complete_predicate: true
+  mutation_paths:
+  - normalization
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OS-LOWERCASE
+    fixture_sha256: 89dca2f7a74259bd0a85a552c71b664cd1f7a0e911d5e7913bdc18337e81a209
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-5.5.12.3-001
+      kind: normalization
+      path: /nodeTemplates/n/capabilities/os/properties/architecture/$primitive
+      expected: amd64
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OS-LOWERCASE
+    fixture_sha256: 89dca2f7a74259bd0a85a552c71b664cd1f7a0e911d5e7913bdc18337e81a209
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-5.5.12.3-001
+      kind: normalization
+      path: /nodeTemplates/n/capabilities/os/properties/type/$primitive
+      expected: linux
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OS-LOWERCASE
+    fixture_sha256: 89dca2f7a74259bd0a85a552c71b664cd1f7a0e911d5e7913bdc18337e81a209
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-5.5.12.3-001
+      kind: normalization
+      path: /nodeTemplates/n/capabilities/os/properties/distribution/$primitive
+      expected: debian
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OS-ALREADY-LOWERCASE
+    fixture_sha256: 1375b77674feac92985c440059c31af936f3a983781e727200a18c2cd01a95ac
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-5.5.12.3-001
+      kind: normalization
+      path: /nodeTemplates/n/capabilities/os/properties/architecture/$primitive
+      expected: amd64
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OS-ALREADY-LOWERCASE
+    fixture_sha256: 1375b77674feac92985c440059c31af936f3a983781e727200a18c2cd01a95ac
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-5.5.12.3-001
+      kind: normalization
+      path: /nodeTemplates/n/capabilities/os/properties/type/$primitive
+      expected: linux
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OS-ALREADY-LOWERCASE
+    fixture_sha256: 1375b77674feac92985c440059c31af936f3a983781e727200a18c2cd01a95ac
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-5.5.12.3-001
+      kind: normalization
+      path: /nodeTemplates/n/capabilities/os/properties/distribution/$primitive
+      expected: debian
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OS-INHERITED-DEFAULTS
+    fixture_sha256: 6a76c0906d23157e275bf98eaef9f1316bf82e8081f63237c1f468b6ec582730
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-5.5.12.3-001
+      kind: normalization
+      path: /nodeTemplates/n/capabilities/os/properties/architecture/$primitive
+      expected: amd64
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OS-INHERITED-DEFAULTS
+    fixture_sha256: 6a76c0906d23157e275bf98eaef9f1316bf82e8081f63237c1f468b6ec582730
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-5.5.12.3-001
+      kind: normalization
+      path: /nodeTemplates/n/capabilities/os/properties/type/$primitive
+      expected: linux
+  - case_id: TOSCA13-CORPUS-EVIDENCE-OS-INHERITED-DEFAULTS
+    fixture_sha256: 6a76c0906d23157e275bf98eaef9f1316bf82e8081f63237c1f468b6ec582730
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-5.5.12.3-001
+      kind: normalization
+      path: /nodeTemplates/n/capabilities/os/properties/distribution/$primitive
+      expected: debian
+  section: 5.5.12.3
+  section_title: Additional Requirements
+  normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+  negative_applicability: Predicate describes the semantic result of valid input; incorrect behavior is tested by mutation,
+    not invented invalid syntax.

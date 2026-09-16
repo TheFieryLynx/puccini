@@ -1,0 +1,12 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+node_types:
+  Abstract: {}
+  Internal:
+    properties:
+      p: {type: string}
+topology_template:
+  node_templates:
+    n:
+      type: Internal
+      properties: {p: configured}
+  substitution_mappings: {node_type: Abstract}

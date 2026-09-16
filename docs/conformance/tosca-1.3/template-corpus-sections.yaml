@@ -122,7 +122,11 @@ sections:
   - keynames:required-first
   - namespace:default
   - reference:normative-type
+  - structural-invalid
+  - structural-valid
   fixtures: &id004
+  - TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-INVALID
+  - TOSCA13-CORPUS-EVIDENCE-STRUCTURAL-VALID
   - TOSCA13-CORPUS-NAMESPACE-DEFAULT-VALID
   status: insufficient-evidence
   exclusions: []
@@ -1541,8 +1545,12 @@ sections:
   applicability_review: deferred; membership is not applicability proof
   grammar_entities: []
   requirement_ids: []
-  variation_axes: []
-  fixtures: &id049 []
+  variation_axes:
+  - constraint-boundary-invalid
+  - constraint-boundary-valid
+  fixtures: &id049
+  - TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-INVALID
+  - TOSCA13-CORPUS-EVIDENCE-CONSTRAINT-BOUNDARY-VALID
   status: insufficient-evidence
   exclusions: []
   primary_classification: processor-non-must-applicable
@@ -2372,11 +2380,15 @@ sections:
   - TOSCA13-3.6.8.2.3-002
   variation_axes:
   - grammar-form:long
+  - import-prefix-invalid
+  - import-prefix-valid
   - imports:missing-resource
   - imports:namespace-qualified
   - reference:imported-target
   - reference:unresolved
   fixtures: &id072
+  - TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-INVALID
+  - TOSCA13-CORPUS-EVIDENCE-IMPORT-PREFIX-VALID
   - TOSCA13-CORPUS-IMPORT-LONG-QUALIFIED-VALID
   - TOSCA13-CORPUS-IMPORT-MISSING-FILE-INVALID
   - TOSCA13-CORPUS-IMPORT-MISSING-FILE-NEAREST-VALID
@@ -2759,8 +2771,12 @@ sections:
   applicability_review: deferred; membership is not applicability proof
   grammar_entities: []
   requirement_ids: []
-  variation_axes: []
-  fixtures: &id081 []
+  variation_axes:
+  - required-refinement-invalid
+  - required-refinement-valid
+  fixtures: &id081
+  - TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-INVALID
+  - TOSCA13-CORPUS-EVIDENCE-REQUIRED-REFINEMENT-VALID
   status: insufficient-evidence
   exclusions: []
   primary_classification: processor-non-must-applicable
@@ -5137,12 +5153,16 @@ sections:
   - keynames:required-target-absent
   - notation:short-operation
   - operation-host:default
+  - workflow-host-invalid
+  - workflow-host-valid
   - workflow:call-operation-long
   - workflow:inline-long
   - workflow:precondition
   - workflow:set-state
   - workflow:step
   fixtures: &id153
+  - TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-INVALID
+  - TOSCA13-CORPUS-EVIDENCE-WORKFLOW-HOST-VALID
   - TOSCA13-CORPUS-INTERACTION-WORKFLOWS-INTERFACES
   - TOSCA13-CORPUS-WORKFLOW-ACTIVITIES-VALID
   - TOSCA13-CORPUS-WORKFLOW-MISSING-TARGET-INVALID
@@ -5441,12 +5461,16 @@ sections:
   - TOSCA13-3.7.2.4-001
   - TOSCA13-3.7.2.4-002
   variation_axes:
+  - capability-source-invalid
+  - capability-source-valid
   - cardinality:narrowing
   - inheritance:direct
   - inheritance:multilevel
   - refinement:default
   - refinement:type-compatible
   fixtures: &id161
+  - TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-INVALID
+  - TOSCA13-CORPUS-EVIDENCE-CAPABILITY-SOURCE-VALID
   - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
   status: insufficient-evidence
   exclusions: []
@@ -6007,10 +6031,14 @@ sections:
   - inheritance:direct
   - inheritance:multilevel
   - inheritance:one-level
+  - interface-type-invalid
+  - interface-type-valid
   - refinement:default
   - refinement:invalid-widening
   - refinement:type-compatible
   fixtures: &id178
+  - TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-INVALID
+  - TOSCA13-CORPUS-EVIDENCE-INTERFACE-TYPE-VALID
   - TOSCA13-CORPUS-TYPE-HIERARCHY-MULTILEVEL-VALID
   - TOSCA13-CORPUS-TYPE-REQUIRED-WIDENING-INVALID
   - TOSCA13-CORPUS-TYPE-REQUIRED-WIDENING-NEAREST-VALID
@@ -7748,8 +7776,12 @@ sections:
   variation_axes:
   - cardinality:multiple
   - reference:existing-target
+  - required-assignment-invalid
+  - required-assignment-valid
   - template-kind:node-relationship-group-policy
   fixtures: &id226
+  - TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-INVALID
+  - TOSCA13-CORPUS-EVIDENCE-REQUIRED-ASSIGNMENT-VALID
   - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
   status: insufficient-evidence
   exclusions: []
@@ -8213,9 +8245,13 @@ sections:
   - imports:qualified
   - normalization:substitution-preserved
   - reference:existing-target
+  - substitution-capability-invalid
+  - substitution-capability-valid
   - substitution:imported-node-type
   - template-kind:node-relationship-group-policy
   fixtures: &id240
+  - TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-INVALID
+  - TOSCA13-CORPUS-EVIDENCE-SUBSTITUTION-CAPABILITY-VALID
   - TOSCA13-CORPUS-SUBSTITUTION-IMPORTS-VALID
   - TOSCA13-CORPUS-TEMPLATES-COMPLETE-VALID
   status: insufficient-evidence
@@ -10715,6 +10751,8 @@ sections:
   - TOSCA13-4.4.2.2-010
   variation_axes:
   - constraint:default
+  - function-resolution-invalid
+  - function-resolution-valid
   - function:get-property
   - function:get_property
   - interaction:function-inheritance
@@ -10725,6 +10763,8 @@ sections:
   - reference:missing-property
   - reference:operation-output
   fixtures: &id329
+  - TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-INVALID
+  - TOSCA13-CORPUS-EVIDENCE-FUNCTION-RESOLUTION-VALID
   - TOSCA13-CORPUS-FUNCTION-REFERENCE-INVALID
   - TOSCA13-CORPUS-FUNCTION-REFERENCE-NEAREST-VALID
   - TOSCA13-CORPUS-FUNCTION-RESOLUTION-VALID
@@ -13655,10 +13695,18 @@ sections:
   requirement_ids:
   - TOSCA13-5.5.7.4-001
   variation_axes:
+  - endpoint-both
+  - endpoint-port-invalid
+  - endpoint-port-valid
+  - endpoint-ports
   - inheritance:normative-parent
   - normative-profile:effective-types
   - version-isolation:tosca-1.3
   fixtures: &id421
+  - TOSCA13-CORPUS-EVIDENCE-ENDPOINT-BOTH
+  - TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-INVALID
+  - TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORT-VALID
+  - TOSCA13-CORPUS-EVIDENCE-ENDPOINT-PORTS
   - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
   status: insufficient-evidence
   exclusions: []
@@ -14180,8 +14228,14 @@ sections:
   variation_axes:
   - inheritance:normative-parent
   - normative-profile:effective-types
+  - os-already-lowercase
+  - os-inherited-defaults
+  - os-lowercase
   - version-isolation:tosca-1.3
   fixtures: &id438
+  - TOSCA13-CORPUS-EVIDENCE-OS-ALREADY-LOWERCASE
+  - TOSCA13-CORPUS-EVIDENCE-OS-INHERITED-DEFAULTS
+  - TOSCA13-CORPUS-EVIDENCE-OS-LOWERCASE
   - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
   status: insufficient-evidence
   exclusions: []
@@ -17351,6 +17405,8 @@ sections:
   - TOSCA13-6.1-007
   - TOSCA13-6.1-008
   variation_axes:
+  - csar-name-invalid
+  - csar-name-valid
   - csar:metadata-free-root
   - csar:valid-metadata
   - entry-selection:explicit
@@ -17359,6 +17415,8 @@ sections:
   fixtures: &id539
   - TOSCA13-CORPUS-CSAR-METADATA-FREE-VALID
   - TOSCA13-CORPUS-CSAR-METADATA-VALID
+  - TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-INVALID
+  - TOSCA13-CORPUS-EVIDENCE-CSAR-NAME-VALID
   status: insufficient-evidence
   exclusions: []
   primary_classification: processor-must-covered
