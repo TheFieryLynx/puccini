@@ -253,12 +253,19 @@ findings:
     permanent_direct_test_before_task: false
     tests:
     - TestReAuditPropertyStatus
-    test_status: planned; report-embedded reproducers will become permanent tests
+    test_status: permanent direct phase and semantic assertions pass; targeted pre-fix failure observed
   remediation_group: B-status
   remediation_order: 2
-  implementation_status: non-compliant
-  verification_status: audit counterexample reproduced; remediation pending
-  mutation_evidence: null
+  implementation_status: implemented
+  verification_status: verified
+  mutation_evidence:
+    result: caught
+    method: temporarily restore the old defective behavior; run permanent direct test; restore original bytes
+    log_sha256: 21149dfd154cbb701fa3d90205d405f76dbc0dbfc8b022e640ef475090969e37
+    failure_excerpt: "--- FAIL: TestReAuditPropertyStatus (0.02s)\n    --- FAIL: TestReAuditPropertyStatus/invalid-unknown\
+      \ (0.02s)\n        re_audit_property_status_test.go:37: expected read rejection, got phase \"\":\nFAIL\nFAIL\t\
+      github.com/tliron/go-puccini/tests/conformance/tosca_1_3\t0.025s\nFAIL\n"
+  remediation_commit_subject: 'fix(tosca-1.3): validate property status values'
 - finding_id: F06
   specification:
     version: TOSCA Simple Profile in YAML 1.3
@@ -823,3 +830,15 @@ verification_runs:
   - full TOSCA 1.3 suite
   - full TOSCA 2.0 suite
   decision: docs/decisions/0012-tosca-1.3-fixed-property-refinement.md
+- group: B-status
+  commands:
+  - focused direct TOSCA 1.3 tests
+  - go test -count=1 ./...
+  - go test -race -count=1 ./...
+  - go vet ./...
+  - git diff --check
+  result: passed
+  includes:
+  - template corpus
+  - full TOSCA 1.3 suite
+  - full TOSCA 2.0 suite

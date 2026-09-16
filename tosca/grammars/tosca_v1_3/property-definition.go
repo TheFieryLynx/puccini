@@ -66,6 +66,13 @@ func ReadPropertyDefinition(ctx *parsing.Context) parsing.EntityPtr {
 	}
 	ctx.ValidateUnsupportedFields(ignore)
 	v2prop := reader.PropertyDefinition
+	if v2prop.Status != nil {
+		switch *v2prop.Status {
+		case "supported", "unsupported", "experimental", "deprecated":
+		default:
+			ctx.FieldChild("status", *v2prop.Status).ReportValueMalformed("property status", "expected supported, unsupported, experimental, or deprecated")
+		}
+	}
 	state.Fixed = reader.Value
 	state.DeclaredDefault = v2prop.Default
 

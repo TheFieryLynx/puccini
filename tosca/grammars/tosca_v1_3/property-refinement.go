@@ -105,6 +105,12 @@ func validateFilePropertyRefinements(file *tosca_v2_0.File) {
 	}
 	sort.Slice(properties, func(i, j int) bool { return properties[i].Context.Path.String() < properties[j].Context.Path.String() })
 	for _, property := range properties {
+		// Section 3.6.10.3: apply the default only after explicit status
+		// values have had the opportunity to propagate through inheritance.
+		if property.Status == nil {
+			status := "supported"
+			property.Status = &status
+		}
 		if state, ok := property.Context.GrammarData.(*propertyRefinement); ok && state.Fixed != nil && !state.Refined {
 			state.Fixed.Context.ReportValueMalformed("property value", "value is only permitted in a property refinement")
 		}
