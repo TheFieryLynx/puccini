@@ -1,0 +1,106 @@
+records:
+- id: A01
+  sections:
+  - '14.1'
+  - '14.3'
+  - '14.4'
+  issue: 'Conformance clauses use stale section numbers/titles: 11.3 Implementations, 5.4.9.3 lowercase, 3.2 property
+    types, 7 networking. Follow matching normative subject, not unrelated literal destination.'
+  status: interpreted-for-audit
+  production_decision_changed: false
+- id: A02
+  sections:
+  - 3.10.1
+  - 3.10.2
+  - 3.10.3.17
+  issue: policy_types table says list, grammar uses map. Requires explicit table-versus-grammar interpretation.
+  status: interpreted-for-audit
+  production_decision_changed: false
+- id: A03
+  sections:
+  - 3.7.3.1
+  - 3.7.3.2
+  issue: relationship table lists string; extended grammar permits a map.
+  status: interpreted-for-audit
+  production_decision_changed: false
+- id: A04
+  sections:
+  - 3.6.20.1
+  - 3.6.20.2
+  issue: Interface type reference keyname and inheritance require grammar interpretation beyond keynames table.
+  status: interpreted-for-audit
+  production_decision_changed: false
+- id: A05
+  sections:
+  - 3.6.10.5
+  - 3.6.10.2
+  issue: schema versus external-schema key spelling and optional external validation conflict.
+  status: interpreted-for-audit
+  production_decision_changed: false
+- id: A06
+  sections:
+  - 3.6.25.1
+  - 3.6.25.2
+  issue: or prose is malformed; not list semantics require careful boolean interpretation.
+  status: interpreted-for-audit
+  production_decision_changed: false
+- id: A07
+  sections:
+  - 3.8.11.1
+  - 3.8.11.2
+  issue: Requirement mapping property/attribute list table versus mapping-oriented grammar.
+  status: interpreted-for-audit
+  production_decision_changed: false
+- id: A08
+  sections:
+  - 8.5.1.1
+  - 8.5.1.3
+  issue: Network table defines dhcp_enabled default true, but YAML definition omits it; table also has conditional
+    property rules absent from YAML.
+  status: interpreted-for-audit
+  production_decision_changed: false
+- id: A09
+  sections:
+  - 3.3.1.1
+  - 3.6.10.2
+  issue: Generic default string type versus required property type; specific property grammar governs explicit declarations.
+  status: interpreted-for-audit
+  production_decision_changed: false
+- id: A10
+  sections:
+  - '14.3'
+  - '14.4'
+  - '8.5'
+  issue: Networking type processor applicability follows automatic normative imports and acceptance of type references;
+    runtime network provisioning remains orchestrator-only.
+  status: interpreted-for-audit
+  production_decision_changed: false
+- id: A11
+  sections:
+  - 3.8.2.3
+  issue: Heading itself contains the mandatory occurrences refinement sentence immediately before Examples; do not
+    discard it as an example.
+  status: interpreted-for-audit
+  production_decision_changed: false
+- id: A12
+  sections:
+  - 5.3.8.2
+  - 5.3.8.4
+  - 5.3.9.2
+  - 5.3.9.4
+  issue: NetworkInfo/PortInfo YAML omits required:false, but Additional Requirements explicitly allow context-dependent
+    requiredness. Raw required-flag differences are not automatically Puccini defects.
+  status: ambiguous-context-policy
+  existing_decision: docs/decisions/tosca-1.3-network-info-requiredness.md
+  production_decision_changed: false
+- id: A13
+  sections:
+  - 5.8.4
+  - 5.9.6
+  - 8.5.3
+  - '5.2'
+  issue: 'Name tables contain tosca: Standard, tosca: WebApplication, and tosca:.Linkable. Literal spellings reject;
+    whitespace-free/corrected qualification is a plausible editorial interpretation, so these three are excluded
+    from F16 confirmed alias defects.'
+  status: unresolved-editorial-spelling
+  production_decision_changed: false

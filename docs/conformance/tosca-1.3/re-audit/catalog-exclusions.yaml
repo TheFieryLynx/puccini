@@ -1,0 +1,1348 @@
+records:
+- section: '1.6'
+  html_line: 2488
+  text: The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”,
+    “MAY”, and “OPTIONAL” in this document are to be interpreted as described in [RFC2119].
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: '2.6'
+  html_line: 3882
+  text: The node type definition for the wordpress node template is WordPress which declares the complete database_endpoint
+    requirement definition. This database_endpoint declaration indicates it must be fulfilled by any node template
+    that provides an Endpoint.Database Capability Type using a ConnectsTo relationship. The wordpress_db node template’s
+    underlying MySQL type definition indeed provides the Endpoint.Database Capability type. In this example however,
+    no explicit relationship template is declared; therefore, TOSCA orchestrators would automatically create a ConnectsTo
+    relationship to establish the link between the wordpress node and the wordpress_db node at runtime.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: '2.9'
+  html_line: 4133
+  text: '· Abstract: where the template describes only the node type along with its required capabilities and properties
+    that must be satisfied.'
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 2.9.1
+  html_line: 4272
+  text: In the example above, the mysql component contains a host requirement for a node of type Compute which it
+    inherits from its parent DBMS node type definition; however, there is no declaration or reference to any node
+    template of type Compute. Instead, the mysql node template augments the abstract “host” requirement with a node_filter
+    which contains additional selection criteria (in the form of property constraints that the provider must use
+    when selecting or allocating a host Compute node.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 2.10.1
+  html_line: 4583
+  text: When a topology template is instantiated by a TOSCA Orchestrator, the orchestrator has to first look for
+    abstract node templates in the topology template. Abstract node templates are node templates that include the
+    substitute directive. These abstract node templates must then be realized using substituting service templates
+    that are compatible with the node types specified for each abstract node template. Such realizations can either
+    be node types that include the appropriate implementation artifacts and deployment artifacts that can be used
+    by the orchestrator to bring to life the real-world resource modeled by a node template. Alternatively, separate
+    topology templates may be annotated as being suitable for realizing a node template in the top-level topology
+    template.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 2.10.2
+  html_line: 4719
+  text: '# and must be substituted with a topology provided by another template'
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 2.10.3
+  html_line: 4888
+  text: Further note that no mappings for properties or attributes of the substituted node are defined. Instead,
+    the inputs and outputs defined by the topology template are mapped to the appropriate properties and attributes
+    or the substituted node. If there are more inputs than the substituted node has properties, default values must
+    be defined for those inputs, since no values can be assigned through properties in a substitution case.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 2.12.3
+  html_line: 5638
+  text: Since both the ACME Firewall and the Simple Firewall can substitute for abstract node templates of type
+    abstract.Firewall, either firewall is a valid candidate to substitute the abstract firewall node template. When
+    multiple matching templates are available, the orchestrator must provide mechanisms to allow the end-user to
+    drive the decision about which matching template must be selected.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: '2.16'
+  html_line: 6223
+  text: Service template designers have the ability to define operation outputs that specify named output values
+    that are expected to be returned by interface operations as well as the attributes on nodes or relationships
+    into which these output values must be stored.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 2.20.1
+  html_line: 6707
+  text: 'To avoid the need for multiple service templates, TOSCA must provide a mechanism that allows all VPN Site
+    nodes to be created from the same Site node template in the topology, and allow the number of sites to be specified
+    at deployment time. Specifically, this functionality must:'
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 3.6.5.4
+  html_line: 10958
+  text: · TOSCA orchestrators SHALL search for matching capabilities listed on a target filter by assuming the capability
+    name is first a symbolic name and secondly it is a type name (in order to avoid namespace collisions).
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 3.6.8.2.4
+  html_line: 11933
+  text: 'TOSCA Orchestrators, Processors and tooling SHOULD treat the <file_URI> of an import as follows:'
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.6.8.2.4
+  html_line: 11936
+  text: '· URI: If the <file_URI> is a known namespace URI (identifier), such as a well-known URI defined by a TOSCA
+    specification, then it SHOULD cause the corresponding Type defintions to be imported.'
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.6.8.2.4
+  html_line: 11952
+  text: · Alias – If the <file_URI> is a reserved TOSCA Namespace alias, then it SHOULD cause the corresponding
+    Type defintions to be imported, using the associated full, Namespace URI to uniquely identify the imported types.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.6.8.2.4
+  html_line: 11959
+  text: · URL - If the <file_URI> is a valid URL (i.e., network accessible as a remote resource) and the location
+    contains a valid TOSCA Service Template, then it SHOULD cause the remote Service Template to be imported.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.6.8.2.4
+  html_line: 11966
+  text: · Relative path - If the <file_URI> is a relative path URL, perhaps pointing to a Service Template located
+    in the same CSAR file, then it SHOULD cause the locally accessible Service Template to be imported.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.6.8.2.4
+  html_line: 11985
+  text: · Otherwise, the import SHOULD be considered a failure.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.6.9
+  html_line: 12018
+  text: All entries in a map or list for one property or parameter must be of the same type. Similarly, all keys
+    for map entries for one property or parameter must be of the same type as well. A TOSCA schema definition specifies
+    the type (for simple entries) or schema (for complex entries) for keys and entries in TOSCA set types such as
+    the TOSCA list or map.
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 3.6.10.4
+  html_line: 12746
+  text: '· property_required: represents an optional boolean value (true or false) indicating whether or not the
+    property is required. If this keyname is not present on a property definition, then the property SHALL be considered
+    required (i.e., true) by default.'
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 3.6.13.3
+  html_line: 13512
+  text: · Attribute values MAY be provided by the underlying implementation at runtime when requested by the get_attribute
+    function or it MAY be provided through the evaluation of expressions and/or functions that derive the values
+    from other TOSCA attributes (also at runtime).
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.6.14.2
+  html_line: 13735
+  text: '· parameter_required: represents an optional boolean value (true or false) indicating whether or not the
+    parameter is required. If this keyname is not present on a parameter definition, then the property SHALL be
+    considered required (i.e., true) by default.'
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 3.6.15
+  html_line: 13851
+  text: An attribute mapping defines a named output value that is expected to be returned by an operation implementations
+    and a mapping that specifies the node or relationship attribute into which the returned output value must be
+    stored.
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 3.6.17.2.3
+  html_line: 14607
+  text: '· attribute_mappings: represents the optional map of of attribute_mappings that consists of named output
+    values returned by operation implementations (i.e. artifacts) and associated mappings that specify the attribute
+    into which this output value must be stored.'
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 3.6.25.5
+  html_line: 16939
+  text: · The TOSCA processor SHOULD perform assertion in the order of the list for every defined condition clause
+    or direct assertion definition.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.7.3.3
+  html_line: 18561
+  text: · Requirement symbolic names SHALL be unique; it is an error if a requirement name is found to occur more
+    than once.
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 3.7.3.3
+  html_line: 18566
+  text: '· If the occurrences keyname is not present, then the occurrence of the requirement SHALL be one and only
+    one; that is a default declaration as follows would be assumed:'
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 3.7.9.3
+  html_line: 20042
+  text: · Requirements are intentionally expressed as a list of TOSCA Requirement definitions which SHOULD be resolved
+    (processed) in sequence order by TOSCA Orchestrators.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.7.9.4
+  html_line: 20050
+  text: · It is recommended that all Node Types SHOULD derive directly (as a parent) or indirectly (as an ancestor)
+    of the TOSCA Root Node Type (i.e., tosca.nodes.Root) to promote compatibility and portability. However, it is
+    permitted to author Node Types that do not do so.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.7.9.4
+  html_line: 20059
+  text: · TOSCA Orchestrators, having a full view of the complete application topology template and its resultant
+    dependency graph of nodes and relationships, MAY prioritize how they instantiate the nodes and relationships
+    for the application (perhaps in parallel where possible) to achieve the greatest efficiency
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.7.10.3
+  html_line: 20364
+  text: · The TOSCA Root Relationship Type (tosca.relationships.Root) SHOULD be used to derive new types where possible
+    when defining new relationships types. This assures that its normative configuration interface (tosca.interfaces.relationship.Configure)
+    can be used in a deterministic way by TOSCA orchestrators.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.8.5.4
+  html_line: 22830
+  text: · Group definitions SHOULD NOT be used to define or redefine relationships (dependencies) for an application
+    that can be expressed using normative TOSCA Relationships within a TOSCA topology template.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.8.7.2
+  html_line: 23423
+  text: '· attribute_mappings: represents the optional map of of attribute_mappings that consists of named output
+    values returned by operation implementations (i.e. artifacts) and associated mappings that specify the attribute
+    into which this output value must be stored.'
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 3.8.8.3
+  html_line: 23579
+  text: '· The previous version of the specification allowed direct mappings from properties of the abstract node
+    template to properties of node templates in the substituting topology template. Support for these mappings has
+    been deprecated since they would have resulted in unpredictable behavior, for the following reason. If the substituting
+    template is a valid TOSCA template, then all the (required) properties of all its node templates must have valid
+    property assignments already defined. If the substitution mappings of the substituting template include direct
+    property-to-property mappings, the the substituting template ends up with two conflicting property assignments:
+    one defined in the substituting template itself, and one defined by the substitution mappings. These conflicting
+    assignments lead to unpredictable behavior.'
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 3.8.10.3
+  html_line: 23878
+  text: · Definition of capability assignment in a capability mapping (through properties and attribute keynames)
+    SHOULD be prohibited for connectivity capabilities as tosca.capabilities.Endpoint.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.8.11.3
+  html_line: 24084
+  text: · Definition of capability assignment in a capability mapping (through properties and attribute keynames)
+    SHOULD be prohibited for connectivity capabilities as tosca.capabilities.Endpoint.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.8.13.5
+  html_line: 24437
+  text: · The node_type specified in the substitution mapping SHOULD be abstract (does not provide implementation
+    for normative operations).
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.10.2.1
+  html_line: 26040
+  text: · The URI value “http://docs.oasis-open.org/tosca”, as well as all (path) extensions to it, SHALL be reserved
+    for TOSCA approved specifications and work. That means Service Templates that do not originate from a TOSCA
+    approved work product MUST NOT use it, in any form, when declaring a (default) Namespace.
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 3.10.2.1
+  html_line: 26048
+  text: · The key “tosca_definitions_version” SHOULD be the first line of each Service Template.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.10.2.2
+  html_line: 26055
+  text: · TOSCA Service Templates do not have to contain a topology_template and MAY contain simply type definitions
+    (e.g., Artifact, Interface, Capability, Node, Relationship Types, etc.) and be imported for use as type definitions
+    in other TOSCA Service Templates.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.10.3.3.4
+  html_line: 26218
+  text: · Some service templates are designed to be referenced and reused by other service templates. Therefore,
+    in these cases, the template_name value SHOULD be designed to be used as a unique identifier through the use
+    of namespacing techniques.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 3.10.3.5.4
+  html_line: 26310
+  text: · Some service templates are designed to be referenced and reused by other service templates and have a
+    lifecycle of their own. Therefore, in these cases, a template_version value SHOULD be included and used in conjunction
+    with a unique template_name value to enable lifecycle management of the service template and its contents.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: '4.1'
+  html_line: 27077
+  text: The following keywords MAY be used in some TOSCA function in place of a TOSCA Node or Relationship Template
+    name. A TOSCA orchestrator will interpret them at the time the function would be evaluated at runtime as described
+    in the table below. Note that some keywords are only valid in the context of a certain TOSCA entity as also
+    denoted in the table.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: '4.1'
+  html_line: 27175
+  text: Specifically, TOSCA orchestrators that encounter this keyword when evaluating the get_attribute or get_property
+    functions SHALL search each node along the “HostedOn” relationship chain starting at the immediate node that
+    hosts the node where the function was evaluated (and then that node’s host node, and so forth) until a match
+    is found or the “HostedOn” relationship chain ends.
+  classification: excluded-target
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: true
+    generator: false
+    archive: false
+  basis: Runtime-only obligation under the orchestrator/archive conformance target.
+- section: 4.8.1.3.2
+  html_line: 29168
+  text: 'In such implementation the TOSCA orchestrator must provide the wordpress.zip archive as a local path (example:
+    /tmp/wordpress.zip) and will remove it after the operation is completed.'
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 4.8.1.3.3
+  html_line: 29215
+  text: 'In such implementation the TOSCA orchestrator must provide the wordpress.zip archive as a local path (example:
+    C:/wpdata/wp.zip ) and will let it after the operation is completed.'
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: '5'
+  html_line: 29248
+  text: Except for the examples, this section is normative and contains normative type definitions which must be
+    supported for conformance to this specification.
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: '5'
+  html_line: 29254
+  text: The declarative approach is heavily dependent of the definition of basic types that a declarative container
+    must understand. The definition of these types must be very clear such that the operational semantics can be
+    precisely followed by a declarative container to achieve the effects intended by the modeler of a topology in
+    an interoperable manner.
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: '5.2'
+  html_line: 29302
+  text: a. These are reserved names within TOSCA namespace that MAY be used in place of the full Type URI.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: '5.2'
+  html_line: 29307
+  text: b. Profiles of the OASIS TOSCA Simple Profile specifcaition SHALL assure non-collision of names for new
+    types when they are introduced.
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: '5.2'
+  html_line: 29312
+  text: c. TOSCA type designers SHOULD NOT create new types with names that would collide with any TOSCA normative
+    type Shorthand Name.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: '5.2'
+  html_line: 29323
+  text: a. This name MAY be used to assure there is no collision when types are imported from other (non) TOSCA
+    approved sources.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 5.3.3
+  html_line: 29522
+  text: · The json datatype SHOULD only be assigned string values that contain valid JSON syntax as defined by the
+    “The JSON Data Interchange Format Standard” (see reference [JSON-Spec]).
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 5.3.5
+  html_line: 29676
+  text: The xml datatype SHOULD only be assigned string values that contain valid XML syntax as defined by the “Extensible
+    Markup Language (XML)” specification” (see reference [XMLSpec]).
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 5.3.6.3
+  html_line: 29938
+  text: · TOSCA Orchestrators SHALL interpret and validate the value of the token property based upon the value
+    of the token_type property.
+  classification: excluded-target
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Runtime-only obligation under the orchestrator/archive conformance target.
+- section: 5.3.8.4
+  html_line: 30459
+  text: · It is expected that TOSCA orchestrators MUST be able to map the network_name from the TOSCA model to underlying
+    network model of the provider.
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 5.3.9.4
+  html_line: 30723
+  text: · It is expected that TOSCA orchestrators MUST be able to map the port_name from the TOSCA model to underlying
+    network model of the provider.
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 5.4.3.2
+  html_line: 31326
+  text: · TOSCA Orchestrators MAY throw an error if it encounters a non-normative deployment artifact type that
+    it is not able to process.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 5.4.4.2
+  html_line: 31465
+  text: · TOSCA Orchestrators MAY throw an error if it encounters a non-normative implementation artifact type that
+    it is not able to process.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 5.5.8.2
+  html_line: 32945
+  text: · If the network_name is set to the reserved value PRIVATE or if the value is set to the name of network
+    (or subnetwork) that is not public (i.e., has non-public IP address ranges assigned to it) then TOSCA Orchestrators
+    SHALL treat this as an error.
+  classification: excluded-target
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Runtime-only obligation under the orchestrator/archive conformance target.
+- section: 5.5.8.2
+  html_line: 32953
+  text: · If a dns_name is set, TOSCA Orchestrators SHALL attempt to register the name in the (local) DNS registry
+    for the Cloud provider.
+  classification: excluded-target
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Runtime-only obligation under the orchestrator/archive conformance target.
+- section: 5.5.9.3
+  html_line: 33087
+  text: · TOSCA Orchestrator implementations of Endpoint.Admin (and connections to it) SHALL assure that network-level
+    security is enforced if possible.
+  classification: excluded-target
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Runtime-only obligation under the orchestrator/archive conformance target.
+- section: 5.8.1
+  html_line: 34602
+  text: · Designers of Node or Relationship types are not required to actually provide/associate code or scripts
+    with every operation for a given interface it supports. In these cases, orchestrators SHALL consider that a
+    “No Operation” or “no-op”.
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 5.8.1
+  html_line: 34609
+  text: · The default behavior when providing scripts for an operation in a sub-type (sub-class) or a template of
+    an existing type which already has a script provided for that operation SHALL be override. Meaning that the
+    subclasses’ script is used in place of the parent type’s script.
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 5.8.2
+  html_line: 34618
+  text: · When TOSCA Orchestrators substitute an implementation for an abstract node in a deployed service template
+    it SHOULD be able to present a confirmation to the submitter to confirm the implementation chosen would be acceptable.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 5.8.5.5
+  html_line: 34958
+  text: · The target (provider) MUST be active and running (i.e., all its dependency stack MUST be fulfilled) prior
+    to invoking add_target
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 5.8.5.5
+  html_line: 34963
+  text: · In other words, all Requirements MUST be satisfied before it advertises its capabilities (i.e., the attributes
+    of the matched Capabilities are available).
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: 5.9.1.4
+  html_line: 35286
+  text: · All Node Type definitions that wish to adhere to the TOSCA Simple Profile SHOULD extend from the TOSCA
+    Root Node Type to be assured of compatibility and portability across implementations.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 5.9.3.4
+  html_line: 35808
+  text: · The underlying implementation of the Compute node SHOULD have the ability to instantiate guest operating
+    systems (either actual or virtualized) based upon the OperatingSystem capability properties if they are supplied
+    in the a node template derived from the Compute node type.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 5.9.4.4
+  html_line: 36045
+  text: · Nodes that can directly be managed and run by a TOSCA Compute Node Type SHOULD extend from this type.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 5.9.5.3
+  html_line: 36188
+  text: · This node SHALL export both a secure endpoint capability (i.e., admin_endpoint), typically for administration,
+    as well as a regular endpoint (i.e., data_endpoint) for serving data.
+  classification: pending-review
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Requires individual applicability/atomicity review; not included in validated atomic count.
+- section: '6.1'
+  html_line: 37806
+  text: · a yaml (.yml or .yaml) file at the root of the archive. The yaml file being a valid tosca definition template
+    that MUST define a metadata section where template_name and template_version are required.
+  classification: excluded-target
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: true
+  basis: Runtime-only obligation under the orchestrator/archive conformance target.
+- section: '6.3'
+  html_line: 37956
+  text: This file must be a valid TOSCA definitions YAML file with the additional restriction that the metadata
+    section (as defined in 3.9.3.2) is required and template_name and template_version metadata are also required.
+  classification: excluded-target
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: true
+  basis: Runtime-only obligation under the orchestrator/archive conformance target.
+- section: 7.2.1.1
+  html_line: 38097
+  text: If a relationship to some of this node defines operations or lifecycle dependency constraint that relies
+    on intermediate states, the weaving SHOULD fail and the orchestrator SHOULD raise an error.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 7.2.2.2
+  html_line: 38115
+  text: DependsOn relationship SHOULD not be implemented. Even if the Configure interface can be implemented this
+    is not considered as a best-practice. If you need specific implementation, please have a look at the ConnectsTo
+    relationship.
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: 7.3.1.1
+  html_line: 38269
+  text: · All steps that defines an on_success operation must be executed before the next step can be executed.
+    So if A and C defines an on_success operation to B, then B will be executed only when both A and C have been
+    successfully executed.
+  classification: excluded-target
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: true
+    generator: false
+    archive: false
+  basis: Runtime-only obligation under the orchestrator/archive conformance target.
+- section: 7.3.3
+  html_line: 38672
+  text: Pre conditions allows the TOSCA orchestrator to determine if a workflow can be executed based on the states
+    and attribute values of the topology’s node. Preconditions must be added to the initial workflow.
+  classification: excluded-target
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: true
+    generator: false
+    archive: false
+  basis: Runtime-only obligation under the orchestrator/archive conformance target.
+- section: 7.3.5
+  html_line: 39090
+  text: '- or: # only one of sub-clauses must be true.'
+  classification: excluded-target
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: true
+    generator: false
+    archive: false
+  basis: Runtime-only obligation under the orchestrator/archive conformance target.
+- section: 7.3.6.1
+  html_line: 39196
+  text: To trigger such a workflow, the TOSCA engine must allow user to provide inputs that match the given definitions.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 7.3.7
+  html_line: 39208
+  text: 'Exception: uninstall workflow operation failure SHOULD not prevent the other operations of the workflow
+    to run (a failure in an uninstall script SHOULD not prevent from releasing resources from the cloud).'
+  classification: non-must
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Recommendation/permission is not a MUST.
+- section: '8.1'
+  html_line: 39394
+  text: TOSCA Service Templates are application centric in the sense that they focus on describing application components
+    in terms of their requirements and interrelationships. In order to provide cloud portability, it is important
+    that a TOSCA Service Template avoid cloud specific requirements and details. However, at the same time, TOSCA
+    must provide the expressiveness to control the mapping of software component connectivity to the network constructs
+    of the hosting cloud.
+  classification: excluded-target
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: true
+    generator: false
+    archive: false
+  basis: Runtime-only obligation under the orchestrator/archive conformance target.
+- section: 8.3.1
+  html_line: 39521
+  text: Application component intercommunication typically has conventions regarding which component(s) initiate
+    the communication. Connection initiation semantics are specified in tosca.capabilities.Endpoint. Endpoints at
+    each end of the tosca.relationships.ConnectsTo must indicate identical connection initiation semantics.
+  classification: excluded-target
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: true
+    generator: false
+    archive: false
+  basis: Runtime-only obligation under the orchestrator/archive conformance target.
+- section: 8.3.1.3
+  html_line: 39607
+  text: Endpoints specifying the Peer-to-Peer initiation semantic need not be related with a tosca.relationships.ConnectsTo
+    relationship for the common case where the same set of component instances must communicate with each other.
+  classification: excluded-target
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: true
+    generator: false
+    archive: false
+  basis: Runtime-only obligation under the orchestrator/archive conformance target.
+- section: 8.3.2
+  html_line: 39621
+  text: TOSCA Service Templates must express enough details about application component intercommunication to enable
+    TOSCA implementations to fulfill these communication semantics in the network infrastructure. TOSCA currently
+    focuses on TCP/IP as this is the most pervasive in today’s cloud infrastructures. The layer 4 ports required
+    for application component intercommunication are specified in tosca.capabilities.Endpoint. The union of the
+    port specifications of both the source and target tosca.capabilities.Endpoint which are part of the tosca.relationships.ConnectsTo
+    Relationship Template are interpreted as the effective set of ports which must be allowed in the network communication.
+  classification: excluded-target
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: true
+    generator: false
+    archive: false
+  basis: Runtime-only obligation under the orchestrator/archive conformance target.
+- section: 8.4.1
+  html_line: 39645
+  text: TOSCA orchestrators are responsible for the provisioning of the network connectivity for declarative TOSCA
+    Service Templates (Declarative TOSCA Service Templates don’t contain explicit plans). This means that the TOSCA
+    orchestrator must be able to infer a suitable logical connectivity model from the Service Template and then
+    decide how to provision the logical connectivity, referred to as “fulfillment”, on the available underlying
+    infrastructure. In order to enable fulfillment, sufficient technical details still must be specified, such as
+    the required protocols, ports and QOS information. TOSCA connectivity types, such as tosca.capabilities.Endpoint,
+    provide well defined means to express these details.
+  classification: excluded-target
+  target:
+    processor: false
+    service_template_author: true
+    orchestrator: true
+    generator: false
+    archive: false
+  basis: Runtime-only obligation under the orchestrator/archive conformance target.
+- section: 12.3.2
+  html_line: 46754
+  text: There must be control mechanisms in place that can be part of these patterns that accept governance policies
+    that allow control expressions of what is allowed when placing, scaling and managing the applications that are
+    enforceable and verifiable in Cloud.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 12.3.2.2
+  html_line: 46790
+  text: Companies realize that their day-to-day business must continue on through unforeseen disasters that might
+    disable instances of the applications and data at or on specific data centers, networks or servers. They need
+    to be able to convey placement policies for their software applications and data that mitigate risk of disaster
+    by assuring these cloud assets are deployed strategically in different physical locations. Such policies need
+    to consider placement across geographic locations as wide as countries, regions, datacenters, as well as granular
+    placement on a network, server or device within the same physical datacenter. Cloud providers must be able to
+    not only enforce these policies but provide robust and seamless failover such that a disaster’s impact is never
+    perceived by the end user.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 12.5.1.1.1
+  html_line: 46865
+  text: This use case shows a failover policy to keep at least 3 copies running in separate containers. In this
+    simple case, the specific containers to use (or name is not important; the Cloud provider must assure placement
+    separation (anti-affinity) in three physically separate containers.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.2.2
+  html_line: 47383
+  text: Different orchestrators could make different decisions about the execution environments for various combinations
+    of node types and artifact types. However, service template designers must have the ability to specify explicitly
+    where artifacts are intended to be processed in those scneario where correct operation depends on using a specific
+    execution environment.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.2.4
+  html_line: 47409
+  text: 'Once the orchestrator has identified the artifact processor as well as the execution environment, it must
+    make sure that the artifact processor is deployed in the execution environment:'
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.2.4
+  html_line: 47427
+  text: · When an external execution environment is specified, the orchestrator must at the very least be able to
+    verify that the proper artifact processor is present in the external execution environment and generate an error
+    if it isn’t. Ideally, the orchestrator should be able to install the processor if necessary.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.2.6
+  html_line: 47493
+  text: Orchestrators must pass information to the artifact processor that properly identifies the target for each
+    artifact being processed.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.2.6
+  html_line: 47505
+  text: · When artifact processors run externally to the topology being deployed, they must establish a connection
+    across a management network to the target. In TOSCA, such targets are identified using Endpoint capabilities
+    that contain the necessary addressing information. This addressing information must be passed to the artifact
+    processor
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.2.6
+  html_line: 47513
+  text: 'Note that in addition to endpoint information about the target, orchestrators may also need to pass information
+    about the protocol that must be used to connect to the target. For example, some networking devices only accept
+    CLI commands across a SSH connection, but others could also accept REST API calls. Different python scripts
+    could be used to configure such devices: one that uses the CLI, and one that executes REST calls. The artifact
+    must include metadata about which connection mechanism is intended to be used, and orchestrators must pass on
+    this information to the artifact processor.'
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.2.6
+  html_line: 47522
+  text: Finally, artifact processor may need proper credentials to connect to target endpoints. Orchestrators must
+    pass those credentials to the artifact processor before the artifact can be processed.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.2.7
+  html_line: 47528
+  text: Orchestrators must pass any required inputs to the artifact processor. Some processors could take inputs
+    through environment variables, but others may prefer command line arguments. Named or positional command line
+    arguments could be used. TOSCA must be very specific about the mechanism for passing input data to processors
+    for each type of artifact.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.2.7
+  html_line: 47536
+  text: Similarly, artifact processors must also pass results from operations back to orchestrators so that results
+    values can be reflected as appropriate in node properties and attributes. If the operation fails, error codes
+    may need to be returned as well. TOSCA must be very specific about the mechanism for returning results and error
+    codes for each type of artifact.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.2.8
+  html_line: 47555
+  text: · Alternatively, the orchestrator MAY be able to reflect the additional components/resources associated
+    with the Artifact Processor as part of the instance model (post deployment).
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.4.1.1.1
+  html_line: 47788
+  text: For example, a Bash script called “create.sh” that is used to install some software for a TOSCA Node; that
+    this introduces imperative logic points (all scripts perhaps) which MAY lead to the creation of “opaque software”
+    or topologies within the node
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.4.2
+  html_line: 47931
+  text: A second important class of artifacts are Python scripts. Unlike Bash script artifacts, Python scripts are
+    more commonly executed within the context of the Orchestrator, but service template designers must also be able
+    to provide Python scripts artifacts that are intended to be executed within the topology being orchestrated,
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.4.2.4
+  html_line: 47976
+  text: Most Python scripts rely on external packages that must be installed in the execution environment. Typically,
+    python packages are installed using the ‘pip’ command. To provide isolation between different environments,
+    it is considered best practice to create virtual environments. A virtual environment is a tool to keep the dependencies
+    required by different python scripts or projects in separate places, by creating virtual Python environments
+    for each of them.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.4.2.4.1.2
+  html_line: 48014
+  text: · Typically, dependent artifacts must be processed in a specific order. TOSCA grammar must provide a way
+    to define orders and groups (perhaps by extending groups grammar by allowing indented sub-lists).
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.4.4.1.1.1
+  html_line: 48062
+  text: · In this scenario, the host on which the software component is deployed must support RPM packages. This
+    must be reflected in the software component’s host requirement for a target container.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.4.4.1.1.1
+  html_line: 48068
+  text: · In this scenario, the host on which the software component is deployed must support Debian packages. This
+    must be reflected in the software component’s host requirement for a target container.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.4.5.1.1.3
+  html_line: 48170
+  text: 'o Today: it must appear in the node under “artifacts” key (grammar)'
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.
+- section: 13.4.7
+  html_line: 48266
+  text: It should be possible to use a generic interface to describe these various API attributes without being
+    forced into using specific software packages or API tooling. Of course, in order to “invoke” the API an orchestrator
+    must launch an API client (e.g. a python script, a Java program, etc.) that uses the appropriate API language
+    bindings. However, using generic API Artifact types, the decision about which API clients and language bindings
+    to use can be left to the orchestrator. It is up to the API Artifact Processor provided by the Orchestrator
+    to create an execution environment within which to deploy API language bindings and associated API clients based
+    on Orchestrator preferences. The API Artifact Processor then uses these API clients to “process” the API artifact.
+  classification: informative
+  target:
+    processor: false
+    service_template_author: false
+    orchestrator: false
+    generator: false
+    archive: false
+  basis: Informative/example context excluded by enclosing section.

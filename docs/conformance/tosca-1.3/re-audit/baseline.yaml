@@ -1,0 +1,66 @@
+audit_version: 1
+specification: TOSCA Simple Profile in YAML Version 1.3, OASIS Standard
+head: b4d40d3ebea7a74a5a55e49020d5fcbbf015be34
+initial_git_status_short: ''
+pre_existing_changes: []
+method: Hash bytes only; existing catalog, coverage and corpus content not consulted during independent extraction.
+sha256:
+  docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html: 5c44638e1f9c532eb88fdc0cda1dce03c8f923a68148d26938797cca7b953df6
+  docs/conformance/tosca-1.3/requirements.yaml: 1861a9652dd659636702f29737818ac6f1c69355ee442e1bebe98739b21aabf0
+  docs/conformance/tosca-1.3/coverage.yaml: 1238b594dfeb73c07f517efe8315b8e38742bf24db5350c1a1a5bf4ded73e11a
+  tests/corpus/tosca_1_3/examples/manifest.yaml: 92062dc4bfa075ed1ec10c809ea46fa9a9b9d1b3d750e279bf02d9fc5dd70698
+  tests/corpus/tosca_1_3/manifest.yaml: ae3084356b3a3e25fbb31b8e5440469c66d799342c986b8fd38207228500adc5
+  tests/corpus/tosca_1_3/non_must/manifest.yaml: a6292dfce8f2845b71827c58944e4f0a868f9a40e34b9e1b2559ad61e99d2646
+  tests/corpus/tosca_1_3/oasis_community/manifest.yaml: 9f0382f117368f3de5019de48c22912ba8d3ddd470f6b9a0c51f8245c6efa28b
+  third_party/oasis/tosca-simple-profile/1.3/SHA256SUMS: 4851f785c01217fcba21e81844165e6cac539413f2fd2269897836e5e82f51b7
+  third_party/oasis/tosca-simple-profile/1.3/SOURCE_COMMIT: 82de42f59b0c39babcc100a32edb1e0f54a4ddfb7c14550dd2951b2c58a8d9ef
+  third_party/oasis/tosca-simple-profile/1.3/artifact.yaml: 58453e11d007d28e18b013fbc3f42b16118fef687ae502cc4e605907a4ccb815
+  third_party/oasis/tosca-simple-profile/1.3/capability.yaml: a37051d05cd5338b5abbe27b732fc21eeebdee4b3df47bb4e9049452c22cd0f8
+  third_party/oasis/tosca-simple-profile/1.3/data.yaml: cf6e8cf8df67bbb581d07a374d5105a0ce7a0ec9855a7445aa4d70d9097c4ff5
+  third_party/oasis/tosca-simple-profile/1.3/group.yaml: 59237fbf361d0c2a1e291c06e35712479ad9e7865209d16e6345d61a491b7d43
+  third_party/oasis/tosca-simple-profile/1.3/interface.yaml: 178aaa9f1c8f4bb6b01b870db386cad0d7fb2792c23a32bd5d328f4f49de1c69
+  third_party/oasis/tosca-simple-profile/1.3/node.yaml: b02001480814cd152773965580b801ce1fbf3f4212933610311630ea9d6c1054
+  third_party/oasis/tosca-simple-profile/1.3/policy.yaml: 44322cdec031126735cf662b31a733d1ce9e25b6991840de6bd505cac8c388a1
+  third_party/oasis/tosca-simple-profile/1.3/profile.yaml: 70e766f957b5f6865aa72dc8f3df80d2988c8d19084ed03ca4491acf51d71e20
+  third_party/oasis/tosca-simple-profile/1.3/relationship.yaml: c6fe5b8adc515c901bf45ea0eb606ce0e0df673780c3f9d9daa80ea8d715c566
+  docs/conformance/tosca-1.3/template-corpus-coverage.yaml: 00d818b1a730b57a3575093d22f00f8d970e2a12c255e8473226e05ce6ec2e8c
+  docs/conformance/tosca-1.3/template-corpus-mutations.yaml: 86a102938e12d98fcf8e324e623fed013c7b6e493c101126876a91712921a16a
+  docs/conformance/tosca-1.3/template-corpus-pairwise.yaml: af725d9e4c578c48346f6e9fd9111d6a2baf4b2d9a2209532c6d9dbe5c4bbae1
+  docs/conformance/tosca-1.3/template-corpus-sections.yaml: b925dc109aa28d729f6a3a6d4c489a0cf24a9e8532ce334555359d7dd0155c03
+  docs/conformance/tosca-1.3/template-corpus-summary.yaml: 4a38515e96cf5a24e37390f01131660c4ba27d4fae458256f2eb7754cec7a1dd
+final_verification:
+  baseline_hashes_preserved: 23
+  original_head_preserved_before_commit: true
+  frozen_atomic_must_denominator: 223
+  frozen_status_sum:
+    implemented: 223
+  all_frozen_verification_statuses: verified (preserved, not re-certified)
+  old_requirement_ids_and_classifications: byte-identical; no changes
+  tracked_worktree_before_audit_staging: identical to HEAD; only new audit reports untracked
+  artifact_validation:
+    yaml_documents: 13
+    duplicate_keys: 0
+    required_files: 15
+    independent_ids: 642
+    section_ids: 1121
+    profile_types: 66
+    mapping_and_finding_cross_references: valid
+    conclusion: Structural validation only; not proof of completed semantic audit.
+  commands:
+  - command: go test ./...
+    exit_code: 0
+    log_sha256: 359faef1b43f1aa272fae1f332c0d70fd00fb48aabcd392519a6079b5e98049d
+  - command: go test -race ./...
+    exit_code: 0
+    log_sha256: 4d889b46e642ce8de56ca5b81efc2c047a80beb5c35b9f336969b5f07a5ca514
+  - command: go vet ./...
+    exit_code: 0
+    log_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  - command: go test -count=1 ./...
+    exit_code: 0
+    log_sha256: 2dbe1b48c641fa1671bcea632e2d350fea1573bb5d231ff381a3f59a99d39670
+  mutation_restoration: 15/15 original files restored; tracked tree matches original HEAD
+  diff_check_exit_code: 0
+  pinned_profile_sha256sum_check: all ten entries OK
+  audit_scripts: Temporary generators/probes removed before commit; exact reproducer and adapter sources embedded
+    in reports.
