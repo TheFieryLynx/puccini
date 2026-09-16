@@ -3696,8 +3696,10 @@ sections:
   - grammar-form:complete
   - inheritance:direct
   - keynames:all-optional
+  - operation-type-inheritance
   - yaml-type:mapping
   fixtures: &id109
+  - TOSCA13-CORPUS-EVIDENCE-OPERATION-TYPE-INHERITANCE
   - TOSCA13-CORPUS-GRAMMAR-DEFINITIONS-COMPLETE-VALID
   status: insufficient-evidence
   exclusions: []
@@ -14984,8 +14986,12 @@ sections:
   variation_axes:
   - inheritance:normative-parent
   - normative-profile:effective-types
+  - operation-template-inherited
+  - operation-template-override
   - version-isolation:tosca-1.3
   fixtures: &id464
+  - TOSCA13-CORPUS-EVIDENCE-OPERATION-TEMPLATE-INHERITED
+  - TOSCA13-CORPUS-EVIDENCE-OPERATION-TEMPLATE-OVERRIDE
   - TOSCA13-CORPUS-NORMATIVE-PROFILE-DERIVED-VALID
   status: insufficient-evidence
   exclusions: []

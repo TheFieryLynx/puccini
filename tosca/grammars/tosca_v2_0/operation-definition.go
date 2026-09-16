@@ -61,6 +61,9 @@ func (self *OperationDefinition) Inherit(parentDefinition *OperationDefinition) 
 
 	self.InputDefinitions.Inherit(parentDefinition.InputDefinitions)
 	self.OutputDefinitions.Inherit(parentDefinition.OutputDefinitions)
+	if inherit := self.Context.Grammar.OperationDefinitionInheritor; inherit != nil {
+		inherit(self, parentDefinition)
+	}
 }
 
 func (self *OperationDefinition) Normalize(normalOperation *normal.Operation) {

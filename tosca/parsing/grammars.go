@@ -17,6 +17,7 @@ type WorkflowStepDefinitionValidator func(EntityPtr)
 type TemplateCopyValidator func(*Context, string, ard.Value)
 type SubstitutionMappingsValidator func(EntityPtr)
 type PropertyDefinitionInheritor func(EntityPtr, EntityPtr)
+type OperationDefinitionInheritor func(EntityPtr, EntityPtr)
 type PropertyAssignmentValidator func(*Context, EntityPtr)
 type AdditionalNormativeNames func(string, bool) []string
 type RequirementAssignmentNormalizer func(EntityPtr, EntityPtr, any) bool
@@ -41,6 +42,7 @@ type Grammar struct {
 	TemplateCopyValidator                   TemplateCopyValidator
 	SubstitutionMappingsValidator           SubstitutionMappingsValidator
 	PropertyDefinitionInheritor             PropertyDefinitionInheritor
+	OperationDefinitionInheritor            OperationDefinitionInheritor
 	PropertyAssignmentValidator             PropertyAssignmentValidator
 	AdditionalNormativeNames                AdditionalNormativeNames
 	RequirementAssignmentNormalizer         RequirementAssignmentNormalizer

@@ -97,6 +97,7 @@ func init() {
 	Grammar.InvalidNamespaceCharacters = ":"
 	Grammar.DataDefinitionValidator = validateConstraintDefinition
 	Grammar.PropertyDefinitionInheritor = inheritPropertyDefinition
+	Grammar.OperationDefinitionInheritor = inheritOperationDefinition
 	Grammar.PropertyAssignmentValidator = validateFixedPropertyAssignment
 	Grammar.AdditionalNormativeNames = additionalNormativeNames
 	Grammar.RequirementAssignmentNormalizer = normalizeRequirementOccurrences

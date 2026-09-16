@@ -1,12 +1,12 @@
 schema_version: 1
-total_cases: 89
-valid_cases: 63
+total_cases: 92
+valid_cases: 66
 invalid_cases: 26
 interaction_cases: 11
 csar_cases: 7
 normalization_cases: 13
 historical_requirement_ids_labelled: 223
 historical_denominator: 223
-owned_primary_requirements: 0
+owned_primary_requirements: 2
 verification_result: re-audit/evidence-recheck.yaml
 sections_with_historical_membership: 111

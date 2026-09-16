@@ -19,7 +19,12 @@ findings:
   assertion: A4
   before_result: 'got "", expected "parent.sh"'
   discovery_commit_policy: Intentionally failing permanent regression committed separately as explicitly required by the evidence-hardening task. This is not a completed remediation commit.
-  status: confirmed
+  status: remediated
+  discovery_commit: f38c63a2
+  remediation: TOSCA 1.3 OperationDefinitionInheritor policy; neutral shared hook remains nil for 2.0.
+  after_result: All operation semantic assertions pass.
+  mutation_result: Disabling the 1.3 hook fails A4; original M04 overwrite fails template override A1. Both restored.
+  cross_version: TestEvidenceOperationPolicyIsolation passes before and after; no change to observable 2.0 result.
   historical_mapping:
     related_ids: [TOSCA13-3.6.17.3-002, TOSCA13-5.8.1-004]
     exact_mapping: false
