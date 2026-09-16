@@ -129,3 +129,122 @@ requirements:
       kind: value
       path: /nodeTemplates/source/requirements/0/relationship/interfaces/Test/operations/keep/implementation
       expected: unrelated.sh
+- id: TOSCA13-5.3.6.1-004
+  predicate: The `token_type` entry defaults to `password`.
+  source_predicate_sha256: 5f0d3bae5d4de567c8dd99ccef069a3b6556ef580b89a749d09f2a7708d9057a
+  evidence_kind: semantic-value
+  positive_required: true
+  negative_required: false
+  complete_predicate: true
+  mutation_paths:
+  - normative-profile
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-OMITTED
+    fixture_sha256: 8ae9cd84221d3f2dca0edfa9e6234df17883fb1fa156afbdcd7cf6cdb717e7cc
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-5.3.6.1-004
+      kind: value
+      path: /nodeTemplates/n/properties/credential/$map/token_type/$primitive
+      expected: password
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-OMITTED
+    fixture_sha256: 8ae9cd84221d3f2dca0edfa9e6234df17883fb1fa156afbdcd7cf6cdb717e7cc
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-5.3.6.1-004
+      kind: value
+      path: /nodeTemplates/n/properties/derived/$map/token_type/$primitive
+      expected: password
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-OMITTED
+    fixture_sha256: 8ae9cd84221d3f2dca0edfa9e6234df17883fb1fa156afbdcd7cf6cdb717e7cc
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-5.3.6.1-004
+      kind: value
+      path: /nodeTemplates/n/properties/credential/$map/token/$primitive
+      expected: secret
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-EXPLICIT-PASSWORD
+    fixture_sha256: 8a7398b455787196557b75590b837fd5629544f560349ac24e795708e849e7ae
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-5.3.6.1-004
+      kind: value
+      path: /nodeTemplates/n/properties/credential/$map/token_type/$primitive
+      expected: password
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-EXPLICIT-ALTERNATE
+    fixture_sha256: aa40d12560b92d0e7d23e8810c4c5083254367a89c156d6ed5cbbe29139a3add
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-5.3.6.1-004
+      kind: value
+      path: /nodeTemplates/n/properties/credential/$map/token_type/$primitive
+      expected: bearer
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-INHERITED-DEFAULT
+    fixture_sha256: 576d4864f93f1f3de1b06d20a1bf26bfe26b38a38db03f52c99f36245860f176
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-5.3.6.1-004
+      kind: value
+      path: /nodeTemplates/n/properties/derived/$map/token_type/$primitive
+      expected: password
+- id: TOSCA13-5.3.6.1-006
+  predicate: The `token_type` entry has type/schema `string`.
+  source_predicate_sha256: 044775d1cd9b6cc7118b49a9a7f4cae56ecfe67790459ffeebee6268e4e3f012
+  evidence_kind: semantic-value
+  positive_required: true
+  negative_required: true
+  complete_predicate: false
+  mutation_paths:
+  - normative-profile
+  bindings:
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-TYPE-VALID
+    fixture_sha256: 8a7398b455787196557b75590b837fd5629544f560349ac24e795708e849e7ae
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-5.3.6.1-006
+      kind: value
+      path: /nodeTemplates/n/properties/credential/$map/token_type/$primitive
+      expected: password
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-TYPE-INVALID
+    fixture_sha256: 4058c90c77c35d35f6f383ba0d62e9a6ae62b956c46fb6d43300b82edf01daa0
+    assertion:
+      id: A1
+      requirement_ids:
+      - TOSCA13-5.3.6.1-006
+      kind: diagnostic
+      path: category
+      expected: instead of
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-TYPE-INVALID
+    fixture_sha256: 4058c90c77c35d35f6f383ba0d62e9a6ae62b956c46fb6d43300b82edf01daa0
+    assertion:
+      id: A2
+      requirement_ids:
+      - TOSCA13-5.3.6.1-006
+      kind: diagnostic
+      path: entity
+      expected: token_type
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-TYPE-INVALID
+    fixture_sha256: 4058c90c77c35d35f6f383ba0d62e9a6ae62b956c46fb6d43300b82edf01daa0
+    assertion:
+      id: A3
+      requirement_ids:
+      - TOSCA13-5.3.6.1-006
+      kind: phase
+      path: processing_phase
+      expected: rendering
+  - case_id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-TYPE-INVALID
+    fixture_sha256: 4058c90c77c35d35f6f383ba0d62e9a6ae62b956c46fb6d43300b82edf01daa0
+    assertion:
+      id: A4
+      requirement_ids:
+      - TOSCA13-5.3.6.1-006
+      kind: reject
+      path: accepted
+      expected: false

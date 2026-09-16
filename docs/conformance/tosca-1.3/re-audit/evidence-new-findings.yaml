@@ -29,3 +29,20 @@ findings:
     related_ids: [TOSCA13-3.6.17.3-002, TOSCA13-5.8.1-004]
     exact_mapping: false
     reason: Omitted implementation inheritance is an interpretation of override semantics, not a separately enumerated frozen predicate. No denominator change.
+- id: EVIDENCE-CREDENTIAL-TOKEN-DATA
+  severity: high
+  specification:
+    version: '1.3'
+    sections: ['5.3.6.1', '5.3.6.2', '4.3.3.1']
+    normative_rule: Credential.token is a required string; token_type defaults to password. The token intrinsic function takes a sequence of three arguments.
+  current_behavior: A one-entry Credential map with string token is converted into an intrinsic function and rejected at read.
+  expected_behavior: Preserve string-valued token maps as data; resolve/render them against their declared type and apply token_type default.
+  reproducer: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-OMITTED
+  assertion: A1
+  before_result: 'read: malformed token function, arguments must be a YAML sequence'
+  status: confirmed
+  discovery_commit_policy: Permanent failing test intentionally committed separately under the explicit task policy.
+  historical_mapping:
+    related_ids: [TOSCA13-5.3.6.1-004, TOSCA13-5.3.6.1-008]
+    exact_mapping: false
+    reason: Default is already indexed outside the frozen denominator; function/data discrimination has no exact frozen mapping. Do not add denominator membership.

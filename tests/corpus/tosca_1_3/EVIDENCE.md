@@ -30,3 +30,8 @@ semantic positive values, phase and targeted diagnostics, nearest-valid isolatio
 and caught mutations on the relevant production paths. Historical 223 membership
 is neither proof of applicability nor proof of a complete denominator. Section
 and variation-axis documents are inventories, not exhaustive coverage claims.
+
+For normalized maps with string keys, assertions use a keyed evidence view:
+`$map/token_type/$primitive` selects the entry whose `$key.$primitive` equals
+`token_type`. It does not select an unstable array index. Duplicate keys fail;
+non-string map keys retain their original representation.

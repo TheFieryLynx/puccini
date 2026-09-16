@@ -3721,4 +3721,240 @@ cases:
     kind: value
     path: /nodeTemplates/source/requirements/0/relationship/interfaces/Test/operations/keep/implementation
     expected: unrelated.sh
+- id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-OMITTED
+  file: sections/evidence/credential-omitted.yaml
+  specification:
+    sections:
+    - 5.3.6.1
+    requirement_ids:
+    - TOSCA13-5.3.6.1-004
+  classification:
+    kind: valid
+    category: normative-profile
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-5.3.6.1-004
+    supporting_requirements: []
+    variation_axes:
+    - credential-omitted
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-5.3.6.1-004
+    kind: value
+    path: /nodeTemplates/n/properties/credential/$map/token_type/$primitive
+    expected: password
+  - id: A2
+    requirement_ids:
+    - TOSCA13-5.3.6.1-004
+    kind: value
+    path: /nodeTemplates/n/properties/derived/$map/token_type/$primitive
+    expected: password
+  - id: A3
+    requirement_ids:
+    - TOSCA13-5.3.6.1-004
+    kind: value
+    path: /nodeTemplates/n/properties/credential/$map/token/$primitive
+    expected: secret
+- id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-EXPLICIT-PASSWORD
+  file: sections/evidence/credential-explicit-password.yaml
+  specification:
+    sections:
+    - 5.3.6.1
+    requirement_ids:
+    - TOSCA13-5.3.6.1-004
+  classification:
+    kind: valid
+    category: normative-profile
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-5.3.6.1-004
+    supporting_requirements: []
+    variation_axes:
+    - credential-explicit-password
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-5.3.6.1-004
+    kind: value
+    path: /nodeTemplates/n/properties/credential/$map/token_type/$primitive
+    expected: password
+- id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-EXPLICIT-ALTERNATE
+  file: sections/evidence/credential-explicit-alternate.yaml
+  specification:
+    sections:
+    - 5.3.6.1
+    requirement_ids:
+    - TOSCA13-5.3.6.1-004
+  classification:
+    kind: valid
+    category: normative-profile
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-5.3.6.1-004
+    supporting_requirements: []
+    variation_axes:
+    - credential-explicit-alternate
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-5.3.6.1-004
+    kind: value
+    path: /nodeTemplates/n/properties/credential/$map/token_type/$primitive
+    expected: bearer
+- id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-TYPE-VALID
+  file: sections/evidence/credential-type-valid.yaml
+  specification:
+    sections:
+    - 5.3.6.1
+    requirement_ids:
+    - TOSCA13-5.3.6.1-006
+  classification:
+    kind: valid
+    category: normative-profile
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-5.3.6.1-006
+    supporting_requirements: []
+    variation_axes:
+    - credential-type-valid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-5.3.6.1-006
+    kind: value
+    path: /nodeTemplates/n/properties/credential/$map/token_type/$primitive
+    expected: password
+- id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-TYPE-INVALID
+  file: sections/evidence/credential-type-invalid.yaml
+  specification:
+    sections:
+    - 5.3.6.1
+    requirement_ids:
+    - TOSCA13-5.3.6.1-006
+  classification:
+    kind: invalid
+    category: normative-profile
+    features:
+    - evidence-hardening
+  expected:
+    accepted: false
+    phase: rendering
+    diagnostic:
+      category: instead of
+      path: token_type
+    assertions: []
+  coverage:
+    primary_requirements:
+    - TOSCA13-5.3.6.1-006
+    supporting_requirements: []
+    variation_axes:
+    - credential-type-invalid
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-5.3.6.1-006
+    kind: diagnostic
+    path: category
+    expected: instead of
+  - id: A2
+    requirement_ids:
+    - TOSCA13-5.3.6.1-006
+    kind: diagnostic
+    path: entity
+    expected: token_type
+  - id: A3
+    requirement_ids:
+    - TOSCA13-5.3.6.1-006
+    kind: phase
+    path: processing_phase
+    expected: rendering
+  - id: A4
+    requirement_ids:
+    - TOSCA13-5.3.6.1-006
+    kind: reject
+    path: accepted
+    expected: false
+  related_cases:
+    nearest_valid: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-TYPE-VALID
+    change: Only credential.token_type changes from string password to integer 7.
+- id: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-INHERITED-DEFAULT
+  file: sections/evidence/credential-inherited-default.yaml
+  specification:
+    sections:
+    - 5.3.6.1
+    requirement_ids:
+    - TOSCA13-5.3.6.1-004
+  classification:
+    kind: valid
+    category: normative-profile
+    features:
+    - evidence-hardening
+  expected:
+    accepted: true
+    phase: normalization
+    diagnostic:
+      category: null
+      path: null
+    assertions:
+    - service_template_non_nil
+  coverage:
+    primary_requirements:
+    - TOSCA13-5.3.6.1-004
+    supporting_requirements: []
+    variation_axes:
+    - credential-inherited-default
+    related_cases: []
+  assertions:
+  - id: A1
+    requirement_ids:
+    - TOSCA13-5.3.6.1-004
+    kind: value
+    path: /nodeTemplates/n/properties/derived/$map/token_type/$primitive
+    expected: password
 schema_version: 2

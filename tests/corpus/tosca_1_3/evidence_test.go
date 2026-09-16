@@ -168,6 +168,10 @@ func assertionResult(a ownedAssertion, r corpusResult) error {
 		if err = json.Unmarshal(raw, &value); err != nil {
 			return err
 		}
+		value, err = evidenceMapView(value)
+		if err != nil {
+			return err
+		}
 		got, err = jsonPointer(value, a.Path)
 		if err != nil {
 			return err
