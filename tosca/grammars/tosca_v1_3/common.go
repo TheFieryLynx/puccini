@@ -98,6 +98,7 @@ func init() {
 	Grammar.DataDefinitionValidator = validateConstraintDefinition
 	Grammar.PropertyDefinitionInheritor = inheritPropertyDefinition
 	Grammar.OperationDefinitionInheritor = inheritOperationDefinition
+	Grammar.FunctionCallLiteral = isTokenStringData
 	Grammar.PropertyAssignmentValidator = validateFixedPropertyAssignment
 	Grammar.AdditionalNormativeNames = additionalNormativeNames
 	Grammar.RequirementAssignmentNormalizer = normalizeRequirementOccurrences

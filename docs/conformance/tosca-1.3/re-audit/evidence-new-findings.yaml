@@ -40,7 +40,11 @@ findings:
   reproducer: TOSCA13-CORPUS-EVIDENCE-CREDENTIAL-OMITTED
   assertion: A1
   before_result: 'read: malformed token function, arguments must be a YAML sequence'
-  status: confirmed
+  status: remediated
+  discovery_commit: 385f9fc7
+  remediation: Grammar-scoped string token data predicate before shared function conversion; absent in 2.0.
+  after_result: Direct and collection Credential values normalize with password default.
+  mutation_result: Original M13 fails inherited-default A1; disabling literal policy fails omitted A1. Both restored.
   discovery_commit_policy: Permanent failing test intentionally committed separately under the explicit task policy.
   historical_mapping:
     related_ids: [TOSCA13-5.3.6.1-004, TOSCA13-5.3.6.1-008]

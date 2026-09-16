@@ -561,3 +561,14 @@ func (entity modelableEntity) hasArtifact(name string) bool {
 	}
 	return false
 }
+
+// Sections 5.3.6.1-2 and 4.3.3.1: Credential token data is a string;
+// the intrinsic token function requires a sequence. Preserve the literal
+// through shared readers too (nested complex values and collection entries).
+func isTokenStringData(value ard.Map) bool {
+	if len(value) != 1 {
+		return false
+	}
+	_, ok := value["token"].(string)
+	return ok
+}

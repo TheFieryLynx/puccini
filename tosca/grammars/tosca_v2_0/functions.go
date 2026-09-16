@@ -57,6 +57,9 @@ func ParseFunctionCall(context *parsing.Context) bool {
 	if !ok {
 		return false
 	}
+	if literal := context.Grammar.FunctionCallLiteral; literal != nil && literal(map_) {
+		return false
+	}
 	count := len(map_)
 
 	changed := false
