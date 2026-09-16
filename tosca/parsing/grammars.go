@@ -15,6 +15,7 @@ type TemplateCopyValidator func(*Context, string, ard.Value)
 type SubstitutionMappingsValidator func(EntityPtr)
 type PropertyDefinitionInheritor func(EntityPtr, EntityPtr)
 type PropertyAssignmentValidator func(*Context, EntityPtr)
+type AdditionalNormativeNames func(string, bool) []string
 
 //
 // Grammar
@@ -36,6 +37,7 @@ type Grammar struct {
 	SubstitutionMappingsValidator           SubstitutionMappingsValidator
 	PropertyDefinitionInheritor             PropertyDefinitionInheritor
 	PropertyAssignmentValidator             PropertyAssignmentValidator
+	AdditionalNormativeNames                AdditionalNormativeNames
 }
 
 func NewGrammar() Grammar {

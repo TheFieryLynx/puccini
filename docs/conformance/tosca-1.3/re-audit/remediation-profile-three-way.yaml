@@ -1,4 +1,4 @@
-scope: Only confirmed F07/F08 fields; unresolved historical profile ambiguities are not reclassified.
+scope: Confirmed F07/F08 fields and F16 alias availability only; historical ambiguities remain unresolved.
 normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
 source_commit: e5b0a3ee46488921ff409bbe0feba37af2a3233e
 oasis_node_sha256: b02001480814cd152773965580b801ce1fbf3f4212933610311630ea9d6c1054
@@ -23,3 +23,67 @@ comparisons:
   status: exact
   effective_test: TestReAuditContainerProfile
   assignment_test: TestReAuditContainerAssignments
+aliases:
+  finding_id: F16
+  newly_resolved: 12
+  positive_spellings_tested: 21
+  case_rejection_siblings: 21
+  effective_identity: Alias and full URI resolve to the identical inherited parent object through ordinary processor
+    path.
+  types:
+  - type: tosca.artifacts.Implementation.Bash
+    section: 5.4.4.3
+    shorthand: Bash
+    qualified: tosca:Bash
+    specification_vs_puccini: exact
+    oasis_full_uri: declared
+    oasis_alias_policy: not executable in a YAML declaration; no alias processor result inferred
+    direct_test: TestReAuditNormativeAliases/Bash
+  - type: tosca.artifacts.Implementation.Python
+    section: 5.4.4.4
+    shorthand: Python
+    qualified: tosca:Python
+    specification_vs_puccini: exact
+    oasis_full_uri: declared
+    oasis_alias_policy: not executable in a YAML declaration; no alias processor result inferred
+    direct_test: TestReAuditNormativeAliases/Python
+  - type: tosca.capabilities.network.Bindable
+    section: 5.5.14
+    shorthand: network.Bindable
+    qualified: tosca:network.Bindable
+    specification_vs_puccini: exact
+    oasis_full_uri: declared
+    oasis_alias_policy: not executable in a YAML declaration; no alias processor result inferred
+    direct_test: TestReAuditNormativeAliases/network.Bindable
+  - type: tosca.nodes.Abstract.Storage
+    section: 5.9.9
+    shorthand: AbstractStorage
+    qualified: tosca:Abstract.Storage
+    specification_vs_puccini: exact
+    oasis_full_uri: declared
+    oasis_alias_policy: not executable in a YAML declaration; no alias processor result inferred
+    direct_test: TestReAuditNormativeAliases/AbstractStorage
+  - type: tosca.nodes.Storage.ObjectStorage
+    section: 5.9.10
+    shorthand: ObjectStorage
+    qualified: tosca:ObjectStorage
+    specification_vs_puccini: exact
+    oasis_full_uri: declared
+    oasis_alias_policy: not executable in a YAML declaration; no alias processor result inferred
+    direct_test: TestReAuditNormativeAliases/ObjectStorage
+  - type: tosca.nodes.Storage.BlockStorage
+    section: 5.9.11
+    shorthand: BlockStorage
+    qualified: tosca:BlockStorage
+    specification_vs_puccini: exact
+    oasis_full_uri: declared
+    oasis_alias_policy: not executable in a YAML declaration; no alias processor result inferred
+    direct_test: TestReAuditNormativeAliases/BlockStorage
+  - type: tosca.relationships.network.BindsTo
+    section: 8.5.5
+    shorthand: network.BindsTo
+    qualified: tosca:BindsTo
+    specification_vs_puccini: exact
+    oasis_full_uri: declared
+    oasis_alias_policy: not executable in a YAML declaration; no alias processor result inferred
+    direct_test: TestReAuditNormativeAliases/network.BindsTo

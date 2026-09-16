@@ -626,16 +626,14 @@ findings:
   catalog_gap: true
   implementation:
     files:
+    - tosca/grammars/tosca_v1_3/normative-names.go
+    - tosca/grammars/tosca_v1_3/common.go
     - tosca/grammars/tosca_v2_0/import.go
-    - tosca/grammars/tosca_v1_3/import.go
-    - tosca/grammars/tosca_v2_0/file.go
+    - tosca/parsing/grammars.go
     symbols:
-    - ReadImport
-    - File.GetImportSpecs
+    - additionalNormativeNames
     - Import.NewImportSpec
     - newImportNameTransformer
-    - getNormativeNames
-    - Context.LookupNames
     parser_phase: namespace/name lookup
     execution_path:
     - tosca_definitions_version selects tosca_v1_3 grammar
@@ -652,12 +650,22 @@ findings:
     permanent_direct_test_before_task: false
     tests:
     - TestReAuditNormativeAliases
-    test_status: planned; report-embedded reproducers will become permanent tests
+    - TestReAuditAliasPolicyIsolation
+    test_status: permanent direct phase and semantic assertions pass; targeted pre-fix failure observed
   remediation_group: C-aliases
   remediation_order: 5
-  implementation_status: non-compliant
-  verification_status: audit counterexample reproduced; remediation pending
-  mutation_evidence: null
+  implementation_status: implemented
+  verification_status: verified
+  mutation_evidence:
+    result: caught
+    method: temporarily restore the old defective behavior; run permanent direct test; restore original bytes
+    log_sha256: b7b26173442cf8572659a0e455e94b8adcd7c1b83b0a478c3d82b6ceb14c3d16
+    failure_excerpt: "--- FAIL: TestReAuditNormativeAliases (0.01s)\n    --- FAIL: TestReAuditNormativeAliases/tosca:BlockStorage\
+      \ (0.01s)\n        re_audit_aliases_test.go:35: namespace: Problems (1)\n              file:///tmp/TestReAuditNormativeAliasestoscaBlockStorage154259334/001/template.yaml\n\
+      \                @3,13 node_types[\"Custom\"].derived_from: reference to unknown node type: tosca:BlockStorage\n\
+      FAIL\nFAIL\tgithub.com/tliron/go-puccini/tests/conformance/tosca_1_3\t0.017s\nFAIL\n"
+  remediation_commit_subject: 'fix(tosca-1.3): resolve normative profile aliases'
+  three_way_report: docs/conformance/tosca-1.3/re-audit/remediation-profile-three-way.yaml
 - finding_id: F09
   specification:
     version: TOSCA Simple Profile in YAML 1.3
@@ -921,3 +929,16 @@ verification_runs:
     explanation: The two apis.yaml inputs contain valid inherited fixed property refinements (F02, section 3.6.10.6).
       Audit expected-reject was incorrect; retained unchanged and reported as unexpected-pass. Two known F16 alias
       rejects remain until the alias commit.
+- group: C-aliases
+  commands:
+  - focused direct TOSCA 1.3 tests
+  - go test -count=1 ./...
+  - go test -race -count=1 ./...
+  - go vet ./...
+  - git diff --check
+  result: passed
+  includes:
+  - template corpus
+  - full TOSCA 1.3 suite
+  - full TOSCA 2.0 suite
+  community_report: docs/conformance/tosca-1.3/re-audit/remediation-oasis-community-results.yaml

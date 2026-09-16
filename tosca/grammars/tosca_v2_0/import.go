@@ -136,7 +136,7 @@ func (self *Import) NewImportSpec(unit *File) (*parsing.ImportSpec, bool) {
 
 	importSpec := &parsing.ImportSpec{
 		URL:             url,
-		NameTransformer: newImportNameTransformer(self.Namespace, appendShortcutNames),
+		NameTransformer: newImportNameTransformer(self.Namespace, appendShortcutNames, self.Context.Grammar),
 		Implicit:        false,
 	}
 	return importSpec, true
@@ -254,13 +254,13 @@ func (self *Import) newProfileImportSpec(profileName string) (*parsing.ImportSpe
 
 	importSpec := &parsing.ImportSpec{
 		URL:             profileURL,
-		NameTransformer: newImportNameTransformer(self.Namespace, appendShortcutNames),
+		NameTransformer: newImportNameTransformer(self.Namespace, appendShortcutNames, self.Context.Grammar),
 		Implicit:        false,
 	}
 	return importSpec, true
 }
 
-func newImportNameTransformer(prefix *string, appendShortCutnames bool) parsing.NameTransformer {
+func newImportNameTransformer(prefix *string, appendShortCutnames bool, grammar *parsing.Grammar) parsing.NameTransformer {
 	return func(name string, entityPtr parsing.EntityPtr) []string {
 		var names []string
 
@@ -269,6 +269,9 @@ func newImportNameTransformer(prefix *string, appendShortCutnames bool) parsing.
 				if normative == "true" {
 					// Reserved "tosca." names also get shorthand and prefixed names
 					names = getNormativeNames(entityPtr, names, name, "tosca", appendShortCutnames)
+					if additional := grammar.AdditionalNormativeNames; additional != nil {
+						names = append(names, additional(name, appendShortCutnames)...)
+					}
 				}
 			}
 		}
