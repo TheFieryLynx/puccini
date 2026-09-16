@@ -439,13 +439,27 @@ findings:
     location: docs/conformance/tosca-1.3/re-audit/findings.yaml#F07
     permanent_direct_test_before_task: false
     tests:
-    - TestReAuditContainerRuntimeProfile
-    test_status: planned; report-embedded reproducers will become permanent tests
+    - TestReAuditContainerProfile
+    - TestReAuditContainerAssignments
+    test_status: permanent direct phase and semantic assertions pass; targeted pre-fix failure observed
   remediation_group: C-profile
   remediation_order: 4
-  implementation_status: non-compliant
-  verification_status: audit counterexample reproduced; remediation pending
-  mutation_evidence: null
+  implementation_status: implemented
+  verification_status: verified
+  mutation_evidence:
+    result: caught
+    method: temporarily restore the old defective behavior; run permanent direct test; restore original bytes
+    log_sha256: 1cf43a8042ab7d0209d9fec9f3f246f70c85355c751bbdf888b538167251fb10
+    failure_excerpt: "--- FAIL: TestReAuditContainerProfile (0.02s)\n    re_audit_container_profile_test.go:27:\
+      \ effective runtime host: &tosca_v2_0.CapabilityDefinition{Entity:(*tosca_v2_0.Entity)(0x23a565926990), Name:\"\
+      host\", Description:(*string)(nil), Metadata:tosca_v2_0.Metadata(nil), CapabilityTypeName:(*string)(0x23a5657cad80),\
+      \ PropertyDefinitions:tosca_v2_0.PropertyDefinitions{}, AttributeDefinitions:tosca_v2_0.AttributeDefinitions{},\
+      \ ValidSourceNodeTypeNames:(*[]string)(0x23a5659269a8), ValidRelationshipTypeNames:(*[]string)(nil), CapabilityType:(*tosca_v2_0.CapabilityType)(0x23a56595cfc0),\
+      \ ValidSourceNodeTypes:tosca_v2_0.NodeTypes{(*tosca_v2_0.NodeType)(0x23a565a01300)}, ValidRelationshipTypes:tosca_v2_0.RelationshipTypes(nil),\
+      \ typeMissingProblemReported:false}\nFAIL\nFAIL\tgithub.com/tliron/go-puccini/tests/conformance/tosca_1_3\t\
+      0.033s\nFAIL\n"
+  remediation_commit_subject: 'fix(tosca-1.3): correct container profile definitions'
+  three_way_report: docs/conformance/tosca-1.3/re-audit/remediation-profile-three-way.yaml
 - finding_id: F08
   specification:
     version: TOSCA Simple Profile in YAML 1.3
@@ -491,13 +505,26 @@ findings:
     location: docs/conformance/tosca-1.3/re-audit/findings.yaml#F08
     permanent_direct_test_before_task: false
     tests:
-    - TestReAuditContainerApplicationProfile
-    test_status: planned; report-embedded reproducers will become permanent tests
+    - TestReAuditContainerProfile
+    - TestReAuditContainerAssignments
+    test_status: permanent direct phase and semantic assertions pass; targeted pre-fix failure observed
   remediation_group: C-profile
   remediation_order: 4
-  implementation_status: non-compliant
-  verification_status: audit counterexample reproduced; remediation pending
-  mutation_evidence: null
+  implementation_status: implemented
+  verification_status: verified
+  mutation_evidence:
+    result: caught
+    method: temporarily restore the old defective behavior; run permanent direct test; restore original bytes
+    log_sha256: 3ebc55fe5c5a63492d8a994eb6273e07359523f61e68d8eaf3e57582652801cc
+    failure_excerpt: "--- FAIL: TestReAuditContainerProfile (0.03s)\n    re_audit_container_profile_test.go:36:\
+      \ effective application network: &tosca_v2_0.RequirementDefinition{Entity:(*tosca_v2_0.Entity)(0x244006782ae0),\
+      \ Name:\"network\", Description:(*string)(nil), TargetCapabilityTypeName:(*string)(0x244006666df0), TargetNodeTypeName:(*string)(nil),\
+      \ RelationshipDefinition:(*tosca_v2_0.RelationshipDefinition)(nil), CountRange:(*tosca_v2_0.RangeEntity)(0x244006887820),\
+      \ NodeFilter:(*tosca_v2_0.NodeFilter)(nil), TargetCapabilityType:(*tosca_v2_0.CapabilityType)(0x244006568ae0),\
+      \ TargetNodeType:(*tosca_v2_0.NodeType)(nil), DefaultCountRange:[]interface {}{1, 1}, capabilityMissingProblemReported:false}\n\
+      FAIL\nFAIL\tgithub.com/tliron/go-puccini/tests/conformance/tosca_1_3\t0.038s\nFAIL\n"
+  remediation_commit_subject: 'fix(tosca-1.3): correct container profile definitions'
+  three_way_report: docs/conformance/tosca-1.3/re-audit/remediation-profile-three-way.yaml
 - finding_id: F16
   specification:
     version: TOSCA Simple Profile in YAML 1.3
@@ -872,3 +899,25 @@ verification_runs:
   - template corpus
   - full TOSCA 1.3 suite
   - full TOSCA 2.0 suite
+- group: C-profile
+  commands:
+  - focused direct TOSCA 1.3 tests
+  - go test -count=1 ./...
+  - go test -race -count=1 ./...
+  - go vet ./...
+  - git diff --check
+  result: passed
+  includes:
+  - template corpus
+  - full TOSCA 1.3 suite
+  - full TOSCA 2.0 suite
+  community_after_profile:
+    total: 65
+    expected_pass: 19
+    expected_reject: 18
+    unexpected_pass: 2
+    unexpected_reject: 2
+    ambiguous: 24
+    explanation: The two apis.yaml inputs contain valid inherited fixed property refinements (F02, section 3.6.10.6).
+      Audit expected-reject was incorrect; retained unchanged and reported as unexpected-pass. Two known F16 alias
+      rejects remain until the alias commit.

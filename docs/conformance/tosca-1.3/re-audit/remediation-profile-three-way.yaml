@@ -1,0 +1,25 @@
+scope: Only confirmed F07/F08 fields; unresolved historical profile ambiguities are not reclassified.
+normative_source: docs/specifications/tosca/1.3/TOSCA-Simple-Profile-YAML-v1.3-os.html
+source_commit: e5b0a3ee46488921ff409bbe0feba37af2a3233e
+oasis_node_sha256: b02001480814cd152773965580b801ce1fbf3f4212933610311630ea9d6c1054
+comparisons:
+- finding_id: F07
+  type: tosca.nodes.Container.Runtime
+  section: 5.9.12.1
+  field: capabilities.host.type
+  specification: tosca.capabilities.Compute
+  oasis: tosca.capabilities.Compute
+  puccini: tosca.capabilities.Compute
+  status: exact
+  effective_test: TestReAuditContainerProfile
+  assignment_test: TestReAuditContainerAssignments
+- finding_id: F08
+  type: tosca.nodes.Container.Application
+  section: 5.9.13.1
+  field: requirements.network.capability
+  specification: tosca.capabilities.Endpoint
+  oasis: tosca.capabilities.Endpoint
+  puccini: tosca.capabilities.Endpoint
+  status: exact
+  effective_test: TestReAuditContainerProfile
+  assignment_test: TestReAuditContainerAssignments

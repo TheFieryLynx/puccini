@@ -327,7 +327,7 @@ node_types:
     derived_from: tosca.nodes.SoftwareComponent
     capabilities:
       host:
-        type: tosca.capabilities.Container
+        type: tosca.capabilities.Compute
         valid_source_types: [ tosca.nodes.Container.Application ]
       scalable:
         type: tosca.capabilities.Scalable
@@ -349,7 +349,7 @@ node_types:
     - storage:
         capability: tosca.capabilities.Storage
     - network:
-        capability: tosca.capabilities.Network
+        capability: tosca.capabilities.Endpoint
 
   tosca.nodes.LoadBalancer:
     metadata:
